@@ -667,11 +667,8 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 0.75rem;
   border-radius: 0.5rem;
   --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
+  background-color: rgb(240 238 234 / var(--tw-bg-opacity, 1));
   padding: 1rem;
-  --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
 .dark .announcement-card {
@@ -1002,8 +999,14 @@ body.follow-along h2 {
   color: rgb(26 58 92 / var(--tw-text-opacity, 1));
 }
 
-.text-navy\/60 {
-  color: rgb(26 58 92 / 0.6);
+.text-navy-light {
+  --tw-text-opacity: 1;
+  color: rgb(61 90 122 / var(--tw-text-opacity, 1));
+}
+
+.text-navy-muted {
+  --tw-text-opacity: 1;
+  color: rgb(90 122 154 / var(--tw-text-opacity, 1));
 }
 
 .text-navy\/70 {

@@ -6,8 +6,11 @@ module.exports = {
     extend: {
       colors: {
         'navy': '#1a3a5c',
+        'navy-light': '#3d5a7a',
+        'navy-muted': '#5a7a9a',
         'gold': '#c9a959',
         'cream': '#faf9f7',
+        'cream-dark': '#f0eeea',
       },
       fontFamily: {
         'serif': ['Georgia', 'Cambria', 'Times New Roman', 'serif'],

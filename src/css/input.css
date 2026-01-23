@@ -69,7 +69,7 @@
 
   /* Announcement card */
   .announcement-card {
-    @apply bg-white p-4 rounded-lg shadow-sm mb-3;
+    @apply bg-cream-dark p-4 rounded-lg mb-3;
   }
 
   .dark .announcement-card {

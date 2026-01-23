@@ -4,3 +4,6 @@ _site/
 *.log
 .env
 .cache/
+
+# Local Netlify folder
+.netlify
