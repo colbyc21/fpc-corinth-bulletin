@@ -1,0 +1,29 @@
+---
+layout: base.njk
+title: Bulletin Archive
+permalink: /archive/
+---
+
+<h1 class="font-serif text-2xl md:text-3xl text-navy dark:text-cream text-center mb-8">Bulletin Archive</h1>
+
+{% if collections.bulletins.length > 0 %}
+<ul class="space-y-3">
+  {% for bulletin in collections.bulletins %}
+  <li>
+    <a href="/{{ bulletin.data.date | dateToPath }}/" class="block bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+      <p class="font-serif text-lg text-navy dark:text-cream">{{ bulletin.data.date | formatDate }}</p>
+      <p class="text-gold text-sm">{{ bulletin.data.liturgical_day }}</p>
+      {% if bulletin.data.worship_order %}
+        {% for element in bulletin.data.worship_order %}
+          {% if element.type == "Sermon" %}
+          <p class="text-navy/70 dark:text-gray-400 text-sm mt-1">{{ element.title }}</p>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+    </a>
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<p class="text-center text-navy/70 dark:text-gray-400">No bulletins have been published yet.</p>
+{% endif %}

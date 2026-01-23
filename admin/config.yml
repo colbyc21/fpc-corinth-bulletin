@@ -1,0 +1,179 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "src/images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "bulletins"
+    label: "Bulletins"
+    folder: "src/bulletins"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}"
+    preview_path: "/{{slug}}/"
+    fields:
+      - { label: "Layout", name: "layout", widget: "hidden", default: "bulletin.njk" }
+      - { label: "Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false }
+      - { label: "Liturgical Day", name: "liturgical_day", widget: "string", hint: "e.g., Third Sunday after Epiphany" }
+      - { label: "Sermon Series", name: "sermon_series", widget: "string", required: false }
+
+      - label: "Prelude"
+        name: "prelude"
+        widget: "string"
+        required: false
+
+      - label: "Call to Meditation"
+        name: "call_to_meditation"
+        widget: "object"
+        collapsed: true
+        fields:
+          - { label: "Reference", name: "reference", widget: "string" }
+          - { label: "Text", name: "text", widget: "text" }
+
+      - label: "Choral Introit"
+        name: "choral_introit"
+        widget: "string"
+        required: false
+
+      - label: "Call to Worship"
+        name: "call_to_worship"
+        widget: "object"
+        collapsed: true
+        fields:
+          - { label: "Reference", name: "reference", widget: "string" }
+          - label: "Lines"
+            name: "lines"
+            widget: "list"
+            fields:
+              - { label: "Leader", name: "leader", widget: "string" }
+              - { label: "All", name: "all", widget: "string", required: false }
+
+      - label: "Order of Worship"
+        name: "worship_order"
+        widget: "list"
+        types:
+          - label: "Hymn"
+            name: "Hymn"
+            widget: "object"
+            fields:
+              - { label: "Type", name: "type", widget: "hidden", default: "Hymn" }
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Number", name: "number", widget: "number" }
+              - { label: "Verses", name: "verses", widget: "string", required: false, hint: "e.g., 1,2,4" }
+              - { label: "Hymnary Link", name: "hymnary_link", widget: "string", required: false }
+
+          - label: "Scripture Reading"
+            name: "Scripture Reading"
+            widget: "object"
+            fields:
+              - { label: "Type", name: "type", widget: "hidden", default: "Scripture Reading" }
+              - { label: "Reference", name: "reference", widget: "string" }
+              - { label: "Text", name: "text", widget: "text", required: false }
+              - { label: "Bible Gateway Link", name: "bible_link", widget: "string", required: false }
+
+          - label: "Prayer"
+            name: "Prayer"
+            widget: "object"
+            fields:
+              - { label: "Type", name: "type", widget: "hidden", default: "Prayer" }
+              - { label: "Title", name: "title", widget: "string", hint: "e.g., Invocation, Prayer of Confession" }
+              - { label: "Text", name: "text", widget: "text", required: false }
+
+          - label: "Responsive Reading"
+            name: "Responsive Reading"
+            widget: "object"
+            fields:
+              - { label: "Type", name: "type", widget: "hidden", default: "Responsive Reading" }
+              - { label: "Reference", name: "reference", widget: "string", required: false }
+              - label: "Lines"
+                name: "lines"
+                widget: "list"
+                fields:
+                  - { label: "Leader", name: "leader", widget: "string" }
+                  - { label: "All", name: "all", widget: "string", required: false }
+
+          - label: "Profession of Faith"
+            name: "Profession of Faith"
+            widget: "object"
+            fields:
+              - { label: "Type", name: "type", widget: "hidden", default: "Profession of Faith" }
+              - { label: "Title", name: "title", widget: "string", hint: "e.g., The Apostles' Creed" }
+              - { label: "Text", name: "text", widget: "text", required: false }
+
+          - label: "Gloria Patri"
+            name: "Gloria Patri"
+            widget: "object"
+            fields:
+              - { label: "Type", name: "type", widget: "hidden", default: "Gloria Patri" }
+              - { label: "Lyrics", name: "lyrics", widget: "text" }
+
+          - label: "Doxology"
+            name: "Doxology"
+            widget: "object"
+            fields:
+              - { label: "Type", name: "type", widget: "hidden", default: "Doxology" }
+              - { label: "Lyrics", name: "lyrics", widget: "text" }
+
+          - label: "Offering"
+            name: "Offering"
+            widget: "object"
+            fields:
+              - { label: "Type", name: "type", widget: "hidden", default: "Offering" }
+              - { label: "Text", name: "text", widget: "string", required: false }
+
+          - label: "Choral Anthem"
+            name: "Choral Anthem"
+            widget: "object"
+            fields:
+              - { label: "Type", name: "type", widget: "hidden", default: "Choral Anthem" }
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Lyrics", name: "lyrics", widget: "text", required: false }
+
+          - label: "Sermon"
+            name: "Sermon"
+            widget: "object"
+            fields:
+              - { label: "Type", name: "type", widget: "hidden", default: "Sermon" }
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Speaker", name: "speaker", widget: "string" }
+              - { label: "Scripture", name: "scripture", widget: "string" }
+
+          - label: "Benediction"
+            name: "Benediction"
+            widget: "object"
+            fields:
+              - { label: "Type", name: "type", widget: "hidden", default: "Benediction" }
+              - { label: "Text", name: "text", widget: "text", required: false }
+
+          - label: "Postlude"
+            name: "Postlude"
+            widget: "object"
+            fields:
+              - { label: "Type", name: "type", widget: "hidden", default: "Postlude" }
+              - { label: "Text", name: "text", widget: "string", required: false }
+
+          - label: "Other"
+            name: "Other"
+            widget: "object"
+            fields:
+              - { label: "Type", name: "type", widget: "string" }
+              - { label: "Text", name: "text", widget: "text", required: false }
+
+      - label: "Flowers"
+        name: "flowers"
+        widget: "object"
+        collapsed: true
+        required: false
+        fields:
+          - { label: "Given By", name: "given_by", widget: "string" }
+          - { label: "In Memory Of", name: "in_memory_of", widget: "string", required: false }
+          - { label: "In Honor Of", name: "in_honor_of", widget: "string", required: false }
+
+      - label: "Announcements"
+        name: "announcements"
+        widget: "list"
+        required: false
+        fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Body", name: "body", widget: "text" }

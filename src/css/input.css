@@ -1,0 +1,106 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply font-sans text-navy bg-cream leading-relaxed;
+  }
+
+  body.dark {
+    @apply bg-gray-900 text-gray-100;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+  }
+}
+
+@layer components {
+  /* Responsive reading format */
+  .responsive-reading .leader {
+    @apply font-semibold text-navy;
+  }
+
+  .responsive-reading .all {
+    @apply font-bold;
+  }
+
+  .dark .responsive-reading .leader {
+    @apply text-gold;
+  }
+
+  /* Worship section styling */
+  .worship-section {
+    @apply py-4 border-b border-navy/10;
+  }
+
+  .dark .worship-section {
+    @apply border-gray-700;
+  }
+
+  .worship-section:last-child {
+    @apply border-b-0;
+  }
+
+  .section-title {
+    @apply text-sm uppercase tracking-wider text-gold font-sans font-semibold mb-2;
+  }
+
+  /* Hymn styling */
+  .hymn-number {
+    @apply inline-block bg-navy text-cream px-2 py-0.5 rounded text-sm font-sans mr-2;
+  }
+
+  .dark .hymn-number {
+    @apply bg-gold text-navy;
+  }
+
+  /* Scripture reference */
+  .scripture-ref {
+    @apply text-gold font-semibold;
+  }
+
+  /* Announcement card */
+  .announcement-card {
+    @apply bg-white p-4 rounded-lg shadow-sm mb-3;
+  }
+
+  .dark .announcement-card {
+    @apply bg-gray-800;
+  }
+
+  /* Follow-along mode */
+  body.follow-along {
+    font-size: 1.25rem;
+  }
+
+  body.follow-along h2 {
+    font-size: 1.5rem;
+  }
+}
+
+@layer utilities {
+  /* Smooth scroll for iOS */
+  .scroll-smooth {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Print styles */
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+}

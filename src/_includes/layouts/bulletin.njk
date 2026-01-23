@@ -1,0 +1,182 @@
+---
+layout: base.njk
+---
+
+<article class="bulletin">
+  <!-- Header -->
+  <header class="text-center mb-8 pb-6 border-b border-navy/20 dark:border-gray-700">
+    <p class="text-gold font-semibold mb-1">{{ liturgical_day }}</p>
+    <h1 class="font-serif text-2xl md:text-3xl text-navy dark:text-cream mb-2">
+      {{ date | formatDate }}
+    </h1>
+    {% if sermon_series %}
+    <p class="text-navy/70 dark:text-gray-400 italic">{{ sermon_series }}</p>
+    {% endif %}
+  </header>
+
+  <!-- Order of Worship -->
+  <section class="mb-10">
+    <h2 class="font-serif text-xl text-navy dark:text-cream mb-6 text-center">Order of Worship</h2>
+
+    <!-- Prelude -->
+    {% if prelude %}
+    <div class="worship-section">
+      <p class="section-title">Prelude</p>
+      <p>{{ prelude }}</p>
+    </div>
+    {% endif %}
+
+    <!-- Call to Meditation -->
+    {% if call_to_meditation %}
+    <div class="worship-section">
+      <p class="section-title">Call to Meditation</p>
+      <p class="scripture-ref mb-2">{{ call_to_meditation.reference }}</p>
+      <blockquote class="italic text-navy/80 dark:text-gray-300 pl-4 border-l-2 border-gold">
+        {{ call_to_meditation.text }}
+      </blockquote>
+    </div>
+    {% endif %}
+
+    <!-- Choral Introit -->
+    {% if choral_introit %}
+    <div class="worship-section">
+      <p class="section-title">Choral Introit</p>
+      <p>{{ choral_introit }}</p>
+    </div>
+    {% endif %}
+
+    <!-- Call to Worship -->
+    {% if call_to_worship %}
+    <div class="worship-section">
+      <p class="section-title">Call to Worship</p>
+      <p class="scripture-ref mb-3">{{ call_to_worship.reference }}</p>
+      <div class="responsive-reading space-y-2">
+        {% for line in call_to_worship.lines %}
+        <div class="mb-2">
+          <p class="leader"><span class="text-gold text-sm mr-2">Leader:</span>{{ line.leader }}</p>
+          {% if line.all %}
+          <p class="all"><span class="text-gold text-sm mr-2">All:</span>{{ line.all }}</p>
+          {% endif %}
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+
+    <!-- Hymns and other elements -->
+    {% for element in worship_order %}
+    <div class="worship-section">
+      <p class="section-title">{{ element.type }}</p>
+
+      {% if element.type == "Hymn" %}
+        <p>
+          <span class="hymn-number">#{{ element.number }}</span>
+          <span class="font-serif">{{ element.title }}</span>
+          {% if element.verses %}
+          <span class="text-sm text-navy/60 dark:text-gray-500">(verses {{ element.verses }})</span>
+          {% endif %}
+        </p>
+        {% if element.hymnary_link %}
+        <a href="{{ element.hymnary_link }}" target="_blank" rel="noopener" class="text-sm text-gold hover:underline">View on Hymnary.org →</a>
+        {% endif %}
+
+      {% elif element.type == "Scripture Reading" %}
+        <p class="scripture-ref mb-2">{{ element.reference }}</p>
+        {% if element.text %}
+        <blockquote class="italic text-navy/80 dark:text-gray-300 pl-4 border-l-2 border-gold">
+          {{ element.text | safe }}
+        </blockquote>
+        {% endif %}
+        {% if element.bible_link %}
+        <a href="{{ element.bible_link }}" target="_blank" rel="noopener" class="text-sm text-gold hover:underline">Read on Bible Gateway →</a>
+        {% endif %}
+
+      {% elif element.type == "Responsive Reading" %}
+        <p class="scripture-ref mb-3">{{ element.reference }}</p>
+        <div class="responsive-reading space-y-2">
+          {% for line in element.lines %}
+          <div class="mb-2">
+            <p class="leader"><span class="text-gold text-sm mr-2">Leader:</span>{{ line.leader }}</p>
+            {% if line.all %}
+            <p class="all"><span class="text-gold text-sm mr-2">All:</span>{{ line.all }}</p>
+            {% endif %}
+          </div>
+          {% endfor %}
+        </div>
+
+      {% elif element.type == "Prayer" %}
+        <p class="font-semibold">{{ element.title }}</p>
+        {% if element.text %}
+        <p class="italic mt-2">{{ element.text | safe }}</p>
+        {% endif %}
+
+      {% elif element.type == "Profession of Faith" %}
+        <p class="font-semibold mb-2">{{ element.title }}</p>
+        {% if element.text %}
+        <p class="italic">{{ element.text | safe }}</p>
+        {% endif %}
+
+      {% elif element.type == "Sermon" %}
+        <h3 class="font-serif text-lg mb-1">{{ element.title }}</h3>
+        <p class="text-navy/70 dark:text-gray-400">{{ element.speaker }}</p>
+        <p class="scripture-ref mt-2">{{ element.scripture }}</p>
+
+      {% elif element.type == "Gloria Patri" or element.type == "Doxology" %}
+        <p class="italic text-navy/80 dark:text-gray-300 whitespace-pre-line">{{ element.lyrics }}</p>
+
+      {% elif element.type == "Choral Anthem" %}
+        <p class="font-serif">{{ element.title }}</p>
+        {% if element.lyrics %}
+        <details class="mt-2">
+          <summary class="text-gold cursor-pointer hover:underline text-sm">View lyrics</summary>
+          <p class="italic mt-2 text-navy/80 dark:text-gray-300 whitespace-pre-line">{{ element.lyrics }}</p>
+        </details>
+        {% endif %}
+
+      {% else %}
+        {% if element.text %}
+        <p>{{ element.text | safe }}</p>
+        {% endif %}
+      {% endif %}
+    </div>
+    {% endfor %}
+
+  </section>
+
+  <!-- Announcements -->
+  {% if announcements or flowers %}
+  <section class="mb-10">
+    <h2 class="font-serif text-xl text-navy dark:text-cream mb-6 text-center">Announcements</h2>
+
+    {% if flowers %}
+    <div class="announcement-card border-l-4 border-gold">
+      <p class="section-title">Flowers</p>
+      <p>Given by <strong>{{ flowers.given_by }}</strong></p>
+      {% if flowers.in_memory_of %}
+      <p class="text-navy/70 dark:text-gray-400 mt-1">In memory of {{ flowers.in_memory_of }}</p>
+      {% endif %}
+      {% if flowers.in_honor_of %}
+      <p class="text-navy/70 dark:text-gray-400 mt-1">In honor of {{ flowers.in_honor_of }}</p>
+      {% endif %}
+    </div>
+    {% endif %}
+
+    {% for announcement in announcements %}
+    <div class="announcement-card">
+      <h3 class="font-semibold text-navy dark:text-cream mb-1">{{ announcement.title }}</h3>
+      <p class="text-navy/80 dark:text-gray-300">{{ announcement.body | safe }}</p>
+    </div>
+    {% endfor %}
+  </section>
+  {% endif %}
+
+  <!-- Share/Actions -->
+  <div class="flex justify-center gap-4 mt-8 no-print">
+    <button id="shareBtn" class="bg-navy text-cream px-4 py-2 rounded hover:bg-navy/90 transition-colors text-sm">
+      Share Bulletin
+    </button>
+    <button id="followAlongBtn" class="border border-navy text-navy dark:border-gold dark:text-gold px-4 py-2 rounded hover:bg-navy/5 transition-colors text-sm">
+      Follow Along Mode
+    </button>
+  </div>
+</article>

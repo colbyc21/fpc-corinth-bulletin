@@ -1,0 +1,18 @@
+---
+layout: base.njk
+title: Current Bulletin
+---
+
+{% set latest = collections.bulletins | getLatest %}
+
+{% if latest %}
+  <meta http-equiv="refresh" content="0; url=/{{ latest.data.date | dateToPath }}/">
+  <p>Redirecting to the latest bulletin...</p>
+  <p><a href="/{{ latest.data.date | dateToPath }}/">Click here if not redirected</a></p>
+{% else %}
+  <div class="text-center py-12">
+    <h1 class="font-serif text-2xl text-navy dark:text-cream mb-4">Welcome to FPC Corinth</h1>
+    <p class="text-navy/70 dark:text-gray-400 mb-6">No bulletins have been published yet.</p>
+    <a href="/about/" class="text-gold hover:underline">Learn more about our church →</a>
+  </div>
+{% endif %}
