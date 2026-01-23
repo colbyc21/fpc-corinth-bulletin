@@ -10,7 +10,7 @@ layout: base.njk
       {{ date | formatDate }}
     </h1>
     {% if sermon_series %}
-    <p class="text-navy-muted dark:text-gray-400 italic">{{ sermon_series }}</p>
+    <p class="dark:text-gray-400" style="color: #1a3a5c;">{{ sermon_series }}</p>
     {% endif %}
   </header>
 
@@ -31,7 +31,7 @@ layout: base.njk
     <div class="worship-section">
       <p class="section-title">Call to Meditation</p>
       <p class="scripture-ref mb-2">{{ call_to_meditation.reference }}</p>
-      <blockquote class="italic text-navy dark:text-gray-300 pl-4 border-l-2 border-gold">
+      <blockquote class="text-navy dark:text-gray-300 pl-4 border-l-2 border-gold" style="color: #1a3a5c;">
         {{ call_to_meditation.text }}
       </blockquote>
     </div>
@@ -83,7 +83,7 @@ layout: base.njk
       {% elif element.type == "Scripture Reading" %}
         <p class="scripture-ref mb-2">{{ element.reference }}</p>
         {% if element.text %}
-        <blockquote class="italic text-navy dark:text-gray-300 pl-4 border-l-2 border-gold">
+        <blockquote class="dark:text-gray-300 pl-4 border-l-2 border-gold" style="color: #1a3a5c;">
           {{ element.text | safe }}
         </blockquote>
         {% endif %}
@@ -107,13 +107,13 @@ layout: base.njk
       {% elif element.type == "Prayer" %}
         <p class="font-semibold">{{ element.title }}</p>
         {% if element.text %}
-        <p class="italic mt-2">{{ element.text | safe }}</p>
+        <p class="mt-2" style="color: #1a3a5c;">{{ element.text | safe }}</p>
         {% endif %}
 
       {% elif element.type == "Profession of Faith" %}
         <p class="font-semibold mb-2">{{ element.title }}</p>
         {% if element.text %}
-        <p class="italic">{{ element.text | safe }}</p>
+        <p style="color: #1a3a5c;">{{ element.text | safe }}</p>
         {% endif %}
 
       {% elif element.type == "Sermon" %}
@@ -122,14 +122,14 @@ layout: base.njk
         <p class="scripture-ref mt-2">{{ element.scripture }}</p>
 
       {% elif element.type == "Gloria Patri" or element.type == "Doxology" %}
-        <p class="italic text-navy dark:text-gray-300 whitespace-pre-line">{{ element.lyrics }}</p>
+        <p class="dark:text-gray-300 whitespace-pre-line" style="color: #1a3a5c;">{{ element.lyrics }}</p>
 
       {% elif element.type == "Choral Anthem" %}
         <p class="font-serif">{{ element.title }}</p>
         {% if element.lyrics %}
         <details class="mt-2">
           <summary class="text-gold cursor-pointer hover:underline text-sm">View lyrics</summary>
-          <p class="italic mt-2 text-navy dark:text-gray-300 whitespace-pre-line">{{ element.lyrics }}</p>
+          <p class="mt-2 dark:text-gray-300 whitespace-pre-line" style="color: #1a3a5c;">{{ element.lyrics }}</p>
         </details>
         {% endif %}
 
