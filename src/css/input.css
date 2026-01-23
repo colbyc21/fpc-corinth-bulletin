@@ -62,9 +62,18 @@
     @apply bg-gold text-navy;
   }
 
-  /* Scripture reference */
+  /* Scripture reference - navy to differentiate from gold section titles */
   .scripture-ref {
-    @apply text-gold font-semibold;
+    @apply text-navy font-semibold font-serif;
+  }
+
+  .dark .scripture-ref {
+    @apply text-cream;
+  }
+
+  /* Blockquote text - medium weight to prevent light italic rendering */
+  blockquote.italic {
+    @apply font-medium;
   }
 
   /* Announcement card */

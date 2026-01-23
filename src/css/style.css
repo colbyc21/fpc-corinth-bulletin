@@ -653,12 +653,24 @@ h1, h2, h3, h4, h5, h6 {
   color: rgb(26 58 92 / var(--tw-text-opacity, 1));
 }
 
-/* Scripture reference */
+/* Scripture reference - navy to differentiate from gold section titles */
 
 .scripture-ref {
+  font-family: Georgia, Cambria, Times New Roman, serif;
   font-weight: 600;
   --tw-text-opacity: 1;
-  color: rgb(201 169 89 / var(--tw-text-opacity, 1));
+  color: rgb(26 58 92 / var(--tw-text-opacity, 1));
+}
+
+.dark .scripture-ref {
+  --tw-text-opacity: 1;
+  color: rgb(250 249 247 / var(--tw-text-opacity, 1));
+}
+
+/* Blockquote text - medium weight to prevent light italic rendering */
+
+blockquote.italic {
+  font-weight: 500;
 }
 
 /* Announcement card */
