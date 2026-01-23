@@ -1057,6 +1057,11 @@ body.follow-along h2 {
   }
 }
 
+.hover\:bg-gold:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(201 169 89 / var(--tw-bg-opacity, 1));
+}
+
 .hover\:bg-navy\/5:hover {
   background-color: rgb(26 58 92 / 0.05);
 }
@@ -1068,6 +1073,11 @@ body.follow-along h2 {
 .hover\:text-gold:hover {
   --tw-text-opacity: 1;
   color: rgb(201 169 89 / var(--tw-text-opacity, 1));
+}
+
+.hover\:text-navy:hover {
+  --tw-text-opacity: 1;
+  color: rgb(26 58 92 / var(--tw-text-opacity, 1));
 }
 
 .hover\:underline:hover {

@@ -70,15 +70,12 @@ layout: base.njk
 
       {% if element.type == "Hymn" %}
         <p>
-          <span class="hymn-number">#{{ element.number }}</span>
+          <a href="https://hymnary.org/hymn/TH1990/{{ element.number }}" target="_blank" rel="noopener" class="hymn-number hover:bg-gold hover:text-navy transition-colors">#{{ element.number }}</a>
           <span class="font-serif">{{ element.title }}</span>
           {% if element.verses %}
           <span class="text-sm text-navy-muted dark:text-gray-500">(verses {{ element.verses }})</span>
           {% endif %}
         </p>
-        {% if element.hymnary_link %}
-        <a href="{{ element.hymnary_link }}" target="_blank" rel="noopener" class="text-sm text-gold hover:underline">View on Hymnary.org →</a>
-        {% endif %}
 
       {% elif element.type == "Scripture Reading" %}
         <p class="scripture-ref mb-2">{{ element.reference }}</p>
