@@ -999,14 +999,9 @@ body.follow-along h2 {
   color: rgb(26 58 92 / var(--tw-text-opacity, 1));
 }
 
-.text-navy-light {
-  --tw-text-opacity: 1;
-  color: rgb(42 74 108 / var(--tw-text-opacity, 1));
-}
-
 .text-navy-muted {
   --tw-text-opacity: 1;
-  color: rgb(61 93 125 / var(--tw-text-opacity, 1));
+  color: rgb(45 77 109 / var(--tw-text-opacity, 1));
 }
 
 .text-navy\/70 {

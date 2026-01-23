@@ -31,7 +31,7 @@ layout: base.njk
     <div class="worship-section">
       <p class="section-title">Call to Meditation</p>
       <p class="scripture-ref mb-2">{{ call_to_meditation.reference }}</p>
-      <blockquote class="italic text-navy-light dark:text-gray-300 pl-4 border-l-2 border-gold">
+      <blockquote class="italic text-navy dark:text-gray-300 pl-4 border-l-2 border-gold">
         {{ call_to_meditation.text }}
       </blockquote>
     </div>
@@ -83,7 +83,7 @@ layout: base.njk
       {% elif element.type == "Scripture Reading" %}
         <p class="scripture-ref mb-2">{{ element.reference }}</p>
         {% if element.text %}
-        <blockquote class="italic text-navy-light dark:text-gray-300 pl-4 border-l-2 border-gold">
+        <blockquote class="italic text-navy dark:text-gray-300 pl-4 border-l-2 border-gold">
           {{ element.text | safe }}
         </blockquote>
         {% endif %}
@@ -122,14 +122,14 @@ layout: base.njk
         <p class="scripture-ref mt-2">{{ element.scripture }}</p>
 
       {% elif element.type == "Gloria Patri" or element.type == "Doxology" %}
-        <p class="italic text-navy-light dark:text-gray-300 whitespace-pre-line">{{ element.lyrics }}</p>
+        <p class="italic text-navy dark:text-gray-300 whitespace-pre-line">{{ element.lyrics }}</p>
 
       {% elif element.type == "Choral Anthem" %}
         <p class="font-serif">{{ element.title }}</p>
         {% if element.lyrics %}
         <details class="mt-2">
           <summary class="text-gold cursor-pointer hover:underline text-sm">View lyrics</summary>
-          <p class="italic mt-2 text-navy-light dark:text-gray-300 whitespace-pre-line">{{ element.lyrics }}</p>
+          <p class="italic mt-2 text-navy dark:text-gray-300 whitespace-pre-line">{{ element.lyrics }}</p>
         </details>
         {% endif %}
 
@@ -164,7 +164,7 @@ layout: base.njk
     {% for announcement in announcements %}
     <div class="announcement-card">
       <h3 class="font-semibold text-navy dark:text-cream mb-1">{{ announcement.title }}</h3>
-      <p class="text-navy-light dark:text-gray-300">{{ announcement.body | safe }}</p>
+      <p class="text-navy dark:text-gray-300">{{ announcement.body | safe }}</p>
     </div>
     {% endfor %}
   </section>
