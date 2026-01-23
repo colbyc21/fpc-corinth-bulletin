@@ -6,9 +6,16 @@ title: Current Bulletin
 {% set latest = collections.bulletins | getLatest %}
 
 {% if latest %}
-  <meta http-equiv="refresh" content="0; url=/{{ latest.data.date | dateToPath }}/">
-  <p>Redirecting to the latest bulletin...</p>
-  <p><a href="/{{ latest.data.date | dateToPath }}/">Click here if not redirected</a></p>
+  <div class="text-center py-12">
+    <p>Redirecting to the latest bulletin...</p>
+    <p><a href="/{{ latest.data.date | dateToPath }}/">Click here if not redirected</a></p>
+  </div>
+  <script>
+    // Only redirect if no identity token in URL
+    if (!window.location.hash.includes('token')) {
+      window.location.href = "/{{ latest.data.date | dateToPath }}/";
+    }
+  </script>
 {% else %}
   <div class="text-center py-12">
     <h1 class="font-serif text-2xl text-navy dark:text-cream mb-4">Welcome to FPC Corinth</h1>
