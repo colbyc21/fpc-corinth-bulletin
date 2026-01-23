@@ -6,8 +6,8 @@ module.exports = {
     extend: {
       colors: {
         'navy': '#1a3a5c',
-        'navy-light': '#3d5a7a',
-        'navy-muted': '#5a7a9a',
+        'navy-light': '#2a4a6c',
+        'navy-muted': '#3d5d7d',
         'gold': '#c9a959',
         'cream': '#faf9f7',
         'cream-dark': '#f0eeea',
