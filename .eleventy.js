@@ -6,6 +6,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/js");
   eleventyConfig.addPassthroughCopy({ "src/sw.js": "sw.js" });
   eleventyConfig.addPassthroughCopy({ "src/manifest.json": "manifest.json" });
+  eleventyConfig.addPassthroughCopy({ "src/Be Blessed.mp3": "audio/be-blessed.mp3" });
 
   // Create a collection of all bulletins sorted by date (newest first)
   eleventyConfig.addCollection("bulletins", function(collectionApi) {
