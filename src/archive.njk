@@ -6,19 +6,34 @@ permalink: /archive/
 
 <h1 class="font-serif text-2xl md:text-3xl text-navy dark:text-cream text-center mb-8">Bulletin Archive</h1>
 
-{% if collections.bulletins.length > 0 %}
+{# Build a combined list: scroll bulletins first (newest), then markdown bulletins #}
+{% set allBulletins = [] %}
+
+{% for sb in scrollBulletins %}
+  {% set allBulletins = (allBulletins.push({date: sb.date, url: sb.url, liturgical_day: sb.liturgical_day, sermon_title: sb.sermon_title, source: "scroll"}), allBulletins) %}
+{% endfor %}
+
+{% for bulletin in collections.bulletins %}
+  {% set sermonTitle = "" %}
+  {% if bulletin.data.worship_order %}
+    {% for element in bulletin.data.worship_order %}
+      {% if element.type == "Sermon" %}
+        {% set sermonTitle = element.title %}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+  {% set allBulletins = (allBulletins.push({date: bulletin.data.date | dateToPath, url: "/" + (bulletin.data.date | dateToPath) + "/", liturgical_day: bulletin.data.liturgical_day, sermon_title: sermonTitle, source: "md"}), allBulletins) %}
+{% endfor %}
+
+{% if allBulletins.length > 0 %}
 <ul class="space-y-3">
-  {% for bulletin in collections.bulletins %}
+  {% for item in allBulletins | sort(true, false, "date") %}
   <li>
-    <a href="/{{ bulletin.data.date | dateToPath }}/" class="block bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
-      <p class="font-serif text-lg text-navy dark:text-cream">{{ bulletin.data.date | formatDate }}</p>
-      <p class="text-gold text-sm">{{ bulletin.data.liturgical_day }}</p>
-      {% if bulletin.data.worship_order %}
-        {% for element in bulletin.data.worship_order %}
-          {% if element.type == "Sermon" %}
-          <p class="text-navy/70 dark:text-gray-400 text-sm mt-1">{{ element.title }}</p>
-          {% endif %}
-        {% endfor %}
+    <a href="{{ item.url }}" class="block bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+      <p class="font-serif text-lg text-navy dark:text-cream">{{ item.date | formatDate }}</p>
+      <p class="text-gold text-sm">{{ item.liturgical_day }}</p>
+      {% if item.sermon_title %}
+      <p class="text-navy/70 dark:text-gray-400 text-sm mt-1">{{ item.sermon_title }}</p>
       {% endif %}
     </a>
   </li>

@@ -3,17 +3,32 @@ layout: base.njk
 title: Current Bulletin
 ---
 
+{# Find the latest bulletin across both markdown and scroll formats #}
 {% set latest = collections.bulletins | getLatest %}
+{% set latestDate = "" %}
+{% set latestUrl = "" %}
 
 {% if latest %}
+  {% set latestDate = latest.data.date | dateToPath %}
+  {% set latestUrl = "/" + latestDate + "/" %}
+{% endif %}
+
+{% for sb in scrollBulletins %}
+  {% if sb.date > latestDate %}
+    {% set latestDate = sb.date %}
+    {% set latestUrl = sb.url %}
+  {% endif %}
+{% endfor %}
+
+{% if latestUrl %}
   <div class="text-center py-12">
     <p>Redirecting to the latest bulletin...</p>
-    <p><a href="/{{ latest.data.date | dateToPath }}/">Click here if not redirected</a></p>
+    <p><a href="{{ latestUrl }}">Click here if not redirected</a></p>
   </div>
   <script>
     // Only redirect if no identity token in URL
     if (!window.location.hash.includes('token')) {
-      window.location.href = "/{{ latest.data.date | dateToPath }}/";
+      window.location.href = "{{ latestUrl }}";
     }
   </script>
 {% else %}

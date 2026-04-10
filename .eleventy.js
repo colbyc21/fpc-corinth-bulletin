@@ -23,9 +23,10 @@ module.exports = function(eleventyConfig) {
     return collection[0];
   });
 
-  // Format date for display
+  // Format date for display (accepts Date objects or YYYY-MM-DD strings)
   eleventyConfig.addFilter("formatDate", function(date) {
-    return new Date(date).toLocaleDateString('en-US', {
+    const d = (typeof date === 'string') ? new Date(date + 'T12:00:00') : new Date(date);
+    return d.toLocaleDateString('en-US', {
       weekday: 'long',
       year: 'numeric',
       month: 'long',
