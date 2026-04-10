@@ -7,6 +7,9 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ "src/sw.js": "sw.js" });
   eleventyConfig.addPassthroughCopy({ "src/manifest.json": "manifest.json" });
   eleventyConfig.addPassthroughCopy({ "src/Be Blessed.mp3": "audio/be-blessed.mp3" });
+  eleventyConfig.addPassthroughCopy({ "logo.png": "images/logo.png" });
+  eleventyConfig.addPassthroughCopy({ "qrcode.png": "images/qrcode.png" });
+  eleventyConfig.addPassthroughCopy("src/scroll");
 
   // Create a collection of all bulletins sorted by date (newest first)
   eleventyConfig.addCollection("bulletins", function(collectionApi) {
