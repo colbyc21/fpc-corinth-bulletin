@@ -1,51 +1,330 @@
 ---
-layout: base.njk
-title: About
 permalink: /about/
 ---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About | FPC Corinth</title>
+<meta name="description" content="First Presbyterian Church of Corinth, MS — an EPC congregation">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Cinzel:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#f7f3eb">
+<style>
+  :root {
+    --cream: #f7f3eb;
+    --warm-white: #faf8f4;
+    --parchment: #f0ebe0;
+    --ink: #2a2118;
+    --ink-light: #4a3f32;
+    --ink-faint: #7a7060;
+    --rule: #c4b8a4;
+    --rule-light: #ddd4c6;
+    --accent: #8b1a1a;
+    --accent-soft: #a0524d;
+    --gold: #b8963e;
+    --section-bg: #ede8de;
+  }
 
-<article class="prose dark:prose-invert max-w-none">
-  <h1 class="font-serif text-2xl md:text-3xl text-navy dark:text-cream text-center mb-8">
-    First Presbyterian Church of Corinth
-  </h1>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-  <div class="text-center mb-8 text-gold italic font-serif text-lg">
-    "To Be Disciples / To Make Disciples"
+  html { font-size: 17px; scroll-behavior: smooth; }
+
+  body {
+    font-family: 'EB Garamond', 'Georgia', serif;
+    color: var(--ink);
+    background: var(--parchment);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 999;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  }
+
+  /* ── SITE HEADER ─────────────────────────── */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--warm-white);
+    border-bottom: 1px solid var(--rule-light);
+    backdrop-filter: saturate(180%) blur(8px);
+  }
+  .site-header-inner {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0.7rem 1.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .site-header .brand {
+    font-family: 'Cinzel', serif;
+    font-weight: 500;
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .site-header .brand:hover { color: var(--accent); }
+  .site-header .archive-link {
+    font-family: 'Cinzel', serif;
+    font-weight: 500;
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    text-decoration: none;
+    padding: 0.35rem 0.85rem;
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    white-space: nowrap;
+  }
+  .site-header .archive-link:hover {
+    color: var(--warm-white);
+    background: var(--ink);
+    border-color: var(--ink);
+  }
+  @media (max-width: 420px) {
+    .site-header .brand { font-size: 0.68rem; letter-spacing: 0.1em; }
+    .site-header .archive-link { font-size: 0.64rem; padding: 0.3rem 0.7rem; }
+    .site-header-inner { padding: 0.6rem 1rem; }
+  }
+
+  /* ── PAGE CONTAINER ──────────────────────── */
+  .page {
+    max-width: 640px;
+    margin: 0 auto;
+    background: var(--warm-white);
+    min-height: calc(100vh - 3rem);
+    box-shadow: 0 0 80px rgba(42, 33, 24, 0.08);
+    padding: 3rem 1.8rem 4rem;
+  }
+  @media (min-width: 641px) {
+    .page {
+      margin-top: 1.5rem;
+      margin-bottom: 1.5rem;
+      border-radius: 2px;
+    }
+  }
+
+  /* ── HEADING ─────────────────────────────── */
+  .page-eyebrow {
+    font-family: 'Cinzel', serif;
+    font-weight: 500;
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-align: center;
+    margin-bottom: 0.8rem;
+  }
+  .page-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: clamp(1.8rem, 6vw, 2.4rem);
+    text-align: center;
+    color: var(--ink);
+    margin-bottom: 0.2rem;
+    letter-spacing: 0.01em;
+    line-height: 1.15;
+  }
+  .page-motto {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--gold);
+    text-align: center;
+    margin-top: 0.8rem;
+  }
+  .ornament {
+    width: 160px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--ink), transparent);
+    margin: 1.5rem auto 2.5rem;
+  }
+
+  /* ── SECTIONS ────────────────────────────── */
+  .about-section {
+    margin-bottom: 2rem;
+  }
+  .about-section h2 {
+    font-family: 'Cinzel', serif;
+    font-weight: 500;
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.8rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--rule-light);
+    text-align: center;
+  }
+  .about-section p {
+    font-size: 0.98rem;
+    color: var(--ink-light);
+    margin-bottom: 0.8rem;
+  }
+  .about-section p:last-child { margin-bottom: 0; }
+  .about-section strong { color: var(--ink); font-weight: 700; }
+
+  .service-times {
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+  }
+  .service-times .row {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    gap: 0.6rem;
+    font-size: 1.1rem;
+    margin-bottom: 0.3rem;
+    color: var(--ink);
+  }
+  .service-times .row .label {
+    font-weight: 500;
+    font-style: italic;
+    color: var(--ink-faint);
+  }
+  .service-times .row .time {
+    font-weight: 600;
+  }
+
+  .location {
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    color: var(--ink);
+    line-height: 1.7;
+  }
+  .location a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--rule);
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+  .location a:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  .denomination {
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    color: var(--ink);
+    font-style: italic;
+  }
+  .denomination strong {
+    font-style: normal;
+  }
+
+  .website-cta {
+    text-align: center;
+    margin-top: 1rem;
+  }
+  .website-cta a {
+    display: inline-block;
+    font-family: 'Cinzel', serif;
+    font-weight: 500;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--warm-white);
+    background: var(--accent);
+    padding: 0.7rem 1.6rem;
+    border-radius: 2px;
+    transition: background 0.2s ease;
+  }
+  .website-cta a:hover { background: var(--accent-soft); }
+
+  /* ── FOOTER ──────────────────────────────── */
+  .page-footer {
+    text-align: center;
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--rule-light);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.85rem;
+    color: var(--ink-faint);
+    font-style: italic;
+  }
+
+  @media (max-width: 500px) {
+    .page { padding: 2rem 1.3rem 3rem; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="https://fpccorinth.org" target="_blank" rel="noopener">First Presbyterian Church</a>
+    <a class="archive-link" href="/archive/">Archive</a>
   </div>
+</header>
 
-  <section class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm mb-8">
-    <h2 class="font-serif text-xl text-navy dark:text-cream mb-4">Service Times</h2>
-    <div class="space-y-2">
-      <p><strong>Sunday School:</strong> 9:00 AM</p>
-      <p><strong>Sunday Worship:</strong> 10:00 AM</p>
+<div class="page">
+  <p class="page-eyebrow">About</p>
+  <h1 class="page-title">First Presbyterian Church<br>of Corinth</h1>
+  <p class="page-motto">"To Be Disciples / To Make Disciples"</p>
+  <div class="ornament"></div>
+
+  <section class="about-section">
+    <h2>Service Times</h2>
+    <div class="service-times">
+      <div class="row"><span class="label">Sunday School</span><span class="time">9:00 AM</span></div>
+      <div class="row"><span class="label">Sunday Worship</span><span class="time">10:00 AM</span></div>
     </div>
   </section>
 
-  <section class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm mb-8">
-    <h2 class="font-serif text-xl text-navy dark:text-cream mb-4">Location</h2>
-    <address class="not-italic">
-      First Presbyterian Church<br>
-      Corinth, MS<br>
-    </address>
-  </section>
-
-  <section class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm mb-8">
-    <h2 class="font-serif text-xl text-navy dark:text-cream mb-4">About This Bulletin</h2>
-    <p class="text-navy/80 dark:text-gray-300">
-      This digital bulletin is designed to be a companion to our printed Sunday bulletin.
-      Follow along on your phone during worship, or review past services in our archive.
-    </p>
-    <p class="text-navy/80 dark:text-gray-300 mt-4">
-      Features include dark mode for reduced brightness during services and a
-      "follow along" mode with larger text for easier reading.
+  <section class="about-section">
+    <h2>Location</h2>
+    <p class="location">
+      919 East Shiloh Road<br>
+      Corinth, MS 38834<br>
+      <a href="tel:6622866424">662-286-6424</a>
     </p>
   </section>
 
-  <section class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm">
-    <h2 class="font-serif text-xl text-navy dark:text-cream mb-4">Our Denomination</h2>
-    <p class="text-navy/80 dark:text-gray-300">
-      First Presbyterian Church of Corinth is a congregation of the
-      <strong>Evangelical Presbyterian Church (EPC)</strong>.
-    </p>
+  <section class="about-section">
+    <h2>About This Bulletin</h2>
+    <p>This digital bulletin is a companion to our printed Sunday bulletin. Follow along on your phone during worship, or revisit past services in the archive.</p>
   </section>
-</article>
+
+  <section class="about-section">
+    <h2>Our Denomination</h2>
+    <p class="denomination">A congregation of the <strong>Evangelical Presbyterian Church (EPC)</strong></p>
+  </section>
+
+  <div class="website-cta">
+    <a href="https://fpccorinth.org" target="_blank" rel="noopener">Visit fpccorinth.org</a>
+  </div>
+
+  <p class="page-footer">
+    Soli Deo Gloria
+  </p>
+</div>
+
+</body>
+</html>
