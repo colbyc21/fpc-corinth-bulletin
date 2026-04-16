@@ -58,6 +58,64 @@
     box-shadow: 0 0 80px rgba(42, 33, 24, 0.08);
   }
 
+  /* ── SITE HEADER ─────────────────────────── */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--warm-white);
+    border-bottom: 1px solid var(--rule-light);
+    backdrop-filter: saturate(180%) blur(8px);
+  }
+  .site-header-inner {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0.7rem 1.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .site-header .brand {
+    font-family: 'Cinzel', serif;
+    font-weight: 500;
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .site-header .brand:hover {
+    color: var(--accent);
+  }
+  .site-header .archive-link {
+    font-family: 'Cinzel', serif;
+    font-weight: 500;
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    text-decoration: none;
+    padding: 0.35rem 0.85rem;
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    white-space: nowrap;
+  }
+  .site-header .archive-link:hover {
+    color: var(--warm-white);
+    background: var(--ink);
+    border-color: var(--ink);
+  }
+  @media (max-width: 420px) {
+    .site-header .brand { font-size: 0.68rem; letter-spacing: 0.1em; }
+    .site-header .archive-link { font-size: 0.64rem; padding: 0.3rem 0.7rem; }
+    .site-header-inner { padding: 0.6rem 1rem; }
+  }
+
   /* ── COVER ──────────────────────────────── */
   .cover-section {
     min-height: 100svh;
@@ -645,11 +703,19 @@
     body { background: #fff; }
     .scroll-container { box-shadow: none; max-width: none; }
     .cover-scroll-hint { display: none; }
+    .site-header { display: none; }
     .reveal { opacity: 1; transform: none; }
   }
 </style>
 </head>
 <body>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="https://fpccorinth.org" target="_blank" rel="noopener">First Presbyterian Church</a>
+    <a class="archive-link" href="/archive/">Archive</a>
+  </div>
+</header>
 
 <div class="scroll-container">
 
