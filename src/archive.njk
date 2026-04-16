@@ -1,44 +1,315 @@
 ---
-layout: base.njk
-title: Bulletin Archive
 permalink: /archive/
 ---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bulletin Archive | FPC Corinth</title>
+<meta name="description" content="Past Sunday bulletins for First Presbyterian Church of Corinth, MS">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Cinzel:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#f7f3eb">
+<style>
+  :root {
+    --cream: #f7f3eb;
+    --warm-white: #faf8f4;
+    --parchment: #f0ebe0;
+    --ink: #2a2118;
+    --ink-light: #4a3f32;
+    --ink-faint: #7a7060;
+    --rule: #c4b8a4;
+    --rule-light: #ddd4c6;
+    --accent: #8b1a1a;
+    --accent-soft: #a0524d;
+    --gold: #b8963e;
+    --section-bg: #ede8de;
+  }
 
-<h1 class="font-serif text-2xl md:text-3xl text-navy dark:text-cream text-center mb-8">Bulletin Archive</h1>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-{# Build a combined list: scroll bulletins first (newest), then markdown bulletins #}
-{% set allBulletins = [] %}
+  html { font-size: 17px; scroll-behavior: smooth; }
 
-{% for sb in scrollBulletins %}
-  {% set allBulletins = (allBulletins.push({date: sb.date, url: sb.url, liturgical_day: sb.liturgical_day, sermon_title: sb.sermon_title, source: "scroll"}), allBulletins) %}
-{% endfor %}
+  body {
+    font-family: 'EB Garamond', 'Georgia', serif;
+    color: var(--ink);
+    background: var(--parchment);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
 
-{% for bulletin in collections.bulletins %}
-  {% set sermonTitle = "" %}
-  {% if bulletin.data.worship_order %}
-    {% for element in bulletin.data.worship_order %}
-      {% if element.type == "Sermon" %}
-        {% set sermonTitle = element.title %}
-      {% endif %}
-    {% endfor %}
-  {% endif %}
-  {% set allBulletins = (allBulletins.push({date: bulletin.data.date | dateToPath, url: "/" + (bulletin.data.date | dateToPath) + "/", liturgical_day: bulletin.data.liturgical_day, sermon_title: sermonTitle, source: "md"}), allBulletins) %}
-{% endfor %}
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 999;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  }
 
-{% if allBulletins.length > 0 %}
-<ul class="space-y-3">
-  {% for item in allBulletins | sort(true, false, "date") %}
-  <li>
-    <a href="{{ item.url }}" class="block bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
-      <p class="font-serif text-lg text-navy dark:text-cream">{{ item.date | formatDate }}</p>
-      <p class="text-gold text-sm">{{ item.liturgical_day }}</p>
-      {% if item.sermon_title %}
-      <p class="text-navy/70 dark:text-gray-400 text-sm mt-1">{{ item.sermon_title }}</p>
-      {% endif %}
-    </a>
-  </li>
+  /* ── SITE HEADER (matches scroll bulletin) ─ */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--warm-white);
+    border-bottom: 1px solid var(--rule-light);
+    backdrop-filter: saturate(180%) blur(8px);
+  }
+  .site-header-inner {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0.7rem 1.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .site-header .brand {
+    font-family: 'Cinzel', serif;
+    font-weight: 500;
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .site-header .brand:hover { color: var(--accent); }
+  .site-header .home-link {
+    font-family: 'Cinzel', serif;
+    font-weight: 500;
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    text-decoration: none;
+    padding: 0.35rem 0.85rem;
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    white-space: nowrap;
+  }
+  .site-header .home-link:hover {
+    color: var(--warm-white);
+    background: var(--ink);
+    border-color: var(--ink);
+  }
+  @media (max-width: 420px) {
+    .site-header .brand { font-size: 0.68rem; letter-spacing: 0.1em; }
+    .site-header .home-link { font-size: 0.64rem; padding: 0.3rem 0.7rem; }
+    .site-header-inner { padding: 0.6rem 1rem; }
+  }
+
+  /* ── PAGE CONTAINER ──────────────────────── */
+  .page {
+    max-width: 640px;
+    margin: 0 auto;
+    background: var(--warm-white);
+    min-height: calc(100vh - 3rem);
+    box-shadow: 0 0 80px rgba(42, 33, 24, 0.08);
+    padding: 3rem 1.8rem 4rem;
+    position: relative;
+  }
+  @media (min-width: 641px) {
+    .page {
+      margin-top: 1.5rem;
+      margin-bottom: 1.5rem;
+      border-radius: 2px;
+    }
+  }
+
+  /* ── HEADING ─────────────────────────────── */
+  .page-eyebrow {
+    font-family: 'Cinzel', serif;
+    font-weight: 500;
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-align: center;
+    margin-bottom: 0.8rem;
+  }
+  .page-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: clamp(1.8rem, 6vw, 2.4rem);
+    text-align: center;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.01em;
+  }
+  .ornament {
+    width: 160px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--ink), transparent);
+    margin: 1rem auto 2rem;
+  }
+  .page-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--ink-faint);
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  /* ── ARCHIVE LIST ────────────────────────── */
+  .archive-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .archive-item {
+    display: block;
+    padding: 1.1rem 1.3rem;
+    background: var(--warm-white);
+    border: 1px solid var(--rule-light);
+    border-left: 3px solid var(--rule);
+    border-radius: 2px;
+    text-decoration: none;
+    color: inherit;
+    transition: border-left-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+    position: relative;
+  }
+  .archive-item:hover {
+    border-left-color: var(--accent);
+    box-shadow: 0 4px 16px rgba(42, 33, 24, 0.08);
+    transform: translateY(-1px);
+  }
+
+  .archive-date {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: 1.15rem;
+    color: var(--ink);
+    margin-bottom: 0.15rem;
+  }
+  .archive-day {
+    font-family: 'Cinzel', serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.35rem;
+  }
+  .archive-sermon {
+    font-size: 0.92rem;
+    font-style: italic;
+    color: var(--ink-light);
+    line-height: 1.45;
+  }
+  .archive-arrow {
+    position: absolute;
+    right: 1.3rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--rule);
+    font-size: 1.4rem;
+    transition: color 0.2s ease, transform 0.2s ease;
+  }
+  .archive-item:hover .archive-arrow {
+    color: var(--accent);
+    transform: translateY(-50%) translateX(3px);
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: var(--ink-faint);
+    font-style: italic;
+  }
+
+  /* ── FOOTER ──────────────────────────────── */
+  .page-footer {
+    text-align: center;
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--rule-light);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.85rem;
+    color: var(--ink-faint);
+    font-style: italic;
+  }
+  .page-footer a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+  .page-footer a:hover { text-decoration: underline; }
+
+  @media (max-width: 500px) {
+    .page { padding: 2rem 1.3rem 3rem; }
+    .archive-item { padding: 0.95rem 2.5rem 0.95rem 1.1rem; }
+    .archive-arrow { right: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="https://fpccorinth.org" target="_blank" rel="noopener">First Presbyterian Church</a>
+    <a class="home-link" href="/">This Week</a>
+  </div>
+</header>
+
+<div class="page">
+  <p class="page-eyebrow">Archive</p>
+  <h1 class="page-title">Past Bulletins</h1>
+  <div class="ornament"></div>
+
+  {# Build combined list of scroll and markdown bulletins #}
+  {% set allBulletins = [] %}
+
+  {% for sb in scrollBulletins %}
+    {% set allBulletins = (allBulletins.push({date: sb.date, url: sb.url, liturgical_day: sb.liturgical_day, sermon_title: sb.sermon_title, source: "scroll"}), allBulletins) %}
   {% endfor %}
-</ul>
-{% else %}
-<p class="text-center text-navy/70 dark:text-gray-400">No bulletins have been published yet.</p>
-{% endif %}
+
+  {% for bulletin in collections.bulletins %}
+    {% set sermonTitle = "" %}
+    {% if bulletin.data.worship_order %}
+      {% for element in bulletin.data.worship_order %}
+        {% if element.type == "Sermon" %}
+          {% set sermonTitle = element.title %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+    {% set allBulletins = (allBulletins.push({date: bulletin.data.date | dateToPath, url: "/" + (bulletin.data.date | dateToPath) + "/", liturgical_day: bulletin.data.liturgical_day, sermon_title: sermonTitle, source: "md"}), allBulletins) %}
+  {% endfor %}
+
+  {% if allBulletins.length > 0 %}
+    <ul class="archive-list">
+      {% for item in allBulletins | sort(true, false, "date") %}
+        <li>
+          <a class="archive-item" href="{{ item.url }}">
+            {% if item.liturgical_day %}<p class="archive-day">{{ item.liturgical_day }}</p>{% endif %}
+            <p class="archive-date">{{ item.date | formatDate }}</p>
+            {% if item.sermon_title %}<p class="archive-sermon">{{ item.sermon_title }}</p>{% endif %}
+            <span class="archive-arrow">&rsaquo;</span>
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p class="empty-state">No bulletins have been published yet.</p>
+  {% endif %}
+
+  <p class="page-footer">
+    A congregation of the Evangelical Presbyterian Church &middot; <a href="/about/">About</a>
+  </p>
+</div>
+
+</body>
+</html>
