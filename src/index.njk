@@ -1,8 +1,7 @@
 ---
-layout: base.njk
-title: Current Bulletin
+eleventyExcludeFromCollections: true
+permalink: /index.html
 ---
-
 {# Find the latest bulletin across both markdown and scroll formats #}
 {% set latest = collections.bulletins | getLatest %}
 {% set latestDate = "" %}
@@ -19,22 +18,27 @@ title: Current Bulletin
     {% set latestUrl = sb.url %}
   {% endif %}
 {% endfor %}
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>FPC Corinth Bulletin</title>
+{% if latestUrl %}<meta http-equiv="refresh" content="0; url={{ latestUrl }}">{% endif %}
+<style>
+  html, body { margin: 0; background: #f0ebe0; color: #2a2118; font-family: 'Georgia', serif; }
+  .pending { display: flex; align-items: center; justify-content: center; min-height: 100vh; font-size: 0.95rem; color: #7a7060; }
+</style>
+</head>
+<body>
 {% if latestUrl %}
-  <div class="text-center py-12">
-    <p>Redirecting to the latest bulletin...</p>
-    <p><a href="{{ latestUrl }}">Click here if not redirected</a></p>
-  </div>
-  <script>
-    // Only redirect if no identity token in URL
-    if (!window.location.hash.includes('token')) {
-      window.location.href = "{{ latestUrl }}";
-    }
-  </script>
+<div class="pending"><a href="{{ latestUrl }}" style="color:#7a7060;">Loading latest bulletin…</a></div>
+<script>
+  if (!window.location.hash.includes('token')) {
+    window.location.replace("{{ latestUrl }}");
+  }
+</script>
 {% else %}
-  <div class="text-center py-12">
-    <h1 class="font-serif text-2xl text-navy dark:text-cream mb-4">Welcome to FPC Corinth</h1>
-    <p class="text-navy/70 dark:text-gray-400 mb-6">No bulletins have been published yet.</p>
-    <a href="/about/" class="text-gold hover:underline">Learn more about our church →</a>
-  </div>
+<div class="pending">No bulletins published yet. <a href="/about/" style="margin-left:0.4rem;color:#8b1a1a;">About</a></div>
 {% endif %}
+</body>
+</html>

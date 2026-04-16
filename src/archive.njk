@@ -258,10 +258,25 @@ permalink: /archive/
 </head>
 <body>
 
+{# Resolve latest bulletin for direct "This Week" link, avoids bouncing through / #}
+{% set latest = collections.bulletins | getLatest %}
+{% set latestDate = "" %}
+{% set thisWeekUrl = "/" %}
+{% if latest %}
+  {% set latestDate = latest.data.date | dateToPath %}
+  {% set thisWeekUrl = "/" + latestDate + "/" %}
+{% endif %}
+{% for sb in scrollBulletins %}
+  {% if sb.date > latestDate %}
+    {% set latestDate = sb.date %}
+    {% set thisWeekUrl = sb.url %}
+  {% endif %}
+{% endfor %}
+
 <header class="site-header">
   <div class="site-header-inner">
     <a class="brand" href="https://fpccorinth.org" target="_blank" rel="noopener">First Presbyterian Church</a>
-    <a class="home-link" href="/">This Week</a>
+    <a class="home-link" href="{{ thisWeekUrl }}">This Week</a>
   </div>
 </header>
 
