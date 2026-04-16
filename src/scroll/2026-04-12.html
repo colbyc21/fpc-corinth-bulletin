@@ -577,20 +577,39 @@
     letter-spacing: 0.04em;
   }
 
-  .footer-qr {
-    margin-top: 1rem;
+  .footer-give {
+    margin-top: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
   }
-  .footer-qr img {
-    width: 80px;
-    height: 80px;
-    display: block;
-    margin: 0 auto 0.3rem;
-  }
-  .footer-qr p {
-    font-size: 0.72rem;
-    color: var(--rule);
-    letter-spacing: 0.1em;
+  .give-button {
+    display: inline-block;
+    font-family: 'Cinzel', serif;
+    font-weight: 500;
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
+    text-decoration: none;
+    color: var(--warm-white);
+    background: var(--accent);
+    padding: 0.7rem 1.6rem;
+    border-radius: 2px;
+    transition: background 0.2s ease;
+  }
+  .give-button:hover {
+    background: var(--accent-soft);
+  }
+  .give-link {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.8rem;
+    color: var(--ink-faint);
+    word-break: break-all;
+    text-decoration: none;
+  }
+  .give-link:hover {
+    color: var(--accent);
   }
 
   /* ── ANIMATIONS ─────────────────────────── */
@@ -996,9 +1015,9 @@
   <!-- ═══════════ FOOTER ═══════════ -->
   <footer class="bulletin-footer">
     <p class="footer-address">919 East Shiloh Rd &nbsp;&middot;&nbsp; Corinth, MS 38834 &nbsp;&middot;&nbsp; fpccorinth.org &nbsp;&middot;&nbsp; 662-286-6638</p>
-    <div class="footer-qr">
-      <img src="/images/qrcode.png" alt="Online Giving QR Code">
-      <p>Scan to give online</p>
+    <div class="footer-give">
+      <a class="give-button" href="https://onrealm.org/fpccorinth/-/form/give/now" target="_blank" rel="noopener">Give Online</a>
+      <a class="give-link" href="https://onrealm.org/fpccorinth/-/form/give/now" target="_blank" rel="noopener">onrealm.org/fpccorinth/-/form/give/now</a>
     </div>
   </footer>
 
