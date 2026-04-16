@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Worship Bulletin — Maundy Thursday, April 2, 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Cinzel:wght@400;500;600;700&family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f7f3eb;
+    --warm-white: #faf8f4;
+    --parchment: #f0ebe0;
+    --ink: #2a2118;
+    --ink-light: #4a3f32;
+    --ink-faint: #7a7060;
+    --rule: #c4b8a4;
+    --rule-light: #ddd4c6;
+    --accent: #8b1a1a;
+    --accent-soft: #a0524d;
+    --gold: #b8963e;
+    --gold-soft: #d4bc7a;
+    --section-bg: #ede8de;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    scroll-behavior: smooth;
+    font-size: 17px;
+  }
+
+  body {
+    font-family: 'EB Garamond', 'Georgia', serif;
+    color: var(--ink);
+    background: var(--parchment);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Subtle paper texture overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 999;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  }
+
+  .scroll-container {
+    max-width: 640px;
+    margin: 0 auto;
+    background: var(--warm-white);
+    min-height: 100vh;
+    box-shadow: 0 0 80px rgba(42, 33, 24, 0.08);
+  }
+
+  /* ── SITE HEADER ─────────────────────────── */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--warm-white);
+    border-bottom: 1px solid var(--rule-light);
+    backdrop-filter: saturate(180%) blur(8px);
+  }
+  .site-header-inner {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0.7rem 1.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .site-header .brand {
+    font-family: 'Cinzel', serif;
+    font-weight: 500;
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .site-header .brand:hover {
+    color: var(--accent);
+  }
+  .site-header .archive-link {
+    font-family: 'Cinzel', serif;
+    font-weight: 500;
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    text-decoration: none;
+    padding: 0.35rem 0.85rem;
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    white-space: nowrap;
+  }
+  .site-header .archive-link:hover {
+    color: var(--warm-white);
+    background: var(--ink);
+    border-color: var(--ink);
+  }
+  @media (max-width: 420px) {
+    .site-header .brand { font-size: 0.68rem; letter-spacing: 0.1em; }
+    .site-header .archive-link { font-size: 0.64rem; padding: 0.3rem 0.7rem; }
+    .site-header-inner { padding: 0.6rem 1rem; }
+  }
+
+  /* ── COVER ──────────────────────────────── */
+  .cover-section {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 3rem 2rem;
+    position: relative;
+    background:
+      radial-gradient(ellipse at 30% 20%, rgba(184, 150, 62, 0.06) 0%, transparent 60%),
+      radial-gradient(ellipse at 70% 80%, rgba(139, 26, 26, 0.04) 0%, transparent 50%),
+      var(--warm-white);
+  }
+
+  .cover-rule {
+    width: 100%;
+    height: 2px;
+    background: var(--ink);
+    position: absolute;
+    left: 0;
+  }
+  .cover-rule--top { top: 1.5rem; }
+  .cover-rule--bottom { bottom: 1.5rem; }
+
+  .cover-logo {
+    width: min(220px, 50vw);
+    height: auto;
+    margin-bottom: 1.2rem;
+    opacity: 0;
+    animation: fadeUp 1s ease-out 0.3s forwards;
+  }
+
+  .cover-church-name {
+    font-family: 'Cinzel', serif;
+    font-weight: 400;
+    font-size: clamp(1.4rem, 5vw, 1.9rem);
+    letter-spacing: 0.04em;
+    color: var(--ink);
+    margin-bottom: 0.6rem;
+    opacity: 0;
+    animation: fadeUp 1s ease-out 0.5s forwards;
+  }
+
+  .cover-ornament {
+    width: 160px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--ink), transparent);
+    margin: 0.3rem auto 0.8rem;
+    opacity: 0;
+    animation: fadeUp 1s ease-out 0.6s forwards;
+  }
+
+  .cover-season {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 1.05rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 0.3rem;
+    opacity: 0;
+    animation: fadeUp 1s ease-out 0.7s forwards;
+  }
+
+  .cover-date {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: clamp(1.2rem, 4vw, 1.6rem);
+    color: var(--ink);
+    opacity: 0;
+    animation: fadeUp 1s ease-out 0.8s forwards;
+  }
+
+  .cover-footer {
+    position: absolute;
+    bottom: 2.2rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.82rem;
+    color: var(--ink-faint);
+    letter-spacing: 0.02em;
+    opacity: 0;
+    animation: fadeUp 1s ease-out 1s forwards;
+  }
+
+  .cover-scroll-hint {
+    position: absolute;
+    bottom: 4.5rem;
+    opacity: 0;
+    animation: fadeUp 1s ease-out 1.2s forwards, gentle-bob 2.5s ease-in-out 2.2s infinite;
+  }
+  .cover-scroll-hint svg {
+    width: 20px;
+    height: 20px;
+    stroke: var(--rule);
+    fill: none;
+    stroke-width: 1.5;
+  }
+
+  /* ── SECTION LAYOUT ─────────────────────── */
+  .bulletin-section {
+    padding: 2rem 1.8rem;
+    border-top: 1px solid var(--rule-light);
+  }
+
+  .section-heading {
+    font-family: 'Cinzel', serif;
+    font-weight: 500;
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-align: center;
+    margin-bottom: 1.4rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  /* ── WELCOME ────────────────────────────── */
+  .welcome-section {
+    background:
+      linear-gradient(180deg, var(--section-bg) 0%, var(--warm-white) 100%);
+  }
+
+  .welcome-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 1.8rem;
+    text-align: center;
+    margin-bottom: 1.2rem;
+    color: var(--ink);
+  }
+
+  .welcome-block {
+    margin-bottom: 1.2rem;
+  }
+
+  .welcome-block h3 {
+    font-family: 'Cinzel', serif;
+    font-weight: 500;
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.4rem;
+  }
+
+  .welcome-block p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--ink-light);
+    text-align: justify;
+    hyphens: auto;
+  }
+
+  .connect-info {
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: var(--ink-light);
+  }
+  .connect-info strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  /* ── LITURGY ────────────────────────────── */
+  .liturgy-header {
+    text-align: center;
+    margin-bottom: 1rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid var(--rule-light);
+  }
+
+  .liturgy-main-title {
+    font-family: 'Cinzel', serif;
+    font-weight: 600;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin-bottom: 0.25rem;
+  }
+
+  .liturgy-date-line {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    color: var(--ink-faint);
+  }
+
+  .liturgy-standing-note {
+    font-style: italic;
+    font-size: 0.82rem;
+    color: var(--ink-faint);
+    margin-top: 0.3rem;
+  }
+
+  /* Liturgy section divider */
+  .liturgy-divider {
+    font-family: 'Cinzel', serif;
+    font-weight: 600;
+    font-size: 0.68rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--accent);
+    margin: 1.6rem 0 0.8rem;
+    position: relative;
+    padding: 0.5rem 0;
+  }
+  .liturgy-divider::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 20%;
+    right: 20%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--rule), transparent);
+  }
+
+  /* Worship items */
+  .worship-item {
+    margin-bottom: 1rem;
+  }
+
+  .worship-heading {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--ink);
+    margin-bottom: 0.2rem;
+  }
+
+  .worship-attr {
+    font-weight: 400;
+    font-style: italic;
+    font-size: 0.88rem;
+    color: var(--ink-faint);
+    margin-left: 0.3rem;
+  }
+
+  .worship-body {
+    font-size: 0.95rem;
+    padding-left: 0.06in;
+    margin-top: 0.15rem;
+    text-align: justify;
+    hyphens: auto;
+    color: var(--ink-light);
+  }
+
+  .worship-body.corporate {
+    font-style: italic;
+    color: var(--ink);
+  }
+
+  /* Responsive reading */
+  .responsive {
+    padding-left: 0.06in;
+    margin-top: 0.2rem;
+  }
+
+  .leader-line, .all-line {
+    font-size: 0.95rem;
+    margin-bottom: 0.15rem;
+    text-align: justify;
+    hyphens: auto;
+  }
+
+  .leader-line {
+    color: var(--ink-light);
+  }
+
+  .all-line {
+    font-style: italic;
+    color: var(--ink);
+  }
+
+  .leader-label {
+    font-weight: 400;
+    color: var(--ink-faint);
+    font-size: 0.85rem;
+  }
+
+  .all-label {
+    font-weight: 700;
+    color: var(--ink);
+    font-size: 0.85rem;
+  }
+
+  .silent-confession {
+    font-weight: 700;
+    font-style: italic;
+    font-size: 0.85rem;
+    padding-left: 0.06in;
+    margin-top: 0.3rem;
+    color: var(--ink-faint);
+  }
+
+  .creed-note {
+    font-size: 0.78rem;
+    font-style: italic;
+    color: var(--ink-faint);
+    padding-left: 0.06in;
+    margin-top: 0.15rem;
+  }
+
+  /* Margin notes (inline on scroll version) */
+  .margin-note {
+    font-size: 0.78rem;
+    line-height: 1.45;
+    color: var(--ink-faint);
+    font-style: italic;
+    border-left: 2px solid var(--rule-light);
+    padding-left: 0.8rem;
+    margin: 0.4rem 0 0.6rem 0.06in;
+  }
+
+  .margin-note .note-label {
+    font-weight: 600;
+    font-style: normal;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--rule);
+    display: block;
+    margin-bottom: 0.1rem;
+  }
+
+  /* Hymn lyrics */
+  .hymn-lyrics {
+    font-style: italic;
+    font-size: 0.95rem;
+    padding-left: 0.06in;
+    margin-top: 0.25rem;
+    color: var(--ink);
+  }
+  .hymn-lyrics .verse {
+    margin-bottom: 0.4rem;
+  }
+  .hymn-lyrics .refrain-label {
+    font-weight: 700;
+    font-style: normal;
+  }
+
+  /* ── SERMON NOTES ───────────────────────── */
+  .sermon-section {
+    background:
+      linear-gradient(180deg, var(--warm-white) 0%, var(--section-bg) 30%, var(--section-bg) 70%, var(--warm-white) 100%);
+  }
+
+  .sermon-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 1.5rem;
+    text-align: center;
+    font-style: italic;
+    color: var(--ink);
+    margin-bottom: 0.2rem;
+  }
+
+  .sermon-text-ref {
+    text-align: center;
+    font-size: 0.92rem;
+    color: var(--ink-faint);
+    margin-bottom: 0.4rem;
+  }
+
+  .sermon-intro {
+    font-size: 0.88rem;
+    line-height: 1.6;
+    text-align: justify;
+    hyphens: auto;
+    color: var(--ink-light);
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--rule-light);
+  }
+
+  .notes-prompt {
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin-top: 1rem;
+    margin-bottom: 0.25rem;
+    color: var(--ink);
+  }
+
+  .scripture-quote {
+    font-size: 0.85rem;
+    font-style: italic;
+    color: var(--ink-faint);
+    padding-left: 0.8rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .notes-lines {
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+    padding: 0.4rem 0;
+  }
+
+  .notes-line {
+    border-bottom: 1px solid var(--rule-light);
+    width: 100%;
+  }
+
+  .sermon-resources {
+    font-size: 0.75rem;
+    color: var(--ink-faint);
+    margin-top: 1.5rem;
+    padding-top: 0.8rem;
+    border-top: 1px solid var(--rule-light);
+    line-height: 1.5;
+  }
+
+  /* ── ANNOUNCEMENTS ──────────────────────── */
+  .announcement {
+    margin-bottom: 1rem;
+  }
+
+  .announcement strong {
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .announcement p {
+    font-size: 0.92rem;
+    line-height: 1.55;
+    color: var(--ink-light);
+  }
+
+  .flower-dedication {
+    text-align: center;
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-top: 1px solid var(--rule-light);
+    border-bottom: 1px solid var(--rule-light);
+  }
+
+  .flower-dedication .verse {
+    font-style: italic;
+    font-size: 0.85rem;
+    color: var(--ink-faint);
+    margin-top: 0.3rem;
+  }
+
+  .flower-dedication .attribution {
+    font-size: 0.88rem;
+    color: var(--ink-light);
+    margin-top: 0.2rem;
+  }
+
+  /* ── SERVANTS & STAFF ───────────────────── */
+  .serve-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.3rem 1.2rem;
+    margin-bottom: 1rem;
+  }
+
+  .serve-line {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: var(--ink-light);
+  }
+  .serve-line .role {
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .staff-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.2rem 1.2rem;
+  }
+
+  .staff-line {
+    font-size: 0.82rem;
+    line-height: 1.45;
+    color: var(--ink-light);
+  }
+  .staff-line .name {
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  /* ── CALENDAR ───────────────────────────── */
+  .calendar-section {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--rule-light);
+  }
+
+  .cal-line {
+    font-size: 0.88rem;
+    line-height: 1.5;
+    color: var(--ink-light);
+    margin-bottom: 0.2rem;
+  }
+  .cal-line .cal-date {
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  /* ── FOOTER ─────────────────────────────── */
+  .bulletin-footer {
+    text-align: center;
+    padding: 1.5rem 2rem 2rem;
+    border-top: 2px solid var(--ink);
+    background: var(--warm-white);
+  }
+
+  .footer-address {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.85rem;
+    color: var(--ink-faint);
+    letter-spacing: 0.04em;
+  }
+
+  .footer-give {
+    margin-top: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .give-button {
+    display: inline-block;
+    font-family: 'Cinzel', serif;
+    font-weight: 500;
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--warm-white);
+    background: var(--accent);
+    padding: 0.7rem 1.6rem;
+    border-radius: 2px;
+    transition: background 0.2s ease;
+  }
+  .give-button:hover {
+    background: var(--accent-soft);
+  }
+
+  /* ── ANIMATIONS ─────────────────────────── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes gentle-bob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(5px); }
+  }
+
+  /* Scroll-triggered fade-in */
+  .reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── RESPONSIVE ─────────────────────────── */
+  @media (max-width: 500px) {
+    html { font-size: 16px; }
+    .bulletin-section { padding: 1.5rem 1.3rem; }
+    .serve-grid, .staff-grid { grid-template-columns: 1fr; }
+    .section-heading::before, .section-heading::after { width: 24px; }
+  }
+
+  @media (min-width: 641px) {
+    .scroll-container {
+      margin-top: 1.5rem;
+      margin-bottom: 1.5rem;
+      border-radius: 2px;
+    }
+  }
+
+  /* ── PRINT ──────────────────────────────── */
+  @media print {
+    body { background: #fff; }
+    .scroll-container { box-shadow: none; max-width: none; }
+    .cover-scroll-hint { display: none; }
+    .site-header { display: none; }
+    .reveal { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="https://fpccorinth.org" target="_blank" rel="noopener">First Presbyterian Church</a>
+    <a class="archive-link" href="/archive/">Archive</a>
+  </div>
+</header>
+
+<div class="scroll-container">
+
+  <!-- ═══════════ COVER ═══════════ -->
+  <section class="cover-section">
+    <div class="cover-rule cover-rule--top"></div>
+
+    <h1 class="cover-church-name">First Presbyterian Church</h1>
+    <div class="cover-ornament"></div>
+    <p class="cover-season">Maundy Thursday</p>
+    <p class="cover-date">April 2, 2026</p>
+
+    <div class="cover-scroll-hint">
+      <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+
+    <div class="cover-rule cover-rule--bottom"></div>
+    <p class="cover-footer">A congregation of the Evangelical Presbyterian Church</p>
+  </section>
+
+  <!-- ═══════════ WELCOME ═══════════ -->
+  <section class="bulletin-section welcome-section">
+    <div class="reveal">
+      <p class="section-heading">Welcome</p>
+
+      <div class="welcome-block">
+        <h3>The Shadow of the Cross</h3>
+        <p>This evening we gather to remember the final hours of our Lord&rsquo;s life. The &ldquo;service of darkness,&rdquo; or Tenebrae (Latin for &ldquo;darkness&rdquo;), dates back to the 4th century. Traditionally observed during Holy Week, it focuses on the final hours of Jesus&rsquo; life and crucifixion. <em>The Shadow of the Cross</em> is a reminder of the magnitude of God&rsquo;s love; a love so great that it continues through all time and eternity.</p>
+        <p style="margin-top:0.5rem;">For shadows to exist, there must be light. In the case of the Passion story of our Lord, that light, as the gospel of John tells us, &ldquo;was the light of the people.&rdquo; (John 1:4). As John affirms, &ldquo;The light shines in the darkness, and the darkness did not overcome it.&rdquo; (John 1:5)</p>
+      </div>
+
+      <div class="welcome-block">
+        <h3>Connect With Us</h3>
+        <p class="connect-info">
+          <strong>Website:</strong> fpccorinth.com<br>
+          <strong>Phone:</strong> 662-286-6424<br>
+          <strong>Address:</strong> 919 East Shiloh Rd, Corinth, MS 38834
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ LITURGY ═══════════ -->
+  <section class="bulletin-section">
+    <div class="reveal">
+      <div class="liturgy-header">
+        <p class="liturgy-main-title">The Service of Tenebrae</p>
+        <p class="liturgy-date-line">Maundy Thursday &bull; April 2, 2026</p>
+        <p class="liturgy-standing-note">The Shadow of the Cross &mdash; A Cantata Arranged &amp; Composed by Lloyd Larson</p>
+      </div>
+
+      <!-- ── GATHERING ── -->
+      <div class="liturgy-divider">Gathering</div>
+
+      <div class="worship-item">
+        <p class="worship-heading">The Prelude <span class="worship-attr">Jo Anderson Handbell Choir</span></p>
+        <div class="margin-note">
+          <span class="note-label">Prelude</span>
+          The prelude provides a quiet moment to prepare for worship. As the music begins, we are encouraged to calm our hearts, focus our minds, and enter reverently into God&rsquo;s presence.
+        </div>
+      </div>
+
+      <div class="worship-item">
+        <p class="worship-heading">Opening Narration</p>
+        <p class="worship-body">The cross of Christ is an eternal reminder of God&rsquo;s unconditional love. This day we stand in the shadow of the cross&hellip; And we gratefully remember.</p>
+      </div>
+
+      <div class="worship-item">
+        <p class="worship-heading">Anthem: &ldquo;I Come to the Cross&rdquo; <span class="worship-attr">with &ldquo;Near the Cross&rdquo;</span></p>
+        <p style="font-size:0.88rem; padding-left:0.06in; font-style:italic; color:var(--ink-faint);">Words and Music by Bill Batstone and Bob Somma &bull; Soloist: Steve Blair</p>
+        <div class="hymn-lyrics">
+          <p class="verse">I come to the cross seeking mercy and grace,<br>
+          I come to the cross where You died in my place.<br>
+          Out of my weakness and into Your strength;<br>
+          Humbly I come to the cross.</p>
+          <p class="verse">Your arms are open, You call me by name,<br>
+          You welcome this child that was lost.<br>
+          You paid the price for my guilt and my shame,<br>
+          Jesus, I come, Jesus, I come, Jesus, I come to the cross.</p>
+          <p class="verse">Jesus, keep me near the cross, there a precious fountain,<br>
+          Free to all, a healing stream, flows from Calvary&rsquo;s mountain.<br>
+          In the cross, in the cross, be my glory ever,<br>
+          Till my raptured soul shall find rest beyond the river.</p>
+        </div>
+      </div>
+
+      <!-- ── COMMUNION ── -->
+      <div class="liturgy-divider">Communion &mdash; The Last Supper</div>
+
+      <div class="worship-item">
+        <p class="worship-heading">Scripture Reading: <span style="font-weight:normal;">Matthew 26:17&ndash;19</span></p>
+        <p class="worship-body">It was the first day of Unleavened Bread, and the disciples came to Jesus, asking, &ldquo;Where do you want us to make the preparations for the Passover?&rdquo; Jesus said, &ldquo;Go into the city to a certain man and tell him, &lsquo;The Teacher says: My appointed time is near. I am going to observe the Passover with my disciples at your house.&rsquo;&rdquo; The disciples did as Jesus had instructed them, and they prepared the Passover meal.</p>
+      </div>
+
+      <div class="worship-item">
+        <p class="worship-heading">Words of Institution: <span style="font-weight:normal;">Luke 22:14&ndash;20</span></p>
+        <p class="worship-body">When the hour came, Jesus took his place at the table surrounded by his disciples. He said to them, &ldquo;I have desired to eat this Passover with you before I suffer&hellip;&rdquo; He then took a loaf of bread, gave thanks, broke it, and gave it to the disciples saying, &ldquo;This is my body given for you. Do this in remembrance of me.&rdquo; After supper, he did the same with the cup saying, &ldquo;This cup, poured out for you, is the new covenant in my blood. Remember me.&rdquo;</p>
+        <div class="margin-note">
+          <span class="note-label">Sacrament</span>
+          Sacraments are holy signs and seals of the covenant of grace, instituted by God, to represent Christ and his benefits, and to confirm our interest in him.
+        </div>
+      </div>
+
+      <div class="worship-item">
+        <p class="worship-heading">Anthem: &ldquo;We Remember You&rdquo;</p>
+        <p style="font-size:0.88rem; padding-left:0.06in; font-style:italic; color:var(--ink-faint);">Words and Music by Walt Harrah</p>
+        <div class="hymn-lyrics">
+          <p class="verse">We remember you, we remember you;<br>
+          By your sacrifice of love all glory now is due.<br>
+          At this table here mercy hovers near.<br>
+          Thanks is offered up; in this bread and cup we remember you.</p>
+          <p class="verse">Jesus, King of kings, name above all names,<br>
+          Precious holy Lamb of God, your praises we proclaim, proclaim!<br>
+          Gladly we embrace both these signs of grace, of grace.<br>
+          Thanks is offered up; in this bread and cup we remember you.</p>
+        </div>
+      </div>
+
+      <div class="worship-item">
+        <p class="worship-heading">Partaking of the Elements</p>
+      </div>
+
+      <!-- ── TENEBRAE ── -->
+      <div class="liturgy-divider">Tenebrae &mdash; The Shadow of the Cross</div>
+
+      <div class="worship-item">
+        <p class="worship-heading">The Betrayal Foretold: <span style="font-weight:normal;">Matthew 26:20&ndash;25, 31a, 33&ndash;34</span></p>
+        <p class="worship-body">While still at the table with his disciples, Jesus said, &ldquo;I tell you the truth, one of you will betray me&hellip;&rdquo; Later that evening Jesus told his followers, &ldquo;This very night you will all become deserters.&rdquo; But Peter declared, &ldquo;Even if all the others fall away, I will never desert you.&rdquo; &ldquo;Truly I tell you,&rdquo; Jesus said to Peter, &ldquo;before the cock crows, you will deny me three times.&rdquo;</p>
+      </div>
+
+      <div class="worship-item">
+        <p class="worship-heading">Anthem: &ldquo;O Jesus, I Have Promised&rdquo; <span class="worship-attr">with &ldquo;I Need Thee Every Hour&rdquo;</span></p>
+        <p style="font-size:0.88rem; padding-left:0.06in; font-style:italic; color:var(--ink-faint);">Words by John E. Bode &bull; Music by Lloyd Larson &bull; Soloist: Jan Pike</p>
+        <div class="hymn-lyrics">
+          <p class="verse">O Jesus, I have promised to serve You till the end;<br>
+          Be forever near me, my Master and my Friend.<br>
+          I shall not fear the battle if You are by my side,<br>
+          Nor wander from the pathway if You will be my guide.</p>
+          <p class="verse">I need Thee every hour, stay Thou near by;<br>
+          Temptations lose their pow&rsquo;r when Thou art nigh.<br>
+          I need Thee, O I need Thee, every hour I need Thee;<br>
+          O bless me now, my Savior, I come, I come to Thee.</p>
+        </div>
+      </div>
+
+      <div class="worship-item">
+        <p class="worship-heading">Gethsemane: <span style="font-weight:normal;">Mark 14:32&ndash;36</span></p>
+        <p class="worship-body">Jesus and his disciples went to a place called Gethsemane where he said to them, &ldquo;Sit here while I pray.&rdquo; He took Peter, James and John along with him and began to be deeply troubled. &ldquo;I am overwhelmed with sorrow, even to the point of death. Remain here and stay awake.&rdquo; Going a little farther, Jesus fell to the ground and prayed, &ldquo;Abba, Father, all things are possible for you. Take this cup from me. Yet, not my will, but yours be done.&rdquo;</p>
+      </div>
+
+      <div class="worship-item">
+        <p class="worship-heading">Anthem: &ldquo;O Love That Will Not Let Me Go&rdquo;</p>
+        <p style="font-size:0.88rem; padding-left:0.06in; font-style:italic; color:var(--ink-faint);">Words by George Matheson &bull; Music by Albert L. Peace</p>
+        <div class="hymn-lyrics">
+          <p class="verse">O Love that will not let me go,<br>
+          I rest my weary soul in thee;<br>
+          I give thee back the life I owe,<br>
+          That in thine ocean depths its flow may richer, fuller be.</p>
+          <p class="verse">O Light that followest all my way,<br>
+          I yield my flickering torch to thee;<br>
+          My heart restores its borrowed ray,<br>
+          That in thy sunshine&rsquo;s blaze its day may brighter fairer be.</p>
+        </div>
+      </div>
+
+      <div class="worship-item">
+        <p class="worship-heading">The Arrest: <span style="font-weight:normal;">Matthew 26:45&ndash;50, 55&ndash;56</span></p>
+        <p class="worship-body">Jesus returned from his place of prayer to find his disciples sleeping. &ldquo;Get up,&rdquo; he said to them, &ldquo;for my betrayer is at hand.&rdquo; While he was still speaking, Judas arrived accompanied by a large crowd with swords and clubs. Judas came up to Jesus and said, &ldquo;Greetings, Rabbi!&rdquo; and kissed him&hellip; Immediately they stepped forward and seized Jesus&hellip; Then all of the disciples deserted Jesus and fled.</p>
+      </div>
+
+      <div class="worship-item">
+        <p class="worship-heading">Anthem: &ldquo;Lamb of God&rdquo;</p>
+        <p style="font-size:0.88rem; padding-left:0.06in; font-style:italic; color:var(--ink-faint);">Words and Music by Twila Paris</p>
+        <div class="hymn-lyrics">
+          <p class="verse">Your only Son, no sin to hide,<br>
+          But I have sent him from your side<br>
+          To walk upon this guilty sod,<br>
+          And to become the Lamb of God.</p>
+          <p class="verse"><span class="refrain-label">(Refrain)</span><br>
+          O Lamb of God, sweet Lamb of God;<br>
+          I love the holy Lamb of God.<br>
+          O wash me in his precious blood,<br>
+          My Jesus Christ, the Lamb of God.</p>
+        </div>
+      </div>
+
+      <div class="worship-item">
+        <p class="worship-heading">Peter&rsquo;s Denial: <span style="font-weight:normal;">Luke 22:54&ndash;62</span></p>
+        <p class="worship-body">The crowd took Jesus to the house of the high priest. Peter followed at a distance&hellip; At that moment the cock crowed. The Lord turned and looked at Peter. Then he remembered the words of Jesus: &ldquo;Before the cock crows today, you will deny me three times.&rdquo; Peter went out and wept bitterly.</p>
+      </div>
+
+      <div class="worship-item">
+        <p class="worship-heading">Anthem: &ldquo;You Are My All in All&rdquo;</p>
+        <p style="font-size:0.88rem; padding-left:0.06in; font-style:italic; color:var(--ink-faint);">Words and Music by Dennis L. Jernigan</p>
+        <div class="hymn-lyrics">
+          <p class="verse">You are my strength when I am weak,<br>
+          You are my treasure that I seek; You are my all in all.<br>
+          Seeking You as a precious jewel,<br>
+          Lord, to give up, I&rsquo;d be a fool; You are my all in all.</p>
+          <p class="verse"><span class="refrain-label">(Refrain)</span><br>
+          Jesus, Lamb of God, worthy is Your name!<br>
+          Jesus, Lamb of God, worthy is Your name!</p>
+        </div>
+      </div>
+
+      <div class="worship-item">
+        <p class="worship-heading">The Trial before Pilate: <span style="font-weight:normal;">Luke 22:66&ndash;23:24</span></p>
+        <p class="worship-body">The next morning, the council of the elders, both the chief priests and the teachers of the law, met together as Jesus was brought before them&hellip; They then brought Jesus before Pilate. But Pilate said to the chief priests and crowds, &ldquo;I find no basis for a charge against this man.&rdquo; But they were insistent&hellip; The shouts of the crowd eventually prevailed. Pilate finally granted their demand&hellip; and he handed Jesus over to them as they had desired.</p>
+      </div>
+
+      <div class="worship-item">
+        <p class="worship-heading">Anthem: &ldquo;When You Prayed Beneath the Trees&rdquo;</p>
+        <p style="font-size:0.88rem; padding-left:0.06in; font-style:italic; color:var(--ink-faint);">Words by Christopher Idle &bull; Music by Lloyd Larson</p>
+        <div class="hymn-lyrics">
+          <p class="verse">When you prayed beneath the trees, it was for me, O Lord;<br>
+          When you cried upon your knees, how could it be, O Lord?<br>
+          When in blood and sweat and tears,<br>
+          You dismissed your final fears,<br>
+          When you faced the soldiers&rsquo; spears, you stood for me, O Lord.</p>
+          <p class="verse">When their triumph looked complete, it was for me, O Lord;<br>
+          When it seemed like your defeat, they could not see, O Lord!<br>
+          When you faced the mob alone, you were silent as a stone,<br>
+          And a tree became your throne; you came for me, for me, O Lord.</p>
+        </div>
+      </div>
+
+      <div class="worship-item">
+        <p class="worship-heading">The Road to Calvary: <span style="font-weight:normal;">Luke 23:26&ndash;27</span></p>
+        <p class="worship-body">As they led Jesus away, they seized Simon of Cyrene, and they laid the cross on him, making him carry it behind Jesus. A large number of people followed him, including many who mourned for him.</p>
+      </div>
+
+      <div class="worship-item">
+        <p class="worship-heading">The Crucifixion: <span style="font-weight:normal;">Luke 23:33&ndash;34, 39&ndash;46</span></p>
+        <p class="worship-body">When they arrived at the place that is called The Skull, they crucified Jesus there along with the criminals&hellip; Jesus said, &ldquo;Father, forgive them, for they do not know what they are doing.&rdquo;&hellip; &ldquo;Jesus, remember me when you come into your kingdom.&rdquo; Jesus answered him, &ldquo;Today you will be with me in Paradise.&rdquo;&hellip; It was now about noon, and darkness swept over the whole land. The curtain of the temple was torn in two. Then Jesus cried out in a loud voice, &ldquo;Father, into your hands I commend my spirit.&rdquo; When he had said this, he breathed his last.</p>
+      </div>
+
+      <div class="worship-item">
+        <p class="worship-heading">Anthem: &ldquo;How Beautiful&rdquo; <span class="worship-attr">with &ldquo;There Is a Redeemer&rdquo;</span></p>
+        <p style="font-size:0.88rem; padding-left:0.06in; font-style:italic; color:var(--ink-faint);">Words by Christopher Idle &bull; Music by Lloyd Larson</p>
+        <div class="hymn-lyrics">
+          <p class="verse">How beautiful the hands that served<br>
+          The wine and the bread and the children of earth.<br>
+          How beautiful the feet that walked<br>
+          The long dusty roads and the hill to the cross.</p>
+          <p class="verse"><span class="refrain-label">(Refrain)</span><br>
+          How beautiful, how beautiful, how beautiful,<br>
+          How beautiful, how beautiful is the body of Christ.</p>
+          <p class="verse">There is a Redeemer, Jesus, God&rsquo;s own Son;<br>
+          Precious Lamb of God, Messiah, Holy One.<br>
+          Thank You, O my Father, for giving us Your Son,<br>
+          And leaving Your Spirit till the work on earth is done.</p>
+        </div>
+      </div>
+
+      <div class="worship-item">
+        <p class="worship-heading">The Centurion&rsquo;s Witness: <span style="font-weight:normal;">Luke 23:47&ndash;49</span></p>
+        <p class="worship-body">The centurion, after witnessing what had happened, praised God and said, &ldquo;Certainly this man was innocent.&rdquo; When the crowds who had gathered there for this spectacle saw what had taken place, they were deeply saddened as they returned to their homes. All those who knew Jesus, including the women who had followed him from Galilee, stood at a distance and watched these things.</p>
+      </div>
+
+      <div class="worship-item">
+        <p class="worship-heading">Anthem: &ldquo;When I Survey the Wondrous Cross&rdquo; <span class="worship-attr">with &ldquo;Beneath the Cross of Jesus&rdquo;</span></p>
+        <p style="font-size:0.88rem; padding-left:0.06in; font-style:italic; color:var(--ink-faint);">Words by Elizabeth C. Clephane &bull; Music by Frederick C. Maker</p>
+        <div class="hymn-lyrics">
+          <p class="verse">Beneath the cross of Jesus I fain would take my stand;<br>
+          The shadow of a mighty Rock within a weary land.<br>
+          A home within the wilderness, a rest upon the way,<br>
+          From the burning of the noontide heat, and the burden of the day.</p>
+          <p class="verse">I take, O cross, thy shadow for my abiding place;<br>
+          I ask no other sunshine than the sunshine of his face,<br>
+          Content to let the world go by, to know no gain nor loss,<br>
+          My sinful self my only shame, my glory all the cross.</p>
+          <p class="verse">When I survey the wondrous cross<br>
+          On which the Prince of glory died,<br>
+          My richest gain I count but loss,<br>
+          And pour contempt on all my pride.</p>
+          <p class="verse">Were the whole realm of nature mine,<br>
+          That were a present far too small;<br>
+          Love so amazing, so divine,<br>
+          Demands my soul, my life, my all.</p>
+        </div>
+      </div>
+
+      <div class="worship-item">
+        <p class="worship-heading">Closing Scripture: <span style="font-weight:normal;">Philippians 2:6&ndash;8; Hebrews 12:2</span></p>
+        <p class="worship-body">Jesus Christ&hellip; who, though being in the very form of God, did not consider equality with God something to be exploited, emptied himself, taking the very nature of a servant, being born in human likeness. Being in human form, he humbled himself, and became obedient to death &mdash; even the death on a cross. Let us fix our eyes on Jesus, the author and perfecter of our faith, who, for the joy set before him, endured the cross and disregarded its shame.</p>
+      </div>
+
+      <!-- ── SENDING ── -->
+      <div class="liturgy-divider">Sending &mdash; Departing in Silence</div>
+
+      <div class="worship-item">
+        <p class="worship-body corporate" style="text-align:center;">The congregation departs in silence, contemplating the shadow of the cross and the magnitude of God&rsquo;s love.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ THOSE WHO SERVE / STAFF ═══════════ -->
+  <section class="bulletin-section">
+    <div class="reveal">
+      <p class="section-heading">Sanctuary Choir</p>
+
+      <div class="serve-grid">
+        <p class="serve-line"><span class="role">Sopranos</span> &mdash; Kelli Harrell, Beth Hendrick, Becky Stewart, Cindy Vann, Janet Winders</p>
+        <p class="serve-line"><span class="role">Altos</span> &mdash; Sue Benton, Mollie Johnson, Sally Sharlow, Maria Tull</p>
+        <p class="serve-line"><span class="role">Tenors</span> &mdash; Steve Blair, Brett Butler, Randy Long, Bo Perry</p>
+        <p class="serve-line"><span class="role">Basses</span> &mdash; Lenny Benton, David Huwe, Pat Palmer, Brian Thomas, Lee Thurner</p>
+      </div>
+
+      <p class="section-heading" style="margin-top:1.2rem;">Musicians &amp; Narrator</p>
+
+      <div class="staff-grid">
+        <p class="staff-line"><span class="name">Jan Pike</span> &mdash; Director</p>
+        <p class="staff-line"><span class="name">Malechi Doren</span> &mdash; Piano</p>
+        <p class="staff-line"><span class="name">John Farris Owings</span> &mdash; Organ</p>
+        <p class="staff-line"><span class="name">Paige Frame</span> &mdash; Flute</p>
+        <p class="staff-line"><span class="name">Alec Doren</span> &mdash; Aerophone &amp; French Horn</p>
+        <p class="staff-line"><span class="name">Sharon Doren</span> &mdash; Cello</p>
+        <p class="staff-line"><span class="name">Rev. Waring Porter</span> &mdash; Narrator</p>
+        <p class="staff-line"><span class="name">Jo Anderson Handbell Choir</span> &mdash; Prelude</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ FOOTER ═══════════ -->
+  <footer class="bulletin-footer">
+    <p class="footer-address">919 East Shiloh Rd &nbsp;&middot;&nbsp; Corinth, MS 38834 &nbsp;&middot;&nbsp; fpccorinth.com &nbsp;&middot;&nbsp; 662-286-6424</p>
+    <div class="footer-give">
+      <a class="give-button" href="https://onrealm.org/fpccorinth/-/form/give/now" target="_blank" rel="noopener">Give Online</a>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  // Scroll-triggered reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

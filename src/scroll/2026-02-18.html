@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Worship Bulletin — Ash Wednesday, February 18, 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Cinzel:wght@400;500;600;700&family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f7f3eb;
+    --warm-white: #faf8f4;
+    --parchment: #f0ebe0;
+    --ink: #2a2118;
+    --ink-light: #4a3f32;
+    --ink-faint: #7a7060;
+    --rule: #c4b8a4;
+    --rule-light: #ddd4c6;
+    --accent: #8b1a1a;
+    --accent-soft: #a0524d;
+    --gold: #b8963e;
+    --gold-soft: #d4bc7a;
+    --section-bg: #ede8de;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    scroll-behavior: smooth;
+    font-size: 17px;
+  }
+
+  body {
+    font-family: 'EB Garamond', 'Georgia', serif;
+    color: var(--ink);
+    background: var(--parchment);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Subtle paper texture overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 999;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  }
+
+  .scroll-container {
+    max-width: 640px;
+    margin: 0 auto;
+    background: var(--warm-white);
+    min-height: 100vh;
+    box-shadow: 0 0 80px rgba(42, 33, 24, 0.08);
+  }
+
+  /* ── SITE HEADER ─────────────────────────── */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--warm-white);
+    border-bottom: 1px solid var(--rule-light);
+    backdrop-filter: saturate(180%) blur(8px);
+  }
+  .site-header-inner {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0.7rem 1.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .site-header .brand {
+    font-family: 'Cinzel', serif;
+    font-weight: 500;
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .site-header .brand:hover {
+    color: var(--accent);
+  }
+  .site-header .archive-link {
+    font-family: 'Cinzel', serif;
+    font-weight: 500;
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    text-decoration: none;
+    padding: 0.35rem 0.85rem;
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    white-space: nowrap;
+  }
+  .site-header .archive-link:hover {
+    color: var(--warm-white);
+    background: var(--ink);
+    border-color: var(--ink);
+  }
+  @media (max-width: 420px) {
+    .site-header .brand { font-size: 0.68rem; letter-spacing: 0.1em; }
+    .site-header .archive-link { font-size: 0.64rem; padding: 0.3rem 0.7rem; }
+    .site-header-inner { padding: 0.6rem 1rem; }
+  }
+
+  /* ── COVER ──────────────────────────────── */
+  .cover-section {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 3rem 2rem;
+    position: relative;
+    background:
+      radial-gradient(ellipse at 30% 20%, rgba(184, 150, 62, 0.06) 0%, transparent 60%),
+      radial-gradient(ellipse at 70% 80%, rgba(139, 26, 26, 0.04) 0%, transparent 50%),
+      var(--warm-white);
+  }
+
+  .cover-rule {
+    width: 100%;
+    height: 2px;
+    background: var(--ink);
+    position: absolute;
+    left: 0;
+  }
+  .cover-rule--top { top: 1.5rem; }
+  .cover-rule--bottom { bottom: 1.5rem; }
+
+  .cover-logo {
+    width: min(220px, 50vw);
+    height: auto;
+    margin-bottom: 1.2rem;
+    opacity: 0;
+    animation: fadeUp 1s ease-out 0.3s forwards;
+  }
+
+  .cover-church-name {
+    font-family: 'Cinzel', serif;
+    font-weight: 400;
+    font-size: clamp(1.4rem, 5vw, 1.9rem);
+    letter-spacing: 0.04em;
+    color: var(--ink);
+    margin-bottom: 0.6rem;
+    opacity: 0;
+    animation: fadeUp 1s ease-out 0.5s forwards;
+  }
+
+  .cover-ornament {
+    width: 160px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--ink), transparent);
+    margin: 0.3rem auto 0.8rem;
+    opacity: 0;
+    animation: fadeUp 1s ease-out 0.6s forwards;
+  }
+
+  .cover-season {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 1.05rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 0.3rem;
+    opacity: 0;
+    animation: fadeUp 1s ease-out 0.7s forwards;
+  }
+
+  .cover-date {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: clamp(1.2rem, 4vw, 1.6rem);
+    color: var(--ink);
+    opacity: 0;
+    animation: fadeUp 1s ease-out 0.8s forwards;
+  }
+
+  .cover-footer {
+    position: absolute;
+    bottom: 2.2rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.82rem;
+    color: var(--ink-faint);
+    letter-spacing: 0.02em;
+    opacity: 0;
+    animation: fadeUp 1s ease-out 1s forwards;
+  }
+
+  .cover-scroll-hint {
+    position: absolute;
+    bottom: 4.5rem;
+    opacity: 0;
+    animation: fadeUp 1s ease-out 1.2s forwards, gentle-bob 2.5s ease-in-out 2.2s infinite;
+  }
+  .cover-scroll-hint svg {
+    width: 20px;
+    height: 20px;
+    stroke: var(--rule);
+    fill: none;
+    stroke-width: 1.5;
+  }
+
+  /* ── SECTION LAYOUT ─────────────────────── */
+  .bulletin-section {
+    padding: 2rem 1.8rem;
+    border-top: 1px solid var(--rule-light);
+  }
+
+  .section-heading {
+    font-family: 'Cinzel', serif;
+    font-weight: 500;
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-align: center;
+    margin-bottom: 1.4rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  /* ── WELCOME ────────────────────────────── */
+  .welcome-section {
+    background:
+      linear-gradient(180deg, var(--section-bg) 0%, var(--warm-white) 100%);
+  }
+
+  .welcome-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 1.8rem;
+    text-align: center;
+    margin-bottom: 1.2rem;
+    color: var(--ink);
+  }
+
+  .welcome-block {
+    margin-bottom: 1.2rem;
+  }
+
+  .welcome-block h3 {
+    font-family: 'Cinzel', serif;
+    font-weight: 500;
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.4rem;
+  }
+
+  .welcome-block p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--ink-light);
+    text-align: justify;
+    hyphens: auto;
+  }
+
+  .connect-info {
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: var(--ink-light);
+  }
+  .connect-info strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  /* ── LITURGY ────────────────────────────── */
+  .liturgy-header {
+    text-align: center;
+    margin-bottom: 1rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid var(--rule-light);
+  }
+
+  .liturgy-main-title {
+    font-family: 'Cinzel', serif;
+    font-weight: 600;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin-bottom: 0.25rem;
+  }
+
+  .liturgy-date-line {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    color: var(--ink-faint);
+  }
+
+  .liturgy-standing-note {
+    font-style: italic;
+    font-size: 0.82rem;
+    color: var(--ink-faint);
+    margin-top: 0.3rem;
+  }
+
+  /* Liturgy section divider */
+  .liturgy-divider {
+    font-family: 'Cinzel', serif;
+    font-weight: 600;
+    font-size: 0.68rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--accent);
+    margin: 1.6rem 0 0.8rem;
+    position: relative;
+    padding: 0.5rem 0;
+  }
+  .liturgy-divider::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 20%;
+    right: 20%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--rule), transparent);
+  }
+
+  /* Worship items */
+  .worship-item {
+    margin-bottom: 1rem;
+  }
+
+  .worship-heading {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--ink);
+    margin-bottom: 0.2rem;
+  }
+
+  .worship-attr {
+    font-weight: 400;
+    font-style: italic;
+    font-size: 0.88rem;
+    color: var(--ink-faint);
+    margin-left: 0.3rem;
+  }
+
+  .worship-body {
+    font-size: 0.95rem;
+    padding-left: 0.06in;
+    margin-top: 0.15rem;
+    text-align: justify;
+    hyphens: auto;
+    color: var(--ink-light);
+  }
+
+  .worship-body.corporate {
+    font-style: italic;
+    color: var(--ink);
+  }
+
+  /* Responsive reading */
+  .responsive {
+    padding-left: 0.06in;
+    margin-top: 0.2rem;
+  }
+
+  .leader-line, .all-line {
+    font-size: 0.95rem;
+    margin-bottom: 0.15rem;
+    text-align: justify;
+    hyphens: auto;
+  }
+
+  .leader-line {
+    color: var(--ink-light);
+  }
+
+  .all-line {
+    font-style: italic;
+    color: var(--ink);
+  }
+
+  .leader-label {
+    font-weight: 400;
+    color: var(--ink-faint);
+    font-size: 0.85rem;
+  }
+
+  .all-label {
+    font-weight: 700;
+    color: var(--ink);
+    font-size: 0.85rem;
+  }
+
+  .silent-confession {
+    font-weight: 700;
+    font-style: italic;
+    font-size: 0.85rem;
+    padding-left: 0.06in;
+    margin-top: 0.3rem;
+    color: var(--ink-faint);
+  }
+
+  .creed-note {
+    font-size: 0.78rem;
+    font-style: italic;
+    color: var(--ink-faint);
+    padding-left: 0.06in;
+    margin-top: 0.15rem;
+  }
+
+  /* Margin notes (inline on scroll version) */
+  .margin-note {
+    font-size: 0.78rem;
+    line-height: 1.45;
+    color: var(--ink-faint);
+    font-style: italic;
+    border-left: 2px solid var(--rule-light);
+    padding-left: 0.8rem;
+    margin: 0.4rem 0 0.6rem 0.06in;
+  }
+
+  .margin-note .note-label {
+    font-weight: 600;
+    font-style: normal;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--rule);
+    display: block;
+    margin-bottom: 0.1rem;
+  }
+
+  /* Psalm poetry */
+  .psalm-poetry {
+    font-size: 0.95rem;
+    padding-left: 0.15in;
+    margin-top: 0.25rem;
+    line-height: 1.5;
+    color: var(--ink-light);
+    font-style: italic;
+  }
+
+  /* Catechism */
+  .catechism {
+    font-size: 0.92rem;
+    line-height: 1.55;
+    padding-left: 0.06in;
+    margin-top: 0.3rem;
+    color: var(--ink-light);
+  }
+  .catechism p + p { margin-top: 0.4rem; }
+  .catechism .question {
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  /* Hymn lyrics */
+  .hymn-lyrics {
+    font-style: italic;
+    font-size: 0.95rem;
+    padding-left: 0.06in;
+    margin-top: 0.25rem;
+    color: var(--ink);
+  }
+  .hymn-lyrics .verse {
+    margin-bottom: 0.4rem;
+  }
+  .hymn-lyrics .refrain-label {
+    font-weight: 700;
+    font-style: normal;
+  }
+
+  /* ── FOOTER ─────────────────────────────── */
+  .bulletin-footer {
+    text-align: center;
+    padding: 1.5rem 2rem 2rem;
+    border-top: 2px solid var(--ink);
+    background: var(--warm-white);
+  }
+
+  .footer-address {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.85rem;
+    color: var(--ink-faint);
+    letter-spacing: 0.04em;
+  }
+
+  .footer-give {
+    margin-top: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .give-button {
+    display: inline-block;
+    font-family: 'Cinzel', serif;
+    font-weight: 500;
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--warm-white);
+    background: var(--accent);
+    padding: 0.7rem 1.6rem;
+    border-radius: 2px;
+    transition: background 0.2s ease;
+  }
+  .give-button:hover {
+    background: var(--accent-soft);
+  }
+
+  /* ── ANIMATIONS ─────────────────────────── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes gentle-bob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(5px); }
+  }
+
+  /* Scroll-triggered fade-in */
+  .reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── RESPONSIVE ─────────────────────────── */
+  @media (max-width: 500px) {
+    html { font-size: 16px; }
+    .bulletin-section { padding: 1.5rem 1.3rem; }
+    .section-heading::before, .section-heading::after { width: 24px; }
+  }
+
+  @media (min-width: 641px) {
+    .scroll-container {
+      margin-top: 1.5rem;
+      margin-bottom: 1.5rem;
+      border-radius: 2px;
+    }
+  }
+
+  /* ── PRINT ──────────────────────────────── */
+  @media print {
+    body { background: #fff; }
+    .scroll-container { box-shadow: none; max-width: none; }
+    .cover-scroll-hint { display: none; }
+    .site-header { display: none; }
+    .reveal { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="https://fpccorinth.org" target="_blank" rel="noopener">First Presbyterian Church</a>
+    <a class="archive-link" href="/archive/">Archive</a>
+  </div>
+</header>
+
+<div class="scroll-container">
+
+  <!-- ═══════════ COVER ═══════════ -->
+  <section class="cover-section">
+    <div class="cover-rule cover-rule--top"></div>
+
+    <h1 class="cover-church-name">First Presbyterian Church</h1>
+    <div class="cover-ornament"></div>
+    <p class="cover-season">Ash Wednesday</p>
+    <p class="cover-date">February 18, 2026</p>
+
+    <div class="cover-scroll-hint">
+      <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+
+    <div class="cover-rule cover-rule--bottom"></div>
+    <p class="cover-footer">A congregation of the Evangelical Presbyterian Church</p>
+  </section>
+
+  <!-- ═══════════ WELCOME / ABOUT ASH WEDNESDAY ═══════════ -->
+  <section class="bulletin-section welcome-section">
+    <div class="reveal">
+      <p class="section-heading">Ash Wednesday</p>
+
+      <div class="welcome-block">
+        <h3>A Call to Renewal</h3>
+        <p>Ash Wednesday is the first day of Lent. By the fourth century, the Western Church determined that the Lenten period of fasting and renewal should correspond to Christ&rsquo;s forty day fast (Matthew 4:2), and, by counting forty days back from Easter (excluding Sundays, which remain &ldquo;feast&rdquo; days), arrived at the Wednesday seven weeks before Easter. At one time Lent was primarily viewed as a period during which converts prepared for baptism on Easter Sunday, but later the season became a general time of penitence and renewal for all Christians. Thus Ash Wednesday became the day that marked the beginning of the Lenten renewal.</p>
+        <p style="margin-top:0.5rem;">The aim of Ash Wednesday worship is threefold: to meditate on our mortality, sinfulness, and need of a Savior; to renew our commitment to daily repentance during the Lenten season and all of life; and to remember with confidence and gratitude that Christ has conquered death and sin. Ash Wednesday worship, then, is filled with gospel truth. It is a witness to the power and beauty of our union with Christ and to the daily dying and rising with Christ that this entails.</p>
+        <p style="margin-top:0.5rem;">The imposition of ashes is often a central part of the worship service. Ashes have a long history in biblical and church traditions. In Scripture, ashes or dust symbolize frailty or death (Genesis 18:27), sadness of mourning (Esther 4:3), judgment (Lamentations 3:16), and repentance (Jonah 3:6). Some traditions have also considered ashes a purifying or cleansing agent. All these images are caught up in the church&rsquo;s use of ashes as a symbol appropriate for Lent.</p>
+        <p style="margin-top:0.5rem;">During our Ash Wednesday service you are invited to reflect upon the work of Christ on your behalf by participating in the distribution of ashes and the sacrament of the Lord&rsquo;s Supper.</p>
+      </div>
+
+      <div class="welcome-block">
+        <h3>Connect With Us</h3>
+        <p class="connect-info">
+          <strong>Website:</strong> fpccorinth.com<br>
+          <strong>Phone:</strong> 662-286-6424<br>
+          <strong>Address:</strong> 919 East Shiloh Rd, Corinth, MS 38834
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ REFLECTION & MEDITATION ═══════════ -->
+  <section class="bulletin-section">
+    <div class="reveal">
+      <p class="section-heading">Reflection &amp; Meditation</p>
+
+      <div class="worship-item">
+        <p class="worship-heading">Psalm 130: A Song of Ascent</p>
+        <p class="psalm-poetry">
+          Out of the depths I cry to you, O Lord!<br>
+          O Lord, hear my voice!<br>
+          Let your ears be attentive<br>
+          to the voice of my pleas for mercy!<br>
+          If you, O Lord, should mark iniquities,<br>
+          O Lord, who could stand?<br>
+          But with you there is forgiveness,<br>
+          that you may be feared.<br>
+          I wait for the Lord, my soul waits,<br>
+          and in his word I hope;<br>
+          my soul waits for the Lord<br>
+          more than watchmen for the morning,<br>
+          more than watchmen for the morning.<br>
+          O Israel, hope in the Lord!<br>
+          For with the Lord there is steadfast love,<br>
+          and with him is plentiful redemption.<br>
+          And he will redeem Israel<br>
+          from all his iniquities.
+        </p>
+      </div>
+
+      <div class="worship-item">
+        <p class="worship-heading">Westminster Shorter Catechism #87</p>
+        <div class="catechism">
+          <p class="question">What is repentance unto life?</p>
+          <p>Repentance unto life is a saving grace, whereby a sinner, out of a true sense of his sin, and apprehension of the mercy of God in Christ, doth, with grief and hatred of his sin, turn from it unto God, with full purpose of, and endeavor after, new obedience.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ LITURGY ═══════════ -->
+  <section class="bulletin-section">
+    <div class="reveal">
+      <div class="liturgy-header">
+        <p class="liturgy-main-title">Liturgy for the Worship of God</p>
+        <p class="liturgy-date-line">February 18, 2026</p>
+        <p class="liturgy-standing-note">* Indicates congregation standing if able</p>
+      </div>
+
+      <!-- ── LITURGY OF THE WORD ── -->
+      <div class="liturgy-divider">The Liturgy of the Word</div>
+
+      <div class="worship-item">
+        <p class="worship-heading">*Call to Worship: <span style="font-weight:normal;">Psalm 51:1&ndash;2, 14; 42:5</span></p>
+        <div class="responsive">
+          <p class="leader-line"><span class="leader-label">Leader:</span> Have mercy on me, O God, according to your steadfast love;</p>
+          <p class="all-line"><span class="all-label">All:</span> according to your abundant mercy blot out my transgressions. Wash me thoroughly from my iniquity, and cleanse me from my sin!</p>
+          <p class="leader-line"><span class="leader-label">Leader:</span> Deliver me from bloodguiltiness, O God, O God of my salvation, and my tongue will sing aloud of your righteousness.</p>
+          <p class="all-line"><span class="all-label">All:</span> Why are you cast down, O my soul, and why are you in turmoil within me? Hope in God; for I shall again praise him, my salvation and my God.</p>
+        </div>
+      </div>
+
+      <div class="worship-item">
+        <p class="worship-heading">*Prayer of Invocation</p>
+      </div>
+
+      <div class="worship-item">
+        <p class="worship-heading">*Hymn of Invitation: &nbsp;#334 <span class="worship-attr">&ldquo;Come, Ye Sinners, Poor and Needy&rdquo;</span></p>
+      </div>
+
+      <div class="worship-item">
+        <p class="worship-heading">Scripture Reading: &nbsp;Psalm 103</p>
+        <p class="worship-body">Bless the Lord, O my soul, and all that is within me, bless his holy name! Bless the Lord, O my soul, and forget not all his benefits, who forgives all your iniquity, who heals all your diseases, who redeems your life from the pit, who crowns you with steadfast love and mercy, who satisfies you with good so that your youth is renewed like the eagle&rsquo;s. The Lord works righteousness and justice for all who are oppressed. He made known his ways to Moses, his acts to the people of Israel. The Lord is merciful and gracious, slow to anger and abounding in steadfast love. He will not always chide, nor will he keep his anger forever. He does not deal with us according to our sins, nor repay us according to our iniquities. For as high as the heavens are above the earth, so great is his steadfast love toward those who fear him; as far as the east is from the west, so far does he remove our transgressions from us. As a father shows compassion to his children, so the Lord shows compassion to those who fear him. For he knows our frame; he remembers that we are dust. As for man, his days are like grass; he flourishes like a flower of the field; for the wind passes over it, and it is gone, and its place knows it no more. But the steadfast love of the Lord is from everlasting to everlasting on those who fear him.</p>
+      </div>
+
+      <div class="worship-item">
+        <p class="worship-heading">Song of Petition: <span class="worship-attr">&ldquo;Abide With Me&rdquo; &bull; The FPC Choir</span></p>
+      </div>
+
+      <div class="worship-item">
+        <p class="worship-heading">Scripture Reading: &nbsp;Lamentations 3:31&ndash;33</p>
+        <p class="worship-body">&ldquo;For the Lord will not cast off forever, but, though he cause grief, he will have compassion according to the abundance of his steadfast love; for he does not afflict from his heart or grieve the children of men.&rdquo;</p>
+      </div>
+
+      <div class="worship-item">
+        <p class="worship-heading">Homily: &ldquo;Afflicted, But Not Cast Off&rdquo; <span class="worship-attr">Rev. Waring Porter</span></p>
+      </div>
+
+      <div class="worship-item">
+        <p class="worship-heading">Litany of Repentance</p>
+        <div class="margin-note">
+          <span class="note-label">Prayer of Confession</span>
+          The prayer of confession invites us to speak words that are remarkably honest about our own sin, words that do not come naturally in our relationship with God or with our fellow human beings. Such honesty becomes remarkably liberating when we sense the immensity of God&rsquo;s grace. In this way we can think of the prayer of confession not as an onerous obligation but as a gift of grace.
+        </div>
+        <div class="margin-note">
+          <span class="note-label">Silent Reflection</span>
+          This prayer addresses various areas of our life into which Jesus has spoken. There will be moments of silent confession throughout the prayer. Use this as a time of personal reflection and confession.
+        </div>
+
+        <div class="responsive">
+          <p class="leader-line"><span class="leader-label">Leader:</span> Lord, you said, &ldquo;If you love me, you will obey what I command.&rdquo;</p>
+          <p class="all-line"><span class="all-label">All:</span> Forgive us our lukewarm love and our disobedience.</p>
+          <p class="silent-confession">Silent Confession</p>
+
+          <p class="leader-line"><span class="leader-label">Leader:</span> Lord, you said, &ldquo;You may ask for anything in my name.&rdquo;</p>
+          <p class="all-line"><span class="all-label">All:</span> Forgive us when we think we need to solve our own problems.</p>
+          <p class="silent-confession">Silent Confession</p>
+
+          <p class="leader-line"><span class="leader-label">Leader:</span> Lord, you said, &ldquo;Do not let your hearts be troubled and do not be afraid.&rdquo;</p>
+          <p class="all-line"><span class="all-label">All:</span> We confess that our lives are often consumed by worry and anxiety.</p>
+          <p class="silent-confession">Silent Confession</p>
+
+          <p class="leader-line"><span class="leader-label">Leader:</span> Lord, you said, &ldquo;If you remain in me and I in you, you will bear much fruit.&rdquo;</p>
+          <p class="all-line"><span class="all-label">All:</span> Forgive us our barren lives, Lord.</p>
+          <p class="silent-confession">Silent Confession</p>
+
+          <p class="leader-line"><span class="leader-label">Leader:</span> Lord, you said, &ldquo;Love each other as I have loved you.&rdquo;</p>
+          <p class="all-line"><span class="all-label">All:</span> In this and in so many other ways, we confess our failures and shortcomings.</p>
+          <p class="silent-confession">Silent Confession</p>
+        </div>
+      </div>
+
+      <div class="worship-item">
+        <p class="worship-heading">Song of Confession: <span class="worship-attr">&ldquo;In Darkness Do I Wander&rdquo; &bull; The FPC Choir</span></p>
+      </div>
+
+      <div class="worship-item">
+        <p class="worship-heading">Words of Assurance: &nbsp;Isaiah 53:4&ndash;6</p>
+        <div class="responsive">
+          <p class="leader-line"><span class="leader-label">Leader:</span> Surely he took up our pain and bore our suffering, yet we considered him punished by God, stricken by him, and afflicted. But he was pierced for our transgressions, he was crushed for our iniquities; the punishment that brought us peace was on him, and by his wounds we are healed.</p>
+          <p class="all-line"><span class="all-label">All:</span> We all, like sheep, have gone astray, each of us has turned to our own way; and the Lord has laid on him the iniquity of us all.</p>
+        </div>
+      </div>
+
+      <!-- ── LITURGY OF THE TABLE ── -->
+      <div class="liturgy-divider">The Liturgy of the Table</div>
+
+      <div class="worship-item">
+        <p class="worship-heading">Reflection &amp; The Lord&rsquo;s Supper</p>
+        <p class="worship-body">All may come forward for the &ldquo;distribution of ashes&rdquo; which reminds us of our need for Christ. In addition, all committed followers of Jesus Christ are invited to partake of the sacrament of the Lord&rsquo;s Supper. Your child may come forward with you and receive the imposition of ashes; however, unless they have met with the elders, please have them refrain from the elements. Please take the elements from an elder in the front of the sanctuary, and return to your seat. When seated, take the sacrament reflecting upon the grace of Christ&rsquo;s atoning sacrifice.</p>
+      </div>
+
+      <div class="worship-item">
+        <p class="worship-heading">Prayer of Consecration &amp; The Lord&rsquo;s Prayer</p>
+        <p class="worship-body corporate">Our Father, who art in heaven, hallowed be thy Name. Thy Kingdom come, thy will be done on earth, as it is in heaven. Give us this day our daily bread, and forgive us our debts, as we forgive our debtors. Lead us not into temptation, but deliver us from evil. For thine is the kingdom, the power, and the glory, forever. Amen.</p>
+      </div>
+
+      <div class="worship-item">
+        <p class="worship-heading">Distribution of Ashes: &nbsp;Genesis 3:19</p>
+        <p class="worship-body">&ldquo;For you are dust, and to dust you will return.&rdquo;</p>
+      </div>
+
+      <div class="worship-item">
+        <p class="worship-heading">The Words of Institution: <span style="font-weight:normal;">1 Corinthians 11:23&ndash;26</span></p>
+        <p class="worship-body">&ldquo;For I received from the Lord what I also passed on to you: The Lord Jesus, on the night He was betrayed, took bread, and when He had given thanks, He broke it and said, &lsquo;This is My body, which is for you; do this in remembrance of Me.&rsquo; In the same way, after supper He took the cup, saying, &lsquo;This cup is the new covenant in My blood; do this, whenever you drink it, in remembrance of Me.&rsquo; For whenever you eat this bread and drink this cup, you proclaim the Lord&rsquo;s death until He comes.&rdquo;</p>
+      </div>
+
+      <div class="worship-item">
+        <p class="worship-heading">Songs of Reflection: <span class="worship-attr">&ldquo;Jesus, I Come&rdquo; &bull; &ldquo;Sing to Jesus&rdquo;</span></p>
+        <div class="margin-note">
+          <span class="note-label">Musicians</span>
+          Cole Sanders, Jamie &amp; Amber Butler. Please join in singing&mdash;words are printed on the insert.
+        </div>
+      </div>
+
+      <div class="worship-item">
+        <p class="worship-heading">Prayer of Thanksgiving</p>
+      </div>
+
+      <div class="worship-item">
+        <p class="worship-heading">Benediction &amp; Dismissal: <span style="font-weight:normal;">1 Thessalonians 5:23&ndash;24</span></p>
+      </div>
+
+      <div class="worship-item">
+        <p class="worship-heading">Choral Amen</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ FOOTER ═══════════ -->
+  <footer class="bulletin-footer">
+    <p class="footer-address">919 East Shiloh Rd &nbsp;&middot;&nbsp; Corinth, MS 38834 &nbsp;&middot;&nbsp; fpccorinth.com &nbsp;&middot;&nbsp; 662-286-6424</p>
+    <div class="footer-give">
+      <a class="give-button" href="https://onrealm.org/fpccorinth/-/form/give/now" target="_blank" rel="noopener">Give Online</a>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  // Scroll-triggered reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
