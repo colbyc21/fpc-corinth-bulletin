@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Worship Bulletin — Fifth Sunday of Easter, May 3, 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Cinzel:wght@400;500;600;700&family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f7f3eb;
+    --warm-white: #faf8f4;
+    --parchment: #f0ebe0;
+    --ink: #2a2118;
+    --ink-light: #4a3f32;
+    --ink-faint: #7a7060;
+    --rule: #c4b8a4;
+    --rule-light: #ddd4c6;
+    --accent: #8b1a1a;
+    --accent-soft: #a0524d;
+    --gold: #b8963e;
+    --gold-soft: #d4bc7a;
+    --section-bg: #ede8de;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    scroll-behavior: smooth;
+    font-size: 17px;
+  }
+
+  body {
+    font-family: 'EB Garamond', 'Georgia', serif;
+    color: var(--ink);
+    background: var(--parchment);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Subtle paper texture overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 999;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  }
+
+  .scroll-container {
+    max-width: 640px;
+    margin: 0 auto;
+    background: var(--warm-white);
+    min-height: 100vh;
+    box-shadow: 0 0 80px rgba(42, 33, 24, 0.08);
+  }
+
+  /* ── SITE HEADER ─────────────────────────── */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--warm-white);
+    border-bottom: 1px solid var(--rule-light);
+    backdrop-filter: saturate(180%) blur(8px);
+  }
+  .site-header-inner {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0.7rem 1.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .site-header .brand {
+    font-family: 'Cinzel', serif;
+    font-weight: 500;
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .site-header .brand:hover {
+    color: var(--accent);
+  }
+  .site-header .archive-link {
+    font-family: 'Cinzel', serif;
+    font-weight: 500;
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    text-decoration: none;
+    padding: 0.35rem 0.85rem;
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    white-space: nowrap;
+  }
+  .site-header .archive-link:hover {
+    color: var(--warm-white);
+    background: var(--ink);
+    border-color: var(--ink);
+  }
+  @media (max-width: 420px) {
+    .site-header .brand { font-size: 0.68rem; letter-spacing: 0.1em; }
+    .site-header .archive-link { font-size: 0.64rem; padding: 0.3rem 0.7rem; }
+    .site-header-inner { padding: 0.6rem 1rem; }
+  }
+
+  /* ── COVER ──────────────────────────────── */
+  .cover-section {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 3rem 2rem;
+    position: relative;
+    background:
+      radial-gradient(ellipse at 30% 20%, rgba(184, 150, 62, 0.06) 0%, transparent 60%),
+      radial-gradient(ellipse at 70% 80%, rgba(139, 26, 26, 0.04) 0%, transparent 50%),
+      var(--warm-white);
+  }
+
+  .cover-rule {
+    width: 100%;
+    height: 2px;
+    background: var(--ink);
+    position: absolute;
+    left: 0;
+  }
+  .cover-rule--top { top: 1.5rem; }
+  .cover-rule--bottom { bottom: 1.5rem; }
+
+  .cover-church-name {
+    font-family: 'Cinzel', serif;
+    font-weight: 400;
+    font-size: clamp(1.4rem, 5vw, 1.9rem);
+    letter-spacing: 0.04em;
+    color: var(--ink);
+    margin-bottom: 0.6rem;
+    opacity: 0;
+    animation: fadeUp 1s ease-out 0.5s forwards;
+  }
+
+  .cover-ornament {
+    width: 160px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--ink), transparent);
+    margin: 0.3rem auto 0.8rem;
+    opacity: 0;
+    animation: fadeUp 1s ease-out 0.6s forwards;
+  }
+
+  .cover-season {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 1.05rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 0.3rem;
+    opacity: 0;
+    animation: fadeUp 1s ease-out 0.7s forwards;
+  }
+
+  .cover-date {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: clamp(1.2rem, 4vw, 1.6rem);
+    color: var(--ink);
+    opacity: 0;
+    animation: fadeUp 1s ease-out 0.8s forwards;
+  }
+
+  .cover-footer {
+    position: absolute;
+    bottom: 2.2rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.82rem;
+    color: var(--ink-faint);
+    letter-spacing: 0.02em;
+    opacity: 0;
+    animation: fadeUp 1s ease-out 1s forwards;
+  }
+
+  .cover-scroll-hint {
+    position: absolute;
+    bottom: 4.5rem;
+    opacity: 0;
+    animation: fadeUp 1s ease-out 1.2s forwards, gentle-bob 2.5s ease-in-out 2.2s infinite;
+  }
+  .cover-scroll-hint svg {
+    width: 20px;
+    height: 20px;
+    stroke: var(--rule);
+    fill: none;
+    stroke-width: 1.5;
+  }
+
+  /* ── SECTION LAYOUT ─────────────────────── */
+  .bulletin-section {
+    padding: 2rem 1.8rem;
+    border-top: 1px solid var(--rule-light);
+  }
+
+  .section-heading {
+    font-family: 'Cinzel', serif;
+    font-weight: 500;
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-align: center;
+    margin-bottom: 1.4rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  /* ── WELCOME ────────────────────────────── */
+  .welcome-section {
+    background:
+      linear-gradient(180deg, var(--section-bg) 0%, var(--warm-white) 100%);
+  }
+
+  .welcome-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 1.8rem;
+    text-align: center;
+    margin-bottom: 1.2rem;
+    color: var(--ink);
+  }
+
+  .welcome-block {
+    margin-bottom: 1.2rem;
+  }
+
+  .welcome-block h3 {
+    font-family: 'Cinzel', serif;
+    font-weight: 500;
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.4rem;
+  }
+
+  .welcome-block p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--ink-light);
+    text-align: justify;
+    hyphens: auto;
+  }
+
+  .connect-info {
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: var(--ink-light);
+  }
+  .connect-info strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  /* ── LITURGY ────────────────────────────── */
+  .liturgy-header {
+    text-align: center;
+    margin-bottom: 1rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid var(--rule-light);
+  }
+
+  .liturgy-main-title {
+    font-family: 'Cinzel', serif;
+    font-weight: 600;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin-bottom: 0.25rem;
+  }
+
+  .liturgy-date-line {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    color: var(--ink-faint);
+  }
+
+  .liturgy-standing-note {
+    font-style: italic;
+    font-size: 0.82rem;
+    color: var(--ink-faint);
+    margin-top: 0.3rem;
+  }
+
+  /* Liturgy section divider */
+  .liturgy-divider {
+    font-family: 'Cinzel', serif;
+    font-weight: 600;
+    font-size: 0.68rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--accent);
+    margin: 1.6rem 0 0.8rem;
+    position: relative;
+    padding: 0.5rem 0;
+  }
+  .liturgy-divider::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 20%;
+    right: 20%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--rule), transparent);
+  }
+
+  /* Worship items */
+  .worship-item {
+    margin-bottom: 1rem;
+  }
+
+  .worship-heading {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--ink);
+    margin-bottom: 0.2rem;
+  }
+
+  .worship-attr {
+    font-weight: 400;
+    font-style: italic;
+    font-size: 0.88rem;
+    color: var(--ink-faint);
+    margin-left: 0.3rem;
+  }
+
+  .worship-body {
+    font-size: 0.95rem;
+    padding-left: 0.06in;
+    margin-top: 0.15rem;
+    text-align: justify;
+    hyphens: auto;
+    color: var(--ink-light);
+  }
+
+  .worship-body.corporate {
+    font-style: italic;
+    color: var(--ink);
+  }
+
+  /* Responsive reading */
+  .responsive {
+    padding-left: 0.06in;
+    margin-top: 0.2rem;
+  }
+
+  .leader-line, .all-line {
+    font-size: 0.95rem;
+    margin-bottom: 0.15rem;
+    text-align: justify;
+    hyphens: auto;
+  }
+
+  .leader-line {
+    color: var(--ink-light);
+  }
+
+  .all-line {
+    font-style: italic;
+    color: var(--ink);
+  }
+
+  .leader-label {
+    font-weight: 400;
+    color: var(--ink-faint);
+    font-size: 0.85rem;
+  }
+
+  .all-label {
+    font-weight: 700;
+    color: var(--ink);
+    font-size: 0.85rem;
+  }
+
+  .silent-confession {
+    font-weight: 700;
+    font-style: italic;
+    font-size: 0.85rem;
+    padding-left: 0.06in;
+    margin-top: 0.3rem;
+    color: var(--ink-faint);
+  }
+
+  .creed-note {
+    font-size: 0.78rem;
+    font-style: italic;
+    color: var(--ink-faint);
+    padding-left: 0.06in;
+    margin-top: 0.15rem;
+  }
+
+  /* Margin notes (inline on scroll version) */
+  .margin-note {
+    font-size: 0.78rem;
+    line-height: 1.45;
+    color: var(--ink-faint);
+    font-style: italic;
+    border-left: 2px solid var(--rule-light);
+    padding-left: 0.8rem;
+    margin: 0.4rem 0 0.6rem 0.06in;
+  }
+
+  .margin-note .note-label {
+    font-weight: 600;
+    font-style: normal;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--rule);
+    display: block;
+    margin-bottom: 0.1rem;
+  }
+
+  /* Anthem lyrics */
+  .anthem-lyrics {
+    display: flex;
+    gap: 1.2rem;
+    padding-left: 0.06in;
+    margin-top: 0.4rem;
+  }
+  .anthem-lyrics .verse {
+    flex: 1;
+    font-style: italic;
+    font-size: 0.85rem;
+    line-height: 1.45;
+    color: var(--ink-light);
+  }
+  @media (max-width: 500px) {
+    .anthem-lyrics { flex-direction: column; gap: 0.6rem; }
+  }
+
+  /* ── SERMON NOTES ───────────────────────── */
+  .sermon-section {
+    background:
+      linear-gradient(180deg, var(--warm-white) 0%, var(--section-bg) 30%, var(--section-bg) 70%, var(--warm-white) 100%);
+  }
+
+  .sermon-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 1.5rem;
+    text-align: center;
+    font-style: italic;
+    color: var(--ink);
+    margin-bottom: 0.2rem;
+  }
+
+  .sermon-text-ref {
+    text-align: center;
+    font-size: 0.92rem;
+    color: var(--ink-faint);
+    margin-bottom: 0.4rem;
+  }
+
+  .sermon-intro {
+    font-size: 0.88rem;
+    line-height: 1.6;
+    text-align: justify;
+    hyphens: auto;
+    color: var(--ink-light);
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--rule-light);
+  }
+
+  .notes-prompt {
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin-top: 1rem;
+    margin-bottom: 0.25rem;
+    color: var(--ink);
+  }
+
+  .scripture-quote {
+    font-size: 0.85rem;
+    font-style: italic;
+    color: var(--ink-faint);
+    padding-left: 0.8rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .notes-lines {
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+    padding: 0.4rem 0;
+  }
+
+  .notes-line {
+    border-bottom: 1px solid var(--rule-light);
+    width: 100%;
+  }
+
+  .sermon-resources {
+    font-size: 0.75rem;
+    color: var(--ink-faint);
+    margin-top: 1.5rem;
+    padding-top: 0.8rem;
+    border-top: 1px solid var(--rule-light);
+    line-height: 1.5;
+  }
+
+  /* ── ANNOUNCEMENTS ──────────────────────── */
+  .flower-dedication {
+    text-align: center;
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-top: 1px solid var(--rule-light);
+    border-bottom: 1px solid var(--rule-light);
+  }
+
+  .flower-dedication .attribution {
+    font-size: 0.88rem;
+    color: var(--ink-light);
+    margin-top: 0.2rem;
+  }
+
+  /* ── SERVANTS & STAFF ───────────────────── */
+  .serve-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.3rem 1.2rem;
+    margin-bottom: 1rem;
+  }
+
+  .serve-line {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: var(--ink-light);
+  }
+  .serve-line .role {
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .staff-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.2rem 1.2rem;
+  }
+
+  .staff-line {
+    font-size: 0.82rem;
+    line-height: 1.45;
+    color: var(--ink-light);
+  }
+  .staff-line .name {
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  /* ── CALENDAR ───────────────────────────── */
+  .calendar-section {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--rule-light);
+  }
+
+  .cal-line {
+    font-size: 0.88rem;
+    line-height: 1.5;
+    color: var(--ink-light);
+    margin-bottom: 0.2rem;
+  }
+  .cal-line .cal-date {
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  /* ── FOOTER ─────────────────────────────── */
+  .bulletin-footer {
+    text-align: center;
+    padding: 1.5rem 2rem 2rem;
+    border-top: 2px solid var(--ink);
+    background: var(--warm-white);
+  }
+
+  .footer-address {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.85rem;
+    color: var(--ink-faint);
+    letter-spacing: 0.04em;
+  }
+
+  .footer-give {
+    margin-top: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .give-button {
+    display: inline-block;
+    font-family: 'Cinzel', serif;
+    font-weight: 500;
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--warm-white);
+    background: var(--accent);
+    padding: 0.7rem 1.6rem;
+    border-radius: 2px;
+    transition: background 0.2s ease;
+  }
+  .give-button:hover {
+    background: var(--accent-soft);
+  }
+
+  /* ── ANIMATIONS ─────────────────────────── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes gentle-bob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(5px); }
+  }
+
+  /* Scroll-triggered fade-in */
+  .reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── RESPONSIVE ─────────────────────────── */
+  @media (max-width: 500px) {
+    html { font-size: 16px; }
+    .bulletin-section { padding: 1.5rem 1.3rem; }
+    .serve-grid, .staff-grid { grid-template-columns: 1fr; }
+    .section-heading::before, .section-heading::after { width: 24px; }
+  }
+
+  @media (min-width: 641px) {
+    .scroll-container {
+      margin-top: 1.5rem;
+      margin-bottom: 1.5rem;
+      border-radius: 2px;
+    }
+  }
+
+  /* ── PRINT ──────────────────────────────── */
+  @media print {
+    body { background: #fff; }
+    .scroll-container { box-shadow: none; max-width: none; }
+    .cover-scroll-hint { display: none; }
+    .site-header { display: none; }
+    .reveal { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="https://fpccorinth.org" target="_blank" rel="noopener">First Presbyterian Church</a>
+    <a class="archive-link" href="/archive/">Archive</a>
+  </div>
+</header>
+
+<div class="scroll-container">
+
+  <!-- ═══════════ COVER ═══════════ -->
+  <section class="cover-section">
+    <div class="cover-rule cover-rule--top"></div>
+
+    <h1 class="cover-church-name">First Presbyterian Church</h1>
+    <div class="cover-ornament"></div>
+    <p class="cover-season">Fifth Sunday of Easter</p>
+    <p class="cover-date">May 3, 2026</p>
+
+    <div class="cover-scroll-hint">
+      <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+
+    <div class="cover-rule cover-rule--bottom"></div>
+    <p class="cover-footer">A congregation of the Evangelical Presbyterian Church</p>
+  </section>
+
+  <!-- ═══════════ WELCOME ═══════════ -->
+  <section class="bulletin-section welcome-section">
+    <div class="reveal">
+      <p class="section-heading">Welcome</p>
+
+      <div class="welcome-block">
+        <h3>We Are Glad You Are Here!</h3>
+        <p>We are honored that you decided to join us this morning. Whether it is your first time in church, your first time in a long while, or part of your regular rhythm, we hope you will be encouraged by the fellowship with each other, and with our Lord, as we worship him together.</p>
+        <p style="margin-top:0.5rem;">If this is your first time with us, please take a moment and fill out a Next Steps Card found on the back of the pew. We would love to meet you and help you get connected.</p>
+      </div>
+
+      <div class="welcome-block">
+        <h3>Children &amp; Nursery</h3>
+        <p>Children&rsquo;s Church &mdash; Children ages 4 through 5th grade are welcome in the Fellowship Hall, located at the northeast corner of the church campus. Nursery rooms for infants through age 3 are in the Education Wing, with the entrance behind the playground on the west side of campus. Children are always welcome in worship!</p>
+      </div>
+
+      <div class="welcome-block">
+        <h3>Our Vision &amp; Mission</h3>
+        <p>Our vision is to see lives transformed by the power of the gospel, rooted in God&rsquo;s Word and the Reformed tradition, in order to create a culture of discipleship at FPC where disciples WORSHIP holistically, GROW relationally in Christ, and SERVE boldly in the world for the glory of God. Our mission is to accomplish this by &ldquo;Being Disciples and Making Disciples.&rdquo;</p>
+      </div>
+
+      <div class="welcome-block">
+        <h3>Connect With Us</h3>
+        <p class="connect-info">
+          <strong>Website:</strong> fpccorinth.org<br>
+          <strong>Phone:</strong> 662-286-6638<br>
+          <strong>Address:</strong> 919 East Shiloh Rd, Corinth, MS 38834
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ LITURGY ═══════════ -->
+  <section class="bulletin-section">
+    <div class="reveal">
+      <div class="liturgy-header">
+        <p class="liturgy-main-title">Liturgy for the Worship of God</p>
+        <p class="liturgy-date-line">May 3, 2026</p>
+        <p class="liturgy-standing-note">* Indicates congregation standing if able</p>
+      </div>
+
+      <!-- ── GATHERING ── -->
+      <div class="liturgy-divider">Gathering</div>
+
+      <div class="worship-item">
+        <p class="worship-heading">The Piano Prelude</p>
+        <div class="margin-note">
+          <span class="note-label">Prelude</span>
+          The prelude provides a quiet moment to prepare for worship. As the music begins, we are encouraged to calm our hearts, focus our minds, and enter reverently into God&rsquo;s presence.
+        </div>
+      </div>
+
+      <div class="worship-item">
+        <p class="worship-heading">Call to Meditation: &nbsp;Revelation 1:5&ndash;6</p>
+        <p class="worship-body">&ldquo;To him who loves us and has freed us from our sins by his blood and made us a kingdom, priests to his God and Father, to him be glory and dominion forever and ever. Amen.&rdquo;</p>
+      </div>
+
+      <div class="worship-item">
+        <p class="worship-heading">The Prelude</p>
+      </div>
+
+      <div class="worship-item">
+        <p class="worship-heading">Choral Introit <span class="worship-attr">&ldquo;In Your House&rdquo;</span></p>
+      </div>
+
+      <div class="worship-item">
+        <p class="worship-heading">*Call to Worship: <span style="font-weight:normal;">from Psalm 145</span></p>
+        <div class="responsive">
+          <p class="leader-line"><span class="leader-label">Leader:</span> Great is the Lord, and greatly to be praised;</p>
+          <p class="all-line"><span class="all-label">All:</span> There is no end to his greatness.</p>
+          <p class="leader-line"><span class="leader-label">Leader:</span> One generation shall praise your works to another</p>
+          <p class="all-line"><span class="all-label">All:</span> And shall declare your power.</p>
+          <p class="leader-line"><span class="leader-label">Leader:</span> All your works praise you, Lord,</p>
+          <p class="all-line"><span class="all-label">All:</span> And your faithful servants bless you.</p>
+          <p class="leader-line"><span class="leader-label">Leader:</span> They make known the glory of your kingdom</p>
+          <p class="all-line"><span class="all-label">All:</span> And speak of your power.</p>
+          <p class="leader-line"><span class="leader-label">Leader:</span> My mouth shall speak the praise of the Lord:</p>
+          <p class="all-line"><span class="all-label">All:</span> Let all flesh bless his holy name for ever and ever.</p>
+        </div>
+      </div>
+
+      <div class="worship-item">
+        <p class="worship-heading">*The Hymn: &nbsp;#234 <span class="worship-attr">&ldquo;Crown Him With Many Crowns&rdquo;</span></p>
+      </div>
+
+      <div class="worship-item">
+        <p class="worship-heading">*Old Testament Reading: <span style="font-weight:normal;">1 Chronicles 29:10&ndash;13</span></p>
+        <p class="worship-body">&ldquo;Therefore David blessed the Lord in the presence of all the assembly. And David said: &lsquo;Blessed are you, O Lord, the God of Israel our father, forever and ever. Yours, O Lord, is the greatness and the power and the glory and the victory and the majesty, for all that is in the heavens and in the earth is yours. Yours is the kingdom, O Lord, and you are exalted as head above all. Both riches and honor come from you, and you rule over all. In your hand are power and might, and in your hand it is to make great and to give strength to all. And now we thank you, our God, and praise your glorious name.&rsquo;&rdquo;</p>
+      </div>
+
+      <div class="worship-item">
+        <p class="worship-heading">*Prayer of Invocation</p>
+      </div>
+
+      <div class="worship-item">
+        <p class="worship-heading">Sacrament of Infant Baptism</p>
+        <p style="font-size:1.02rem; padding-left:0.06in; font-style:italic; margin-top:0.3rem;">Grant Wallace McCalla &amp; Britton Elaine McCalla</p>
+        <p style="font-size:0.9rem; padding-left:0.06in; font-style:italic; color:var(--ink-faint);">Children of Hunter &amp; Anna McCalla</p>
+        <div class="margin-note">
+          <span class="note-label">Infant Baptism</span>
+          We believe infant baptism is a sign and seal of God&rsquo;s covenant of grace, marking the children of believers as members of the visible church just as circumcision did under the old covenant. It does not guarantee salvation, but it signifies God&rsquo;s promises and calls the child to personal faith and repentance as they grow. (Gen. 17:7&ndash;12; Col. 2:11&ndash;12)
+        </div>
+      </div>
+
+      <div class="worship-item">
+        <p class="worship-heading">*Song of Blessing <span class="worship-attr">&ldquo;Jesus Loves You&rdquo;</span></p>
+        <p class="worship-body corporate">Jesus loves you, this we know, for the Bible tells us so;<br>Little ones to Him belong, you are weak but He is strong.<br>Yes, Jesus loves you! Yes, Jesus loves you! Yes, Jesus loves you! The Bible tells us so.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── WORD ── -->
+  <section class="bulletin-section">
+    <div class="reveal">
+      <div class="liturgy-divider">Word</div>
+
+      <div class="worship-item">
+        <p class="worship-heading">Corporate Prayer of Confession</p>
+        <p class="worship-body corporate">Sovereign and gracious God, Yours is the kingdom, and the power, and the glory forever. Yet we confess that we have not lived for Your glory. We have sought our own way instead of submitting to Your rule, trusted in our own strength rather than Your power, and desired our own praise instead of honoring Your name. Forgive us, we pray, for the sake of Jesus Christ, our crucified and risen King. Renew us by Your Spirit, that we may gladly live under Your reign and seek Your glory in all things.</p>
+        <p class="silent-confession">Silent Confession</p>
+      </div>
+
+      <div class="worship-item">
+        <p class="worship-heading">*Assurance of Divine Pardon: <span style="font-weight:normal;">Revelation 1:5&ndash;6</span></p>
+        <p class="worship-body">&ldquo;To him who loves us and has freed us from our sins by his blood and made us a kingdom, priests to his God and Father, to him be glory and dominion forever and ever. Amen.&rdquo;</p>
+      </div>
+
+      <div class="worship-item">
+        <p class="worship-heading">*Gloria Patri</p>
+        <p class="worship-body corporate">Glory be to the Father, and to the Son: and to the Holy Ghost; As it was in the beginning, is now, and ever shall be: world without end. Amen.</p>
+        <div class="margin-note">
+          <span class="note-label">Gloria Patri</span>
+          Latin for &ldquo;Glory be to the Father.&rdquo; A praise to the Triune God read or sung by the church for nearly 17 centuries.
+        </div>
+      </div>
+
+      <div class="worship-item">
+        <p class="worship-heading">Monthly Missionary Focus <span class="worship-attr">Jennifer LeGoff</span></p>
+        <p style="font-size:0.88rem; padding-left:0.06in; font-style:italic; color:var(--ink-faint);">FPC Missions Committee</p>
+      </div>
+
+      <div class="worship-item">
+        <p class="worship-heading">The Giving of Tithes and Offerings</p>
+      </div>
+
+      <div class="worship-item">
+        <p class="worship-heading">Choral Anthem <span class="worship-attr">&ldquo;Jesus Paid It All&rdquo;</span></p>
+        <p style="font-size:0.88rem; padding-left:0.06in; font-style:italic; color:var(--ink-faint);">arr. Howard Helvey</p>
+        <div class="anthem-lyrics">
+          <div class="verse">
+            I hear the Savior say,<br>
+            &ldquo;Thy strength indeed is small!<br>
+            Child of weakness, watch and pray,<br>
+            Find in Me thine all in all.&rdquo;<br>
+            Jesus paid it all,<br>
+            All to Him I owe;<br>
+            Sin had left a crimson stain,<br>
+            He washed it white as snow.<br><br>
+            Lord, now indeed I find<br>
+            Thy pow&rsquo;r and Thine alone,<br>
+            Can change the leper&rsquo;s spots<br>
+            And melt the heart of stone.<br>
+            Jesus paid it all,<br>
+            All to Him I owe;<br>
+            Sin had left a crimson stain,<br>
+            He washed it white as snow.
+          </div>
+          <div class="verse">
+            For nothing good have I<br>
+            Whereby Thy grace to claim;<br>
+            I&rsquo;ll wash my garments white<br>
+            In the blood of Calv&rsquo;ry&rsquo;s Lamb.<br>
+            And when before the throne,<br>
+            I stand in Him complete,<br>
+            &ldquo;Jesus died my soul to save,&rdquo;<br>
+            My lips shall still repeat.<br><br>
+            Jesus paid it all,<br>
+            All to Him I owe;<br>
+            Sin had left a crimson stain,<br>
+            He washed it white as snow.
+          </div>
+        </div>
+      </div>
+
+      <div class="worship-item">
+        <p class="worship-heading">*The Doxology and Prayer of Dedication</p>
+        <p class="worship-body corporate">Praise God, from whom all blessings flow; Praise Him, all creatures here below; Praise Him above, ye heavenly host; Praise Father, Son, and Holy Ghost. Amen.</p>
+      </div>
+
+      <div class="worship-item">
+        <p class="worship-heading">Scripture Reading <span class="worship-attr">Romans 11:33&ndash;36</span></p>
+        <div class="margin-note">
+          <span class="note-label">Scripture</span>
+          Pew Bible: p. 947
+        </div>
+      </div>
+
+      <div class="worship-item">
+        <p class="worship-heading">Scripture Response: &nbsp;Isaiah 40:6b, 8</p>
+        <div class="responsive">
+          <p class="leader-line"><span class="leader-label">Leader:</span> All flesh is grass, and all its beauty is like the flower of the field;</p>
+          <p class="all-line"><span class="all-label">All:</span> The grass withers, the flower fades, but the Word of our God will stand forever. Amen.</p>
+        </div>
+      </div>
+
+      <div class="worship-item">
+        <p class="worship-heading">Sermon: &ldquo;Soli Deo Gloria&rdquo; <span class="worship-attr">Rev. Waring Porter</span></p>
+        <p style="font-size:0.88rem; padding-left:0.06in; font-style:italic; color:var(--ink-faint);">Praying as Christ Taught Us</p>
+      </div>
+
+      <div class="worship-item">
+        <p class="worship-heading">Prayer of Commitment &amp; The Lord&rsquo;s Prayer</p>
+        <p class="worship-body corporate">Our Father, who art in heaven, hallowed be thy Name. Thy Kingdom come, thy will be done on earth, as it is in heaven. Give us this day our daily bread, and forgive us our debts, as we forgive our debtors. Lead us not into temptation, but deliver us from evil. For thine is the kingdom, the power, and the glory, forever. Amen.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SENDING ── -->
+  <section class="bulletin-section">
+    <div class="reveal">
+      <div class="liturgy-divider">Sending</div>
+
+      <div class="worship-item">
+        <p class="worship-heading">*Hymn: &nbsp;#66 <span class="worship-attr">&ldquo;To God Be the Glory&rdquo;</span></p>
+      </div>
+
+      <div class="worship-item">
+        <p class="worship-heading">*Benediction</p>
+        <div class="margin-note">
+          <span class="note-label">Benediction</span>
+          The benediction is the pronouncement of God&rsquo;s effective blessing over his people gathered to worship him as we are sent back into the world.
+        </div>
+      </div>
+
+      <div class="worship-item">
+        <p class="worship-heading">*Choral Benediction <span class="worship-attr">Threefold Amen</span></p>
+        <div class="margin-note">
+          <span class="note-label">Choral Benediction</span>
+          The choral benediction provides a moment for us to reflect on God&rsquo;s blessing over us.
+        </div>
+      </div>
+
+      <div class="worship-item">
+        <p class="worship-heading">*Postlude</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ SERMON NOTES ═══════════ -->
+  <section class="bulletin-section sermon-section">
+    <div class="reveal">
+      <p class="section-heading">Sermon Outline</p>
+      <p class="sermon-title">&ldquo;Praying as Christ Taught Us: Soli Deo Gloria&rdquo;</p>
+      <p class="sermon-text-ref">Romans 11:33&ndash;36 &bull; Rev. Waring Porter</p>
+
+      <p class="sermon-intro">In this sermon series, we have learned that when Jesus teaches us to pray in Matthew 6, He doesn&rsquo;t start with our needs&mdash;He starts with God: &ldquo;Our Father in heaven, hallowed be your name.&rdquo; Before prayer ever changes our circumstances, it is meant to reorient our hearts toward the glory of God. As we come to the end of the Lord&rsquo;s Prayer, we see where all of this has been heading. After eleven chapters of deep theology in his letter to the church in Rome, the apostle Paul doesn&rsquo;t conclude with a neat summary&mdash;he explodes in worship. The final word of prayer is praise, and the reason is simple: all true prayer ends where it began&mdash;with the glory of God alone.</p>
+
+      <p class="notes-prompt">I. &nbsp;The Goal of Prayer (vv. 33&ndash;34)</p>
+      <p class="scripture-quote">Romans 11:33 &mdash; &ldquo;Oh, the depth of the riches and wisdom and knowledge of God! How unsearchable are his judgments and how inscrutable his ways!&rdquo;</p>
+      <div class="notes-lines"><div class="notes-line"></div><div class="notes-line"></div><div class="notes-line"></div></div>
+
+      <p class="notes-prompt">II. &nbsp;The Delight of Prayer (v. 36)</p>
+      <p class="scripture-quote">Romans 11:36a &mdash; &ldquo;For from him and through him and to him are all things.&rdquo;</p>
+      <div class="notes-lines"><div class="notes-line"></div><div class="notes-line"></div><div class="notes-line"></div></div>
+
+      <p class="notes-prompt">III. &nbsp;The Hope of Prayer (v. 36b)</p>
+      <p class="scripture-quote">Romans 11:36b &mdash; &ldquo;To him be glory forever. Amen.&rdquo;</p>
+      <div class="notes-lines"><div class="notes-line"></div><div class="notes-line"></div><div class="notes-line"></div></div>
+
+      <p style="font-size:0.82rem; font-style:italic; text-align:center; color:var(--ink-faint); margin-top:1.2rem;">
+        The final word of prayer is praise&mdash;because the final reality of all things is the glory of God.
+      </p>
+
+      <p class="sermon-resources"><em>Resources:</em> Calvin&rsquo;s Commentaries (Vol. IX), John Calvin; The Lord&rsquo;s Prayer, Kevin DeYoung; Romans, William Hendrickson; Matthew Henry&rsquo;s Commentary (Vol. 6); Lead With Prayer, Doolittle, Greer, Skoog; Praying the Lord&rsquo;s Prayer, J.I. Packer; The Lord&rsquo;s Prayer, Thomas Watson</p>
+    </div>
+  </section>
+
+  <!-- ═══════════ ANNOUNCEMENTS ═══════════ -->
+  <section class="bulletin-section">
+    <div class="reveal">
+      <p class="section-heading">Announcements</p>
+
+      <div class="flower-dedication">
+        <p><strong>Flower Dedication</strong> &mdash; The flowers adorning the Sanctuary today are given in loving memory of Adolph &amp; Annice Brawner.</p>
+        <p class="attribution">&mdash; Brad &amp; Judy, David &amp; Geri, and Louanne &amp; Johnny</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ THOSE WHO SERVE / STAFF ═══════════ -->
+  <section class="bulletin-section">
+    <div class="reveal">
+      <p class="section-heading">Those Who Serve Today</p>
+
+      <div class="serve-grid">
+        <p class="serve-line"><span class="role">Assisting Elder</span> &mdash; Dr. Micah Monaghan</p>
+        <p class="serve-line"><span class="role">Ushers</span> &mdash; Jed James, Stephen Holley, Jason LeGoff, Carson Butler, &amp; Dr. John Shipp</p>
+        <p class="serve-line"><span class="role">Greeters</span> &mdash; LeeAnne &amp; Brylee Price</p>
+        <p class="serve-line"><span class="role">Nursery</span> &mdash; Debbie Parker, Laura Giaccaglini</p>
+        <p class="serve-line"><span class="role">Acolytes</span> &mdash; Maddie Whittington &amp; Claire Tull</p>
+        <p class="serve-line"><span class="role">Circle of Prayer</span> &mdash; Dr. Steve &amp; Mrs. Cindy Blair</p>
+      </div>
+
+      <p class="section-heading" style="margin-top:1.2rem;">Church Staff</p>
+
+      <div class="staff-grid">
+        <p class="staff-line"><span class="name">Rev. Waring Porter</span> &mdash; Pastor</p>
+        <p class="staff-line"><span class="name">Jennifer Shipp</span> &mdash; Student Min. Coordinator</p>
+        <p class="staff-line"><span class="name">Gregg Parker</span> &mdash; Dir. of Discipleship</p>
+        <p class="staff-line"><span class="name">Jan Pike</span> &mdash; Choir Director</p>
+        <p class="staff-line"><span class="name">Brett Grantham</span> &mdash; Dir. of Intergenerational Min.</p>
+        <p class="staff-line"><span class="name">Malachi Doren</span> &mdash; Accompanist</p>
+        <p class="staff-line"><span class="name">Bobby Capps</span> &mdash; Dir. of Outreach &amp; Care</p>
+        <p class="staff-line"><span class="name">We&rsquo;re Hiring!</span> &mdash; Secretary</p>
+        <p class="staff-line"><span class="name">Phyllis Sellers</span> &mdash; Day School Director</p>
+        <p class="staff-line"><span class="name">Sammy Allred</span> &mdash; Bookkeeper</p>
+      </div>
+
+      <div class="calendar-section">
+        <p class="section-heading" style="margin-top:0;">The Church Calendar</p>
+        <p class="cal-line"><span class="cal-date">May 3</span> &nbsp;Session Meeting</p>
+        <p class="cal-line"><span class="cal-date">May 7</span> &nbsp;National Day of Prayer</p>
+        <p class="cal-line"><span class="cal-date">May 17</span> &nbsp;Baccalaureate Sunday</p>
+        <p class="cal-line"><span class="cal-date">May 17</span> &nbsp;Church Fellowship Night</p>
+        <p class="cal-line"><span class="cal-date">May 20</span> &nbsp;LeConte Lodge Trip Info Meeting</p>
+        <p class="cal-line"><span class="cal-date">May 21&ndash;24</span> &nbsp;Branson Trip (4th &amp; 5th Graders)</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ FOOTER ═══════════ -->
+  <footer class="bulletin-footer">
+    <p class="footer-address">919 East Shiloh Rd &nbsp;&middot;&nbsp; Corinth, MS 38834 &nbsp;&middot;&nbsp; fpccorinth.org &nbsp;&middot;&nbsp; 662-286-6638</p>
+    <div class="footer-give">
+      <a class="give-button" href="https://onrealm.org/fpccorinth/-/form/give/now" target="_blank" rel="noopener">Give Online</a>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  // Scroll-triggered reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
