@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Worship Bulletin — Sixth Sunday of Easter, May 10, 2026</title>
+<title>Worship Bulletin — May 24, 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Cinzel:wght@400;500;600;700&family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet">
@@ -160,18 +160,6 @@
     margin: 0.3rem auto 0.8rem;
     opacity: 0;
     animation: fadeUp 1s ease-out 0.6s forwards;
-  }
-
-  .cover-season {
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 300;
-    font-size: 1.05rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
-    margin-bottom: 0.3rem;
-    opacity: 0;
-    animation: fadeUp 1s ease-out 0.7s forwards;
   }
 
   .cover-date {
@@ -453,6 +441,13 @@
   @media (max-width: 500px) {
     .anthem-lyrics { flex-direction: column; gap: 0.6rem; }
   }
+  .anthem-credit {
+    font-size: 0.72rem;
+    color: var(--ink-faint);
+    font-style: normal;
+    padding-left: 0.06in;
+    margin-top: 0.4rem;
+  }
 
   /* ── SERMON NOTES ───────────────────────── */
   .sermon-section {
@@ -478,14 +473,29 @@
   }
 
   .sermon-intro {
-    font-size: 0.88rem;
-    line-height: 1.6;
+    font-size: 0.92rem;
+    line-height: 1.65;
     text-align: justify;
     hyphens: auto;
     color: var(--ink-light);
     margin-bottom: 1rem;
     padding-bottom: 1rem;
     border-bottom: 1px solid var(--rule-light);
+  }
+
+  .sermon-point {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--ink);
+    margin-top: 1.2rem;
+    margin-bottom: 0.3rem;
+  }
+  .sermon-point .pt-ref {
+    font-weight: 400;
+    font-style: italic;
+    font-size: 0.9rem;
+    color: var(--ink-faint);
   }
 
   .notes-prompt {
@@ -535,9 +545,10 @@
   }
 
   .flower-dedication .attribution {
-    font-size: 0.88rem;
-    color: var(--ink-light);
-    margin-top: 0.2rem;
+    font-size: 0.85rem;
+    font-style: italic;
+    color: var(--ink-faint);
+    margin-top: 0.3rem;
   }
 
   .announce-block {
@@ -720,8 +731,7 @@
 
     <h1 class="cover-church-name">First Presbyterian Church</h1>
     <div class="cover-ornament"></div>
-    <p class="cover-season">Sixth Sunday of Easter</p>
-    <p class="cover-date">May 10, 2026</p>
+    <p class="cover-date">May 24, 2026</p>
 
     <div class="cover-scroll-hint">
       <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
@@ -744,7 +754,7 @@
 
       <div class="welcome-block">
         <h3>Children &amp; Nursery</h3>
-        <p>Children&rsquo;s Church &mdash; Children ages 4 through 5th grade are welcome in the Fellowship Hall, located at the northeast corner of the church campus. Nursery rooms for infants through age 3 are in the Education Wing, with the entrance behind the playground on the west side of campus. Children are always welcome in worship!</p>
+        <p>Children&rsquo;s Church is on a short break&mdash;the Youth Group will resume leading Children&rsquo;s Church on June 1st. Nursery rooms for infants through age 3 are in the Education Wing, with the entrance behind the playground on the west side of campus. Children are always welcome in worship!</p>
       </div>
 
       <div class="welcome-block">
@@ -768,7 +778,7 @@
     <div class="reveal">
       <div class="liturgy-header">
         <p class="liturgy-main-title">Liturgy for the Worship of God</p>
-        <p class="liturgy-date-line">May 10, 2026</p>
+        <p class="liturgy-date-line">May 24, 2026</p>
         <p class="liturgy-standing-note">* Indicates congregation standing if able</p>
       </div>
 
@@ -777,6 +787,15 @@
 
       <div class="worship-item">
         <p class="worship-heading">The Piano Prelude</p>
+      </div>
+
+      <div class="worship-item">
+        <p class="worship-heading">Call to Meditation: &nbsp;Revelation 5:13</p>
+        <p class="worship-body">&ldquo;To him who sits on the throne and to the Lamb be blessing and honor and glory and might forever and ever!&rdquo;</p>
+      </div>
+
+      <div class="worship-item">
+        <p class="worship-heading">The Prelude</p>
         <div class="margin-note">
           <span class="note-label">Prelude</span>
           The prelude provides a quiet moment to prepare for worship. As the music begins, we are encouraged to calm our hearts, focus our minds, and enter reverently into God&rsquo;s presence.
@@ -784,71 +803,45 @@
       </div>
 
       <div class="worship-item">
-        <p class="worship-heading">Call to Meditation: &nbsp;Lamentations 3:22&ndash;23</p>
-        <p class="worship-body">&ldquo;The steadfast love of the Lord never ceases; his mercies never come to an end; they are new every morning; great is your faithfulness.&rdquo;</p>
-        <div class="margin-note">
-          <span class="note-label">Call to Meditation</span>
-          Hesed&mdash;often translated in the ESV as &ldquo;steadfast love&rdquo;&mdash;is a recurring word used by the Hebrew authors to describe God&rsquo;s character. It combines the ideas of love, generosity, and promise-keeping loyalty.
-        </div>
-      </div>
-
-      <div class="worship-item">
-        <p class="worship-heading">The Prelude</p>
-      </div>
-
-      <div class="worship-item">
         <p class="worship-heading">Choral Introit <span class="worship-attr">&ldquo;In Your House&rdquo;</span></p>
       </div>
 
       <div class="worship-item">
-        <p class="worship-heading">*Scriptural Call to Worship: <span style="font-weight:normal;">Psalm 89:1&ndash;5</span></p>
+        <p class="worship-heading">*Scriptural Call to Worship: <span style="font-weight:normal;">Psalm 96:11&ndash;13</span></p>
         <div class="responsive">
-          <p class="leader-line"><span class="leader-label">Leader:</span> I will sing of the steadfast love of the Lord forever; with my mouth I will make known your faithfulness to all generations.</p>
-          <p class="all-line"><span class="all-label">All:</span> For I said, &ldquo;Steadfast love will be built up forever; in the heavens you will establish your faithfulness.&rdquo;</p>
-          <p class="leader-line"><span class="leader-label">Leader:</span> You have said, &ldquo;I have made a covenant with my chosen one; I have sworn to David my servant: &lsquo;I will establish your offspring forever, and build your throne for all generations.&rsquo;&rdquo;</p>
-          <p class="all-line"><span class="all-label">All:</span> Let the heavens praise your wonders, O Lord, your faithfulness in the assembly of the holy ones!</p>
+          <p class="leader-line"><span class="leader-label">Leader:</span> Let the heavens be glad, and let the earth rejoice; let the sea roar, and all that fills it; let the field exult, and everything in it!</p>
+          <p class="all-line"><span class="all-label">All:</span> Then shall all the trees of the forest sing for joy before the Lord, for he comes, for he comes to judge the earth.</p>
+          <p class="leader-line"><span class="leader-label">Leader:</span> He will judge the world in righteousness, and the peoples in his faithfulness.</p>
         </div>
       </div>
 
       <div class="worship-item">
-        <p class="worship-heading">*The Hymn of Praise: &nbsp;#267 <span class="worship-attr">&ldquo;Come, Thou Almighty King&rdquo;</span></p>
+        <p class="worship-heading">*The Hymn: &nbsp;#262 <span class="worship-attr">&ldquo;Holy, Holy, Holy&rdquo; (vv. 1&ndash;3)</span></p>
+      </div>
+
+      <div class="worship-item">
+        <p class="worship-heading">*Responsive Reading: <span style="font-weight:normal;">Isaiah 6:1&ndash;7</span></p>
+        <div class="responsive">
+          <p class="leader-line"><span class="leader-label">Leader:</span> In the year that King Uzziah died I saw the Lord sitting upon a throne, high and lifted up; and the train of his robe filled the temple. Above him stood the seraphim. Each had six wings: with two he covered his face, and with two he covered his feet, and with two he flew. And one called to another and said:</p>
+          <p class="all-line"><span class="all-label">All:</span> &ldquo;Holy, holy, holy is the Lord of hosts; the whole earth is full of his glory!&rdquo;</p>
+          <p class="leader-line"><span class="leader-label">Leader:</span> And the foundations of the thresholds shook at the voice of him who called, and the house was filled with smoke. And I said: &ldquo;Woe is me! For I am lost; for I am a man of unclean lips, and I dwell in the midst of a people of unclean lips; for my eyes have seen the King, the Lord of hosts!&rdquo; Then one of the seraphim flew to me, having in his hand a burning coal that he had taken with tongs from the altar.</p>
+          <p class="all-line"><span class="all-label">All:</span> And he touched my mouth and said: &ldquo;Behold, this has touched your lips; your guilt is taken away, and your sin atoned for.&rdquo;</p>
+        </div>
+      </div>
+
+      <div class="worship-item">
+        <p class="worship-heading">*Congregational Response: &nbsp;#262 <span class="worship-attr">&ldquo;Holy, Holy, Holy&rdquo; (v. 4)</span></p>
       </div>
 
       <div class="worship-item">
         <p class="worship-heading">*Profession of Faith <span class="worship-attr">The Apostles&rsquo; Creed</span></p>
         <p class="worship-body corporate">I believe in God, the Father almighty, Maker of heaven and earth, and in Jesus Christ, his only Son, our Lord, who was conceived by the Holy Ghost, born of the Virgin Mary, suffered under Pontius Pilate, was crucified, dead and buried; he descended into hell; the third day he rose again from the dead; he ascended into heaven, and sitteth on the right hand of God the Father Almighty; from thence he shall come to judge the quick and the dead. I believe in the Holy Ghost, the holy catholic* Church, the communion of saints, the forgiveness of sins, the resurrection of the body, and the life everlasting. Amen.</p>
-        <p class="creed-note">*that is, the true Christian church of all times and all places</p>
+        <p class="creed-note">*universal</p>
       </div>
 
       <div class="worship-item">
-        <p class="worship-heading">*Prayer of Invocation</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── CONFESSION & ASSURANCE ── -->
-  <section class="bulletin-section">
-    <div class="reveal">
-      <div class="liturgy-divider">Confession &amp; Assurance</div>
-
-      <div class="worship-item">
-        <p class="worship-heading">Corporate Prayer of Confession</p>
-        <p class="worship-body corporate">King of heaven and earth, we confess that we have not always lived under Your reign. We have sought our own kingdoms before Yours, trusted in our own wisdom, and failed to bear witness to Your justice, mercy, and peace. Forgive us, Lord. Turn our hearts again to Christ our King. By Your Spirit, teach us to seek first Your Kingdom and to live as faithful citizens of Your grace; through Jesus Christ our Lord.</p>
-        <p class="silent-confession">Individual Prayers of Confession (silently)</p>
-        <div class="margin-note">
-          <span class="note-label">Corporate Confession</span>
-          Confessing as a community of believers reminds us of who God is, who we are, and how we have failed to live as God has called us to.
-        </div>
-      </div>
-
-      <div class="worship-item">
-        <p class="worship-heading">Assurance of Divine Pardon: <span style="font-weight:normal;">1 John 1:8&ndash;9</span></p>
-        <p class="worship-body">&ldquo;If we say we have no sin, we deceive ourselves, and the truth is not in us. If we confess our sins, he is faithful and just to forgive us our sins and to cleanse us from all unrighteousness.&rdquo;</p>
-      </div>
-
-      <div class="worship-item">
-        <p class="worship-heading">*Gloria Patri</p>
-        <p class="worship-body corporate">Glory be to the Father, and to the Son: and to the Holy Ghost; As it was in the beginning, is now, and ever shall be: world without end. Amen.</p>
+        <p class="worship-heading">*Prayer of Invocation &amp; The Lord&rsquo;s Prayer</p>
+        <p class="worship-body corporate">Our Father, who art in heaven, hallowed be thy Name. Thy Kingdom come, thy will be done on earth, as it is in heaven. Give us this day our daily bread, and forgive us our debts, as we forgive our debtors. Lead us not into temptation, but deliver us from evil. For thine is the kingdom, the power, and the glory, for ever. Amen.</p>
       </div>
     </div>
   </section>
@@ -863,42 +856,7 @@
       </div>
 
       <div class="worship-item">
-        <p class="worship-heading">Choral Anthem <span class="worship-attr">&ldquo;My Savior&rdquo;</span></p>
-        <p style="font-size:0.88rem; padding-left:0.06in; font-style:italic; color:var(--ink-faint);">Don Besig &amp; Nancy Besig</p>
-        <div class="anthem-lyrics">
-          <div class="verse">
-            As a shepherd tends his sheep<br>
-            In a quiet meadow,<br>
-            So my Savior watches me<br>
-            And cares for me each day.<br>
-            As a captain sails the sea<br>
-            Through the storms and shadows.<br>
-            So my Savior stays with me<br>
-            And keeps me unafraid.<br><br>
-            When I fall He takes my hand<br>
-            And helps me to start again.<br>
-            When I call He understands;<br>
-            My Savior is my friend.<br>
-            As a parent calms the fear<br>
-            When there&rsquo;s pain and sorrow,<br>
-            So my Savior comforts me<br>
-            And helps me to find my way.
-          </div>
-          <div class="verse">
-            He is my Savior, beautiful Savior,<br>
-            Source of all hope and abiding faith.<br>
-            Truly I love Him, proudly I serve Him,<br>
-            Redeemed forever by His grace.<br><br>
-            As a cool and gentle breeze<br>
-            Brings a fresh new dawning,<br>
-            So my Savior touches me<br>
-            And fills my heart with hope.<br>
-            As the sun breaks through the trees<br>
-            On a bright new morning,<br>
-            So my Savior shines on me<br>
-            And helps my faith to grow!
-          </div>
-        </div>
+        <p class="worship-heading">The Offertory</p>
       </div>
 
       <div class="worship-item">
@@ -907,14 +865,10 @@
       </div>
 
       <div class="worship-item">
-        <p class="worship-heading">Pastoral Prayer <span class="worship-attr">A Prayer for Mothers</span></p>
-      </div>
-
-      <div class="worship-item">
-        <p class="worship-heading">Scripture Reading <span class="worship-attr">2 Corinthians 1:20</span></p>
+        <p class="worship-heading">Scripture Reading <span class="worship-attr">Jude 5&ndash;16</span></p>
         <div class="margin-note">
           <span class="note-label">Scripture</span>
-          Pew Bible: p. 964
+          Pew Bible: p. 1027
         </div>
       </div>
 
@@ -927,13 +881,82 @@
       </div>
 
       <div class="worship-item">
-        <p class="worship-heading">Sermon: &ldquo;The Prayer of Faith&rdquo; <span class="worship-attr">Rev. Waring Porter</span></p>
-        <p style="font-size:0.88rem; padding-left:0.06in; font-style:italic; color:var(--ink-faint);">Praying as Christ Taught Us</p>
+        <p class="worship-heading">Sermon: &ldquo;False Grace and Certain Judgment&rdquo;</p>
+        <p style="padding-left:0.06in; font-style:italic; font-size:0.88rem; color:var(--ink-faint); margin-top:0.1rem;">Rev. Waring Porter</p>
       </div>
 
       <div class="worship-item">
-        <p class="worship-heading">Prayer of Commitment &amp; The Lord&rsquo;s Prayer</p>
-        <p class="worship-body corporate">Our Father, who art in heaven, hallowed be thy Name. Thy Kingdom come, thy will be done on earth, as it is in heaven. Give us this day our daily bread, and forgive us our debts, as we forgive our debtors. Lead us not into temptation, but deliver us from evil. For thine is the kingdom, the power, and the glory, forever. Amen.</p>
+        <p class="worship-heading">Prayer of Commitment</p>
+      </div>
+
+      <div class="worship-item">
+        <p class="worship-heading">Choral Anthem <span class="worship-attr">&ldquo;We Will Remember You&rdquo; &middot; Harris / Hayes</span></p>
+        <div class="anthem-lyrics">
+          <div class="verse">
+            We will remember you in the breaking of the bread,<br>
+            We will remember ev&rsquo;ry loving word you said.<br>
+            &ldquo;Eat this bread and live. My peace to you I give.&rdquo;<br>
+            In the breaking of the bread, we will remember you.<br><br>
+            We will remember you in the pouring of the wine,<br>
+            We will remember how you looked into our eyes.<br>
+            &ldquo;Drink this cup and live. Your sins I will forgive.&rdquo;<br>
+            In the pouring of the wine, we will remember you.<br><br>
+            A new command you gave to us,<br>
+            That we would love as you have loved,<br>
+            That all your children here would kneel as one,<br>
+            Believing you are God&rsquo;s own Son.
+          </div>
+          <div class="verse">
+            We will remember you as we share the bread and wine,<br>
+            We will remember and look forward to the time<br>
+            When your kingdom comes and your will is done.<br>
+            As we share the bread and wine,<br>
+            We will remember you.<br><br>
+            And as we break the bread and pour the wine,<br>
+            And as we pledge our hearts and lives,<br>
+            We will remember, we will remember you.
+          </div>
+        </div>
+        <p class="anthem-credit">CCLI License #1203745</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── THE LORD'S SUPPER ── -->
+  <section class="bulletin-section">
+    <div class="reveal">
+      <div class="liturgy-divider">The Lord&rsquo;s Supper</div>
+
+      <div class="worship-item">
+        <p class="worship-heading">The Sacrament of The Lord&rsquo;s Supper</p>
+        <p class="worship-body" style="font-style:italic;">Invitation to the Table</p>
+        <div class="margin-note">
+          <span class="note-label">Sacrament</span>
+          Sacraments are holy signs and seals of the covenant of grace, instituted by God, to represent Christ and his benefits, and to confirm our interest in him.
+        </div>
+      </div>
+
+      <div class="worship-item">
+        <p class="worship-heading">Corporate Prayer of Confession</p>
+        <p class="worship-body corporate">Almighty and holy God, though You have shown us mercy, we still doubt. Though You have called us to holiness, we still wander. We confess our pride, our selfishness, our careless words, and our failure to contend for the faith once delivered to the saints. Forgive us for the ways we grumble against Your providence, resist Your authority, and seek our own desires above Your will. Cleanse us from hidden sins and from outward disobedience. We thank You that in Jesus Christ there is mercy for sinners, steadfast love for the weak, and pardon for all who repent and believe. Keep us in Your love and preserve us by Your grace.</p>
+        <p class="silent-confession">Silent Confession</p>
+      </div>
+
+      <div class="worship-item">
+        <p class="worship-heading">Assurance of Pardon: <span style="font-weight:normal;">Psalm 130:3&ndash;4</span></p>
+        <p class="worship-body">&ldquo;If you, O Lord, should mark iniquities, O Lord, who could stand? But with you there is forgiveness, that you may be feared.&rdquo;</p>
+      </div>
+
+      <div class="worship-item">
+        <p class="worship-heading">The Words of Institution: <span style="font-weight:normal;">1 Corinthians 11:23&ndash;29</span></p>
+      </div>
+
+      <div class="worship-item">
+        <p class="worship-heading">Partaking of the Elements</p>
+      </div>
+
+      <div class="worship-item">
+        <p class="worship-heading">Prayer of Thanksgiving</p>
       </div>
     </div>
   </section>
@@ -944,7 +967,7 @@
       <div class="liturgy-divider">Sending</div>
 
       <div class="worship-item">
-        <p class="worship-heading">*Hymn: &nbsp;#173 <span class="worship-attr">&ldquo;All Glory, Laud and Honor&rdquo;</span></p>
+        <p class="worship-heading">*Hymn of Commitment: &nbsp;#203 <span class="worship-attr">&ldquo;And Can It Be?&rdquo;</span></p>
       </div>
 
       <div class="worship-item">
@@ -961,32 +984,44 @@
     </div>
   </section>
 
-  <!-- ═══════════ SERMON NOTES ═══════════ -->
+  <!-- ═══════════ SERMON OUTLINE ═══════════ -->
   <section class="bulletin-section sermon-section">
     <div class="reveal">
       <p class="section-heading">Sermon Outline</p>
-      <p class="sermon-title">&ldquo;Praying as Christ Taught Us: The Prayer of Faith&rdquo;</p>
-      <p class="sermon-text-ref">2 Corinthians 1:20 &bull; Rev. Waring Porter</p>
+      <p class="sermon-title">&ldquo;False Grace and Certain Judgment&rdquo;</p>
+      <p class="sermon-text-ref">Jude 5&ndash;16 &bull; Rev. Waring Porter</p>
 
-      <p class="sermon-intro">As we come to the end of this sermon series on the Lord&rsquo;s Prayer, we are looking at the very last word of the prayer&mdash;&ldquo;Amen.&rdquo; What does it mean for us to say Amen at the end of a prayer? It is not just the end of a prayer; it is the expression of faith. In this verse, the Apostle Paul pulls back the curtain and shows us what is really happening when we say that word. As we conclude this series, we&rsquo;re going to see that saying &ldquo;Amen&rdquo; is not ending our prayer&mdash;it is how we anchor our prayer in Christ.</p>
-
-      <p class="notes-prompt">I. &nbsp;Amen Is an Act of Trust</p>
-      <p class="scripture-quote">2 Corinthians 1:20 &mdash; &ldquo;It is through him that we utter our Amen&hellip;&rdquo;</p>
-      <div class="notes-lines"><div class="notes-line"></div><div class="notes-line"></div><div class="notes-line"></div></div>
-
-      <p class="notes-prompt">II. &nbsp;Our Assurance Is Grounded in Christ</p>
-      <p class="scripture-quote">2 Corinthians 1:20 &mdash; &ldquo;For all the promises of God find their Yes in him.&rdquo;</p>
-      <div class="notes-lines"><div class="notes-line"></div><div class="notes-line"></div><div class="notes-line"></div></div>
-
-      <p class="notes-prompt">III. &nbsp;Amen Expresses Confidence in God&rsquo;s Faithfulness</p>
-      <p class="scripture-quote">2 Corinthians 1:20 &mdash; &ldquo;&hellip;to God for his glory.&rdquo;</p>
-      <div class="notes-lines"><div class="notes-line"></div><div class="notes-line"></div><div class="notes-line"></div></div>
-
-      <p style="font-size:0.82rem; font-style:italic; text-align:center; color:var(--ink-faint); margin-top:1.2rem;">
-        Saying &ldquo;Amen&rdquo; is not ending our prayer&mdash;it is how we anchor our prayer in Christ.
+      <p class="sermon-intro" style="margin-top:1rem; border-bottom:none; padding-bottom:0; margin-bottom:0.6rem;">
+        One of the greatest dangers facing the church today is not outright atheism or open hostility to Christianity. It is a distorted version of Christianity that speaks often about grace but very little about holiness, repentance, obedience, or the fear of God. Dietrich Bonhoeffer famously called this &ldquo;cheap grace.&rdquo;
+      </p>
+      <p class="sermon-intro">
+        Today we see forms of Christianity that want the benefits of Jesus without the lordship of Jesus. We see a version of faith that avoids hard truths because it fears offending people more than dishonoring God. Jude reminds us that the holiness of God matters. Truth matters. Doctrine matters. The way we live matters. Because false teaching is never merely intellectual, it is deeply spiritual and profoundly moral. What we believe about grace will shape the kind of disciples we become.
       </p>
 
-      <p class="sermon-resources"><em>Resources:</em> Calvin&rsquo;s Commentaries (Vol. XX), John Calvin; The Lord&rsquo;s Prayer, Kevin DeYoung; 2 Corinthians, Simon Kistemaker; Matthew Henry&rsquo;s Commentary (Vol. 6); Praying the Lord&rsquo;s Prayer, J.I. Packer; The Lord&rsquo;s Prayer, Thomas Watson</p>
+      <p class="sermon-point">I. Remember God&rsquo;s Past Judgments <span class="pt-ref">(vv. 5&ndash;7)</span></p>
+      <div class="notes-lines">
+        <div class="notes-line"></div>
+        <div class="notes-line"></div>
+        <div class="notes-line"></div>
+      </div>
+
+      <p class="sermon-point">II. The Character of False Teachers <span class="pt-ref">(vv. 8&ndash;13)</span></p>
+      <div class="notes-lines">
+        <div class="notes-line"></div>
+        <div class="notes-line"></div>
+        <div class="notes-line"></div>
+      </div>
+
+      <p class="sermon-point">III. The Certainty of Final Judgment <span class="pt-ref">(vv. 14&ndash;16)</span></p>
+      <div class="notes-lines">
+        <div class="notes-line"></div>
+        <div class="notes-line"></div>
+        <div class="notes-line"></div>
+      </div>
+
+      <p class="sermon-resources">
+        <strong>Resources:</strong> <em>The Cost of Discipleship,</em> Dietrich Bonhoeffer; <em>Calvin&rsquo;s Commentaries</em> (Vol. XXII), John Calvin; <em>Peter &amp; Jude,</em> Simon Kistemaker; <em>Matthew Henry&rsquo;s Commentary</em> (Vol. 6).
+      </p>
     </div>
   </section>
 
@@ -996,28 +1031,18 @@
       <p class="section-heading">Announcements</p>
 
       <div class="announce-block">
-        <h3>Living Free &mdash; May 14</h3>
-        <p>We will be serving a meal at Living Free this Thursday. We need desserts and servers. If you can help with either, please reach out to Nick Ashmore or show up to Living Free at 5:30.</p>
-      </div>
-
-      <div class="announce-block">
-        <h3>Joint Adult Sunday School</h3>
-        <p>We will have joint Sunday School in the fellowship hall next Sunday, the 17th, to hear from two of our missionaries serving overseas.</p>
-      </div>
-
-      <div class="announce-block">
-        <h3>Church Fellowship Night &mdash; May 17</h3>
-        <p>Let&rsquo;s meet in the Sanctuary at 5:30 p.m. for Family Worship, followed by a Church Potluck Dinner in the Fellowship Hall. Chicken Tenders will be provided&mdash;please bring your favorite dish, side, or dessert. A nursery will be available for children up to 3 years old. Please use the insert to sign up.</p>
-      </div>
-
-      <div class="announce-block">
         <h3>Annual LeConte Lodge Hiking Trip</h3>
-        <p>There will be an information meeting for those interested in attending or learning more about this trip on May 20th at 5:00 p.m. in the Conference Room. Trip dates are September 29th &ndash; October 2nd. Registration will open on May 27th at 9:00. Register by emailing fpc.leconte24@gmail.com.</p>
+        <p>September 29th &ndash; October 2nd. Registration opens on May 27th at 9:00 a.m. Register by emailing fpc.leconte24@gmail.com.</p>
+      </div>
+
+      <div class="announce-block">
+        <h3>Church Office Closed &mdash; Memorial Day</h3>
+        <p>The church office will be closed on Monday, May 25, in observance of Memorial Day.</p>
       </div>
 
       <div class="flower-dedication">
-        <p><strong>Flower Dedication</strong> &mdash; In loving honor of all mothers on Mother&rsquo;s Day. &ldquo;Her children rise up and call her blessed.&rdquo; &mdash; Proverbs 31:28</p>
-        <p class="attribution">&mdash; Brian &amp; LeeAnne Price</p>
+        <p><strong>Flower Dedication</strong> &mdash; The flowers on the altar are reverently placed for the Glory of God and in loving memory of Jackson Thomas Marlar, by his loving aunt and uncle, Morgan and Kevin Williams, and his cousins, Eleanor and John Francis Williams, on the first anniversary of Jackson&rsquo;s passing.</p>
+        <p class="attribution">Luke 10:27</p>
       </div>
     </div>
   </section>
@@ -1028,12 +1053,13 @@
       <p class="section-heading">Those Who Serve Today</p>
 
       <div class="serve-grid">
-        <p class="serve-line"><span class="role">Assisting Elder</span> &mdash; Pat Palmer</p>
+        <p class="serve-line"><span class="role">Assisting Elder</span> &mdash; Dr. John Shipp</p>
         <p class="serve-line"><span class="role">Ushers</span> &mdash; Jed James, Stephen Holley, Jason LeGoff, Carson Butler, &amp; Dr. John Shipp</p>
-        <p class="serve-line"><span class="role">Greeters</span> &mdash; Ryan &amp; Ellen Wesson</p>
-        <p class="serve-line"><span class="role">Nursery</span> &mdash; Devin Butler &amp; Mary Elizabeth Pounders</p>
-        <p class="serve-line"><span class="role">Acolytes</span> &mdash; Pete Fisher &amp; Ryder Wesson</p>
-        <p class="serve-line"><span class="role">Circle of Prayer</span> &mdash; Jenny Biggers &amp; Becky Stewart</p>
+        <p class="serve-line"><span class="role">Greeters</span> &mdash; Gregg Parker</p>
+        <p class="serve-line"><span class="role">Nursery</span> &mdash; Anna Erwin &amp; Abbie Butler</p>
+        <p class="serve-line"><span class="role">Acolytes</span> &mdash; Will Sanders &amp; Jack Windsor</p>
+        <p class="serve-line"><span class="role">AV Engineer</span> &mdash; Russell Smith</p>
+        <p class="serve-line"><span class="role">Circle of Prayer</span> &mdash; Jason &amp; Jennifer LeGoff</p>
       </div>
 
       <p class="section-heading" style="margin-top:1.2rem;">Church Staff</p>
@@ -1053,11 +1079,13 @@
 
       <div class="calendar-section">
         <p class="section-heading" style="margin-top:0;">The Church Calendar</p>
-        <p class="cal-line"><span class="cal-date">May 17</span> &nbsp;Baccalaureate Sunday</p>
-        <p class="cal-line"><span class="cal-date">May 17</span> &nbsp;Church Fellowship Night</p>
-        <p class="cal-line"><span class="cal-date">May 20</span> &nbsp;LeConte Lodge Trip Info Meeting</p>
         <p class="cal-line"><span class="cal-date">May 21&ndash;24</span> &nbsp;Branson Trip (4th &amp; 5th Graders)</p>
+        <p class="cal-line"><span class="cal-date">May 25</span> &nbsp;Memorial Day (Church Office Closed)</p>
         <p class="cal-line"><span class="cal-date">May 27</span> &nbsp;LeConte Lodge Trip Registration Opens</p>
+        <p class="cal-line"><span class="cal-date">June 4</span> &nbsp;Hands to Hearts</p>
+        <p class="cal-line"><span class="cal-date">June 8</span> &nbsp;Session Meeting</p>
+        <p class="cal-line"><span class="cal-date">June 14</span> &nbsp;Deacons&rsquo; Meeting</p>
+        <p class="cal-line"><span class="cal-date">June 21</span> &nbsp;Father&rsquo;s Day</p>
       </div>
     </div>
   </section>
