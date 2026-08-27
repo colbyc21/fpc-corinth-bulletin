@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Bulletin (Legal Fold) — August 30, 2026</title>
+<style>
+  /* ── Reset & Base ─────────────────────────────────── */
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: "Times New Roman", "Georgia", serif;
+    font-size: 11.5pt;
+    line-height: 1.35;
+    color: #000;
+    background: #fff;
+  }
+
+  /* ── Page Setup (14x8.5 landscape; nested 2-sheet saddle stitch) ── */
+  @page {
+    size: 14in 8.5in;
+    margin: 0;
+  }
+
+  .sheet {
+    width: 14in;
+    height: 8.5in;
+    display: flex;
+    overflow: hidden;
+    page-break-after: always;
+  }
+  .sheet:last-child { page-break-after: auto; }
+
+  .panel {
+    width: 7in;
+    height: 8.5in;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .panel-left  { padding: 0.28in 0.22in 0.32in 0.4in; }
+  .panel-right { padding: 0.28in 0.4in 0.32in 0.22in; }
+
+  /* ── Utility ──────────────────────────────────────── */
+  .text-center { text-align: center; }
+  .bold   { font-weight: bold; }
+  .italic { font-style: italic; }
+
+  .split-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.1in;
+  }
+  .split-line .attr {
+    font-weight: normal;
+    font-size: 10.5pt;
+    white-space: nowrap;
+    font-style: italic;
+  }
+
+  hr {
+    border: none;
+    border-top: 1.5pt solid #000;
+    margin: 0.05in 0;
+  }
+  hr.thin { border-top-width: 0.75pt; }
+
+  /* ── FRONT COVER ──────────────────────────────────── */
+  .cover {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    text-align: center;
+  }
+  .cover .spacer { flex: 1; }
+  .cover .cover-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .cover .subtitle {
+    font-size: 11pt;
+    letter-spacing: 0.08em;
+    margin-top: 0.1in;
+  }
+  .cover .date {
+    font-size: 15pt;
+    margin-top: 0.14in;
+  }
+  .cover .mission {
+    font-style: italic;
+    font-size: 12pt;
+    margin-top: 0.22in;
+  }
+  .cover .cover-footer {
+    font-style: italic;
+    font-size: 9.5pt;
+    margin-bottom: 0.05in;
+  }
+  .cover .logo-wrap { height: 2.3in; margin-bottom: 0.18in; }
+  .cover .logo-wrap img { height: 100%; width: auto; }
+
+  /* ── BACK PANEL ───────────────────────────────────── */
+  .back-panel {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    text-align: justify;
+  }
+  .back-panel h3 {
+    font-size: 11pt;
+    text-align: center !important;
+    margin-bottom: 0.03in;
+  }
+  .back-panel .section { margin-bottom: 0.04in; }
+  .back-panel hr { margin: 0.03in 0; }
+  .staff-line { font-size: 8.5pt; line-height: 1.28; }
+  .staff-line .name { font-weight: bold; }
+  .serve-line {
+    font-size: 9pt;
+    line-height: 1.3;
+    margin-bottom: 1pt;
+  }
+  .serve-line .role { font-weight: bold; }
+  .cal-line { font-size: 8.5pt; line-height: 1.35; }
+  .cal-line .cal-date { font-weight: bold; }
+  .cal-cols {
+    display: flex;
+    gap: 0.18in;
+  }
+  .cal-cols > div { flex: 1; }
+  .announce-line {
+    font-size: 8.5pt;
+    line-height: 1.26;
+    margin-bottom: 2pt;
+    text-align: justify;
+  }
+  .announce-line .a-head { font-weight: bold; }
+
+  /* ── WELCOME PAGE ─────────────────────────────────── */
+  .welcome-page {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  .welcome-page h2 {
+    font-size: 16pt;
+    text-align: center;
+    margin-bottom: 0.12in;
+  }
+  .welcome-page h3 {
+    font-size: 12pt;
+    margin-bottom: 0.05in;
+  }
+  .welcome-page p {
+    font-size: 10.5pt;
+    line-height: 1.4;
+    text-align: justify;
+    margin-bottom: 0.08in;
+  }
+  .welcome-section { margin-bottom: 0.12in; }
+
+  /* ── LITURGY PAGES (grid with aligned notes) ─────── */
+  .liturgy-grid {
+    display: grid;
+    align-content: start;
+    height: 100%;
+    row-gap: 0.04in;
+    grid-auto-flow: dense;
+  }
+  .liturgy-grid.spread { align-content: space-between; }
+  .liturgy-grid .worship-item { margin-bottom: 0; }
+  .liturgy-grid.notes-right {
+    grid-template-columns: 1fr 1.3in;
+    column-gap: 0.08in;
+  }
+  .liturgy-grid.notes-left {
+    grid-template-columns: 1.3in 1fr;
+    column-gap: 0.1in;
+  }
+
+  .notes-right .lg-main { grid-column: 1; }
+  .notes-left  .lg-main { grid-column: 2; }
+
+  .lg-note {
+    font-size: 7.5pt;
+    line-height: 1.25;
+    color: #555;
+    align-self: start;
+    padding-top: 1pt;
+  }
+  .notes-right .lg-note {
+    grid-column: 2;
+    border-left: 0.5pt solid #bbb;
+    padding-left: 0.06in;
+  }
+  .notes-left .lg-note {
+    grid-column: 1;
+    border-right: 0.5pt solid #bbb;
+    padding-right: 0.06in;
+    text-align: right;
+  }
+  .lg-note .note-label {
+    font-weight: bold;
+    font-size: 7pt;
+    text-transform: uppercase;
+    color: #777;
+    display: block;
+    margin-bottom: 1pt;
+  }
+  .lg-note:empty { border: none; }
+
+  .lg-full { grid-column: 1 / -1; }
+
+  .liturgy-title {
+    font-size: 14pt;
+    font-weight: bold;
+    font-style: italic;
+    text-align: center;
+    margin-bottom: 0.02in;
+  }
+  .liturgy-date {
+    font-size: 11pt;
+    text-align: center;
+    margin-bottom: 0.03in;
+  }
+  .liturgy-note {
+    font-size: 9pt;
+    font-style: italic;
+    margin-bottom: 0.06in;
+    text-align: center;
+  }
+
+  .worship-item { margin-bottom: 0.04in; }
+  .worship-heading {
+    font-weight: bold;
+    font-size: 10.5pt;
+  }
+  .worship-body {
+    font-size: 10.5pt;
+    padding-left: 0.06in;
+    margin-top: 2pt;
+    text-align: justify;
+  }
+  .worship-body.corporate { font-style: italic; }
+  .responsive .leader-line,
+  .responsive .all-line {
+    padding-left: 0.06in;
+    font-size: 10.5pt;
+    text-align: justify;
+  }
+  .responsive .all-line { font-style: italic; }
+  .responsive .leader-label { font-weight: normal; }
+  .responsive .all-label { font-weight: bold; }
+
+  .silent-confession {
+    font-weight: bold;
+    font-style: italic;
+    font-size: 9.5pt;
+    text-align: left;
+    padding-left: 0.06in;
+    margin: 2pt 0;
+  }
+
+  .creed-note {
+    font-size: 8pt;
+    font-style: italic;
+    color: #444;
+    padding-left: 0.06in;
+    margin-top: 1pt;
+  }
+
+  /* Section divider */
+  .liturgy-section-heading {
+    font-size: 11pt;
+    font-weight: bold;
+    text-align: center;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin: 0.06in 0 0.04in;
+    color: #333;
+  }
+
+  /* ── SERMON NOTES PAGE ────────────────────────────── */
+  .sermon-notes-page {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  .sermon-notes-page h2 {
+    font-size: 16pt;
+    text-align: center;
+    margin-bottom: 0.06in;
+  }
+  .sermon-notes-page .sermon-title {
+    font-size: 13pt;
+    font-style: italic;
+    text-align: center;
+    margin-bottom: 0.04in;
+  }
+  .sermon-notes-page .sermon-text {
+    font-size: 11pt;
+    text-align: center;
+    margin-bottom: 0.1in;
+  }
+  .sermon-intro {
+    font-size: 9.5pt;
+    line-height: 1.4;
+    text-align: justify;
+    margin-bottom: 0.1in;
+    padding-bottom: 0.06in;
+    border-bottom: 0.5pt solid #ccc;
+  }
+  .sermon-outline-pt {
+    font-size: 10.5pt;
+    font-weight: bold;
+    margin-top: 0.05in;
+    margin-bottom: 0.03in;
+  }
+  .notes-line {
+    border-bottom: 0.5pt solid #ccc;
+    height: 0.34in;
+    width: 100%;
+  }
+  .scripture-quote {
+    font-size: 9pt;
+    font-style: italic;
+    color: #444;
+    padding-left: 0.15in;
+    margin-bottom: 0.04in;
+  }
+
+  /* ── Screen preview ───────────────────────────────── */
+  @media screen {
+    body { background: #888; }
+    .sheet {
+      background: #fff;
+      margin: 0.25in auto;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+    }
+    .panel-left { border-right: 1px dashed #ccc; }
+
+    .panel::before {
+      content: attr(data-page-label);
+      position: absolute;
+      top: 4px;
+      right: 8px;
+      font-size: 8pt;
+      color: #aaa;
+      font-family: sans-serif;
+    }
+    .panel-left::before {
+      right: auto;
+      left: 8px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════════════════
+     SHEET 1 — OUTSIDE  (Back Cover left | Front Cover right)
+     ════════════════════════════════════════════════════════════ -->
+<div class="sheet">
+
+  <!-- ── LEFT: PAGE 8 — BACK COVER ── -->
+  <div class="panel panel-left" data-page-label="Page 8 – Back Cover">
+    <div class="back-panel">
+      <hr>
+
+      <div class="section text-center">
+        <h3>Flower Dedication</h3>
+        <p style="font-size:9.5pt; line-height:1.32; text-align:center;">
+          The beautiful flowers adorning the sanctuary this morning are given in honor of our children, grandchildren, and great-grandchildren. To God be the glory!
+          <span style="font-style:italic;">&mdash; Mike and Shirley McClamroch</span>
+        </p>
+      </div>
+
+      <hr class="thin">
+
+      <div class="section">
+        <h3>Announcements</h3>
+        <div style="display:flex; gap:0.18in; align-items:flex-start;">
+          <div style="flex:1;">
+            <p class="announce-line"><span class="a-head">Roca Blanca Project Fund.</span> Our mission team needs help funding the work they will do while in Mexico. Giving to the RB Project Fund will go directly to purchasing food baskets for hungry people and buying supplies for all projects the team will complete while on the base. Envelopes are available at the Narthex and East Entrance. Thank you for participating in the work of the Lord at home and in other countries!</p>
+          </div>
+          <div style="flex:1;">
+            <p class="announce-line"><span class="a-head">Samaritan&rsquo;s Purse Shoeboxes.</span> Collection boxes are available in the children&rsquo;s wing and the side entrance by the church office. You can participate by shopping and collecting items, or by donating monetarily &mdash; each shoebox costs $10 to ship. Items needed: small composition notebooks, pencils, small cars/trucks, puzzles, jump ropes, hair bows/barrettes/brushes/combs, underwear in larger sizes, and small stuffed animals. No liquids, candy, or food!</p>
+          </div>
+        </div>
+      </div>
+
+      <hr class="thin">
+
+      <div class="section">
+        <h3>Those Who Serve Today</h3>
+        <div style="display:flex; gap:0.2in;">
+          <div style="flex:1;">
+            <p class="serve-line"><span class="role">Assisting Elder</span> &mdash; GT McCullough</p>
+            <p class="serve-line"><span class="role">Greeters</span> &mdash; Bob &amp; Susan Joiner</p>
+            <p class="serve-line"><span class="role">Acolytes</span> &mdash; John Butler &amp; Betsy Butler</p>
+            <p class="serve-line"><span class="role">Circle of Prayer</span> &mdash; Jenny Biggers &amp; Jack Griffith</p>
+          </div>
+          <div style="flex:1;">
+            <p class="serve-line"><span class="role">Ushers</span> &mdash; Trey Tull, Don Williams, Brent Johnson, Hack Smith, &amp; Hayden Worsham</p>
+            <p class="serve-line"><span class="role">Nursery</span> &mdash; Deborah Kiddy, Katy Stanley, Penny Long, Suzanne Davis, Deb Parker, &amp; Abbie Butler</p>
+            <p class="serve-line"><span class="role">AV Engineer</span> &mdash; Russell Smith</p>
+          </div>
+        </div>
+      </div>
+
+      <hr class="thin">
+
+      <div class="section">
+        <h3>Church Staff</h3>
+        <div style="display:flex; gap:0.2in;">
+          <div style="flex:1;">
+            <p class="staff-line"><span class="name">Rev. Waring Porter</span> - Pastor</p>
+            <p class="staff-line"><span class="name">Gregg Parker</span> - Dir. of Discipleship</p>
+            <p class="staff-line"><span class="name">Bobby Capps</span> - Dir. of Outreach &amp; Care</p>
+            <p class="staff-line"><span class="name">Jennifer Shipp</span> - Dir. of Student Ministries</p>
+            <p class="staff-line"><span class="name">Laura Kate Carmichiel</span> - Dir. of Women&rsquo;s Min. &amp; Comm.</p>
+          </div>
+          <div style="flex:1;">
+            <p class="staff-line"><span class="name">Phyllis Sellers</span> - Day School Director</p>
+            <p class="staff-line"><span class="name">Jan Pike</span> - Choir Director</p>
+            <p class="staff-line"><span class="name">Malechi Doren</span> - Accompanist</p>
+            <p class="staff-line"><span class="name">Teresa Tsagarakis</span> - Administrative Assistant</p>
+            <p class="staff-line"><span class="name">Sammy Allred</span> - Bookkeeper</p>
+          </div>
+        </div>
+      </div>
+
+      <hr class="thin">
+
+      <div class="section" style="display:flex; gap:0.15in; margin-top:0.04in;">
+        <div style="flex:2;">
+          <h3>The Church Calendar</h3>
+          <div class="cal-cols">
+            <div>
+              <p class="cal-line"><span class="cal-date">September 1</span> &nbsp;Women&rsquo;s Bible Study &mdash; Youth House, 8&nbsp;a.m.</p>
+              <p class="cal-line"><span class="cal-date">September 2</span> &nbsp;Youth &middot; Women&rsquo;s Bible Study, 6&nbsp;p.m. &mdash; <span style="font-style:italic;">No KidsQuest</span></p>
+              <p class="cal-line"><span class="cal-date">September 3</span> &nbsp;MI3 Week 4</p>
+            </div>
+            <div>
+              <p class="cal-line"><span class="cal-date">September 7</span> &nbsp;Labor Day &mdash; Church Office Closed</p>
+              <p class="cal-line"><span class="cal-date">September 13</span> &nbsp;Session Meeting &middot; Deacons&rsquo; Meeting</p>
+            </div>
+          </div>
+        </div>
+        <div class="text-center">
+          <h3>Online Giving</h3>
+          <img src="../../qrcode.png" alt="QR Code" style="width:0.9in; height:0.9in; margin:0.04in auto; display:block;">
+          <p style="font-size:8pt;">Scan to give online</p>
+        </div>
+      </div>
+
+      <div style="flex:1;"></div>
+
+      <div>
+        <hr>
+        <p class="text-center" style="font-size:8.5pt; padding-top:0.04in;">
+          919 East Shiloh Rd &nbsp;&middot;&nbsp; Corinth, MS 38834 &nbsp;&middot;&nbsp; fpccorinth.org &nbsp;&middot;&nbsp; 662-286-6638
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── RIGHT: PAGE 1 — FRONT COVER ── -->
+  <div class="panel panel-right" data-page-label="Page 1 – Front Cover">
+    <div class="cover">
+      <hr style="width:100%;">
+
+      <div class="spacer"></div>
+
+      <div class="cover-group">
+        <div class="logo-wrap">
+          <img src="logo-cover.png" alt="First Presbyterian Church">
+        </div>
+        <hr style="border-top:2pt solid #000; width:2.5in;">
+        <p class="date">August 30, 2026</p>
+        <p class="subtitle">Fourteenth Sunday after Pentecost</p>
+        <p class="mission">&ldquo;To be disciples, to make disciples&rdquo;</p>
+      </div>
+
+      <div class="spacer"></div>
+
+      <hr style="width:100%;">
+      <p class="cover-footer">A congregation of the Evangelical Presbyterian Church</p>
+    </div>
+  </div>
+
+</div><!-- end sheet 1 outside -->
+
+
+<!-- ════════════════════════════════════════════════════════════
+     SHEET 1 — INSIDE  (Welcome left | Sermon Notes right)
+     ════════════════════════════════════════════════════════════ -->
+<div class="sheet">
+
+  <!-- ── LEFT: PAGE 2 — WELCOME ── -->
+  <div class="panel panel-left" data-page-label="Page 2 – Welcome">
+    <div class="welcome-page">
+      <hr>
+      <h2 style="margin-top:0.12in;">Welcome</h2>
+
+      <div class="welcome-section">
+        <h3>We Are Glad You Are Here!</h3>
+        <p>
+          We are honored that you decided to join us this morning. Whether it is your first time in church, your first time in a long while, or part of your regular rhythm, we hope you will be encouraged by the fellowship with each other, and with our Lord, as we worship him together.
+        </p>
+        <p>
+          If this is your first time with us, please take a moment and fill out a Next Steps Card found on the back of the pew. We would love to meet you and help you get connected.
+        </p>
+      </div>
+
+      <div class="welcome-section">
+        <h3>Children &amp; Nursery</h3>
+        <p>
+          Children (age 4+) and their families worship together in the sanctuary, where children will be dismissed to Children&rsquo;s Church during the service. Children&rsquo;s bulletins and crayons are available at both entrances to the Sanctuary. Children are always welcome in worship!
+        </p>
+        <p>
+          Nursery rooms for infants through age 3 are in the Education Wing, with the entrance behind the playground on the west side of campus. If you have a newborn and/or are nursing your baby, please feel free to use our baby room just off the narthex &mdash; a quiet space with comfortable seating where the worship service is broadcast as well.
+        </p>
+      </div>
+
+      <div class="welcome-section">
+        <h3>Our Vision &amp; Mission</h3>
+        <p>
+          Our vision is to see lives transformed by the power of the gospel, rooted in God&rsquo;s Word and the Reformed tradition, in order to create a culture of discipleship at FPC where disciples WORSHIP holistically, GROW relationally in Christ, and SERVE boldly in the world for the glory of God. Our mission is to accomplish this by &ldquo;Being Disciples and Making Disciples.&rdquo;
+        </p>
+      </div>
+
+      <div class="welcome-section">
+        <h3>Connect With Us</h3>
+        <p style="font-size:10.5pt;">
+          <span class="bold">Website:</span> fpccorinth.org<br>
+          <span class="bold">Phone:</span> 662-286-6638<br>
+          <span class="bold">Address:</span> 919 East Shiloh Rd, Corinth, MS 38834
+        </p>
+      </div>
+
+      <div style="flex:1;"></div>
+      <hr>
+    </div>
+  </div>
+
+  <!-- ── RIGHT: PAGE 7 — SERMON NOTES ── -->
+  <div class="panel panel-right" data-page-label="Page 7 – Sermon Notes">
+    <div class="sermon-notes-page">
+      <hr>
+      <h2 style="margin-top:0.08in; margin-bottom:0.03in;">Sermon Outline</h2>
+      <p class="sermon-title" style="margin-bottom:0.02in;">&ldquo;Restored by Grace: The Good Hand of God&rdquo;</p>
+      <p class="sermon-text" style="margin-bottom:0;">Rev. Waring Porter &nbsp;&middot;&nbsp; Ezra 7:11&ndash;28</p>
+
+      <hr class="thin" style="margin-bottom:0.06in;">
+
+      <p class="sermon-intro" style="margin-bottom:0.04in; padding-bottom:0; border-bottom:none;">
+        Have you ever been asked to do something that made you think, &ldquo;I don&rsquo;t know if I have what it takes to do this&rdquo;? Most of us know that feeling. We look at what is in front of us, and then we think about what is within us, and there seems to be a gap. The assignment looks bigger than our ability.
+      </p>
+      <p class="sermon-intro">
+        Because of that, it is easy to imagine Ezra looking at everything in front of him and asking, &ldquo;Do I really have what it takes to do this?&rdquo; The main point we will see today in this passage is that when God gives us an assignment that is bigger than our ability, He does not send us out alone. The God who calls us is the God who equips us, sustains us, and works through us. That is the good hand of God.
+      </p>
+
+      <p class="sermon-outline-pt">I. God Opens the Way (vv. 11&ndash;26)</p>
+      <div class="notes-line"></div>
+      <div class="notes-line"></div>
+      <div class="notes-line"></div>
+      <div class="notes-line"></div>
+
+      <p class="sermon-outline-pt">II. God Provides What We Need (vv. 23&ndash;27)</p>
+      <div class="notes-line"></div>
+      <div class="notes-line"></div>
+      <div class="notes-line"></div>
+      <div class="notes-line"></div>
+
+      <p class="sermon-outline-pt">III. God Gives Us Courage (v. 28)</p>
+      <div class="notes-line"></div>
+      <div class="notes-line"></div>
+      <div class="notes-line"></div>
+      <div class="notes-line"></div>
+
+      <div style="flex:1;"></div>
+
+      <p style="font-size:7.5pt; font-style:italic; color:#555; text-align:center; margin-bottom:0.05in;">
+        Resources: Matthew Henry&rsquo;s Commentary, Vol. 2, Matthew Henry; Ezra &amp; Nehemiah, Derek Kidner; Ezra &amp; Nehemiah, Jacob M. Myers; Westminster Confession of Faith
+      </p>
+      <hr>
+    </div>
+  </div>
+
+</div><!-- end sheet 1 inside -->
+
+
+<!-- ════════════════════════════════════════════════════════════
+     SHEET 2 — OUTSIDE  (Liturgy p6 left | Liturgy p3 right)
+     ════════════════════════════════════════════════════════════ -->
+<div class="sheet">
+
+  <!-- ── LEFT: PAGE 6 — LITURGY (end) ── -->
+  <div class="panel panel-left" data-page-label="Page 6 – Liturgy (end)">
+    <div class="liturgy-grid notes-left spread">
+
+      <div class="lg-main worship-item">
+        <p class="worship-heading">*The Doxology and Prayer of Dedication</p>
+        <p class="worship-body corporate">
+          Praise God, from whom all blessings flow; Praise Him, all creatures here below; Praise Him above, ye heavenly host; Praise Father, Son, and Holy Ghost. Amen.
+        </p>
+      </div>
+      <div class="lg-note"></div>
+
+      <div class="lg-main worship-item">
+        <p class="worship-heading">*Children Dismissed to Children&rsquo;s Church</p>
+      </div>
+      <div class="lg-note">
+        <span class="note-label">Children&rsquo;s Church</span>
+        Children ages 4 up to 4th grade are invited to come forward and exit out the side door for Children&rsquo;s Church. Following the worship service, they may be picked up in the Fellowship Hall.
+      </div>
+
+      <div class="lg-full">
+        <p class="liturgy-section-heading">Word</p>
+        <hr class="thin">
+      </div>
+
+      <div class="lg-main worship-item">
+        <div class="split-line">
+          <p class="worship-heading">Scripture Reading</p>
+          <span class="attr">Ezra 7:11&ndash;28 &middot; Pew Bible, p. 393</span>
+        </div>
+      </div>
+      <div class="lg-note"></div>
+
+      <div class="lg-main worship-item">
+        <p class="worship-heading">Scripture Response: <span style="font-weight:normal;">Isaiah 40:6b, 8</span></p>
+        <div class="responsive">
+          <p class="leader-line"><span class="leader-label">Leader:</span> All flesh is grass, and all its beauty is like the flower of the field;</p>
+          <p class="all-line"><span class="all-label">All:</span> The grass withers, the flower fades, but the Word of our God will stand forever. Amen.</p>
+        </div>
+      </div>
+      <div class="lg-note"></div>
+
+      <div class="lg-main worship-item">
+        <p class="worship-heading">Sermon: <span style="font-weight:normal; font-style:italic; font-size:10pt;">&ldquo;Restored by Grace: The Good Hand of God&rdquo;</span></p>
+        <p style="padding-left:0.06in; font-style:italic; font-size:9.5pt; margin-top:1pt;">Rev. Waring Porter</p>
+      </div>
+      <div class="lg-note"></div>
+
+      <div class="lg-main worship-item">
+        <p class="worship-heading">Prayer of Commitment</p>
+      </div>
+      <div class="lg-note"></div>
+
+      <div class="lg-full">
+        <p class="liturgy-section-heading">Sending</p>
+        <hr class="thin">
+      </div>
+
+      <div class="lg-main worship-item">
+        <div class="split-line">
+          <p class="worship-heading">*Hymn: &nbsp;#51</p>
+          <span class="attr">&ldquo;Guide Me, O Thou Great Jehovah&rdquo;</span>
+        </div>
+      </div>
+      <div class="lg-note"></div>
+
+      <div class="lg-main worship-item">
+        <p class="worship-heading">*Benediction</p>
+      </div>
+      <div class="lg-note">
+        <span class="note-label">Benediction</span>
+        God&rsquo;s people are blessed by the Lord and sent forth into the world, bearing with them the hope and peace of the Gospel. This should remind us that God doesn&rsquo;t just meet with us when we gather, but He goes with us as we scatter. As we continue our worship, we do so as people sent to our community for reconciliation, bearing witness to the good news of the gospel.
+      </div>
+
+      <div class="lg-main worship-item">
+        <div class="split-line">
+          <p class="worship-heading">*Choral Benediction</p>
+          <span class="attr">&ldquo;Benediction&rdquo; (2-part)</span>
+        </div>
+      </div>
+      <div class="lg-note"></div>
+
+      <div class="lg-main worship-item">
+        <p class="worship-heading">*Postlude</p>
+      </div>
+      <div class="lg-note"></div>
+
+    </div>
+  </div>
+
+  <!-- ── RIGHT: PAGE 3 — LITURGY (start) ── -->
+  <div class="panel panel-right" data-page-label="Page 3 – Liturgy (start)">
+    <div class="liturgy-grid notes-right spread">
+
+      <div class="lg-full">
+        <p class="liturgy-title">LITURGY FOR THE WORSHIP OF GOD</p>
+        <p class="liturgy-date">August 30, 2026</p>
+        <p class="liturgy-note" style="margin-bottom:0.03in;">* Indicates congregation standing if able</p>
+        <hr class="thin">
+        <p class="liturgy-note" style="font-size:9pt; line-height:1.3; margin:0.04in 0.1in 0.02in;">Our worship is a covenant conversation between God and His people. Throughout the service, God graciously speaks to us through His Word, and we joyfully respond with praise, confession, prayer, faith, thanksgiving, and obedience.</p>
+        <p class="liturgy-section-heading">Gathering</p>
+        <hr class="thin">
+      </div>
+
+      <div class="lg-main worship-item">
+        <p class="worship-heading">The Piano Prelude</p>
+      </div>
+      <div class="lg-note"></div>
+
+      <div class="lg-main worship-item">
+        <p class="worship-heading">Greetings &amp; Announcements</p>
+      </div>
+      <div class="lg-note"></div>
+
+      <div class="lg-main worship-item">
+        <p class="worship-heading">Call to Meditation: <span style="font-weight:normal;">2 Corinthians 9:8</span></p>
+        <p class="worship-body">&ldquo;And God is able to make all grace abound to you, so that having all sufficiency in all things at all times, you may abound in every good work.&rdquo;</p>
+      </div>
+      <div class="lg-note"></div>
+
+      <div class="lg-main worship-item">
+        <p class="worship-heading">The Prelude</p>
+      </div>
+      <div class="lg-note"></div>
+
+      <div class="lg-main worship-item">
+        <div class="split-line">
+          <p class="worship-heading">Choral Introit</p>
+          <span class="attr">&ldquo;Blessed Assurance&rdquo;</span>
+        </div>
+      </div>
+      <div class="lg-note"></div>
+
+      <div class="lg-main worship-item">
+        <p class="worship-heading">*Call to Worship: <span style="font-weight:normal;">from Psalm 145</span></p>
+        <div class="responsive">
+          <p class="leader-line"><span class="leader-label">Leader:</span> I will extol you, my God and King, and bless your name forever and ever.</p>
+          <p class="all-line"><span class="all-label">All:</span> Every day I will bless you and praise your name forever and ever.</p>
+          <p class="leader-line"><span class="leader-label">Leader:</span> Great is the Lord, and greatly to be praised, and his greatness is unsearchable. One generation shall commend your works to another, and shall declare your mighty acts.</p>
+          <p class="all-line"><span class="all-label">All:</span> On the glorious splendor of your majesty, and on your wondrous works, I will meditate.</p>
+          <p class="leader-line"><span class="leader-label">Leader:</span> They shall speak of the might of your awesome deeds, and I will declare your greatness. They shall pour forth the fame of your abundant goodness</p>
+          <p class="all-line"><span class="all-label">All:</span> And shall sing aloud of your righteousness.</p>
+          <p class="leader-line"><span class="leader-label">Leader:</span> Let us worship our great God!</p>
+        </div>
+      </div>
+      <div class="lg-note">
+        <span class="note-label">Call to Worship</span>
+        We are summoned to worship by God&rsquo;s word, calling His people into His presence to honor Him in spirit and truth, opening a sacred conversation that unfolds throughout the service. We sing in response to God&rsquo;s call to worship, which is a reminder that worship is at God&rsquo;s initiative, not ours.
+      </div>
+
+      <div class="lg-main worship-item">
+        <div class="split-line">
+          <p class="worship-heading" style="white-space:nowrap;">*The Hymn: &nbsp;#8</p>
+          <span class="attr">&ldquo;Praise to the Lord, the Almighty&rdquo;</span>
+        </div>
+      </div>
+      <div class="lg-note">
+        <span class="note-label">Praise to the Lord, the Almighty</span>
+        Written by German hymnwriter Joachim Neander in 1680, this magnificent hymn of praise draws direct inspiration from Psalm 103 and Psalm 150, urging us to bless the Lord for His sovereign care, protection, and creation. For over 340 years, its vibrant words have united believers, refocusing our hearts away from daily distractions and onto God&rsquo;s enduring faithfulness.
+      </div>
+
+    </div>
+  </div>
+
+</div><!-- end sheet 2 outside -->
+
+
+<!-- ════════════════════════════════════════════════════════════
+     SHEET 2 — INSIDE  (Liturgy p4 left | Liturgy p5 right)
+     ════════════════════════════════════════════════════════════ -->
+<div class="sheet">
+
+  <!-- ── LEFT: PAGE 4 — LITURGY (continued) ── -->
+  <div class="panel panel-left" data-page-label="Page 4 – Liturgy (continued)">
+    <div class="liturgy-grid notes-left spread">
+
+      <div class="lg-main worship-item">
+        <p class="worship-heading">*Prayer of Invocation &amp; The Lord&rsquo;s Prayer</p>
+        <p class="worship-body corporate">
+          Our Father, who art in heaven, hallowed be thy Name. Thy Kingdom come, thy will be done on earth, as it is in heaven. Give us this day our daily bread, and forgive us our debts, as we forgive our debtors. Lead us not into temptation, but deliver us from evil. For thine is the kingdom, the power, and the glory, for ever. Amen.
+        </p>
+      </div>
+      <div class="lg-note"></div>
+
+      <div class="lg-main worship-item">
+        <p class="worship-heading">*The Old Testament Reading: <span style="font-weight:normal;">Psalm 95:1&ndash;7</span></p>
+        <div class="responsive">
+          <p class="leader-line"><span class="leader-label">Leader:</span> Oh come, let us sing to the Lord; let us make a joyful noise to the rock of our salvation! Let us come into his presence with thanksgiving; let us make a joyful noise to him with songs of praise! For the Lord is a great God, and a great King above all gods. In his hand are the depths of the earth; the heights of the mountains are his also. The sea is his, for he made it, and his hands formed the dry land. Oh come, let us worship and bow down; let us kneel before the Lord, our Maker!</p>
+          <p class="all-line"><span class="all-label">All:</span> For he is our God, and we are the people of his pasture, and the sheep of his hand.</p>
+        </div>
+      </div>
+      <div class="lg-note"></div>
+
+      <div class="lg-main worship-item">
+        <div class="split-line">
+          <p class="worship-heading">*Congregational Response: &nbsp;#461</p>
+          <span class="attr">&ldquo;He Leadeth Me&rdquo; (v. 1)</span>
+        </div>
+      </div>
+      <div class="lg-note"></div>
+
+      <div class="lg-main worship-item">
+        <p class="worship-heading">Corporate Prayer of Confession</p>
+        <p class="worship-body corporate">
+          Almighty and merciful God, we come before you in need of your grace. You made us, you sustain us, and you call us your own. Yet we daily turn away from your goodness. Forgive us for our self-sufficiency. We act as if we are the masters of our own lives. We trust in our own strength, our own plans, and our own success. We lean on our own wisdom and forget that every breath comes from you. We try to live without your help. Forgive us for our ingratitude. You shower us with daily blessings, yet we grumble and complain. We often look at what we do not have instead of thanking you for what we do have. We treat your free grace as if it is something we earned. Lord, have mercy on us. Break our pride. Heal our blindness. Forgive our sin for the sake of Jesus Christ.
+        </p>
+        <p class="silent-confession">Silent Confession</p>
+      </div>
+      <div class="lg-note">
+        <span class="note-label">Corporate Confession</span>
+        Our corporate confession of sin is a three-fold acknowledgement that the world is not the way it was meant to be; I am not the way I was meant to be; and we as a church are not the way we were meant to be. As we acknowledge our failures together, we testify to the world that the gospel is rooted in the faithful mercy of God alone. This is the most honest moment of our week, as we humbly agree with Scripture&rsquo;s claim that all have sinned and fall short of the glory of God.
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── RIGHT: PAGE 5 — LITURGY (continued) ── -->
+  <div class="panel panel-right" data-page-label="Page 5 – Liturgy (continued)">
+    <div class="liturgy-grid notes-right spread">
+
+      <div class="lg-main worship-item">
+        <p class="worship-heading">Assurance of Divine Pardon: <span style="font-weight:normal;">Psalm 23:1&ndash;3</span></p>
+        <p class="worship-body">
+          &ldquo;The Lord is my shepherd; I shall not want. He makes me lie down in green pastures. He leads me beside still waters. He restores my soul. He leads me in paths of righteousness for his name&rsquo;s sake.&rdquo;
+        </p>
+      </div>
+      <div class="lg-note">
+        <span class="note-label">Assurance of Pardon</span>
+        After confessing our sins, we hear God&rsquo;s promise of forgiveness, reminding us that the good news of Jesus Christ meets our confession with grace. We are reminded that true repentance is always answered by God&rsquo;s faithful forgiveness, and Christ&rsquo;s saving work is greater than our sin.
+      </div>
+
+      <div class="lg-main worship-item">
+        <p class="worship-heading">*Gloria Patri</p>
+        <p class="worship-body corporate">
+          Glory be to the Father, and to the Son, and to the Holy Ghost; As it was in the beginning, is now, and ever shall be: world without end. Amen.
+        </p>
+      </div>
+      <div class="lg-note"></div>
+
+      <div class="lg-main worship-item">
+        <p class="worship-heading">*Profession of Faith: <span style="font-weight:normal;">The Apostles&rsquo; Creed</span></p>
+        <p class="worship-body corporate">
+          I believe in God, the Father almighty, Maker of heaven and earth, and in Jesus Christ, his only Son, our Lord, who was conceived by the Holy Ghost, born of the Virgin Mary, suffered under Pontius Pilate, was crucified, dead and buried; he descended into hell; the third day he rose again from the dead; he ascended into heaven, and sitteth on the right hand of God the Father Almighty; from thence he shall come to judge the quick and the dead. I believe in the Holy Ghost, the holy catholic* Church, the communion of saints, the forgiveness of sins, the resurrection of the body, and the life everlasting. Amen.
+        </p>
+        <p class="creed-note">*that is, the true Christian church of all times and all places</p>
+      </div>
+      <div class="lg-note"></div>
+
+      <div class="lg-main worship-item">
+        <div class="split-line">
+          <p class="worship-heading">Pastoral Prayer of Intercession</p>
+          <span class="attr">Prayer Warriors</span>
+        </div>
+      </div>
+      <div class="lg-note">
+        <span class="note-label">Prayer Warriors</span>
+        Prayer warriors are people who are known for regularly interceding on behalf of others before God. To intercede means to come between, so prayer warriors are, in effect, coming between God and the trouble in another person&rsquo;s life. At FPC, the Prayer Warriors ministry assigns adult members to pray daily for the children in the congregation.
+      </div>
+
+      <div class="lg-main worship-item">
+        <p class="worship-heading">The Giving of Tithes and Offerings</p>
+      </div>
+      <div class="lg-note"></div>
+
+      <div class="lg-main worship-item">
+        <div class="split-line">
+          <p class="worship-heading">Choral Anthem</p>
+          <span class="attr" style="text-align:right;">&ldquo;The Old Time Religion&rdquo;<br><span style="font-size:9pt;">Traditional; arr. John Carter</span></span>
+        </div>
+      </div>
+      <div class="lg-note"></div>
+
+    </div>
+  </div>
+
+</div><!-- end sheet 2 inside -->
+
+</body>
+</html>
