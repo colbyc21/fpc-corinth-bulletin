@@ -4,19 +4,19 @@ layout: base.njk
 
 <article class="bulletin">
   <!-- Header -->
-  <header class="text-center mb-8 pb-6 border-b border-navy/20 dark:border-gray-700">
-    <p class="text-gold font-semibold mb-1">{{ liturgical_day }}</p>
-    <h1 class="font-serif text-2xl md:text-3xl text-navy dark:text-cream mb-2">
+  <header class="text-center mb-8 pb-6 border-b border-sage/30 dark:border-gray-700">
+    <p class="text-sage-deep font-semibold mb-1">{{ liturgical_day }}</p>
+    <h1 class="font-serif text-2xl md:text-3xl text-ink dark:text-cream mb-2">
       {{ date | formatDate }}
     </h1>
     {% if sermon_series %}
-    <p class="dark:text-gray-400" style="color: #1a3a5c;">{{ sermon_series }}</p>
+    <p class="dark:text-gray-400" style="color: #171200;">{{ sermon_series }}</p>
     {% endif %}
   </header>
 
   <!-- Order of Worship -->
   <section class="mb-10">
-    <h2 class="font-serif text-xl text-navy dark:text-cream mb-6 text-center">Order of Worship</h2>
+    <h2 class="font-serif text-xl text-ink dark:text-cream mb-6 text-center">Order of Worship</h2>
 
     <!-- Prelude -->
     {% if prelude %}
@@ -31,7 +31,7 @@ layout: base.njk
     <div class="worship-section">
       <p class="section-title">Call to Meditation</p>
       <p class="scripture-ref mb-2">{{ call_to_meditation.reference }}</p>
-      <blockquote class="text-navy dark:text-gray-300 pl-4 border-l-2 border-gold" style="color: #1a3a5c;">
+      <blockquote class="text-ink dark:text-gray-300 pl-4 border-l-2 border-sage" style="color: #171200;">
         {{ call_to_meditation.text }}
       </blockquote>
     </div>
@@ -53,9 +53,9 @@ layout: base.njk
       <div class="responsive-reading space-y-2">
         {% for line in call_to_worship.lines %}
         <div class="mb-2">
-          <p class="leader"><span class="text-gold text-sm mr-2">Leader:</span>{{ line.leader }}</p>
+          <p class="leader"><span class="text-sage-deep text-sm mr-2">Leader:</span>{{ line.leader }}</p>
           {% if line.all %}
-          <p class="all"><span class="text-gold text-sm mr-2">All:</span>{{ line.all }}</p>
+          <p class="all"><span class="text-sage-deep text-sm mr-2">All:</span>{{ line.all }}</p>
           {% endif %}
         </div>
         {% endfor %}
@@ -70,22 +70,22 @@ layout: base.njk
 
       {% if element.type == "Hymn" %}
         <p>
-          <a href="https://hymnary.org/hymn/HWC1986/{{ element.number }}" target="_blank" rel="noopener" class="hymn-number hover:bg-gold hover:text-navy transition-colors">#{{ element.number }}</a>
+          <a href="https://hymnary.org/hymn/HWC1986/{{ element.number }}" target="_blank" rel="noopener" class="hymn-number hover:bg-sage-deep hover:text-white transition-colors">#{{ element.number }}</a>
           <span class="font-serif">{{ element.title }}</span>
           {% if element.verses %}
-          <span class="text-sm text-navy-muted dark:text-gray-500">(verses {{ element.verses }})</span>
+          <span class="text-sm text-ink-muted dark:text-gray-500">(verses {{ element.verses }})</span>
           {% endif %}
         </p>
 
       {% elif element.type == "Scripture Reading" %}
         <p class="scripture-ref mb-2">{{ element.reference }}</p>
         {% if element.text %}
-        <blockquote class="dark:text-gray-300 pl-4 border-l-2 border-gold" style="color: #1a3a5c;">
+        <blockquote class="dark:text-gray-300 pl-4 border-l-2 border-sage" style="color: #171200;">
           {{ element.text | safe }}
         </blockquote>
         {% endif %}
         {% if element.bible_link %}
-        <a href="{{ element.bible_link }}" target="_blank" rel="noopener" class="text-sm text-gold hover:underline">Read on Bible Gateway →</a>
+        <a href="{{ element.bible_link }}" target="_blank" rel="noopener" class="text-sm text-sage-deep hover:underline">Read on Bible Gateway →</a>
         {% endif %}
 
       {% elif element.type == "Responsive Reading" %}
@@ -93,9 +93,9 @@ layout: base.njk
         <div class="responsive-reading space-y-2">
           {% for line in element.lines %}
           <div class="mb-2">
-            <p class="leader"><span class="text-gold text-sm mr-2">Leader:</span>{{ line.leader }}</p>
+            <p class="leader"><span class="text-sage-deep text-sm mr-2">Leader:</span>{{ line.leader }}</p>
             {% if line.all %}
-            <p class="all"><span class="text-gold text-sm mr-2">All:</span>{{ line.all }}</p>
+            <p class="all"><span class="text-sage-deep text-sm mr-2">All:</span>{{ line.all }}</p>
             {% endif %}
           </div>
           {% endfor %}
@@ -104,29 +104,29 @@ layout: base.njk
       {% elif element.type == "Prayer" %}
         <p class="font-semibold">{{ element.title }}</p>
         {% if element.text %}
-        <p class="mt-2" style="color: #1a3a5c;">{{ element.text | safe }}</p>
+        <p class="mt-2" style="color: #171200;">{{ element.text | safe }}</p>
         {% endif %}
 
       {% elif element.type == "Profession of Faith" %}
         <p class="font-semibold mb-2">{{ element.title }}</p>
         {% if element.text %}
-        <p style="color: #1a3a5c;">{{ element.text | safe }}</p>
+        <p style="color: #171200;">{{ element.text | safe }}</p>
         {% endif %}
 
       {% elif element.type == "Sermon" %}
         <h3 class="font-serif text-lg mb-1">{{ element.title }}</h3>
-        <p class="text-navy-muted dark:text-gray-400">{{ element.speaker }}</p>
+        <p class="text-ink-muted dark:text-gray-400">{{ element.speaker }}</p>
         <p class="scripture-ref mt-2">{{ element.scripture }}</p>
 
       {% elif element.type == "Gloria Patri" or element.type == "Doxology" %}
-        <p class="dark:text-gray-300 whitespace-pre-line" style="color: #1a3a5c;">{{ element.lyrics }}</p>
+        <p class="dark:text-gray-300 whitespace-pre-line" style="color: #171200;">{{ element.lyrics }}</p>
 
       {% elif element.type == "Choral Anthem" %}
         <p class="font-serif">{{ element.title }}</p>
         {% if element.lyrics %}
         <details class="mt-2">
-          <summary class="text-gold cursor-pointer hover:underline text-sm">View lyrics</summary>
-          <p class="mt-2 dark:text-gray-300 whitespace-pre-line" style="color: #1a3a5c;">{{ element.lyrics }}</p>
+          <summary class="text-sage-deep cursor-pointer hover:underline text-sm">View lyrics</summary>
+          <p class="mt-2 dark:text-gray-300 whitespace-pre-line" style="color: #171200;">{{ element.lyrics }}</p>
         </details>
         {% endif %}
 
@@ -143,25 +143,25 @@ layout: base.njk
   <!-- Announcements -->
   {% if announcements or flowers %}
   <section class="mb-10">
-    <h2 class="font-serif text-xl text-navy dark:text-cream mb-6 text-center">Announcements</h2>
+    <h2 class="font-serif text-xl text-ink dark:text-cream mb-6 text-center">Announcements</h2>
 
     {% if flowers %}
-    <div class="announcement-card border-l-4 border-gold">
+    <div class="announcement-card border-l-4 border-sage">
       <p class="section-title">Flowers</p>
       <p>Given by <strong>{{ flowers.given_by }}</strong></p>
       {% if flowers.in_memory_of %}
-      <p class="text-navy-muted dark:text-gray-400 mt-1">In memory of {{ flowers.in_memory_of }}</p>
+      <p class="text-ink-muted dark:text-gray-400 mt-1">In memory of {{ flowers.in_memory_of }}</p>
       {% endif %}
       {% if flowers.in_honor_of %}
-      <p class="text-navy-muted dark:text-gray-400 mt-1">In honor of {{ flowers.in_honor_of }}</p>
+      <p class="text-ink-muted dark:text-gray-400 mt-1">In honor of {{ flowers.in_honor_of }}</p>
       {% endif %}
     </div>
     {% endif %}
 
     {% for announcement in announcements %}
     <div class="announcement-card">
-      <h3 class="font-semibold text-navy dark:text-cream mb-1">{{ announcement.title }}</h3>
-      <p class="text-navy dark:text-gray-300">{{ announcement.body | safe }}</p>
+      <h3 class="font-semibold text-ink dark:text-cream mb-1">{{ announcement.title }}</h3>
+      <p class="text-ink dark:text-gray-300">{{ announcement.body | safe }}</p>
     </div>
     {% endfor %}
   </section>
@@ -169,10 +169,10 @@ layout: base.njk
 
   <!-- Share/Actions -->
   <div class="flex justify-center gap-4 mt-8 no-print">
-    <button id="shareBtn" class="bg-navy text-cream px-4 py-2 rounded hover:bg-navy/90 transition-colors text-sm">
+    <button id="shareBtn" class="bg-sage text-white px-4 py-2 rounded hover:bg-sage-deep transition-colors text-sm">
       Share Bulletin
     </button>
-    <button id="followAlongBtn" class="border border-navy text-navy dark:border-gold dark:text-gold px-4 py-2 rounded hover:bg-navy/5 transition-colors text-sm">
+    <button id="followAlongBtn" class="border border-sage text-sage-deep dark:border-sage dark:text-sage px-4 py-2 rounded hover:bg-sage/10 transition-colors text-sm">
       Follow Along Mode
     </button>
   </div>

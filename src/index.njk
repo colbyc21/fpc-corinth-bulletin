@@ -25,20 +25,20 @@ permalink: /index.html
 <title>FPC Corinth Bulletin</title>
 {% if latestUrl %}<meta http-equiv="refresh" content="0; url={{ latestUrl }}">{% endif %}
 <style>
-  html, body { margin: 0; background: #f0ebe0; color: #2a2118; font-family: 'Georgia', serif; }
-  .pending { display: flex; align-items: center; justify-content: center; min-height: 100vh; font-size: 0.95rem; color: #7a7060; }
+  html, body { margin: 0; background: #eceeea; color: #171200; font-family: 'Georgia', serif; }
+  .pending { display: flex; align-items: center; justify-content: center; min-height: 100vh; font-size: 0.95rem; color: #666558; }
 </style>
 </head>
 <body>
 {% if latestUrl %}
-<div class="pending"><a href="{{ latestUrl }}" style="color:#7a7060;">Loading latest bulletin…</a></div>
+<div class="pending"><a href="{{ latestUrl }}" style="color:#666558;">Loading latest bulletin…</a></div>
 <script>
   if (!window.location.hash.includes('token')) {
     window.location.replace("{{ latestUrl }}");
   }
 </script>
 {% else %}
-<div class="pending">No bulletins published yet. <a href="/about/" style="margin-left:0.4rem;color:#8b1a1a;">About</a></div>
+<div class="pending">No bulletins published yet. <a href="/about/" style="margin-left:0.4rem;color:#56736a;">About</a></div>
 {% endif %}
 </body>
 </html>

@@ -8,12 +8,14 @@
 
   <!-- Preconnect for performance -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
 
   <!-- Styles -->
   <link rel="stylesheet" href="/css/style.css">
 
   <!-- Theme color for mobile browsers -->
-  <meta name="theme-color" content="#1a3a5c" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#6d8c83" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#111827" media="(prefers-color-scheme: dark)">
 
   <!-- PWA manifest -->
@@ -35,14 +37,14 @@
   </script>
 </head>
 <body class="min-h-screen">
-  <header class="bg-navy text-cream py-4 px-4 sticky top-0 z-50 no-print">
+  <header class="bg-sage text-white py-4 px-4 sticky top-0 z-50 no-print">
     <div class="max-w-2xl mx-auto flex items-center justify-between">
       <a href="/" class="flex items-center gap-3">
-        <span class="font-serif text-lg">FPC Corinth</span>
+        <span class="font-sans font-semibold uppercase tracking-wider text-sm">First Presbyterian</span>
       </a>
       <nav class="flex items-center gap-4">
-        <a href="/archive/" class="text-sm hover:text-gold transition-colors">Archive</a>
-        <button id="darkModeToggle" class="p-2 hover:text-gold transition-colors" aria-label="Toggle dark mode">
+        <a href="/archive/" class="font-sans text-xs uppercase tracking-wider hover:text-sage-light transition-colors">Archive</a>
+        <button id="darkModeToggle" class="p-2 hover:text-sage-light transition-colors" aria-label="Toggle dark mode">
           <svg class="w-5 h-5 dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
           </svg>
@@ -58,12 +60,12 @@
     {{ content | safe }}
   </main>
 
-  <footer class="bg-navy/5 dark:bg-gray-800 py-8 px-4 mt-12 no-print">
-    <div class="max-w-2xl mx-auto text-center text-sm text-navy/70 dark:text-gray-400">
+  <footer class="bg-sage text-white dark:bg-gray-800 py-8 px-4 mt-12 no-print">
+    <div class="max-w-2xl mx-auto text-center text-sm text-white/90 dark:text-gray-400">
       <p class="font-serif text-lg mb-2">First Presbyterian Church of Corinth</p>
       <p class="italic mb-4">"To Be Disciples / To Make Disciples"</p>
       <p>A congregation of the Evangelical Presbyterian Church (EPC)</p>
-      <a href="/about/" class="text-gold hover:underline mt-4 inline-block">About & Service Times</a>
+      <a href="/about/" class="font-sans text-xs uppercase tracking-wider underline underline-offset-4 hover:text-sage-light mt-4 inline-block">About & Service Times</a>
     </div>
   </footer>
 

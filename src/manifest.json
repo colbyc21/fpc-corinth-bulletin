@@ -4,8 +4,8 @@
   "description": "Digital bulletin for First Presbyterian Church of Corinth",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#faf9f7",
-  "theme_color": "#1a3a5c",
+  "background_color": "#fdfdfb",
+  "theme_color": "#6d8c83",
   "icons": [
     {
       "src": "/images/icon-192.png",

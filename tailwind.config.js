@@ -5,15 +5,20 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'navy': '#1a3a5c',
-        'navy-muted': '#2d4d6d',
-        'gold': '#c9a959',
-        'cream': '#faf9f7',
-        'cream-dark': '#f0eeea',
+        // Brand palette — matches fpccorinth.org
+        'sage': '#6d8c83',        // primary brand green (fills, buttons, footer)
+        'sage-deep': '#56736a',   // sage for small text (AA contrast on light bg)
+        'sage-light': '#eef2ef',  // sage tint for surfaces
+        'ink': '#171200',         // body text
+        'ink-muted': '#666558',   // secondary text
+        'gold': '#847539',        // olive-gold action accent
+        'khaki': '#b0af9b',       // rules / borders
+        'cream': '#fdfdfb',       // page background
+        'cream-dark': '#eceeea',  // card background
       },
       fontFamily: {
-        'serif': ['Georgia', 'Cambria', 'Times New Roman', 'serif'],
-        'sans': ['system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+        'serif': ['EB Garamond', 'Georgia', 'Cambria', 'Times New Roman', 'serif'],
+        'sans': ['Work Sans', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
       },
       fontSize: {
         'body': '1rem',      // 16px minimum

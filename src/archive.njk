@@ -10,25 +10,26 @@ permalink: /archive/
 <meta name="description" content="Past Sunday bulletins for First Presbyterian Church of Corinth, MS">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Cinzel:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
 <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
 <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
 <link rel="manifest" href="/manifest.json">
-<meta name="theme-color" content="#f7f3eb">
+<meta name="theme-color" content="#f4f5f1">
 <style>
   :root {
-    --cream: #f7f3eb;
-    --warm-white: #faf8f4;
-    --parchment: #f0ebe0;
-    --ink: #2a2118;
-    --ink-light: #4a3f32;
-    --ink-faint: #7a7060;
-    --rule: #c4b8a4;
-    --rule-light: #ddd4c6;
-    --accent: #8b1a1a;
-    --accent-soft: #a0524d;
-    --gold: #b8963e;
-    --section-bg: #ede8de;
+    --cream: #f4f5f1;
+    --warm-white: #fdfdfb;
+    --parchment: #eceeea;
+    --ink: #171200;
+    --ink-light: #3f3d32;
+    --ink-faint: #666558;
+    --rule: #b0af9b;
+    --rule-light: #d9d9cf;
+    --accent: #6d8c83;
+    --accent-soft: #8aa39b;
+    --accent-deep: #56736a;
+    --gold: #847539;
+    --section-bg: #eef2ef;
   }
 
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -73,7 +74,7 @@ permalink: /archive/
     gap: 1rem;
   }
   .site-header .brand {
-    font-family: 'Cinzel', serif;
+    font-family: 'Work Sans', sans-serif;
     font-weight: 500;
     font-size: 0.78rem;
     letter-spacing: 0.14em;
@@ -84,9 +85,9 @@ permalink: /archive/
     overflow: hidden;
     text-overflow: ellipsis;
   }
-  .site-header .brand:hover { color: var(--accent); }
+  .site-header .brand:hover { color: var(--accent-deep); }
   .site-header .home-link {
-    font-family: 'Cinzel', serif;
+    font-family: 'Work Sans', sans-serif;
     font-weight: 500;
     font-size: 0.7rem;
     letter-spacing: 0.16em;
@@ -116,7 +117,7 @@ permalink: /archive/
     margin: 0 auto;
     background: var(--warm-white);
     min-height: calc(100vh - 3rem);
-    box-shadow: 0 0 80px rgba(42, 33, 24, 0.08);
+    box-shadow: 0 0 80px rgba(23, 18, 0, 0.08);
     padding: 3rem 1.8rem 4rem;
     position: relative;
   }
@@ -130,18 +131,18 @@ permalink: /archive/
 
   /* ── HEADING ─────────────────────────────── */
   .page-eyebrow {
-    font-family: 'Cinzel', serif;
+    font-family: 'Work Sans', sans-serif;
     font-weight: 500;
     font-size: 0.72rem;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--accent);
+    color: var(--accent-deep);
     text-align: center;
     margin-bottom: 0.8rem;
   }
   .page-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 500;
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 300;
     font-size: clamp(1.8rem, 6vw, 2.4rem);
     text-align: center;
     color: var(--ink);
@@ -155,7 +156,7 @@ permalink: /archive/
     margin: 1rem auto 2rem;
   }
   .page-sub {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'EB Garamond', serif;
     font-style: italic;
     font-size: 1rem;
     color: var(--ink-faint);
@@ -184,24 +185,24 @@ permalink: /archive/
     position: relative;
   }
   .archive-item:hover {
-    border-left-color: var(--accent);
-    box-shadow: 0 4px 16px rgba(42, 33, 24, 0.08);
+    border-left-color: var(--accent-deep);
+    box-shadow: 0 4px 16px rgba(23, 18, 0, 0.08);
     transform: translateY(-1px);
   }
 
   .archive-date {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'EB Garamond', serif;
     font-weight: 500;
     font-size: 1.15rem;
     color: var(--ink);
     margin-bottom: 0.15rem;
   }
   .archive-day {
-    font-family: 'Cinzel', serif;
+    font-family: 'Work Sans', sans-serif;
     font-size: 0.68rem;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--accent);
+    color: var(--accent-deep);
     margin-bottom: 0.35rem;
   }
   .archive-sermon {
@@ -215,13 +216,13 @@ permalink: /archive/
     right: 1.3rem;
     top: 50%;
     transform: translateY(-50%);
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'EB Garamond', serif;
     color: var(--rule);
     font-size: 1.4rem;
     transition: color 0.2s ease, transform 0.2s ease;
   }
   .archive-item:hover .archive-arrow {
-    color: var(--accent);
+    color: var(--accent-deep);
     transform: translateY(-50%) translateX(3px);
   }
 
@@ -238,13 +239,13 @@ permalink: /archive/
     margin-top: 3rem;
     padding-top: 1.5rem;
     border-top: 1px solid var(--rule-light);
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'EB Garamond', serif;
     font-size: 0.85rem;
     color: var(--ink-faint);
     font-style: italic;
   }
   .page-footer a {
-    color: var(--accent);
+    color: var(--accent-deep);
     text-decoration: none;
   }
   .page-footer a:hover { text-decoration: underline; }

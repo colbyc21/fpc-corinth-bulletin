@@ -10,7 +10,7 @@
   }
 
   body {
-    @apply font-sans text-navy bg-cream leading-relaxed;
+    @apply font-serif text-ink bg-cream leading-relaxed;
   }
 
   body.dark {
@@ -25,7 +25,7 @@
 @layer components {
   /* Responsive reading format */
   .responsive-reading .leader {
-    @apply font-semibold text-navy;
+    @apply font-semibold text-ink;
   }
 
   .responsive-reading .all {
@@ -33,12 +33,12 @@
   }
 
   .dark .responsive-reading .leader {
-    @apply text-gold;
+    @apply text-sage;
   }
 
   /* Worship section styling */
   .worship-section {
-    @apply py-4 border-b border-navy/10;
+    @apply py-4 border-b border-sage/20;
   }
 
   .dark .worship-section {
@@ -50,21 +50,21 @@
   }
 
   .section-title {
-    @apply text-sm uppercase tracking-wider text-gold font-sans font-semibold mb-2;
+    @apply text-sm uppercase tracking-wider text-sage-deep font-sans font-semibold mb-2;
   }
 
   /* Hymn styling */
   .hymn-number {
-    @apply inline-block bg-navy text-cream px-2 py-0.5 rounded text-sm font-sans mr-2;
+    @apply inline-block bg-sage text-white px-2 py-0.5 rounded text-sm font-sans mr-2;
   }
 
   .dark .hymn-number {
-    @apply bg-gold text-navy;
+    @apply bg-sage text-white;
   }
 
-  /* Scripture reference - navy to differentiate from gold section titles */
+  /* Scripture reference - ink to differentiate from sage section titles */
   .scripture-ref {
-    @apply text-navy font-semibold font-serif;
+    @apply text-ink font-semibold font-serif;
   }
 
   .dark .scripture-ref {

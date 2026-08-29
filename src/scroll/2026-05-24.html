@@ -6,22 +6,23 @@
 <title>Worship Bulletin — May 24, 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Cinzel:wght@400;500;600;700&family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --cream: #f7f3eb;
-    --warm-white: #faf8f4;
-    --parchment: #f0ebe0;
-    --ink: #2a2118;
-    --ink-light: #4a3f32;
-    --ink-faint: #7a7060;
-    --rule: #c4b8a4;
-    --rule-light: #ddd4c6;
-    --accent: #8b1a1a;
-    --accent-soft: #a0524d;
-    --gold: #b8963e;
-    --gold-soft: #d4bc7a;
-    --section-bg: #ede8de;
+    --cream: #f4f5f1;
+    --warm-white: #fdfdfb;
+    --parchment: #eceeea;
+    --ink: #171200;
+    --ink-light: #3f3d32;
+    --ink-faint: #666558;
+    --rule: #b0af9b;
+    --rule-light: #d9d9cf;
+    --accent: #6d8c83;
+    --accent-soft: #8aa39b;
+    --accent-deep: #56736a;
+    --gold: #847539;
+    --gold-soft: #ada37c;
+    --section-bg: #eef2ef;
   }
 
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -55,7 +56,7 @@
     margin: 0 auto;
     background: var(--warm-white);
     min-height: 100vh;
-    box-shadow: 0 0 80px rgba(42, 33, 24, 0.08);
+    box-shadow: 0 0 80px rgba(23, 18, 0, 0.08);
   }
 
   /* ── SITE HEADER ─────────────────────────── */
@@ -77,7 +78,7 @@
     gap: 1rem;
   }
   .site-header .brand {
-    font-family: 'Cinzel', serif;
+    font-family: 'Work Sans', sans-serif;
     font-weight: 500;
     font-size: 0.78rem;
     letter-spacing: 0.14em;
@@ -89,10 +90,10 @@
     text-overflow: ellipsis;
   }
   .site-header .brand:hover {
-    color: var(--accent);
+    color: var(--accent-deep);
   }
   .site-header .archive-link {
-    font-family: 'Cinzel', serif;
+    font-family: 'Work Sans', sans-serif;
     font-weight: 500;
     font-size: 0.7rem;
     letter-spacing: 0.16em;
@@ -127,8 +128,8 @@
     padding: 3rem 2rem;
     position: relative;
     background:
-      radial-gradient(ellipse at 30% 20%, rgba(184, 150, 62, 0.06) 0%, transparent 60%),
-      radial-gradient(ellipse at 70% 80%, rgba(139, 26, 26, 0.04) 0%, transparent 50%),
+      radial-gradient(ellipse at 30% 20%, rgba(132, 117, 57, 0.05) 0%, transparent 60%),
+      radial-gradient(ellipse at 70% 80%, rgba(109, 140, 131, 0.07) 0%, transparent 50%),
       var(--warm-white);
   }
 
@@ -143,7 +144,7 @@
   .cover-rule--bottom { bottom: 1.5rem; }
 
   .cover-church-name {
-    font-family: 'Cinzel', serif;
+    font-family: 'Work Sans', sans-serif;
     font-weight: 400;
     font-size: clamp(1.4rem, 5vw, 1.9rem);
     letter-spacing: 0.04em;
@@ -163,8 +164,8 @@
   }
 
   .cover-date {
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 500;
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 300;
     font-size: clamp(1.2rem, 4vw, 1.6rem);
     color: var(--ink);
     opacity: 0;
@@ -174,7 +175,7 @@
   .cover-footer {
     position: absolute;
     bottom: 2.2rem;
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'EB Garamond', serif;
     font-style: italic;
     font-size: 0.82rem;
     color: var(--ink-faint);
@@ -204,12 +205,12 @@
   }
 
   .section-heading {
-    font-family: 'Cinzel', serif;
+    font-family: 'Work Sans', sans-serif;
     font-weight: 500;
     font-size: 0.72rem;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--accent);
+    color: var(--accent-deep);
     text-align: center;
     margin-bottom: 1.4rem;
     padding-bottom: 0.5rem;
@@ -223,8 +224,8 @@
   }
 
   .welcome-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 600;
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 300;
     font-size: 1.8rem;
     text-align: center;
     margin-bottom: 1.2rem;
@@ -236,12 +237,12 @@
   }
 
   .welcome-block h3 {
-    font-family: 'Cinzel', serif;
+    font-family: 'Work Sans', sans-serif;
     font-weight: 500;
     font-size: 0.78rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--accent);
+    color: var(--accent-deep);
     margin-bottom: 0.4rem;
   }
 
@@ -272,7 +273,7 @@
   }
 
   .liturgy-main-title {
-    font-family: 'Cinzel', serif;
+    font-family: 'Work Sans', sans-serif;
     font-weight: 600;
     font-size: 0.8rem;
     letter-spacing: 0.2em;
@@ -282,7 +283,7 @@
   }
 
   .liturgy-date-line {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'EB Garamond', serif;
     font-size: 1rem;
     color: var(--ink-faint);
   }
@@ -296,13 +297,13 @@
 
   /* Liturgy section divider */
   .liturgy-divider {
-    font-family: 'Cinzel', serif;
+    font-family: 'Work Sans', sans-serif;
     font-weight: 600;
     font-size: 0.68rem;
     letter-spacing: 0.25em;
     text-transform: uppercase;
     text-align: center;
-    color: var(--accent);
+    color: var(--accent-deep);
     margin: 1.6rem 0 0.8rem;
     position: relative;
     padding: 0.5rem 0;
@@ -456,11 +457,11 @@
   }
 
   .sermon-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 600;
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 400;
     font-size: 1.5rem;
     text-align: center;
-    font-style: italic;
+    font-style: normal;
     color: var(--ink);
     margin-bottom: 0.2rem;
   }
@@ -484,7 +485,7 @@
   }
 
   .sermon-point {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'EB Garamond', serif;
     font-weight: 600;
     font-size: 1.1rem;
     color: var(--ink);
@@ -558,12 +559,12 @@
   }
   .announce-block:last-child { border-bottom: none; }
   .announce-block h3 {
-    font-family: 'Cinzel', serif;
+    font-family: 'Work Sans', sans-serif;
     font-weight: 500;
     font-size: 0.78rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--accent);
+    color: var(--accent-deep);
     margin-bottom: 0.4rem;
   }
   .announce-block p {
@@ -635,7 +636,7 @@
   }
 
   .footer-address {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'EB Garamond', serif;
     font-size: 0.85rem;
     color: var(--ink-faint);
     letter-spacing: 0.04em;
@@ -650,7 +651,7 @@
   }
   .give-button {
     display: inline-block;
-    font-family: 'Cinzel', serif;
+    font-family: 'Work Sans', sans-serif;
     font-weight: 500;
     font-size: 0.75rem;
     letter-spacing: 0.18em;
