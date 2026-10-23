@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Thanksgiving Meal Volunteer Insert — October 25, 2026</title>
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: "Times New Roman", "Georgia", serif;
+    font-size: 11pt;
+    line-height: 1.35;
+    color: #000;
+    background: #fff;
+  }
+
+  /* ── 11 x 8.5 landscape, two 5.5 x 8.5 panels, cut down the middle ── */
+  @page { size: 11in 8.5in; margin: 0; }
+
+  .sheet {
+    width: 11in;
+    height: 8.5in;
+    display: flex;
+    overflow: hidden;
+    position: relative;
+  }
+  .cut-line {
+    position: absolute;
+    left: 5.5in;
+    top: 0;
+    height: 8.5in;
+    border-left: 0.5pt dashed #999;
+  }
+  .cut-mark {
+    position: absolute;
+    left: 5.5in;
+    transform: translateX(-50%);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 7pt;
+    color: #999;
+    background: #fff;
+    padding: 0 3px;
+  }
+  .cut-mark.top { top: 0.08in; }
+  .cut-mark.bottom { bottom: 0.08in; }
+
+  .panel {
+    width: 5.5in;
+    height: 8.5in;
+    padding: 0.5in 0.5in 0.45in;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .panel hr {
+    border: none;
+    border-top: 1.5pt solid #000;
+  }
+  .panel hr.thin { border-top-width: 0.75pt; }
+
+  .logo { height: 1.05in; display: block; margin: 0 auto 0.12in; }
+
+  .eyebrow {
+    text-align: center;
+    font-size: 9pt;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 0.04in;
+  }
+  h1 {
+    text-align: center;
+    font-size: 17pt;
+    font-weight: bold;
+    line-height: 1.15;
+    margin-bottom: 0.05in;
+  }
+  .when {
+    text-align: center;
+    font-style: italic;
+    font-size: 11.5pt;
+    margin-bottom: 0.12in;
+  }
+
+  .blurb {
+    font-size: 10.5pt;
+    line-height: 1.4;
+    text-align: justify;
+    margin: 0.14in 0 0.22in;
+  }
+
+  h2 {
+    font-size: 11pt;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-align: center;
+    margin: 0.12in 0 0.1in;
+  }
+
+  .field {
+    display: flex;
+    align-items: baseline;
+    gap: 0.08in;
+    margin-bottom: 0.3in;
+    font-size: 11.5pt;
+  }
+  .field .label { white-space: nowrap; font-weight: bold; }
+  .field .line  { flex: 1; border-bottom: 0.75pt solid #000; height: 0.26in; }
+  .field .line.short { flex: 0 0 0.9in; }
+  .hint {
+    font-size: 8.5pt;
+    font-style: italic;
+    color: #333;
+    margin: -0.22in 0 0.3in 0;
+  }
+
+  .serve-head { font-weight: bold; font-size: 11.5pt; margin-bottom: 0.14in; }
+  .option {
+    display: flex;
+    align-items: baseline;
+    gap: 0.1in;
+    margin: 0 0 0.2in 0.1in;
+    font-size: 11.5pt;
+  }
+  .box {
+    flex: 0 0 auto;
+    width: 0.17in;
+    height: 0.17in;
+    border: 0.9pt solid #000;
+    position: relative;
+    top: 0.025in;
+  }
+  .option .sub { font-size: 10pt; white-space: nowrap; }
+  .option .line { flex: 1; border-bottom: 0.75pt solid #000; height: 0.2in; min-width: 0.6in; }
+
+  .foot {
+    margin-top: auto;
+    text-align: center;
+    font-size: 9pt;
+    line-height: 1.35;
+  }
+  .foot .return { font-style: italic; margin-bottom: 0.08in; }
+  .foot .church { font-size: 8pt; color: #333; padding-top: 0.05in; }
+
+  @media screen {
+    body { background: #888; }
+    .sheet { background: #fff; margin: 0.25in auto; box-shadow: 0 2px 12px rgba(0,0,0,0.3); }
+  }
+</style>
+</head>
+<body>
+
+<div class="sheet">
+  <div class="cut-line"></div>
+  <span class="cut-mark top">&#9986; cut</span>
+  <span class="cut-mark bottom">&#9986; cut</span>
+
+  <!-- PANEL (repeated twice; cut in half to make two inserts) -->
+  <div class="panel">
+    <hr>
+    <img class="logo" src="logo-cover.png" alt="First Presbyterian Church" style="margin-top:0.14in;">
+    <p class="eyebrow">Volunteer Sign-Up</p>
+    <h1>37th Community<br>Thanksgiving Meal</h1>
+    <p class="when">Thanksgiving Morning &middot; Thursday, November 26, 2026</p>
+    <hr class="thin">
+
+    <p class="blurb">
+      Join us on Thanksgiving morning as we prepare and deliver 750 Thanksgiving meals to those who need them throughout Alcorn County. This is a HUGE project and can only be accomplished with the help of many. It is a great opportunity for the members of FPC to be disciples by &ldquo;living and loving like Jesus.&rdquo;
+    </p>
+
+    <div class="field"><span class="label">Name(s):</span><span class="line"></span></div>
+    <div class="field"><span class="label">Email <span style="font-weight:normal;">(required)</span>:</span><span class="line"></span></div>
+    <p class="hint">*You will receive an email on Nov. 24 with instructions.</p>
+
+    <p class="serve-head">I/We would like to serve by:</p>
+    <div class="option"><span class="box"></span><span>Meal Preparation <span class="sub">(9:30 a.m.)</span></span></div>
+    <div class="field" style="margin:-0.04in 0 0.22in 0.45in; font-size:10.5pt;"><span class="label" style="font-weight:normal;">How many from your family?</span><span class="line short"></span></div>
+    <div class="option"><span class="box"></span><span>Deliver Meals <span class="sub">(9:45 a.m.)</span></span></div>
+
+    <div class="foot">
+      <p class="return">Please place this form in the offering plate or bring it to the church office.</p>
+      <hr>
+      <p class="church">First Presbyterian Church &nbsp;&middot;&nbsp; 919 East Shiloh Rd, Corinth, MS 38834 &nbsp;&middot;&nbsp; 662-286-6638</p>
+    </div>
+  </div>
+
+  <div class="panel">
+    <hr>
+    <img class="logo" src="logo-cover.png" alt="First Presbyterian Church" style="margin-top:0.14in;">
+    <p class="eyebrow">Volunteer Sign-Up</p>
+    <h1>37th Community<br>Thanksgiving Meal</h1>
+    <p class="when">Thanksgiving Morning &middot; Thursday, November 26, 2026</p>
+    <hr class="thin">
+
+    <p class="blurb">
+      Join us on Thanksgiving morning as we prepare and deliver 750 Thanksgiving meals to those who need them throughout Alcorn County. This is a HUGE project and can only be accomplished with the help of many. It is a great opportunity for the members of FPC to be disciples by &ldquo;living and loving like Jesus.&rdquo;
+    </p>
+
+    <div class="field"><span class="label">Name(s):</span><span class="line"></span></div>
+    <div class="field"><span class="label">Email <span style="font-weight:normal;">(required)</span>:</span><span class="line"></span></div>
+    <p class="hint">*You will receive an email on Nov. 24 with instructions.</p>
+
+    <p class="serve-head">I/We would like to serve by:</p>
+    <div class="option"><span class="box"></span><span>Meal Preparation <span class="sub">(9:30 a.m.)</span></span></div>
+    <div class="field" style="margin:-0.04in 0 0.22in 0.45in; font-size:10.5pt;"><span class="label" style="font-weight:normal;">How many from your family?</span><span class="line short"></span></div>
+    <div class="option"><span class="box"></span><span>Deliver Meals <span class="sub">(9:45 a.m.)</span></span></div>
+
+    <div class="foot">
+      <p class="return">Please place this form in the offering plate or bring it to the church office.</p>
+      <hr>
+      <p class="church">First Presbyterian Church &nbsp;&middot;&nbsp; 919 East Shiloh Rd, Corinth, MS 38834 &nbsp;&middot;&nbsp; 662-286-6638</p>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
