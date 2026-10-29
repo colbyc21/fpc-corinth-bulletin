@@ -5,6 +5,7 @@ Name spellings to watch in weekly bulletin inputs:
 - **McClamroch** — Mike and Shirley McClamroch (content file had "Mcclamroch"; confirmed 2026-08-26).
 - **Dr. Steve Blair** — use "Steve" (not "Stephen") everywhere, including Circle of Prayer; content files mix the two (confirmed by user 2026-10-01).
 - **Giaccaglini** — Brandon / Laura Giaccaglini; content file for 2026-10-04 had "Giaccaligini".
+- **LeGoff** — Jason & Jennifer LeGoff (capital G). The 2026-11-01 bulletin printed "Legoff"; confirmed **LeGoff** by user 2026-10-29.
 - **Joy Riders** (two words) — the seniors' group; content files write "JoyRider"/"Joy Rider". Prior bulletins use "Joy Riders" (checked 2026-10-08).
 
 **Why:** the content file and past bulletins disagree; the user has confirmed these spellings directly.

@@ -66,18 +66,24 @@ Everything the volunteer types is saved as they go, so the week can be started W
 
 ## 3. Architecture
 
+The app code lives **in this repo under `builder/`** (one history; Netlify ignores it because Eleventy reads only `src/` and the passthroughs). On basecamp it runs from a separate deploy clone. *(Updated after Phase 0, see `docs/basecamp-discovery.md` §11.2.)*
+
 ```
-basecamp
-├── bulletin-builder/              # new app (Python 3.12, FastAPI + Jinja2 + HTMX, SQLite)
-│   ├── app/                       # web UI, auth, job queue, spend ledger
-│   ├── pipeline/                  # the steps in §4 (pure functions where possible)
-│   ├── templates/                 # Nunjucks templates for print + scroll (see §4.4)
-│   ├── data/                      # rosters, calendar, standing text (§5)
-│   └── repo/                      # git clone of fpc-corinth-bulletin (push access)
-└── (Playwright's bundled Chromium)  # headless rendering + overflow measurement
+fpc-corinth-bulletin/builder/         # in this repo
+├── app/                              # web UI, auth, job queue, spend ledger  (Python 3.12, FastAPI + Jinja2 + HTMX, SQLite)
+├── pipeline/                         # the steps in §4 (pure functions where possible)
+├── templates/                        # Nunjucks templates for print + scroll (see §4.4)
+├── scripts/                          # phase0_seed.py and friends
+└── data/                             # seed/ (rosters, events) and standing/ (staff, welcome, pew pages, hymns)  (§5)
+
+basecamp (user clovis)
+├── ~/bulletin-builder/repo/          # deploy clone of this repo, pushes to main over SSH with the deploy key
+├── ~/bulletin-builder/var/           # runtime data: SQLite, uploads in progress, renders
+├── ~/.config/bulletin-builder/env    # secrets, mode 600 (API key, session secret); no sudo needed
+└── (Playwright's bundled Chromium)   # headless rendering + overflow measurement, via the Playwright API
 ```
 
-Ubuntu notes: the `chromium` apt package on recent Ubuntu is a snap shim, and snap confinement breaks headless printing to arbitrary paths. Use the Chromium that Playwright installs (`playwright install --with-deps chromium`) for both PDF printing and the overflow measurement; it is the same engine with the same print flags used today. Run the app as its own system user under a `systemd` service, put it behind whatever reverse proxy §11 finds already on the box (nginx or Caddy; install Caddy if there is none, it handles HTTPS by itself), and open only the proxy's ports in `ufw`. Keep secrets (API key, GitHub token, session secret) in `/etc/bulletin-builder.env` readable only by that user, loaded by the unit file.
+Ubuntu notes: the `chromium` apt package on recent Ubuntu is a snap shim, and snap confinement breaks headless printing to arbitrary paths. Use the Chromium that Playwright installs (`playwright install --with-deps chromium`) for both PDF printing and the overflow measurement; it is the same engine with the same print flags used today. Drive it through Playwright's API, not the Chromium CLI, because of the AppArmor restriction found in Phase 0; PNG proofs come from `pymupdf`, not `pdftoppm`. Run the app as **user `clovis` under a systemd *user* unit** (linger is already enabled), the same pattern as the fpc-sermons app. Bind to `127.0.0.1:8710` and expose it as **`bulletin-admin.fpccorinth.org` on the existing host cloudflared tunnel with Cloudflare Access in front**; adding that hostname is the one step that needs sudo (`/etc/cloudflared/config.yml`). No `ufw` change and no new reverse proxy. Keep secrets in `~/.config/bulletin-builder/env` (mode 600), loaded by the unit file. The GitHub deploy key is `~/.ssh/fpc_bulletin_deploy`.
 
 Principles:
 
@@ -171,9 +177,9 @@ A single table, editable in the app or maintained as a CSV/Sheet the app imports
 
 | sunday | assisting_elder | greeters | ushers | acolytes | nursery | circle_of_prayer | childrens_church | av_engineer |
 |---|---|---|---|---|---|---|---|---|
-| 2026-11-01 | Dr. John Shipp | Courtney & Ivy Monaghan | Scott Sawyer; Holland Yeates; … | Jack Windsor & Will Sanders | … | Jason & Jennifer Legoff | Jennifer Shipp | Russell Smith |
+| 2026-11-01 | Dr. John Shipp | Courtney & Ivy Monaghan | Scott Sawyer; Holland Yeates; … | Jack Windsor & Will Sanders | … | Jason & Jennifer LeGoff | Jennifer Shipp | Russell Smith |
 
-The office already produces this schedule a quarter at a time. The builder reads the row for the week into `week.serve` and shows it on the form for confirmation. Names pass through the name-spellings check. Roles with no entry stay visibly blank on the form so the volunteer notices, and the builder flags them rather than guessing.
+The office keeps a schedule for the whole year that changes ad hoc when people are away, so there is no clean quarterly file to import. **Decision (§11.3, item 7): the app owns the roster table**, seeded from `builder/data/seed/rosters.csv` (22 Sundays), and the volunteer confirms or edits each week by hand. A yearly-schedule import can come later. The builder reads the row for the week into `week.serve` and shows it on the form for confirmation. Names pass through the name-spellings check. Roles with no entry stay visibly blank on the form so the volunteer notices, and the builder flags them rather than guessing.
 
 Keep the staff list as standing data with an edit screen, not as a weekly field. It has not changed since August.
 
@@ -181,8 +187,8 @@ Keep the staff list as standing data with an edit screen, not as a weekly field.
 
 One events table (`title, start, end, location, notes, category, recurrence`). Sources, in order of preference:
 
-- If the church already keeps a Google Calendar (or similar), subscribe to its ICS and treat it as the source; the app only reads it.
-- Otherwise, the app owns the table with an edit screen, and seeds the recurring items that appear every week: Messy Bible Study Tuesday 8 a.m., Kids Quest / Youth House / Bible Study Wednesday 6 p.m., Session and Deacons' meetings, First Thursday at the Youth House, Joy Riders, Day School closures.
+- **Decision (§11.3, item 6): the app owns the table.** The church has Google Workspace but no main calendar that anyone knows of. The app keeps the events table with an edit screen, seeded from `builder/data/seed/events.csv` (74 lines from past bulletins) plus the recurring items that appear every week: Messy Bible Study Tuesday 8 a.m., Kids Quest / Youth House / Bible Study Wednesday 6 p.m., Session and Deacons' meetings, First Thursday at the Youth House, Joy Riders, Day School closures.
+- If a church Google Calendar is set up later, the app can either subscribe to its ICS as the source (read-only) or keep publishing its own ICS for Google to subscribe to. Keep the events table behind an interface so that swap is local.
 
 From that table the build produces two things:
 
@@ -195,8 +201,8 @@ If the church uses Planning Center or Breeze, check first whether either already
 
 - Welcome paragraphs, with the two Children's Church variants (regular schedule / school break) and a custom option
 - Vision & mission text, contact block
-- Pew Bible page table: book + chapter → page. Known so far: Ezra = 395, Nehemiah 1 = 398, Acts 9 = 945. Needs the pew Bible edition to fill in (§11).
-- Hymnal table: number → title, so a hymn number alone fills the title and a mismatch is flagged
+- Pew Bible page table: book + chapter → page. The pew Bible is the **ESV Thinline** (§11.3). Seeded with 16 references in `builder/data/standing/pew-bible-pages.json`; fill in the rest from that edition's page map.
+- Hymnal table: number → title, so a hymn number alone fills the title and a mismatch is flagged. Seeded with 52 numbers in `builder/data/standing/hymns.json`. Hymnal edition still to be confirmed by Colby (believed to be the red hymnal used in Presbyterian churches).
 - Series tracker: current sermon series title and preacher default (Rev. Waring Porter)
 - Monthly items: Missionary Focus speaker for the month, kids bulletin month
 
@@ -239,10 +245,10 @@ Write the full JSON Schema in `pipeline/schema/week.schema.json` and validate on
 ## 7. Access, auth and safety
 
 - **Nothing works without a login.** Every route except the sign-in page and the public calendar page requires an authenticated session: the form, both file uploads, Build, the proof images, the chat box and Publish. Unauthenticated requests get a redirect to sign-in, never a partial page. Uploads are additionally limited to `.docx` under 10 MB, checked by content type, and stored only under the week's folder.
-- Put the app behind the existing reverse proxy on basecamp with HTTPS. If basecamp is only reachable on the church LAN or a Tailscale network, that is sufficient; otherwise use Google sign-in restricted to `@fpccorinth.org` accounts.
-- Three roles: *editor* (enter, upload, build, proof, chat, mark ready), *publisher* (everything an editor can do, plus Publish) and *admin* (everything, plus user management, rosters, calendar and standing-text screens, the spend cap and the kill switch). Start with Colby as admin and the pastor as publisher. Accounts are created by an admin; there is no self-signup.
+- **Decided (§11.3, item 2):** basecamp is internet-reachable through the host cloudflared tunnel, so the app sits at `bulletin-admin.fpccorinth.org` with **Cloudflare Access** in front (email one-time PIN, exact-address allowlist) as the outer gate. Inside the app, identity and roles use the **sermons-app magic-link pattern** through the same Resend account, so gmail and proton users work and there are no passwords to manage. Google sign-in was dropped because most users are not on `@fpccorinth.org` accounts.
+- Three roles: *editor* (enter, upload, build, proof, chat, mark ready), *publisher* (everything an editor can do, plus Publish) and *admin* (everything, plus user management, rosters, calendar and standing-text screens, the spend cap and the kill switch). Start with the office administrator as editor, the pastor and Colby as publishers, and Colby as admin (§11.3, item 1). Editors mark *Ready*; only publishers press Publish (item 3). Accounts are created by an admin; there is no self-signup.
 - Every login, upload, build, chat message and publish is written to an audit log with the user and timestamp, so a wrong bulletin can be traced to the step that introduced it.
-- The git push uses a deploy key or fine-grained GitHub token scoped to this one repo, stored in the app's environment, never in the repo.
+- The git push uses the repo-scoped deploy key `~/.ssh/fpc_bulletin_deploy` generated in Phase 0 and pushes straight to `main` (§11.3, item 4). Never Colby's personal `gh` token.
 - Uploaded files are untrusted: store them under the week folder, never execute anything from them, parse with the extractor only.
 - The app never deletes from the repo. Re-building a week overwrites that week's generated files only.
 
@@ -261,7 +267,7 @@ Those numbers include a full Claude Code system prompt and tool catalog on every
 
 Four layers, all of them required:
 
-1. **Console workspace limit (the real safety net).** Create a dedicated Anthropic Console workspace `bulletin-builder` with its own API key and set its monthly spend limit (e.g. $40). This is enforced by Anthropic and cannot be exceeded by a bug in the app.
+1. **Console workspace limit (the real safety net).** Colby creates a dedicated Anthropic Console workspace `bulletin-builder` with its own API key, a **$40** monthly spend limit and email alerts (confirmed, §11.3 item 5). The key lives in `~/.config/bulletin-builder/env` (mode 600). This is enforced by Anthropic and cannot be exceeded by a bug in the app.
 2. **App ledger.** Every API response's `usage` (input, cache write, cache read, output) is written to SQLite with the job id and priced at the current rate card. The form header shows *This month: $X of $40*. At 80 percent, builds still run but the chat box warns; at 100 percent, the app refuses new model calls and tells the volunteer to contact Colby. Deterministic steps keep working.
 3. **Per-job caps.** Fit loop ≤ 8 turns and ≤ $3; chat message ≤ 4 turns and ≤ $1; ≤ 3 full builds per week per bulletin; ≤ 30 chat messages per bulletin. Hitting a cap stops cleanly and says so.
 4. **Kill switch.** An environment variable `BUILDER_MODEL_CALLS=off` makes every model step a no-op that returns the previous result, so the deterministic pipeline can still render and publish during an incident.
@@ -347,7 +353,7 @@ Ask these in a single message. Each has a default; if Colby does not object, pro
 2. **Login.** Default: if the box is on Tailscale or LAN only, a simple username and password per user managed by the admin screen; if it is internet-reachable, Google sign-in restricted to `@fpccorinth.org`. Say which you found and which you propose.
 3. **Publish rights.** Default: editors can mark *Ready*; only publishers press Publish. Ask whether the volunteer should be allowed to publish directly instead.
 4. **GitHub.** Give Colby the public deploy key you generated and ask him to add it to the repo with write access (Settings → Deploy keys). Default: the server pushes straight to `main`, the same as today.
-5. **Budget.** Default: Colby creates a Console workspace named `bulletin-builder` with a $40 monthly spend limit and alerts to his email, and puts its key in `/etc/bulletin-builder.env`. Ask for the key only after the workspace exists.
+5. **Budget.** Default: Colby creates a Console workspace named `bulletin-builder` with a $40 monthly spend limit and alerts to his email, and puts its key in `~/.config/bulletin-builder/env` (was `/etc/bulletin-builder.env`; changed in Phase 0 so nothing needs sudo). Ask for the key only after the workspace exists.
 6. **Calendar source.** Ask whether the church already keeps a Google Calendar, Planning Center, Breeze, or similar. Default if none: the app owns the events table, seeded from §11.1, and publishes `calendar.ics`.
 7. **Rosters.** Ask for the current quarter's volunteer schedule in whatever form the office produces it (spreadsheet or Word). Default until it arrives: the roster screen starts from the seeded history and the volunteer fills each week by hand.
 8. **Pew Bible and hymnal.** Ask for the pew Bible edition (publisher and year) and the hymnal name and edition. Default: use the seeded page and hymn tables and flag anything missing.
@@ -357,3 +363,5 @@ Ask these in a single message. Each has a default; if Colby does not object, pro
 12. **Netlify.** Ask for the site id and a personal access token if deploy-status polling is wanted. Default: skip polling; show the commit hash and a link to the Netlify deploys page.
 
 Record the answers in `docs/basecamp-discovery.md`, update §3, §7 and §8 of this plan to match, commit, and stop. Phase 1 starts on Colby's go-ahead.
+
+**Done 2026-10-29.** All twelve answers are in `docs/basecamp-discovery.md` §11.3; §3, §5, §7 and §8 above reflect them.
