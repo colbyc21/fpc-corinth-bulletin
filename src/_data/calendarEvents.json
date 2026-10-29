@@ -1,0 +1,386 @@
+{
+  "generated": "2026-10-29T22:56:36+00:00",
+  "subscribe_url": "https://bulletin.fpccorinth.org/calendar.ics",
+  "events": [
+    {
+      "date": "2026-11-01",
+      "label": "November 1",
+      "month": "November 2026",
+      "weekday": "Sunday",
+      "title": "Session Meeting",
+      "time": "",
+      "location": "",
+      "recurring": false
+    },
+    {
+      "date": "2026-11-03",
+      "label": "November 3",
+      "month": "November 2026",
+      "weekday": "Tuesday",
+      "title": "Messy Bible Study",
+      "time": "8 a.m.",
+      "location": "Youth House",
+      "recurring": true
+    },
+    {
+      "date": "2026-11-03",
+      "label": "November 3",
+      "month": "November 2026",
+      "weekday": "Tuesday",
+      "title": "Election Day (Fellowship Hall in use)",
+      "time": "",
+      "location": "",
+      "recurring": false
+    },
+    {
+      "date": "2026-11-03",
+      "label": "November 3",
+      "month": "November 2026",
+      "weekday": "Tuesday",
+      "title": "No Day School",
+      "time": "",
+      "location": "",
+      "recurring": false
+    },
+    {
+      "date": "2026-11-04",
+      "label": "November 4",
+      "month": "November 2026",
+      "weekday": "Wednesday",
+      "title": "Messy Bible Study",
+      "time": "6 p.m.",
+      "location": "",
+      "recurring": true
+    },
+    {
+      "date": "2026-11-04",
+      "label": "November 4",
+      "month": "November 2026",
+      "weekday": "Wednesday",
+      "title": "Kids Quest",
+      "time": "",
+      "location": "",
+      "recurring": true
+    },
+    {
+      "date": "2026-11-04",
+      "label": "November 4",
+      "month": "November 2026",
+      "weekday": "Wednesday",
+      "title": "Youth House",
+      "time": "",
+      "location": "",
+      "recurring": true
+    },
+    {
+      "date": "2026-11-05",
+      "label": "November 5",
+      "month": "November 2026",
+      "weekday": "Thursday",
+      "title": "First Thursday at the Youth House",
+      "time": "noon",
+      "location": "",
+      "recurring": false
+    },
+    {
+      "date": "2026-11-08",
+      "label": "November 8",
+      "month": "November 2026",
+      "weekday": "Sunday",
+      "title": "Deacons’ Meeting",
+      "time": "",
+      "location": "",
+      "recurring": false
+    },
+    {
+      "date": "2026-11-10",
+      "label": "November 10",
+      "month": "November 2026",
+      "weekday": "Tuesday",
+      "title": "Messy Bible Study",
+      "time": "8 a.m.",
+      "location": "Youth House",
+      "recurring": true
+    },
+    {
+      "date": "2026-11-11",
+      "label": "November 11",
+      "month": "November 2026",
+      "weekday": "Wednesday",
+      "title": "Messy Bible Study",
+      "time": "6 p.m.",
+      "location": "",
+      "recurring": true
+    },
+    {
+      "date": "2026-11-11",
+      "label": "November 11",
+      "month": "November 2026",
+      "weekday": "Wednesday",
+      "title": "Kids Quest",
+      "time": "",
+      "location": "",
+      "recurring": true
+    },
+    {
+      "date": "2026-11-11",
+      "label": "November 11",
+      "month": "November 2026",
+      "weekday": "Wednesday",
+      "title": "Youth House",
+      "time": "",
+      "location": "",
+      "recurring": true
+    },
+    {
+      "date": "2026-11-17",
+      "label": "November 17",
+      "month": "November 2026",
+      "weekday": "Tuesday",
+      "title": "Messy Bible Study",
+      "time": "8 a.m.",
+      "location": "Youth House",
+      "recurring": true
+    },
+    {
+      "date": "2026-11-18",
+      "label": "November 18",
+      "month": "November 2026",
+      "weekday": "Wednesday",
+      "title": "Messy Bible Study",
+      "time": "6 p.m.",
+      "location": "",
+      "recurring": true
+    },
+    {
+      "date": "2026-11-18",
+      "label": "November 18",
+      "month": "November 2026",
+      "weekday": "Wednesday",
+      "title": "Kids Quest",
+      "time": "",
+      "location": "",
+      "recurring": true
+    },
+    {
+      "date": "2026-11-18",
+      "label": "November 18",
+      "month": "November 2026",
+      "weekday": "Wednesday",
+      "title": "Youth House",
+      "time": "",
+      "location": "",
+      "recurring": true
+    },
+    {
+      "date": "2026-11-24",
+      "label": "November 24",
+      "month": "November 2026",
+      "weekday": "Tuesday",
+      "title": "Messy Bible Study",
+      "time": "8 a.m.",
+      "location": "Youth House",
+      "recurring": true
+    },
+    {
+      "date": "2026-11-25",
+      "label": "November 25",
+      "month": "November 2026",
+      "weekday": "Wednesday",
+      "title": "Messy Bible Study",
+      "time": "6 p.m.",
+      "location": "",
+      "recurring": true
+    },
+    {
+      "date": "2026-11-25",
+      "label": "November 25",
+      "month": "November 2026",
+      "weekday": "Wednesday",
+      "title": "Kids Quest",
+      "time": "",
+      "location": "",
+      "recurring": true
+    },
+    {
+      "date": "2026-11-25",
+      "label": "November 25",
+      "month": "November 2026",
+      "weekday": "Wednesday",
+      "title": "Youth House",
+      "time": "",
+      "location": "",
+      "recurring": true
+    },
+    {
+      "date": "2026-11-26",
+      "label": "November 26",
+      "month": "November 2026",
+      "weekday": "Thursday",
+      "title": "37th Community Thanksgiving Meal",
+      "time": "",
+      "location": "",
+      "recurring": false
+    },
+    {
+      "date": "2026-12-01",
+      "label": "December 1",
+      "month": "December 2026",
+      "weekday": "Tuesday",
+      "title": "Messy Bible Study",
+      "time": "8 a.m.",
+      "location": "Youth House",
+      "recurring": true
+    },
+    {
+      "date": "2026-12-02",
+      "label": "December 2",
+      "month": "December 2026",
+      "weekday": "Wednesday",
+      "title": "Messy Bible Study",
+      "time": "6 p.m.",
+      "location": "",
+      "recurring": true
+    },
+    {
+      "date": "2026-12-02",
+      "label": "December 2",
+      "month": "December 2026",
+      "weekday": "Wednesday",
+      "title": "Kids Quest",
+      "time": "",
+      "location": "",
+      "recurring": true
+    },
+    {
+      "date": "2026-12-02",
+      "label": "December 2",
+      "month": "December 2026",
+      "weekday": "Wednesday",
+      "title": "Youth House",
+      "time": "",
+      "location": "",
+      "recurring": true
+    },
+    {
+      "date": "2026-12-08",
+      "label": "December 8",
+      "month": "December 2026",
+      "weekday": "Tuesday",
+      "title": "Messy Bible Study",
+      "time": "8 a.m.",
+      "location": "Youth House",
+      "recurring": true
+    },
+    {
+      "date": "2026-12-09",
+      "label": "December 9",
+      "month": "December 2026",
+      "weekday": "Wednesday",
+      "title": "Messy Bible Study",
+      "time": "6 p.m.",
+      "location": "",
+      "recurring": true
+    },
+    {
+      "date": "2026-12-09",
+      "label": "December 9",
+      "month": "December 2026",
+      "weekday": "Wednesday",
+      "title": "Kids Quest",
+      "time": "",
+      "location": "",
+      "recurring": true
+    },
+    {
+      "date": "2026-12-09",
+      "label": "December 9",
+      "month": "December 2026",
+      "weekday": "Wednesday",
+      "title": "Youth House",
+      "time": "",
+      "location": "",
+      "recurring": true
+    },
+    {
+      "date": "2026-12-15",
+      "label": "December 15",
+      "month": "December 2026",
+      "weekday": "Tuesday",
+      "title": "Messy Bible Study",
+      "time": "8 a.m.",
+      "location": "Youth House",
+      "recurring": true
+    },
+    {
+      "date": "2026-12-16",
+      "label": "December 16",
+      "month": "December 2026",
+      "weekday": "Wednesday",
+      "title": "Messy Bible Study",
+      "time": "6 p.m.",
+      "location": "",
+      "recurring": true
+    },
+    {
+      "date": "2026-12-16",
+      "label": "December 16",
+      "month": "December 2026",
+      "weekday": "Wednesday",
+      "title": "Kids Quest",
+      "time": "",
+      "location": "",
+      "recurring": true
+    },
+    {
+      "date": "2026-12-16",
+      "label": "December 16",
+      "month": "December 2026",
+      "weekday": "Wednesday",
+      "title": "Youth House",
+      "time": "",
+      "location": "",
+      "recurring": true
+    },
+    {
+      "date": "2026-12-22",
+      "label": "December 22",
+      "month": "December 2026",
+      "weekday": "Tuesday",
+      "title": "Messy Bible Study",
+      "time": "8 a.m.",
+      "location": "Youth House",
+      "recurring": true
+    },
+    {
+      "date": "2026-12-23",
+      "label": "December 23",
+      "month": "December 2026",
+      "weekday": "Wednesday",
+      "title": "Messy Bible Study",
+      "time": "6 p.m.",
+      "location": "",
+      "recurring": true
+    },
+    {
+      "date": "2026-12-23",
+      "label": "December 23",
+      "month": "December 2026",
+      "weekday": "Wednesday",
+      "title": "Kids Quest",
+      "time": "",
+      "location": "",
+      "recurring": true
+    },
+    {
+      "date": "2026-12-23",
+      "label": "December 23",
+      "month": "December 2026",
+      "weekday": "Wednesday",
+      "title": "Youth House",
+      "time": "",
+      "location": "",
+      "recurring": true
+    }
+  ]
+}

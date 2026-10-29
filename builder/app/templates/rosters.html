@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Rosters{% endblock %}
+{% block content %}
+<h1>Those Who Serve</h1>
+<p class="muted">One row per Sunday. The next eight Sundays are listed first even when empty. Names are written exactly as they should print (commas, “&amp;”, “Dr.”). Blank roles stay blank and get flagged at build time.</p>
+{% for r in rows %}
+<div class="card" id="r-{{ r.sunday }}">
+  <form method="post" action="/rosters/{{ r.sunday }}">
+    <div class="row" style="margin-bottom:0.4rem"><strong style="flex:0 0 auto">{{ r.sunday | long_date }}</strong>{% if r.sunday in upcoming %}<span class="pill" style="flex:0 0 auto">upcoming</span>{% endif %}<span class="muted" style="flex:1 1 auto; text-align:right">{{ r.updated_at or "" }}</span></div>
+    <div class="row">
+      {% for role in ROSTER_ROLES %}
+      <div><label for="{{ r.sunday }}-{{ role }}">{{ ROLE_LABELS[role] }}</label><input id="{{ r.sunday }}-{{ role }}" type="text" name="{{ role }}" value="{{ r[role] or '' }}"></div>
+      {% endfor %}
+      <div class="narrow"><button type="submit">Save</button></div>
+    </div>
+  </form>
+</div>
+{% endfor %}
+{% endblock %}

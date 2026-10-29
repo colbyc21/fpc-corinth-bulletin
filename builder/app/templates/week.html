@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block title %}{{ d | long_date }}{% endblock %}
+{% block content %}
+<h1>{{ d | long_date }} <span class="pill {{ status.status }}">{{ status.status }}</span></h1>
+{% if week %}<p class="muted">{{ week.subtitle_override or week.liturgical_day }} · Sermon: “{{ week.sermon.title }}” · {{ week.sermon.preacher }}</p>{% endif %}
+{% if error %}<div class="flash bad">week.json does not validate: {{ error }}</div>{% endif %}
+
+<div class="card">
+  <div class="row">
+    <form method="post" action="/weeks/{{ d }}/build" class="narrow"><button type="submit" {% if error %}disabled{% endif %}>Build print + scroll</button></form>
+    {% if has_pdf %}<a class="btn quiet narrow" href="/weeks/{{ d }}/pdf">Download PDF</a>{% endif %}
+    {% if week and week.inserts %}{% for ins in week.inserts %}<a class="btn quiet narrow" href="/weeks/{{ d }}/insert/{{ ins }}.pdf">Insert: {{ ins }}</a>{% endfor %}{% endif %}
+    {% if has_scroll %}<a class="btn quiet narrow" href="/weeks/{{ d }}/scroll" target="_blank">Open scroll page</a>{% endif %}
+    <form method="post" action="/weeks/{{ d }}/ready" class="narrow"><button type="submit" class="quiet" {% if not has_pdf %}disabled{% endif %}>Mark ready</button></form>
+    {% if user.role in ('publisher', 'admin') %}
+    <form method="post" action="/weeks/{{ d }}/publish" class="row" style="flex:2 1 320px" onsubmit="return confirm('Commit and push {{ d }} to main? Netlify will deploy it.');">
+      <div><label for="correction">Correction note (optional, for the commit subject)</label><input id="correction" type="text" name="correction" placeholder="e.g. assisting elder"></div>
+      <div class="narrow"><button type="submit" {% if not has_pdf %}disabled{% endif %}>Publish to main</button></div>
+    </form>
+    {% else %}
+    <div class="muted" style="flex:2 1 240px">Publishing needs the publisher role. Mark the week ready and a publisher will push it.</div>
+    {% endif %}
+  </div>
+  {% if status.published_commit %}<p class="muted">Last published commit <code>{{ status.published_commit }}</code> at {{ status.published_at }} · <a href="{{ netlify_url }}" target="_blank" rel="noopener">Netlify deploys ↗</a> · <a href="{{ site_url }}/scroll/{{ d }}/" target="_blank" rel="noopener">live page ↗</a></p>{% endif %}
+</div>
+
+{% if report %}
+<h2>Last build · {{ report.built_at }} · {{ report.seconds }} s</h2>
+<div class="card">
+  <table>
+    <thead><tr><th>Panel</th><th>Overflow (px)</th><th>Grid overflow</th><th>Past bottom</th></tr></thead>
+    <tbody>
+    {% for m in report.measurements %}
+      {% set bad = m.overflow_px > 0.5 or m.grid_overflow_px > 0.5 or m.content_past_bottom_px > 0.5 %}
+      <tr class="{{ 'bad' if bad else '' }}"><td>{{ m.label }}</td><td>{{ m.overflow_px }}</td><td>{{ m.grid_overflow_px }}</td><td>{{ m.content_past_bottom_px }}</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  {% if report.name_changes %}
+  <h2>Name corrections applied</h2>
+  <ul>{% for c in report.name_changes %}<li><code>{{ c.where }}</code>: {{ c.before }} → <strong>{{ c.after }}</strong> <span class="muted">({{ c.reason }})</span></li>{% endfor %}</ul>
+  {% endif %}
+  {% if report.flags %}
+  <h2>Flags</h2>
+  <ul>{% for f in report.flags %}<li class="warn"><code>{{ f.where }}</code>: {{ f.message }}</li>{% endfor %}</ul>
+  {% endif %}
+</div>
+
+<div class="two">
+  <div>
+    <h2>Print panels</h2>
+    <div class="panels">
+      {% for n in panels %}
+      <figure><a href="/weeks/{{ d }}/panel/{{ n }}.png?t={{ report.built_at }}" target="_blank"><img src="/weeks/{{ d }}/panel/{{ n }}.png?t={{ report.built_at }}" alt="Page {{ n }}"></a><figcaption>Page {{ n }}</figcaption></figure>
+      {% endfor %}
+    </div>
+  </div>
+  <div>
+    <h2>Scroll page</h2>
+    {% if has_scroll %}<iframe class="scroll" src="/weeks/{{ d }}/scroll"></iframe>{% else %}<p class="muted">Build first.</p>{% endif %}
+  </div>
+</div>
+{% endif %}
+
+<h2>week.json</h2>
+<div class="card">
+  <p class="muted">The single source of truth for this Sunday. Phase 3 replaces this editor with the volunteer form; until then edit the JSON directly. It is validated on save.</p>
+  <form method="post" action="/weeks/{{ d }}/json">
+    <textarea class="code" name="raw" spellcheck="false">{{ raw }}</textarea>
+    <p style="margin-top:0.6rem"><button type="submit">Save week.json</button></p>
+  </form>
+</div>
+{% endblock %}

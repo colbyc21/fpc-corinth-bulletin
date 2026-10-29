@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Users{% endblock %}
+{% block content %}
+<h1>Users</h1>
+<p class="muted">Editors enter, build, proof and mark a week ready. Publishers also push to main. Admins also manage these screens. Any email address works; sign-in is by emailed link.</p>
+<div class="card">
+  <form method="post" action="/users" class="row">
+    <div><label>Email</label><input type="email" name="email" required></div>
+    <div><label>Name</label><input type="text" name="name"></div>
+    <div><label>Role</label><select name="role">{% for r in USER_ROLES %}<option value="{{ r }}">{{ r }}</option>{% endfor %}</select></div>
+    <div class="narrow"><button type="submit">Add</button></div>
+  </form>
+</div>
+<table>
+  <thead><tr><th>Email</th><th>Name</th><th>Role</th><th>Last sign-in</th><th></th></tr></thead>
+  <tbody>
+  {% for u in users %}
+  <tr>
+    <td>{{ u.email }}</td><td>{{ u.name or '' }}</td>
+    <td><form method="post" action="/users/{{ u.id }}/role" class="row"><select name="role" style="flex:1 1 120px">{% for r in USER_ROLES %}<option value="{{ r }}" {% if r == u.role %}selected{% endif %}>{{ r }}</option>{% endfor %}</select><button class="quiet narrow" type="submit">Set</button></form></td>
+    <td class="muted">{{ u.last_login_at or 'never' }}</td>
+    <td><form method="post" action="/users/{{ u.id }}/delete" onsubmit="return confirm('Remove {{ u.email }}?')"><button class="danger" type="submit" {% if u.id == user.id %}disabled{% endif %}>Remove</button></form></td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

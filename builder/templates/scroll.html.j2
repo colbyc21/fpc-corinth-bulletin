@@ -1,0 +1,1079 @@
+{#- Scroll (mobile) bulletin published at /scroll/<date>/. Head and site header are the
+    2026-11-01 file verbatim; the body renders from week.json. -#}
+{%- macro star(it) -%}{% if it.star %}*{% endif %}{%- endmacro -%}
+{%- macro heading(it) -%}
+{%- if it.type == "hymn" %}
+        <p class="worship-heading">{{ star(it) }}{{ it.title }}: &nbsp;#{{ it.number }} <span class="worship-attr">{{ it.piece | q }}</span></p>
+{%- elif it.type == "music" %}
+        <p class="worship-heading">{{ star(it) }}{{ it.title }} <span class="worship-attr">{{ it.piece | q }}{% if it.credit %} &middot; {{ it.credit }}{% endif %}</span></p>
+{%- elif it.type == "speaker" %}
+        <p class="worship-heading">{{ star(it) }}{{ it.title }} <span class="worship-attr">{{ it.name }}{% if it.role %}, {{ it.role }}{% endif %}</span></p>
+{%- elif it.type == "reading" %}
+        <p class="worship-heading">{{ star(it) }}{{ it.title }} <span class="worship-attr">{{ it.ref }}{% if week.pew_bible_page %} &middot; Pew Bible, p. {{ week.pew_bible_page }}{% endif %}</span></p>
+{%- elif it.type == "sermon" %}
+        <p class="worship-heading">{{ it.title }}: <span class="worship-attr">{{ sermon.title | q }} &middot; {{ sermon.preacher }}</span></p>
+{%- elif it.ref %}
+        <p class="worship-heading">{{ star(it) }}{{ it.title }}: <span style="font-weight:normal;">{{ it.ref }}</span></p>
+{%- else %}
+        <p class="worship-heading">{{ star(it) }}{{ it.title }}</p>
+{%- endif %}
+{%- endmacro -%}
+{%- macro body(it) -%}
+{%- if it.type == "responsive" %}
+        <div class="responsive">
+{%- for ln in it.lines %}
+          <p class="{{ 'all-line' if ln.who == 'All' else 'leader-line' }}"><span class="{{ 'all-label' if ln.who == 'All' else 'leader-label' }}">{{ ln.who }}:</span> {{ ln.text }}</p>
+{%- endfor %}
+        </div>
+{%- elif it.type == "corporate" and it.text %}
+        <p class="worship-body corporate">{{ it.text }}</p>
+{%- elif it.text %}
+        <p class="worship-body">{{ it.text }}</p>
+{%- endif %}
+{%- if it.silent_confession %}
+        <p class="silent-confession">Silent Confession</p>
+{%- endif %}
+{%- if it.creed_note %}
+        <p class="creed-note">{{ it.creed_note }}</p>
+{%- endif %}
+{%- endmacro -%}
+{%- macro note(n) -%}
+        <div class="margin-note">
+          <span class="note-label">{{ n.label }}</span>
+          {{ n.text }}
+        </div>
+{%- endmacro -%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Worship Bulletin — {{ date_long }}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f4f5f1;
+    --warm-white: #fdfdfb;
+    --parchment: #eceeea;
+    --ink: #171200;
+    --ink-light: #3f3d32;
+    --ink-faint: #666558;
+    --rule: #b0af9b;
+    --rule-light: #d9d9cf;
+    --accent: #6d8c83;
+    --accent-soft: #8aa39b;
+    --accent-deep: #56736a;
+    --gold: #847539;
+    --gold-soft: #ada37c;
+    --section-bg: #eef2ef;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    scroll-behavior: smooth;
+    font-size: 17px;
+  }
+
+  body {
+    font-family: 'EB Garamond', 'Georgia', serif;
+    color: var(--ink);
+    background: var(--parchment);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Subtle paper texture overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 999;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  }
+
+  .scroll-container {
+    max-width: 640px;
+    margin: 0 auto;
+    background: var(--warm-white);
+    min-height: 100vh;
+    box-shadow: 0 0 80px rgba(23, 18, 0, 0.08);
+  }
+
+  /* ── SITE HEADER ─────────────────────────── */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--warm-white);
+    border-bottom: 1px solid var(--rule-light);
+    backdrop-filter: saturate(180%) blur(8px);
+  }
+  .site-header-inner {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0.7rem 1.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .site-header .brand {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 500;
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .site-header .brand:hover {
+    color: var(--accent-deep);
+  }
+  .site-header .archive-link {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 500;
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    text-decoration: none;
+    padding: 0.35rem 0.85rem;
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    white-space: nowrap;
+  }
+  .site-header .archive-link:hover {
+    color: var(--warm-white);
+    background: var(--ink);
+    border-color: var(--ink);
+  }
+  @media (max-width: 420px) {
+    .site-header .brand { font-size: 0.68rem; letter-spacing: 0.1em; }
+    .site-header .archive-link { font-size: 0.64rem; padding: 0.3rem 0.7rem; }
+    .site-header-inner { padding: 0.6rem 1rem; }
+  }
+
+  /* ── COVER ──────────────────────────────── */
+  .cover-section {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 3rem 2rem;
+    position: relative;
+    background:
+      radial-gradient(ellipse at 30% 20%, rgba(132, 117, 57, 0.05) 0%, transparent 60%),
+      radial-gradient(ellipse at 70% 80%, rgba(109, 140, 131, 0.07) 0%, transparent 50%),
+      var(--warm-white);
+  }
+
+  .cover-rule {
+    width: 100%;
+    height: 2px;
+    background: var(--ink);
+    position: absolute;
+    left: 0;
+  }
+  .cover-rule--top { top: 1.5rem; }
+  .cover-rule--bottom { bottom: 1.5rem; }
+
+  .cover-logo {
+    width: min(78vw, 360px);
+    height: auto;
+    margin-bottom: 0.8rem;
+    opacity: 0;
+    animation: fadeUp 1s ease-out 0.5s forwards;
+  }
+
+  .cover-ornament {
+    width: 160px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--ink), transparent);
+    margin: 0.3rem auto 0.8rem;
+    opacity: 0;
+    animation: fadeUp 1s ease-out 0.6s forwards;
+  }
+
+  .cover-date {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 300;
+    font-size: clamp(1.2rem, 4vw, 1.6rem);
+    color: var(--ink);
+    opacity: 0;
+    animation: fadeUp 1s ease-out 0.8s forwards;
+  }
+
+  .cover-occasion {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 400;
+    font-size: 0.78rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent-deep);
+    margin-top: 0.6rem;
+    opacity: 0;
+    animation: fadeUp 1s ease-out 0.95s forwards;
+  }
+
+  .cover-mission {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--ink-light);
+    margin-top: 1rem;
+    opacity: 0;
+    animation: fadeUp 1s ease-out 1.05s forwards;
+  }
+
+  .cover-footer {
+    position: absolute;
+    bottom: 2.2rem;
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 0.82rem;
+    color: var(--ink-faint);
+    letter-spacing: 0.02em;
+    opacity: 0;
+    animation: fadeUp 1s ease-out 1s forwards;
+  }
+
+  .cover-scroll-hint {
+    position: absolute;
+    bottom: 4.5rem;
+    opacity: 0;
+    animation: fadeUp 1s ease-out 1.2s forwards, gentle-bob 2.5s ease-in-out 2.2s infinite;
+  }
+  .cover-scroll-hint svg {
+    width: 20px;
+    height: 20px;
+    stroke: var(--rule);
+    fill: none;
+    stroke-width: 1.5;
+  }
+
+  /* ── SECTION LAYOUT ─────────────────────── */
+  .bulletin-section {
+    padding: 2rem 1.8rem;
+    border-top: 1px solid var(--rule-light);
+  }
+
+  .section-heading {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 500;
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent-deep);
+    text-align: center;
+    margin-bottom: 1.4rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  /* ── WELCOME ────────────────────────────── */
+  .welcome-section {
+    background:
+      linear-gradient(180deg, var(--section-bg) 0%, var(--warm-white) 100%);
+  }
+
+  .welcome-title {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 300;
+    font-size: 1.8rem;
+    text-align: center;
+    margin-bottom: 1.2rem;
+    color: var(--ink);
+  }
+
+  .welcome-block {
+    margin-bottom: 1.2rem;
+  }
+
+  .welcome-block h3 {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 500;
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent-deep);
+    margin-bottom: 0.4rem;
+  }
+
+  .welcome-block p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--ink-light);
+    text-align: justify;
+    hyphens: auto;
+  }
+
+  .connect-info {
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: var(--ink-light);
+  }
+  .connect-info strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  /* ── LITURGY ────────────────────────────── */
+  .liturgy-header {
+    text-align: center;
+    margin-bottom: 1rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid var(--rule-light);
+  }
+
+  .liturgy-main-title {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 600;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin-bottom: 0.25rem;
+  }
+
+  .liturgy-date-line {
+    font-family: 'EB Garamond', serif;
+    font-size: 1rem;
+    color: var(--ink-faint);
+  }
+
+  .liturgy-standing-note {
+    font-style: italic;
+    font-size: 0.82rem;
+    color: var(--ink-faint);
+    margin-top: 0.3rem;
+  }
+
+  /* Liturgy section divider */
+  .liturgy-divider {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 600;
+    font-size: 0.68rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--accent-deep);
+    margin: 1.6rem 0 0.8rem;
+    position: relative;
+    padding: 0.5rem 0;
+  }
+  .liturgy-divider::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 20%;
+    right: 20%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--rule), transparent);
+  }
+
+  /* Worship items */
+  .worship-item {
+    margin-bottom: 1rem;
+  }
+
+  .worship-heading {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--ink);
+    margin-bottom: 0.2rem;
+  }
+
+  .worship-attr {
+    font-weight: 400;
+    font-style: italic;
+    font-size: 0.88rem;
+    color: var(--ink-faint);
+    margin-left: 0.3rem;
+  }
+
+  .worship-body {
+    font-size: 0.95rem;
+    padding-left: 0.06in;
+    margin-top: 0.15rem;
+    text-align: justify;
+    hyphens: auto;
+    color: var(--ink-light);
+  }
+
+  .worship-body.corporate {
+    font-style: italic;
+    color: var(--ink);
+  }
+
+  /* Responsive reading */
+  .responsive {
+    padding-left: 0.06in;
+    margin-top: 0.2rem;
+  }
+
+  .leader-line, .all-line {
+    font-size: 0.95rem;
+    margin-bottom: 0.15rem;
+    text-align: justify;
+    hyphens: auto;
+  }
+
+  .leader-line {
+    color: var(--ink-light);
+  }
+
+  .all-line {
+    font-style: italic;
+    color: var(--ink);
+  }
+
+  .leader-label {
+    font-weight: 400;
+    color: var(--ink-faint);
+    font-size: 0.85rem;
+  }
+
+  .all-label {
+    font-weight: 700;
+    color: var(--ink);
+    font-size: 0.85rem;
+  }
+
+  .silent-confession {
+    font-weight: 700;
+    font-style: italic;
+    font-size: 0.85rem;
+    padding-left: 0.06in;
+    margin-top: 0.3rem;
+    color: var(--ink-faint);
+  }
+
+  .creed-note {
+    font-size: 0.78rem;
+    font-style: italic;
+    color: var(--ink-faint);
+    padding-left: 0.06in;
+    margin-top: 0.15rem;
+  }
+
+  /* Margin notes (inline on scroll version) */
+  .margin-note {
+    font-size: 0.78rem;
+    line-height: 1.45;
+    color: var(--ink-faint);
+    font-style: italic;
+    border-left: 2px solid var(--rule-light);
+    padding-left: 0.8rem;
+    margin: 0.4rem 0 0.6rem 0.06in;
+  }
+
+  .margin-note .note-label {
+    font-weight: 600;
+    font-style: normal;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--rule);
+    display: block;
+    margin-bottom: 0.1rem;
+  }
+
+  /* Anthem lyrics */
+  .anthem-lyrics {
+    display: flex;
+    gap: 1.2rem;
+    padding-left: 0.06in;
+    margin-top: 0.4rem;
+  }
+  .anthem-lyrics .verse {
+    flex: 1;
+    font-style: italic;
+    font-size: 0.85rem;
+    line-height: 1.45;
+    color: var(--ink-light);
+  }
+  @media (max-width: 500px) {
+    .anthem-lyrics { flex-direction: column; gap: 0.6rem; }
+  }
+  .anthem-credit {
+    font-size: 0.72rem;
+    color: var(--ink-faint);
+    font-style: normal;
+    padding-left: 0.06in;
+    margin-top: 0.4rem;
+  }
+
+  /* ── SERMON NOTES ───────────────────────── */
+  .sermon-section {
+    background:
+      linear-gradient(180deg, var(--warm-white) 0%, var(--section-bg) 30%, var(--section-bg) 70%, var(--warm-white) 100%);
+  }
+
+  .sermon-title {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 400;
+    font-size: 1.5rem;
+    text-align: center;
+    font-style: normal;
+    color: var(--ink);
+    margin-bottom: 0.2rem;
+  }
+
+  .sermon-text-ref {
+    text-align: center;
+    font-size: 0.92rem;
+    color: var(--ink-faint);
+    margin-bottom: 0.4rem;
+  }
+
+  .sermon-epigraph {
+    text-align: center;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--ink-light);
+    margin: 0.6rem 0 1.2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--rule-light);
+  }
+
+  .sermon-intro {
+    font-size: 0.92rem;
+    line-height: 1.65;
+    text-align: justify;
+    hyphens: auto;
+    color: var(--ink-light);
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--rule-light);
+  }
+
+  .sermon-point {
+    font-family: 'EB Garamond', serif;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--ink);
+    margin-top: 1.2rem;
+    margin-bottom: 0.3rem;
+  }
+  .sermon-point .pt-ref {
+    font-weight: 400;
+    font-style: italic;
+    font-size: 0.9rem;
+    color: var(--ink-faint);
+  }
+
+  .notes-prompt {
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin-top: 1rem;
+    margin-bottom: 0.25rem;
+    color: var(--ink);
+  }
+
+  .sub-list {
+    list-style: none;
+    padding-left: 0.06in;
+    margin: 0.3rem 0 0.4rem;
+  }
+  .sub-list li {
+    font-size: 0.92rem;
+    line-height: 1.55;
+    color: var(--ink-light);
+    padding-left: 1rem;
+    position: relative;
+  }
+  .sub-list li::before {
+    content: '·';
+    position: absolute;
+    left: 0.3rem;
+    color: var(--accent-deep);
+    font-weight: 700;
+  }
+
+  .scripture-quote {
+    font-size: 0.85rem;
+    font-style: italic;
+    color: var(--ink-faint);
+    padding-left: 0.8rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .notes-lines {
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+    padding: 0.4rem 0;
+  }
+
+  .notes-line {
+    border-bottom: 1px solid var(--rule-light);
+    width: 100%;
+  }
+
+  .sermon-resources {
+    font-size: 0.75rem;
+    color: var(--ink-faint);
+    margin-top: 1.5rem;
+    padding-top: 0.8rem;
+    border-top: 1px solid var(--rule-light);
+    line-height: 1.5;
+  }
+
+  /* ── ANNOUNCEMENTS ──────────────────────── */
+  .flower-dedication {
+    text-align: center;
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-top: 1px solid var(--rule-light);
+    border-bottom: 1px solid var(--rule-light);
+  }
+
+  .flower-dedication .attribution {
+    font-size: 0.85rem;
+    font-style: italic;
+    color: var(--ink-faint);
+    margin-top: 0.3rem;
+  }
+
+  .announce-block {
+    margin-bottom: 1rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid var(--rule-light);
+  }
+  .announce-block:last-child { border-bottom: none; }
+  .announce-block h3 {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 500;
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent-deep);
+    margin-bottom: 0.4rem;
+  }
+  .announce-block p {
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: var(--ink-light);
+    text-align: justify;
+    hyphens: auto;
+  }
+  .announce-block p.announce-detail {
+    text-align: left;
+    margin-top: 0.4rem;
+  }
+
+  /* QR code for announcement */
+  .announce-qr {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.9rem;
+  }
+  .announce-qr img {
+    width: 160px;
+    height: 160px;
+    max-width: 55%;
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    background: #fff;
+    padding: 0.5rem;
+  }
+  .announce-qr .qr-caption {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 500;
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  /* ── SERVANTS & STAFF ───────────────────── */
+  .serve-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.3rem 1.2rem;
+    margin-bottom: 1rem;
+  }
+
+  .serve-line {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: var(--ink-light);
+  }
+  .serve-line .role {
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .staff-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.2rem 1.2rem;
+  }
+
+  .staff-line {
+    font-size: 0.82rem;
+    line-height: 1.45;
+    color: var(--ink-light);
+  }
+  .staff-line .name {
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  /* ── CALENDAR ───────────────────────────── */
+  .calendar-section {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--rule-light);
+  }
+
+  .cal-line {
+    font-size: 0.88rem;
+    line-height: 1.5;
+    color: var(--ink-light);
+    margin-bottom: 0.2rem;
+  }
+  .cal-line .cal-date {
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  /* ── FOOTER ─────────────────────────────── */
+  .bulletin-footer {
+    text-align: center;
+    padding: 1.5rem 2rem 2rem;
+    border-top: 2px solid var(--ink);
+    background: var(--warm-white);
+  }
+
+  .footer-address {
+    font-family: 'EB Garamond', serif;
+    font-size: 0.85rem;
+    color: var(--ink-faint);
+    letter-spacing: 0.04em;
+  }
+
+  .footer-give {
+    margin-top: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .give-button {
+    display: inline-block;
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 500;
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--warm-white);
+    background: var(--accent);
+    padding: 0.7rem 1.6rem;
+    border-radius: 2px;
+    transition: background 0.2s ease;
+  }
+  .give-button:hover {
+    background: var(--accent-soft);
+  }
+
+  /* ── ANIMATIONS ─────────────────────────── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes gentle-bob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(5px); }
+  }
+
+  /* Scroll-triggered fade-in */
+  .reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── RESPONSIVE ─────────────────────────── */
+  @media (max-width: 500px) {
+    html { font-size: 16px; }
+    .bulletin-section { padding: 1.5rem 1.3rem; }
+    .serve-grid, .staff-grid { grid-template-columns: 1fr; }
+    .section-heading::before, .section-heading::after { width: 24px; }
+  }
+
+  @media (min-width: 641px) {
+    .scroll-container {
+      margin-top: 1.5rem;
+      margin-bottom: 1.5rem;
+      border-radius: 2px;
+    }
+  }
+
+  /* ── PRINT ──────────────────────────────── */
+  @media print {
+    body { background: #fff; }
+    .scroll-container { box-shadow: none; max-width: none; }
+    .cover-scroll-hint { display: none; }
+    .site-header { display: none; }
+    .reveal { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="https://fpccorinth.org" target="_blank" rel="noopener">First Presbyterian Church</a>
+    <a class="archive-link" href="/archive/">Archive</a>
+  </div>
+</header>
+
+<div class="scroll-container">
+
+  <!-- ═══════════ COVER ═══════════ -->
+  <section class="cover-section">
+    <div class="cover-rule cover-rule--top"></div>
+
+    <h1 style="margin:0; line-height:0;"><img class="cover-logo" src="/images/fpc-logo-2026.png" alt="First Presbyterian Church"></h1>
+    <div class="cover-ornament"></div>
+    <p class="cover-date">{{ date_long }}</p>
+    <p class="cover-occasion">{{ subtitle }}</p>
+    <p class="cover-mission">{{ lit.mission }}</p>
+
+    <div class="cover-scroll-hint">
+      <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+
+    <div class="cover-rule cover-rule--bottom"></div>
+    <p class="cover-footer">{{ lit.denomination }}</p>
+  </section>
+
+  <!-- ═══════════ WELCOME ═══════════ -->
+  <section class="bulletin-section welcome-section">
+    <div class="reveal">
+      <p class="section-heading">Welcome</p>
+
+      <div class="welcome-block">
+        <h3>We Are Glad You Are Here!</h3>
+{%- for p in welcome.welcome %}
+        <p{% if not loop.first %} style="margin-top:0.5rem;"{% endif %}>{{ p }}</p>
+{%- endfor %}
+      </div>
+
+      <div class="welcome-block">
+        <h3>Children &amp; Nursery</h3>
+{%- for p in children_paragraphs %}
+        <p{% if not loop.first %} style="margin-top:0.5rem;"{% endif %}>{{ p }}</p>
+{%- endfor %}
+      </div>
+
+      <div class="welcome-block">
+        <h3>Our Vision &amp; Mission</h3>
+{%- for p in welcome.vision_mission %}
+        <p{% if not loop.first %} style="margin-top:0.5rem;"{% endif %}>{{ p }}</p>
+{%- endfor %}
+      </div>
+
+      <div class="welcome-block">
+        <h3>Connect With Us</h3>
+        <p class="connect-info">
+          <strong>Website:</strong> {{ lit.contact.website }}<br>
+          <strong>Phone:</strong> {{ lit.contact.phone }}<br>
+          <strong>Address:</strong> {{ lit.contact.address }}
+        </p>
+      </div>
+    </div>
+  </section>
+{% for sec in scroll_sections %}
+
+  <!-- ═══════════ LITURGY{% if sec.title %}: {{ sec.title | upper }}{% endif %} ═══════════ -->
+  <section class="bulletin-section">
+    <div class="reveal">
+{%- if loop.first %}
+      <div class="liturgy-header">
+        <p class="liturgy-main-title">Liturgy for the Worship of God</p>
+        <p class="liturgy-date-line">{{ date_long }}</p>
+        <p class="liturgy-standing-note">{{ lit.standing_note }}</p>
+      </div>
+{%- endif %}
+{%- if sec.title %}
+
+      <div class="liturgy-divider">{{ sec.title }}</div>
+{%- endif %}
+{%- if loop.first %}
+      <p class="liturgy-standing-note" style="margin:0 0 1rem; font-size:0.9rem; color:var(--ink-light); line-height:1.5;">{{ liturgy_intro }}</p>
+{%- endif %}
+{%- for entry in sec["items"] %}
+
+      <div class="worship-item">
+{{- heading(entry.item) }}
+{{- body(entry.item) }}
+{%- if entry.note %}
+{{ note(entry.note) }}
+{%- endif %}
+      </div>
+{%- endfor %}
+    </div>
+  </section>
+{%- endfor %}
+
+  <!-- ═══════════ SERMON NOTES ═══════════ -->
+  <section class="bulletin-section sermon-section">
+    <div class="reveal">
+      <p class="section-heading">Sermon Notes</p>
+{%- if sermon.missing %}
+      <!-- MISSING: Sermon Notes docx had not arrived when this was built; fill-in page used. -->
+{%- endif %}
+      <p class="sermon-title">{{ sermon.title | q }}</p>
+      <p class="sermon-text-ref">{{ sermon.preacher }} &nbsp;&middot;&nbsp; {{ sermon.scripture }}</p>
+{% for p in sermon.intro %}
+{%- if loop.last %}
+      <p class="sermon-intro">{{ p }}</p>
+{%- else %}
+      <p class="sermon-intro" style="margin-bottom:0.6rem; padding-bottom:0; border-bottom:none;">{{ p }}</p>
+{%- endif %}
+{%- endfor %}
+{% if sermon_points %}
+{%- for pt in sermon_points %}
+
+      <p class="sermon-point">{{ pt.heading }}{% if pt.ref %} <span class="pt-ref">({{ pt.ref }})</span>{% endif %}</p>
+{%- if pt.quote %}
+      <p class="scripture-quote">{{ pt.quote }}</p>
+{%- endif %}
+{%- if pt.sub %}
+      <ul class="sub-list">
+{%- for s in pt.sub %}
+        <li>{{ s }}</li>
+{%- endfor %}
+      </ul>
+{%- endif %}
+      <div class="notes-lines">
+{%- for _ in range(pt.lines) %}
+        <div class="notes-line"></div>
+{%- endfor %}
+      </div>
+{%- endfor %}
+{%- else %}
+      <div class="notes-lines">
+{%- for _ in range(sermon.blank_lines) %}
+        <div class="notes-line"></div>
+{%- endfor %}
+      </div>
+{%- endif %}
+    </div>
+  </section>
+{% if week.announcements or flowers %}
+
+  <!-- ═══════════ ANNOUNCEMENTS ═══════════ -->
+  <section class="bulletin-section">
+    <div class="reveal">
+      <p class="section-heading">Announcements</p>
+{%- for a in week.announcements %}
+
+      <div class="announce-block">
+        <h3>{{ a.title }}</h3>
+        <p>{{ a.body }}</p>
+{%- if a.detail %}
+        <p class="announce-detail">{{ a.detail }}</p>
+{%- endif %}
+{%- if a.qr %}
+        <div class="announce-qr">
+          <img src="{{ a.qr.src }}" alt="{{ a.qr.caption }}">
+          <span class="qr-caption">{{ a.qr.caption }}</span>
+        </div>
+{%- endif %}
+      </div>
+{%- endfor %}
+{%- if flowers %}
+
+      <div class="flower-dedication">
+        <p><strong>Flower Dedication</strong> &mdash; The flowers adorning the sanctuary today are given {{ flowers.given }}</p>
+{%- if flowers.message %}
+        <p class="attribution" style="margin-top:0.5rem;">{{ flowers.message }}</p>
+{%- endif %}
+{%- if flowers.quote %}
+        <p class="attribution" style="margin-top:0.5rem;">{{ flowers.quote }}{% if flowers.reference %}<br>{{ flowers.reference }}{% endif %}</p>
+{%- endif %}
+{%- if flowers.closing or flowers.signed %}
+        <p class="attribution" style="margin-top:0.5rem;">{{ flowers.closing or "" }}{% if flowers.closing and flowers.signed %}<br>{% endif %}{{ flowers.signed or "" }}</p>
+{%- endif %}
+      </div>
+{%- endif %}
+    </div>
+  </section>
+{% endif %}
+
+  <!-- ═══════════ THOSE WHO SERVE / STAFF ═══════════ -->
+  <section class="bulletin-section">
+    <div class="reveal">
+      <p class="section-heading">Those Who Serve Today</p>
+
+      <div class="serve-grid">
+{%- for role, who in serve_scroll %}
+        <p class="serve-line"><span class="role">{{ role }}</span> &mdash; {{ who }}</p>
+{%- endfor %}
+      </div>
+
+      <p class="section-heading" style="margin-top:1.2rem;">Church Staff</p>
+
+      <div class="staff-grid">
+{%- for s in staff %}
+        <p class="staff-line"><span class="name">{{ s.name }}</span> &mdash; {{ s.role }}</p>
+{%- endfor %}
+      </div>
+
+      <div class="calendar-section">
+        <p class="section-heading" style="margin-top:0;">The Church Calendar</p>
+{%- for c in calendar %}
+        <p class="cal-line"><span class="cal-date">{{ c.label }}</span> &nbsp;{{ c.text }}</p>
+{%- endfor %}
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ FOOTER ═══════════ -->
+  <footer class="bulletin-footer">
+    <p class="footer-address">{{ lit.address_line }}</p>
+    <div class="footer-give">
+      <a class="give-button" href="{{ lit.give_url }}" target="_blank" rel="noopener">Give Online</a>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  // Scroll-triggered reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Weeks{% endblock %}
+{% block content %}
+<h1>Sunday bulletins</h1>
+
+<div class="card">
+  <form method="post" action="/weeks/new" class="row">
+    <div><label for="date">Start a week</label>
+      <select id="date" name="date">{% for d in sundays %}<option value="{{ d }}">{{ d | long_date }}</option>{% endfor %}</select></div>
+    <div class="narrow"><button type="submit">Create week.json</button></div>
+    <div class="muted" style="flex:2 1 280px">Pre-fills the roster row and the calendar lines from the tables. If the week already exists you are taken to it.</div>
+  </form>
+</div>
+
+<table>
+  <thead><tr><th>Sunday</th><th>Subtitle</th><th>Sermon</th><th>Status</th><th></th></tr></thead>
+  <tbody>
+  {% for w in weeks %}
+    <tr>
+      <td><a href="/weeks/{{ w.date }}">{{ w.date | long_date }}</a></td>
+      <td>{{ w.subtitle }}</td>
+      <td>{{ w.sermon }}</td>
+      <td><span class="pill {{ w.status }}">{{ w.status }}</span>{% if w.published_commit %} <code>{{ w.published_commit }}</code>{% endif %}</td>
+      <td><a class="muted" href="{{ site_url }}/scroll/{{ w.date }}/" target="_blank" rel="noopener">live page ↗</a></td>
+    </tr>
+  {% else %}
+    <tr><td colspan="5" class="muted">No week.json files yet.</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

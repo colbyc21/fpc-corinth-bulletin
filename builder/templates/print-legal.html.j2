@@ -1,0 +1,752 @@
+{#- Print booklet: 14x8.5in legal landscape, 2 sheets, saddle-stitched → 8 panels.
+    CSS head is the 2026-11-01 file verbatim (plus "Liberation Serif" in the stack so
+    Ubuntu renders do not depend on fontconfig aliases, and .sacrament-sub always present). -#}
+{%- macro star(it) -%}{% if it.star %}*{% endif %}{%- endmacro -%}
+{%- macro heading(it) -%}
+{%- set cls = "worship-heading" + (" sacrament-sub" if it.sub else "") -%}
+{%- if it.type == "hymn" %}
+        <div class="split-line">
+          <p class="{{ cls }}" style="white-space:nowrap;">{{ star(it) }}{{ it.title }}: &nbsp;#{{ it.number }}</p>
+          <span class="attr">{{ it.piece | q }}</span>
+        </div>
+{%- elif it.type == "music" %}
+        <div class="split-line">
+          <p class="{{ cls }}">{{ star(it) }}{{ it.title }}</p>
+          {% if it.credit %}<span class="attr" style="text-align:right;">{{ it.piece | q }}<br><span style="font-size:9pt;">{{ it.credit }}</span></span>{% else %}<span class="attr">{{ it.piece | q }}</span>{% endif %}
+        </div>
+{%- elif it.type == "speaker" %}
+        <div class="split-line">
+          <p class="{{ cls }}">{{ star(it) }}{{ it.title }}</p>
+          <span class="attr" style="text-align:right;">{{ it.name }}{% if it.role %}<br><span style="font-size:9pt;">{{ it.role }}</span>{% endif %}</span>
+        </div>
+{%- elif it.type == "reading" %}
+        <div class="split-line">
+          <p class="{{ cls }}">{{ star(it) }}{{ it.title }}</p>
+          <span class="attr">{{ it.ref }}{% if week.pew_bible_page %} &middot; Pew Bible, p. {{ week.pew_bible_page }}{% endif %}</span>
+        </div>
+{%- elif it.type == "sermon" %}
+        <div class="split-line">
+          <p class="{{ cls }}">{{ it.title }}: <span style="font-weight:normal; font-style:italic; font-size:10pt;">{{ sermon.title | q }}</span></p>
+          <span class="attr">{{ sermon.preacher }}</span>
+        </div>
+{%- elif it.ref %}
+        <p class="{{ cls }}">{{ star(it) }}{{ it.title }}: <span style="font-weight:normal;">{{ it.ref }}</span></p>
+{%- else %}
+        <p class="{{ cls }}">{{ star(it) }}{{ it.title }}</p>
+{%- endif %}
+{%- endmacro -%}
+{%- macro body(it) -%}
+{%- if it.type == "responsive" %}
+        <div class="responsive">
+{%- for ln in it.lines %}
+          <p class="{{ 'all-line' if ln.who == 'All' else 'leader-line' }}"><span class="{{ 'all-label' if ln.who == 'All' else 'leader-label' }}">{{ ln.who }}:</span> {{ ln.text }}</p>
+{%- endfor %}
+        </div>
+{%- elif it.type == "corporate" and it.text %}
+        <p class="worship-body corporate">
+          {{ it.text }}
+        </p>
+{%- elif it.text %}
+        <p class="worship-body">{{ it.text }}</p>
+{%- endif %}
+{%- if it.silent_confession %}
+        <p class="silent-confession">Silent Confession</p>
+{%- endif %}
+{%- if it.creed_note %}
+        <p class="creed-note">{{ it.creed_note }}</p>
+{%- endif %}
+{%- endmacro -%}
+{%- macro note_cell(cell) -%}
+{%- if cell.span > 1 %}
+      <div class="lg-note" style="grid-row: span {{ cell.span }}; align-self: {{ cell.align or 'start' }};">
+{%- else %}
+      <div class="lg-note">
+{%- endif %}
+{%- for n in cell.notes %}
+        <span class="note-label"{% if not loop.first %} style="margin-top:0.12in;"{% endif %}>{{ n.label }}</span>
+        {{ n.text }}
+{%- endfor %}
+      </div>
+{%- endmacro -%}
+{%- macro liturgy_page(page) -%}
+{%- for cell in pages[page] %}
+{%- if cell.kind == "section" %}
+{%- if page == "p3" and loop.first %}
+      <div class="lg-full">
+        <p class="liturgy-title">{{ lit.title }}</p>
+        <p class="liturgy-date">{{ date_long }}</p>
+        <p class="liturgy-note" style="margin-bottom:0.03in;">{{ lit.standing_note }}</p>
+        <hr class="thin">
+        <p class="liturgy-section-heading">{{ cell.item.title }}</p>
+        <hr class="thin">
+        <p class="liturgy-note" style="font-size:9pt; line-height:1.3; margin:0.04in 0.1in 0.06in;">{{ liturgy_intro }}</p>
+      </div>
+{%- else %}
+
+      <div class="lg-full">
+        <p class="liturgy-section-heading">{{ cell.item.title }}</p>
+        <hr class="thin">
+      </div>
+{%- endif %}
+{%- elif cell.kind == "main" %}
+
+      <div class="lg-main worship-item">
+{{- heading(cell.item) }}
+{{- body(cell.item) }}
+      </div>
+{%- elif cell.kind == "note" %}
+{{ note_cell(cell) }}
+{%- else %}
+      <div class="lg-note"></div>
+{%- endif %}
+{%- endfor %}
+{%- endmacro -%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Bulletin (Legal Fold) — {{ date_long }}</title>
+<style>
+  /* ── Reset & Base ─────────────────────────────────── */
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: "Times New Roman", "Liberation Serif", "Georgia", serif;
+    font-size: 11.5pt;
+    line-height: 1.35;
+    color: #000;
+    background: #fff;
+  }
+
+  /* ── Page Setup (14x8.5 landscape; nested 2-sheet saddle stitch) ── */
+  @page {
+    size: 14in 8.5in;
+    margin: 0;
+  }
+
+  .sheet {
+    width: 14in;
+    height: 8.5in;
+    display: flex;
+    overflow: hidden;
+    page-break-after: always;
+  }
+  .sheet:last-child { page-break-after: auto; }
+
+  .panel {
+    width: 7in;
+    height: 8.5in;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .panel-left  { padding: 0.28in 0.22in 0.32in 0.4in; }
+  .panel-right { padding: 0.28in 0.4in 0.32in 0.22in; }
+
+  /* ── Utility ──────────────────────────────────────── */
+  .text-center { text-align: center; }
+  .bold   { font-weight: bold; }
+  .italic { font-style: italic; }
+
+  .split-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.1in;
+  }
+  .split-line .attr {
+    font-weight: normal;
+    font-size: 10.5pt;
+    white-space: nowrap;
+    font-style: italic;
+  }
+
+  hr {
+    border: none;
+    border-top: 1.5pt solid #000;
+    margin: 0.05in 0;
+  }
+  hr.thin { border-top-width: 0.75pt; }
+
+  /* ── FRONT COVER ──────────────────────────────────── */
+  .cover {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    text-align: center;
+  }
+  .cover .spacer { flex: 1; }
+  .cover .cover-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .cover .subtitle {
+    font-size: 11pt;
+    letter-spacing: 0.08em;
+    margin-top: 0.1in;
+  }
+  .cover .date {
+    font-size: 15pt;
+    margin-top: 0.14in;
+  }
+  .cover .mission {
+    font-style: italic;
+    font-size: 12pt;
+    margin-top: 0.22in;
+  }
+  .cover .cover-footer {
+    font-style: italic;
+    font-size: 9.5pt;
+    margin-bottom: 0.05in;
+  }
+  .cover .logo-wrap { height: 2.3in; margin-bottom: 0.18in; }
+  .cover .logo-wrap img { height: 100%; width: auto; }
+
+  /* ── BACK PANEL ───────────────────────────────────── */
+  .back-panel {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    text-align: justify;
+  }
+  .back-panel h3 {
+    font-size: 11pt;
+    text-align: center !important;
+    margin-bottom: 0.03in;
+  }
+  .back-panel .section { margin-bottom: 0.04in; }
+  .back-panel hr { margin: 0.03in 0; }
+  .staff-line { font-size: 8.5pt; line-height: 1.28; }
+  .staff-line .name { font-weight: bold; }
+  .serve-line {
+    font-size: 9pt;
+    line-height: 1.3;
+    margin-bottom: 1pt;
+  }
+  .serve-line .role { font-weight: bold; }
+  .cal-line { font-size: 8.5pt; line-height: 1.35; }
+  .cal-line .cal-date { font-weight: bold; }
+  .cal-cols {
+    display: flex;
+    gap: 0.18in;
+  }
+  .cal-cols > div { flex: 1; }
+  .announce-line {
+    font-size: 8.5pt;
+    line-height: 1.26;
+    margin-bottom: 2pt;
+    text-align: justify;
+  }
+  .announce-line .a-head { font-weight: bold; }
+
+  /* ── WELCOME PAGE ─────────────────────────────────── */
+  .welcome-page {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  .welcome-page h2 {
+    font-size: 16pt;
+    text-align: center;
+    margin-bottom: 0.12in;
+  }
+  .welcome-page h3 {
+    font-size: 12pt;
+    margin-bottom: 0.05in;
+  }
+  .welcome-page p {
+    font-size: 10.5pt;
+    line-height: 1.4;
+    text-align: justify;
+    margin-bottom: 0.08in;
+  }
+  .welcome-section { margin-bottom: 0.12in; }
+
+  /* ── LITURGY PAGES (grid with aligned notes) ─────── */
+  .liturgy-grid {
+    display: grid;
+    align-content: start;
+    height: 100%;
+    row-gap: 0.04in;
+    grid-auto-flow: dense;
+  }
+  .liturgy-grid.spread { align-content: space-between; }
+  .liturgy-grid .worship-item { margin-bottom: 0; }
+  .liturgy-grid.notes-right {
+    grid-template-columns: 1fr 1.3in;
+    column-gap: 0.08in;
+  }
+  .liturgy-grid.notes-left {
+    grid-template-columns: 1.3in 1fr;
+    column-gap: 0.1in;
+  }
+
+  .notes-right .lg-main { grid-column: 1; }
+  .notes-left  .lg-main { grid-column: 2; }
+
+  .lg-note {
+    font-size: 7.5pt;
+    line-height: 1.25;
+    color: #555;
+    align-self: start;
+    padding-top: 1pt;
+  }
+  .notes-right .lg-note {
+    grid-column: 2;
+    border-left: 0.5pt solid #bbb;
+    padding-left: 0.06in;
+  }
+  .notes-left .lg-note {
+    grid-column: 1;
+    border-right: 0.5pt solid #bbb;
+    padding-right: 0.06in;
+    text-align: right;
+  }
+  .lg-note .note-label {
+    font-weight: bold;
+    font-size: 7pt;
+    text-transform: uppercase;
+    color: #777;
+    display: block;
+    margin-bottom: 1pt;
+  }
+  .lg-note:empty { border: none; }
+
+  .lg-full { grid-column: 1 / -1; }
+
+  .liturgy-title {
+    font-size: 14pt;
+    font-weight: bold;
+    font-style: italic;
+    text-align: center;
+    margin-bottom: 0.02in;
+  }
+  .liturgy-date {
+    font-size: 11pt;
+    text-align: center;
+    margin-bottom: 0.03in;
+  }
+  .liturgy-note {
+    font-size: 9pt;
+    font-style: italic;
+    margin-bottom: 0.06in;
+    text-align: center;
+  }
+
+  .worship-item { margin-bottom: 0.04in; }
+  .worship-heading {
+    font-weight: bold;
+    font-size: 10.5pt;
+  }
+  .worship-body {
+    font-size: 10.5pt;
+    padding-left: 0.06in;
+    margin-top: 2pt;
+    text-align: justify;
+  }
+  .worship-body.corporate { font-style: italic; }
+  .responsive .leader-line,
+  .responsive .all-line {
+    padding-left: 0.06in;
+    font-size: 10.5pt;
+    text-align: justify;
+  }
+  .responsive .all-line { font-style: italic; }
+  .responsive .leader-label { font-weight: normal; }
+  .responsive .all-label { font-weight: bold; }
+
+  .silent-confession {
+    font-weight: bold;
+    font-style: italic;
+    font-size: 9.5pt;
+    text-align: left;
+    padding-left: 0.06in;
+    margin: 2pt 0;
+  }
+
+  .creed-note {
+    font-size: 8pt;
+    font-style: italic;
+    color: #444;
+    padding-left: 0.06in;
+    margin-top: 1pt;
+  }
+
+  /* Section divider */
+  .liturgy-section-heading {
+    font-size: 11pt;
+    font-weight: bold;
+    text-align: center;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin: 0.06in 0 0.04in;
+    color: #333;
+  }
+
+  /* Communion sub-items */
+  .sacrament-sub {
+    padding-left: 0.18in;
+  }
+
+  /* ── SERMON NOTES PAGE ────────────────────────────── */
+  .sermon-notes-page {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  .sermon-notes-page h2 {
+    font-size: 16pt;
+    text-align: center;
+    margin-bottom: 0.06in;
+  }
+  .sermon-notes-page .sermon-title {
+    font-size: 13pt;
+    font-style: italic;
+    text-align: center;
+    margin-bottom: 0.04in;
+  }
+  .sermon-notes-page .sermon-text {
+    font-size: 11pt;
+    text-align: center;
+    margin-bottom: 0.1in;
+  }
+  .sermon-intro {
+    font-size: 9.5pt;
+    line-height: 1.4;
+    text-align: justify;
+    margin-bottom: 0.1in;
+    padding-bottom: 0.06in;
+    border-bottom: 0.5pt solid #ccc;
+  }
+  .sermon-outline-pt {
+    font-size: 10.5pt;
+    font-weight: bold;
+    margin-top: 0.05in;
+    margin-bottom: 0.03in;
+  }
+  .notes-line {
+    border-bottom: 0.5pt solid #ccc;
+    height: 0.32in;
+    width: 100%;
+  }
+  .scripture-quote {
+    font-size: 9pt;
+    font-style: italic;
+    color: #444;
+    padding-left: 0.15in;
+    margin-bottom: 0.04in;
+  }
+
+  /* ── Screen preview ───────────────────────────────── */
+  @media screen {
+    body { background: #888; }
+    .sheet {
+      background: #fff;
+      margin: 0.25in auto;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+    }
+    .panel-left { border-right: 1px dashed #ccc; }
+
+    .panel::before {
+      content: attr(data-page-label);
+      position: absolute;
+      top: 4px;
+      right: 8px;
+      font-size: 8pt;
+      color: #aaa;
+      font-family: sans-serif;
+    }
+    .panel-left::before {
+      right: auto;
+      left: 8px;
+    }
+  }
+{% if overrides_css %}
+  /* ── Layout overrides recorded in week.json ───────── */
+{{ overrides_css | safe }}
+{% endif %}
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════════════════
+     SHEET 1 — OUTSIDE  (Back Cover left | Front Cover right)
+     ════════════════════════════════════════════════════════════ -->
+<div class="sheet">
+
+  <!-- ── LEFT: PAGE 8 — BACK COVER ── -->
+  <div class="panel panel-left" id="page-8" data-page-label="Page 8 – Back Cover">
+    <div class="back-panel">
+      <hr>
+{% if flowers %}
+
+      <div class="section text-center">
+        <h3>Flower Dedication</h3>
+        <p style="font-size:9.5pt; line-height:1.32; text-align:center;">
+          The flowers adorning the sanctuary today are given {{ flowers.given }}
+{%- if flowers.message %}
+          <span style="font-style:italic; display:block; font-size:9pt; margin-top:1pt;">{{ flowers.message }}</span>
+{%- endif %}
+{%- if flowers.quote %}
+          <span style="font-style:italic; display:block; font-size:9pt; margin-top:1pt;">{{ flowers.quote }}{% if flowers.reference %} &mdash; {{ flowers.reference }}{% endif %}</span>
+{%- endif %}
+{%- if flowers.signed or flowers.closing %}
+          <span style="font-style:italic; display:block;">{{ flowers.closing or "" }}{% if flowers.closing and flowers.signed %} {% endif %}{{ flowers.signed or "" }}</span>
+{%- endif %}
+        </p>
+      </div>
+
+      <hr class="thin">
+{% endif %}
+{% if week.announcements %}
+
+      <div class="section">
+        <h3>Announcements</h3>
+        <div style="display:flex; gap:0.18in; align-items:flex-start;">
+{%- for col in announcement_cols %}
+          <div style="flex:1;">
+{%- for a in col %}
+            <p class="announce-line"><span class="a-head">{{ a.title }}.</span> {{ a.body }}{% if a.print_suffix %} {{ a.print_suffix }}{% endif %}</p>
+{%- endfor %}
+          </div>
+{%- endfor %}
+        </div>
+      </div>
+
+      <hr class="thin">
+{% endif %}
+
+      <div class="section">
+        <h3>Those Who Serve Today</h3>
+        <div style="display:flex; gap:0.2in;">
+{%- for col in serve_print %}
+          <div style="flex:1;">
+{%- for role, who in col %}
+            <p class="serve-line"><span class="role">{{ role }}</span> &mdash; {{ who }}</p>
+{%- endfor %}
+          </div>
+{%- endfor %}
+        </div>
+      </div>
+
+      <hr class="thin">
+
+      <div class="section">
+        <h3>Church Staff</h3>
+        <div style="display:flex; gap:0.2in;">
+{%- for col in staff_cols %}
+          <div style="flex:1;">
+{%- for s in col %}
+            <p class="staff-line"><span class="name">{{ s.name }}</span> - {{ s.role }}</p>
+{%- endfor %}
+          </div>
+{%- endfor %}
+        </div>
+      </div>
+
+      <hr class="thin">
+
+      <div class="section" style="display:flex; gap:0.15in; margin-top:0.04in;">
+        <div style="flex:2;">
+          <h3>The Church Calendar</h3>
+{%- for c in calendar %}
+          <p class="cal-line"><span class="cal-date">{{ c.label }}</span> &nbsp;{{ c.text }}</p>
+{%- endfor %}
+        </div>
+        <div class="text-center">
+          <h3>Online Giving</h3>
+          <img src="../../qrcode.png" alt="QR Code" style="width:0.9in; height:0.9in; margin:0.04in auto; display:block;">
+          <p style="font-size:8pt;">Scan to give online</p>
+        </div>
+      </div>
+
+      <div style="flex:1;"></div>
+
+      <div>
+        <hr>
+        <p class="text-center" style="font-size:8.5pt; padding-top:0.04in;">
+          {{ lit.address_line }}
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── RIGHT: PAGE 1 — FRONT COVER ── -->
+  <div class="panel panel-right" id="page-1" data-page-label="Page 1 – Front Cover">
+    <div class="cover">
+      <hr style="width:100%;">
+
+      <div class="spacer"></div>
+
+      <div class="cover-group">
+        <div class="logo-wrap">
+          <img src="logo-cover.png" alt="First Presbyterian Church">
+        </div>
+        <hr style="border-top:2pt solid #000; width:2.5in;">
+        <p class="date">{{ date_long }}</p>
+        <p class="subtitle">{{ subtitle }}</p>
+        <p class="mission">{{ lit.mission }}</p>
+      </div>
+
+      <div class="spacer"></div>
+
+      <hr style="width:100%;">
+      <p class="cover-footer">{{ lit.denomination }}</p>
+    </div>
+  </div>
+
+</div><!-- end sheet 1 outside -->
+
+
+<!-- ════════════════════════════════════════════════════════════
+     SHEET 1 — INSIDE  (Welcome left | Sermon Notes right)
+     ════════════════════════════════════════════════════════════ -->
+<div class="sheet">
+
+  <!-- ── LEFT: PAGE 2 — WELCOME ── -->
+  <div class="panel panel-left" id="page-2" data-page-label="Page 2 – Welcome">
+    <div class="welcome-page">
+      <hr>
+      <h2 style="margin-top:0.12in;">Welcome</h2>
+
+      <div class="welcome-section">
+        <h3>We Are Glad You Are Here!</h3>
+{%- for p in welcome.welcome %}
+        <p>
+          {{ p }}
+        </p>
+{%- endfor %}
+      </div>
+
+      <div class="welcome-section">
+        <h3>Children &amp; Nursery</h3>
+{%- for p in children_paragraphs %}
+        <p>
+          {{ p }}
+        </p>
+{%- endfor %}
+      </div>
+
+      <div class="welcome-section">
+        <h3>Our Vision &amp; Mission</h3>
+{%- for p in welcome.vision_mission %}
+        <p>
+          {{ p }}
+        </p>
+{%- endfor %}
+      </div>
+
+      <div class="welcome-section">
+        <h3>Connect With Us</h3>
+        <p style="font-size:10.5pt;">
+          <span class="bold">Website:</span> {{ lit.contact.website }}<br>
+          <span class="bold">Phone:</span> {{ lit.contact.phone }}<br>
+          <span class="bold">Address:</span> {{ lit.contact.address }}
+        </p>
+      </div>
+
+      <div style="flex:1;"></div>
+      <hr>
+    </div>
+  </div>
+
+  <!-- ── RIGHT: PAGE 7 — SERMON NOTES ── -->
+  <div class="panel panel-right" id="page-7" data-page-label="Page 7 – Sermon Notes">
+{%- if sermon.missing %}
+    <!-- MISSING: Sermon Notes docx had not arrived when this was built; fill-in page used. -->
+{%- endif %}
+    <div class="sermon-notes-page">
+      <hr>
+      <h2 style="margin-top:0.08in; margin-bottom:0.03in;">Sermon Notes</h2>
+      <p class="sermon-title" style="margin-bottom:0.02in;">{{ sermon.title | q }}</p>
+      <p class="sermon-text" style="margin-bottom:0;">{{ sermon.preacher }} &nbsp;&middot;&nbsp; {{ sermon.scripture }}</p>
+
+      <hr class="thin" style="margin-bottom:0.06in;">
+{% for p in sermon.intro %}
+{%- if loop.last %}
+      <p class="sermon-intro">
+{%- else %}
+      <p class="sermon-intro" style="margin-bottom:0.04in; padding-bottom:0; border-bottom:none;">
+{%- endif %}
+        {{ p }}
+      </p>
+{%- endfor %}
+{% if sermon_points %}
+{%- for pt in sermon_points %}
+
+      <p class="sermon-outline-pt">{{ pt.heading }}{% if pt.ref %} <span style="font-weight:normal; font-style:italic; font-size:9.5pt;">({{ pt.ref }})</span>{% endif %}</p>
+{%- if pt.quote %}
+      <p class="scripture-quote">{{ pt.quote }}</p>
+{%- endif %}
+{%- for s in pt.sub or [] %}
+      <p class="scripture-quote" style="font-style:normal;">{{ s }}</p>
+{%- endfor %}
+{%- for _ in range(pt.lines) %}
+      <div class="notes-line"></div>
+{%- endfor %}
+{%- endfor %}
+{%- else %}
+{%- for _ in range(sermon.blank_lines) %}
+      <div class="notes-line"></div>
+{%- endfor %}
+{%- endif %}
+
+      <div style="flex:1;"></div>
+      <hr>
+    </div>
+  </div>
+
+</div><!-- end sheet 1 inside -->
+
+
+<!-- ════════════════════════════════════════════════════════════
+     SHEET 2 — OUTSIDE  (Liturgy p6 left | Liturgy p3 right)
+     ════════════════════════════════════════════════════════════ -->
+<div class="sheet">
+
+  <!-- ── LEFT: PAGE 6 — LITURGY (end) ── -->
+  <div class="panel panel-left" id="page-6" data-page-label="Page 6 – Liturgy (end)">
+    <div class="{{ pages_meta.p6.classes }}"{% if pages_meta.p6.style %} style="{{ pages_meta.p6.style }}"{% endif %}>
+{{ liturgy_page("p6") }}
+
+    </div>
+  </div>
+
+  <!-- ── RIGHT: PAGE 3 — LITURGY (start) ── -->
+  <div class="panel panel-right" id="page-3" data-page-label="Page 3 – Liturgy (start)">
+    <div class="{{ pages_meta.p3.classes }}"{% if pages_meta.p3.style %} style="{{ pages_meta.p3.style }}"{% endif %}>
+{{ liturgy_page("p3") }}
+
+    </div>
+  </div>
+
+</div><!-- end sheet 2 outside -->
+
+
+<!-- ════════════════════════════════════════════════════════════
+     SHEET 2 — INSIDE  (Liturgy p4 left | Liturgy p5 right)
+     ════════════════════════════════════════════════════════════ -->
+<div class="sheet">
+
+  <!-- ── LEFT: PAGE 4 — LITURGY (continued) ── -->
+  <div class="panel panel-left" id="page-4" data-page-label="Page 4 – Liturgy (continued)">
+    <div class="{{ pages_meta.p4.classes }}"{% if pages_meta.p4.style %} style="{{ pages_meta.p4.style }}"{% endif %}>
+{{ liturgy_page("p4") }}
+
+    </div>
+  </div>
+
+  <!-- ── RIGHT: PAGE 5 — LITURGY (continued) ── -->
+  <div class="panel panel-right" id="page-5" data-page-label="Page 5 – Liturgy (continued)">
+    <div class="{{ pages_meta.p5.classes }}"{% if pages_meta.p5.style %} style="{{ pages_meta.p5.style }}"{% endif %}>
+{{ liturgy_page("p5") }}
+
+    </div>
+  </div>
+
+</div><!-- end sheet 2 inside -->
+
+</body>
+</html>

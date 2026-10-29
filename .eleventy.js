@@ -10,6 +10,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ "logo.png": "images/logo.png" });
   eleventyConfig.addPassthroughCopy({ "qrcode.png": "images/qrcode.png" });
   eleventyConfig.addPassthroughCopy("src/scroll");
+  eleventyConfig.addPassthroughCopy({ "src/calendar.ics": "calendar.ics" });
 
   // Create a collection of all bulletins sorted by date (newest first)
   eleventyConfig.addCollection("bulletins", function(collectionApi) {

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Standing text{% endblock %}
+{% block content %}
+<h1>Standing text</h1>
+<p class="muted">Text that rarely changes: welcome paragraphs (regular and school-break variants), staff list, liturgy header, pew Bible pages, hymn titles. Saved copies live in the database; the files under <code>builder/data/standing/</code> are the seed.</p>
+<div class="two">
+  <div class="card">
+    {% for k in keys %}<div><a href="/standing/{{ k }}"{% if k == key %} style="font-weight:600"{% endif %}>{{ k }}</a></div>{% endfor %}
+  </div>
+  <div class="card" style="grid-column: span 1">
+    {% if key %}
+    <form method="post" action="/standing/{{ key }}">
+      <label>{{ key }}.json</label>
+      <textarea class="code" name="raw" spellcheck="false">{{ raw }}</textarea>
+      <p style="margin-top:0.6rem"><button type="submit">Save</button></p>
+    </form>
+    {% else %}<p class="muted">Pick an item on the left.</p>{% endif %}
+  </div>
+</div>
+{% endblock %}

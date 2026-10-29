@@ -1,0 +1,421 @@
+"""FastAPI app for the bulletin builder (Phase 1 surface).
+
+Phase 1 ships the deterministic core behind a login: a dashboard of weeks,
+a week page (raw week.json editor, build, proof panels, scroll preview,
+publish), and the admin screens for rosters, events, standing text and
+users. The volunteer form, chat and job progress arrive in Phase 3.
+
+Run:  uvicorn builder.app.main:app --host 127.0.0.1 --port 8710
+"""
+from __future__ import annotations
+
+import json
+import logging
+import re
+from datetime import date, timedelta
+from pathlib import Path
+
+from fastapi import Depends, FastAPI, Form, HTTPException, Request
+from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, RedirectResponse, Response
+from fastapi.templating import Jinja2Templates
+
+from builder import config
+from builder.app import auth
+from builder.pipeline import build as buildmod, calendar_feed, dates, publish as publishmod
+from builder.pipeline import week as weekmod
+from builder.pipeline.store import ROLE_LABELS, ROSTER_ROLES, USER_ROLES, Store
+
+logging.basicConfig(level=logging.INFO, format="%(asctime)s %(name)s %(levelname)s %(message)s")
+log = logging.getLogger("builder.app")
+
+app = FastAPI(title="FPC Bulletin Builder", docs_url=None, redoc_url=None, openapi_url=None)
+templates = Jinja2Templates(directory=str(Path(__file__).parent / "templates"))
+templates.env.filters["long_date"] = dates.long_date
+templates.env.filters["month_day"] = dates.month_day
+templates.env.globals.update(ROLE_LABELS=ROLE_LABELS, ROSTER_ROLES=ROSTER_ROLES, USER_ROLES=USER_ROLES,
+                             netlify_url=config.NETLIFY_DEPLOYS_URL, site_url=config.SITE_URL)
+
+DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
+_store: Store | None = None
+
+
+def store() -> Store:
+    global _store
+    if _store is None:
+        config.ensure_dirs()
+        _store = Store()
+        _store.seed_if_empty()
+    return _store
+
+
+def current_user(request: Request) -> dict | None:
+    return auth.user_from_request(request, store())
+
+
+def need(role: str):
+    def dep(request: Request, user: dict | None = Depends(current_user)) -> dict:
+        if user is None:
+            raise HTTPException(status_code=401)
+        return auth.require_role(user, role)
+    return dep
+
+
+@app.exception_handler(HTTPException)
+async def http_errors(request: Request, exc: HTTPException):
+    if exc.status_code == 401:
+        return RedirectResponse(f"/login?next={request.url.path}", status_code=303)
+    return templates.TemplateResponse(request, "error.html", {"user": current_user(request), "spend": store().month_spend(),
+                                                              "status": exc.status_code, "detail": exc.detail}, status_code=exc.status_code)
+
+
+def page(request: Request, name: str, user: dict | None, **ctx):
+    ctx.setdefault("flash", request.query_params.get("m"))
+    return templates.TemplateResponse(request, name, {"user": user, "spend": store().month_spend(), **ctx})
+
+
+def check_date(d: str) -> str:
+    if not DATE_RE.match(d):
+        raise HTTPException(400, "bad date")
+    date.fromisoformat(d)
+    return d
+
+
+# ── health and auth ──────────────────────────────────────────────────
+@app.get("/healthz")
+def healthz():
+    return {"ok": True}
+
+
+@app.get("/login", response_class=HTMLResponse)
+def login_form(request: Request, user: dict | None = Depends(current_user)):
+    if user:
+        return RedirectResponse("/", status_code=303)
+    return page(request, "login.html", None, sent=False)
+
+
+@app.post("/login", response_class=HTMLResponse)
+def login_post(request: Request, email: str = Form(...)):
+    s = store()
+    email = email.strip().lower()
+    s.log("login.request", email, request.client.host if request.client else None)
+    if s.recent_login_attempts(email) > 5:
+        return page(request, "login.html", None, sent=True, note="Too many attempts. Try again in a little while.")
+    u = s.user_by_email(email)
+    if u:
+        token = s.create_magic_link(u["id"])
+        link = f"{config.PUBLIC_BASE_URL}/auth/{token}"
+        auth.send_magic_link(email, link)
+    return page(request, "login.html", None, sent=True)
+
+
+@app.get("/auth/{token}")
+def login_token(token: str, request: Request):
+    s = store()
+    u = s.consume_magic_link(token)
+    if not u:
+        return page(request, "login.html", None, sent=False, note="That link has expired or was already used. Ask for a new one.")
+    s.log("login.ok", u["email"])
+    resp = RedirectResponse("/", status_code=303)
+    resp.set_cookie(auth.COOKIE, auth.session_cookie(u["id"]), max_age=auth.MAX_AGE, httponly=True, samesite="lax", secure=auth.secure_cookies())
+    return resp
+
+
+@app.post("/logout")
+def logout(user: dict | None = Depends(current_user)):
+    if user:
+        store().log("logout", user["email"])
+    resp = RedirectResponse("/login", status_code=303)
+    resp.delete_cookie(auth.COOKIE)
+    return resp
+
+
+# ── dashboard and weeks ──────────────────────────────────────────────
+def list_weeks() -> list[dict]:
+    s = store()
+    status = {w["date"]: w for w in s.weeks()}
+    out = []
+    for p in sorted(config.BULLETINS_DIR.glob("*/week.json"), reverse=True):
+        d = p.parent.name
+        try:
+            w = json.loads(p.read_text())
+            sermon = w.get("sermon", {}).get("title", "")
+            sub = w.get("subtitle_override") or w.get("liturgical_day") or ""
+        except Exception:
+            sermon, sub = "(unreadable week.json)", ""
+        out.append({"date": d, "sermon": sermon, "subtitle": sub, **status.get(d, {"status": "draft"})})
+    return out
+
+
+@app.get("/", response_class=HTMLResponse)
+def dashboard(request: Request, user: dict = Depends(need("editor"))):
+    nxt = dates.next_sunday()
+    return page(request, "dashboard.html", user, weeks=list_weeks()[:30], next_sunday=nxt.isoformat(),
+                sundays=[(nxt + timedelta(weeks=i)).isoformat() for i in range(0, 6)])
+
+
+@app.post("/weeks/new")
+def week_new(date_: str = Form(..., alias="date"), user: dict = Depends(need("editor"))):
+    d = check_date(date_)
+    s = store()
+    path = weekmod.week_path(d)
+    if not path.exists():
+        week = weekmod.scaffold(d, serve=s.serve_for(d), calendar=calendar_feed.week_calendar(s, d))
+        weekmod.save_week(week, path)
+        s.set_week_status(d, "draft")
+        s.log("week.new", user["email"], d)
+    return RedirectResponse(f"/weeks/{d}", status_code=303)
+
+
+@app.get("/weeks/{d}", response_class=HTMLResponse)
+def week_page(d: str, request: Request, user: dict = Depends(need("editor"))):
+    check_date(d)
+    path = weekmod.week_path(d)
+    if not path.exists():
+        raise HTTPException(404, f"No week.json for {d}. Create it from the dashboard.")
+    raw = path.read_text()
+    error = None
+    try:
+        week = weekmod.load_week(d)
+    except Exception as e:  # show the raw file even if it no longer validates
+        week, error = None, str(e)
+    report = buildmod.last_report(d)
+    wdir = config.week_dir(d)
+    return page(request, "week.html", user, d=d, raw=raw, week=week, error=error, report=report,
+                status=store().week_status(d), has_pdf=(wdir / f"bulletin-{d}-legal.pdf").exists(),
+                has_scroll=(config.SCROLL_DIR / f"{d}.html").exists(),
+                panels=sorted(int(k) for k in (report or {}).get("panels", {})))
+
+
+@app.post("/weeks/{d}/json")
+def week_save_json(d: str, request: Request, raw: str = Form(...), user: dict = Depends(need("editor"))):
+    check_date(d)
+    try:
+        week = weekmod.with_defaults(json.loads(raw))
+        weekmod.save_week(week)
+    except Exception as e:
+        return RedirectResponse(f"/weeks/{d}?m=Not+saved:+{_q(str(e))}", status_code=303)
+    s = store()
+    s.set_week_status(d, "draft")
+    s.log("week.edit", user["email"], d)
+    return RedirectResponse(f"/weeks/{d}?m=Saved", status_code=303)
+
+
+@app.post("/weeks/{d}/build")
+def week_build(d: str, user: dict = Depends(need("editor"))):
+    check_date(d)
+    try:
+        report = buildmod.build(d, store=store())
+    except Exception as e:
+        log.exception("build failed")
+        return RedirectResponse(f"/weeks/{d}?m=Build+failed:+{_q(str(e))}", status_code=303)
+    store().log("week.build", user["email"], json.dumps({"date": d, "overflow": len(report["overflow"])}))
+    msg = "Built with no overflow" if not report["overflow"] else f"Built, but {len(report['overflow'])} panel(s) overflow"
+    return RedirectResponse(f"/weeks/{d}?m={_q(msg)}", status_code=303)
+
+
+@app.post("/weeks/{d}/ready")
+def week_ready(d: str, user: dict = Depends(need("editor"))):
+    check_date(d)
+    s = store()
+    s.set_week_status(d, "ready")
+    s.log("week.ready", user["email"], d)
+    return RedirectResponse(f"/weeks/{d}?m=Marked+ready", status_code=303)
+
+
+@app.post("/weeks/{d}/publish")
+def week_publish(d: str, correction: str = Form(""), user: dict = Depends(need("publisher"))):
+    check_date(d)
+    try:
+        res = publishmod.publish(d, store=store(), correction=correction.strip() or None, user=user["email"])
+    except Exception as e:
+        log.exception("publish failed")
+        return RedirectResponse(f"/weeks/{d}?m=Publish+failed:+{_q(str(e))}", status_code=303)
+    return RedirectResponse(f"/weeks/{d}?m={_q('Published ' + res['commit'] + ' to ' + res['branch'])}", status_code=303)
+
+
+@app.get("/weeks/{d}/pdf")
+def week_pdf(d: str, user: dict = Depends(need("editor"))):
+    check_date(d)
+    p = config.week_dir(d) / f"bulletin-{d}-legal.pdf"
+    if not p.exists():
+        raise HTTPException(404)
+    return FileResponse(p, media_type="application/pdf", filename=p.name)
+
+
+@app.get("/weeks/{d}/insert/{name}.pdf")
+def week_insert(d: str, name: str, user: dict = Depends(need("editor"))):
+    check_date(d)
+    if not re.match(r"^[a-z0-9-]+$", name):
+        raise HTTPException(400)
+    p = config.week_dir(d) / f"{name}-insert.pdf"
+    if not p.exists():
+        raise HTTPException(404)
+    return FileResponse(p, media_type="application/pdf", filename=p.name)
+
+
+@app.get("/weeks/{d}/scroll", response_class=HTMLResponse)
+def week_scroll(d: str, user: dict = Depends(need("editor"))):
+    check_date(d)
+    p = config.SCROLL_DIR / f"{d}.html"
+    if not p.exists():
+        raise HTTPException(404)
+    html = p.read_text().replace('src="/images/', f'src="{config.SITE_URL}/images/')
+    return HTMLResponse(html)
+
+
+@app.get("/weeks/{d}/panel/{n}.png")
+def week_panel(d: str, n: int, user: dict = Depends(need("editor"))):
+    check_date(d)
+    p = config.PROOF_DIR / d / f"panel-{n}.png"
+    if not p.exists():
+        raise HTTPException(404)
+    return FileResponse(p, media_type="image/png")
+
+
+# ── rosters ──────────────────────────────────────────────────────────
+@app.get("/rosters", response_class=HTMLResponse)
+def rosters(request: Request, user: dict = Depends(need("admin"))):
+    s = store()
+    nxt = dates.next_sunday()
+    upcoming = [(nxt + timedelta(weeks=i)).isoformat() for i in range(0, 8)]
+    rows = {r["sunday"]: r for r in s.rosters(80)}
+    for d in upcoming:
+        rows.setdefault(d, {"sunday": d})
+    ordered = sorted(rows.values(), key=lambda r: r["sunday"], reverse=True)
+    return page(request, "rosters.html", user, rows=ordered, upcoming=set(upcoming))
+
+
+@app.post("/rosters/{sunday}")
+async def roster_save(sunday: str, request: Request, user: dict = Depends(need("admin"))):
+    check_date(sunday)
+    form = await request.form()
+    store().upsert_roster(sunday, {r: form.get(r, "") for r in ROSTER_ROLES})
+    store().log("roster.save", user["email"], sunday)
+    return RedirectResponse(f"/rosters?m=Saved+{sunday}#r-{sunday}", status_code=303)
+
+
+# ── events ───────────────────────────────────────────────────────────
+@app.get("/events", response_class=HTMLResponse)
+def events(request: Request, user: dict = Depends(need("admin")), all: int = 0):
+    s = store()
+    today = date.today().isoformat()
+    evs = s.events()
+    if not all:
+        evs = [e for e in evs if e.get("recurrence") or (e.get("end_date") or e["start_date"]) >= today]
+    return page(request, "events.html", user, events=evs, show_all=bool(all), today=today,
+                preview=calendar_feed.week_calendar(s, dates.next_sunday().isoformat()), next_sunday=dates.next_sunday().isoformat())
+
+
+async def _event_form(request: Request) -> dict:
+    form = await request.form()
+    data = {k: (form.get(k) or "").strip() for k in ("title", "start_date", "end_date", "time_text", "location", "notes", "category", "until_date")}
+    day = form.get("byday", "")
+    data["recurrence"] = f"WEEKLY;BYDAY={day}" if day else None
+    data["featured"] = form.get("featured") == "on"
+    return data
+
+
+@app.post("/events")
+async def event_create(request: Request, user: dict = Depends(need("admin"))):
+    data = await _event_form(request)
+    try:
+        eid = store().upsert_event(data)
+    except ValueError as e:
+        return RedirectResponse(f"/events?m={_q(str(e))}", status_code=303)
+    store().log("event.add", user["email"], json.dumps(data))
+    return RedirectResponse(f"/events?m=Added#e-{eid}", status_code=303)
+
+
+@app.post("/events/{eid}")
+async def event_update(eid: int, request: Request, user: dict = Depends(need("admin"))):
+    data = await _event_form(request)
+    try:
+        store().upsert_event(data, eid)
+    except ValueError as e:
+        return RedirectResponse(f"/events?m={_q(str(e))}", status_code=303)
+    store().log("event.edit", user["email"], json.dumps({"id": eid, **data}))
+    return RedirectResponse(f"/events?m=Saved#e-{eid}", status_code=303)
+
+
+@app.post("/events/{eid}/delete")
+def event_delete(eid: int, user: dict = Depends(need("admin"))):
+    store().delete_event(eid)
+    store().log("event.delete", user["email"], str(eid))
+    return RedirectResponse("/events?m=Removed", status_code=303)
+
+
+@app.get("/calendar.ics")
+def calendar_ics(user: dict = Depends(need("editor"))):
+    return Response(calendar_feed.build_ics(store()), media_type="text/calendar")
+
+
+# ── standing text ────────────────────────────────────────────────────
+@app.get("/standing", response_class=HTMLResponse)
+def standing(request: Request, user: dict = Depends(need("admin"))):
+    return page(request, "standing.html", user, keys=store().standing_keys(), key=None, raw=None)
+
+
+@app.get("/standing/{key}", response_class=HTMLResponse)
+def standing_edit(key: str, request: Request, user: dict = Depends(need("admin"))):
+    if not re.match(r"^[a-z0-9-]+$", key):
+        raise HTTPException(400)
+    value = store().standing(key)
+    if value is None:
+        raise HTTPException(404)
+    return page(request, "standing.html", user, keys=store().standing_keys(), key=key, raw=json.dumps(value, ensure_ascii=False, indent=2))
+
+
+@app.post("/standing/{key}")
+def standing_save(key: str, raw: str = Form(...), user: dict = Depends(need("admin"))):
+    if not re.match(r"^[a-z0-9-]+$", key):
+        raise HTTPException(400)
+    try:
+        value = json.loads(raw)
+    except json.JSONDecodeError as e:
+        return RedirectResponse(f"/standing/{key}?m={_q('Not saved: ' + str(e))}", status_code=303)
+    store().set_standing(key, value)
+    store().log("standing.save", user["email"], key)
+    return RedirectResponse(f"/standing/{key}?m=Saved", status_code=303)
+
+
+# ── users and audit ──────────────────────────────────────────────────
+@app.get("/users", response_class=HTMLResponse)
+def users(request: Request, user: dict = Depends(need("admin"))):
+    return page(request, "users.html", user, users=store().users())
+
+
+@app.post("/users")
+def user_add(email: str = Form(...), name: str = Form(""), role: str = Form(...), user: dict = Depends(need("admin"))):
+    if role not in USER_ROLES or "@" not in email:
+        raise HTTPException(400, "bad email or role")
+    store().add_user(email, name.strip() or None, role)
+    store().log("user.add", user["email"], f"{email} {role}")
+    return RedirectResponse("/users?m=Added", status_code=303)
+
+
+@app.post("/users/{uid}/role")
+def user_role(uid: int, role: str = Form(...), user: dict = Depends(need("admin"))):
+    if uid == user["id"] and role != "admin":
+        raise HTTPException(400, "You cannot remove your own admin role.")
+    store().set_user_role(uid, role)
+    store().log("user.role", user["email"], f"{uid} {role}")
+    return RedirectResponse("/users?m=Updated", status_code=303)
+
+
+@app.post("/users/{uid}/delete")
+def user_delete(uid: int, user: dict = Depends(need("admin"))):
+    if uid == user["id"]:
+        raise HTTPException(400, "You cannot remove yourself.")
+    store().remove_user(uid)
+    store().log("user.remove", user["email"], str(uid))
+    return RedirectResponse("/users?m=Removed", status_code=303)
+
+
+@app.get("/audit", response_class=HTMLResponse)
+def audit(request: Request, user: dict = Depends(need("admin"))):
+    return page(request, "audit.html", user, rows=store().audit(300))
+
+
+def _q(s: str) -> str:
+    from urllib.parse import quote_plus
+    return quote_plus(s[:300])

@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Audit{% endblock %}
+{% block content %}
+<h1>Audit log</h1>
+<table>
+  <thead><tr><th>When (UTC)</th><th>Who</th><th>Action</th><th>Detail</th></tr></thead>
+  <tbody>
+  {% for r in rows %}<tr><td class="muted">{{ r.ts }}</td><td>{{ r.user_email or '' }}</td><td><code>{{ r.action }}</code></td><td style="word-break:break-all">{{ r.detail or '' }}</td></tr>{% endfor %}
+  </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,112 @@
+---
+permalink: /calendar/
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Church Calendar | FPC Corinth</title>
+<meta name="description" content="Upcoming events at First Presbyterian Church of Corinth, MS, and a calendar feed you can subscribe to">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#f4f5f1">
+<style>
+  :root {
+    --cream: #f4f5f1; --warm-white: #fdfdfb; --parchment: #eceeea;
+    --ink: #171200; --ink-light: #3f3d32; --ink-faint: #666558;
+    --rule: #b0af9b; --rule-light: #d9d9cf;
+    --accent: #6d8c83; --accent-soft: #8aa39b; --accent-deep: #56736a;
+    --gold: #847539; --section-bg: #eef2ef;
+  }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { font-size: 17px; scroll-behavior: smooth; }
+  body { font-family: 'EB Garamond', 'Georgia', serif; color: var(--ink); background: var(--parchment); line-height: 1.6; -webkit-font-smoothing: antialiased; min-height: 100vh; }
+  .site-header { position: sticky; top: 0; z-index: 100; background: var(--warm-white); border-bottom: 1px solid var(--rule-light); backdrop-filter: saturate(180%) blur(8px); }
+  .site-header-inner { max-width: 640px; margin: 0 auto; padding: 0.7rem 1.4rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  .site-header .brand { font-family: 'Work Sans', sans-serif; font-weight: 500; font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink); text-decoration: none; white-space: nowrap; }
+  .site-header .archive-link { font-family: 'Work Sans', sans-serif; font-weight: 500; font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-faint); text-decoration: none; padding: 0.35rem 0.85rem; border: 1px solid var(--rule); border-radius: 2px; white-space: nowrap; }
+  .site-header .archive-link:hover { color: var(--warm-white); background: var(--ink); border-color: var(--ink); }
+  .page { max-width: 640px; margin: 0 auto; background: var(--warm-white); min-height: calc(100vh - 3rem); box-shadow: 0 0 80px rgba(23, 18, 0, 0.08); padding: 3rem 1.8rem 4rem; }
+  @media (min-width: 641px) { .page { margin-top: 1.5rem; margin-bottom: 1.5rem; border-radius: 2px; } }
+  .page-eyebrow { font-family: 'Work Sans', sans-serif; font-weight: 500; font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent-deep); text-align: center; margin-bottom: 0.6rem; }
+  .page-title { font-family: 'Work Sans', sans-serif; font-weight: 300; font-size: 1.8rem; text-align: center; color: var(--ink); line-height: 1.2; }
+  .ornament { width: 160px; height: 2px; background: linear-gradient(90deg, transparent, var(--ink), transparent); margin: 1.2rem auto 1.6rem; }
+  .subscribe { background: var(--section-bg); border: 1px solid var(--rule-light); border-radius: 3px; padding: 1.2rem 1.3rem; margin-bottom: 2rem; }
+  .subscribe h2 { font-family: 'Work Sans', sans-serif; font-weight: 500; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-deep); margin-bottom: 0.6rem; }
+  .subscribe p { font-size: 0.92rem; color: var(--ink-light); margin-bottom: 0.5rem; }
+  .subscribe code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.8rem; background: #fff; border: 1px solid var(--rule-light); padding: 0.1rem 0.35rem; border-radius: 2px; word-break: break-all; }
+  .btn { display: inline-block; font-family: 'Work Sans', sans-serif; font-weight: 500; font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase; text-decoration: none; color: var(--warm-white); background: var(--accent); padding: 0.7rem 1.4rem; border-radius: 2px; margin: 0.4rem 0.4rem 0.4rem 0; }
+  .btn:hover { background: var(--accent-soft); }
+  details summary { cursor: pointer; font-size: 0.9rem; color: var(--accent-deep); margin-top: 0.5rem; }
+  details ol { font-size: 0.88rem; color: var(--ink-light); padding-left: 1.2rem; margin: 0.4rem 0 0.6rem; }
+  .month { font-family: 'Work Sans', sans-serif; font-weight: 600; font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent-deep); margin: 1.6rem 0 0.6rem; padding-bottom: 0.3rem; border-bottom: 1px solid var(--rule); }
+  .event { display: grid; grid-template-columns: 5.2rem 1fr; gap: 0.2rem 0.8rem; padding: 0.45rem 0; border-bottom: 1px solid var(--rule-light); font-size: 0.92rem; }
+  .event .when { color: var(--ink); font-weight: 600; }
+  .event .when small { display: block; font-weight: 400; font-size: 0.72rem; color: var(--ink-faint); }
+  .event .what { color: var(--ink-light); }
+  .event .meta { font-size: 0.8rem; color: var(--ink-faint); font-style: italic; }
+  .empty { font-style: italic; color: var(--ink-faint); text-align: center; padding: 2rem 0; }
+  .updated { font-size: 0.75rem; color: var(--ink-faint); text-align: center; margin-top: 2rem; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="https://fpccorinth.org" target="_blank" rel="noopener">First Presbyterian Church</a>
+    <a class="archive-link" href="/archive/">Archive</a>
+  </div>
+</header>
+
+<div class="page">
+  <p class="page-eyebrow">First Presbyterian Church of Corinth</p>
+  <h1 class="page-title">Church Calendar</h1>
+  <div class="ornament"></div>
+
+  <section class="subscribe">
+    <h2>Subscribe on your phone</h2>
+    <p>Add the church calendar to your own calendar app once and new events show up by themselves.</p>
+    <a class="btn" href="webcal://bulletin.fpccorinth.org/calendar.ics">Subscribe</a>
+    <a class="btn" href="https://calendar.google.com/calendar/r?cid=https%3A%2F%2Fbulletin.fpccorinth.org%2Fcalendar.ics" target="_blank" rel="noopener">Add to Google Calendar</a>
+    <details>
+      <summary>iPhone or iPad</summary>
+      <ol>
+        <li>Tap <strong>Subscribe</strong> above, then <strong>Subscribe</strong> again in the Calendar prompt.</li>
+        <li>If nothing happens, open Settings → Calendar → Accounts → Add Account → Other → Add Subscribed Calendar and paste <code>https://bulletin.fpccorinth.org/calendar.ics</code>.</li>
+      </ol>
+    </details>
+    <details>
+      <summary>Google Calendar (Android or web)</summary>
+      <ol>
+        <li>Tap <strong>Add to Google Calendar</strong> above, or in Google Calendar on the web open Other calendars → <strong>+</strong> → From URL.</li>
+        <li>Paste <code>https://bulletin.fpccorinth.org/calendar.ics</code> and choose Add calendar. It will then appear in the Google Calendar app on your phone.</li>
+      </ol>
+    </details>
+  </section>
+
+  {% set evs = calendarEvents.events %}
+  {% if evs.length == 0 %}
+    <p class="empty">No events are scheduled in the next sixty days.</p>
+  {% endif %}
+  {% set lastMonth = "" %}
+  {% for e in evs %}
+    {% if e.month != lastMonth %}
+      <p class="month">{{ e.month }}</p>
+      {% set lastMonth = e.month %}
+    {% endif %}
+    <div class="event">
+      <div class="when">{{ e.label }}<small>{{ e.weekday }}</small></div>
+      <div class="what">{{ e.title }}{% if e.time or e.location %}<div class="meta">{{ e.time }}{% if e.time and e.location %} · {% endif %}{{ e.location }}</div>{% endif %}</div>
+    </div>
+  {% endfor %}
+
+  <p class="updated">Updated {{ calendarEvents.generated | slice(0, 10) }} · <a href="/calendar.ics">calendar.ics</a></p>
+</div>
+
+</body>
+</html>

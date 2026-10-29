@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Calendar{% endblock %}
+{% block content %}
+<h1>Church calendar</h1>
+<p class="muted">This table feeds the back-cover calendar box and the public feed at <a href="{{ site_url }}/calendar.ics">{{ site_url }}/calendar.ics</a> (regenerated on every publish). Weekly items repeat until their “until” date. <strong>Featured</strong> events are listed in every bulletin until they pass, the way the Thanksgiving Meal was.</p>
+
+<div class="card">
+  <h2 style="margin-top:0">Next bulletin’s calendar box ({{ next_sunday | long_date }})</h2>
+  {% for line in preview %}<div><strong>{{ line.date | month_day }}</strong> &nbsp;{{ line["items"] | join(" · ") }}</div>{% else %}<div class="muted">Nothing in the window.</div>{% endfor %}
+</div>
+
+{% macro event_fields(e) %}
+  <div style="flex:2 1 220px"><label>Title</label><input type="text" name="title" value="{{ e.title if e else '' }}" required></div>
+  <div><label>Date</label><input type="date" name="start_date" value="{{ e.start_date if e else '' }}" required></div>
+  <div><label>End date (multi-day)</label><input type="date" name="end_date" value="{{ (e.end_date or '') if e else '' }}"></div>
+  <div><label>Time text</label><input type="text" name="time_text" placeholder="8 a.m." value="{{ (e.time_text or '') if e else '' }}"></div>
+  <div><label>Location</label><input type="text" name="location" value="{{ (e.location or '') if e else '' }}"></div>
+  <div><label>Repeats weekly on</label>
+    <select name="byday">
+      {% set cur = (e.recurrence or '').split('BYDAY=')[-1] if e and e.recurrence else '' %}
+      <option value="">— no —</option>
+      {% for code, name in [('SU','Sunday'),('MO','Monday'),('TU','Tuesday'),('WE','Wednesday'),('TH','Thursday'),('FR','Friday'),('SA','Saturday')] %}
+      <option value="{{ code }}" {% if cur == code %}selected{% endif %}>{{ name }}</option>
+      {% endfor %}
+    </select></div>
+  <div><label>Until (for weekly)</label><input type="date" name="until_date" value="{{ (e.until_date or '') if e else '' }}"></div>
+  <div class="narrow"><label>Featured</label><input type="checkbox" name="featured" {% if e and e.featured %}checked{% endif %}></div>
+{% endmacro %}
+
+<div class="card">
+  <h2 style="margin-top:0">Add an event</h2>
+  <form method="post" action="/events" class="row">
+    {{ event_fields(None) }}
+    <div class="narrow"><button type="submit">Add</button></div>
+  </form>
+</div>
+
+<p class="muted">{% if show_all %}Showing every event. <a href="/events">Show upcoming only</a>{% else %}Showing upcoming and weekly events. <a href="/events?all=1">Show all</a>{% endif %}</p>
+{% for e in events %}
+<div class="card" id="e-{{ e.id }}">
+  <form method="post" action="/events/{{ e.id }}" class="row">
+    {{ event_fields(e) }}
+    <div class="narrow"><button type="submit" class="quiet">Save</button></div>
+    <div class="narrow"><button type="submit" class="danger" formaction="/events/{{ e.id }}/delete" formnovalidate onclick="return confirm('Remove this event?')">Remove</button></div>
+  </form>
+  {% if e.notes %}<div class="muted" style="margin-top:0.3rem">{{ e.notes }}</div>{% endif %}
+</div>
+{% endfor %}
+{% endblock %}

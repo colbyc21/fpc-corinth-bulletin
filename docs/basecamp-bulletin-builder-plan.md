@@ -4,7 +4,7 @@
 
 **Audience.** This document is written for Claude Code running on basecamp (Ubuntu), working with Colby. It assumes a clone of the `fpc-corinth-bulletin` repo and the knowledge notes in `docs/knowledge/`. Read those four notes before writing any code; they are two months of hard-won rules about the bulletin.
 
-**Status.** Draft, 2026-10-29. Phase 0 (§11) is a discovery pass that Claude Code runs on the server itself. It finds out nearly everything by looking; the short list of things it has to ask Colby is in §11.3, each with a default so work can continue while waiting.
+**Status.** Phase 0 and Phase 1 done, 2026-10-29 (see §9). Phase 0 (§11) is a discovery pass that Claude Code runs on the server itself. It finds out nearly everything by looking; the short list of things it has to ask Colby is in §11.3, each with a default so work can continue while waiting.
 
 **How to start.** On basecamp, in the repo clone:
 
@@ -72,8 +72,10 @@ The app code lives **in this repo under `builder/`** (one history; Netlify ignor
 fpc-corinth-bulletin/builder/         # in this repo
 ├── app/                              # web UI, auth, job queue, spend ledger  (Python 3.12, FastAPI + Jinja2 + HTMX, SQLite)
 ├── pipeline/                         # the steps in §4 (pure functions where possible)
-├── templates/                        # Nunjucks templates for print + scroll (see §4.4)
+├── templates/                        # Jinja2 templates for print + scroll (see §4.4; Jinja2, not Nunjucks, so the app has one language)
 ├── scripts/                          # phase0_seed.py and friends
+├── tests/                            # pytest; test_render_golden.py is the Phase 1 acceptance test
+├── deploy/                           # bulletin-builder.service (user unit)
 └── data/                             # seed/ (rosters, events) and standing/ (staff, welcome, pew pages, hymns)  (§5)
 
 basecamp (user clovis)
@@ -129,7 +131,7 @@ unzip -p file.docx word/document.xml | perl -pe 's/<\/w:p>/\n/g; s/<w:tab\/>/\t/
 
 ### 4.4 Render (deterministic)
 
-Two Nunjucks templates, built once from the 2026-11-01 files:
+Two Jinja2 templates, built once from the 2026-11-01 files (`builder/templates/`):
 
 - `print-legal.njk`: the CSS head verbatim; the eight panels as template blocks; the liturgy grid as a loop over items with their notes. Page breaks are data: `week.json.layout.pages` lists which item ids go on p3, p4, p5, p6. Default pagination follows the usual shape (p3: Meditation through Hymn; p4: Invocation, Confession; p5: Assurance through Children's Church; p6: Scripture through Postlude) and is adjusted by the fit loop.
 - `scroll.njk`: lines 1–806 verbatim, then the body sections.
@@ -281,6 +283,8 @@ Also: prompt caching on the system prompt (knowledge notes + schema + template r
 **Phase 0 — Discovery (Claude Code on basecamp, §11).** `docs/knowledge/*.md` already holds the four notes Claude kept outside the repo. Claude Code inventories the server, verifies access, writes `docs/basecamp-discovery.md`, asks Colby the §11.3 questions, and updates §3 and §7 of this plan with what it found. Acceptance: a test render of `bulletins/2026-11-01/bulletin-2026-11-01-legal.html` to PDF on the server matches the committed PDF's page size and fonts, and a test commit to a scratch branch reaches GitHub.
 
 **Phase 1 — Deterministic core (first).** Templates from 2026-11-01, `week.json` schema, extractor, renderer, PDF, overflow measurement, git publish, ICS generation, roster and calendar tables with edit screens. Acceptance: regenerate the Nov 1 bulletin from a hand-written `week.json` and get a pixel-near-identical PDF and scroll page; publish to a test branch.
+
+> **Done 2026-10-29.** `bulletins/2026-11-01/week.json` was hand-written and regenerates the booklet with identical text (the confirmed LeGoff spelling is the one change), 0.00–0.01 % pixel difference against the committed HTML rendered on the same box, and zero overflow on all eight panels; the scroll page differs only by the same correction. A publish to `basecamp-phase1-test` reached GitHub as commit 73fbefd and the branch was deleted. Also delivered: `src/calendar.ics` + `/calendar/` page, the FastAPI app with magic-link login and admin screens (rosters, events, standing text, users, audit), 44 passing tests, and the user unit. The volunteer form and chat are Phase 3; in Phase 1 the week page edits `week.json` directly. Rosters, events and standing text are admin-only screens, as §7 says; editors change the week's roster on the week itself.
 
 **Phase 2 — Model steps.** Parse, copyedit, fit loop, spend ledger and caps. Acceptance: build Oct 18 (communion, no sermon notes), Oct 25 (Reformation Sunday subtitle, canvass after sermon, insert) and Nov 1 (long responsive reading, missionary focus) from their original inputs with no human edits and zero overflow; total cost for the three under $10.
 

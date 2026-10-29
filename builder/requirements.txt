@@ -1,0 +1,19 @@
+# Runtime for the bulletin builder. Install into ~/bulletin-builder/venv on basecamp:
+#   python3 -m venv ~/bulletin-builder/venv && ~/bulletin-builder/venv/bin/pip install -r builder/requirements.txt
+#   ~/bulletin-builder/venv/bin/playwright install chromium
+playwright==1.64.1
+pymupdf
+pypdf
+python-docx
+striprtf
+jinja2
+jsonschema
+icalendar
+fastapi
+uvicorn[standard]
+python-multipart
+httpx
+itsdangerous
+anthropic
+numpy
+pytest

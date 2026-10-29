@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}Bulletin Builder{% endblock %} · FPC Corinth</title>
+<meta name="robots" content="noindex">
+<style>
+  :root { --ink:#171200; --ink-light:#3f3d32; --faint:#666558; --rule:#d9d9cf; --accent:#6d8c83; --deep:#56736a; --bg:#f4f5f1; --card:#fdfdfb; --warn:#9a5b1e; --bad:#9a2e2e; --ok:#3f6e4f; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; font-size:15px; color:var(--ink); background:var(--bg); line-height:1.45; }
+  header.top { background:var(--card); border-bottom:1px solid var(--rule); padding:0.6rem 1.2rem; display:flex; gap:1.2rem; align-items:center; flex-wrap:wrap; }
+  header.top .brand { font-weight:600; letter-spacing:0.08em; text-transform:uppercase; font-size:0.8rem; color:var(--deep); text-decoration:none; }
+  header.top nav a { color:var(--ink-light); text-decoration:none; margin-right:0.9rem; font-size:0.9rem; }
+  header.top nav a:hover { color:var(--deep); }
+  header.top .me { margin-left:auto; font-size:0.82rem; color:var(--faint); display:flex; gap:0.8rem; align-items:center; }
+  header.top .spend { font-variant-numeric: tabular-nums; }
+  main { max-width:1100px; margin:1.2rem auto; padding:0 1.2rem; }
+  h1 { font-weight:500; font-size:1.4rem; margin:0.2rem 0 1rem; }
+  h2 { font-weight:500; font-size:1.05rem; margin:1.4rem 0 0.6rem; color:var(--deep); text-transform:uppercase; letter-spacing:0.08em; font-size:0.8rem; }
+  .card { background:var(--card); border:1px solid var(--rule); border-radius:4px; padding:1rem 1.2rem; margin-bottom:1rem; }
+  .flash { background:#eef2ef; border:1px solid var(--accent); color:var(--deep); padding:0.5rem 0.8rem; border-radius:3px; margin-bottom:1rem; }
+  .flash.bad { border-color:var(--bad); color:var(--bad); background:#f7eaea; }
+  table { border-collapse:collapse; width:100%; font-size:0.9rem; }
+  th, td { text-align:left; padding:0.4rem 0.5rem; border-bottom:1px solid var(--rule); vertical-align:top; }
+  th { font-weight:600; color:var(--faint); font-size:0.75rem; text-transform:uppercase; letter-spacing:0.06em; }
+  input[type=text], input[type=email], input[type=date], input[type=number], select, textarea { font:inherit; padding:0.35rem 0.5rem; border:1px solid #bbb; border-radius:3px; background:#fff; width:100%; }
+  textarea.code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size:12.5px; line-height:1.4; min-height:60vh; white-space:pre; }
+  button, .btn { font:inherit; font-size:0.85rem; padding:0.4rem 0.9rem; border-radius:3px; border:1px solid var(--deep); background:var(--accent); color:#fff; cursor:pointer; text-decoration:none; display:inline-block; }
+  button.quiet, .btn.quiet { background:#fff; color:var(--deep); }
+  button.danger { background:#fff; color:var(--bad); border-color:var(--bad); }
+  button:disabled { opacity:0.5; cursor:not-allowed; }
+  .row { display:flex; gap:0.6rem; flex-wrap:wrap; align-items:end; }
+  .row > * { flex:1 1 140px; }
+  .row > .narrow { flex:0 0 auto; }
+  label { font-size:0.75rem; color:var(--faint); display:block; margin-bottom:0.15rem; }
+  .muted { color:var(--faint); font-size:0.85rem; }
+  .pill { display:inline-block; font-size:0.72rem; padding:0.1rem 0.5rem; border-radius:999px; border:1px solid var(--rule); color:var(--faint); background:#fff; text-transform:uppercase; letter-spacing:0.05em; }
+  .pill.built { color:var(--deep); border-color:var(--accent); } .pill.ready { color:var(--warn); border-color:var(--warn); } .pill.published { color:#fff; background:var(--deep); border-color:var(--deep); }
+  .panels { display:grid; grid-template-columns:repeat(auto-fill, minmax(230px, 1fr)); gap:0.8rem; }
+  .panels figure { margin:0; } .panels img { width:100%; border:1px solid var(--rule); background:#fff; } .panels figcaption { font-size:0.75rem; color:var(--faint); margin-top:0.2rem; }
+  iframe.scroll { width:100%; height:80vh; border:1px solid var(--rule); background:#fff; }
+  .ok { color:var(--ok); } .bad { color:var(--bad); } .warn { color:var(--warn); }
+  code { font-family: ui-monospace, Menlo, monospace; font-size:0.85em; background:#eee; padding:0.05rem 0.3rem; border-radius:2px; }
+  details summary { cursor:pointer; color:var(--deep); }
+  @media (max-width:700px) { .two { grid-template-columns:1fr; } }
+  .two { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="/">FPC Bulletin Builder</a>
+  {% if user %}
+  <nav>
+    <a href="/">Weeks</a>
+    {% if user.role == 'admin' %}<a href="/rosters">Rosters</a><a href="/events">Calendar</a><a href="/standing">Standing text</a><a href="/users">Users</a><a href="/audit">Audit</a>{% endif %}
+  </nav>
+  <div class="me">
+    <span class="spend" title="Model spend this month, of the $40 cap">This month: ${{ '%.2f' % spend }} of $40</span>
+    <span>{{ user.email }} · {{ user.role }}</span>
+    <form method="post" action="/logout" style="margin:0"><button class="quiet" type="submit">Sign out</button></form>
+  </div>
+  {% endif %}
+</header>
+<main>
+  {% if flash %}<div class="flash{% if 'failed' in flash or 'Not saved' in flash or 'Too many' in flash %} bad{% endif %}">{{ flash }}</div>{% endif %}
+  {% block content %}{% endblock %}
+</main>
+</body>
+</html>

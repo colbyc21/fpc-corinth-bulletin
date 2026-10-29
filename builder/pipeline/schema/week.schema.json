@@ -1,0 +1,705 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bulletin.fpccorinth.org/schema/week.schema.json",
+  "title": "FPC Corinth weekly bulletin (week.json)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "date",
+    "liturgy",
+    "sermon"
+  ],
+  "properties": {
+    "date": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "liturgical_day": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Cover subtitle. Null means compute from the church year (Nth Sunday after Pentecost, etc.)."
+    },
+    "subtitle_override": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Filled from the content form's Subtitle when it is not the placeholder. Wins over liturgical_day."
+    },
+    "special": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "communion": {
+          "type": "boolean",
+          "default": false
+        },
+        "canvass": {
+          "type": "boolean",
+          "default": false
+        }
+      }
+    },
+    "pew_bible_page": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "welcome_variant": {
+      "type": "string",
+      "enum": [
+        "regular",
+        "school_break",
+        "custom"
+      ],
+      "default": "regular"
+    },
+    "welcome_custom": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": "string"
+      },
+      "description": "Paragraphs for the Children & Nursery block when welcome_variant is custom."
+    },
+    "flowers": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "given": {
+          "type": "string",
+          "description": "Completes 'The flowers adorning the sanctuary today are given …'"
+        },
+        "message": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "quote": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "reference": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "closing": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "signed": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "given"
+      ]
+    },
+    "announcements": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "title",
+          "body"
+        ],
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "body": {
+            "type": "string"
+          },
+          "print_suffix": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Extra sentence appended in the print booklet only (e.g. 'complete the insert')."
+          },
+          "detail": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Extra paragraph shown on the scroll page only."
+          },
+          "qr": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "src": {
+                "type": "string"
+              },
+              "caption": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "serve": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "assisting_elder": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "greeters": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "ushers": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "acolytes": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "nursery": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "circle_of_prayer": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "childrens_church": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "av_engineer": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "staff": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "description": "Null means use the standing staff list.",
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "role"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "calendar": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "date",
+          "items"
+        ],
+        "properties": {
+          "date": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+          },
+          "label": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Overrides the 'Month D' label, e.g. for a date range."
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1
+          }
+        }
+      }
+    },
+    "liturgy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "items"
+      ],
+      "properties": {
+        "intro": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Overrides the standing 'covenant conversation' paragraph."
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/item"
+          }
+        },
+        "notes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "for",
+              "label",
+              "text"
+            ],
+            "properties": {
+              "for": {
+                "type": "string",
+                "description": "Item id the note belongs to."
+              },
+              "label": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "sermon": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "title",
+        "scripture",
+        "preacher"
+      ],
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "scripture": {
+          "type": "string"
+        },
+        "preacher": {
+          "type": "string"
+        },
+        "intro": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "points": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "heading"
+            ],
+            "properties": {
+              "heading": {
+                "type": "string"
+              },
+              "ref": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "quote": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "sub": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "lines": {
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              }
+            }
+          }
+        },
+        "notes_lines_per_point": {
+          "type": "integer",
+          "default": 3
+        },
+        "blank_lines": {
+          "type": "integer",
+          "default": 18,
+          "description": "Lines on the notes page when there are no points."
+        },
+        "missing": {
+          "type": "boolean",
+          "default": false,
+          "description": "True when no Sermon Notes docx arrived; renders a fill-in page and flags it."
+        }
+      }
+    },
+    "inserts": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "layout": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "pages": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "p3": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "p4": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "p5": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "p6": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "page_style": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "spread": {
+                "type": "boolean"
+              },
+              "row_gap": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "announcement_columns": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "description": "Two lists of announcement indexes for the print back cover. Null splits in half.",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "notes": {
+          "type": "array",
+          "description": "Print-only note placement. A note not listed here sits beside its own item.",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "notes",
+              "at",
+              "span"
+            ],
+            "properties": {
+              "notes": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "minItems": 1
+              },
+              "at": {
+                "type": "string",
+                "description": "Item id whose row the note cell starts in."
+              },
+              "span": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "align": {
+                "type": "string",
+                "enum": [
+                  "start",
+                  "end"
+                ],
+                "default": "start"
+              }
+            }
+          }
+        },
+        "overrides": {
+          "type": "array",
+          "description": "Free CSS overrides recorded by the fit loop or the chat step.",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "selector",
+              "css"
+            ],
+            "properties": {
+              "page": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "selector": {
+                "type": "string"
+              },
+              "css": {
+                "type": "string"
+              },
+              "reason": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "copyedit": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "changes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "where": {
+                "type": "string"
+              },
+              "before": {
+                "type": "string"
+              },
+              "after": {
+                "type": "string"
+              },
+              "reason": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "flags": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "where": {
+                "type": "string"
+              },
+              "message": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "item": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "type",
+        "title"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9-]+$"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "section",
+            "plain",
+            "scripture",
+            "responsive",
+            "corporate",
+            "hymn",
+            "music",
+            "speaker",
+            "reading",
+            "sermon"
+          ]
+        },
+        "title": {
+          "type": "string"
+        },
+        "star": {
+          "type": "boolean",
+          "default": false
+        },
+        "sub": {
+          "type": "boolean",
+          "default": false,
+          "description": "Communion sub-item (indented .sacrament-sub)."
+        },
+        "ref": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Scripture reference or source shown after the title."
+        },
+        "text": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Body text: quoted scripture, corporate prayer, or a speaker's quote."
+        },
+        "lines": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "who",
+              "text"
+            ],
+            "properties": {
+              "who": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "silent_confession": {
+          "type": "boolean",
+          "default": false
+        },
+        "creed_note": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "number": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "piece": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Hymn or anthem title (rendered in quotes)."
+        },
+        "credit": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Composer or arranger line under an anthem title."
+        },
+        "name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "role": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "scroll_only": {
+          "type": "boolean",
+          "default": false,
+          "description": "Section heading shown on the scroll page only (e.g. Table on communion Sundays)."
+        }
+      }
+    }
+  }
+}

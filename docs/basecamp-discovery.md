@@ -266,3 +266,34 @@ Also confirmed: the family name is **LeGoff** (capital G); the 2026-11-01 bullet
 
 **Waiting on Colby (not blocking Phase 1):** add the deploy key to GitHub; create the Console workspace and hand over the key; confirm the hymnal edition.
 
+
+
+---
+
+## Phase 1 notes (2026-10-29)
+
+What changed on the box, so the next session does not rediscover it:
+
+- **Deploy key works.** Added to the repo by Colby; `git ls-remote` and a push over `~/.ssh/fpc_bulletin_deploy` both succeeded. The deploy clone is `~/bulletin-builder/repo` with `core.sshCommand` set to that key and git identity `FPC Bulletin Builder <bulletin-builder@fpccorinth.org>`.
+- **Runtime venv** at `~/bulletin-builder/venv` (`builder/requirements.txt`); Playwright Chromium headless shell 1248 installed. **Store** at `~/bulletin-builder/var/builder.sqlite`, seeded with 22 roster rows and 93 events (the four weekly items plus the one-off history; duplicates of weekly items were dropped and events the office listed more than a week ahead are marked *featured*).
+- **Secrets file** `~/.config/bulletin-builder/env` (mode 600) exists with `SESSION_SECRET` generated and placeholders for `ANTHROPIC_API_KEY` and `RESEND_API_KEY`. Claude Code's permission classifier refused to copy the Resend key out of the sermons app's `.env`, so Colby does that by hand (one line, below). Without the key the app still works: the sign-in link is written to the journal instead of emailed.
+- **qrcode.png** was recovered from the image embedded in the committed 2026-11-01 PDF (410×410, decodes to `https://onrealm.org/fpccorinth/-/form/give/now`) and committed at the repo root, so `/images/qrcode.png` and the print booklet's QR code work again.
+- **Calendar feed.** `.eleventy.js` now passes `src/calendar.ics` through; `src/calendar.njk` renders `/calendar/` from `src/_data/calendarEvents.json`. Both files are regenerated on every publish.
+- **Service.** `builder/deploy/bulletin-builder.service` is installed as a user unit, listening on `127.0.0.1:8710`. Not yet reachable from outside: the `bulletin-admin.fpccorinth.org` ingress on the host cloudflared tunnel and the Cloudflare Access policy are still the sudo step for Colby.
+
+### Colby's remaining one-liners
+
+```
+# 1. Resend key (same account as the sermons app)
+grep '^RESEND_API_KEY=' ~/fpc_sermons/.env >> ~/.config/bulletin-builder/env   # then delete the empty placeholder line
+# 2. Anthropic key for the bulletin-builder workspace
+sed -i 's|^ANTHROPIC_API_KEY=.*|ANTHROPIC_API_KEY=sk-ant-...|' ~/.config/bulletin-builder/env
+systemctl --user restart bulletin-builder
+# 3. Cloudflare ingress (sudo): add before the http_status:404 line in /etc/cloudflared/config.yml
+#      - hostname: bulletin-admin.fpccorinth.org
+#        service: http://localhost:8710
+#    then: cloudflared tunnel route dns <tunnel-name> bulletin-admin.fpccorinth.org && sudo systemctl restart cloudflared
+#    and add a Cloudflare Access application for that hostname (email OTP, exact-address allowlist).
+```
+
+Still unconfirmed from §11.3: the hymnal edition (item 8).
