@@ -117,15 +117,38 @@ def test_week_page_form_refresh_and_chat_routes(client, store, monkeypatch, tmp_
     monkeypatch.setattr(config, "BULLETINS_DIR", bdir)
     login_as(client, store, "ed3@example.com", "editor")
     html = client.get("/weeks/2026-11-01").text
-    assert "1 · Inputs" in html and 'name="serve_assisting_elder"' in html and 'name="calendar_lines"' in html
+    assert "1 · The pastor" in html and 'name="serve_assisting_elder"' in html and 'name="calendar_lines"' in html
     data = {"sermon_title": "T2", "sermon_scripture": "Nehemiah 1:1–11", "sermon_preacher": "", "subtitle_override": "", "welcome_variant": "regular",
             "pew_bible_page": "", "flowers_given": "", "ann_title": ["One"], "ann_body": ["Body one."], "serve_assisting_elder": "Dr. John Shipp",
             "calendar_lines": "2026-11-03: Messy Bible Study, 8 a.m."}
     r = client.post("/weeks/2026-11-01/form", data=data)
-    assert r.status_code == 303 and "Saved" in r.headers["location"]
-    from builder.pipeline import week as weekmod
+    assert r.status_code == 303 and "Saved" in r.headers["location"] and "house" not in r.headers["location"]
+
+    # with the tidy box ticked the copyedit runs over what changed; fake the model answer
+    from builder.pipeline import content as contentmod, week as weekmod
+
+    def fake_tidy(date, content, *, store, **kw):
+        assert content["announcements"][0]["body"] == "Body two at 8:00 AM."
+        return {"subtitle": None, "flowers": None, "staff_changes": [],
+                "announcements": [{"title": "One", "body": "Body two at 8 a.m.", "print_suffix": None, "detail": None}],
+                "serve": {k: ("Dr. John Shipp" if k == "assisting_elder" else None) for k in contentmod.SERVE_KEYS},
+                "calendar": [{"date": "2026-11-03", "items": ["Messy Bible Study, 8 a.m."]}],
+                "changes": [{"where": "announcements[0].body", "before": "8:00 AM", "after": "8 a.m.", "reason": "house style"}],
+                "flags": [], "_job": {"id": "x", "calls": 1, "cost": 0.01, "log": []}}
+
+    monkeypatch.setattr(contentmod, "tidy", fake_tidy)
+    r = client.post("/weeks/2026-11-01/form", data={**data, "ann_body": ["Body two at 8:00 AM."], "tidy": "on"})
+    assert r.status_code == 303 and "1+edit" in r.headers["location"]
+    week = weekmod.load_week("2026-11-01")
+    assert week["announcements"][0]["body"] == "Body two at 8 a.m."
+    assert any(c["where"] == "announcements[0].body" for c in week["copyedit"]["changes"])
+    assert any(f["where"] == "serve.greeters" for f in week["copyedit"]["flags"])  # blank roles are flagged
+    # saving again with nothing changed in those sections does not call the model
+    monkeypatch.setattr(contentmod, "tidy", lambda *a, **k: (_ for _ in ()).throw(AssertionError("tidy should not run")))
+    r = client.post("/weeks/2026-11-01/form", data={**data, "ann_body": ["Body two at 8 a.m."], "tidy": "on", "pew_bible_page": "5"})
+    assert "nothing" not in r.headers["location"] and "Saved" in r.headers["location"]
     w = weekmod.load_week("2026-11-01")
-    assert w["sermon"]["title"] == "T2" and w["announcements"] == [{"title": "One", "body": "Body one."}] and w["flowers"] is None
+    assert w["sermon"]["title"] == "T2" and w["announcements"] == [{"title": "One", "body": "Body two at 8 a.m."}] and w["flowers"] is None
     r = client.post("/weeks/2026-11-01/form", data={**data, "calendar_lines": "bad line"})
     assert "Not+saved" in r.headers["location"]
     r = client.post("/weeks/2026-11-01/refresh/serve")

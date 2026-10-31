@@ -238,3 +238,50 @@ def test_parse_hymn_verse_selection_moves_to_title(store):
     out = parsemod.postprocess("2026-10-25", parsed, store)
     h = next(i for i in out["liturgy"]["items"] if i["id"] == "hymn2")
     assert h["piece"] == "Praise to the Lord, the Almighty (vv. 1–3)" and "ref" not in h
+
+
+def test_merge_tidy_keeps_typed_shape_when_model_changes_counts():
+    from builder.pipeline import content as contentmod
+
+    week = weekmod.load_week("2026-11-01")
+    week["copyedit"] = {"changes": [{"where": "liturgy.items[2].text", "before": "a", "after": "b", "reason": "r"},
+                                    {"where": "announcements[0].body", "before": "old", "after": "stale", "reason": "r"}],
+                        "flags": [{"where": "serve.ushers", "message": "stale flag"}]}
+    typed = contentmod.content_of(week)
+    res = contentmod.postprocess("2026-11-01", {
+        "subtitle": "Reformation Sunday", "flowers": typed["flowers"], "staff_changes": [],
+        "announcements": [{"title": "Only one", "body": "b", "print_suffix": None, "detail": None}],
+        "serve": {k: typed["serve"].get(k) for k in contentmod.SERVE_KEYS},
+        "calendar": typed["calendar"][:1],
+        "changes": [{"where": "announcements[0].body", "before": "x", "after": "y", "reason": "r"},
+                    {"where": "serve.ushers", "before": "Jon", "after": "John", "reason": "spelling"}],
+        "flags": [],
+    })
+    merged = contentmod.merge_tidy(week, res)
+    assert merged["announcements"] == typed["announcements"] and merged["calendar"] == typed["calendar"]
+    assert merged["subtitle_override"] is None  # typed blank stays blank
+    wheres = [c["where"] for c in merged["copyedit"]["changes"]]
+    assert wheres == ["liturgy.items[2].text", "serve.ushers"]  # liturgy kept, stale content change dropped, announcement change dropped with its section
+    assert [f["where"] for f in merged["copyedit"]["flags"]] == ["announcements", "calendar"]
+    weekmod.validate(merged)
+
+
+def test_tidy_sends_structured_content(store, monkeypatch):
+    from builder.pipeline import content as contentmod
+
+    seen = {}
+
+    def fake_complete(job, **kw):
+        seen.update(kw)
+        job.record("claude-opus-5-5", {"input_tokens": 10, "output_tokens": 10})
+
+        class R:
+            content = [type("T", (), {"type": "text", "text": json.dumps({
+                "subtitle": None, "flowers": None, "staff_changes": [], "announcements": [], "calendar": [],
+                "serve": {k: None for k in contentmod.SERVE_KEYS}, "changes": [], "flags": []})})()]
+        return R()
+
+    monkeypatch.setattr(model, "complete", fake_complete)
+    out = contentmod.tidy("2026-11-08", {"announcements": [{"title": "A", "body": "b"}], "serve": {}, "calendar": []}, store=store)
+    assert out["_job"]["calls"] == 1 and seen["schema"] is contentmod.OUTPUT_SCHEMA
+    assert "Content as typed" in seen["messages"][0]["content"] and '"title": "A"' in seen["messages"][0]["content"]

@@ -21,7 +21,7 @@ from fastapi.templating import Jinja2Templates
 
 from builder import config
 from builder.app import auth
-from builder.pipeline import build as buildmod, calendar_feed, chat as chatmod, dates, deploy_status, extract, fit as fitmod, forms, intake as intakemod, model as modelmod, publish as publishmod
+from builder.pipeline import build as buildmod, calendar_feed, chat as chatmod, content as contentmod, dates, deploy_status, extract, fit as fitmod, forms, intake as intakemod, model as modelmod, publish as publishmod
 from builder.pipeline import week as weekmod
 from builder.pipeline.store import ROLE_LABELS, ROSTER_ROLES, USER_ROLES, Store
 
@@ -205,15 +205,28 @@ async def week_form(d: str, request: Request, user: dict = Depends(need("editor"
         if hasattr(v, "filename"):
             continue
         data.setdefault(k, []).append(v)
+    s = store()
     try:
-        week = forms.form_to_week(weekmod.load_week(d), data)
+        before = weekmod.load_week(d)
+        week = forms.form_to_week(before, data)
         weekmod.save_week(week)
     except (ValueError, KeyError) as e:
         return RedirectResponse(f"/weeks/{d}?m=Not+saved:+{_q(str(e))}#details", status_code=303)
-    s = store()
+    msg, cost = "Saved", 0.0
+    if "tidy" in data and contentmod.content_of(week) != contentmod.content_of(before):
+        # the same copyedit the content file gets, so typed text comes out in house style
+        try:
+            raw = contentmod.tidy(d, contentmod.content_of(week), store=s)
+            cost = raw.pop("_job")["cost"]
+            week = contentmod.merge_tidy(week, contentmod.postprocess(d, raw))
+            weekmod.save_week(week)
+            n = len([c for c in week["copyedit"]["changes"] if c["where"].startswith(contentmod._OWN_PREFIXES)])
+            msg = f"Saved; {n} edit(s) to house style, listed under step 3" if n else "Saved; nothing to copyedit"
+        except (modelmod.ModelError, ValueError) as e:
+            msg = f"Saved as typed (copyedit skipped: {e})"
     s.set_week_status(d, "draft")
-    s.log("week.form", user["email"], d)
-    return RedirectResponse(f"/weeks/{d}?m=Saved#details", status_code=303)
+    s.log("week.form", user["email"], json.dumps({"date": d, "cost": cost, "tidy": "tidy" in data}))
+    return RedirectResponse(f"/weeks/{d}?m={_q(msg)}#details", status_code=303)
 
 
 @app.post("/weeks/{d}/refresh/{what}")

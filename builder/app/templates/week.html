@@ -9,16 +9,21 @@
   <a href="#inputs"><span>1</span> Inputs</a><a href="#details"><span>2</span> Details</a><a href="#build"><span>3</span> Build &amp; proof</a><a href="#publish"><span>4</span> Publish</a>
 </nav>
 
-<h2 id="inputs">1 · Inputs from the pastor and the office</h2>
+<h2 id="inputs">1 · The pastor’s files</h2>
 <div class="card">
   <form method="post" action="/weeks/{{ d }}/intake" enctype="multipart/form-data" class="row">
     <div><label>Liturgy (.docx) {% if inputs.liturgy %}<span class="ok">✓ on file</span>{% endif %}</label><input type="file" name="liturgy" accept=".docx"></div>
     <div><label>Sermon Notes (.docx) {% if inputs.sermon %}<span class="ok">✓ on file</span>{% endif %}</label><input type="file" name="sermon" accept=".docx"></div>
-    <div><label>Content form (.rtf/.txt) {% if inputs.content %}<span class="ok">✓ on file</span>{% endif %}</label><input type="file" name="content" accept=".rtf,.txt"></div>
-    <div><label>Pastor's announcements (.rtf/.txt) {% if inputs.announcements %}<span class="ok">✓ on file</span>{% endif %}</label><input type="file" name="announcements" accept=".rtf,.txt"></div>
+    <details style="flex:1 1 100%">
+      <summary class="muted">Also have the office’s content file or the pastor’s announcements as a file? (optional)</summary>
+      <div class="row" style="margin-top:0.4rem">
+        <div><label>Content form (.rtf/.txt) {% if inputs.content %}<span class="ok">✓ on file</span>{% endif %}</label><input type="file" name="content" accept=".rtf,.txt"></div>
+        <div><label>Pastor's announcements (.rtf/.txt) {% if inputs.announcements %}<span class="ok">✓ on file</span>{% endif %}</label><input type="file" name="announcements" accept=".rtf,.txt"></div>
+      </div>
+    </details>
     <div class="narrow"><button type="submit" {% if spend_status.blocked or not spend_status.model_calls %}disabled{% endif %}>Read the files</button></div>
   </form>
-  <p class="muted">Reading the files fills in the liturgy, sermon, flowers, announcements, Those Who Serve and the calendar below, and lists every edit and gap it found. The liturgy and the content form can come on different days; what is not uploaded stays as it is. Sermon notes may be missing: the notes page becomes a fill-in page.
+  <p class="muted">The liturgy gives the order of worship, the prayers and the hymns; the sermon notes give the sermon page (if they are missing, it becomes a fill-in page). Everything else, flowers, announcements, Those Who Serve and the calendar, is typed into step 2. Reading a file fills in what it carries and leaves the rest as it is.
   {% if not spend_status.model_calls %}<strong>Model calls are switched off on this server.</strong>{% elif spend_status.blocked %}<strong>The monthly model spend cap is reached; contact Colby.</strong>{% elif spend_status.warn %}<strong>Model spend is at {{ (spend_status.fraction * 100) | round | int }}% of the monthly cap.</strong>{% endif %}</p>
 </div>
 
@@ -105,7 +110,7 @@
   <p class="muted">One line per date: <code>2026-11-03: Messy Bible Study, 8 a.m. · Election Day</code>. Separate items with “ · ”. <button type="submit" class="quiet" formaction="/weeks/{{ d }}/refresh/calendar" formmethod="post" title="Replace these with the calendar table's events for the week">Refresh from calendar</button></p>
 </div>
 
-<div class="card"><button type="submit">Save details</button> <span class="muted">Saving does not rebuild; build in step 3.</span></div>
+<div class="card"><button type="submit">Save details</button> <label class="check" title="Runs the same copyedit the content file gets: house style for times, dates and names, and a list of every edit under step 3"><input type="checkbox" name="tidy" {% if spend_status.model_calls and not spend_status.blocked %}checked{% else %}disabled{% endif %}> Copyedit what changed to house style</label> <span class="muted">Saving does not rebuild; build in step 3.</span></div>
 </form>
 {% endif %}
 

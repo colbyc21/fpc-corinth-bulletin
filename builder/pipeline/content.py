@@ -1,6 +1,7 @@
 """Model call 2: the office content form (+ pastor's announcements) → copyedited content.
 
-Output: subtitle, flowers, announcements, serve, calendar, staff_changes,
+The same step also runs over text typed into the web form (:func:`tidy`),
+so both paths come out in house style. Output: subtitle, flowers, announcements, serve, calendar, staff_changes,
 plus the ``changes`` and ``flags`` lists the Proof page shows. The name
 rules in ``names.py`` run again afterwards so a confirmed spelling always
 wins even if the model missed it.
@@ -9,6 +10,7 @@ from __future__ import annotations
 
 import json
 import re
+from copy import deepcopy
 
 from builder import config
 from builder.pipeline import extract, model, names
@@ -131,3 +133,75 @@ def postprocess(date: str, parsed: dict) -> dict:
     shell = {"serve": serve, "announcements": anns, "flowers": flowers, "calendar": calendar, "liturgy": {"items": []}, "sermon": {}}
     out["changes"] += names.fix_week(shell)
     return out
+
+
+# ── the form path ───────────────────────────────────────────────────
+CONTENT_FIELDS = ("subtitle_override", "flowers", "announcements", "serve", "calendar")
+_OWN_PREFIXES = ("subtitle", "flowers", "announcements", "serve", "calendar", "staff")
+
+
+def content_of(week: dict) -> dict:
+    """The sections of a week that the Details form and the content file both supply."""
+    return {k: deepcopy(week.get(k)) for k in CONTENT_FIELDS}
+
+
+def tidy(date: str, content: dict, *, store: Store, job: model.Job | None = None, example: str | None = EXAMPLE_DATE) -> dict:
+    """Copyedit already-structured content (from the web form) with the same rules
+    and schema as the file path. Returns the raw model answer plus ``_job``."""
+    job = job or model.Job("content", date, store)
+    given = {
+        "subtitle": content.get("subtitle_override"),
+        "flowers": content.get("flowers"),
+        "announcements": [{"title": a["title"], "body": a["body"], "print_suffix": a.get("print_suffix"), "detail": a.get("detail")}
+                          for a in content.get("announcements") or []],
+        "serve": {k: (content.get("serve") or {}).get(k) for k in SERVE_KEYS},
+        "calendar": content.get("calendar") or [],
+    }
+    user = "\n".join([
+        f"Sunday: {date}.",
+        "",
+        "This week the office typed the content straight into the web form, so it arrives already in the output shape "
+        "rather than as a text export. Copyedit it by the rules and return it in the same shape: the same announcements "
+        "in the same order (never drop, merge or add one), the same calendar lines in the same order with their ISO dates "
+        "unchanged, the same serve keys. A null subtitle stays null. There is no Staff block, so `staff_changes` is empty. "
+        "Record every word-level edit in `changes` and anything a human must decide in `flags`.",
+        "",
+        "## Content as typed",
+        "```json",
+        json.dumps(given, ensure_ascii=False, indent=1),
+        "```",
+    ])
+    resp = model.complete(job, system=system_prompt(store, example), messages=[{"role": "user", "content": user}],
+                          schema=OUTPUT_SCHEMA, effort="low", max_tokens=16000)
+    out = model.json_of(resp)
+    out["_job"] = {"id": job.id, "calls": job.calls, "cost": round(job.cost, 4), "log": job.log_lines}
+    return out
+
+
+def merge_tidy(week: dict, res: dict) -> dict:
+    """Put a postprocessed tidy answer into the week, keeping the typed version of
+    any section whose shape the model changed. Replaces the copyedit changes and
+    flags that belong to these sections and leaves the liturgy's alone."""
+    w = deepcopy(week)
+    flags = list(res["flags"])
+    changes = list(res["changes"])
+    typed_anns = w.get("announcements") or []
+    if len(res["announcements"]) == len(typed_anns):
+        w["announcements"] = res["announcements"]
+    else:
+        flags.append({"where": "announcements", "message": "The copyeditor changed the number of announcements; kept them as typed."})
+        changes = [c for c in changes if not c["where"].startswith("announcements")]
+    typed_cal = w.get("calendar") or []
+    if [c["date"] for c in res["calendar"]] == [c["date"] for c in typed_cal]:
+        w["calendar"] = res["calendar"]
+    else:
+        flags.append({"where": "calendar", "message": "The copyeditor changed the calendar's dates or line count; kept the lines as typed."})
+        changes = [c for c in changes if not c["where"].startswith("calendar")]
+    w["subtitle_override"] = res["subtitle_override"] if w.get("subtitle_override") else None
+    w["flowers"] = res["flowers"] if w.get("flowers") else None
+    w["serve"] = {k: v for k, v in res["serve"].items() if v}
+    ce = w.setdefault("copyedit", {"changes": [], "flags": []})
+    keep = lambda item: not item["where"].startswith(_OWN_PREFIXES)  # noqa: E731
+    ce["changes"] = [c for c in ce.get("changes", []) if keep(c)] + changes
+    ce["flags"] = [f for f in ce.get("flags", []) if keep(f)] + flags
+    return w
