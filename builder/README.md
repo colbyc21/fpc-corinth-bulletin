@@ -49,7 +49,7 @@ $PY -m pytest builder/tests -q
 Environment: `BUILDER_REPO` (clone to build in; defaults to the repo this
 code is in), `BUILDER_VAR` (`~/bulletin-builder/var`), secrets in
 `~/.config/bulletin-builder/env` (`SESSION_SECRET`, `RESEND_API_KEY`,
-`EMAIL_FROM`, `ANTHROPIC_API_KEY`, `PUBLIC_BASE_URL`, `BUILDER_MODEL_CALLS`).
+`EMAIL_FROM`, `ANTHROPIC_API_KEY`, `BUILDER_MODEL_CALLS`). `PUBLIC_BASE_URL` is set in the unit file: it is the address the magic links point at and, when it is https, makes the session cookie Secure.
 
 ## Model steps and spend
 
