@@ -32,6 +32,8 @@ app = FastAPI(title="FPC Bulletin Builder", docs_url=None, redoc_url=None, opena
 templates = Jinja2Templates(directory=str(Path(__file__).parent / "templates"))
 templates.env.filters["long_date"] = dates.long_date
 templates.env.filters["month_day"] = dates.month_day
+templates.env.filters["recurrence_parts"] = calendar_feed.recurrence_parts
+templates.env.filters["describe_recurrence"] = calendar_feed.describe_recurrence
 templates.env.globals.update(ROLE_LABELS=ROLE_LABELS, ROSTER_ROLES=ROSTER_ROLES, USER_ROLES=USER_ROLES,
                              netlify_url=config.NETLIFY_DEPLOYS_URL, site_url=config.SITE_URL)
 
@@ -456,16 +458,15 @@ def events(request: Request, user: dict = Depends(need("publisher")), all: int =
 async def _event_form(request: Request) -> dict:
     form = await request.form()
     data = {k: (form.get(k) or "").strip() for k in ("title", "start_date", "end_date", "time_text", "location", "notes", "category", "until_date")}
-    day = form.get("byday", "")
-    data["recurrence"] = f"WEEKLY;BYDAY={day}" if day else None
+    data["recurrence"] = calendar_feed.make_recurrence(form.get("repeat", ""), form.get("nth", ""), form.get("byday", ""))
     data["featured"] = form.get("featured") == "on"
     return data
 
 
 @app.post("/events")
 async def event_create(request: Request, user: dict = Depends(need("publisher"))):
-    data = await _event_form(request)
     try:
+        data = await _event_form(request)
         eid = store().upsert_event(data)
     except ValueError as e:
         return RedirectResponse(f"/events?m={_q(str(e))}", status_code=303)
@@ -475,8 +476,8 @@ async def event_create(request: Request, user: dict = Depends(need("publisher"))
 
 @app.post("/events/{eid}")
 async def event_update(eid: int, request: Request, user: dict = Depends(need("publisher"))):
-    data = await _event_form(request)
     try:
+        data = await _event_form(request)
         store().upsert_event(data, eid)
     except ValueError as e:
         return RedirectResponse(f"/events?m={_q(str(e))}", status_code=303)

@@ -68,6 +68,12 @@ def test_publisher_edits_calendar_but_not_other_admin_screens(client, store):
     assert r.status_code == 200 and 'href="/events"' in r.text and 'href="/users"' not in r.text
     r = client.post("/events", data={"title": "Bake sale", "start_date": "2026-12-05"}, follow_redirects=False)
     assert r.status_code == 303 and "Added" in r.headers["location"]
+    r = client.post("/events", data={"title": "Session Meeting", "start_date": "2026-11-01", "repeat": "MONTHLY", "nth": "1", "byday": "SU"}, follow_redirects=False)
+    assert r.status_code == 303 and "Added" in r.headers["location"]
+    html = client.get("/events").text
+    assert "Repeats the first Sunday of the month" in html
+    r = client.post("/events", data={"title": "Bad", "start_date": "2026-11-01", "repeat": "MONTHLY", "byday": "SU"}, follow_redirects=False)
+    assert r.status_code == 303 and "which+week" in r.headers["location"]
     for path in ("/rosters", "/users", "/audit", "/standing"):
         assert client.get(path).status_code == 403, path
     client.cookies.clear()

@@ -2,7 +2,7 @@
 {% block title %}Calendar{% endblock %}
 {% block content %}
 <h1>Church calendar</h1>
-<p class="muted">This table feeds the back-cover calendar box and the public feed at <a href="{{ site_url }}/calendar.ics">{{ site_url }}/calendar.ics</a> (regenerated on every publish). Weekly items repeat until their “until” date. <strong>Featured</strong> events are listed in every bulletin until they pass, the way the Thanksgiving Meal was.</p>
+<p class="muted">This table feeds the back-cover calendar box and the public feed at <a href="{{ site_url }}/calendar.ics">{{ site_url }}/calendar.ics</a> (regenerated on every publish). Repeating items run until their “until” date; a monthly item is, say, the first Sunday or the last Thursday of each month. <strong>Featured</strong> events are listed in every bulletin until they pass, the way the Thanksgiving Meal was.</p>
 
 <div class="card">
   <h2 style="margin-top:0">Next bulletin’s calendar box ({{ next_sunday | long_date }})</h2>
@@ -15,15 +15,28 @@
   <div><label>End date (multi-day)</label><input type="date" name="end_date" value="{{ (e.end_date or '') if e else '' }}"></div>
   <div><label>Time text</label><input type="text" name="time_text" placeholder="8 a.m." value="{{ (e.time_text or '') if e else '' }}"></div>
   <div><label>Location</label><input type="text" name="location" value="{{ (e.location or '') if e else '' }}"></div>
-  <div><label>Repeats weekly on</label>
-    <select name="byday">
-      {% set cur = (e.recurrence or '').split('BYDAY=')[-1] if e and e.recurrence else '' %}
+  {% set rp = (e.recurrence | recurrence_parts) if e else {'freq': '', 'nth': '', 'day': ''} %}
+  <div><label>Repeats</label>
+    <select name="repeat">
       <option value="">— no —</option>
-      {% for code, name in [('SU','Sunday'),('MO','Monday'),('TU','Tuesday'),('WE','Wednesday'),('TH','Thursday'),('FR','Friday'),('SA','Saturday')] %}
-      <option value="{{ code }}" {% if cur == code %}selected{% endif %}>{{ name }}</option>
+      <option value="WEEKLY" {% if rp.freq == 'WEEKLY' %}selected{% endif %}>every week</option>
+      <option value="MONTHLY" {% if rp.freq == 'MONTHLY' %}selected{% endif %}>every month</option>
+    </select></div>
+  <div><label>Week of the month (monthly)</label>
+    <select name="nth">
+      <option value="">—</option>
+      {% for n, name in [('1','first'),('2','second'),('3','third'),('4','fourth'),('5','fifth'),('-1','last')] %}
+      <option value="{{ n }}" {% if rp.nth == n %}selected{% endif %}>{{ name }}</option>
       {% endfor %}
     </select></div>
-  <div><label>Until (for weekly)</label><input type="date" name="until_date" value="{{ (e.until_date or '') if e else '' }}"></div>
+  <div><label>On</label>
+    <select name="byday">
+      <option value="">—</option>
+      {% for code, name in [('SU','Sunday'),('MO','Monday'),('TU','Tuesday'),('WE','Wednesday'),('TH','Thursday'),('FR','Friday'),('SA','Saturday')] %}
+      <option value="{{ code }}" {% if rp.day == code %}selected{% endif %}>{{ name }}</option>
+      {% endfor %}
+    </select></div>
+  <div><label>Until (repeats)</label><input type="date" name="until_date" value="{{ (e.until_date or '') if e else '' }}"></div>
   <div class="narrow"><label>Featured</label><input type="checkbox" name="featured" {% if e and e.featured %}checked{% endif %}></div>
 {% endmacro %}
 
@@ -35,7 +48,7 @@
   </form>
 </div>
 
-<p class="muted">{% if show_all %}Showing every event. <a href="/events">Show upcoming only</a>{% else %}Showing upcoming and weekly events. <a href="/events?all=1">Show all</a>{% endif %}</p>
+<p class="muted">{% if show_all %}Showing every event. <a href="/events">Show upcoming only</a>{% else %}Showing upcoming and repeating events. <a href="/events?all=1">Show all</a>{% endif %}</p>
 {% for e in events %}
 <div class="card" id="e-{{ e.id }}">
   <form method="post" action="/events/{{ e.id }}" class="row">
@@ -43,7 +56,8 @@
     <div class="narrow"><button type="submit" class="quiet">Save</button></div>
     <div class="narrow"><button type="submit" class="danger" formaction="/events/{{ e.id }}/delete" formnovalidate onclick="return confirm('Remove this event?')">Remove</button></div>
   </form>
-  {% if e.notes %}<div class="muted" style="margin-top:0.3rem">{{ e.notes }}</div>{% endif %}
+  {% set desc = e.recurrence | describe_recurrence %}
+  {% if desc or e.notes %}<div class="muted" style="margin-top:0.3rem">{% if desc %}Repeats {{ desc }}{% if e.until_date %} until {{ e.until_date | month_day }}{% endif %}.{% endif %} {{ e.notes or '' }}</div>{% endif %}
 </div>
 {% endfor %}
 {% endblock %}

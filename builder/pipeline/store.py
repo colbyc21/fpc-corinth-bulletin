@@ -45,7 +45,7 @@ create table if not exists events (
   location text,
   notes text,
   category text,
-  recurrence text,          -- e.g. WEEKLY;BYDAY=TU  (null = one-off)
+  recurrence text,          -- e.g. WEEKLY;BYDAY=TU or MONTHLY;BYDAY=1SU  (null = one-off)
   until_date text,          -- last date a recurring event occurs
   featured integer not null default 0,  -- list in every bulletin until it passes
   created_at text not null,

@@ -49,6 +49,31 @@ def test_ics_round_trips(store):
     assert b"X-WR-CALNAME:FPC Corinth Church Calendar" in data
 
 
+def test_monthly_recurrence():
+    from datetime import date
+    ev = {"title": "Session Meeting", "start_date": "2026-11-01", "recurrence": "MONTHLY;BYDAY=1SU"}
+    got = calendar_feed.occurrences(ev, date(2026, 11, 1), date(2027, 1, 31))
+    assert [d.isoformat() for d in got] == ["2026-11-01", "2026-12-06", "2027-01-03"]
+    last = {"title": "Men's breakfast", "start_date": "2026-11-01", "recurrence": "MONTHLY;BYDAY=-1TH", "until_date": "2026-12-31"}
+    got = calendar_feed.occurrences(last, date(2026, 11, 1), date(2027, 2, 28))
+    assert [d.isoformat() for d in got] == ["2026-11-26", "2026-12-31"]
+    assert calendar_feed.describe_recurrence("MONTHLY;BYDAY=-1TH") == "the last Thursday of the month"
+    assert calendar_feed.describe_recurrence("WEEKLY;BYDAY=TU") == "every Tuesday"
+    assert calendar_feed.make_recurrence("MONTHLY", "2", "WE") == "MONTHLY;BYDAY=2WE"
+    assert calendar_feed.recurrence_parts("MONTHLY;BYDAY=2WE") == {"freq": "MONTHLY", "nth": "2", "day": "WE"}
+    assert calendar_feed.make_recurrence("", "", "") is None
+    import pytest
+    with pytest.raises(ValueError):
+        calendar_feed.make_recurrence("MONTHLY", "", "WE")
+
+
+def test_monthly_event_in_ics(store):
+    store.upsert_event({"title": "Session Meeting", "start_date": "2026-11-01", "recurrence": "MONTHLY;BYDAY=1SU"})
+    data = calendar_feed.build_ics(store)
+    assert b"RRULE:FREQ=MONTHLY;BYDAY=1SU" in data
+    calendar_feed.validate_ics(data)
+
+
 def test_upcoming_is_sorted(store):
     from datetime import date
     rows = calendar_feed.upcoming(store, 60, today=date(2026, 11, 1))
