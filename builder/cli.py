@@ -11,6 +11,7 @@
     python -m builder compare a.pdf b.pdf     text + pixel comparison per page
     python -m builder extract file.docx       print the docx as text
     python -m builder calendar [--sunday D]   print the back-cover lines and write src/calendar.ics
+    python -m builder hymns [--write]         hymn index from the published bulletins; --write refreshes src/_data/hymnIndex.json
     python -m builder add-user email role     create an app user (editor|publisher|admin)
 """
 from __future__ import annotations
@@ -173,6 +174,20 @@ def cmd_calendar(args) -> int:
     return 0
 
 
+def cmd_hymns(args) -> int:
+    from builder.pipeline import hymn_index
+
+    idx = hymn_index.build()
+    print(f"{len(idx['hymns'])} hymns at {idx['services']} services, {idx['since']} to {idx['through']}")
+    for h in sorted(idx["hymns"], key=lambda h: (-h["times"], h["last"])):
+        print(f"  #{h['number']:<5} {h['title']:<44} {h['times']:>2}x  last {h['last']}  {h['url']}")
+    for u in idx["unnumbered"]:
+        print(f"  (no number) {u['title']}  {u['date']}")
+    if args.write:
+        print("wrote", hymn_index.write_site_data())
+    return 0
+
+
 def cmd_add_user(args) -> int:
     from builder.pipeline.store import Store
 
@@ -204,6 +219,7 @@ def main(argv: list[str] | None = None) -> int:
     s.add_argument("--diff", action="store_true"); s.set_defaults(fn=cmd_compare)
     s = sub.add_parser("extract"); s.add_argument("file"); s.set_defaults(fn=cmd_extract)
     s = sub.add_parser("calendar"); s.add_argument("--sunday"); s.add_argument("--write", action="store_true"); s.set_defaults(fn=cmd_calendar)
+    s = sub.add_parser("hymns"); s.add_argument("--write", action="store_true"); s.set_defaults(fn=cmd_hymns)
     s = sub.add_parser("add-user"); s.add_argument("email"); s.add_argument("role", choices=["editor", "publisher", "admin"])
     s.add_argument("--name"); s.set_defaults(fn=cmd_add_user)
 

@@ -56,6 +56,8 @@ def test_editor_sees_weeks_but_not_admin_screens(client, store):
     assert client.get("/").status_code == 200
     r = client.get("/weeks/2026-11-01")
     assert r.status_code == 200 and "week.json" in r.text and "Publishing needs the publisher role" in r.text
+    r = client.get("/hymns")
+    assert r.status_code == 200 and "hymnary.org/hymn/HWC1986/2" in r.text
     for path in ("/rosters", "/events", "/users", "/audit", "/standing"):
         assert client.get(path).status_code == 403, path
     assert client.post("/weeks/2026-11-01/publish").status_code == 403

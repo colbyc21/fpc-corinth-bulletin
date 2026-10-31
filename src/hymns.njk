@@ -1,0 +1,137 @@
+---
+permalink: /hymns/
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hymn Index | FPC Corinth</title>
+<meta name="description" content="Every hymn sung at First Presbyterian Church of Corinth, MS: how often, when last, and a link to the words">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#f4f5f1">
+<style>
+  :root {
+    --cream: #f4f5f1; --warm-white: #fdfdfb; --parchment: #eceeea;
+    --ink: #171200; --ink-light: #3f3d32; --ink-faint: #666558;
+    --rule: #b0af9b; --rule-light: #d9d9cf;
+    --accent: #6d8c83; --accent-soft: #8aa39b; --accent-deep: #56736a;
+    --gold: #847539; --section-bg: #eef2ef;
+  }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { font-size: 17px; scroll-behavior: smooth; }
+  body { font-family: 'EB Garamond', 'Georgia', serif; color: var(--ink); background: var(--parchment); line-height: 1.6; -webkit-font-smoothing: antialiased; min-height: 100vh; }
+  .site-header { position: sticky; top: 0; z-index: 100; background: var(--warm-white); border-bottom: 1px solid var(--rule-light); backdrop-filter: saturate(180%) blur(8px); }
+  .site-header-inner { max-width: 720px; margin: 0 auto; padding: 0.7rem 1.4rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  .site-header .brand { font-family: 'Work Sans', sans-serif; font-weight: 500; font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink); text-decoration: none; white-space: nowrap; }
+  .site-header .archive-link { font-family: 'Work Sans', sans-serif; font-weight: 500; font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-faint); text-decoration: none; padding: 0.35rem 0.85rem; border: 1px solid var(--rule); border-radius: 2px; white-space: nowrap; margin-left: 0.4rem; }
+  .site-header .archive-link:hover { color: var(--warm-white); background: var(--ink); border-color: var(--ink); }
+  .page { max-width: 720px; margin: 0 auto; background: var(--warm-white); min-height: calc(100vh - 3rem); box-shadow: 0 0 80px rgba(23, 18, 0, 0.08); padding: 3rem 1.8rem 4rem; }
+  @media (min-width: 721px) { .page { margin-top: 1.5rem; margin-bottom: 1.5rem; border-radius: 2px; } }
+  .page-eyebrow { font-family: 'Work Sans', sans-serif; font-weight: 500; font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent-deep); text-align: center; margin-bottom: 0.6rem; }
+  .page-title { font-family: 'Work Sans', sans-serif; font-weight: 300; font-size: 1.8rem; text-align: center; color: var(--ink); line-height: 1.2; }
+  .ornament { width: 160px; height: 2px; background: linear-gradient(90deg, transparent, var(--ink), transparent); margin: 1.2rem auto 1.6rem; }
+  .intro { font-size: 0.92rem; color: var(--ink-light); text-align: center; margin-bottom: 1.4rem; }
+  .intro a { color: var(--accent-deep); }
+  .sort { font-family: 'Work Sans', sans-serif; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-faint); text-align: center; margin-bottom: 1rem; }
+  .sort button { font: inherit; letter-spacing: inherit; text-transform: inherit; color: var(--accent-deep); background: none; border: 1px solid var(--rule-light); border-radius: 2px; padding: 0.3rem 0.7rem; margin: 0 0.15rem; cursor: pointer; }
+  .sort button[aria-pressed="true"] { color: var(--warm-white); background: var(--accent); border-color: var(--accent); }
+  table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+  th { font-family: 'Work Sans', sans-serif; font-weight: 600; font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent-deep); text-align: left; padding: 0.4rem 0.4rem; border-bottom: 1px solid var(--rule); }
+  td { padding: 0.45rem 0.4rem; border-bottom: 1px solid var(--rule-light); vertical-align: top; }
+  td.n, th.n { text-align: right; white-space: nowrap; }
+  td.num { font-weight: 600; white-space: nowrap; }
+  td.title a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--rule); }
+  td.title a:hover { color: var(--accent-deep); border-color: var(--accent-deep); }
+  td.title small { display: block; font-size: 0.78rem; color: var(--ink-faint); font-style: italic; }
+  td .dates { display: none; font-size: 0.78rem; color: var(--ink-faint); margin-top: 0.2rem; }
+  tr.open td .dates { display: block; }
+  td.last { white-space: nowrap; cursor: pointer; }
+  td.last::after { content: " ▸"; color: var(--rule); font-size: 0.7rem; }
+  tr.open td.last::after { content: " ▾"; }
+  .note { font-size: 0.85rem; color: var(--ink-faint); margin-top: 1.6rem; }
+  .updated { font-size: 0.75rem; color: var(--ink-faint); text-align: center; margin-top: 2rem; }
+  @media (max-width: 480px) { th.tune, td.tune { display: none; } }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="https://fpccorinth.org" target="_blank" rel="noopener">First Presbyterian Church</a>
+    <span><a class="archive-link" href="/calendar/">Calendar</a><a class="archive-link" href="/archive/">Archive</a></span>
+  </div>
+</header>
+
+<div class="page">
+  <p class="page-eyebrow">First Presbyterian Church of Corinth</p>
+  <h1 class="page-title">Hymn Index</h1>
+  <div class="ornament"></div>
+
+  <p class="intro">{{ hymnIndex.hymns.length }} hymns sung at {{ hymnIndex.services }} services since {{ hymnIndex.since_label }}, from <a href="{{ hymnIndex.hymnary_hymnal_url }}" target="_blank" rel="noopener">{{ hymnIndex.hymnal }}</a>. A title opens the words on Hymnary.org; a “last sung” date opens every date.</p>
+
+  <p class="sort">Sort by
+    <button type="button" data-sort="number" aria-pressed="true">Number</button>
+    <button type="button" data-sort="times">Most sung</button>
+    <button type="button" data-sort="last">Most recent</button>
+    <button type="button" data-sort="title">Title</button>
+  </p>
+
+  <table id="hymns">
+    <thead><tr><th>#</th><th>Hymn</th><th class="tune">Tune</th><th class="n">Sung</th><th>Last sung</th></tr></thead>
+    <tbody>
+    {% for h in hymnIndex.hymns %}
+      <tr data-number="{{ h.number }}" data-times="{{ h.times }}" data-last="{{ h.last }}" data-title="{{ h.title | lower }}">
+        <td class="num">{{ h.number }}</td>
+        <td class="title"><a href="{{ h.url }}" target="_blank" rel="noopener">{{ h.title }}</a>{% if h.as_printed.length %}<small>printed as {{ h.as_printed | join(" / ") }}</small>{% endif %}{% if not h.in_hymnal %}<small>not a number in the hymnal</small>{% endif %}</td>
+        <td class="tune">{{ h.tune or "" }}</td>
+        <td class="n">{{ h.times }}</td>
+        <td class="last" title="Show every date">{{ h.last_label }}
+          <div class="dates">{% for d in h.dates | reverse %}<a href="/scroll/{{ d.date }}/">{{ d.date }}</a> · {{ d.slot }}{% if d.verses %} ({{ d.verses }}){% endif %}<br>{% endfor %}</div>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+
+  {% if hymnIndex.unnumbered.length %}
+  <p class="note">Sung without a hymnal number: {% for u in hymnIndex.unnumbered %}“{{ u.title }}” ({{ u.date }}){% if not loop.last %}; {% endif %}{% endfor %}.</p>
+  {% endif %}
+
+  <p class="updated">Updated {{ hymnIndex.generated.slice(0, 10) }} · through {{ hymnIndex.through_label }}</p>
+</div>
+
+<script>
+(function () {
+  var tbody = document.querySelector('#hymns tbody');
+  var rows = Array.prototype.slice.call(tbody.rows);
+  function key(row, by) {
+    var v = row.dataset[by];
+    return by === 'number' ? parseInt(v, 10) : by === 'times' ? -parseInt(v, 10) : by === 'last' ? v : v;
+  }
+  document.querySelectorAll('.sort button').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var by = btn.dataset.sort;
+      document.querySelectorAll('.sort button').forEach(function (b) { b.setAttribute('aria-pressed', b === btn); });
+      rows.sort(function (a, b) {
+        var ka = key(a, by), kb = key(b, by);
+        if (by === 'last') return kb < ka ? -1 : kb > ka ? 1 : parseInt(a.dataset.number, 10) - parseInt(b.dataset.number, 10);
+        if (ka < kb) return -1; if (ka > kb) return 1;
+        return parseInt(a.dataset.number, 10) - parseInt(b.dataset.number, 10);
+      });
+      rows.forEach(function (r) { tbody.appendChild(r); });
+    });
+  });
+  tbody.addEventListener('click', function (e) {
+    var cell = e.target.closest('td.last');
+    if (cell && e.target.tagName !== 'A') cell.parentElement.classList.toggle('open');
+  });
+})();
+</script>
+</body>
+</html>

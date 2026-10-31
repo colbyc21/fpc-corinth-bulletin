@@ -29,7 +29,7 @@ permalink: /calendar/
   .site-header { position: sticky; top: 0; z-index: 100; background: var(--warm-white); border-bottom: 1px solid var(--rule-light); backdrop-filter: saturate(180%) blur(8px); }
   .site-header-inner { max-width: 640px; margin: 0 auto; padding: 0.7rem 1.4rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
   .site-header .brand { font-family: 'Work Sans', sans-serif; font-weight: 500; font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink); text-decoration: none; white-space: nowrap; }
-  .site-header .archive-link { font-family: 'Work Sans', sans-serif; font-weight: 500; font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-faint); text-decoration: none; padding: 0.35rem 0.85rem; border: 1px solid var(--rule); border-radius: 2px; white-space: nowrap; }
+  .site-header .archive-link { font-family: 'Work Sans', sans-serif; font-weight: 500; font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-faint); text-decoration: none; padding: 0.35rem 0.85rem; border: 1px solid var(--rule); border-radius: 2px; white-space: nowrap; margin-left: 0.4rem; }
   .site-header .archive-link:hover { color: var(--warm-white); background: var(--ink); border-color: var(--ink); }
   .page { max-width: 640px; margin: 0 auto; background: var(--warm-white); min-height: calc(100vh - 3rem); box-shadow: 0 0 80px rgba(23, 18, 0, 0.08); padding: 3rem 1.8rem 4rem; }
   @media (min-width: 641px) { .page { margin-top: 1.5rem; margin-bottom: 1.5rem; border-radius: 2px; } }
@@ -59,7 +59,7 @@ permalink: /calendar/
 <header class="site-header">
   <div class="site-header-inner">
     <a class="brand" href="https://fpccorinth.org" target="_blank" rel="noopener">First Presbyterian Church</a>
-    <a class="archive-link" href="/archive/">Archive</a>
+    <span><a class="archive-link" href="/hymns/">Hymns</a><a class="archive-link" href="/archive/">Archive</a></span>
   </div>
 </header>
 

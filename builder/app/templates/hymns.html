@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Hymns{% endblock %}
+{% block content %}
+<h1>Hymn index</h1>
+<p class="muted">{{ idx.hymns | length }} hymns sung at {{ idx.services }} services since {{ idx.since_label }}, read from the published bulletins. The public copy is <a href="{{ site_url }}/hymns/">{{ site_url }}/hymns/</a> (regenerated on every publish). A title opens the words on Hymnary.org.</p>
+
+<div class="card">
+  <table>
+    <thead><tr><th>#</th><th>Hymn</th><th>Tune</th><th>Sung</th><th>First</th><th>Last</th><th>Dates</th></tr></thead>
+    <tbody>
+    {% for h in idx.hymns | sort(attribute='last', reverse=True) %}
+      <tr>
+        <td><strong>{{ h.number }}</strong></td>
+        <td><a href="{{ h.url }}" target="_blank" rel="noopener">{{ h.title }}</a>{% if h.as_printed %}<div class="muted">printed as {{ h.as_printed | join(" / ") }}</div>{% endif %}{% if not h.in_hymnal %}<div class="warn">not a number in the hymnal</div>{% endif %}</td>
+        <td class="muted">{{ h.tune or "" }}</td>
+        <td>{{ h.times }}</td>
+        <td>{{ h.first }}</td>
+        <td>{{ h.last }}</td>
+        <td class="muted">{% for d in h.dates | reverse %}{{ d.date }} ({{ d.slot }}{% if d.verses %}, {{ d.verses }}{% endif %}){% if not loop.last %}, {% endif %}{% endfor %}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% if idx.unnumbered %}
+<p class="muted">Sung without a hymnal number: {% for u in idx.unnumbered %}“{{ u.title }}” ({{ u.date }}){% if not loop.last %}; {% endif %}{% endfor %}.</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,1363 @@
+{
+  "generated": "2026-10-31T20:18:32+00:00",
+  "hymnal": "The Hymnal for Worship & Celebration",
+  "hymnary_hymnal_url": "https://hymnary.org/hymnal/HWC1986",
+  "services": 40,
+  "since": "2026-01-25",
+  "through": "2026-11-01",
+  "since_label": "January 25, 2026",
+  "through_label": "November 1, 2026",
+  "hymns": [
+    {
+      "number": "1",
+      "title": "Joyful, Joyful, We Adore Thee",
+      "as_printed": [],
+      "tune": "HYMN TO JOY",
+      "in_hymnal": true,
+      "times": 1,
+      "first": "2026-08-16",
+      "last": "2026-08-16",
+      "last_label": "August 16, 2026",
+      "dates": [
+        {
+          "date": "2026-08-16",
+          "slot": "Hymn of Commitment",
+          "verses": null
+        }
+      ],
+      "url": "https://hymnary.org/hymn/HWC1986/1"
+    },
+    {
+      "number": "2",
+      "title": "Come, Thou Fount of Every Blessing",
+      "as_printed": [
+        "Come, Thou Fount"
+      ],
+      "tune": "NETTLETON",
+      "in_hymnal": true,
+      "times": 4,
+      "first": "2026-03-22",
+      "last": "2026-11-01",
+      "last_label": "November 1, 2026",
+      "dates": [
+        {
+          "date": "2026-03-22",
+          "slot": "The Hymn",
+          "verses": null
+        },
+        {
+          "date": "2026-05-31",
+          "slot": "Hymn of Response",
+          "verses": null
+        },
+        {
+          "date": "2026-10-11",
+          "slot": "The Hymn",
+          "verses": null
+        },
+        {
+          "date": "2026-11-01",
+          "slot": "Hymn of Response",
+          "verses": null
+        }
+      ],
+      "url": "https://hymnary.org/hymn/HWC1986/2"
+    },
+    {
+      "number": "3",
+      "title": "Praise My Soul the King of Heaven",
+      "as_printed": [],
+      "tune": "LAUDA ANIMA (Andrews)",
+      "in_hymnal": true,
+      "times": 1,
+      "first": "2026-03-29",
+      "last": "2026-03-29",
+      "last_label": "March 29, 2026",
+      "dates": [
+        {
+          "date": "2026-03-29",
+          "slot": "Hymn",
+          "verses": null
+        }
+      ],
+      "url": "https://hymnary.org/hymn/HWC1986/3"
+    },
+    {
+      "number": "8",
+      "title": "Praise to the Lord, the Almighty",
+      "as_printed": [],
+      "tune": "LOBE DEN HERREN",
+      "in_hymnal": true,
+      "times": 6,
+      "first": "2026-03-01",
+      "last": "2026-10-25",
+      "last_label": "October 25, 2026",
+      "dates": [
+        {
+          "date": "2026-03-01",
+          "slot": "The Hymn of Praise",
+          "verses": "vv. 1–3"
+        },
+        {
+          "date": "2026-03-01",
+          "slot": "Congregational Response",
+          "verses": "v. 4"
+        },
+        {
+          "date": "2026-04-12",
+          "slot": "Hymn of Praise",
+          "verses": null
+        },
+        {
+          "date": "2026-08-30",
+          "slot": "The Hymn",
+          "verses": null
+        },
+        {
+          "date": "2026-10-25",
+          "slot": "The Hymn",
+          "verses": "vv. 1–3"
+        },
+        {
+          "date": "2026-10-25",
+          "slot": "Congregational Response",
+          "verses": "v. 4"
+        }
+      ],
+      "url": "https://hymnary.org/hymn/HWC1986/8"
+    },
+    {
+      "number": "10",
+      "title": "O Worship the King",
+      "as_printed": [],
+      "tune": "LYONS",
+      "in_hymnal": true,
+      "times": 1,
+      "first": "2026-11-01",
+      "last": "2026-11-01",
+      "last_label": "November 1, 2026",
+      "dates": [
+        {
+          "date": "2026-11-01",
+          "slot": "The Hymn",
+          "verses": null
+        }
+      ],
+      "url": "https://hymnary.org/hymn/HWC1986/10"
+    },
+    {
+      "number": "25",
+      "title": "Immortal, Invisible",
+      "as_printed": [],
+      "tune": "ST. DENIO",
+      "in_hymnal": true,
+      "times": 4,
+      "first": "2026-06-28",
+      "last": "2026-08-09",
+      "last_label": "August 9, 2026",
+      "dates": [
+        {
+          "date": "2026-06-28",
+          "slot": "The Hymn",
+          "verses": "vv. 1–3"
+        },
+        {
+          "date": "2026-06-28",
+          "slot": "Congregational Response",
+          "verses": "v. 4"
+        },
+        {
+          "date": "2026-08-09",
+          "slot": "The Hymn",
+          "verses": "vv. 1–3"
+        },
+        {
+          "date": "2026-08-09",
+          "slot": "Congregational Response",
+          "verses": "v. 4"
+        }
+      ],
+      "url": "https://hymnary.org/hymn/HWC1986/25"
+    },
+    {
+      "number": "26",
+      "title": "A Mighty Fortress Is Our God",
+      "as_printed": [
+        "A Mighty Fortress"
+      ],
+      "tune": "EIN' FESTE BURG",
+      "in_hymnal": true,
+      "times": 4,
+      "first": "2026-04-26",
+      "last": "2026-07-26",
+      "last_label": "July 26, 2026",
+      "dates": [
+        {
+          "date": "2026-04-26",
+          "slot": "Hymn of Praise",
+          "verses": "vv. 1–3"
+        },
+        {
+          "date": "2026-04-26",
+          "slot": "Congregational Response",
+          "verses": "v. 4"
+        },
+        {
+          "date": "2026-07-26",
+          "slot": "The Hymn",
+          "verses": "vv. 1–3"
+        },
+        {
+          "date": "2026-07-26",
+          "slot": "Congregational Response",
+          "verses": "v. 4"
+        }
+      ],
+      "url": "https://hymnary.org/hymn/HWC1986/26"
+    },
+    {
+      "number": "31",
+      "title": "Great Is the Lord",
+      "as_printed": [],
+      "tune": "GREAT IS THE LORD",
+      "in_hymnal": true,
+      "times": 1,
+      "first": "2026-06-07",
+      "last": "2026-06-07",
+      "last_label": "June 7, 2026",
+      "dates": [
+        {
+          "date": "2026-06-07",
+          "slot": "Hymn",
+          "verses": null
+        }
+      ],
+      "url": "https://hymnary.org/hymn/HWC1986/31"
+    },
+    {
+      "number": "43",
+      "title": "Great Is Thy Faithfulness",
+      "as_printed": [],
+      "tune": "FAITHFULNESS",
+      "in_hymnal": true,
+      "times": 4,
+      "first": "2026-04-19",
+      "last": "2026-11-01",
+      "last_label": "November 1, 2026",
+      "dates": [
+        {
+          "date": "2026-04-19",
+          "slot": "Hymn",
+          "verses": null
+        },
+        {
+          "date": "2026-05-31",
+          "slot": "The Hymn of Praise",
+          "verses": "vv. 1, 2"
+        },
+        {
+          "date": "2026-05-31",
+          "slot": "The Hymn of Praise",
+          "verses": "v. 3"
+        },
+        {
+          "date": "2026-11-01",
+          "slot": "Hymn",
+          "verses": null
+        }
+      ],
+      "url": "https://hymnary.org/hymn/HWC1986/43"
+    },
+    {
+      "number": "51",
+      "title": "Guide Me, O Thou Great Jehovah",
+      "as_printed": [],
+      "tune": "CWM RHONDDA",
+      "in_hymnal": true,
+      "times": 1,
+      "first": "2026-08-30",
+      "last": "2026-08-30",
+      "last_label": "August 30, 2026",
+      "dates": [
+        {
+          "date": "2026-08-30",
+          "slot": "Hymn",
+          "verses": null
+        }
+      ],
+      "url": "https://hymnary.org/hymn/HWC1986/51"
+    },
+    {
+      "number": "52",
+      "title": "O God, Our Help in Ages Past",
+      "as_printed": [],
+      "tune": "ST. ANNE",
+      "in_hymnal": true,
+      "times": 3,
+      "first": "2026-06-28",
+      "last": "2026-09-06",
+      "last_label": "September 6, 2026",
+      "dates": [
+        {
+          "date": "2026-06-28",
+          "slot": "Hymn",
+          "verses": null
+        },
+        {
+          "date": "2026-08-09",
+          "slot": "Closing Hymn",
+          "verses": null
+        },
+        {
+          "date": "2026-09-06",
+          "slot": "Hymn",
+          "verses": null
+        }
+      ],
+      "url": "https://hymnary.org/hymn/HWC1986/52"
+    },
+    {
+      "number": "59",
+      "title": "I Sing the Mighty Power of God",
+      "as_printed": [],
+      "tune": "ELLACOMBE",
+      "in_hymnal": true,
+      "times": 1,
+      "first": "2026-03-01",
+      "last": "2026-03-01",
+      "last_label": "March 1, 2026",
+      "dates": [
+        {
+          "date": "2026-03-01",
+          "slot": "Hymn",
+          "verses": null
+        }
+      ],
+      "url": "https://hymnary.org/hymn/HWC1986/59"
+    },
+    {
+      "number": "64",
+      "title": "All Creatures of Our God and King",
+      "as_printed": [],
+      "tune": "LASST UNS ERFREUEN",
+      "in_hymnal": true,
+      "times": 6,
+      "first": "2026-03-15",
+      "last": "2026-09-13",
+      "last_label": "September 13, 2026",
+      "dates": [
+        {
+          "date": "2026-03-15",
+          "slot": "The Hymn",
+          "verses": "vv. 1–3"
+        },
+        {
+          "date": "2026-03-15",
+          "slot": "Congregational Response",
+          "verses": "vv. 4–5"
+        },
+        {
+          "date": "2026-06-07",
+          "slot": "The Hymn",
+          "verses": "vv. 1–3"
+        },
+        {
+          "date": "2026-06-07",
+          "slot": "Congregational Response",
+          "verses": "vv. 4–5"
+        },
+        {
+          "date": "2026-09-13",
+          "slot": "The Hymn",
+          "verses": "vv. 1–3"
+        },
+        {
+          "date": "2026-09-13",
+          "slot": "Congregational Response",
+          "verses": "vv. 4–5"
+        }
+      ],
+      "url": "https://hymnary.org/hymn/HWC1986/64"
+    },
+    {
+      "number": "66",
+      "title": "To God Be the Glory",
+      "as_printed": [],
+      "tune": "TO GOD BE THE GLORY",
+      "in_hymnal": true,
+      "times": 3,
+      "first": "2026-05-03",
+      "last": "2026-08-16",
+      "last_label": "August 16, 2026",
+      "dates": [
+        {
+          "date": "2026-05-03",
+          "slot": "Hymn",
+          "verses": null
+        },
+        {
+          "date": "2026-07-05",
+          "slot": "The Hymn",
+          "verses": null
+        },
+        {
+          "date": "2026-08-16",
+          "slot": "The Hymn",
+          "verses": null
+        }
+      ],
+      "url": "https://hymnary.org/hymn/HWC1986/66"
+    },
+    {
+      "number": "67",
+      "title": "The love of God is greater far",
+      "as_printed": [
+        "The Love of God"
+      ],
+      "tune": "LOVE OF GOD",
+      "in_hymnal": true,
+      "times": 1,
+      "first": "2026-01-25",
+      "last": "2026-01-25",
+      "last_label": "January 25, 2026",
+      "dates": [
+        {
+          "date": "2026-01-25",
+          "slot": "Hymn",
+          "verses": "vv. 1, 2, 3"
+        }
+      ],
+      "url": "https://hymnary.org/hymn/HWC1986/67"
+    },
+    {
+      "number": "76",
+      "title": "O For a Thousand Tongues to Sing",
+      "as_printed": [],
+      "tune": "AZMON",
+      "in_hymnal": true,
+      "times": 2,
+      "first": "2026-09-27",
+      "last": "2026-09-27",
+      "last_label": "September 27, 2026",
+      "dates": [
+        {
+          "date": "2026-09-27",
+          "slot": "The Hymn",
+          "verses": "vv. 1–3"
+        },
+        {
+          "date": "2026-09-27",
+          "slot": "Hymn of Response",
+          "verses": "vv. 4–5"
+        }
+      ],
+      "url": "https://hymnary.org/hymn/HWC1986/76"
+    },
+    {
+      "number": "87",
+      "title": "May Jesus Christ Be Praised",
+      "as_printed": [],
+      "tune": "LAUDES DOMINI",
+      "in_hymnal": true,
+      "times": 4,
+      "first": "2026-06-14",
+      "last": "2026-10-04",
+      "last_label": "October 4, 2026",
+      "dates": [
+        {
+          "date": "2026-06-14",
+          "slot": "The Hymn",
+          "verses": "vv. 1–4"
+        },
+        {
+          "date": "2026-06-14",
+          "slot": "Congregational Response",
+          "verses": "vv. 4–5"
+        },
+        {
+          "date": "2026-10-04",
+          "slot": "The Hymn",
+          "verses": "vv. 1–4"
+        },
+        {
+          "date": "2026-10-04",
+          "slot": "Congregational Response",
+          "verses": "vv. 5–6"
+        }
+      ],
+      "url": "https://hymnary.org/hymn/HWC1986/87"
+    },
+    {
+      "number": "89",
+      "title": "Our Great Savior",
+      "as_printed": [],
+      "tune": "HYFRYDOL",
+      "in_hymnal": true,
+      "times": 1,
+      "first": "2026-04-19",
+      "last": "2026-04-19",
+      "last_label": "April 19, 2026",
+      "dates": [
+        {
+          "date": "2026-04-19",
+          "slot": "Hymn of Commitment",
+          "verses": "vv. 1, 5"
+        }
+      ],
+      "url": "https://hymnary.org/hymn/HWC1986/89"
+    },
+    {
+      "number": "97",
+      "title": "All Hail the Power of Jesus’ Name",
+      "as_printed": [],
+      "tune": "CORONATION",
+      "in_hymnal": true,
+      "times": 1,
+      "first": "2026-05-17",
+      "last": "2026-05-17",
+      "last_label": "May 17, 2026",
+      "dates": [
+        {
+          "date": "2026-05-17",
+          "slot": "The Hymn of Praise",
+          "verses": null
+        }
+      ],
+      "url": "https://hymnary.org/hymn/HWC1986/97"
+    },
+    {
+      "number": "108",
+      "title": "Come, Christians, Join to Sing",
+      "as_printed": [],
+      "tune": "MADRID",
+      "in_hymnal": true,
+      "times": 2,
+      "first": "2026-03-08",
+      "last": "2026-06-21",
+      "last_label": "June 21, 2026",
+      "dates": [
+        {
+          "date": "2026-03-08",
+          "slot": "The Hymn",
+          "verses": null
+        },
+        {
+          "date": "2026-06-21",
+          "slot": "The Hymn",
+          "verses": null
+        }
+      ],
+      "url": "https://hymnary.org/hymn/HWC1986/108"
+    },
+    {
+      "number": "173",
+      "title": "All Glory Laud and Honor",
+      "as_printed": [
+        "All Glory, Laud and Honor"
+      ],
+      "tune": "ST. THEODULPH",
+      "in_hymnal": true,
+      "times": 2,
+      "first": "2026-03-29",
+      "last": "2026-05-10",
+      "last_label": "May 10, 2026",
+      "dates": [
+        {
+          "date": "2026-03-29",
+          "slot": "The Hymn",
+          "verses": null
+        },
+        {
+          "date": "2026-05-10",
+          "slot": "Hymn",
+          "verses": null
+        }
+      ],
+      "url": "https://hymnary.org/hymn/HWC1986/173"
+    },
+    {
+      "number": "202",
+      "title": "Amazing Grace",
+      "as_printed": [],
+      "tune": "AMAZING GRACE",
+      "in_hymnal": true,
+      "times": 3,
+      "first": "2026-01-25",
+      "last": "2026-10-25",
+      "last_label": "October 25, 2026",
+      "dates": [
+        {
+          "date": "2026-01-25",
+          "slot": "Hymn",
+          "verses": "vv. 1, 2, 3, 4"
+        },
+        {
+          "date": "2026-04-12",
+          "slot": "Hymn",
+          "verses": "vv. 1–3"
+        },
+        {
+          "date": "2026-10-25",
+          "slot": "Hymn of Response",
+          "verses": "vv. 1–3"
+        }
+      ],
+      "url": "https://hymnary.org/hymn/HWC1986/202"
+    },
+    {
+      "number": "203",
+      "title": "And Can It Be?",
+      "as_printed": [
+        "And Can It Be"
+      ],
+      "tune": "SAGINA",
+      "in_hymnal": true,
+      "times": 3,
+      "first": "2026-04-12",
+      "last": "2026-09-27",
+      "last_label": "September 27, 2026",
+      "dates": [
+        {
+          "date": "2026-04-12",
+          "slot": "Congregational Response",
+          "verses": "vv. 1, 4"
+        },
+        {
+          "date": "2026-05-24",
+          "slot": "Hymn of Commitment",
+          "verses": null
+        },
+        {
+          "date": "2026-09-27",
+          "slot": "Hymn",
+          "verses": null
+        }
+      ],
+      "url": "https://hymnary.org/hymn/HWC1986/203"
+    },
+    {
+      "number": "204",
+      "title": "Rock of Ages",
+      "as_printed": [],
+      "tune": "TOPLADY",
+      "in_hymnal": true,
+      "times": 2,
+      "first": "2026-09-06",
+      "last": "2026-09-06",
+      "last_label": "September 6, 2026",
+      "dates": [
+        {
+          "date": "2026-09-06",
+          "slot": "The Hymn",
+          "verses": "vv. 1–3"
+        },
+        {
+          "date": "2026-09-06",
+          "slot": "Hymn of Response",
+          "verses": "v. 4"
+        }
+      ],
+      "url": "https://hymnary.org/hymn/HWC1986/204"
+    },
+    {
+      "number": "206",
+      "title": "There Is a Redeemer",
+      "as_printed": [],
+      "tune": "GREEN",
+      "in_hymnal": true,
+      "times": 3,
+      "first": "2026-03-15",
+      "last": "2026-09-20",
+      "last_label": "September 20, 2026",
+      "dates": [
+        {
+          "date": "2026-03-15",
+          "slot": "Hymn of Commitment",
+          "verses": null
+        },
+        {
+          "date": "2026-07-12",
+          "slot": "Hymn of Commitment",
+          "verses": null
+        },
+        {
+          "date": "2026-09-20",
+          "slot": "Hymn of Commitment",
+          "verses": null
+        }
+      ],
+      "url": "https://hymnary.org/hymn/HWC1986/206"
+    },
+    {
+      "number": "208",
+      "title": "Alas, and Did My Savior Bleed?",
+      "as_printed": [],
+      "tune": "MARTYRDOM",
+      "in_hymnal": true,
+      "times": 2,
+      "first": "2026-08-16",
+      "last": "2026-10-18",
+      "last_label": "October 18, 2026",
+      "dates": [
+        {
+          "date": "2026-08-16",
+          "slot": "Congregational Response",
+          "verses": "vv. 1–3"
+        },
+        {
+          "date": "2026-10-18",
+          "slot": "Congregational Response",
+          "verses": "vv. 1–3"
+        }
+      ],
+      "url": "https://hymnary.org/hymn/HWC1986/208"
+    },
+    {
+      "number": "210",
+      "title": "Jesus Paid It All",
+      "as_printed": [],
+      "tune": "ALL TO CHRIST",
+      "in_hymnal": true,
+      "times": 1,
+      "first": "2026-03-22",
+      "last": "2026-03-22",
+      "last_label": "March 22, 2026",
+      "dates": [
+        {
+          "date": "2026-03-22",
+          "slot": "Hymn",
+          "verses": null
+        }
+      ],
+      "url": "https://hymnary.org/hymn/HWC1986/210"
+    },
+    {
+      "number": "217",
+      "title": "Christ the Lord Is Risen Today",
+      "as_printed": [],
+      "tune": "EASTER HYMN",
+      "in_hymnal": true,
+      "times": 1,
+      "first": "2026-04-05",
+      "last": "2026-04-05",
+      "last_label": "April 5, 2026",
+      "dates": [
+        {
+          "date": "2026-04-05",
+          "slot": "The Hymn",
+          "verses": null
+        }
+      ],
+      "url": "https://hymnary.org/hymn/HWC1986/217"
+    },
+    {
+      "number": "227",
+      "title": "Thine Is the Glory",
+      "as_printed": [],
+      "tune": "MACCABEUS",
+      "in_hymnal": true,
+      "times": 1,
+      "first": "2026-04-05",
+      "last": "2026-04-05",
+      "last_label": "April 5, 2026",
+      "dates": [
+        {
+          "date": "2026-04-05",
+          "slot": "Hymn",
+          "verses": null
+        }
+      ],
+      "url": "https://hymnary.org/hymn/HWC1986/227"
+    },
+    {
+      "number": "231",
+      "title": "Jesus Shall Reign",
+      "as_printed": [],
+      "tune": "DUKE STREET",
+      "in_hymnal": true,
+      "times": 2,
+      "first": "2026-03-08",
+      "last": "2026-06-21",
+      "last_label": "June 21, 2026",
+      "dates": [
+        {
+          "date": "2026-03-08",
+          "slot": "Congregational Response",
+          "verses": null
+        },
+        {
+          "date": "2026-06-21",
+          "slot": "Congregational Response",
+          "verses": null
+        }
+      ],
+      "url": "https://hymnary.org/hymn/HWC1986/231"
+    },
+    {
+      "number": "234",
+      "title": "Crown Him with Many Crowns",
+      "as_printed": [
+        "Crown Him With Many Crowns"
+      ],
+      "tune": "DIADEMATA",
+      "in_hymnal": true,
+      "times": 3,
+      "first": "2026-02-15",
+      "last": "2026-05-03",
+      "last_label": "May 3, 2026",
+      "dates": [
+        {
+          "date": "2026-02-15",
+          "slot": "Hymn of Praise",
+          "verses": "vv. 1–3"
+        },
+        {
+          "date": "2026-02-15",
+          "slot": "Congregational Response",
+          "verses": "v. 4"
+        },
+        {
+          "date": "2026-05-03",
+          "slot": "The Hymn",
+          "verses": null
+        }
+      ],
+      "url": "https://hymnary.org/hymn/HWC1986/234"
+    },
+    {
+      "number": "262",
+      "title": "Holy, Holy, Holy",
+      "as_printed": [],
+      "tune": "NICAEA",
+      "in_hymnal": true,
+      "times": 6,
+      "first": "2026-05-24",
+      "last": "2026-09-20",
+      "last_label": "September 20, 2026",
+      "dates": [
+        {
+          "date": "2026-05-24",
+          "slot": "The Hymn",
+          "verses": "vv. 1–3"
+        },
+        {
+          "date": "2026-05-24",
+          "slot": "Congregational Response",
+          "verses": "v. 4"
+        },
+        {
+          "date": "2026-07-12",
+          "slot": "The Hymn",
+          "verses": "vv. 1–3"
+        },
+        {
+          "date": "2026-07-12",
+          "slot": "Congregational Response",
+          "verses": "v. 4"
+        },
+        {
+          "date": "2026-09-20",
+          "slot": "The Hymn",
+          "verses": "vv. 1–3"
+        },
+        {
+          "date": "2026-09-20",
+          "slot": "Congregational Response",
+          "verses": "v. 4"
+        }
+      ],
+      "url": "https://hymnary.org/hymn/HWC1986/262"
+    },
+    {
+      "number": "267",
+      "title": "Come, Thou Almighty King",
+      "as_printed": [],
+      "tune": "ITALIAN HYMN",
+      "in_hymnal": true,
+      "times": 2,
+      "first": "2026-02-15",
+      "last": "2026-05-10",
+      "last_label": "May 10, 2026",
+      "dates": [
+        {
+          "date": "2026-02-15",
+          "slot": "Hymn of Commitment",
+          "verses": null
+        },
+        {
+          "date": "2026-05-10",
+          "slot": "The Hymn of Praise",
+          "verses": null
+        }
+      ],
+      "url": "https://hymnary.org/hymn/HWC1986/267"
+    },
+    {
+      "number": "269",
+      "title": "O Word of God Incarnate",
+      "as_printed": [],
+      "tune": "MUNICH",
+      "in_hymnal": true,
+      "times": 2,
+      "first": "2026-08-23",
+      "last": "2026-08-23",
+      "last_label": "August 23, 2026",
+      "dates": [
+        {
+          "date": "2026-08-23",
+          "slot": "The Hymn",
+          "verses": "vv. 1–3"
+        },
+        {
+          "date": "2026-08-23",
+          "slot": "Congregational Response",
+          "verses": "v. 4"
+        }
+      ],
+      "url": "https://hymnary.org/hymn/HWC1986/269"
+    },
+    {
+      "number": "275",
+      "title": "How Firm a Foundation",
+      "as_printed": [],
+      "tune": "FOUNDATION",
+      "in_hymnal": true,
+      "times": 3,
+      "first": "2026-05-17",
+      "last": "2026-08-23",
+      "last_label": "August 23, 2026",
+      "dates": [
+        {
+          "date": "2026-05-17",
+          "slot": "The Hymn of Response",
+          "verses": null
+        },
+        {
+          "date": "2026-07-19",
+          "slot": "The Hymn",
+          "verses": null
+        },
+        {
+          "date": "2026-08-23",
+          "slot": "Hymn",
+          "verses": "vv. 1–2"
+        }
+      ],
+      "url": "https://hymnary.org/hymn/HWC1986/275"
+    },
+    {
+      "number": "276",
+      "title": "Christ Is Made the Sure Foundation",
+      "as_printed": [],
+      "tune": "REGENT SQUARE",
+      "in_hymnal": true,
+      "times": 1,
+      "first": "2026-07-19",
+      "last": "2026-07-19",
+      "last_label": "July 19, 2026",
+      "dates": [
+        {
+          "date": "2026-07-19",
+          "slot": "Hymn",
+          "verses": "vv. 1, 4"
+        }
+      ],
+      "url": "https://hymnary.org/hymn/HWC1986/276"
+    },
+    {
+      "number": "277",
+      "title": "The Church’s One Foundation",
+      "as_printed": [],
+      "tune": "AURELIA",
+      "in_hymnal": true,
+      "times": 3,
+      "first": "2026-05-31",
+      "last": "2026-10-18",
+      "last_label": "October 18, 2026",
+      "dates": [
+        {
+          "date": "2026-05-31",
+          "slot": "Hymn",
+          "verses": null
+        },
+        {
+          "date": "2026-08-02",
+          "slot": "The Hymn",
+          "verses": null
+        },
+        {
+          "date": "2026-10-18",
+          "slot": "The Hymn",
+          "verses": null
+        }
+      ],
+      "url": "https://hymnary.org/hymn/HWC1986/277"
+    },
+    {
+      "number": "334",
+      "title": "Come, Ye Sinners, Poor and Needy",
+      "as_printed": [],
+      "tune": "ARISE",
+      "in_hymnal": true,
+      "times": 1,
+      "first": "2026-02-18",
+      "last": "2026-02-18",
+      "last_label": "February 18, 2026",
+      "dates": [
+        {
+          "date": "2026-02-18",
+          "slot": "Hymn of Invitation",
+          "verses": null
+        }
+      ],
+      "url": "https://hymnary.org/hymn/HWC1986/334"
+    },
+    {
+      "number": "345",
+      "title": "Blessed Assurance",
+      "as_printed": [
+        "Leaning on the Everlasting Arms"
+      ],
+      "tune": "ASSURANCE",
+      "in_hymnal": true,
+      "times": 2,
+      "first": "2026-06-14",
+      "last": "2026-10-04",
+      "last_label": "October 4, 2026",
+      "dates": [
+        {
+          "date": "2026-06-14",
+          "slot": "Hymn",
+          "verses": null
+        },
+        {
+          "date": "2026-10-04",
+          "slot": "Hymn",
+          "verses": null
+        }
+      ],
+      "url": "https://hymnary.org/hymn/HWC1986/345"
+    },
+    {
+      "number": "347",
+      "title": "Be Still My Soul",
+      "as_printed": [],
+      "tune": "FINLANDIA",
+      "in_hymnal": true,
+      "times": 1,
+      "first": "2026-04-26",
+      "last": "2026-04-26",
+      "last_label": "April 26, 2026",
+      "dates": [
+        {
+          "date": "2026-04-26",
+          "slot": "Hymn of Response",
+          "verses": "v. 1"
+        }
+      ],
+      "url": "https://hymnary.org/hymn/HWC1986/347"
+    },
+    {
+      "number": "350",
+      "title": "Tis So Sweet to Trust in Jesus",
+      "as_printed": [],
+      "tune": "TRUST IN JESUS",
+      "in_hymnal": true,
+      "times": 1,
+      "first": "2026-07-12",
+      "last": "2026-07-12",
+      "last_label": "July 12, 2026",
+      "dates": [
+        {
+          "date": "2026-07-12",
+          "slot": "Hymn of Preparation",
+          "verses": "vv. 1–2"
+        }
+      ],
+      "url": "https://hymnary.org/hymn/HWC1986/350"
+    },
+    {
+      "number": "359",
+      "title": "All my tomorrows, all my past",
+      "as_printed": [
+        "Blest Be the Tie That Binds"
+      ],
+      "tune": "LORD OF ALL",
+      "in_hymnal": true,
+      "times": 1,
+      "first": "2026-01-25",
+      "last": "2026-01-25",
+      "last_label": "January 25, 2026",
+      "dates": [
+        {
+          "date": "2026-01-25",
+          "slot": "Hymn",
+          "verses": "vv. 1, 2, 3"
+        }
+      ],
+      "url": "https://hymnary.org/hymn/HWC1986/359"
+    },
+    {
+      "number": "364",
+      "title": "My Jesus, I Love Thee",
+      "as_printed": [],
+      "tune": "GORDON",
+      "in_hymnal": true,
+      "times": 1,
+      "first": "2026-04-19",
+      "last": "2026-04-19",
+      "last_label": "April 19, 2026",
+      "dates": [
+        {
+          "date": "2026-04-19",
+          "slot": "Congregational Response",
+          "verses": "vv. 1, 2"
+        }
+      ],
+      "url": "https://hymnary.org/hymn/HWC1986/364"
+    },
+    {
+      "number": "366",
+      "title": "I Surrender All",
+      "as_printed": [],
+      "tune": "SURRENDER",
+      "in_hymnal": true,
+      "times": 1,
+      "first": "2026-10-11",
+      "last": "2026-10-11",
+      "last_label": "October 11, 2026",
+      "dates": [
+        {
+          "date": "2026-10-11",
+          "slot": "Hymn",
+          "verses": null
+        }
+      ],
+      "url": "https://hymnary.org/hymn/HWC1986/366"
+    },
+    {
+      "number": "368",
+      "title": "All For Jesus",
+      "as_printed": [],
+      "tune": "CONSTANCY",
+      "in_hymnal": true,
+      "times": 2,
+      "first": "2026-03-08",
+      "last": "2026-06-21",
+      "last_label": "June 21, 2026",
+      "dates": [
+        {
+          "date": "2026-03-08",
+          "slot": "Hymn",
+          "verses": null
+        },
+        {
+          "date": "2026-06-21",
+          "slot": "Hymn",
+          "verses": null
+        }
+      ],
+      "url": "https://hymnary.org/hymn/HWC1986/368"
+    },
+    {
+      "number": "369",
+      "title": "O Jesus, I Have Promised",
+      "as_printed": [],
+      "tune": "ANGEL&#039;S STORY",
+      "in_hymnal": true,
+      "times": 1,
+      "first": "2026-10-25",
+      "last": "2026-10-25",
+      "last_label": "October 25, 2026",
+      "dates": [
+        {
+          "date": "2026-10-25",
+          "slot": "Hymn",
+          "verses": null
+        }
+      ],
+      "url": "https://hymnary.org/hymn/HWC1986/369"
+    },
+    {
+      "number": "379",
+      "title": "Take My Life and Let It Be",
+      "as_printed": [],
+      "tune": "HENDON",
+      "in_hymnal": true,
+      "times": 2,
+      "first": "2026-02-22",
+      "last": "2026-08-02",
+      "last_label": "August 2, 2026",
+      "dates": [
+        {
+          "date": "2026-02-22",
+          "slot": "Hymn",
+          "verses": "vv. 1, 2, 5, 6"
+        },
+        {
+          "date": "2026-08-02",
+          "slot": "Hymn",
+          "verses": "vv. 1, 2, 5, 6"
+        }
+      ],
+      "url": "https://hymnary.org/hymn/HWC1986/379"
+    },
+    {
+      "number": "382",
+      "title": "Be Thou My Vision",
+      "as_printed": [],
+      "tune": "SLANE",
+      "in_hymnal": true,
+      "times": 3,
+      "first": "2026-02-22",
+      "last": "2026-07-26",
+      "last_label": "July 26, 2026",
+      "dates": [
+        {
+          "date": "2026-02-22",
+          "slot": "The Hymn",
+          "verses": "vv. 1–3"
+        },
+        {
+          "date": "2026-02-22",
+          "slot": "Congregational Response",
+          "verses": "v. 4"
+        },
+        {
+          "date": "2026-07-26",
+          "slot": "Hymn",
+          "verses": null
+        }
+      ],
+      "url": "https://hymnary.org/hymn/HWC1986/382"
+    },
+    {
+      "number": "461",
+      "title": "He Leadeth Me",
+      "as_printed": [],
+      "tune": null,
+      "in_hymnal": true,
+      "times": 1,
+      "first": "2026-08-30",
+      "last": "2026-08-30",
+      "last_label": "August 30, 2026",
+      "dates": [
+        {
+          "date": "2026-08-30",
+          "slot": "Congregational Response",
+          "verses": "v. 1"
+        }
+      ],
+      "url": "https://hymnary.org/hymn/HWC1986/461"
+    },
+    {
+      "number": "479",
+      "title": "Onward, Christian Soldiers",
+      "as_printed": [],
+      "tune": null,
+      "in_hymnal": true,
+      "times": 1,
+      "first": "2026-04-26",
+      "last": "2026-04-26",
+      "last_label": "April 26, 2026",
+      "dates": [
+        {
+          "date": "2026-04-26",
+          "slot": "Hymn",
+          "verses": null
+        }
+      ],
+      "url": "https://hymnary.org/hymn/HWC1986/479"
+    },
+    {
+      "number": "483",
+      "title": "Lead On, O King Eternal",
+      "as_printed": [],
+      "tune": null,
+      "in_hymnal": true,
+      "times": 1,
+      "first": "2026-07-05",
+      "last": "2026-07-05",
+      "last_label": "July 5, 2026",
+      "dates": [
+        {
+          "date": "2026-07-05",
+          "slot": "Hymn",
+          "verses": null
+        }
+      ],
+      "url": "https://hymnary.org/hymn/HWC1986/483"
+    },
+    {
+      "number": "506",
+      "title": "I Will Sing of My Redeemer",
+      "as_printed": [],
+      "tune": null,
+      "in_hymnal": true,
+      "times": 1,
+      "first": "2026-04-12",
+      "last": "2026-04-12",
+      "last_label": "April 12, 2026",
+      "dates": [
+        {
+          "date": "2026-04-12",
+          "slot": "Hymn of Response",
+          "verses": "vv. 1, 3"
+        }
+      ],
+      "url": "https://hymnary.org/hymn/HWC1986/506"
+    },
+    {
+      "number": "546",
+      "title": "For All the Saints",
+      "as_printed": [],
+      "tune": null,
+      "in_hymnal": true,
+      "times": 1,
+      "first": "2026-10-18",
+      "last": "2026-10-18",
+      "last_label": "October 18, 2026",
+      "dates": [
+        {
+          "date": "2026-10-18",
+          "slot": "Hymn of Commitment",
+          "verses": null
+        }
+      ],
+      "url": "https://hymnary.org/hymn/HWC1986/546"
+    },
+    {
+      "number": "620",
+      "title": "We Give Thee but Thine Own",
+      "as_printed": [],
+      "tune": "SCHUMANN",
+      "in_hymnal": true,
+      "times": 1,
+      "first": "2026-09-13",
+      "last": "2026-09-13",
+      "last_label": "September 13, 2026",
+      "dates": [
+        {
+          "date": "2026-09-13",
+          "slot": "Closing Hymn",
+          "verses": null
+        }
+      ],
+      "url": "https://hymnary.org/hymn/HWC1986/620"
+    }
+  ],
+  "unnumbered": [
+    {
+      "date": "2026-03-22",
+      "title": "God, Be Merciful to Me",
+      "slot": "Hymn of Lament",
+      "verses": null
+    },
+    {
+      "date": "2026-07-19",
+      "title": "It Is Well With My Soul",
+      "slot": "Hymn of Response",
+      "verses": "v. 1"
+    }
+  ]
+}

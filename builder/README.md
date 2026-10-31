@@ -14,6 +14,7 @@ Self-service production of the Sunday bulletin on basecamp. The plan is in
 | `pipeline/build.py` | one build: names → render → PDF → measure → proofs → `var/proofs/<date>/build.json` |
 | `pipeline/publish.py` | scroll index, calendar files, Eleventy check, commit, push (deploy key) |
 | `pipeline/calendar_feed.py` | events table → back-cover lines, `src/calendar.ics`, `/calendar/` page data |
+| `pipeline/hymn_index.py` | published scroll pages → hymn index (`/hymns/` page data, app Hymns screen): times sung, last sung, hymnary.org link |
 | `pipeline/store.py` | SQLite: rosters, events, standing text, users, magic links, audit, week status, spend ledger |
 | `pipeline/names.py` | confirmed name spellings, applied to every build |
 | `pipeline/extract.py` | docx / rtf → text, read by the parse step |
