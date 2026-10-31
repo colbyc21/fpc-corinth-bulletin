@@ -105,7 +105,7 @@ permalink: /calendar/
     </div>
   {% endfor %}
 
-  <p class="updated">Updated {{ calendarEvents.generated | slice(0, 10) }} · <a href="/calendar.ics">calendar.ics</a></p>
+  <p class="updated">Updated {{ calendarEvents.generated.slice(0, 10) }} · <a href="/calendar.ics">calendar.ics</a></p>
 </div>
 
 </body>
