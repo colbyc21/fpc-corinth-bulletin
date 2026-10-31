@@ -5,6 +5,10 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(REPO))
 os.environ.setdefault("BUILDER_REPO", str(REPO))
+# Never let a test touch the real Cloudflare Access policy: hide the token file and any token in the shell.
+os.environ["CLOUDFLARE_ENV_FILE"] = "/nonexistent/cloudflare-env"
+os.environ.pop("CLOUDFLARE_API_TOKEN", None)
+os.environ.pop("CLOUDFLARE_ACCOUNT_ID", None)
 
 import pytest  # noqa: E402
 
