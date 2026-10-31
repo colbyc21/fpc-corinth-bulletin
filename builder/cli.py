@@ -13,6 +13,7 @@
     python -m builder calendar [--sunday D]   print the back-cover lines and write src/calendar.ics
     python -m builder hymns [--write]         hymn index from the published bulletins; --write refreshes src/_data/hymnIndex.json
     python -m builder add-user email role     create an app user (editor|publisher|admin)
+    python -m builder cc auth|status|lists    Constant Contact: one-time device-flow authorization, token status, contact lists
 """
 from __future__ import annotations
 
@@ -188,6 +189,33 @@ def cmd_hymns(args) -> int:
     return 0
 
 
+def cmd_cc(args) -> int:
+    from builder.pipeline import constant_contact as cc
+
+    try:
+        if args.what == "auth":
+            dev = cc.start_device_flow()
+            url = dev.get("verification_uri_complete") or dev.get("verification_uri")
+            print(f"Open {url}\nand enter the code {dev['user_code']} while signed in to the church's Constant Contact account.")
+            print(f"Waiting up to {dev.get('expires_in', 600)} s ...", flush=True)
+            tok = cc.finish_device_flow(dev)
+            print(f"authorized; token saved to {cc.TOKEN_FILE} (scope: {tok.get('scope')}); {len(cc.contact_lists())} contact lists visible")
+        elif args.what == "status":
+            tok = cc.load_tokens()
+            if not tok:
+                print("not authorized")
+                return 1
+            lists = cc.contact_lists()  # also refreshes a stale token
+            print(f"authorized (scope: {tok.get('scope')}); {len(lists)} contact lists visible; token file {cc.TOKEN_FILE}")
+        elif args.what == "lists":
+            for lst in cc.contact_lists():
+                print(f"  {lst['list_id']}  {lst['name']}  ({lst.get('membership_count', '?')} contacts)")
+    except cc.CCError as e:
+        print(f"constant contact: {e}", file=sys.stderr)
+        return 1
+    return 0
+
+
 def cmd_add_user(args) -> int:
     from builder.pipeline.store import Store
 
@@ -220,6 +248,7 @@ def main(argv: list[str] | None = None) -> int:
     s = sub.add_parser("extract"); s.add_argument("file"); s.set_defaults(fn=cmd_extract)
     s = sub.add_parser("calendar"); s.add_argument("--sunday"); s.add_argument("--write", action="store_true"); s.set_defaults(fn=cmd_calendar)
     s = sub.add_parser("hymns"); s.add_argument("--write", action="store_true"); s.set_defaults(fn=cmd_hymns)
+    s = sub.add_parser("cc"); s.add_argument("what", choices=["auth", "status", "lists"]); s.set_defaults(fn=cmd_cc)
     s = sub.add_parser("add-user"); s.add_argument("email"); s.add_argument("role", choices=["editor", "publisher", "admin"])
     s.add_argument("--name"); s.set_defaults(fn=cmd_add_user)
 
