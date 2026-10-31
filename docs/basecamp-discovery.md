@@ -297,3 +297,5 @@ systemctl --user restart bulletin-builder
 ```
 
 Item 8 (hymnal edition) was confirmed on 2026-10-31; nothing from §11.3 remains open.
+
+**Tunnel and Access (2026-10-31).** `bulletin-admin.fpccorinth.org` is on the host tunnel (`/etc/cloudflared/config.yml`, copy in `builder/deploy/cloudflared-config.yml`) and the hostname answers with a 302 to the Zero Trust login, so Access is in front. Access application `FPC Bulletin Builder` (id `9ecb43fd-…`) has one allow policy, `Bulletin builder users`, which is an exact-email allowlist managed with `builder/deploy/cloudflare-access.sh list|add|remove`. The API token for that lives in `~/.config/cloudflare/env` (mode 600; scopes: Access apps and policies edit, Access organizations/IdPs read, account settings read). The Zero Trust org is `cool-dream-4616.cloudflareaccess.com`. Its only login method is *Cloudflare account members*; the **One-time PIN login method must be enabled in the dashboard** (Zero Trust → Settings → Authentication → Login methods) before anyone who is not a Cloudflare account member can sign in — the API call to add it was blocked by the permission classifier.
