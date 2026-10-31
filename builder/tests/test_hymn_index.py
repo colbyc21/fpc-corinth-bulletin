@@ -17,6 +17,24 @@ def test_scan_page_reads_numbered_hymns_and_skips_the_catechism():
     assert unnumbered == [{"date": "2026-03-01", "title": "God, Be Merciful to Me", "slot": "Hymn of Lament", "verses": None}]
 
 
+def test_a_hymn_split_across_a_service_counts_once():
+    page = PAGE + """
+<p class="worship-heading">*Hymn: &nbsp;#8 <span class="worship-attr">&ldquo;Praise to the Lord, the Almighty&rdquo; (vv. 4&ndash;5)</span></p>
+"""
+    repo_pages = {"2026-03-01": page, "2026-03-08": PAGE}
+    import builder.pipeline.hymn_index as hi
+
+    orig = hi.scan
+    try:
+        hi.scan = lambda repo=None: (sorted([r for d, t in repo_pages.items() for r in hi.scan_scroll_page(t, d)[0]], key=lambda r: r["date"]), [])
+        idx = hi.build(hymns={"8": {"title": "Praise to the Lord, the Almighty", "tune": "LOBE DEN HERREN"}})
+    finally:
+        hi.scan = orig
+    eight = next(h for h in idx["hymns"] if h["number"] == "8")
+    assert eight["times"] == 2 and [d["date"] for d in eight["dates"]] == ["2026-03-01", "2026-03-08"]
+    assert eight["dates"][0]["verses"] == "vv. 1–3, vv. 4–5" and eight["dates"][0]["slot"] == "The Hymn of Praise / Hymn"
+
+
 def test_markdown_bulletin():
     md = 'layout: x\ndate: 2026-01-25\n\nworship_order:\n  - type: "Hymn"\n    title: "Amazing Grace"\n    number: 202\n    verses: "1,2,3,4"\n'
     assert hymn_index.scan_markdown_bulletin(md) == [{"date": "2026-01-25", "number": "202", "title": "Amazing Grace", "slot": "Hymn", "verses": "vv. 1, 2, 3, 4"}]

@@ -1,5 +1,8 @@
 """Hymn index: how often each hymn has been sung, when last, and where to read it.
 
+A hymn counts once per service however many times it appears that day
+(the congregation often sings verses 1-3, hears a reading, then sings 4-5).
+
 The published scroll pages (``src/scroll/<date>.html``) are the record of
 what was sung at each service, so the index is rebuilt from them (plus the
 one older Markdown bulletin) rather than kept as a separate table. Every
@@ -91,7 +94,16 @@ def build(repo: Path | None = None, hymns: dict | None = None) -> dict:
     sung, unnumbered = scan(repo)
     by_number: dict[str, list[dict]] = {}
     for row in sung:
-        by_number.setdefault(row["number"], []).append(row)
+        uses = by_number.setdefault(row["number"], [])
+        if uses and uses[-1]["date"] == row["date"]:
+            # the same hymn split across a service (vv. 1-3, a reading, vv. 4-5) is one singing
+            prev = uses[-1]
+            if row["slot"] not in prev["slot"].split(" / "):
+                prev["slot"] += " / " + row["slot"]
+            if row["verses"]:
+                prev["verses"] = f"{prev['verses']}, {row['verses']}" if prev["verses"] else row["verses"]
+            continue
+        uses.append(dict(row))
     rows = []
     for number, uses in sorted(by_number.items(), key=lambda kv: _number_key(kv[0])):
         entry = hymns.get(number) or {}

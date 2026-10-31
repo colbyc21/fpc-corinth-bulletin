@@ -792,6 +792,17 @@
     .site-header { display: none; }
     .reveal { opacity: 1; transform: none; }
   }
+  /* ── SITE MENU ───────────────────────────── */
+  .site-nav details { position: relative; }
+  .site-nav summary { list-style: none; cursor: pointer; display: inline-flex; align-items: center; gap: 0.45rem; font-family: 'Work Sans', sans-serif; font-weight: 500; font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-faint); padding: 0.35rem 0.85rem; border: 1px solid var(--rule); border-radius: 2px; white-space: nowrap; user-select: none; -webkit-user-select: none; -webkit-tap-highlight-color: transparent; transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease; }
+  .site-nav summary::-webkit-details-marker { display: none; }
+  .site-nav summary svg { width: 15px; height: 15px; }
+  .site-nav summary:hover, .site-nav details[open] summary { color: var(--warm-white); background: var(--ink); border-color: var(--ink); }
+  .site-nav .menu-list { position: absolute; right: 0; top: calc(100% + 0.55rem); min-width: 14rem; background: var(--warm-white); border: 1px solid var(--rule-light); border-radius: 3px; box-shadow: 0 14px 36px rgba(23, 18, 0, 0.14); padding: 0.4rem 0; z-index: 200; }
+  .site-nav .menu-list a { display: block; padding: 0.6rem 1.15rem; font-family: 'Work Sans', sans-serif; font-size: 0.8rem; letter-spacing: 0.05em; color: var(--ink); text-decoration: none; }
+  .site-nav .menu-list a:hover { background: var(--section-bg); color: var(--accent-deep); }
+  .site-nav .menu-list a.current { color: var(--accent-deep); font-weight: 600; }
+  @media (max-width: 420px) { .site-nav summary { font-size: 0.64rem; padding: 0.3rem 0.7rem; } }
 </style>
 </head>
 <body>
@@ -799,7 +810,18 @@
 <header class="site-header">
   <div class="site-header-inner">
     <a class="brand" href="https://fpccorinth.org" target="_blank" rel="noopener">First Presbyterian Church</a>
-    <a class="archive-link" href="/archive/">Archive</a>
+    <nav class="site-nav" aria-label="Site">
+      <details>
+        <summary><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg>Menu</summary>
+        <div class="menu-list">
+          <a href="/">This Week’s Bulletin</a>
+          <a href="/archive/">Past Bulletins</a>
+          <a href="/calendar/">Church Calendar</a>
+          <a href="/hymns/">Hymn Index</a>
+          <a href="/about/">About &amp; Service Times</a>
+        </div>
+      </details>
+    </nav>
   </div>
 </header>
 
@@ -1166,5 +1188,18 @@
   reveals.forEach(el => observer.observe(el));
 </script>
 
+<script>
+(function () {
+  var d = document.querySelector('.site-nav details');
+  if (!d) return;
+  document.addEventListener('click', function (e) { if (d.open && !d.contains(e.target)) d.open = false; });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') d.open = false; });
+  var p = location.pathname;
+  d.querySelectorAll('.menu-list a').forEach(function (a) {
+    var h = a.getAttribute('href');
+    if (h !== '/' && p.indexOf(h) === 0) a.classList.add('current');
+  });
+})();
+</script>
 </body>
 </html>
