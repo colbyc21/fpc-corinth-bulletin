@@ -16,15 +16,15 @@ from builder import config
 from builder.pipeline import calendar_feed, dates, extract, friday, model, names
 from builder.pipeline.store import ROLE_LABELS, Store
 
-_S = {"type": ["string", "null"]}
+_S = {"type": "string"}  # "" means none: the API allows few nullable fields in a strict schema
 _STRS = {"type": "array", "items": {"type": "string"}}
-# Flat on purpose: nested nullable objects made the strict-output grammar too large for the API.
+# Flat and null-free on purpose: nested or nullable fields made the strict-output grammar too large for the API.
 _ITEM = {"type": "object", "additionalProperties": False,
          "required": ["eyebrow", "title", "when", "when_highlight", "body", "note", "quote_text", "quote_ref", "link_label", "link_url",
                       "image_src", "image_alt", "image_width"],
          "properties": {"eyebrow": _S, "title": _S, "when": _S, "when_highlight": {"type": "boolean"}, "body": _STRS, "note": _S,
                         "quote_text": _S, "quote_ref": _S, "link_label": _S, "link_url": _S, "image_src": _S, "image_alt": _S,
-                        "image_width": {"type": ["integer", "null"]}}}
+                        "image_width": {"type": "integer"}}}
 _SECTION = {"type": "object", "additionalProperties": False, "required": ["key", "intro", "items"],
             "properties": {"key": {"type": "string", "enum": friday.SECTION_ORDER}, "intro": _S, "items": {"type": "array", "items": _ITEM}}}
 _DATED = {"type": "object", "additionalProperties": False, "required": ["date", "names"],
@@ -53,20 +53,21 @@ def _model_view(doc: dict) -> dict:
     """The parts of a friday.json the model produces, in its (flat) output shape."""
     out = {k: deepcopy(doc.get(k)) for k in MODEL_KEYS}
     sc = doc.get("scripture") or {}
-    out["scripture_text"], out["scripture_ref"] = sc.get("text"), sc.get("ref")
+    out["scripture_text"], out["scripture_ref"] = sc.get("text") or "", sc.get("ref") or ""
+    out["subject"], out["preheader"] = doc.get("subject") or "", doc.get("preheader") or ""
     out["sections"] = []
     for s in doc.get("sections", []):
         items = []
         for it in s.get("items", []):
             q, l, im = it.get("quote") or {}, it.get("link") or {}, it.get("image") or {}
-            items.append({"eyebrow": it.get("eyebrow"), "title": it.get("title"), "when": it.get("when"), "when_highlight": bool(it.get("when_highlight")),
-                          "body": list(it.get("body", [])), "note": it.get("note"), "quote_text": q.get("text"), "quote_ref": q.get("ref"),
-                          "link_label": l.get("label"), "link_url": l.get("url"), "image_src": im.get("src"), "image_alt": im.get("alt"),
-                          "image_width": im.get("width")})
-        out["sections"].append({"key": s["key"], "intro": s.get("intro"), "items": items})
+            items.append({"eyebrow": it.get("eyebrow") or "", "title": it.get("title") or "", "when": it.get("when") or "", "when_highlight": bool(it.get("when_highlight")),
+                          "body": list(it.get("body", [])), "note": it.get("note") or "", "quote_text": q.get("text") or "", "quote_ref": q.get("ref") or "",
+                          "link_label": l.get("label") or "", "link_url": l.get("url") or "", "image_src": im.get("src") or "", "image_alt": im.get("alt") or "",
+                          "image_width": im.get("width") or 0})
+        out["sections"].append({"key": s["key"], "intro": s.get("intro") or "", "items": items})
     hymn = doc.get("closing_hymn") or {}
-    out["hymn_lines"], out["hymn_attribution"] = list(hymn.get("lines", [])), hymn.get("attribution")
-    out["serve_lines"] = deepcopy(doc.get("serve", []))
+    out["hymn_lines"], out["hymn_attribution"] = list(hymn.get("lines", [])), hymn.get("attribution") or ""
+    out["serve_lines"] = [{"role": l.get("role") or "", "names": l.get("names") or ""} for l in doc.get("serve", [])]
     out["calendar_lines"] = deepcopy(doc.get("calendar", []))
     return out
 
@@ -94,6 +95,8 @@ def _nest(parsed: dict) -> dict:
                           "link": {"label": (it.get("link_label") or "Learn more").strip(), "url": lu} if lu else None,
                           "image": img, "image_position": "after_body"})
         out["sections"].append({"key": s["key"], "label": None, "title": None, "intro": s.get("intro") or None, "footer_line": None, "items": items})
+    out["serve_lines"] = [{"role": (l.get("role") or "").strip() or None, "names": l.get("names") or ""} for l in parsed.get("serve_lines", [])]
+    out["subject"], out["preheader"] = parsed.get("subject") or None, parsed.get("preheader") or None
     return out
 
 
