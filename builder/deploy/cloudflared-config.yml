@@ -1,0 +1,11 @@
+# Host tunnel ingress for basecamp: copy to /etc/cloudflared/config.yml (sudo) and restart cloudflared.service.
+# The DNS record is created with: cloudflared tunnel route dns fpc-sermons bulletin-admin.fpccorinth.org
+tunnel: f2939c72-7306-4139-b26b-38d5e1cf2ad2
+credentials-file: /home/clovis/.cloudflared/f2939c72-7306-4139-b26b-38d5e1cf2ad2.json
+
+ingress:
+  - hostname: sermons.fpccorinth.org
+    service: http://localhost:3001
+  - hostname: bulletin-admin.fpccorinth.org
+    service: http://localhost:8710
+  - service: http_status:404
