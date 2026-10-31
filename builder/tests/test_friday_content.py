@@ -6,20 +6,22 @@ from builder.pipeline import friday, friday_content as fc, model
 
 def _parsed(**over):
     base = {
-        "scripture": {"text": "Verse.", "ref": "Acts 10:43"}, "subject": None, "preheader": None,
+        "scripture_text": "Verse.", "scripture_ref": "Acts 10:43", "subject": None, "preheader": None,
         "sections": [
-            {"key": "women", "label": None, "title": None, "intro": "Jump in!", "footer_line": None, "items": [
+            {"key": "women", "intro": "Jump in!", "items": [
                 {"eyebrow": None, "title": "First Thursday", "when": "Thursday, November 5 · Noon · Youth House", "when_highlight": True,
-                 "body": ["Jennifer Legoff will host."], "note": None, "quote": None, "link": None, "image": None, "image_position": "after_body"}]},
-            {"key": "prepare", "label": None, "title": None, "intro": None, "footer_line": None, "items": [
-                {"eyebrow": None, "title": None, "when": None, "when_highlight": False, "body": [], "note": None, "quote": None, "link": None, "image": None, "image_position": "after_body"}]},
+                 "body": ["Jennifer Legoff will host."], "note": None, "quote_text": None, "quote_ref": None, "link_label": "Sign up", "link_url": "https://x.org",
+                 "image_src": "https://files.constantcontact.com/a.jpg", "image_alt": "Flyer", "image_width": 520}]},
+            {"key": "prepare", "intro": None, "items": [
+                {"eyebrow": None, "title": None, "when": None, "when_highlight": False, "body": [], "note": None, "quote_text": None, "quote_ref": None,
+                 "link_label": None, "link_url": None, "image_src": None, "image_alt": None, "image_width": None}]},
         ],
         "birthdays": [{"date": "2026-11-02", "names": ["B. Member"]}, {"date": "bad", "names": ["X"]}],
         "anniversaries": [],
         "serve_lines": [{"role": "Assisting Elder", "names": "Dr. Don Shipp"}, {"role": "Nursery", "names": ""},
                         {"role": None, "names": "Infant (Room 4) — Laura Kate"}, {"role": "Joy in Bloom Deliverer (November)", "names": "Gloria Williams"}],
         "calendar_lines": [{"date": "2026-11-03", "items": ["Messy Bible Study at 8 am"]}, {"date": "2026-11-07", "items": ["Tabitha’s Toolbox Work Day"]}],
-        "closing_hymn": {"lines": ["A line"], "attribution": "Someone"},
+        "hymn_lines": ["A line"], "hymn_attribution": "Someone",
         "carried_forward": ["WM Book Club"], "dropped": ["Fall Festival"],
         "changes": [], "flags": [],
     }
@@ -34,6 +36,9 @@ def test_merge_uses_the_tables_and_flags_the_notes(store):
     friday.validate(doc)
     # sections come back in the standing order, the empty item is dropped
     assert [s["key"] for s in doc["sections"]] == ["women"] and doc["sections"][0]["intro"] == "Jump in!"
+    it = doc["sections"][0]["items"][0]
+    assert it["link"] == {"label": "Sign up", "url": "https://x.org"} and it["image"] == {"src": "https://files.constantcontact.com/a.jpg", "alt": "Flyer", "width": 520}
+    assert doc["scripture"] == {"text": "Verse.", "ref": "Acts 10:43"} and doc["closing_hymn"] == {"lines": ["A line"], "attribution": "Someone"}
     # name rule applied and recorded
     assert doc["sections"][0]["items"][0]["body"] == ["Jennifer LeGoff will host."]
     assert any(c["before"] == "Legoff" for c in doc["copyedit"]["changes"])

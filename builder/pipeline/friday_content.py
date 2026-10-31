@@ -17,58 +17,83 @@ from builder.pipeline import calendar_feed, dates, extract, friday, model, names
 from builder.pipeline.store import ROLE_LABELS, Store
 
 _S = {"type": ["string", "null"]}
-_IMAGE = {"type": ["object", "null"], "additionalProperties": False, "required": ["src", "alt", "width"],
-          "properties": {"src": {"type": "string"}, "alt": {"type": "string"}, "width": {"type": ["integer", "null"]}}}
+_STRS = {"type": "array", "items": {"type": "string"}}
+# Flat on purpose: nested nullable objects made the strict-output grammar too large for the API.
 _ITEM = {"type": "object", "additionalProperties": False,
-         "required": ["eyebrow", "title", "when", "when_highlight", "body", "note", "quote", "link", "image", "image_position"],
-         "properties": {"eyebrow": _S, "title": _S, "when": _S, "when_highlight": {"type": "boolean"},
-                        "body": {"type": "array", "items": {"type": "string"}}, "note": _S,
-                        "quote": {"type": ["object", "null"], "additionalProperties": False, "required": ["text", "ref"], "properties": {"text": {"type": "string"}, "ref": {"type": "string"}}},
-                        "link": {"type": ["object", "null"], "additionalProperties": False, "required": ["label", "url"], "properties": {"label": {"type": "string"}, "url": {"type": "string"}}},
-                        "image": _IMAGE, "image_position": {"type": "string", "enum": ["after_body", "before_body", "after_note"]}}}
-_SECTION = {"type": "object", "additionalProperties": False, "required": ["key", "label", "title", "intro", "footer_line", "items"],
-            "properties": {"key": {"type": "string", "enum": friday.SECTION_ORDER}, "label": _S, "title": _S, "intro": _S, "footer_line": _S,
-                           "items": {"type": "array", "items": _ITEM}}}
+         "required": ["eyebrow", "title", "when", "when_highlight", "body", "note", "quote_text", "quote_ref", "link_label", "link_url",
+                      "image_src", "image_alt", "image_width"],
+         "properties": {"eyebrow": _S, "title": _S, "when": _S, "when_highlight": {"type": "boolean"}, "body": _STRS, "note": _S,
+                        "quote_text": _S, "quote_ref": _S, "link_label": _S, "link_url": _S, "image_src": _S, "image_alt": _S,
+                        "image_width": {"type": ["integer", "null"]}}}
+_SECTION = {"type": "object", "additionalProperties": False, "required": ["key", "intro", "items"],
+            "properties": {"key": {"type": "string", "enum": friday.SECTION_ORDER}, "intro": _S, "items": {"type": "array", "items": _ITEM}}}
 _DATED = {"type": "object", "additionalProperties": False, "required": ["date", "names"],
-          "properties": {"date": {"type": "string"}, "names": {"type": "array", "items": {"type": "string"}}}}
+          "properties": {"date": {"type": "string"}, "names": _STRS}}
 OUTPUT_SCHEMA = {
     "type": "object", "additionalProperties": False,
-    "required": ["scripture", "subject", "preheader", "sections", "birthdays", "anniversaries", "serve_lines", "calendar_lines",
-                 "closing_hymn", "carried_forward", "dropped", "changes", "flags"],
+    "required": ["scripture_text", "scripture_ref", "subject", "preheader", "sections", "birthdays", "anniversaries", "serve_lines",
+                 "calendar_lines", "hymn_lines", "hymn_attribution", "carried_forward", "dropped", "changes", "flags"],
     "properties": {
-        "scripture": {"type": ["object", "null"], "additionalProperties": False, "required": ["text", "ref"], "properties": {"text": {"type": "string"}, "ref": {"type": "string"}}},
-        "subject": _S, "preheader": _S,
+        "scripture_text": _S, "scripture_ref": _S, "subject": _S, "preheader": _S,
         "sections": {"type": "array", "items": _SECTION},
         "birthdays": {"type": "array", "items": _DATED}, "anniversaries": {"type": "array", "items": _DATED},
         "serve_lines": {"type": "array", "items": {"type": "object", "additionalProperties": False, "required": ["role", "names"], "properties": {"role": _S, "names": {"type": "string"}}}},
-        "calendar_lines": {"type": "array", "items": {"type": "object", "additionalProperties": False, "required": ["date", "items"], "properties": {"date": {"type": "string"}, "items": {"type": "array", "items": {"type": "string"}}}}},
-        "closing_hymn": {"type": ["object", "null"], "additionalProperties": False, "required": ["lines", "attribution"], "properties": {"lines": {"type": "array", "items": {"type": "string"}}, "attribution": _S}},
-        "carried_forward": {"type": "array", "items": {"type": "string"}}, "dropped": {"type": "array", "items": {"type": "string"}},
+        "calendar_lines": {"type": "array", "items": {"type": "object", "additionalProperties": False, "required": ["date", "items"], "properties": {"date": {"type": "string"}, "items": _STRS}}},
+        "hymn_lines": _STRS, "hymn_attribution": _S,
+        "carried_forward": _STRS, "dropped": _STRS,
         "changes": {"type": "array", "items": {"type": "object", "additionalProperties": False, "required": ["where", "before", "after", "reason"], "properties": {k: {"type": "string"} for k in ("where", "before", "after", "reason")}}},
         "flags": {"type": "array", "items": {"type": "object", "additionalProperties": False, "required": ["where", "message"], "properties": {"where": {"type": "string"}, "message": {"type": "string"}}}},
     },
 }
 EXAMPLE_DATE = "2026-11-01"
-MODEL_KEYS = ("scripture", "subject", "preheader", "sections", "birthdays", "anniversaries", "closing_hymn")
+MODEL_KEYS = ("subject", "preheader", "birthdays", "anniversaries")
 
 
 def _model_view(doc: dict) -> dict:
-    """The parts of a friday.json the model produces, in its output shape."""
+    """The parts of a friday.json the model produces, in its (flat) output shape."""
     out = {k: deepcopy(doc.get(k)) for k in MODEL_KEYS}
-    for s in out["sections"]:
-        for k in ("label", "title", "intro", "footer_line"):
-            s.setdefault(k, None)
-        s.pop("large_headings", None)
-        s.pop("split_items", None)
-        for it in s["items"]:
-            for k in ("eyebrow", "title", "when", "note", "quote", "link", "image"):
-                it.setdefault(k, None)
-            it.setdefault("when_highlight", False)
-            it.setdefault("image_position", "after_body")
-            if it["image"] is not None:
-                it["image"].setdefault("width", None)
+    sc = doc.get("scripture") or {}
+    out["scripture_text"], out["scripture_ref"] = sc.get("text"), sc.get("ref")
+    out["sections"] = []
+    for s in doc.get("sections", []):
+        items = []
+        for it in s.get("items", []):
+            q, l, im = it.get("quote") or {}, it.get("link") or {}, it.get("image") or {}
+            items.append({"eyebrow": it.get("eyebrow"), "title": it.get("title"), "when": it.get("when"), "when_highlight": bool(it.get("when_highlight")),
+                          "body": list(it.get("body", [])), "note": it.get("note"), "quote_text": q.get("text"), "quote_ref": q.get("ref"),
+                          "link_label": l.get("label"), "link_url": l.get("url"), "image_src": im.get("src"), "image_alt": im.get("alt"),
+                          "image_width": im.get("width")})
+        out["sections"].append({"key": s["key"], "intro": s.get("intro"), "items": items})
+    hymn = doc.get("closing_hymn") or {}
+    out["hymn_lines"], out["hymn_attribution"] = list(hymn.get("lines", [])), hymn.get("attribution")
     out["serve_lines"] = deepcopy(doc.get("serve", []))
     out["calendar_lines"] = deepcopy(doc.get("calendar", []))
+    return out
+
+
+def _nest(parsed: dict) -> dict:
+    """The model's flat answer → the nested friday.json shapes merge() builds from."""
+    out = dict(parsed)
+    st = (parsed.get("scripture_text") or "").strip()
+    out["scripture"] = {"text": st, "ref": (parsed.get("scripture_ref") or "").strip()} if st else None
+    lines = [l for l in parsed.get("hymn_lines") or [] if l and l.strip()]
+    out["closing_hymn"] = {"lines": lines, "attribution": parsed.get("hymn_attribution") or None} if lines else None
+    out["sections"] = []
+    for s in parsed.get("sections", []):
+        items = []
+        for it in s.get("items", []):
+            qt, lu, src = (it.get("quote_text") or "").strip(), (it.get("link_url") or "").strip(), (it.get("image_src") or "").strip()
+            img = None
+            if src:
+                img = {"src": src, "alt": (it.get("image_alt") or "Photo").strip()}
+                if it.get("image_width"):
+                    img["width"] = int(it["image_width"])
+            items.append({"eyebrow": it.get("eyebrow") or None, "title": it.get("title") or None, "when": it.get("when") or None,
+                          "when_highlight": bool(it.get("when_highlight")), "body": list(it.get("body") or []), "note": it.get("note") or None,
+                          "quote": {"text": qt, "ref": (it.get("quote_ref") or "").strip()} if qt else None,
+                          "link": {"label": (it.get("link_label") or "Learn more").strip(), "url": lu} if lu else None,
+                          "image": img, "image_position": "after_body"})
+        out["sections"].append({"key": s["key"], "label": None, "title": None, "intro": s.get("intro") or None, "footer_line": None, "items": items})
     return out
 
 
@@ -149,6 +174,7 @@ def _event_key(s: str) -> str:
 def merge(sunday: str, parsed: dict, *, store: Store, week: dict | None, base: dict | None = None) -> dict:
     """Shape the answer into friday.json: the model's sections, the roster and
     calendar tables for serve and calendar (the notes add and flag), name rules."""
+    parsed = _nest(parsed)
     flags = list(parsed.get("flags", []))
     changes = list(parsed.get("changes", []))
     doc = deepcopy(base) if base else friday.scaffold(sunday, week)
