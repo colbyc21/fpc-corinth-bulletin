@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block title %}{{ d | long_date }}{% endblock %}
 {% block content %}
-<h1>{{ d | long_date }} <span class="pill {{ status.status }}">{{ status.status }}</span></h1>
+<h1>{{ d | long_date }} <span class="pill {{ status.status }}">{{ status.status }}</span> <a class="muted" style="font-size:0.85rem;font-weight:400" href="/weeks/{{ d }}/email">The Friday Email for this week →</a></h1>
 {% if week %}<p class="muted">{{ week.subtitle_override or week.liturgical_day }} · Sermon: “{{ week.sermon.title }}” · {{ week.sermon.preacher }}</p>{% endif %}
 {% if error %}<div class="flash bad">week.json does not validate: {{ error }}. Fix it in the JSON editor at the bottom.</div>{% endif %}
 

@@ -1,0 +1,187 @@
+{% extends "base.html" %}
+{% block title %}Friday Email · {{ friday | long_date }}{% endblock %}
+{% block content %}
+<h1>The Friday Email <span class="muted" style="font-size:0.9rem">for Friday {{ friday | long_date }} · before Sunday <a href="/weeks/{{ d }}">{{ d | month_day }}</a></span></h1>
+{% if error %}<div class="flash bad">friday.json does not validate: {{ error }}</div>{% endif %}
+
+{% if not exists %}
+<div class="card">
+  <p>No email started for this week yet. Starting one pulls the calendar and Those Who Serve from {% if has_week %}the bulletin{% else %}the tables{% endif %} and lays out the usual sections, ready to type into or to fill from the office’s notes.</p>
+  <form method="post" action="/weeks/{{ d }}/email/new"><button type="submit">Start this week’s email</button></form>
+</div>
+{% else %}
+<nav class="steps">
+  <a href="#notes"><span>1</span> Notes</a><a href="#content"><span>2</span> Content</a><a href="#preview"><span>3</span> Preview &amp; corrections</a><a href="#send"><span>4</span> Send</a>
+</nav>
+
+<h2 id="notes">1 · The office’s notes</h2>
+<div class="card">
+  <form method="post" action="/weeks/{{ d }}/email/intake" enctype="multipart/form-data" class="row">
+    <div><label>Notes file (.rtf, .txt, or a zipped .rtfd with its pictures)</label><input type="file" name="notes" accept=".rtf,.txt,.zip"></div>
+    <div class="narrow"><button type="submit" {% if spend_status.blocked or not spend_status.model_calls %}disabled{% endif %}>Read the notes</button></div>
+  </form>
+  <p class="muted">Optional. The notes are sorted into the sections below, copyedited to house style, and checked against the calendar and roster tables; anything doubtful is flagged. Pictures inside a zipped .rtfd land on the Photos shelf. You can also skip this and type straight into step 2.</p>
+</div>
+
+{% if doc %}
+<h2 id="content">2 · Content</h2>
+<form method="post" action="/weeks/{{ d }}/email/form" enctype="multipart/form-data" id="emailform">
+<div class="card">
+  <div class="row">
+    <div style="flex:2 1 260px"><label>Subject line</label><input type="text" name="subject" value="{{ doc.subject }}"></div>
+    <div style="flex:2 1 260px"><label>Preview text (shown after the subject in the inbox)</label><input type="text" name="preheader" value="{{ doc.preheader or '' }}"></div>
+  </div>
+  <div class="row">
+    <div style="flex:3 1 300px"><label>Scripture at the top</label><textarea name="scripture_text" rows="2">{{ doc.scripture.text if doc.scripture else '' }}</textarea></div>
+    <div><label>Reference</label><input type="text" name="scripture_ref" value="{{ doc.scripture.ref if doc.scripture else '' }}" placeholder="Psalm 100:4"></div>
+  </div>
+</div>
+
+{% for s in doc.sections %}{% set si = loop.index0 %}
+<div class="card" id="sec{{ si }}">
+  <h3>{{ s.label or s.title or s.key }} <span class="muted" style="font-weight:400">· {{ s['items'] | length }} item(s)</span></h3>
+  <div><label>Section intro (optional)</label><input type="text" name="s{{ si }}_intro" value="{{ s.intro or '' }}"></div>
+  {% for it in s['items'] %}{% set ii = loop.index0 %}{% set p = 's' ~ si ~ '_i' ~ ii ~ '_' %}
+  <div class="ann" id="s{{ si }}_i{{ ii }}">
+    <div class="row">
+      <div><label>Eyebrow (small caps line above)</label><input type="text" name="{{ p }}eyebrow" value="{{ it.eyebrow or '' }}"></div>
+      <div style="flex:2 1 220px"><label>Heading</label><input type="text" name="{{ p }}title" value="{{ it.title or '' }}"></div>
+      <div><label>When / where line</label><input type="text" name="{{ p }}when" value="{{ it.when or '' }}" placeholder="Sunday, November 2, 5:00 p.m."></div>
+      <div class="narrow"><label>&nbsp;</label><label class="check"><input type="checkbox" name="{{ p }}when_highlight" {% if it.when_highlight %}checked{% endif %}> highlight</label></div>
+    </div>
+    <div><label>Text (blank line between paragraphs; *italics* for titles)</label><textarea name="{{ p }}body" rows="{{ [3, (it.body | join('\n\n') | length // 90) + 2] | max }}">{{ it.body | join('\n\n') }}</textarea></div>
+    <div class="row">
+      <div style="flex:2 1 220px"><label>Small note under the text</label><input type="text" name="{{ p }}note" value="{{ it.note or '' }}"></div>
+      <div><label>Button label</label><input type="text" name="{{ p }}link_label" value="{{ it.link.label if it.link else '' }}"></div>
+      <div><label>Button link</label><input type="text" name="{{ p }}link_url" value="{{ it.link.url if it.link else '' }}" placeholder="https://…"></div>
+    </div>
+    <details {% if it.quote %}open{% endif %}><summary class="muted">Pull quote</summary>
+      <div class="row">
+        <div style="flex:3 1 260px"><label>Quote</label><input type="text" name="{{ p }}quote_text" value="{{ it.quote.text if it.quote else '' }}"></div>
+        <div><label>Attribution</label><input type="text" name="{{ p }}quote_ref" value="{{ it.quote.ref if it.quote else '' }}"></div>
+      </div>
+    </details>
+    <div class="row" style="margin-top:0.5rem">
+      {% if it.image %}
+      <div class="narrow"><img src="{{ it.image.src }}" alt="" style="height:64px;border:1px solid var(--rule);border-radius:3px;background:#fff"></div>
+      <div><label>Photo caption / alt text</label><input type="text" name="{{ p }}image_alt" value="{{ it.image.alt }}"></div>
+      <div class="narrow"><label>Width</label><select name="{{ p }}image_width">{% for w in (300, 400, 520, 560) %}<option value="{{ w }}" {% if it.image.width == w %}selected{% endif %}>{{ w }} px</option>{% endfor %}</select></div>
+      <div class="narrow"><label>Position</label><select name="{{ p }}image_position">{% for v, l in (('before_body','above the text'),('after_body','below the text'),('after_title','under the heading')) %}<option value="{{ v }}" {% if it.image_position == v %}selected{% endif %}>{{ l }}</option>{% endfor %}</select></div>
+      <div class="narrow"><label>&nbsp;</label><label class="check"><input type="checkbox" name="{{ p }}image_remove"> remove photo</label></div>
+      {% else %}
+      <div><label>Add a photo to this item</label><input type="file" name="{{ p }}photo" accept="image/*"></div>
+      {% if doc.media %}<div class="narrow"><label>or from the shelf</label>{% for m in doc.media %}<button type="submit" class="quiet" formaction="/weeks/{{ d }}/email/item?action=attach&si={{ si }}&ii={{ ii }}&src={{ m.src | urlencode }}" title="{{ m.alt }}"><img src="{{ m.src }}" alt="{{ m.alt }}" style="height:28px;vertical-align:middle"></button> {% endfor %}</div>{% endif %}
+      <input type="hidden" name="{{ p }}image_position" value="{{ it.image_position }}">
+      {% endif %}
+      <div class="narrow" style="margin-left:auto">
+        <button type="submit" class="quiet" formaction="/weeks/{{ d }}/email/item?action=up&si={{ si }}&ii={{ ii }}" title="Move up">↑</button>
+        <button type="submit" class="quiet" formaction="/weeks/{{ d }}/email/item?action=down&si={{ si }}&ii={{ ii }}" title="Move down">↓</button>
+        <button type="submit" class="danger" formaction="/weeks/{{ d }}/email/item?action=remove&si={{ si }}&ii={{ ii }}" onclick="return confirm('Remove this item?')">Remove</button>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+  <p style="margin:0.6rem 0 0"><button type="submit" class="quiet" formaction="/weeks/{{ d }}/email/item?action=add&si={{ si }}">+ Add an item to {{ s.label or s.title or s.key }}</button>{% if s.footer_line %} <span class="muted">Ends with: {{ s.footer_line }}</span>{% endif %}</p>
+</div>
+{% endfor %}
+
+<div class="two">
+<div class="card" id="birthdays">
+  <h3>Birthdays</h3>
+  <textarea name="birthdays" rows="5" class="code" style="min-height:auto">{{ birthdays_text }}</textarea>
+  <h3 style="margin-top:0.8rem">Anniversaries</h3>
+  <textarea name="anniversaries" rows="3" class="code" style="min-height:auto">{{ anniversaries_text }}</textarea>
+  <p class="muted">One line per date: <code>2026-11-03: Jane Doe, Sam Smith</code>. Couples as <code>Bob &amp; Sue Jones</code>.</p>
+  <div><label>Note under the lists</label><input type="text" name="birthdays_note" value="{{ doc.birthdays_note or '' }}"></div>
+</div>
+<div class="card" id="serve">
+  <h3>Those Who Serve this Sunday</h3>
+  <textarea name="serve" rows="9" class="code" style="min-height:auto">{{ serve_text }}</textarea>
+  <p class="muted"><code>Role: names</code> per line; a line starting with <code>- </code> is a nursery room under the line above. <button type="submit" class="quiet" formaction="/weeks/{{ d }}/email/refresh/serve" title="Replace with the bulletin's Those Who Serve (or the roster table if there is no bulletin yet)">Refresh from the bulletin</button></p>
+</div>
+</div>
+
+<div class="card" id="calendar">
+  <h3>Church calendar (two weeks)</h3>
+  <textarea name="calendar_lines" rows="8" class="code" style="min-height:auto">{{ calendar_text }}</textarea>
+  <p class="muted">One line per date: <code>2026-11-03: Messy Bible Study, 8 a.m. · Election Day</code>. <button type="submit" class="quiet" formaction="/weeks/{{ d }}/email/refresh/calendar" title="Replace with the calendar table's events for the next two weeks">Refresh from the calendar</button></p>
+</div>
+
+<div class="card">
+  <h3>Closing hymn verse</h3>
+  <div class="row">
+    <div style="flex:3 1 300px"><label>Lines</label><textarea name="hymn_lines" rows="4">{{ doc.closing_hymn.lines | join('\n') if doc.closing_hymn else '' }}</textarea></div>
+    <div><label>Attribution</label><input type="text" name="hymn_attribution" value="{{ doc.closing_hymn.attribution if doc.closing_hymn else '' }}"></div>
+  </div>
+</div>
+
+{% if doc.media %}
+<div class="card" id="photos">
+  <h3>Photos on the shelf</h3>
+  <p class="muted">Uploaded for this week and hosted at this address; attach one to an item with the small buttons beside “Add a photo”.</p>
+  <div class="row">{% for m in doc.media %}<div class="narrow"><img src="{{ m.src }}" alt="{{ m.alt }}" style="height:80px;border:1px solid var(--rule);border-radius:3px;background:#fff"><br><span class="muted">{{ m.alt }}</span></div>{% endfor %}</div>
+</div>
+{% endif %}
+
+<div class="card"><button type="submit">Save and render</button> <label class="check" title="Runs the same copyedit the notes get: house style for times, dates and names, and a list of every edit"><input type="checkbox" name="tidy" {% if spend_status.model_calls and not spend_status.blocked %}checked{% else %}disabled{% endif %}> Copyedit what changed to house style</label></div>
+</form>
+
+{% if doc.copyedit.flags or doc.copyedit.changes %}
+<div class="card">
+  {% if doc.copyedit.flags %}<h3>To check</h3><ul class="compact" style="columns:1">{% for f in doc.copyedit.flags %}<li><strong>{{ f.where }}</strong> — {{ f.message }}</li>{% endfor %}</ul>{% endif %}
+  {% if doc.copyedit.changes %}<details><summary class="muted">{{ doc.copyedit.changes | length }} edit(s) to house style</summary><ul class="compact" style="columns:1">{% for c in doc.copyedit.changes %}<li><span class="muted">{{ c.where }}:</span> “{{ c.before }}” → “{{ c.after }}” <span class="muted">({{ c.reason }})</span></li>{% endfor %}</ul></details>{% endif %}
+</div>
+{% endif %}
+
+<h2 id="preview">3 · Preview and corrections</h2>
+<div class="card">
+  {% if has_html %}
+  <p class="muted" style="margin-top:0"><a href="#" onclick="document.getElementById('pv').style.width='620px';return false">desktop</a> · <a href="#" onclick="document.getElementById('pv').style.width='390px';return false">phone</a> · <a href="/weeks/{{ d }}/email/preview.html" target="_blank" rel="noopener">open in a tab ↗</a></p>
+  <iframe id="pv" class="scroll" src="/weeks/{{ d }}/email/preview.html" style="width:620px;max-width:100%;height:70vh;display:block;margin:0 auto"></iframe>
+  {% else %}<p class="muted">Save once to render the preview.</p>{% endif %}
+</div>
+
+<h3 id="chat">Ask for a change</h3>
+<div class="card">
+  {% if chat %}
+  <div class="chatlog">
+    {% for m in chat %}<div class="msg {{ m.role }}"><span class="who">{{ 'You' if m.role == 'user' else 'Builder' }}</span> {{ m.text }}{% if m.cost_usd %} <span class="muted">(${{ '%.2f' % m.cost_usd }})</span>{% endif %}</div>{% endfor %}
+  </div>
+  {% endif %}
+  <form method="post" action="/weeks/{{ d }}/email/chat" class="row">
+    <div style="flex:4 1 300px"><input type="text" name="message" placeholder="e.g. Move the chili supper above the youth lock-in and make the time 5:30" required></div>
+    <div class="narrow"><button type="submit" {% if spend_status.blocked or not spend_status.model_calls or chat_left <= 0 %}disabled{% endif %}>Send</button></div>
+  </form>
+  <p class="muted">Each message makes the change, re-renders, and refreshes the preview. {{ chat_left }} message(s) left for this email.</p>
+</div>
+
+<h2 id="send">4 · Send</h2>
+<div class="card">
+  {% if user.role in ('publisher', 'admin') %}
+  <form method="post" action="/weeks/{{ d }}/email/push" class="row">
+    <div style="flex:3 1 300px"><label>Send a test copy to (comma-separated)</label><input type="text" name="test_to" value="{{ test_default }}"></div>
+    <div class="narrow"><button type="submit" {% if not has_html %}disabled{% endif %}>Create the draft in Constant Contact</button></div>
+  </form>
+  <p class="muted">Makes a draft campaign addressed to the members list and emails the test copies. Nothing goes to the list until it is scheduled, here or in Constant Contact.</p>
+  {% if doc.push %}
+  <p>Draft <strong>{{ doc.push.name }}</strong> created {{ doc.push.created_at[:16].replace('T', ' ') }} UTC{% if doc.push.test_sent_to %}, test sent to {{ doc.push.test_sent_to | join(', ') }}{% endif %}. <a href="{{ campaign_url }}" target="_blank" rel="noopener">Open in Constant Contact ↗</a>
+  {% if stale %}<span class="warn">The content has changed since that draft; create it again before scheduling.</span>{% endif %}
+  {% if doc.push.scheduled %}<br><span class="ok">Scheduled: {{ 'send now' if doc.push.scheduled == '0' else doc.push.scheduled }}</span>{% endif %}</p>
+  {% if not doc.push.scheduled %}
+  <form method="post" action="/weeks/{{ d }}/email/schedule" class="row" onsubmit="return confirm('Schedule the email to the whole members list?')">
+    <div><label>Send to the list at (Central time; blank = now)</label><input type="datetime-local" name="when" value="{{ friday }}T09:00"></div>
+    <div class="narrow"><button type="submit" {% if stale %}disabled{% endif %}>Schedule the send</button></div>
+  </form>
+  {% endif %}
+  {% endif %}
+  {% else %}
+  <p class="muted">Sending needs the publisher role. A publisher creates the draft, sends test copies, and schedules it.</p>
+  {% endif %}
+</div>
+
+<details style="margin-top:1.5rem"><summary class="muted">Advanced: friday.json</summary>
+<div class="card"><pre class="code" style="white-space:pre-wrap;font-size:12px">{{ doc | tojson(indent=2) }}</pre></div>
+</details>
+{% endif %}
+{% endif %}
+{% endblock %}

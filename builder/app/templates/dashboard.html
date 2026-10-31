@@ -21,7 +21,7 @@
       <td>{{ w.subtitle }}</td>
       <td>{{ w.sermon }}</td>
       <td><span class="pill {{ w.status }}">{{ w.status }}</span>{% if w.published_commit %} <code>{{ w.published_commit }}</code>{% endif %}</td>
-      <td><a class="muted" href="{{ site_url }}/scroll/{{ w.date }}/" target="_blank" rel="noopener">live page ↗</a></td>
+      <td><a class="muted" href="/weeks/{{ w.date }}/email">Friday email</a> · <a class="muted" href="{{ site_url }}/scroll/{{ w.date }}/" target="_blank" rel="noopener">live page ↗</a></td>
     </tr>
   {% else %}
     <tr><td colspan="5" class="muted">No week.json files yet.</td></tr>

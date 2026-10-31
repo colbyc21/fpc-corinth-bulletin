@@ -585,3 +585,332 @@ def audit(request: Request, user: dict = Depends(need("admin"))):
 def _q(s: str) -> str:
     from urllib.parse import quote_plus
     return quote_plus(s[:300])
+
+
+# ── the Friday email ─────────────────────────────────────────────────
+from builder.pipeline import friday as fridaymod, friday_chat, friday_content, friday_forms, friday_push, media as mediamod  # noqa: E402
+
+NOTES_SUFFIXES = (".rtf", ".txt", ".zip")
+
+
+def _email_ctx(d: str) -> dict:
+    exists = fridaymod.path_for(d).exists()
+    doc, error = None, None
+    if exists:
+        try:
+            doc = fridaymod.load(d)
+        except Exception as e:
+            error = str(e)
+    s = store()
+    return dict(d=d, exists=exists, doc=doc, error=error, friday=fridaymod.friday_of(d),
+                has_week=weekmod.week_path(d).exists(), has_html=fridaymod.html_path(d).exists(),
+                serve_text=friday_forms.serve_text(doc["serve"]) if doc else "",
+                calendar_text=forms.calendar_lines_text(doc["calendar"]) if doc else "",
+                birthdays_text=friday_forms.dated_text(doc["birthdays"]) if doc else "",
+                anniversaries_text=friday_forms.dated_text(doc["anniversaries"]) if doc else "",
+                stale=friday_push.stale(doc) if doc else False,
+                chat=s.chat_history(friday_chat.chat_key(d)), chat_left=friday_chat.MAX_MESSAGES - s.chat_count(friday_chat.chat_key(d)),
+                campaign_url=cc_url(doc), test_default=",".join(_test_recipients(s)))
+
+
+def cc_url(doc: dict | None) -> str | None:
+    if not doc or not doc.get("push"):
+        return None
+    from builder.pipeline import constant_contact
+    return constant_contact.campaign_url(doc["push"]["campaign_id"])
+
+
+def _test_recipients(s: Store) -> list[str]:
+    return [u["email"] for u in s.users() if u["role"] in ("publisher", "admin")][:5]
+
+
+def _eredirect(d: str, msg: str | None = None, anchor: str = "content") -> RedirectResponse:
+    url = f"/weeks/{d}/email" + (f"?m={_q(msg)}" if msg else "") + f"#{anchor}"
+    return RedirectResponse(url, status_code=303)
+
+
+@app.get("/weeks/{d}/email", response_class=HTMLResponse)
+def email_page(d: str, request: Request, user: dict = Depends(need("editor"))):
+    check_date(d)
+    return page(request, "email.html", user, **_email_ctx(d))
+
+
+def _fresh_doc(d: str) -> dict:
+    s = store()
+    week = weekmod.load_week(d) if weekmod.week_path(d).exists() else None
+    doc = fridaymod.scaffold(d, week=week, previous=friday_content._previous(d))
+    doc["calendar"] = calendar_feed.week_calendar(s, d, horizon_days=14)
+    if not doc["serve"]:
+        doc["serve"] = fridaymod.serve_lines_from_week({"serve": s.serve_for(d)})
+    return doc
+
+
+@app.post("/weeks/{d}/email/new")
+def email_new(d: str, user: dict = Depends(need("editor"))):
+    check_date(d)
+    if not fridaymod.path_for(d).exists():
+        fridaymod.save(_fresh_doc(d))
+        store().log("friday.new", user["email"], d)
+    return _eredirect(d)
+
+
+@app.post("/weeks/{d}/email/intake")
+async def email_intake(d: str, user: dict = Depends(need("editor")), notes: UploadFile | None = File(None)):
+    check_date(d)
+    if notes is None or not notes.filename:
+        return _eredirect(d, "Choose the office’s notes file", "notes")
+    suffix = Path(notes.filename).suffix.lower()
+    if suffix not in NOTES_SUFFIXES:
+        return _eredirect(d, f"Not parsed: expected .rtf, .txt or a zipped .rtfd, got {suffix or 'no extension'}", "notes")
+    data = await notes.read()
+    if len(data) > MAX_UPLOAD * 4:
+        return _eredirect(d, "Not parsed: file larger than 40 MB", "notes")
+    wdir = config.week_dir(d)
+    wdir.mkdir(parents=True, exist_ok=True)
+    if not fridaymod.path_for(d).exists():
+        fridaymod.save(_fresh_doc(d))
+    doc = fridaymod.load(d)
+    added, skipped = [], []
+    if suffix == ".zip":
+        try:
+            rtf, _, images = mediamod.extract_notes_zip(data)
+        except Exception:
+            return _eredirect(d, "Not parsed: that zip could not be read", "notes")
+        if rtf is None:
+            return _eredirect(d, "Not parsed: no .rtf inside the zip", "notes")
+        path = wdir / f"friday-notes-{doc['friday']}.rtf"
+        path.write_bytes(rtf)
+        for name, blob in images:
+            try:
+                img = mediamod.save_image(d, blob, name)
+                if img["src"] not in {m["src"] for m in doc["media"]}:
+                    added.append({"src": img["src"], "alt": img["alt"], "width": img["width"]})
+            except ValueError:
+                skipped.append(name)
+        doc["media"] += added
+        fridaymod.save(doc)
+    else:
+        path = wdir / f"friday-notes-{doc['friday']}{suffix}"
+        path.write_bytes(data)
+    try:
+        res = friday_content.intake(d, path, store=store(), user=user["email"])
+    except modelmod.ModelError as e:
+        return _eredirect(d, f"Not parsed: {e}", "notes")
+    except Exception as e:
+        log.exception("friday intake failed")
+        return _eredirect(d, f"Not parsed: {e}", "notes")
+    fl = res["doc"]["copyedit"]["flags"]
+    msg = f"Read the notes (${res['cost']:.2f}); {len(res['doc']['copyedit']['changes'])} edit(s), {len(fl)} flag(s)"
+    if added:
+        msg += f"; {len(added)} photo(s) from the zip are under Photos, ready to attach"
+    if skipped:
+        msg += f"; could not read {', '.join(skipped)}"
+    return _eredirect(d, msg)
+
+
+async def _email_form_data(request: Request) -> tuple[dict, list[tuple[str, UploadFile]]]:
+    form = await request.form()
+    data: dict = {}
+    files = []
+    for k, v in form.multi_items():
+        if hasattr(v, "filename"):
+            if v.filename:
+                files.append((k, v))
+        else:
+            data[k] = v
+    return data, files
+
+
+async def _apply_email_form(d: str, request: Request) -> tuple[dict, dict, list[str]]:
+    """Save what was typed (and any photos chosen) before anything else happens."""
+    data, files = await _email_form_data(request)
+    before = fridaymod.load(d)
+    index_map: dict = {}
+    doc = friday_forms.form_to_doc(before, data, index_map)
+    notes = []
+    for field, up in files:
+        m = re.match(r"^s(\d+)_i(\d+)_photo$", field)
+        blob = await up.read()
+        if len(blob) > MAX_UPLOAD * 2:
+            notes.append(f"{up.filename}: larger than 20 MB")
+            continue
+        try:
+            img = mediamod.save_image(d, blob, up.filename or "")
+        except ValueError as e:
+            notes.append(f"{up.filename}: {e}")
+            continue
+        image = {"src": img["src"], "alt": img["alt"], "width": img["width"]}
+        if image["src"] not in {x["src"] for x in doc["media"]}:
+            doc["media"].append(image)
+        if m:
+            key = (int(m.group(1)), int(m.group(2)))
+            if key in index_map:
+                doc["sections"][key[0]]["items"][index_map[key]]["image"] = dict(image)
+            else:
+                notes.append(f"{up.filename}: kept under Photos (the item it was for is empty)")
+    return before, doc, notes
+
+
+@app.post("/weeks/{d}/email/form")
+async def email_form(d: str, request: Request, user: dict = Depends(need("editor"))):
+    check_date(d)
+    s = store()
+    try:
+        before, doc, notes = await _apply_email_form(d, request)
+        fridaymod.save(doc)
+    except (ValueError, KeyError) as e:
+        return _eredirect(d, f"Not saved: {e}")
+    msg, cost = "Saved", 0.0
+    data, _ = await _email_form_data(request)
+    if "tidy" in data and friday_content._model_view(doc) != friday_content._model_view(before):
+        try:
+            out = friday_content.tidy(d, doc, store=s)
+            cost = out.pop("_job")["cost"]
+            fridaymod.save(out)
+            doc = out
+            n = len(doc["copyedit"]["changes"])
+            msg = f"Saved; {n} edit(s) to house style, listed below the form" if n else "Saved; nothing to copyedit"
+        except (modelmod.ModelError, ValueError) as e:
+            msg = f"Saved as typed (copyedit skipped: {e})"
+    if notes:
+        msg += "; " + "; ".join(notes)
+    try:
+        fridaymod.build(d, doc)
+    except Exception as e:
+        log.exception("friday render failed")
+        msg += f"; preview not rendered: {e}"
+    s.log("friday.form", user["email"], json.dumps({"date": d, "cost": cost, "tidy": "tidy" in data}))
+    return _eredirect(d, msg)
+
+
+@app.post("/weeks/{d}/email/item")
+async def email_item(d: str, request: Request, action: str, si: int, ii: int = 0, user: dict = Depends(need("editor"))):
+    """Add, remove or move an item; the typed form is saved first so nothing is lost."""
+    check_date(d)
+    try:
+        _, doc, notes = await _apply_email_form(d, request)
+        items = doc["sections"][si]["items"]
+        if action == "add":
+            items.append(friday_forms.blank_item())
+            anchor = f"s{si}_i{len(items) - 1}"
+        elif action == "remove":
+            items.pop(ii)
+            anchor = f"sec{si}"
+        elif action in ("up", "down"):
+            j = ii - 1 if action == "up" else ii + 1
+            if 0 <= j < len(items):
+                items[ii], items[j] = items[j], items[ii]
+            anchor = f"s{si}_i{j if 0 <= j < len(items) else ii}"
+        elif action == "attach":  # a photo from the Photos shelf: ?src=
+            src = request.query_params.get("src", "")
+            img = next((m for m in doc["media"] if m["src"] == src), None)
+            if img is None:
+                raise ValueError("that photo is not on the shelf")
+            items[ii]["image"] = dict(img)
+            anchor = f"s{si}_i{ii}"
+        else:
+            raise HTTPException(404)
+        fridaymod.save(doc)
+    except (ValueError, KeyError, IndexError) as e:
+        return _eredirect(d, f"Not saved: {e}")
+    return _eredirect(d, "; ".join(notes) if notes else None, anchor)
+
+
+@app.post("/weeks/{d}/email/refresh/{what}")
+async def email_refresh(d: str, what: str, request: Request, user: dict = Depends(need("editor"))):
+    check_date(d)
+    s = store()
+    try:
+        _, doc, _ = await _apply_email_form(d, request)
+    except (ValueError, KeyError) as e:
+        return _eredirect(d, f"Not saved: {e}")
+    if what == "serve":
+        week = weekmod.load_week(d) if weekmod.week_path(d).exists() else {"serve": s.serve_for(d)}
+        doc["serve"] = fridaymod.serve_lines_from_week(week)
+        src = "the bulletin" if weekmod.week_path(d).exists() else "the roster table"
+    elif what == "calendar":
+        doc["calendar"] = calendar_feed.week_calendar(s, d, horizon_days=14)
+        src = "the calendar table"
+    else:
+        raise HTTPException(404)
+    fridaymod.save(doc)
+    s.log("friday.refresh", user["email"], f"{d} {what}")
+    return _eredirect(d, f"Refreshed {what} from {src}", "serve" if what == "serve" else "calendar")
+
+
+@app.get("/weeks/{d}/email/preview.html", response_class=HTMLResponse)
+def email_preview(d: str, user: dict = Depends(need("editor"))):
+    check_date(d)
+    if not fridaymod.path_for(d).exists():
+        raise HTTPException(404, "no email yet")
+    return HTMLResponse(fridaymod.render(fridaymod.load(d)))
+
+
+@app.post("/weeks/{d}/email/chat")
+def email_chat(d: str, message: str = Form(...), user: dict = Depends(need("editor"))):
+    check_date(d)
+    message = message.strip()
+    if not message:
+        return _eredirect(d, None, "chat")
+    try:
+        res = friday_chat.revise(d, message, store=store(), user=user["email"])
+    except modelmod.ModelError as e:
+        return _eredirect(d, f"Chat: {e}", "chat")
+    except Exception as e:
+        log.exception("friday chat failed")
+        return _eredirect(d, f"Chat failed: {e}", "chat")
+    return _eredirect(d, f"Done (${res['cost']:.2f})", "chat")
+
+
+@app.post("/weeks/{d}/email/push")
+def email_push(d: str, test_to: str = Form(""), user: dict = Depends(need("publisher"))):
+    check_date(d)
+    emails = [e.strip() for e in re.split(r"[,\s;]+", test_to) if e.strip()]
+    bad = [e for e in emails if not re.match(r"^[^@\s]+@[^@\s]+\.[^@\s]+$", e)]
+    if bad:
+        return _eredirect(d, f"Not sent: bad address {bad[0]}", "send")
+    try:
+        res = friday_push.push(d, store=store(), test_to=emails, user=user["email"])
+    except Exception as e:
+        log.exception("friday push failed")
+        return _eredirect(d, f"Push failed: {e}", "send")
+    msg = f"Draft “{res['name']}” is in Constant Contact"
+    if emails:
+        msg += f"; test sent to {', '.join(emails)}"
+    return _eredirect(d, msg, "send")
+
+
+@app.post("/weeks/{d}/email/schedule")
+def email_schedule(d: str, when: str = Form(""), user: dict = Depends(need("publisher"))):
+    """Schedule the draft to the whole list. ``when`` is a local datetime (America/Chicago); blank = send now."""
+    check_date(d)
+    from datetime import datetime
+    from zoneinfo import ZoneInfo
+
+    if when.strip():
+        try:
+            local = datetime.fromisoformat(when.strip()).replace(tzinfo=ZoneInfo("America/Chicago"))
+        except ValueError:
+            return _eredirect(d, "Not scheduled: bad date/time", "send")
+        when_iso = local.astimezone(ZoneInfo("UTC")).strftime("%Y-%m-%dT%H:%M:%SZ")
+        label = local.strftime("%A %B %-d at %-I:%M %p")
+    else:
+        when_iso, label = "0", "now"
+    try:
+        friday_push.schedule(d, when_iso, store=store(), user=user["email"])
+    except Exception as e:
+        log.exception("friday schedule failed")
+        return _eredirect(d, f"Not scheduled: {e}", "send")
+    return _eredirect(d, f"Scheduled to send {label} to the list", "send")
+
+
+@app.get("/media/{name}")
+def media_file(name: str):
+    """Photos for the emails: public, so mail clients can fetch them."""
+    try:
+        path = mediamod.path_of(name)
+    except ValueError:
+        raise HTTPException(404)
+    if not path.exists():
+        raise HTTPException(404)
+    return FileResponse(path, headers={"Cache-Control": "public, max-age=31536000, immutable"})

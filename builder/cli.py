@@ -14,6 +14,8 @@
     python -m builder hymns [--write]         hymn index from the published bulletins; --write refreshes src/_data/hymnIndex.json
     python -m builder add-user email role     create an app user (editor|publisher|admin)
     python -m builder cc auth|status|lists    Constant Contact: one-time device-flow authorization, token status, contact lists
+    python -m builder email new|intake|build|push 2026-11-08 [notes.rtf] [--test a@b.c]
+                                              the Friday email for that Sunday: scaffold, read the notes, render, push the draft
 """
 from __future__ import annotations
 
@@ -216,6 +218,55 @@ def cmd_cc(args) -> int:
     return 0
 
 
+def cmd_email(args) -> int:
+    from builder.pipeline import calendar_feed, friday, friday_content, friday_push, model
+    from builder.pipeline import week as weekmod
+    from builder.pipeline.store import Store
+
+    config.ensure_dirs()
+    s = Store()
+    d = args.date
+    if args.what == "new":
+        if friday.path_for(d).exists() and not args.force:
+            print(f"{friday.path_for(d)} exists; use --force to overwrite", file=sys.stderr)
+            return 1
+        week = weekmod.load_week(d) if weekmod.week_path(d).exists() else None
+        doc = friday.scaffold(d, week=week)
+        doc["calendar"] = calendar_feed.week_calendar(s, d, horizon_days=14)
+        if not doc["serve"]:
+            doc["serve"] = friday.serve_lines_from_week({"serve": s.serve_for(d)})
+        print(friday.save(doc))
+        return 0
+    if args.what == "intake":
+        if not args.file:
+            print("intake needs the notes file", file=sys.stderr)
+            return 2
+        if not friday.path_for(d).exists():
+            week = weekmod.load_week(d) if weekmod.week_path(d).exists() else None
+            doc = friday.scaffold(d, week=week)
+            doc["calendar"] = calendar_feed.week_calendar(s, d, horizon_days=14)
+            friday.save(doc)
+        try:
+            res = friday_content.intake(d, args.file, store=s)
+        except model.ModelError as e:
+            print(f"model: {e}", file=sys.stderr)
+            return 1
+        doc = res["doc"]
+        print(f"cost ${res['cost']:.3f}; {len(doc['copyedit']['changes'])} change(s), {len(doc['copyedit']['flags'])} flag(s)")
+        for f in doc["copyedit"]["flags"]:
+            print(f"  flag {f['where']}: {f['message']}")
+        print(friday.build(d, doc))
+        return 0
+    if args.what == "build":
+        print(friday.build(d))
+        return 0
+    if args.what == "push":
+        res = friday_push.push(d, store=s, test_to=args.test or [])
+        print(json.dumps(res, indent=2))
+        return 0
+    return 2
+
+
 def cmd_add_user(args) -> int:
     from builder.pipeline.store import Store
 
@@ -249,6 +300,8 @@ def main(argv: list[str] | None = None) -> int:
     s = sub.add_parser("calendar"); s.add_argument("--sunday"); s.add_argument("--write", action="store_true"); s.set_defaults(fn=cmd_calendar)
     s = sub.add_parser("hymns"); s.add_argument("--write", action="store_true"); s.set_defaults(fn=cmd_hymns)
     s = sub.add_parser("cc"); s.add_argument("what", choices=["auth", "status", "lists"]); s.set_defaults(fn=cmd_cc)
+    s = sub.add_parser("email"); s.add_argument("what", choices=["new", "intake", "build", "push"]); s.add_argument("date"); s.add_argument("file", nargs="?")
+    s.add_argument("--test", action="append", help="test-send address (repeatable)"); s.add_argument("--force", action="store_true"); s.set_defaults(fn=cmd_email)
     s = sub.add_parser("add-user"); s.add_argument("email"); s.add_argument("role", choices=["editor", "publisher", "admin"])
     s.add_argument("--name"); s.set_defaults(fn=cmd_add_user)
 

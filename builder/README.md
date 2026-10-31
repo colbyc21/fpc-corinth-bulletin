@@ -25,9 +25,14 @@ Self-service production of the Sunday bulletin on basecamp. The plan is in
 | `pipeline/fit.py` | model call 3: the fit loop (tools `read_week`, `set_layout`, `render_and_measure`) and `build_and_fit` |
 | `pipeline/chat.py` | model call 4: the chat box (edit_week by JSON pointer + the fit tools), 4 calls / $1 per message |
 | `pipeline/forms.py` | the volunteer form ↔ week.json |
+| `pipeline/friday.py` + `templates/email.html.j2` | the Friday email: `bulletins/<sunday>/friday.json` → 600 px table-layout HTML |
+| `pipeline/friday_content.py` | model call: the office's notes → sections, merged with the calendar and roster tables (`prompts/friday.md`) |
+| `pipeline/friday_forms.py` / `friday_chat.py` / `friday_push.py` | the email page's form ↔ friday.json; chat corrections (`prompts/friday_chat.md`); Constant Contact draft, test send, schedule |
+| `pipeline/media.py` | photos for the email: resized, stored under `var/media`, served publicly at `/media/<name>` |
+| `pipeline/constant_contact.py` | Constant Contact v3 client: device-flow OAuth, lists, campaigns, tests, schedule (`python -m builder cc auth`) |
 | `pipeline/deploy_status.py` | is the published week live? Netlify API if `NETLIFY_TOKEN`/`NETLIFY_SITE_ID` are set, else the scroll page's `fpc-build` marker |
 | `prompts/*.md` | the four prompts; edit these, not the code, to change model behaviour |
-| `app/` | FastAPI app: magic-link login; the week page (Inputs → Details → Build & proof → Publish, with chat); rosters, events, standing text, users, audit, spend |
+| `app/` | FastAPI app: magic-link login; the week page (Inputs → Details → Build & proof → Publish, with chat); the Friday email page (Notes → Content with per-item photos → Preview & chat → Send); rosters, events, standing text, users, audit, spend |
 | `data/seed/`, `data/standing/` | Phase 0 seeds; the store loads them once |
 | `tests/` | pytest; `test_render_golden.py` is the Phase 1 acceptance test |
 | `deploy/bulletin-builder.service` | user-level systemd unit |
