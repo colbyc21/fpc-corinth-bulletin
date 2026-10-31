@@ -3,8 +3,6 @@
 {% block content %}
 <h1>Users</h1>
 <p class="muted">Editors enter, build, proof and mark a week ready. Publishers also push to main. Admins also manage these screens. Any email address works; sign-in is by emailed link.</p>
-<p class="muted">Two gates: Cloudflare Access (a one-time PIN emailed to an allowed address) in front of this site, then the sign-in link here. Adding or removing a user updates the Access allowlist too.
-{% if not access.configured %}<strong>Cloudflare Access is not configured on this box</strong>, so only the sign-in link applies.{% elif access.error %}<strong>Could not read the Access allowlist:</strong> {{ access.error }}{% endif %}</p>
 <div class="card">
   <form method="post" action="/users" class="row">
     <div><label>Email</label><input type="email" name="email" required></div>
@@ -14,25 +12,16 @@
   </form>
 </div>
 <table>
-  <thead><tr><th>Email</th><th>Name</th><th>Role</th><th>Access gate</th><th>Last sign-in</th><th></th></tr></thead>
+  <thead><tr><th>Email</th><th>Name</th><th>Role</th><th>Last sign-in</th><th></th></tr></thead>
   <tbody>
   {% for u in users %}
   <tr>
     <td>{{ u.email }}</td><td>{{ u.name or '' }}</td>
     <td><form method="post" action="/users/{{ u.id }}/role" class="row"><select name="role" style="flex:1 1 120px">{% for r in USER_ROLES %}<option value="{{ r }}" {% if r == u.role %}selected{% endif %}>{{ r }}</option>{% endfor %}</select><button class="quiet narrow" type="submit">Set</button></form></td>
-    <td class="muted">{% if access.allowlist is none %}&mdash;{% elif u.gate %}allowed{% else %}<strong>not on allowlist</strong>{% endif %}</td>
     <td class="muted">{{ u.last_login_at or 'never' }}</td>
     <td><form method="post" action="/users/{{ u.id }}/delete" onsubmit="return confirm('Remove {{ u.email }}?')"><button class="danger" type="submit" {% if u.id == user.id %}disabled{% endif %}>Remove</button></form></td>
   </tr>
   {% endfor %}
   </tbody>
 </table>
-{% if access.allowlist is not none and (access.strays or access.missing) %}
-<div class="card">
-  <p><strong>Access allowlist is out of step with the users above.</strong>
-  {% if access.missing %}Users not on the allowlist (they will be stopped at the gate): {{ access.missing|join(', ') }}.{% endif %}
-  {% if access.strays %}Addresses on the allowlist with no user here (they pass the gate but cannot sign in): {{ access.strays|join(', ') }}.{% endif %}</p>
-  <form method="post" action="/users/access/sync" onsubmit="return confirm('Make the Cloudflare Access allowlist exactly these users?')"><button type="submit">Sync allowlist to users</button></form>
-</div>
-{% endif %}
 {% endblock %}

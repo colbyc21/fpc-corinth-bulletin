@@ -14,14 +14,13 @@ import logging
 import re
 from datetime import date, timedelta
 from pathlib import Path
-from urllib.parse import quote_plus
 
 from fastapi import Depends, FastAPI, Form, HTTPException, Request
 from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, RedirectResponse, Response
 from fastapi.templating import Jinja2Templates
 
 from builder import config
-from builder.app import auth, cfaccess
+from builder.app import auth
 from builder.pipeline import build as buildmod, calendar_feed, dates, publish as publishmod
 from builder.pipeline import week as weekmod
 from builder.pipeline.store import ROLE_LABELS, ROSTER_ROLES, USER_ROLES, Store
@@ -382,43 +381,16 @@ def standing_save(key: str, raw: str = Form(...), user: dict = Depends(need("adm
 # ── users and audit ──────────────────────────────────────────────────
 @app.get("/users", response_class=HTMLResponse)
 def users(request: Request, user: dict = Depends(need("admin"))):
-    rows = store().users()
-    access = {"configured": cfaccess.configured(), "allowlist": None, "error": None}
-    if access["configured"]:
-        try:
-            access["allowlist"] = cfaccess.allowlist()
-        except cfaccess.AccessError as e:
-            access["error"] = str(e)
-    allowed = set(access["allowlist"] or [])
-    for u in rows:
-        u["gate"] = u["email"] in allowed
-    emails = {u["email"] for u in rows}
-    access["strays"] = sorted(allowed - emails)
-    access["missing"] = sorted(emails - allowed) if access["allowlist"] is not None else []
-    return page(request, "users.html", user, users=rows, access=access)
-
-
-def _gate(action, email: str, actor: str) -> str:
-    """Apply an allowlist change and describe the outcome for the flash message."""
-    try:
-        result = action(email)
-    except cfaccess.AccessError as e:
-        store().log("access.error", actor, f"{email}: {e}")
-        return f" but the Cloudflare Access update failed: {e}"
-    if result is None:
-        return " (Cloudflare Access not configured on this box)"
-    store().log("access." + action.__name__, actor, email)
-    return " and the Access allowlist updated"
+    return page(request, "users.html", user, users=store().users())
 
 
 @app.post("/users")
 def user_add(email: str = Form(...), name: str = Form(""), role: str = Form(...), user: dict = Depends(need("admin"))):
     if role not in USER_ROLES or "@" not in email:
         raise HTTPException(400, "bad email or role")
-    email = email.strip().lower()
     store().add_user(email, name.strip() or None, role)
     store().log("user.add", user["email"], f"{email} {role}")
-    return RedirectResponse("/users?m=" + quote_plus("Added" + _gate(cfaccess.add, email, user["email"])), status_code=303)
+    return RedirectResponse("/users?m=Added", status_code=303)
 
 
 @app.post("/users/{uid}/role")
@@ -434,27 +406,9 @@ def user_role(uid: int, role: str = Form(...), user: dict = Depends(need("admin"
 def user_delete(uid: int, user: dict = Depends(need("admin"))):
     if uid == user["id"]:
         raise HTTPException(400, "You cannot remove yourself.")
-    target = store().user_by_id(uid)
-    if not target:
-        raise HTTPException(404, "no such user")
     store().remove_user(uid)
-    store().log("user.remove", user["email"], f"{uid} {target['email']}")
-    return RedirectResponse("/users?m=" + quote_plus("Removed" + _gate(cfaccess.remove, target["email"], user["email"])), status_code=303)
-
-
-@app.post("/users/access/sync")
-def user_access_sync(user: dict = Depends(need("admin"))):
-    """Make the Access allowlist exactly the active users (fixes strays and gaps)."""
-    emails = [u["email"] for u in store().users()]
-    try:
-        result = cfaccess.sync(emails)
-    except cfaccess.AccessError as e:
-        store().log("access.error", user["email"], f"sync: {e}")
-        return RedirectResponse("/users?m=" + quote_plus(f"Sync failed: {e}"), status_code=303)
-    if result is None:
-        return RedirectResponse("/users?m=" + quote_plus("Cloudflare Access not configured on this box"), status_code=303)
-    store().log("access.sync", user["email"], ", ".join(result))
-    return RedirectResponse("/users?m=" + quote_plus(f"Access allowlist now matches the {len(result)} users"), status_code=303)
+    store().log("user.remove", user["email"], str(uid))
+    return RedirectResponse("/users?m=Removed", status_code=303)
 
 
 @app.get("/audit", response_class=HTMLResponse)

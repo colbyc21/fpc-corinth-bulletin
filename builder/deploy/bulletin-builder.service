@@ -11,7 +11,6 @@ Wants=network-online.target
 Type=simple
 WorkingDirectory=%h/bulletin-builder/repo
 EnvironmentFile=%h/.config/bulletin-builder/env
-EnvironmentFile=-%h/.config/cloudflare/env
 Environment=BUILDER_REPO=%h/bulletin-builder/repo
 Environment=BUILDER_VAR=%h/bulletin-builder/var
 Environment=PYTHONUNBUFFERED=1
