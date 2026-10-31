@@ -16,7 +16,7 @@
         <td>{{ h.times }}</td>
         <td>{{ h.first }}</td>
         <td>{{ h.last }}</td>
-        <td class="muted">{% for d in h.dates | reverse %}{{ d.date }} ({{ d.slot }}{% if d.verses %}, {{ d.verses }}{% endif %}){% if not loop.last %}, {% endif %}{% endfor %}</td>
+        <td class="muted">{% for d in h.dates | reverse %}{{ d.date }} ({{ d.slot }}{% if d.parts > 1 %}, in {{ d.parts }} parts{% endif %}{% if d.verses %}, {{ d.verses }}{% endif %}){% if not loop.last %}, {% endif %}{% endfor %}</td>
       </tr>
     {% endfor %}
     </tbody>

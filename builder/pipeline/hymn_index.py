@@ -98,12 +98,14 @@ def build(repo: Path | None = None, hymns: dict | None = None) -> dict:
         if uses and uses[-1]["date"] == row["date"]:
             # the same hymn split across a service (vv. 1-3, a reading, vv. 4-5) is one singing
             prev = uses[-1]
+            prev["parts"] += 1
             if row["slot"] not in prev["slot"].split(" / "):
                 prev["slot"] += " / " + row["slot"]
             if row["verses"]:
-                prev["verses"] = f"{prev['verses']}, {row['verses']}" if prev["verses"] else row["verses"]
+                more = re.sub(r"^v{1,2}\.\s*", "", row["verses"])
+                prev["verses"] = f"{prev['verses']}, {more}" if prev["verses"] else row["verses"]
             continue
-        uses.append(dict(row))
+        uses.append({**row, "parts": 1})
     rows = []
     for number, uses in sorted(by_number.items(), key=lambda kv: _number_key(kv[0])):
         entry = hymns.get(number) or {}
@@ -121,7 +123,7 @@ def build(repo: Path | None = None, hymns: dict | None = None) -> dict:
             "first": uses[0]["date"],
             "last": uses[-1]["date"],
             "last_label": _label(uses[-1]["date"]),
-            "dates": [{"date": u["date"], "label": _label(u["date"]), "slot": u["slot"], "verses": u["verses"]} for u in uses],
+            "dates": [{"date": u["date"], "label": _label(u["date"]), "slot": u["slot"], "verses": u["verses"], "parts": u["parts"]} for u in uses],
             "url": HYMNARY_URL.format(number=number),
         })
     services = sorted({r["date"] for r in sung} | {r["date"] for r in unnumbered})

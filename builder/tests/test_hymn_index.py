@@ -32,7 +32,8 @@ def test_a_hymn_split_across_a_service_counts_once():
         hi.scan = orig
     eight = next(h for h in idx["hymns"] if h["number"] == "8")
     assert eight["times"] == 2 and [d["date"] for d in eight["dates"]] == ["2026-03-01", "2026-03-08"]
-    assert eight["dates"][0]["verses"] == "vv. 1–3, vv. 4–5" and eight["dates"][0]["slot"] == "The Hymn of Praise / Hymn"
+    assert eight["dates"][0]["verses"] == "vv. 1–3, 4–5" and eight["dates"][0]["slot"] == "The Hymn of Praise / Hymn"
+    assert eight["dates"][0]["parts"] == 2 and eight["dates"][1]["parts"] == 1
 
 
 def test_markdown_bulletin():
