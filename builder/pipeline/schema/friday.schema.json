@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "The Friday Email for one week",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["date", "friday", "subject", "sections", "calendar", "serve"],
+  "properties": {
+    "date": {"type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$", "description": "the Sunday this email leads into (matches week.json)"},
+    "friday": {"type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$"},
+    "subject": {"type": "string"},
+    "preheader": {"type": ["string", "null"]},
+    "scripture": {"type": ["object", "null"], "additionalProperties": false, "required": ["text", "ref"],
+                  "properties": {"text": {"type": "string"}, "ref": {"type": "string"}}},
+    "sections": {"type": "array", "items": {"$ref": "#/$defs/section"}},
+    "calendar": {"type": "array", "items": {"type": "object", "additionalProperties": false, "required": ["date", "items"],
+                 "properties": {"date": {"type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$"}, "items": {"type": "array", "items": {"type": "string"}}}}},
+    "birthdays": {"type": "array", "items": {"$ref": "#/$defs/dated_names"}},
+    "anniversaries": {"type": "array", "items": {"$ref": "#/$defs/dated_names"}},
+    "birthdays_note": {"type": ["string", "null"]},
+    "serve": {"type": "array", "items": {"type": "object", "additionalProperties": false, "required": ["role", "names"],
+              "properties": {"role": {"type": ["string", "null"]}, "names": {"type": "string"}}},
+              "description": "Those Who Serve lines in order; role null = an indented sub-line (nursery rooms)"},
+    "closing_hymn": {"type": ["object", "null"], "additionalProperties": false, "required": ["lines", "attribution"],
+                     "properties": {"lines": {"type": "array", "items": {"type": "string"}}, "attribution": {"type": ["string", "null"]}}},
+    "copyedit": {"type": "object", "additionalProperties": false, "required": ["changes", "flags"],
+                 "properties": {"changes": {"type": "array", "items": {"$ref": "#/$defs/change"}}, "flags": {"type": "array", "items": {"$ref": "#/$defs/flag"}}}},
+    "push": {"type": ["object", "null"], "additionalProperties": false,
+             "properties": {"campaign_id": {"type": "string"}, "activity_id": {"type": "string"}, "name": {"type": "string"},
+                            "created_at": {"type": "string"}, "test_sent_to": {"type": "array", "items": {"type": "string"}},
+                            "scheduled": {"type": ["string", "null"]}, "html_sha": {"type": "string"}}},
+    "media": {"type": "array", "items": {"$ref": "#/$defs/image"}, "description": "photos uploaded for this week, attachable to items"}
+  },
+  "$defs": {
+    "section": {
+      "type": "object", "additionalProperties": false, "required": ["key", "items"],
+      "properties": {
+        "key": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"},
+        "label": {"type": ["string", "null"], "description": "small uppercase band label (Prepare, Give, Connect)"},
+        "title": {"type": ["string", "null"], "description": "large heading instead of a label (Women’s Ministry)"},
+        "intro": {"type": ["string", "null"], "description": "italic line under the label or title"},
+        "footer_line": {"type": ["string", "null"], "description": "centered closing line (Follow us on Instagram: @x)"},
+        "large_headings": {"type": "boolean", "description": "items get the big announcement heading"},
+        "split_items": {"type": "boolean", "description": "each item in its own band (the announcements block)"},
+        "items": {"type": "array", "items": {"$ref": "#/$defs/item"}}
+      }
+    },
+    "item": {
+      "type": "object", "additionalProperties": false, "required": ["body"],
+      "properties": {
+        "eyebrow": {"type": ["string", "null"], "description": "small gray line above the title (Children’s Ministry, New Sunday School Class)"},
+        "title": {"type": ["string", "null"]},
+        "when": {"type": ["string", "null"], "description": "date · time · place line"},
+        "when_highlight": {"type": "boolean", "description": "gold, for this-week or imminent"},
+        "body": {"type": "array", "items": {"type": "string"}, "description": "paragraphs; *text* for italics"},
+        "note": {"type": ["string", "null"], "description": "smaller gray paragraph after the body (how to sign up, who to call)"},
+        "quote": {"type": ["object", "null"], "additionalProperties": false, "required": ["text", "ref"],
+                  "properties": {"text": {"type": "string"}, "ref": {"type": "string"}}},
+        "link": {"type": ["object", "null"], "additionalProperties": false, "required": ["label", "url"],
+                 "properties": {"label": {"type": "string"}, "url": {"type": "string"}}},
+        "image": {"anyOf": [{"$ref": "#/$defs/image"}, {"type": "null"}]},
+        "image_position": {"type": "string", "enum": ["after_body", "before_body", "after_note"]}
+      }
+    },
+    "image": {"type": "object", "additionalProperties": false, "required": ["src", "alt"],
+              "properties": {"src": {"type": "string"}, "alt": {"type": "string"}, "width": {"type": ["integer", "null"]}}},
+    "dated_names": {"type": "object", "additionalProperties": false, "required": ["date", "names"],
+                    "properties": {"date": {"type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$"}, "names": {"type": "array", "items": {"type": "string"}}}},
+    "change": {"type": "object", "additionalProperties": false, "required": ["where", "before", "after", "reason"],
+               "properties": {"where": {"type": "string"}, "before": {"type": "string"}, "after": {"type": "string"}, "reason": {"type": "string"}}},
+    "flag": {"type": "object", "additionalProperties": false, "required": ["where", "message"],
+             "properties": {"where": {"type": "string"}, "message": {"type": "string"}}}
+  }
+}

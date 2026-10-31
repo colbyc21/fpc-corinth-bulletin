@@ -1,0 +1,267 @@
+{#- The Friday Email. 600 px table layout, inline styles, the autumn-2026 look. -#}
+{%- set SERIF = "'EB Garamond', Georgia, serif" -%}
+{%- set SANS = "'Work Sans', Arial, Helvetica, sans-serif" -%}
+{%- macro label(text, mb='20px') -%}
+<p style="margin: 0 0 {{ mb }} 0; font-size: 15px; color: #56736a; font-weight: bold; font-family: {{ SANS }}; letter-spacing: 3px; text-transform: uppercase;">{{ text }}</p>
+{%- endmacro -%}
+{%- macro eyebrow(text) -%}
+<p style="margin: 0 0 4px 0; font-size: 15px; color: #8b8a7c; font-family: {{ SANS }}; letter-spacing: 1px; text-transform: uppercase;">{{ text }}</p>
+{%- endmacro -%}
+{%- macro heading(text, large) -%}
+{%- if large -%}
+<h2 style="margin: 0 0 8px 0; font-size: 22px; color: #56736a; font-weight: normal; font-family: {{ SERIF }};">{{ text }}</h2>
+{%- else -%}
+<h3 style="margin: 0 0 8px 0; font-size: 19px; color: #56736a; font-weight: normal; font-family: {{ SERIF }};">{{ text }}</h3>
+{%- endif -%}
+{%- endmacro -%}
+{%- macro when(text, hot) -%}
+<p style="margin: 0 0 12px 0; font-size: 15px; color: {{ '#847539' if hot else '#666558' }}; font-family: {{ SANS }}; letter-spacing: 1px; text-transform: uppercase;{% if hot %} font-weight: bold;{% endif %}">{{ text }}</p>
+{%- endmacro -%}
+{%- macro para(text, last) -%}
+<p style="margin: 0 0 {{ '0' if last else '16px' }} 0; font-size: 17px; line-height: 1.7; color: #3f3d32;">{{ text | rich }}</p>
+{%- endmacro -%}
+{%- macro note(text) -%}
+<p style="margin: 16px 0 0 0; font-size: 16px; line-height: 1.6; color: #666558; font-family: {{ SANS }};">{{ text | rich }}</p>
+{%- endmacro -%}
+{%- macro button(link, gold=False) -%}
+<table role="presentation" cellspacing="0" cellpadding="0" border="0" style="margin: 20px 0 0 0;">
+  <tr>
+    <td style="background-color: {{ '#847539' if gold else '#6d8c83' }}; border-radius: 4px;">
+      <a href="{{ link.url }}" target="_blank" style="display: inline-block; padding: 12px 28px; font-size: 16px; color: #ffffff; text-decoration: none; font-family: {{ SANS }}; letter-spacing: 0.5px;">{{ link.label }}&rarr;</a>
+    </td>
+  </tr>
+</table>
+{%- endmacro -%}
+{%- macro image(img) -%}
+<img src="{{ img.src }}" alt="{{ img.alt }}" width="{{ img.width or 520 }}" style="display: block; width: 100%; max-width: {{ img.width or 520 }}px; height: auto; margin: 16px auto 0 auto; border-radius: 4px;">
+{%- endmacro -%}
+{%- macro quote(q) -%}
+<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: 0 0 12px 0;">
+  <tr>
+    <td style="border-left: 3px solid #847539; padding: 4px 0 4px 20px;">
+      <p style="margin: 0; font-size: 17px; line-height: 1.7; color: #3f3d32; font-style: italic;">&ldquo;{{ q.text }}&rdquo;</p>
+      <p style="margin: 8px 0 0 0; font-size: 15px; color: #8b8a7c; font-family: {{ SANS }};">&mdash; {{ q.ref }}</p>
+    </td>
+  </tr>
+</table>
+{%- endmacro -%}
+{%- macro item_block(it, large) -%}
+{% if it.eyebrow %}{{ eyebrow(it.eyebrow) }}{% endif %}
+{% if it.title %}{{ heading(it.title, large) }}{% endif %}
+{% if it.when %}{{ when(it.when, it.when_highlight) }}{% endif %}
+{% if it.quote %}{{ quote(it.quote) }}{% endif %}
+{% if it.image and it.image_position == 'before_body' %}{{ image(it.image) }}<div style="height: 16px; line-height: 16px; font-size: 16px;">&nbsp;</div>{% endif %}
+{% for p in it.body %}{{ para(p, loop.last) }}
+{% endfor %}
+{% if it.image and it.image_position == 'after_body' %}{{ image(it.image) }}{% endif %}
+{% if it.note %}{{ note(it.note) }}{% endif %}
+{% if it.image and it.image_position == 'after_note' %}{{ image(it.image) }}{% endif %}
+{% if it.link %}{{ button(it.link) }}{% endif %}
+{%- endmacro -%}
+{%- macro section_head(s) -%}
+{% if s.label %}{{ label(s.label, '4px' if s.intro else '20px') }}{% endif %}
+{% if s.title %}<h2 style="margin: 0 0 {{ '4px' if s.intro else '16px' }} 0; font-size: 22px; color: #56736a; font-weight: normal; font-family: {{ SERIF }};">{{ s.title }}</h2>{% endif %}
+{% if s.intro %}<p style="margin: 0 0 24px 0; font-size: 15px; color: #666558; font-family: {{ SANS }}; font-style: italic;">{{ s.intro | rich }}</p>{% endif %}
+{%- endmacro -%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ e.subject }}</title>
+  <style type="text/css">
+    @media only screen and (max-width: 620px) {
+      .email-body { width: 100% !important; max-width: 100% !important; border-radius: 0 !important; }
+      .email-outer { padding: 0 !important; }
+      .section-pad { padding-left: 22px !important; padding-right: 22px !important; }
+    }
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <!--[if mso]>
+  <style type="text/css">
+    body, table, td {font-family: Georgia, serif !important;}
+  </style>
+  <![endif]-->
+</head>
+<body style="margin: 0; padding: 0; background-color: #eceeea; font-family: {{ SERIF }};">
+{% if e.preheader %}
+  <div style="display: none; max-height: 0; overflow: hidden; mso-hide: all; font-size: 1px; line-height: 1px; color: #eceeea;">{{ e.preheader }}</div>
+{% endif %}
+  <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #eceeea;">
+    <tr>
+      <td align="center" class="email-outer" style="padding: 24px 16px;">
+        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="600" class="email-body" style="max-width: 600px; background-color: #ffffff; border-radius: 4px; overflow: hidden; box-shadow: 0 2px 8px rgba(23, 18, 0, 0.08);">
+
+          <!-- Header -->
+          <tr>
+            <td style="background-color: #ffffff; padding: 48px 40px 40px 40px; text-align: center;">
+              <img src="{{ standing.logo }}" alt="First Presbyterian Church" width="220" style="display: block; margin: 0 auto 24px auto; max-width: 220px;">
+              <h1 style="margin: 0; font-size: 34px; font-weight: normal; color: #171200; letter-spacing: 2px; font-family: {{ SERIF }}; text-transform: uppercase;">{{ e.subject }}</h1>
+              <hr style="border: none; border-top: 2px solid #6d8c83; width: 80px; margin: 16px auto;">
+              <p style="margin: 0; font-size: 15px; color: #666558; text-transform: uppercase; letter-spacing: 2px; font-family: {{ SANS }};">{{ friday_label }}</p>
+            </td>
+          </tr>
+{% if e.scripture %}
+
+          <!-- Opening Scripture -->
+          <tr>
+            <td class="section-pad" style="padding: 32px 40px; border-bottom: 1px solid #d9d9cf; background-color: #f1f4f2;">
+              <p style="margin: 0; font-size: 18px; line-height: 1.7; color: #3f3d32; font-style: italic; text-align: center;">&ldquo;{{ e.scripture.text }}&rdquo;</p>
+              <p style="margin: 12px 0 0 0; font-size: 15px; color: #8b8a7c; text-align: center; font-family: {{ SANS }};">&mdash; {{ e.scripture.ref }}</p>
+            </td>
+          </tr>
+{% endif %}
+{% for s in sections %}
+{% set bg = band(loop.index0) %}
+{% if s.split_items %}
+
+          <!-- {{ s.key }} -->
+          <tr>
+            <td class="section-pad" style="padding: 32px 40px 0 40px; background-color: {{ bg }};">
+              {{ section_head(s) | replace('margin: 0 0 20px 0', 'margin: 0') }}
+            </td>
+          </tr>
+{% for it in s['items'] %}
+          <tr>
+            <td class="section-pad" style="padding: {{ '24px' if loop.first else '32px' }} 40px 32px 40px; border-bottom: 1px solid #d9d9cf; background-color: {{ bg }};">
+              {{ item_block(it, s.large_headings) }}
+            </td>
+          </tr>
+{% endfor %}
+{% else %}
+
+          <!-- {{ s.key }} -->
+          <tr>
+            <td class="section-pad" style="padding: 32px 40px; border-bottom: 1px solid #d9d9cf; background-color: {{ bg }};">
+              {{ section_head(s) }}
+{% for it in s['items'] %}
+{% if not loop.first %}
+              <hr style="border: none; border-top: 1px solid #d9d9cf; margin: 24px 0;">
+{% endif %}
+              {{ item_block(it, s.large_headings) }}
+{% endfor %}
+{% if s.footer_line %}
+              <p style="margin: 24px 0 0 0; font-size: 16px; color: #3f3d32; font-family: {{ SANS }}; text-align: center;">{{ s.footer_line | rich }}</p>
+{% endif %}
+            </td>
+          </tr>
+{% endif %}
+{% endfor %}
+{% if e.calendar %}
+
+          <!-- The Church Calendar -->
+          <tr>
+            <td class="section-pad" style="padding: 32px 40px; border-bottom: 1px solid #d9d9cf; background-color: #ffffff;">
+              <h2 style="margin: 0 0 16px 0; font-size: 22px; color: #56736a; font-weight: normal; font-family: {{ SERIF }};">The Church Calendar</h2>
+              <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="font-size: 16px; line-height: 1.8; color: #3f3d32;">
+{% for c in e.calendar %}
+                <tr><td><strong style="color: #56736a;">{{ c.date | month_day }}</strong> &mdash; {{ c['items'] | map('rich') | join('; ') }}</td></tr>
+{% endfor %}
+              </table>
+            </td>
+          </tr>
+{% endif %}
+{% if e.birthdays or e.anniversaries %}
+
+          <!-- Birthdays & Anniversaries -->
+          <tr>
+            <td class="section-pad" style="padding: 32px 40px; border-bottom: 1px solid #d9d9cf; background-color: #f1f4f2;">
+{% if e.birthdays %}
+              <h2 style="margin: 0 0 8px 0; font-size: 20px; color: #56736a; font-weight: normal; font-family: {{ SERIF }};">&#127874; Birthdays</h2>
+{% if e.birthdays_note %}
+              <p style="margin: 0 0 16px 0; font-size: 13px; line-height: 1.5; color: #8b8a7c; font-family: {{ SANS }}; font-style: italic;">{{ e.birthdays_note }}</p>
+{% endif %}
+              <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="font-size: 16px; line-height: 1.8; color: #3f3d32;">
+{% for b in e.birthdays %}
+                <tr><td><strong style="color: #56736a;">{{ b.date | month_day }}</strong> &mdash; {{ b.names | join(', ') }}</td></tr>
+{% endfor %}
+              </table>
+{% endif %}
+{% if e.anniversaries %}
+              <h2 style="margin: {{ '24px' if e.birthdays else '0' }} 0 16px 0; font-size: 20px; color: #56736a; font-weight: normal; font-family: {{ SERIF }};">&#128141; Anniversaries</h2>
+              <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="font-size: 16px; line-height: 1.8; color: #3f3d32;">
+{% for a in e.anniversaries %}
+                <tr><td><strong style="color: #56736a;">{{ a.date | month_day }}</strong> &mdash; {{ a.names | join(', ') }}</td></tr>
+{% endfor %}
+              </table>
+{% endif %}
+            </td>
+          </tr>
+{% endif %}
+
+          <!-- Bulletin & Those Who Serve -->
+          <tr>
+            <td class="section-pad" style="padding: 32px 40px; border-bottom: 1px solid #d9d9cf; background-color: #ffffff;">
+              <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                <tr>
+                  <td align="center" style="padding-bottom: 24px;">
+                    <table role="presentation" cellspacing="0" cellpadding="0" border="0">
+                      <tr>
+                        <td style="background-color: #847539; border-radius: 4px;">
+                          <a href="{{ standing.bulletin_url }}" target="_blank" style="display: inline-block; padding: 14px 32px; font-size: 17px; color: #ffffff; text-decoration: none; font-family: {{ SANS }}; letter-spacing: 0.5px; font-weight: bold;">&#128196; View Sunday Bulletin</a>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+{% if e.serve %}
+                <tr>
+                  <td>
+                    <h2 style="margin: 0 0 16px 0; font-size: 20px; color: #56736a; font-weight: normal; font-family: {{ SERIF }}; text-align: center;">Those Who Serve this Sunday</h2>
+                    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="font-size: 16px; line-height: 2; color: #3f3d32; text-align: center;">
+{% for line in e.serve %}
+{% if line.role and line.names %}
+                      <tr><td><strong style="color: #56736a;">{{ line.role }}</strong> &mdash; {{ line.names }}</td></tr>
+{% elif line.role %}
+                      <tr><td><strong style="color: #56736a;">{{ line.role }}</strong></td></tr>
+{% else %}
+                      <tr><td>{{ line.names }}</td></tr>
+{% endif %}
+{% endfor %}
+                    </table>
+                  </td>
+                </tr>
+{% endif %}
+              </table>
+            </td>
+          </tr>
+{% if e.closing_hymn and e.closing_hymn.lines %}
+
+          <!-- Closing Hymn -->
+          <tr>
+            <td class="section-pad" style="padding: 32px 40px; background-color: #6d8c83;">
+              <p style="margin: 0; font-size: 18px; line-height: 1.7; color: #ffffff; font-style: italic; text-align: center;">
+                &ldquo;{{ e.closing_hymn.lines | join('<br>\n                ') | safe }}&rdquo;
+              </p>
+{% if e.closing_hymn.attribution %}
+              <p style="margin: 12px 0 0 0; font-size: 15px; color: #dbe4e0; text-align: center; font-family: {{ SANS }};">&mdash; {{ e.closing_hymn.attribution }}</p>
+{% endif %}
+            </td>
+          </tr>
+{% endif %}
+
+          <!-- Footer -->
+          <tr>
+            <td class="section-pad" style="padding: 32px 40px; background-color: #eceeea; text-align: center;">
+              <table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" style="margin-bottom: 20px;">
+                <tr>
+                  <td style="padding: 0 8px;"><a href="{{ standing.facebook }}" target="_blank"><img src="{{ standing.icon_facebook }}" alt="Facebook" width="36" height="36" style="display: block; border-radius: 50%;"></a></td>
+                  <td style="padding: 0 8px;"><a href="{{ standing.apple_podcasts }}" target="_blank"><img src="{{ standing.icon_apple }}" alt="Apple Podcasts" width="36" height="36" style="display: block; border-radius: 50%;"></a></td>
+                  <td style="padding: 0 8px;"><a href="{{ standing.spotify }}" target="_blank"><img src="{{ standing.icon_spotify }}" alt="Spotify" width="36" height="36" style="display: block; border-radius: 50%;"></a></td>
+                </tr>
+              </table>
+              <p style="margin: 0 0 8px 0; font-size: 16px; color: #3f3d32; font-family: {{ SERIF }}; font-weight: bold;">First Presbyterian Church</p>
+              <p style="margin: 0 0 16px 0; font-size: 15px; color: #666558; font-family: {{ SANS }};">{{ standing.address }}</p>
+              <img src="{{ standing.epc_logo }}" alt="Evangelical Presbyterian Church" width="50" style="display: block; margin: 0 auto 16px auto; max-width: 50px;">
+              <p style="margin: 0; font-size: 13px; color: #8b8a7c; font-family: {{ SANS }}; font-style: italic;">A congregation of the Evangelical Presbyterian Church</p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

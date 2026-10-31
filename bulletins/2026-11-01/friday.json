@@ -1,0 +1,143 @@
+{
+  "date": "2026-11-01",
+  "friday": "2026-10-30",
+  "subject": "The Friday Email",
+  "preheader": null,
+  "scripture": {
+    "text": "To him (Jesus Christ) all the prophets bear witness that everyone who believes in him receives forgiveness of sins through his name.",
+    "ref": "Acts 10:43"
+  },
+  "sections": [
+    {
+      "key": "prepare",
+      "items": [
+        {"title": "🕐 Fall Back!", "body": ["Remember to turn back your clock before bed Saturday night! We fall back for daylight saving time."]},
+        {"title": "What Is the Reformation?", "body": [], "link": {"label": "Read the Article by Pastor Waring", "url": "https://files.constantcontact.com/b85de079001/a3e2ab5f-f625-4dab-a0ce-6166cd65a37a.png"}}
+      ]
+    },
+    {
+      "key": "give",
+      "items": [
+        {"title": "Samaritan’s Purse", "body": ["Let’s overflow the collection totes for Samaritan’s Purse this week — fill them up! This is a great project to involve your children: take them to the store, let them help choose toys or gifts, teach them about the project, and let them place the donations in the baskets."]},
+        {"title": "Every Member Canvass",
+         "body": ["Does your giving — of your time, talents, and treasures — look increasingly like how Jesus gave? Consider and respond to the EMC online, or by paper booklet at each entrance and in the office!"],
+         "note": "If you had trouble submitting online, try it again. We removed the country area code requirement that might have been giving you trouble!",
+         "link": {"label": "Visit Our Website", "url": "https://www.fpccorinth.org"}}
+      ]
+    },
+    {
+      "key": "connect",
+      "intro": "with those around you! Encouragement from Bobby Capps:",
+      "items": [
+        {"quote": {"text": "You are the light of the world.", "ref": "Matthew 5:14"},
+         "body": ["Light does not have to call attention to itself to be useful; it simply has to be present. Ask God to help you notice the person already in front of you."]},
+        {"quote": {"text": "Look not only to his own interests, but also to the interests of others.", "ref": "Philippians 2:4"},
+         "body": ["Care starts with attention. Before we can help someone, we have to notice them."]}
+      ]
+    },
+    {
+      "key": "did_you_know",
+      "items": [
+        {"eyebrow": "Yarn Crafters",
+         "body": ["Yarn Crafters makes hats and scarves for the warming center; hats, booties, and blankets for Oasis Medical Center; as well as layettes for newborns in the church body. We knit, crochet, and use a loom to create our goodies.",
+                  "We have a multitude of projects and very few crafters. If you want to learn to knit or crochet, our experts are available to teach you!"],
+         "image": {"src": "https://files.constantcontact.com/b85de079001/e8b35950-57ee-433e-a214-d2400423e497.jpg", "alt": "Hand-knit baby hats and booties by Yarn Crafters", "width": 400},
+         "image_position": "before_body",
+         "note": "*Meetings:* Tuesdays at 1:00 p.m. at Nancy Nunley’s house, 411 E. Fourth St. Call Janet Winders at 901-275-0765 for more information."}
+      ]
+    },
+    {
+      "key": "announcements",
+      "items": [
+        {"title": "37th Community Thanksgiving Meal", "when": "Thanksgiving Morning · Thursday, November 26",
+         "body": ["Join us on Thanksgiving morning as we prepare and deliver 750 Thanksgiving meals to those who need it throughout Alcorn County. This is a HUGE project and can only be accomplished with the help of many. This is a great opportunity for the members of FPC to be disciples by “living and loving like Jesus.” You can help with meal prep or by delivering meals."],
+         "note": "Please fill out the insert at church Sunday to volunteer your time, and place it in the offering plate or drop it by the church office."},
+        {"eyebrow": "New Sunday School Class", "title": "America’s Providential History", "when": "Begins This Sunday · November 1", "when_highlight": true,
+         "body": ["A new Sunday school class entitled “America’s Providential History” will begin Sunday, November 1. It will be a 6-month class led by Richard Hendrick. Please call the church office to register; the cost of the book is $25."]},
+        {"title": "🗳️ Election Day", "when": "Tuesday, November 3",
+         "body": ["Reminder to exercise your right to vote Tuesday, November 3! Our FPC Fellowship Hall is a voting precinct, and the polls will be open on Tuesday."]}
+      ]
+    },
+    {
+      "key": "children",
+      "title": null,
+      "items": [
+        {"eyebrow": "Children’s Ministry", "title": "Kids Quest Family Gathering", "when": "Wednesday, November 11 · 5:00 p.m. · Pavilion", "when_highlight": true,
+         "body": ["Kids will sing a couple of songs at 5:00, and parents will pick up from the pavilion area as we welcome all our Kids Quest families on the campus!"],
+         "image": {"src": "https://files.constantcontact.com/b85de079001/3b67669b-c716-444c-abb0-05bcc21a3dd7.jpg", "alt": "Kids Quest Family Gathering", "width": 520}},
+        {"body": ["A big thank-you to Dave Shanklin for coming last week and singing a fun song with the kids!"],
+         "image": {"src": "https://files.constantcontact.com/b85de079001/6701d8d3-83c9-415b-8d54-b9a0ffd75948.jpg", "alt": "Dave Shanklin playing guitar for the kids", "width": 400}},
+        {"title": "Memory Work", "when": "Through December 12",
+         "body": ["We will have one more round of memory work before the end of the year. Get a sheet and put the verses somewhere you’ll see them every day. Visit the table on Sunday mornings during breakfast to recite your verse and get candy. Adults, kids, everyone is welcome!"],
+         "link": {"label": "Get the New Memory Work Sheet", "url": "https://files.constantcontact.com/b85de079001/6f715b5b-e905-4c76-92de-0ca626703f74.png"}}
+      ]
+    },
+    {
+      "key": "youth",
+      "title": null,
+      "items": [
+        {"eyebrow": "Youth Ministry", "title": "YH ‘Friendsgiving’ Progressive Dinner", "when": "Wednesday, November 18 · 6:00–8:00 p.m.",
+         "body": ["Contact Jennifer if you’d like to host!", "Randy Long is teaching Sunday School for the month of November."]}
+      ]
+    },
+    {
+      "key": "women",
+      "intro": "Lots of chances to be involved! Jump in somewhere!",
+      "items": [
+        {"title": "First Thursday", "when": "Thursday, November 5 · Noon · Youth House", "when_highlight": true,
+         "body": ["Sally Beth McCullough will be speaking on adoption. Please come, bring a lunch, bring a friend, and join us!"],
+         "image": {"src": "https://files.constantcontact.com/b85de079001/0bb9f614-791e-4d2d-9ed6-fb0497c44372.jpg", "alt": "First Thursday, November 5", "width": 520}},
+        {"title": "WM Book Club", "when": "Thursday, November 12",
+         "body": ["Join us as we discuss *Theo of Golden* by Allen Levi and *Murder in the Choir Loft* by Michael Allen Adam. Read along and jump in!"]},
+        {"title": "Serve: Tabitha’s Toolbox", "when": "Work Day · Saturday, November 7",
+         "body": ["Tabitha’s Toolbox work day is Saturday, November 7! Join the GroupMe for all the details."],
+         "link": {"label": "Join Tabitha’s Toolbox", "url": "https://groupme.com/join_group/117848405/xZHeiCP0"}},
+        {"title": "Serve: Martha’s Ministry",
+         "body": ["Martha’s Ministry cooking team is restocking the freezer meals soon. If you’d like to lend a hand in cooking, please reach out to Nancy Palmer at 662-415-1608 for the details."]}
+      ]
+    }
+  ],
+  "calendar": [
+    {"date": "2026-11-01", "items": ["Daylight Saving Time ends — fall back!"]},
+    {"date": "2026-11-01", "items": ["America’s Providential History class begins", "FPC Membership Class, 9:30 a.m. (also Nov. 8)"]},
+    {"date": "2026-11-03", "items": ["Messy Bible Study, 8 a.m.", "Election Day (Fellowship Hall in use)", "No Day School"]},
+    {"date": "2026-11-04", "items": ["Kids Quest", "Youth House", "Messy Bible Study, 6 p.m."]},
+    {"date": "2026-11-05", "items": ["First Thursday, Youth House, noon"]},
+    {"date": "2026-11-07", "items": ["Tabitha’s Toolbox Work Day"]},
+    {"date": "2026-11-08", "items": ["Deacons’ Meeting"]},
+    {"date": "2026-11-11", "items": ["Kids Quest Family Gathering, 5 p.m., Pavilion"]},
+    {"date": "2026-11-12", "items": ["WM Book Club discussion on *Theo of Golden* and *Murder in the Choir Loft*"]},
+    {"date": "2026-11-18", "items": ["YH ‘Friendsgiving’ Progressive Dinner, 6–8 p.m."]},
+    {"date": "2026-11-26", "items": ["37th Community Thanksgiving Meal"]}
+  ],
+  "birthdays": [
+    {"date": "2026-10-31", "names": ["A. Member"]},
+    {"date": "2026-11-02", "names": ["B. Member", "C. Member"]},
+    {"date": "2026-11-03", "names": ["D. Member", "E. Member"]},
+    {"date": "2026-11-06", "names": ["F. Member", "G. Member", "H. Member"]}
+  ],
+  "anniversaries": [
+    {"date": "2026-10-31", "names": ["I. & J. Member"]},
+    {"date": "2026-11-04", "names": ["K. & L. Member"]}
+  ],
+  "serve": [
+    {"role": "Assisting Elder", "names": "Dr. John Shipp"},
+    {"role": "Greeters", "names": "Courtney & Ivey Monaghan"},
+    {"role": "Acolytes", "names": "Will Sanders & Jack Windsor"},
+    {"role": "Ushers", "names": "Scott Sawyer, Holland Yeates, Ben Long, & Josh McCahill"},
+    {"role": "Nursery", "names": ""},
+    {"role": null, "names": "Infant (Room 4) — Laura Kate, Jackie Capps, & Morgan Williams"},
+    {"role": null, "names": "Movers (Room 2) — Maribel Albarran"},
+    {"role": null, "names": "2–3 Year Olds (Room 1) — Brittany & Joshua Bryant"},
+    {"role": "AV Engineer", "names": "Russell Smith"},
+    {"role": "Joy in Bloom Deliverer (November)", "names": "Gloria Williams & Janet Winders"},
+    {"role": "Martha’s Ministry Deliverer (November)", "names": "Cindy Blair"}
+  ],
+  "closing_hymn": {
+    "lines": ["O God, our help in ages past,", "Our hope for years to come,", "Our shelter from the stormy blast,", "And our eternal home."],
+    "attribution": "“O God, Our Help in Ages Past”, Isaac Watts & William Croft"
+  },
+  "copyedit": {"changes": [], "flags": []},
+  "push": null,
+  "media": []
+}
