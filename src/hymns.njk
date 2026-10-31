@@ -38,25 +38,50 @@ permalink: /hymns/
   .ornament { width: 160px; height: 2px; background: linear-gradient(90deg, transparent, var(--ink), transparent); margin: 1.2rem auto 1.6rem; }
   .intro { font-size: 0.92rem; color: var(--ink-light); text-align: center; margin-bottom: 1.4rem; }
   .intro a { color: var(--accent-deep); }
-  .sort { font-family: 'Work Sans', sans-serif; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-faint); text-align: center; margin-bottom: 1rem; }
-  .sort button { font: inherit; letter-spacing: inherit; text-transform: inherit; color: var(--accent-deep); background: none; border: 1px solid var(--rule-light); border-radius: 2px; padding: 0.3rem 0.7rem; margin: 0 0.15rem; cursor: pointer; }
+  .sort { display: flex; align-items: center; gap: 0.35rem; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding: 0.2rem 0 0.8rem; margin: 0 -1.8rem 0.6rem; padding-left: 1.8rem; padding-right: 1.8rem; }
+  .sort::-webkit-scrollbar { display: none; }
+  .sort span { font-family: 'Work Sans', sans-serif; font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-faint); white-space: nowrap; margin-right: 0.2rem; }
+  .sort button { font-family: 'Work Sans', sans-serif; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-deep); background: none; border: 1px solid var(--rule-light); border-radius: 999px; padding: 0.4rem 0.85rem; cursor: pointer; white-space: nowrap; -webkit-tap-highlight-color: transparent; }
   .sort button[aria-pressed="true"] { color: var(--warm-white); background: var(--accent); border-color: var(--accent); }
-  table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
-  th { font-family: 'Work Sans', sans-serif; font-weight: 600; font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent-deep); text-align: left; padding: 0.4rem 0.4rem; border-bottom: 1px solid var(--rule); }
-  td { padding: 0.45rem 0.4rem; border-bottom: 1px solid var(--rule-light); vertical-align: top; }
-  td.n, th.n { text-align: right; white-space: nowrap; }
-  td.num { font-weight: 600; white-space: nowrap; }
-  td.title a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--rule); }
-  td.title a:hover { color: var(--accent-deep); border-color: var(--accent-deep); }
-  td.title small { display: block; font-size: 0.78rem; color: var(--ink-faint); font-style: italic; }
-  td .dates { display: none; font-size: 0.78rem; color: var(--ink-faint); margin-top: 0.2rem; }
-  tr.open td .dates { display: block; }
-  td.last { white-space: nowrap; cursor: pointer; }
-  td.last::after { content: " ▸"; color: var(--rule); font-size: 0.7rem; }
-  tr.open td.last::after { content: " ▾"; }
+  .list { border-top: 1px solid var(--rule); }
+  .hymn { display: grid; grid-template-columns: 2.6rem 1fr; grid-template-areas: "num title" "num meta" "num dates"; column-gap: 0.6rem; padding: 0.8rem 0; border-bottom: 1px solid var(--rule-light); }
+  .hymn .num { grid-area: num; font-family: 'Work Sans', sans-serif; font-weight: 500; font-size: 0.95rem; color: var(--accent-deep); padding-top: 0.15rem; }
+  .hymn .title { grid-area: title; font-size: 1.05rem; line-height: 1.35; }
+  .hymn .title a { color: var(--ink); text-decoration: none; }
+  .hymn .title a::after { content: " ↗"; font-size: 0.7em; color: var(--rule); }
+  .hymn .title small { display: block; font-size: 0.8rem; color: var(--ink-faint); font-style: italic; margin-top: 0.1rem; }
+  .hymn .meta { grid-area: meta; font-family: 'Work Sans', sans-serif; font-size: 0.74rem; letter-spacing: 0.02em; color: var(--ink-faint); margin-top: 0.3rem; display: flex; flex-wrap: wrap; gap: 0.25rem 0.9rem; align-items: baseline; }
+  .hymn .meta b { font-weight: 600; color: var(--ink-light); }
+  .hymn .meta .tune { font-variant: small-caps; letter-spacing: 0.08em; }
+  .hymn .meta button { font: inherit; letter-spacing: inherit; color: var(--accent-deep); background: none; border: 0; padding: 0; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+  .hymn .meta button::after { content: " ▾"; font-size: 0.8em; }
+  .hymn.open .meta button::after { content: " ▴"; }
+  .hymn .dates { grid-area: dates; display: none; font-size: 0.86rem; color: var(--ink-light); margin-top: 0.5rem; padding: 0.5rem 0.8rem; background: var(--section-bg); border-radius: 3px; }
+  .hymn.open .dates { display: block; }
+  .hymn .dates div { padding: 0.15rem 0; }
+  .hymn .dates a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--rule); }
+  .hymn .dates span { color: var(--ink-faint); }
+  @media (min-width: 600px) {
+    .hymn { grid-template-columns: 3rem 1fr 8rem 3.5rem; grid-template-areas: "num title tune sung" "num meta tune sung" "num dates dates dates"; align-items: start; }
+    .hymn .title { font-size: 1rem; }
+    .hymn .meta .tune { display: none; }
+    .hymn .tunecol { grid-area: tune; font-family: 'Work Sans', sans-serif; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); padding-top: 0.3rem; }
+    .hymn .sungcol { grid-area: sung; font-family: 'Work Sans', sans-serif; font-size: 0.95rem; color: var(--ink-light); text-align: right; padding-top: 0.15rem; }
+    .hymn .meta .sung { display: none; }
+  }
+  @media (max-width: 599px) { .hymn .tunecol, .hymn .sungcol { display: none; } }
   .note { font-size: 0.85rem; color: var(--ink-faint); margin-top: 1.6rem; }
   .updated { font-size: 0.75rem; color: var(--ink-faint); text-align: center; margin-top: 2rem; }
-  @media (max-width: 480px) { th.tune, td.tune { display: none; } }
+  @media (max-width: 480px) {
+    html { font-size: 16px; }
+    .page { padding: 2rem 1.1rem 3rem; }
+    .sort { margin: 0 -1.1rem 0.6rem; padding-left: 1.1rem; padding-right: 1.1rem; }
+    .site-header-inner { padding: 0.6rem 1rem; }
+    .site-header .brand { font-size: 0.68rem; letter-spacing: 0.1em; }
+    .site-header .archive-link { font-size: 0.62rem; letter-spacing: 0.1em; padding: 0.3rem 0.55rem; margin-left: 0.3rem; }
+    .page-title { font-size: 1.6rem; }
+    .intro { text-align: left; font-size: 0.95rem; }
+  }
 </style>
 </head>
 <body>
@@ -75,29 +100,31 @@ permalink: /hymns/
 
   <p class="intro">{{ hymnIndex.hymns.length }} hymns sung at {{ hymnIndex.services }} services since {{ hymnIndex.since_label }}, from <a href="{{ hymnIndex.hymnary_hymnal_url }}" target="_blank" rel="noopener">{{ hymnIndex.hymnal }}</a>. A title opens the words on Hymnary.org; a “last sung” date opens every date.</p>
 
-  <p class="sort">Sort by
+  <div class="sort" role="group" aria-label="Sort hymns">
+    <span>Sort</span>
     <button type="button" data-sort="number" aria-pressed="true">Number</button>
-    <button type="button" data-sort="times">Most sung</button>
-    <button type="button" data-sort="last">Most recent</button>
-    <button type="button" data-sort="title">Title</button>
-  </p>
+    <button type="button" data-sort="times" aria-pressed="false">Most sung</button>
+    <button type="button" data-sort="last" aria-pressed="false">Most recent</button>
+    <button type="button" data-sort="title" aria-pressed="false">Title</button>
+  </div>
 
-  <table id="hymns">
-    <thead><tr><th>#</th><th>Hymn</th><th class="tune">Tune</th><th class="n">Sung</th><th>Last sung</th></tr></thead>
-    <tbody>
+  <div class="list" id="hymns">
     {% for h in hymnIndex.hymns %}
-      <tr data-number="{{ h.number }}" data-times="{{ h.times }}" data-last="{{ h.last }}" data-title="{{ h.title | lower }}">
-        <td class="num">{{ h.number }}</td>
-        <td class="title"><a href="{{ h.url }}" target="_blank" rel="noopener">{{ h.title }}</a>{% if h.as_printed.length %}<small>printed as {{ h.as_printed | join(" / ") }}</small>{% endif %}{% if not h.in_hymnal %}<small>not a number in the hymnal</small>{% endif %}</td>
-        <td class="tune">{{ h.tune or "" }}</td>
-        <td class="n">{{ h.times }}</td>
-        <td class="last" title="Show every date">{{ h.last_label }}
-          <div class="dates">{% for d in h.dates | reverse %}<a href="/scroll/{{ d.date }}/">{{ d.date }}</a> · {{ d.slot }}{% if d.verses %} ({{ d.verses }}){% endif %}<br>{% endfor %}</div>
-        </td>
-      </tr>
+    <article class="hymn" data-number="{{ h.number }}" data-times="{{ h.times }}" data-last="{{ h.last }}" data-title="{{ h.title | lower }}">
+      <div class="num">{{ h.number }}</div>
+      <div class="title"><a href="{{ h.url }}" target="_blank" rel="noopener" title="Words on Hymnary.org">{{ h.title }}</a>{% if h.as_printed.length %}<small>printed as {{ h.as_printed | join(" / ") }}</small>{% endif %}{% if not h.in_hymnal %}<small>not a number in the hymnal</small>{% endif %}</div>
+      <div class="tunecol">{{ h.tune or "" }}</div>
+      <div class="sungcol" title="Times sung">{{ h.times }}×</div>
+      <div class="meta">
+        <span class="sung">Sung <b>{{ h.times }}</b></span>
+        <span>Last <b>{{ h.last_label }}</b></span>
+        {% if h.tune %}<span class="tune">{{ h.tune | lower }}</span>{% endif %}
+        <button type="button" aria-expanded="false">{{ "every date" if h.times > 1 else "details" }}</button>
+      </div>
+      <div class="dates">{% for d in h.dates | reverse %}<div><a href="/scroll/{{ d.date }}/">{{ d.label }}</a> <span>· {{ d.slot }}{% if d.verses %} ({{ d.verses }}){% endif %}</span></div>{% endfor %}</div>
+    </article>
     {% endfor %}
-    </tbody>
-  </table>
+  </div>
 
   {% if hymnIndex.unnumbered.length %}
   <p class="note">Sung without a hymnal number: {% for u in hymnIndex.unnumbered %}“{{ u.title }}” ({{ u.date }}){% if not loop.last %}; {% endif %}{% endfor %}.</p>
@@ -108,28 +135,29 @@ permalink: /hymns/
 
 <script>
 (function () {
-  var tbody = document.querySelector('#hymns tbody');
-  var rows = Array.prototype.slice.call(tbody.rows);
-  function key(row, by) {
-    var v = row.dataset[by];
-    return by === 'number' ? parseInt(v, 10) : by === 'times' ? -parseInt(v, 10) : by === 'last' ? v : v;
-  }
+  var list = document.getElementById('hymns');
+  var rows = Array.prototype.slice.call(list.children);
+  function byNumber(a, b) { return parseInt(a.dataset.number, 10) - parseInt(b.dataset.number, 10); }
+  var sorters = {
+    number: byNumber,
+    times: function (a, b) { return (parseInt(b.dataset.times, 10) - parseInt(a.dataset.times, 10)) || byNumber(a, b); },
+    last: function (a, b) { return (b.dataset.last < a.dataset.last ? -1 : b.dataset.last > a.dataset.last ? 1 : 0) || byNumber(a, b); },
+    title: function (a, b) { return a.dataset.title < b.dataset.title ? -1 : a.dataset.title > b.dataset.title ? 1 : 0; }
+  };
   document.querySelectorAll('.sort button').forEach(function (btn) {
     btn.addEventListener('click', function () {
-      var by = btn.dataset.sort;
-      document.querySelectorAll('.sort button').forEach(function (b) { b.setAttribute('aria-pressed', b === btn); });
-      rows.sort(function (a, b) {
-        var ka = key(a, by), kb = key(b, by);
-        if (by === 'last') return kb < ka ? -1 : kb > ka ? 1 : parseInt(a.dataset.number, 10) - parseInt(b.dataset.number, 10);
-        if (ka < kb) return -1; if (ka > kb) return 1;
-        return parseInt(a.dataset.number, 10) - parseInt(b.dataset.number, 10);
-      });
-      rows.forEach(function (r) { tbody.appendChild(r); });
+      document.querySelectorAll('.sort button').forEach(function (b) { b.setAttribute('aria-pressed', String(b === btn)); });
+      rows.sort(sorters[btn.dataset.sort]);
+      rows.forEach(function (r) { list.appendChild(r); });
+      window.scrollTo({ top: list.getBoundingClientRect().top + window.pageYOffset - 80, behavior: 'smooth' });
     });
   });
-  tbody.addEventListener('click', function (e) {
-    var cell = e.target.closest('td.last');
-    if (cell && e.target.tagName !== 'A') cell.parentElement.classList.toggle('open');
+  list.addEventListener('click', function (e) {
+    var btn = e.target.closest('.meta button');
+    if (!btn) return;
+    var row = btn.closest('.hymn');
+    var open = row.classList.toggle('open');
+    btn.setAttribute('aria-expanded', String(open));
   });
 })();
 </script>

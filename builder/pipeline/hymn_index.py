@@ -109,7 +109,7 @@ def build(repo: Path | None = None, hymns: dict | None = None) -> dict:
             "first": uses[0]["date"],
             "last": uses[-1]["date"],
             "last_label": _label(uses[-1]["date"]),
-            "dates": [{"date": u["date"], "slot": u["slot"], "verses": u["verses"]} for u in uses],
+            "dates": [{"date": u["date"], "label": _label(u["date"]), "slot": u["slot"], "verses": u["verses"]} for u in uses],
             "url": HYMNARY_URL.format(number=number),
         })
     services = sorted({r["date"] for r in sung} | {r["date"] for r in unnumbered})

@@ -52,6 +52,18 @@ permalink: /calendar/
   .event .meta { font-size: 0.8rem; color: var(--ink-faint); font-style: italic; }
   .empty { font-style: italic; color: var(--ink-faint); text-align: center; padding: 2rem 0; }
   .updated { font-size: 0.75rem; color: var(--ink-faint); text-align: center; margin-top: 2rem; }
+  @media (max-width: 480px) {
+    html { font-size: 16px; }
+    .page { padding: 2rem 1.1rem 3rem; }
+    .site-header-inner { padding: 0.6rem 1rem; }
+    .site-header .brand { font-size: 0.68rem; letter-spacing: 0.1em; }
+    .site-header .archive-link { font-size: 0.62rem; letter-spacing: 0.1em; padding: 0.3rem 0.55rem; margin-left: 0.3rem; }
+    .page-title { font-size: 1.6rem; }
+    .subscribe { padding: 1rem; }
+    .btn { display: block; text-align: center; margin: 0.5rem 0 0; }
+    .event { grid-template-columns: 6.2rem 1fr; font-size: 0.95rem; }
+    .event .when { font-size: 0.9rem; white-space: nowrap; }
+  }
 </style>
 </head>
 <body>

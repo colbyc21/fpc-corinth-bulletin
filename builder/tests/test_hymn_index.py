@@ -29,6 +29,6 @@ def test_index_from_the_repo():
     two = rows["2"]  # Come, Thou Fount: sung four times through Nov 1
     assert two["title"] == "Come, Thou Fount of Every Blessing" and two["times"] >= 4 and two["last"] >= "2026-11-01"
     assert two["url"] == "https://hymnary.org/hymn/HWC1986/2" and two["tune"] == "NETTLETON"
-    assert two["dates"] == sorted(two["dates"], key=lambda d: d["date"])
+    assert two["dates"] == sorted(two["dates"], key=lambda d: d["date"]) and two["dates"][-1]["label"].endswith(", 2026")
     assert [h["number"] for h in idx["hymns"]] == sorted((h["number"] for h in idx["hymns"]), key=hymn_index._number_key)
     assert all(h["in_hymnal"] for h in idx["hymns"]), [h["number"] for h in idx["hymns"] if not h["in_hymnal"]]
