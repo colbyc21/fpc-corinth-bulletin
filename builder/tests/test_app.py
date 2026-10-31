@@ -62,6 +62,17 @@ def test_editor_sees_weeks_but_not_admin_screens(client, store):
     client.cookies.clear()
 
 
+def test_publisher_edits_calendar_but_not_other_admin_screens(client, store):
+    login_as(client, store, "pub@example.com", "publisher")
+    r = client.get("/events")
+    assert r.status_code == 200 and 'href="/events"' in r.text and 'href="/users"' not in r.text
+    r = client.post("/events", data={"title": "Bake sale", "start_date": "2026-12-05"}, follow_redirects=False)
+    assert r.status_code == 303 and "Added" in r.headers["location"]
+    for path in ("/rosters", "/users", "/audit", "/standing"):
+        assert client.get(path).status_code == 403, path
+    client.cookies.clear()
+
+
 def test_admin_screens_render_and_edit(client, store):
     login_as(client, store, "admin@example.com", "admin")
     for path in ("/", "/weeks/2026-11-01", "/rosters", "/events", "/events?all=1", "/users", "/audit", "/standing", "/standing/welcome", "/calendar.ics"):

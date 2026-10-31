@@ -443,7 +443,7 @@ async def roster_save(sunday: str, request: Request, user: dict = Depends(need("
 
 # ── events ───────────────────────────────────────────────────────────
 @app.get("/events", response_class=HTMLResponse)
-def events(request: Request, user: dict = Depends(need("admin")), all: int = 0):
+def events(request: Request, user: dict = Depends(need("publisher")), all: int = 0):
     s = store()
     today = date.today().isoformat()
     evs = s.events()
@@ -463,7 +463,7 @@ async def _event_form(request: Request) -> dict:
 
 
 @app.post("/events")
-async def event_create(request: Request, user: dict = Depends(need("admin"))):
+async def event_create(request: Request, user: dict = Depends(need("publisher"))):
     data = await _event_form(request)
     try:
         eid = store().upsert_event(data)
@@ -474,7 +474,7 @@ async def event_create(request: Request, user: dict = Depends(need("admin"))):
 
 
 @app.post("/events/{eid}")
-async def event_update(eid: int, request: Request, user: dict = Depends(need("admin"))):
+async def event_update(eid: int, request: Request, user: dict = Depends(need("publisher"))):
     data = await _event_form(request)
     try:
         store().upsert_event(data, eid)
@@ -485,7 +485,7 @@ async def event_update(eid: int, request: Request, user: dict = Depends(need("ad
 
 
 @app.post("/events/{eid}/delete")
-def event_delete(eid: int, user: dict = Depends(need("admin"))):
+def event_delete(eid: int, user: dict = Depends(need("publisher"))):
     store().delete_event(eid)
     store().log("event.delete", user["email"], str(eid))
     return RedirectResponse("/events?m=Removed", status_code=303)
