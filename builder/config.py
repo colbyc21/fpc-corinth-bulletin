@@ -8,8 +8,9 @@ from a developer clone and from the deploy clone on basecamp:
 * ``BUILDER_VAR``  - runtime data outside the repo (SQLite, proofs, uploads).
   Defaults to ``~/bulletin-builder/var``.
 
-Secrets come from ``~/.config/bulletin-builder/env`` (mode 600). The systemd
-unit loads that file; ``load_env()`` does the same for command-line use.
+Secrets come from ``~/.config/bulletin-builder/env`` (mode 600) and the
+Cloudflare API token from ``~/.config/cloudflare/env``. The systemd unit loads
+both files; ``load_env()`` does the same for command-line use.
 """
 from __future__ import annotations
 
@@ -35,7 +36,10 @@ def load_env(path: Path = ENV_FILE) -> None:
         os.environ.setdefault(key, value)
 
 
+CLOUDFLARE_ENV_FILE = Path(os.environ.get("CLOUDFLARE_ENV_FILE") or Path.home() / ".config/cloudflare/env")
+
 load_env()
+load_env(CLOUDFLARE_ENV_FILE)
 
 REPO = Path(os.environ.get("BUILDER_REPO") or Path(__file__).resolve().parents[1])
 VAR = Path(os.environ.get("BUILDER_VAR") or Path.home() / "bulletin-builder/var")
@@ -60,6 +64,9 @@ PUBLIC_BASE_URL = os.environ.get("PUBLIC_BASE_URL", "http://127.0.0.1:8710")
 SITE_URL = "https://bulletin.fpccorinth.org"
 NETLIFY_DEPLOYS_URL = os.environ.get("NETLIFY_DEPLOYS_URL", "https://app.netlify.com/")
 MODEL_CALLS = os.environ.get("BUILDER_MODEL_CALLS", "on").lower() not in {"off", "0", "false", "no"}
+# Cloudflare Access application "FPC Bulletin Builder" on bulletin-admin.fpccorinth.org and its allow policy.
+CF_ACCESS_APP_ID = os.environ.get("CF_ACCESS_APP_ID", "9ecb43fd-772a-476a-b2ee-2556e18e9ca2")
+CF_ACCESS_POLICY_ID = os.environ.get("CF_ACCESS_POLICY_ID", "23b51a9b-d325-497e-94a1-b6cb4c7f9f7e")
 
 
 def week_dir(date: str) -> Path:
