@@ -22,8 +22,11 @@ Self-service production of the Sunday bulletin on basecamp. The plan is in
 | `pipeline/content.py` | model call 2: content form + pastor's announcements → flowers, announcements, serve, calendar, with `changes`/`flags` |
 | `pipeline/intake.py` | runs the two calls on the uploaded files and writes week.json |
 | `pipeline/fit.py` | model call 3: the fit loop (tools `read_week`, `set_layout`, `render_and_measure`) and `build_and_fit` |
-| `prompts/*.md` | the three prompts; edit these, not the code, to change model behaviour |
-| `app/` | FastAPI app: magic-link login, weeks, rosters, events, standing text, users, audit |
+| `pipeline/chat.py` | model call 4: the chat box (edit_week by JSON pointer + the fit tools), 4 calls / $1 per message |
+| `pipeline/forms.py` | the volunteer form ↔ week.json |
+| `pipeline/deploy_status.py` | is the published week live? Netlify API if `NETLIFY_TOKEN`/`NETLIFY_SITE_ID` are set, else the scroll page's `fpc-build` marker |
+| `prompts/*.md` | the four prompts; edit these, not the code, to change model behaviour |
+| `app/` | FastAPI app: magic-link login; the week page (Inputs → Details → Build & proof → Publish, with chat); rosters, events, standing text, users, audit, spend |
 | `data/seed/`, `data/standing/` | Phase 0 seeds; the store loads them once |
 | `tests/` | pytest; `test_render_golden.py` is the Phase 1 acceptance test |
 | `deploy/bulletin-builder.service` | user-level systemd unit |
