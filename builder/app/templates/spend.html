@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Spend{% endblock %}
+{% block content %}
+<h1>Model spend</h1>
+<p class="muted">This month: <strong>${{ '%.2f' % spend_status.month }}</strong> of ${{ '%.0f' % spend_status.cap }}.
+{% if not spend_status.model_calls %}<strong>Model calls are switched off</strong> (BUILDER_MODEL_CALLS=off in the env file).{% endif %}
+The Console workspace limit is the hard ceiling; this ledger prices every response at list rates.</p>
+<div class="card">
+  <table>
+    <thead><tr><th>Kind</th><th>Calls</th><th>Input</th><th>Cache write</th><th>Cache read</th><th>Output</th><th>Cost</th></tr></thead>
+    <tbody>
+    {% for r in by_kind %}<tr><td>{{ r.kind }}</td><td>{{ r.calls }}</td><td>{{ r.input_tokens }}</td><td>{{ r.cache_write_tokens }}</td><td>{{ r.cache_read_tokens }}</td><td>{{ r.output_tokens }}</td><td>${{ '%.3f' % r.cost_usd }}</td></tr>{% endfor %}
+    </tbody>
+  </table>
+</div>
+<h2>Last calls</h2>
+<div class="card">
+  <table>
+    <thead><tr><th>When</th><th>Job</th><th>Model</th><th>In</th><th>Cache w/r</th><th>Out</th><th>Cost</th></tr></thead>
+    <tbody>
+    {% for r in rows %}<tr><td class="muted">{{ r.ts }}</td><td><code>{{ r.job }}</code></td><td>{{ r.model }}</td><td>{{ r.input_tokens }}</td><td>{{ r.cache_write_tokens }} / {{ r.cache_read_tokens }}</td><td>{{ r.output_tokens }}</td><td>${{ '%.4f' % r.cost_usd }}</td></tr>{% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

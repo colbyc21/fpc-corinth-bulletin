@@ -49,6 +49,41 @@ def validate(week: dict) -> None:
         unknown = [i for i in placed if i not in known]
         if missing or unknown:
             raise ValueError(f"layout.pages mismatch; missing={missing} unknown={unknown}")
+        if len(placed) != len(set(placed)):
+            raise ValueError("layout.pages places an item twice")
+        check_note_placements(week)
+
+
+def check_note_placements(week: dict) -> None:
+    """A spanned note cell must stay inside one page, must not cross a section
+    heading (the grid would push the heading below the span) and must not
+    cover an item whose own note is not in that cell (the note would vanish)."""
+    items = items_by_id(week)
+    note_ids = {n["for"] for n in week["liturgy"].get("notes", [])}
+    placements = (week.get("layout") or {}).get("notes") or []
+    in_cells = {nid for p in placements for nid in p["notes"]}
+    for p in placements:
+        if p["at"] not in items:
+            raise ValueError(f"layout.notes: unknown item {p['at']!r}")
+        for nid in p["notes"]:
+            if nid not in note_ids:
+                raise ValueError(f"layout.notes: no margin note for item {nid!r}")
+    for page, page_ids in (week["layout"]["pages"] or {}).items():
+        rows = [i for i in page_ids if items[i]["type"] != "section"]
+        for p in placements:
+            if p["at"] not in rows:
+                continue
+            start = rows.index(p["at"])
+            covered = rows[start:start + p["span"]]
+            if len(covered) < p["span"]:
+                raise ValueError(f"layout.notes: span {p['span']} at {p['at']!r} runs past the end of {page}")
+            first, last = page_ids.index(covered[0]), page_ids.index(covered[-1])
+            crossed = [i for i in page_ids[first:last + 1] if items[i]["type"] == "section" and not items[i].get("scroll_only")]
+            if crossed:
+                raise ValueError(f"layout.notes: the span at {p['at']!r} crosses the {crossed[0]!r} heading; end it before the heading")
+            for iid in covered:
+                if iid in note_ids and iid not in p["notes"] and iid not in in_cells:
+                    raise ValueError(f"layout.notes: the span at {p['at']!r} would hide the note for {iid!r}; include it in that cell or shorten the span")
 
 
 def week_path(date: str) -> Path:

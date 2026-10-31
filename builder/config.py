@@ -61,6 +61,20 @@ SITE_URL = "https://bulletin.fpccorinth.org"
 NETLIFY_DEPLOYS_URL = os.environ.get("NETLIFY_DEPLOYS_URL", "https://app.netlify.com/")
 MODEL_CALLS = os.environ.get("BUILDER_MODEL_CALLS", "on").lower() not in {"off", "0", "false", "no"}
 
+# Model steps (§3.1, §8). One model for all three call kinds; effort per kind.
+MODEL = os.environ.get("BUILDER_MODEL", "claude-opus-5-5")
+MONTHLY_CAP_USD = float(os.environ.get("BUILDER_MONTHLY_CAP_USD", "40"))
+WARN_FRACTION = 0.8
+JOB_CAPS = {  # kind: (max calls, max USD)
+    "parse": (2, 1.50),
+    "content": (2, 1.00),
+    "fit": (8, 3.00),
+    "chat": (4, 1.00),
+}
+BUILDS_PER_WEEK = 3
+PROMPTS_DIR = BUILDER_DIR / "prompts"
+KNOWLEDGE_DIR = REPO / "docs/knowledge"
+
 
 def week_dir(date: str) -> Path:
     return BULLETINS_DIR / date

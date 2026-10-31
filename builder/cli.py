@@ -2,7 +2,10 @@
 
     python -m builder init-db                 create the SQLite store and load the seeds
     python -m builder new 2026-11-08          scaffold bulletins/<date>/week.json from rosters + calendar
-    python -m builder build 2026-11-01        render HTML/PDF, measure overflow, write proof PNGs
+    python -m builder intake 2026-11-08 --liturgy f.docx [--sermon f.docx] [--content f.rtf] [--announcements f.rtf]
+                                              parse the inputs with the model into week.json (shows flags, changes, cost)
+    python -m builder build 2026-11-01 [--fit] render HTML/PDF, measure overflow, write proof PNGs; --fit runs the model fit loop on overflow
+    python -m builder spend                   this month's model spend by kind and the last calls
     python -m builder measure 2026-11-01      measure only (no PDF)
     python -m builder publish 2026-11-01 [--branch basecamp-test] [--no-push]
     python -m builder compare a.pdf b.pdf     text + pixel comparison per page
@@ -45,11 +48,68 @@ def cmd_new(args) -> int:
     return 0
 
 
+def cmd_intake(args) -> int:
+    from builder.pipeline import intake, model
+    from builder.pipeline.store import Store
+
+    config.ensure_dirs()
+    paths = {k: Path(v) for k, v in (("liturgy", args.liturgy), ("sermon", args.sermon), ("content", args.content), ("announcements", args.announcements)) if v}
+    for k, p in paths.items():
+        if not p.exists():
+            print(f"{k}: {p} does not exist", file=sys.stderr)
+            return 2
+    try:
+        res = intake.intake(args.date, store=Store(), example=None if args.no_example else "2026-11-01", **paths)
+    except model.ModelError as e:
+        print(f"model step failed: {e}", file=sys.stderr)
+        return 1
+    print(f"wrote {config.week_dir(args.date) / 'week.json'}  cost ${res['cost']:.3f}")
+    for j in res["jobs"]:
+        for line in j["log"]:
+            print("  " + line)
+    if res["changes"]:
+        print("changes:")
+        for c in res["changes"]:
+            print(f"  {c['where']}: {c['before']} -> {c['after']}  ({c['reason']})")
+    if res["flags"]:
+        print("flags:")
+        for f in res["flags"]:
+            print(f"  {f['where']}: {f['message']}")
+    return 0
+
+
+def cmd_spend(args) -> int:
+    from builder.pipeline import model
+    from builder.pipeline.store import Store
+
+    s = Store()
+    st = model.spend_status(s)
+    print(f"this month: ${st['month']:.2f} of ${st['cap']:.0f}  model calls {'on' if st['model_calls'] else 'OFF'}")
+    for row in s.month_ledger_by_kind():
+        print(f"  {row['kind']:<8} {row['calls']:>3} calls  in {row['input_tokens']:>7}  cached {row['cache_read_tokens']:>7}  out {row['output_tokens']:>6}  ${row['cost_usd']:.3f}")
+    for r in s.ledger(limit=args.last):
+        print(f"  {r['ts']}  {r['job']:<40} {r['model']:<18} in {r['input_tokens']:>6} w {r['cache_write_tokens']:>6} r {r['cache_read_tokens']:>6} out {r['output_tokens']:>5}  ${r['cost_usd']:.4f}")
+    return 0
+
+
 def cmd_build(args) -> int:
     from builder.pipeline import build
 
     config.ensure_dirs()
-    report = build.build(args.date, proofs=not args.no_proofs)
+    if args.fit:
+        from builder.pipeline import fit as fitmod, model
+        from builder.pipeline.store import Store
+
+        try:
+            res = fitmod.build_and_fit(args.date, store=Store())
+        except model.ModelError as e:
+            print(f"fit loop failed: {e}", file=sys.stderr)
+            return 1
+        report = res["report"]
+        if res["fit"]:
+            print("fit:", json.dumps(res["fit"], indent=2))
+    else:
+        report = build.build(args.date, proofs=not args.no_proofs)
     print(json.dumps({k: report[k] for k in ("date", "seconds", "outputs", "pdf")}, indent=2))
     for m in report["measurements"]:
         flag = "  <-- OVERFLOW" if m in report["overflow"] else ""
@@ -129,7 +189,14 @@ def main(argv: list[str] | None = None) -> int:
 
     sub.add_parser("init-db").set_defaults(fn=cmd_init_db)
     s = sub.add_parser("new"); s.add_argument("date"); s.add_argument("--force", action="store_true"); s.set_defaults(fn=cmd_new)
-    s = sub.add_parser("build"); s.add_argument("date"); s.add_argument("--no-proofs", action="store_true"); s.set_defaults(fn=cmd_build)
+    s = sub.add_parser("intake"); s.add_argument("date")
+    for opt in ("--liturgy", "--sermon", "--content", "--announcements"):
+        s.add_argument(opt)
+    s.add_argument("--no-example", action="store_true", help="do not show the model the 2026-11-01 worked example")
+    s.set_defaults(fn=cmd_intake)
+    s = sub.add_parser("build"); s.add_argument("date"); s.add_argument("--no-proofs", action="store_true")
+    s.add_argument("--fit", action="store_true"); s.set_defaults(fn=cmd_build)
+    s = sub.add_parser("spend"); s.add_argument("--last", type=int, default=10); s.set_defaults(fn=cmd_spend)
     s = sub.add_parser("measure"); s.add_argument("date"); s.set_defaults(fn=cmd_measure)
     s = sub.add_parser("publish"); s.add_argument("date"); s.add_argument("--branch"); s.add_argument("--no-push", action="store_true")
     s.add_argument("--correction", help="what was corrected, for the commit subject"); s.set_defaults(fn=cmd_publish)

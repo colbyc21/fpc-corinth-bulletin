@@ -53,10 +53,10 @@
   {% if user %}
   <nav>
     <a href="/">Weeks</a>
-    {% if user.role == 'admin' %}<a href="/rosters">Rosters</a><a href="/events">Calendar</a><a href="/standing">Standing text</a><a href="/users">Users</a><a href="/audit">Audit</a>{% endif %}
+    {% if user.role == 'admin' %}<a href="/rosters">Rosters</a><a href="/events">Calendar</a><a href="/standing">Standing text</a><a href="/users">Users</a><a href="/audit">Audit</a><a href="/spend">Spend</a>{% endif %}
   </nav>
   <div class="me">
-    <span class="spend" title="Model spend this month, of the $40 cap">This month: ${{ '%.2f' % spend }} of $40</span>
+    <span class="spend {% if spend_status.blocked %}bad{% elif spend_status.warn %}warn{% endif %}" title="Model spend this month, of the cap">{% if user and user.role == 'admin' %}<a href="/spend">{% endif %}This month: ${{ '%.2f' % spend }} of ${{ '%.0f' % spend_status.cap }}{% if not spend_status.model_calls %} · model OFF{% endif %}{% if user and user.role == 'admin' %}</a>{% endif %}</span>
     <span>{{ user.email }} · {{ user.role }}</span>
     <form method="post" action="/logout" style="margin:0"><button class="quiet" type="submit">Sign out</button></form>
   </div>

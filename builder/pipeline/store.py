@@ -268,11 +268,41 @@ class Store:
     def weeks(self) -> list[dict]:
         return [dict(r) for r in self.db.execute("select * from weeks order by date desc")]
 
-    # ── ledger (Phase 2 fills this) ──────────────────────────────────
+    # ── ledger ───────────────────────────────────────────────────────
     def month_spend(self, year_month: str | None = None) -> float:
         ym = year_month or datetime.now(timezone.utc).strftime("%Y-%m")
         row = self.db.execute("select coalesce(sum(cost_usd),0) as c from ledger where substr(ts,1,7)=?", (ym,)).fetchone()
         return float(row["c"])
+
+    def add_ledger(self, job: str, kind: str, model: str, usage: dict, cost_usd: float) -> int:
+        """One row per API response. ``usage`` holds the four token counts."""
+        cur = self.db.execute(
+            "insert into ledger (ts, job, kind, model, input_tokens, cache_write_tokens, cache_read_tokens, output_tokens, cost_usd)"
+            " values (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+            (now(), job, kind, model, int(usage.get("input_tokens") or 0), int(usage.get("cache_write_tokens") or 0),
+             int(usage.get("cache_read_tokens") or 0), int(usage.get("output_tokens") or 0), float(cost_usd)))
+        return int(cur.lastrowid)
+
+    def job_spend(self, job: str) -> float:
+        row = self.db.execute("select coalesce(sum(cost_usd),0) as c from ledger where job=?", (job,)).fetchone()
+        return float(row["c"])
+
+    def job_calls(self, job: str) -> int:
+        return int(self.db.execute("select count(*) as n from ledger where job=?", (job,)).fetchone()["n"])
+
+    def ledger(self, limit: int = 200) -> list[dict]:
+        return [dict(r) for r in self.db.execute("select * from ledger order by id desc limit ?", (limit,))]
+
+    def month_ledger_by_kind(self, year_month: str | None = None) -> list[dict]:
+        ym = year_month or datetime.now(timezone.utc).strftime("%Y-%m")
+        return [dict(r) for r in self.db.execute(
+            "select kind, count(*) as calls, sum(input_tokens) as input_tokens, sum(cache_write_tokens) as cache_write_tokens,"
+            " sum(cache_read_tokens) as cache_read_tokens, sum(output_tokens) as output_tokens, sum(cost_usd) as cost_usd"
+            " from ledger where substr(ts,1,7)=? group by kind order by cost_usd desc", (ym,))]
+
+    def builds_this_week(self, date: str) -> int:
+        """Full builds that ran the fit loop for this Sunday (ledger kind 'fit' jobs)."""
+        return int(self.db.execute("select count(distinct job) as n from ledger where kind='fit' and job like ?", (f"fit:{date}:%",)).fetchone()["n"])
 
     # ── seeding ──────────────────────────────────────────────────────
     def seed_if_empty(self, seed_dir: Path | None = None) -> dict:

@@ -6,8 +6,20 @@
 {% if error %}<div class="flash bad">week.json does not validate: {{ error }}</div>{% endif %}
 
 <div class="card">
+  <form method="post" action="/weeks/{{ d }}/intake" enctype="multipart/form-data" class="row">
+    <div><label>Liturgy (.docx)</label><input type="file" name="liturgy" accept=".docx"></div>
+    <div><label>Sermon Notes (.docx)</label><input type="file" name="sermon" accept=".docx"></div>
+    <div><label>Content form (.rtf/.txt)</label><input type="file" name="content" accept=".rtf,.txt"></div>
+    <div><label>Pastor's announcements (.rtf/.txt)</label><input type="file" name="announcements" accept=".rtf,.txt"></div>
+    <div class="narrow"><button type="submit" {% if spend_status.blocked or not spend_status.model_calls %}disabled{% endif %}>Parse inputs</button></div>
+  </form>
+  <p class="muted">Parsing reads the files with the model and rewrites this week’s content; the liturgy and the content form can be submitted separately.
+  {% if not spend_status.model_calls %}<strong>Model calls are switched off on this server.</strong>{% elif spend_status.blocked %}<strong>The monthly model spend cap is reached; contact Colby.</strong>{% elif spend_status.warn %}<strong>Model spend is at {{ (spend_status.fraction * 100) | round | int }}% of the monthly cap.</strong>{% endif %}</p>
+</div>
+
+<div class="card">
   <div class="row">
-    <form method="post" action="/weeks/{{ d }}/build" class="narrow"><button type="submit" {% if error %}disabled{% endif %}>Build print + scroll</button></form>
+    <form method="post" action="/weeks/{{ d }}/build" class="narrow"><button type="submit" {% if error %}disabled{% endif %} title="Renders; if a panel overflows and model calls are on, the fit loop adjusts the layout">Build print + scroll</button></form>
     {% if has_pdf %}<a class="btn quiet narrow" href="/weeks/{{ d }}/pdf">Download PDF</a>{% endif %}
     {% if week and week.inserts %}{% for ins in week.inserts %}<a class="btn quiet narrow" href="/weeks/{{ d }}/insert/{{ ins }}.pdf">Insert: {{ ins }}</a>{% endfor %}{% endif %}
     {% if has_scroll %}<a class="btn quiet narrow" href="/weeks/{{ d }}/scroll" target="_blank">Open scroll page</a>{% endif %}
@@ -39,6 +51,10 @@
   {% if report.name_changes %}
   <h2>Name corrections applied</h2>
   <ul>{% for c in report.name_changes %}<li><code>{{ c.where }}</code>: {{ c.before }} → <strong>{{ c.after }}</strong> <span class="muted">({{ c.reason }})</span></li>{% endfor %}</ul>
+  {% endif %}
+  {% if week and week.copyedit.changes %}
+  <h2>Copyedits from the inputs</h2>
+  <ul>{% for c in week.copyedit.changes %}<li><code>{{ c.where }}</code>: {{ c.before }} → <strong>{{ c.after }}</strong> <span class="muted">({{ c.reason }})</span></li>{% endfor %}</ul>
   {% endif %}
   {% if report.flags %}
   <h2>Flags</h2>

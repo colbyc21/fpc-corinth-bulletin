@@ -15,13 +15,13 @@ import re
 from datetime import date, timedelta
 from pathlib import Path
 
-from fastapi import Depends, FastAPI, Form, HTTPException, Request
+from fastapi import Depends, FastAPI, File, Form, HTTPException, Request, UploadFile
 from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, RedirectResponse, Response
 from fastapi.templating import Jinja2Templates
 
 from builder import config
 from builder.app import auth
-from builder.pipeline import build as buildmod, calendar_feed, dates, publish as publishmod
+from builder.pipeline import build as buildmod, calendar_feed, dates, extract, fit as fitmod, intake as intakemod, model as modelmod, publish as publishmod
 from builder.pipeline import week as weekmod
 from builder.pipeline.store import ROLE_LABELS, ROSTER_ROLES, USER_ROLES, Store
 
@@ -65,12 +65,14 @@ async def http_errors(request: Request, exc: HTTPException):
     if exc.status_code == 401:
         return RedirectResponse(f"/login?next={request.url.path}", status_code=303)
     return templates.TemplateResponse(request, "error.html", {"user": current_user(request), "spend": store().month_spend(),
+                                                             "spend_status": modelmod.spend_status(store()),
                                                               "status": exc.status_code, "detail": exc.detail}, status_code=exc.status_code)
 
 
 def page(request: Request, name: str, user: dict | None, **ctx):
     ctx.setdefault("flash", request.query_params.get("m"))
-    return templates.TemplateResponse(request, name, {"user": user, "spend": store().month_spend(), **ctx})
+    return templates.TemplateResponse(request, name, {"user": user, "spend": store().month_spend(),
+                                                     "spend_status": modelmod.spend_status(store()), **ctx})
 
 
 def check_date(d: str) -> str:
@@ -200,17 +202,97 @@ def week_save_json(d: str, request: Request, raw: str = Form(...), user: dict = 
     return RedirectResponse(f"/weeks/{d}?m=Saved", status_code=303)
 
 
+MAX_UPLOAD = 10 * 1024 * 1024
+UPLOAD_SLOTS = {  # form field -> (filename pattern, accepted suffixes)
+    "liturgy": ("{d} Liturgy.docx", (".docx",)),
+    "sermon": ("{d} Sermon Notes.docx", (".docx",)),
+    "content": ("bulletin-content-{d}.rtf", (".rtf", ".txt")),
+    "announcements": ("Announcements.rtf", (".rtf", ".txt")),
+}
+
+
+async def _save_upload(d: str, slot: str, up: UploadFile | None) -> Path | None:
+    """Store one untrusted upload under the week folder with the canonical name."""
+    if up is None or not up.filename:
+        return None
+    pattern, suffixes = UPLOAD_SLOTS[slot]
+    suffix = Path(up.filename).suffix.lower()
+    if suffix not in suffixes:
+        raise ValueError(f"{slot}: expected {' or '.join(suffixes)}, got {suffix or 'no extension'}")
+    data = await up.read()
+    if len(data) > MAX_UPLOAD:
+        raise ValueError(f"{slot}: file larger than 10 MB")
+    wdir = config.week_dir(d)
+    wdir.mkdir(parents=True, exist_ok=True)
+    name = pattern.format(d=d)
+    if suffix == ".txt":
+        name = name.replace(".rtf", ".txt")
+    path = wdir / name
+    path.write_bytes(data)
+    if suffix == ".docx" and not extract.is_docx(path):
+        path.unlink()
+        raise ValueError(f"{slot}: not a Word document")
+    return path
+
+
+@app.post("/weeks/{d}/intake")
+async def week_intake(d: str, user: dict = Depends(need("editor")), liturgy: UploadFile | None = File(None),
+                      sermon: UploadFile | None = File(None), content: UploadFile | None = File(None),
+                      announcements: UploadFile | None = File(None)):
+    check_date(d)
+    try:
+        paths = {slot: await _save_upload(d, slot, up) for slot, up in (("liturgy", liturgy), ("sermon", sermon), ("content", content), ("announcements", announcements))}
+    except ValueError as e:
+        return RedirectResponse(f"/weeks/{d}?m=Not+parsed:+{_q(str(e))}", status_code=303)
+    paths = {k: v for k, v in paths.items() if v}
+    if not paths:
+        return RedirectResponse(f"/weeks/{d}?m=Choose+at+least+one+file", status_code=303)
+    if "sermon" in paths and "liturgy" not in paths:
+        wk = config.week_dir(d) / f"{d} Liturgy.docx"
+        if wk.exists():
+            paths["liturgy"] = wk
+        else:
+            return RedirectResponse(f"/weeks/{d}?m=Upload+the+Liturgy+with+the+Sermon+Notes", status_code=303)
+    try:
+        res = intakemod.intake(d, store=store(), user=user["email"], **paths)
+    except modelmod.ModelError as e:
+        return RedirectResponse(f"/weeks/{d}?m=Not+parsed:+{_q(str(e))}", status_code=303)
+    except Exception as e:
+        log.exception("intake failed")
+        return RedirectResponse(f"/weeks/{d}?m=Not+parsed:+{_q(str(e))}", status_code=303)
+    msg = f"Parsed {', '.join(paths)} (${res['cost']:.2f}); {len(res['changes'])} edit(s), {len(res['flags'])} flag(s)"
+    return RedirectResponse(f"/weeks/{d}?m={_q(msg)}", status_code=303)
+
+
 @app.post("/weeks/{d}/build")
 def week_build(d: str, user: dict = Depends(need("editor"))):
     check_date(d)
     try:
-        report = buildmod.build(d, store=store())
+        res = fitmod.build_and_fit(d, store=store())
+    except modelmod.ModelError as e:
+        return RedirectResponse(f"/weeks/{d}?m=Build+failed:+{_q(str(e))}", status_code=303)
     except Exception as e:
         log.exception("build failed")
         return RedirectResponse(f"/weeks/{d}?m=Build+failed:+{_q(str(e))}", status_code=303)
-    store().log("week.build", user["email"], json.dumps({"date": d, "overflow": len(report["overflow"])}))
-    msg = "Built with no overflow" if not report["overflow"] else f"Built, but {len(report['overflow'])} panel(s) overflow"
+    report = res["report"]
+    store().log("week.build", user["email"], json.dumps({"date": d, "overflow": len(report["overflow"]), "fit": res["fit"]}))
+    if not report["overflow"]:
+        msg = "Built with no overflow"
+        if res["fit"] and res["fit"].get("turns"):
+            msg += f" after the fit loop ({res['fit']['turns']} turn(s), ${res['fit']['cost']:.2f})"
+    else:
+        msg = f"Built, but {len(report['overflow'])} panel(s) still overflow"
+        if res["fit"]:
+            msg += ": " + (res["fit"].get("skipped") or res["fit"].get("summary") or "")
+        elif not config.MODEL_CALLS:
+            msg += " (model calls are off, so the fit loop did not run)"
     return RedirectResponse(f"/weeks/{d}?m={_q(msg)}", status_code=303)
+
+
+@app.get("/spend", response_class=HTMLResponse)
+def spend_page(request: Request, user: dict = Depends(need("admin"))):
+    s = store()
+    return page(request, "spend.html", user, by_kind=s.month_ledger_by_kind(), rows=s.ledger(limit=100))
 
 
 @app.post("/weeks/{d}/ready")
