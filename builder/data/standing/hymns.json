@@ -1,10 +1,19 @@
 {
+  "_meta": {
+    "hymnal": "The Hymnal for Worship & Celebration",
+    "edition": "brown, Word Music, Nashville, 1986; Tom Fettke and Ken Barker, editors; ISBN 9783010026369",
+    "confirmed_by": "Colby, 2026-10-31",
+    "source": "number→first_line and tune from hymnary.org/hymnal/HWC1986 (site notes the index is unproofed); title and seen from the church's own liturgy files, otherwise title is the first line with trailing punctuation removed and title_source marks it",
+    "notes": "628a–628i are the Amens. first_line is what hymnary lists; the printed title in the hymnal sometimes differs (e.g. #89 is printed as Our Great Savior)."
+  },
   "1": {
     "title": "Joyful, Joyful, We Adore Thee",
     "seen": [
       "2026-08-16",
       "2026-08-16 (docx)"
-    ]
+    ],
+    "first_line": "Joyful, joyful, we adore Thee",
+    "tune": "HYMN TO JOY"
   },
   "2": {
     "title": "Come, Thou Fount of Every Blessing",
@@ -18,13 +27,40 @@
     "variants": [
       "Come, Thou Fount",
       "Come, Thou Fount of Every Blessing"
-    ]
+    ],
+    "first_line": "Come, Thou Fount of every blessing",
+    "tune": "NETTLETON"
   },
   "3": {
     "title": "Praise My Soul the King of Heaven",
     "seen": [
       "2026-03-29"
-    ]
+    ],
+    "first_line": "Praise, my soul, the King of heaven",
+    "tune": "LAUDA ANIMA (Andrews)"
+  },
+  "4": {
+    "title": "O Lord my God, when I in awesome wonder",
+    "title_source": "hymnary-first-line",
+    "first_line": "O Lord my God, when I in awesome wonder",
+    "tune": "HOW GREAT THOU ART"
+  },
+  "5": {
+    "title": "I will give thanks to Thee, O Lord, among the people",
+    "title_source": "hymnary-first-line",
+    "first_line": "I will give thanks to Thee, O Lord, among the people",
+    "tune": "BE EXALTED"
+  },
+  "6": {
+    "title": "Sing praise to God who reigns above",
+    "title_source": "hymnary-first-line",
+    "first_line": "Sing praise to God who reigns above",
+    "tune": "MIT FREUDEN ZART"
+  },
+  "7": {
+    "title": "Praise the Lord",
+    "title_source": "hymnary-first-line",
+    "first_line": "Praise the Lord"
   },
   "8": {
     "title": "Praise to the Lord, the Almighty",
@@ -34,14 +70,108 @@
       "2026-08-30",
       "2026-10-25",
       "2026-10-25 (docx)"
-    ]
+    ],
+    "first_line": "Praise to the Lord, the Almighty, the King of creation!",
+    "tune": "LOBE DEN HERREN"
+  },
+  "9": {
+    "title": "Praise the Lord! ye heav'ns, adore Him",
+    "title_source": "hymnary-first-line",
+    "first_line": "Praise the Lord! ye heav'ns, adore Him",
+    "tune": "AUSTRIAN HYMN"
   },
   "10": {
     "title": "O Worship the King",
     "seen": [
       "2026-11-01",
       "2026-11-01 (docx)"
-    ]
+    ],
+    "first_line": "O worship the King, all glorious above",
+    "tune": "LYONS"
+  },
+  "11": {
+    "title": "How can I say thanks for the things You have done for me",
+    "title_source": "hymnary-first-line",
+    "first_line": "How can I say thanks for the things You have done for me",
+    "tune": "MY TRIBUTE"
+  },
+  "12": {
+    "title": "Holy God, we praise Thy name",
+    "title_source": "hymnary-first-line",
+    "first_line": "Holy God, we praise Thy name",
+    "tune": "GROSSER GOTT"
+  },
+  "13": {
+    "title": "Bless the Lord, O my soul",
+    "title_source": "hymnary-first-line",
+    "first_line": "Bless the Lord, O my soul",
+    "tune": "BLESS HIS HOLY NAME"
+  },
+  "14": {
+    "title": "Come, let us worship and bow down",
+    "title_source": "hymnary-first-line",
+    "first_line": "Come, let us worship and bow down",
+    "tune": "WORSHIP AND BOW DOWN"
+  },
+  "15": {
+    "title": "Abba Father, Abba Father",
+    "title_source": "hymnary-first-line",
+    "first_line": "\"Abba Father, Abba Father\"",
+    "tune": "ABBA FATHER"
+  },
+  "16": {
+    "title": "We praise Thee, O God, our Redeemer, Creator",
+    "title_source": "hymnary-first-line",
+    "first_line": "We praise Thee, O God, our Redeemer, Creator",
+    "tune": "KREMSER"
+  },
+  "17": {
+    "title": "Ye servants of God, your Master proclaim",
+    "title_source": "hymnary-first-line",
+    "first_line": "Ye servants of God, your Master proclaim",
+    "tune": "HANOVER"
+  },
+  "18": {
+    "title": "Come, we that love the Lord",
+    "title_source": "hymnary-first-line",
+    "first_line": "Come, we that love the Lord",
+    "tune": "ST. THOMAS"
+  },
+  "19": {
+    "title": "We worship and adore You",
+    "title_source": "hymnary-first-line",
+    "first_line": "We worship and adore You",
+    "tune": "WORSHIP AND ADORE"
+  },
+  "20": {
+    "title": "All people that on earth do dwell",
+    "title_source": "hymnary-first-line",
+    "first_line": "All people that on earth do dwell",
+    "tune": "OLD HUNDREDTH"
+  },
+  "21": {
+    "title": "Stand up and bless the Lord",
+    "title_source": "hymnary-first-line",
+    "first_line": "Stand up and bless the Lord",
+    "tune": "ST. THOMAS"
+  },
+  "22": {
+    "title": "Holy, holy, holy, Lord God of Hosts",
+    "title_source": "hymnary-first-line",
+    "first_line": "Holy, holy, holy, Lord God of Hosts!",
+    "tune": "CHAUTAUQUA (Refrain only)"
+  },
+  "23": {
+    "title": "Make a joyful noise unto the Lord, all the earth",
+    "title_source": "hymnary-first-line",
+    "first_line": "Make a joyful noise unto the Lord, all the earth!",
+    "tune": "JOYFUL NOISE"
+  },
+  "24": {
+    "title": "Clap your hands, all you people",
+    "title_source": "hymnary-first-line",
+    "first_line": "Clap your hands, all you people",
+    "tune": "CLAP YOUR HANDS"
   },
   "25": {
     "title": "Immortal, Invisible",
@@ -50,7 +180,9 @@
       "2026-06-28 (docx)",
       "2026-08-09",
       "2026-08-09 (docx)"
-    ]
+    ],
+    "first_line": "Immortal, invisible, God only wise",
+    "tune": "ST. DENIO"
   },
   "26": {
     "title": "A Mighty Fortress Is Our God",
@@ -62,13 +194,106 @@
     "variants": [
       "A Mighty Fortress",
       "A Mighty Fortress Is Our God"
-    ]
+    ],
+    "first_line": "A mighty fortress is our God",
+    "tune": "EIN' FESTE BURG"
+  },
+  "27": {
+    "title": "Tell out, my soul, the greatness of the Lord",
+    "title_source": "hymnary-first-line",
+    "first_line": "Tell out, my soul, the greatness of the Lord!",
+    "tune": "WOODLANDS"
+  },
+  "28": {
+    "title": "O Lord, our Lord, how excellent is Thy name in all the earth",
+    "title_source": "hymnary-first-line",
+    "first_line": "O Lord, our Lord, how excellent is Thy name in all the earth!"
+  },
+  "29": {
+    "title": "Father, we love You, we worship and adore You",
+    "title_source": "hymnary-first-line",
+    "first_line": "Father, we love You, we worship and adore You",
+    "tune": "GLORIFY THY NAME"
+  },
+  "30": {
+    "title": "O Lord, our Lord, how majestic is Your name in all the earth",
+    "title_source": "hymnary-first-line",
+    "first_line": "O Lord, our Lord, how majestic is Your name in all the earth",
+    "tune": "HOW MAJESTIC"
   },
   "31": {
     "title": "Great Is the Lord",
     "seen": [
       "2026-06-07"
-    ]
+    ],
+    "first_line": "Great is the Lord and worthy of glory",
+    "tune": "GREAT IS THE LORD"
+  },
+  "32": {
+    "title": "Holy, holy, Lord, God almighty",
+    "title_source": "hymnary-first-line",
+    "first_line": "Holy, holy, Lord, God almighty",
+    "tune": "DONA NOBIS PACEM"
+  },
+  "33": {
+    "title": "God the Omnipotent! King, who ordainest",
+    "title_source": "hymnary-first-line",
+    "first_line": "God the Omnipotent! King, who ordainest",
+    "tune": "RUSSIAN HYMN"
+  },
+  "34": {
+    "title": "The God of Abraham praise",
+    "title_source": "hymnary-first-line",
+    "first_line": "The God of Abraham praise",
+    "tune": "LEONI"
+  },
+  "35": {
+    "title": "Alleluia, Alleluia",
+    "title_source": "hymnary-first-line",
+    "first_line": "Alleluia, Alleluia!",
+    "tune": "SOLI DEO GLORIA"
+  },
+  "36": {
+    "title": "El Shaddai, El Shaddai, El Elyon na Adonai",
+    "title_source": "hymnary-first-line",
+    "first_line": "El Shaddai, El Shaddai, El Elyon na Adonai",
+    "tune": "EL SHADDAI"
+  },
+  "37": {
+    "title": "Hallelujah! Hallelujah! Hallelujah! Hallelujah! Hallelujah",
+    "title_source": "hymnary-first-line",
+    "first_line": "Hallelujah! Hallelujah! Hallelujah! Hallelujah! Hallelujah!",
+    "tune": "HALLELUJAH CHORUS"
+  },
+  "38": {
+    "title": "I will call upon the Lord who is worthy to be praised",
+    "title_source": "hymnary-first-line",
+    "first_line": "I will call upon the Lord who is worthy to be praised",
+    "tune": "O'SHIELDS"
+  },
+  "39": {
+    "title": "God, our Father, we adore You, magnify You",
+    "title_source": "hymnary-first-line",
+    "first_line": "God, our Father, we adore You, magnify You",
+    "tune": "ENGLAND"
+  },
+  "40": {
+    "title": "Bless the Lord who reigns in beauty",
+    "title_source": "hymnary-first-line",
+    "first_line": "Bless the Lord who reigns in beauty",
+    "tune": "A PERFECT HEART"
+  },
+  "41": {
+    "title": "God is so good, God is so good",
+    "title_source": "hymnary-first-line",
+    "first_line": "God is so good, God is so good",
+    "tune": "GOD IS SO GOOD"
+  },
+  "42": {
+    "title": "Seek ye first the kingdom of God",
+    "title_source": "hymnary-first-line",
+    "first_line": "Seek ye first the kingdom of God",
+    "tune": "LAFFERTY"
   },
   "43": {
     "title": "Great Is Thy Faithfulness",
@@ -77,14 +302,59 @@
       "2026-05-31",
       "2026-11-01",
       "2026-11-01 (docx)"
-    ]
+    ],
+    "first_line": "Great is Thy faithfulness, O God my Father",
+    "tune": "FAITHFULNESS"
+  },
+  "44": {
+    "title": "Children of the heav'nly Father",
+    "title_source": "hymnary-first-line",
+    "first_line": "Children of the heav'nly Father",
+    "tune": "TRYGGARE KAN INGEN VARA"
+  },
+  "45": {
+    "title": "A pilgrim was I, and a-wand'ring",
+    "title_source": "hymnary-first-line",
+    "first_line": "A pilgrim was I, and a-wand'ring",
+    "tune": "SURELY GOODNESS AND MERCY"
+  },
+  "46": {
+    "title": "In shady, green pastures, so rich and so sweet",
+    "title_source": "hymnary-first-line",
+    "first_line": "In shady, green pastures, so rich and so sweet",
+    "tune": "GOD LEADS US"
+  },
+  "47": {
+    "title": "Be not dismayed whate'er betide",
+    "title_source": "hymnary-first-line",
+    "first_line": "Be not dismayed whate'er betide",
+    "tune": "GOD CARES"
+  },
+  "48": {
+    "title": "In Thee, O Lord, do I put my trust",
+    "title_source": "hymnary-first-line",
+    "first_line": "In Thee, O Lord, do I put my trust"
+  },
+  "49": {
+    "title": "Lead me, Lord, lead me in Thy righteousness",
+    "title_source": "hymnary-first-line",
+    "first_line": "Lead me, Lord, lead me in Thy righteousness",
+    "tune": "LEAD ME, LORD"
+  },
+  "50": {
+    "title": "The Lord's my Shepherd, I'll not want",
+    "title_source": "hymnary-first-line",
+    "first_line": "The Lord's my Shepherd, I'll not want",
+    "tune": "CRIMOND"
   },
   "51": {
     "title": "Guide Me, O Thou Great Jehovah",
     "seen": [
       "2026-08-30",
       "2026-08-30 (docx)"
-    ]
+    ],
+    "first_line": "Guide me, O Thou great Jehovah",
+    "tune": "CWM RHONDDA"
   },
   "52": {
     "title": "O God, Our Help in Ages Past",
@@ -94,13 +364,77 @@
       "2026-08-09",
       "2026-08-09 (docx)",
       "2026-09-06"
-    ]
+    ],
+    "first_line": "O God, our help in ages past",
+    "tune": "ST. ANNE"
+  },
+  "53": {
+    "title": "Because the Lord is my Shepherd, I have ev'rything that I need",
+    "title_source": "hymnary-first-line",
+    "first_line": "Because the Lord is my Shepherd, I have ev'rything that I need",
+    "tune": "THE NEW 23rd"
+  },
+  "54": {
+    "title": "God moves in a mysterious way",
+    "title_source": "hymnary-first-line",
+    "first_line": "God moves in a mysterious way",
+    "tune": "TALLIS' CANON"
+  },
+  "55": {
+    "title": "Day by day, day by day",
+    "title_source": "hymnary-first-line",
+    "first_line": "Day by day, day by day",
+    "tune": "FAYE"
+  },
+  "56": {
+    "title": "Day by day and with each passing moment",
+    "title_source": "hymnary-first-line",
+    "first_line": "Day by day and with each passing moment",
+    "tune": "BLOTT EN DAG"
+  },
+  "57": {
+    "title": "He careth for you, He careth for you",
+    "title_source": "hymnary-first-line",
+    "first_line": "He careth for you, He careth for you",
+    "tune": "HE CARETH FOR YOU"
+  },
+  "58": {
+    "title": "This is my Father's world",
+    "title_source": "hymnary-first-line",
+    "first_line": "This is my Father's world",
+    "tune": "TERRA BEATA"
   },
   "59": {
     "title": "I Sing the Mighty Power of God",
     "seen": [
       "2026-03-01"
-    ]
+    ],
+    "first_line": "I sing the mighty pow'r of God",
+    "tune": "ELLACOMBE"
+  },
+  "60": {
+    "title": "Morning has broken",
+    "title_source": "hymnary-first-line",
+    "first_line": "Morning has broken",
+    "tune": "BUNESSAN"
+  },
+  "61": {
+    "title": "Lavish love, abundant beauty",
+    "title_source": "hymnary-first-line",
+    "first_line": "Lavish love, abundant beauty",
+    "tune": "HYFRYDOL"
+  },
+  "62": {
+    "title": "The spacious firmament on high",
+    "title_source": "hymnary-first-line",
+    "first_line": "The spacious firmament on high",
+    "tune": "CREATION"
+  },
+  "63": {
+    "title": "To him alone who does mighty wonders",
+    "title_source": "hymnary-first-line",
+    "first_line": "To him alone who does mighty wonders",
+    "tune": "CATHERINE"
   },
   "64": {
     "title": "All Creatures of Our God and King",
@@ -109,7 +443,15 @@
       "2026-06-07",
       "2026-09-13",
       "2026-09-13 (docx)"
-    ]
+    ],
+    "first_line": "All creatures of our God and King",
+    "tune": "LASST UNS ERFREUEN"
+  },
+  "65": {
+    "title": "There's the wonder of sunset at evening",
+    "title_source": "hymnary-first-line",
+    "first_line": "There's the wonder of sunset at evening",
+    "tune": "WONDER OF IT ALL"
   },
   "66": {
     "title": "To God Be the Glory",
@@ -118,7 +460,63 @@
       "2026-07-05",
       "2026-08-16",
       "2026-08-16 (docx)"
-    ]
+    ],
+    "first_line": "To God be the glory great things He hath done!",
+    "tune": "TO GOD BE THE GLORY"
+  },
+  "67": {
+    "title": "The love of God is greater far",
+    "title_source": "hymnary-first-line",
+    "first_line": "The love of God is greater far",
+    "tune": "LOVE OF GOD"
+  },
+  "68": {
+    "title": "There's a wideness in God's mercy",
+    "title_source": "hymnary-first-line",
+    "first_line": "There's a wideness in God's mercy",
+    "tune": "WELLESLEY"
+  },
+  "69": {
+    "title": "Thy loving kindness is better than life",
+    "title_source": "hymnary-first-line",
+    "first_line": "Thy loving kindness is better than life",
+    "tune": "THY LOVING KINDNESS"
+  },
+  "70": {
+    "title": "Begin, my tongue, some heav'nly theme",
+    "title_source": "hymnary-first-line",
+    "first_line": "Begin, my tongue, some heav'nly theme",
+    "tune": "MANOAH"
+  },
+  "71": {
+    "title": "Behold, what manner of love the Father has given unto us",
+    "title_source": "hymnary-first-line",
+    "first_line": "Behold, what manner of love the Father has given unto us",
+    "tune": "MANNER OF LOVE"
+  },
+  "72": {
+    "title": "We will glorify the King of kings",
+    "title_source": "hymnary-first-line",
+    "first_line": "We will glorify the King of kings",
+    "tune": "WE WILL GLORIFY"
+  },
+  "73": {
+    "title": "Thou art worthy, Thou art worthy",
+    "title_source": "hymnary-first-line",
+    "first_line": "Thou art worthy, Thou art worthy",
+    "tune": "WORTHY"
+  },
+  "74": {
+    "title": "Majesty, worship His majesty",
+    "title_source": "hymnary-first-line",
+    "first_line": "Majesty, worship His majesty",
+    "tune": "MAJESTY"
+  },
+  "75": {
+    "title": "Praise the Savior, ye who know Him",
+    "title_source": "hymnary-first-line",
+    "first_line": "Praise the Savior, ye who know Him!",
+    "tune": "ACCLAIM"
   },
   "76": {
     "title": "O For a Thousand Tongues to Sing",
@@ -129,7 +527,68 @@
     "variants": [
       "O For a 1000 Tongues to Sing",
       "O For a Thousand Tongues to Sing"
-    ]
+    ],
+    "first_line": "O for a thousand tongues to sing",
+    "tune": "AZMON"
+  },
+  "77": {
+    "title": "King of kings and Lord of lords, glory, hallelujah",
+    "title_source": "hymnary-first-line",
+    "first_line": "King of kings and Lord of lords, glory, hallelujah!",
+    "tune": "KING OF KINGS"
+  },
+  "78": {
+    "title": "Blessing and honor and glory be Thine",
+    "title_source": "hymnary-first-line",
+    "first_line": "Blessing and honor and glory be Thine",
+    "tune": "GERMAN FOLK"
+  },
+  "79": {
+    "title": "Jesus, the very thought of Thee",
+    "title_source": "hymnary-first-line",
+    "first_line": "Jesus, the very thought of Thee",
+    "tune": "ST. AGNES"
+  },
+  "80": {
+    "title": "I love You, Lord, and I lift my voice",
+    "title_source": "hymnary-first-line",
+    "first_line": "I love You, Lord, and I lift my voice",
+    "tune": "I LOVE YOU LORD"
+  },
+  "81": {
+    "title": "Christ has for sin atonement made",
+    "title_source": "hymnary-first-line",
+    "first_line": "Christ has for sin atonement made",
+    "tune": "BENTON HARBOR"
+  },
+  "82": {
+    "title": "O come, let us adore Him",
+    "title_source": "hymnary-first-line",
+    "first_line": "O come, let us adore Him",
+    "tune": "ADESTE FIDELES (Refrain only)"
+  },
+  "83": {
+    "title": "Lord, we praise You, Lord, we praise You",
+    "title_source": "hymnary-first-line",
+    "first_line": "Lord, we praise You, Lord, we praise You",
+    "tune": "LORD, WE PRAISE YOU"
+  },
+  "84": {
+    "title": "Hallowed be the name of Jesus",
+    "title_source": "hymnary-first-line",
+    "first_line": "Hallowed be the name of Jesus",
+    "tune": "HALLOWED BE THE NAME"
+  },
+  "85": {
+    "title": "Blessed Savior, we adore Thee",
+    "title_source": "hymnary-first-line",
+    "first_line": "Blessed Savior, we adore Thee",
+    "tune": "GLORIOUS NAME"
+  },
+  "86": {
+    "title": "Christ is the image of the invisible God",
+    "title_source": "hymnary-first-line",
+    "first_line": "Christ is the image of the invisible God"
   },
   "87": {
     "title": "May Jesus Christ Be Praised",
@@ -137,26 +596,522 @@
       "2026-06-14",
       "2026-10-04",
       "2026-10-04 (docx)"
-    ]
+    ],
+    "first_line": "When morning gilds the skies",
+    "tune": "LAUDES DOMINI"
+  },
+  "88": {
+    "title": "Fairest Lord Jesus",
+    "title_source": "hymnary-first-line",
+    "first_line": "Fairest Lord Jesus",
+    "tune": "CRUSADER'S HYMN"
   },
   "89": {
     "title": "Our Great Savior",
     "seen": [
       "2026-04-19"
-    ]
+    ],
+    "first_line": "Jesus! what a Friend for sinners!",
+    "tune": "HYFRYDOL"
+  },
+  "90": {
+    "title": "There is strength in the name of the Lord",
+    "title_source": "hymnary-first-line",
+    "first_line": "There is strength in the name of the Lord",
+    "tune": "NAME OF THE LORD"
+  },
+  "91": {
+    "title": "Alleluia, Alleluia",
+    "title_source": "hymnary-first-line",
+    "first_line": "Alleluia, Alleluia",
+    "tune": "ALLELUIA"
+  },
+  "92": {
+    "title": "Love divine, all loves excelling",
+    "title_source": "hymnary-first-line",
+    "first_line": "Love divine, all loves excelling",
+    "tune": "BEECHER"
+  },
+  "93": {
+    "title": "Praise the name of Jesus",
+    "title_source": "hymnary-first-line",
+    "first_line": "Praise the name of Jesus",
+    "tune": "HICKS"
+  },
+  "94": {
+    "title": "How sweet the name of Jesus sounds",
+    "title_source": "hymnary-first-line",
+    "first_line": "How sweet the name of Jesus sounds",
+    "tune": "ST. PETER"
+  },
+  "95": {
+    "title": "Jesus is the sweetest name I know",
+    "title_source": "hymnary-first-line",
+    "first_line": "Jesus is the sweetest name I know",
+    "tune": "SWEETEST NAME"
+  },
+  "96": {
+    "title": "All hail the pow'r of Jesus' name",
+    "title_source": "hymnary-first-line",
+    "first_line": "All hail the pow'r of Jesus' name!",
+    "tune": "DIADEM"
   },
   "97": {
     "title": "All Hail the Power of Jesus’ Name",
     "seen": [
       "2026-05-17"
-    ]
+    ],
+    "first_line": "All hail the pow'r of Jesus' name!",
+    "tune": "CORONATION"
+  },
+  "98": {
+    "title": "Jesus, we just want to thank You",
+    "title_source": "hymnary-first-line",
+    "first_line": "Jesus, we just want to thank You",
+    "tune": "THANK YOU"
+  },
+  "99": {
+    "title": "Wherefore God also hath highly exalted Him",
+    "title_source": "hymnary-first-line",
+    "first_line": "Wherefore God also hath highly exalted Him"
+  },
+  "100": {
+    "title": "We love to sing of Christ our King",
+    "title_source": "hymnary-first-line",
+    "first_line": "We love to sing of Christ our King",
+    "tune": "GOLDEN CHAIN (Refrain only)"
+  },
+  "101": {
+    "title": "His name is Wonderful, His name is Wonderful",
+    "title_source": "hymnary-first-line",
+    "first_line": "His name is Wonderful, His name is Wonderful",
+    "tune": "MIEIR"
+  },
+  "102": {
+    "title": "Jesus, Jesus, Jesus",
+    "title_source": "hymnary-first-line",
+    "first_line": "Jesus, Jesus, Jesus",
+    "tune": "THAT NAME"
+  },
+  "103": {
+    "title": "All praise to Him who reigns above",
+    "title_source": "hymnary-first-line",
+    "first_line": "All praise to Him who reigns above",
+    "tune": "BLESSED BE THE NAME"
+  },
+  "104": {
+    "title": "Immortal, invisible King of Heaven, Lord Most High",
+    "title_source": "hymnary-first-line",
+    "first_line": "Immortal, invisible King of Heaven, Lord Most High",
+    "tune": "KING OF HEAVEN"
+  },
+  "105": {
+    "title": "Emptied of His glory; God became a man",
+    "title_source": "hymnary-first-line",
+    "first_line": "Emptied of His glory; God became a man",
+    "tune": "HE IS LORD"
+  },
+  "106": {
+    "title": "Praise Him! praise Him! Jesus our blessed Redeemer",
+    "title_source": "hymnary-first-line",
+    "first_line": "Praise Him! praise Him! Jesus our blessed Redeemer!",
+    "tune": "JOYFUL SONG"
+  },
+  "107": {
+    "title": "Let's just praise the Lord",
+    "title_source": "hymnary-first-line",
+    "first_line": "Let's just praise the Lord!",
+    "tune": "LET&#039;S JUST PRAISE THE LORD"
   },
   "108": {
     "title": "Come, Christians, Join to Sing",
     "seen": [
       "2026-03-08",
       "2026-06-21"
-    ]
+    ],
+    "first_line": "Come, Christians, join to sing",
+    "tune": "MADRID"
+  },
+  "109": {
+    "title": "Majestic sweetness sits enthroned",
+    "title_source": "hymnary-first-line",
+    "first_line": "Majestic sweetness sits enthroned",
+    "tune": "ORTONVILLE"
+  },
+  "110": {
+    "title": "O could I speak the matchless worth",
+    "title_source": "hymnary-first-line",
+    "first_line": "O could I speak the matchless worth",
+    "tune": "ARIEL"
+  },
+  "111": {
+    "title": "Join all the glorious names",
+    "title_source": "hymnary-first-line",
+    "first_line": "Join all the glorious names",
+    "tune": "DARWALL"
+  },
+  "112": {
+    "title": "Jesus, name above all names",
+    "title_source": "hymnary-first-line",
+    "first_line": "Jesus, name above all names",
+    "tune": "HEARN"
+  },
+  "113": {
+    "title": "I just came to praise the Lord",
+    "title_source": "hymnary-first-line",
+    "first_line": "I just came to praise the Lord",
+    "tune": "ROMERO"
+  },
+  "114": {
+    "title": "His name is Master, Savior, Lion of Judah",
+    "title_source": "hymnary-first-line",
+    "first_line": "His name is Master, Savior, Lion of Judah",
+    "tune": "HIS NAME IS LIFE"
+  },
+  "115": {
+    "title": "O let us lift our voices",
+    "title_source": "hymnary-first-line",
+    "first_line": "O let us lift our voices",
+    "tune": "SOMETIMES ALLELUIA"
+  },
+  "116": {
+    "title": "Take the name of Jesus with you",
+    "title_source": "hymnary-first-line",
+    "first_line": "Take the name of Jesus with you",
+    "tune": "PRECIOUS NAME"
+  },
+  "117": {
+    "title": "We come, O Christ, to You",
+    "title_source": "hymnary-first-line",
+    "first_line": "We come, O Christ, to You",
+    "tune": "DARWALL"
+  },
+  "118": {
+    "title": "Of the Father's love begotten",
+    "title_source": "hymnary-first-line",
+    "first_line": "Of the Father's love begotten",
+    "tune": "DIVINUM MYSTERIUM"
+  },
+  "119": {
+    "title": "O thou joyful",
+    "title_source": "hymnary-first-line",
+    "first_line": "O thou joyful",
+    "tune": "O SANCTISSIMA"
+  },
+  "120": {
+    "title": "The Advent of our God",
+    "title_source": "hymnary-first-line",
+    "first_line": "The Advent of our God",
+    "tune": "ST. THOMAS"
+  },
+  "121": {
+    "title": "The Word made flesh has dwelt among us",
+    "title_source": "hymnary-first-line",
+    "first_line": "The Word made flesh has dwelt among us",
+    "tune": "VICKI"
+  },
+  "122": {
+    "title": "Who shall come in the fullness of time",
+    "title_source": "hymnary-first-line",
+    "first_line": "Who shall come in the fullness of time"
+  },
+  "123": {
+    "title": "O come, O come, Emmanuel",
+    "title_source": "hymnary-first-line",
+    "first_line": "O come, O come, Emmanuel",
+    "tune": "VENI EMMANUEL"
+  },
+  "124": {
+    "title": "Come, Thou long-expected Jesus",
+    "title_source": "hymnary-first-line",
+    "first_line": "Come, Thou long-expected Jesus",
+    "tune": "HYFRYDOL"
+  },
+  "125": {
+    "title": "Joy to the world! the Lord is come",
+    "title_source": "hymnary-first-line",
+    "first_line": "Joy to the world! the Lord is come",
+    "tune": "ANTIOCH"
+  },
+  "126": {
+    "title": "O holy Child of Bethlehem",
+    "title_source": "hymnary-first-line",
+    "first_line": "O holy Child of Bethlehem!",
+    "tune": "ELATA"
+  },
+  "127": {
+    "title": "Thou didst leave Thy throne and Thy kingly crown",
+    "title_source": "hymnary-first-line",
+    "first_line": "Thou didst leave Thy throne and Thy kingly crown",
+    "tune": "MARGARET"
+  },
+  "128": {
+    "title": "It came upon the midnight clear",
+    "title_source": "hymnary-first-line",
+    "first_line": "It came upon the midnight clear",
+    "tune": "CAROL"
+  },
+  "129": {
+    "title": "Break forth, O beauteous heav'nly light",
+    "title_source": "hymnary-first-line",
+    "first_line": "Break forth, O beauteous heav'nly light",
+    "tune": "ERMUNTRE DICH"
+  },
+  "130": {
+    "title": "And there were in the same country shepherds",
+    "title_source": "hymnary-first-line",
+    "first_line": "And there were in the same country shepherds"
+  },
+  "131": {
+    "title": "Angels, from the realms of glory",
+    "title_source": "hymnary-first-line",
+    "first_line": "Angels, from the realms of glory",
+    "tune": "REGENT SQUARE"
+  },
+  "132": {
+    "title": "Angels we have heard on high",
+    "title_source": "hymnary-first-line",
+    "first_line": "Angels we have heard on high",
+    "tune": "GLORIA"
+  },
+  "133": {
+    "title": "Hark! the herald angels sing",
+    "title_source": "hymnary-first-line",
+    "first_line": "Hark! the herald angels sing",
+    "tune": "MENDELSSOHN"
+  },
+  "134": {
+    "title": "Emmanuel, Emmanuel",
+    "title_source": "hymnary-first-line",
+    "first_line": "Emmanuel, Emmanuel",
+    "tune": "EMMANUEL"
+  },
+  "135": {
+    "title": "While shepherds watched their flocks by night",
+    "title_source": "hymnary-first-line",
+    "first_line": "While shepherds watched their flocks by night",
+    "tune": "CHRISTMAS"
+  },
+  "136": {
+    "title": "The first Noel, the angel did say",
+    "title_source": "hymnary-first-line",
+    "first_line": "The first Noel, the angel did say",
+    "tune": "THE FIRST NOEL"
+  },
+  "137": {
+    "title": "What Child is this, who, laid to rest",
+    "title_source": "hymnary-first-line",
+    "first_line": "What Child is this, who, laid to rest",
+    "tune": "GREENSLEEVES"
+  },
+  "138": {
+    "title": "While shepherds kept their watching",
+    "title_source": "hymnary-first-line",
+    "first_line": "While shepherds kept their watching",
+    "tune": "GO TELL IT"
+  },
+  "139": {
+    "title": "I wonder as I wander, out under the sky",
+    "title_source": "hymnary-first-line",
+    "first_line": "I wonder as I wander, out under the sky",
+    "tune": "I WONDER AS I WANDER"
+  },
+  "140": {
+    "title": "Gathered round Your table on this holy eve",
+    "title_source": "hymnary-first-line",
+    "first_line": "Gathered round Your table on this holy eve",
+    "tune": "GREENRIDGE"
+  },
+  "141": {
+    "title": "O little town of Bethlehem",
+    "title_source": "hymnary-first-line",
+    "first_line": "O little town of Bethlehem",
+    "tune": "ST. LOUIS"
+  },
+  "142": {
+    "title": "Now the birth of Jesus Christ was on this wise",
+    "title_source": "hymnary-first-line",
+    "first_line": "Now the birth of Jesus Christ was on this wise"
+  },
+  "143": {
+    "title": "Infant holy, infant lowly",
+    "title_source": "hymnary-first-line",
+    "first_line": "Infant holy, infant lowly",
+    "tune": "W ZLOBIE LEZY"
+  },
+  "144": {
+    "title": "While by the sheep we watched at night",
+    "title_source": "hymnary-first-line",
+    "first_line": "While by the sheep we watched at night",
+    "tune": "JÜNGST"
+  },
+  "145": {
+    "title": "O come, all ye faithful, joyful and triumphant",
+    "title_source": "hymnary-first-line",
+    "first_line": "O come, all ye faithful, joyful and triumphant",
+    "tune": "ADESTE FIDELES"
+  },
+  "146": {
+    "title": "For unto us a Child is born",
+    "title_source": "hymnary-first-line",
+    "first_line": "For unto us a Child is born",
+    "tune": "FOR UNTO US"
+  },
+  "147": {
+    "title": "Silent night, holy night",
+    "title_source": "hymnary-first-line",
+    "first_line": "Silent night, holy night",
+    "tune": "STILLE NACHT"
+  },
+  "148": {
+    "title": "O holy night! the stars are brightly shining",
+    "title_source": "hymnary-first-line",
+    "first_line": "O holy night! the stars are brightly shining",
+    "tune": "CANTIQUE DE NOEL"
+  },
+  "149": {
+    "title": "Alleluia",
+    "title_source": "hymnary-first-line",
+    "first_line": "Alleluia!",
+    "tune": "NATIVITY CANON"
+  },
+  "150": {
+    "title": "O hearken ye who would believe",
+    "title_source": "hymnary-first-line",
+    "first_line": "O hearken ye who would believe",
+    "tune": "O HEARKEN YE"
+  },
+  "151": {
+    "title": "Good Christian men, rejoice",
+    "title_source": "hymnary-first-line",
+    "first_line": "Good Christian men, rejoice",
+    "tune": "IN DULCI JUBILO"
+  },
+  "152": {
+    "title": "I heard the bells on Christmas day",
+    "title_source": "hymnary-first-line",
+    "first_line": "I heard the bells on Christmas day",
+    "tune": "WALTHAM"
+  },
+  "153": {
+    "title": "Come on, ring those bells, light the Christmas tree",
+    "title_source": "hymnary-first-line",
+    "first_line": "Come on, ring those bells, light the Christmas tree",
+    "tune": "RING THOSE BELLS"
+  },
+  "154": {
+    "title": "What can I give Him, poor as I am",
+    "title_source": "hymnary-first-line",
+    "first_line": "What can I give Him, poor as I am?",
+    "tune": "CASTLE"
+  },
+  "155": {
+    "title": "Once in royal David's city",
+    "title_source": "hymnary-first-line",
+    "first_line": "Once in royal David's city",
+    "tune": "IRBY"
+  },
+  "156": {
+    "title": "Jesus, Jesus, blessed Lord Thou art",
+    "title_source": "hymnary-first-line",
+    "first_line": "Jesus, Jesus, blessed Lord Thou art",
+    "tune": "CHILD OF LOVE"
+  },
+  "157": {
+    "title": "Away in a manger, no crib for a bed",
+    "title_source": "hymnary-first-line",
+    "first_line": "Away in a manger, no crib for a bed",
+    "tune": "AWAY IN A MANGER"
+  },
+  "158": {
+    "title": "Away in a manger, no crib for a bed",
+    "title_source": "hymnary-first-line",
+    "first_line": "Away in a manger, no crib for a bed",
+    "tune": "CRADLE SONG"
+  },
+  "159": {
+    "title": "We light a thousand candles bright",
+    "title_source": "hymnary-first-line",
+    "first_line": "We light a thousand candles bright",
+    "tune": "THOUSAND CANDLES"
+  },
+  "160": {
+    "title": "Lo, how a Rose e'er blooming",
+    "title_source": "hymnary-first-line",
+    "first_line": "Lo, how a Rose e'er blooming",
+    "tune": "ES IST EIN&#039; ROS&#039;"
+  },
+  "161": {
+    "title": "Our day of joy is here again",
+    "title_source": "hymnary-first-line",
+    "first_line": "Our day of joy is here again",
+    "tune": "NU GLADJENS TIMME"
+  },
+  "162": {
+    "title": "In the little village of Bethlehem",
+    "title_source": "hymnary-first-line",
+    "first_line": "In the little village of Bethlehem",
+    "tune": "NEIDLINGER"
+  },
+  "163": {
+    "title": "As with gladness men of old",
+    "title_source": "hymnary-first-line",
+    "first_line": "As with gladness men of old",
+    "tune": "DIX"
+  },
+  "164": {
+    "title": "One small Child in a land of a thousand",
+    "title_source": "hymnary-first-line",
+    "first_line": "One small Child in a land of a thousand",
+    "tune": "ONE SMALL CHILD"
+  },
+  "165": {
+    "title": "Worship the Lord in the beauty of holiness",
+    "title_source": "hymnary-first-line",
+    "first_line": "Worship the Lord in the beauty of holiness!",
+    "tune": "JANICE"
+  },
+  "166": {
+    "title": "We three kings of Orient are",
+    "title_source": "hymnary-first-line",
+    "first_line": "We three kings of Orient are",
+    "tune": "KINGS OF ORIENT"
+  },
+  "167": {
+    "title": "O sing a song of Bethlehem",
+    "title_source": "hymnary-first-line",
+    "first_line": "O sing a song of Bethlehem",
+    "tune": "KINGSFOLD"
+  },
+  "168": {
+    "title": "Who is He in yonder stall",
+    "title_source": "hymnary-first-line",
+    "first_line": "Who is He in yonder stall",
+    "tune": "LOWLINESS"
+  },
+  "169": {
+    "title": "Once our blessed Christ of beauty",
+    "title_source": "hymnary-first-line",
+    "first_line": "Once our blessed Christ of beauty",
+    "tune": "THE UNVEILED CHRIST"
+  },
+  "170": {
+    "title": "One day when heaven was filled with His praises",
+    "title_source": "hymnary-first-line",
+    "first_line": "One day when heaven was filled with His praises",
+    "tune": "ONE DAY"
+  },
+  "171": {
+    "title": "Come and praise the Lord our King",
+    "title_source": "hymnary-first-line",
+    "first_line": "Come and praise the Lord our King",
+    "tune": "CULL CANYON"
+  },
+  "172": {
+    "title": "Tell me the story of Jesus",
+    "title_source": "hymnary-first-line",
+    "first_line": "Tell me the story of Jesus",
+    "tune": "STORY OF JESUS"
   },
   "173": {
     "title": "All Glory Laud and Honor",
@@ -167,7 +1122,175 @@
     "variants": [
       "All Glory Laud and Honor",
       "All Glory, Laud and Honor"
-    ]
+    ],
+    "first_line": "All glory, laud and honor",
+    "tune": "ST. THEODULPH"
+  },
+  "174": {
+    "title": "Hosanna, loud hosanna",
+    "title_source": "hymnary-first-line",
+    "first_line": "Hosanna, loud hosanna",
+    "tune": "ELLACOMBE"
+  },
+  "175": {
+    "title": "Man of Sorrows!\" what a name",
+    "title_source": "hymnary-first-line",
+    "first_line": "\"Man of Sorrows!\" what a name",
+    "tune": "MAN OF SORROWS"
+  },
+  "176": {
+    "title": "King of my life, I crown Thee now",
+    "title_source": "hymnary-first-line",
+    "first_line": "King of my life, I crown Thee now",
+    "tune": "DUNCANNON"
+  },
+  "177": {
+    "title": "What wondrous love is this, O my soul, O my soul",
+    "title_source": "hymnary-first-line",
+    "first_line": "What wondrous love is this, O my soul, O my soul!",
+    "tune": "WONDROUS LOVE"
+  },
+  "178": {
+    "title": "O sacred Head, now wounded",
+    "title_source": "hymnary-first-line",
+    "first_line": "O sacred Head, now wounded",
+    "tune": "PASSION CHORALE"
+  },
+  "179": {
+    "title": "Behold the Lamb, behold the Lamb",
+    "title_source": "hymnary-first-line",
+    "first_line": "Behold the Lamb, behold the Lamb",
+    "tune": "BEHOLD THE LAMB"
+  },
+  "180": {
+    "title": "Worthy is the Lamb that was slain",
+    "title_source": "hymnary-first-line",
+    "first_line": "Worthy is the Lamb that was slain",
+    "tune": "WORTHY IS THE LAMB"
+  },
+  "181": {
+    "title": "Were you there when they crucified my Lord",
+    "title_source": "hymnary-first-line",
+    "first_line": "Were you there when they crucified my Lord?",
+    "tune": "WERE YOU THERE?"
+  },
+  "182": {
+    "title": "And Jesus answered them, saying, The hour is come",
+    "title_source": "hymnary-first-line",
+    "first_line": "And Jesus answered them, saying, The hour is come"
+  },
+  "183": {
+    "title": "Beneath the cross of Jesus",
+    "title_source": "hymnary-first-line",
+    "first_line": "Beneath the cross of Jesus",
+    "tune": "ST. CHRISTOPHER"
+  },
+  "184": {
+    "title": "In the cross of Christ I glory",
+    "title_source": "hymnary-first-line",
+    "first_line": "In the cross of Christ I glory",
+    "tune": "RATHBUN"
+  },
+  "185": {
+    "title": "When I survey the wondrous cross",
+    "title_source": "hymnary-first-line",
+    "first_line": "When I survey the wondrous cross",
+    "tune": "HAMBURG"
+  },
+  "186": {
+    "title": "On a hill far away stood an old rugged cross",
+    "title_source": "hymnary-first-line",
+    "first_line": "On a hill far away stood an old rugged cross",
+    "tune": "OLD RUGGED CROSS"
+  },
+  "187": {
+    "title": "In the cross of Christ I glory",
+    "title_source": "hymnary-first-line",
+    "first_line": "In the cross of Christ I glory",
+    "tune": "WALKER"
+  },
+  "188": {
+    "title": "Alas! and did my Savior bleed",
+    "title_source": "hymnary-first-line",
+    "first_line": "Alas! and did my Savior bleed?",
+    "tune": "HUDSON"
+  },
+  "189": {
+    "title": "Far dearer than all that the world can impart",
+    "title_source": "hymnary-first-line",
+    "first_line": "Far dearer than all that the world can impart",
+    "tune": "CALVARY COVERS IT"
+  },
+  "190": {
+    "title": "Have you been to Jesus for the cleansing power",
+    "title_source": "hymnary-first-line",
+    "first_line": "Have you been to Jesus for the cleansing power?",
+    "tune": "WASHED IN THE BLOOD"
+  },
+  "191": {
+    "title": "Would you be free from the burden of sin",
+    "title_source": "hymnary-first-line",
+    "first_line": "Would you be free from the burden of sin?",
+    "tune": "POWER IN THE BLOOD"
+  },
+  "192": {
+    "title": "The blood that Jesus shed for me",
+    "title_source": "hymnary-first-line",
+    "first_line": "The blood that Jesus shed for me",
+    "tune": "THE BLOOD"
+  },
+  "193": {
+    "title": "Jesus, Thy blood and righteousness",
+    "title_source": "hymnary-first-line",
+    "first_line": "Jesus, Thy blood and righteousness",
+    "tune": "GERMANY"
+  },
+  "194": {
+    "title": "I know a fount where sins are washed away",
+    "title_source": "hymnary-first-line",
+    "first_line": "I know a fount where sins are washed away",
+    "tune": "I KNOW A FOUNT"
+  },
+  "195": {
+    "title": "What can wash away my sin",
+    "title_source": "hymnary-first-line",
+    "first_line": "What can wash away my sin?",
+    "tune": "PLAINFIELD"
+  },
+  "196": {
+    "title": "There is a fountain filled with blood",
+    "title_source": "hymnary-first-line",
+    "first_line": "There is a fountain filled with blood",
+    "tune": "CLEANSING FOUNTAIN"
+  },
+  "197": {
+    "title": "Hear the story from God's Word",
+    "title_source": "hymnary-first-line",
+    "first_line": "Hear the story from God's Word",
+    "tune": "LAMB OF GLORY"
+  },
+  "198": {
+    "title": "Wonderful grace of Jesus",
+    "title_source": "hymnary-first-line",
+    "first_line": "Wonderful grace of Jesus",
+    "tune": "WONDERFUL GRACE"
+  },
+  "199": {
+    "title": "Arise, my soul, arise",
+    "title_source": "hymnary-first-line",
+    "first_line": "Arise, my soul, arise",
+    "tune": "LENOX"
+  },
+  "200": {
+    "title": "From the fullness of His grace",
+    "title_source": "hymnary-first-line",
+    "first_line": "From the fullness of His grace"
+  },
+  "201": {
+    "title": "Marvelous grace of our loving Lord",
+    "title_source": "hymnary-first-line",
+    "first_line": "Marvelous grace of our loving Lord",
+    "tune": "MOODY"
   },
   "202": {
     "title": "Amazing Grace",
@@ -175,7 +1298,9 @@
       "2026-04-12",
       "2026-10-25",
       "2026-10-25 (docx)"
-    ]
+    ],
+    "first_line": "Amazing grace! how sweet the sound",
+    "tune": "AMAZING GRACE"
   },
   "203": {
     "title": "And Can It Be?",
@@ -188,14 +1313,24 @@
     "variants": [
       "And Can It Be",
       "And Can It Be?"
-    ]
+    ],
+    "first_line": "And can it be that I should gain",
+    "tune": "SAGINA"
   },
   "204": {
     "title": "Rock of Ages",
     "seen": [
       "2026-09-06",
       "2026-09-06 (docx)"
-    ]
+    ],
+    "first_line": "Rock of Ages, cleft for me",
+    "tune": "TOPLADY"
+  },
+  "205": {
+    "title": "For God so loved the world",
+    "title_source": "hymnary-first-line",
+    "first_line": "For God so loved the world",
+    "tune": "GIFT OF LIFE"
   },
   "206": {
     "title": "There Is a Redeemer",
@@ -208,7 +1343,15 @@
     "variants": [
       "There Is a Redeemer",
       "There is a Redeemer"
-    ]
+    ],
+    "first_line": "There is a Redeemer",
+    "tune": "GREEN"
+  },
+  "207": {
+    "title": "God so loved the world",
+    "title_source": "hymnary-first-line",
+    "first_line": "God so loved the world",
+    "tune": "STAINER"
   },
   "208": {
     "title": "Alas, and Did My Savior Bleed?",
@@ -217,32 +1360,167 @@
       "2026-08-16 (docx)",
       "2026-10-18",
       "2026-10-18 (docx)"
-    ]
+    ],
+    "first_line": "Alas! and did my Savior bleed",
+    "tune": "MARTYRDOM"
+  },
+  "209": {
+    "title": "We are the reason that He gave His life",
+    "title_source": "hymnary-first-line",
+    "first_line": "We are the reason that He gave His life",
+    "tune": "MEECE"
   },
   "210": {
     "title": "Jesus Paid It All",
     "seen": [
       "2026-03-22"
-    ]
+    ],
+    "first_line": "I hear the Savior say",
+    "tune": "ALL TO CHRIST"
+  },
+  "211": {
+    "title": "O the deep, deep love of Jesus",
+    "title_source": "hymnary-first-line",
+    "first_line": "O the deep, deep love of Jesus",
+    "tune": "EBENEZER"
+  },
+  "212": {
+    "title": "O the deep, deep love of Jesus",
+    "title_source": "hymnary-first-line",
+    "first_line": "O the deep, deep love of Jesus",
+    "tune": "BUNESSAN"
+  },
+  "213": {
+    "title": "God sent His Son, they called Him Jesus",
+    "title_source": "hymnary-first-line",
+    "first_line": "God sent His Son, they called Him Jesus",
+    "tune": "RESURRECTION"
+  },
+  "214": {
+    "title": "After the Sabbath, at dawn on the first day of the week",
+    "title_source": "hymnary-first-line",
+    "first_line": "After the Sabbath, at dawn on the first day of the week"
+  },
+  "215": {
+    "title": "Alleluia! Alleluia",
+    "title_source": "hymnary-first-line",
+    "first_line": "Alleluia! Alleluia!",
+    "tune": "HYMN TO JOY"
+  },
+  "216": {
+    "title": "Low in the grave he lay",
+    "title_source": "hymnary-first-line",
+    "first_line": "Low in the grave he lay",
+    "tune": "CHRIST AROSE"
   },
   "217": {
     "title": "Christ the Lord Is Risen Today",
     "seen": [
       "2026-04-05"
-    ]
+    ],
+    "first_line": "Christ the Lord is ris'n today, Alleluia!",
+    "tune": "EASTER HYMN"
+  },
+  "218": {
+    "title": "I know, I know that Jesus liveth",
+    "title_source": "hymnary-first-line",
+    "first_line": "I know, I know that Jesus liveth",
+    "tune": "HANNAH (Refrain only)"
+  },
+  "219": {
+    "title": "Our blessed Lord was slain",
+    "title_source": "hymnary-first-line",
+    "first_line": "Our blessed Lord was slain",
+    "tune": "HE ROSE TRIUMPHANTLY"
+  },
+  "220": {
+    "title": "I serve a risen Savior",
+    "title_source": "hymnary-first-line",
+    "first_line": "I serve a risen Savior",
+    "tune": "ACKLEY"
+  },
+  "221": {
+    "title": "Alleluia! Christ is risen from the dead",
+    "title_source": "hymnary-first-line",
+    "first_line": "Alleluia! Christ is risen from the dead",
+    "tune": "RESURRECTION CANON"
+  },
+  "222": {
+    "title": "Hear the bells ringing, they're singing",
+    "title_source": "hymnary-first-line",
+    "first_line": "Hear the bells ringing, they're singing",
+    "tune": "EASTER SONG"
+  },
+  "223": {
+    "title": "Be joyful, joyful, the Lord is alive",
+    "title_source": "hymnary-first-line",
+    "first_line": "Be joyful, joyful, the Lord is alive",
+    "tune": "BE JOYFUL"
+  },
+  "224": {
+    "title": "Jesus lives, and so shall I",
+    "title_source": "hymnary-first-line",
+    "first_line": "Jesus lives, and so shall I",
+    "tune": "ZUVERSICHT"
+  },
+  "225": {
+    "title": "Rise, O Church, and lift your voices",
+    "title_source": "hymnary-first-line",
+    "first_line": "Rise, O Church, and lift your voices",
+    "tune": "REGENT SQUARE"
+  },
+  "226": {
+    "title": "The day of resurrection",
+    "title_source": "hymnary-first-line",
+    "first_line": "The day of resurrection!",
+    "tune": "LANCASHIRE"
   },
   "227": {
     "title": "Thine Is the Glory",
     "seen": [
       "2026-04-05"
-    ]
+    ],
+    "first_line": "Thine is the glory, Risen, conqu'ring Son",
+    "tune": "MACCABEUS"
+  },
+  "228": {
+    "title": "Rejoice, the Lord is King",
+    "title_source": "hymnary-first-line",
+    "first_line": "Rejoice, the Lord is King!",
+    "tune": "DARWALL"
+  },
+  "229": {
+    "title": "How lovely on the mountains",
+    "title_source": "hymnary-first-line",
+    "first_line": "How lovely on the mountains",
+    "tune": "OUR GOD REIGNS"
+  },
+  "230": {
+    "title": "Jesus is King, Jesus is King",
+    "title_source": "hymnary-first-line",
+    "first_line": "Jesus is King, Jesus is King",
+    "tune": "JESUS IS KING"
   },
   "231": {
     "title": "Jesus Shall Reign",
     "seen": [
       "2026-03-08",
       "2026-06-21"
-    ]
+    ],
+    "first_line": "Jesus shall reign where'er the sun",
+    "tune": "DUKE STREET"
+  },
+  "232": {
+    "title": "Hail the day that sees Him rise Alleluia",
+    "title_source": "hymnary-first-line",
+    "first_line": "Hail the day that sees Him rise Alleluia!",
+    "tune": "LLANFAIR"
+  },
+  "233": {
+    "title": "Alleluia! sing to Jesus",
+    "title_source": "hymnary-first-line",
+    "first_line": "Alleluia! sing to Jesus!",
+    "tune": "HYFRYDOL"
   },
   "234": {
     "title": "Crown Him with Many Crowns",
@@ -253,7 +1531,171 @@
     "variants": [
       "Crown Him With Many Crowns",
       "Crown Him with Many Crowns"
-    ]
+    ],
+    "first_line": "Crown Him with many crowns",
+    "tune": "DIADEMATA"
+  },
+  "235": {
+    "title": "At the name of Jesus",
+    "title_source": "hymnary-first-line",
+    "first_line": "At the name of Jesus",
+    "tune": "ASHLYNE"
+  },
+  "236": {
+    "title": "Jesus may come today, Glad day! Glad day",
+    "title_source": "hymnary-first-line",
+    "first_line": "Jesus may come today, Glad day! Glad day!",
+    "tune": "CROWNING DAY"
+  },
+  "237": {
+    "title": "The sky shall unfold, preparing His entrance",
+    "title_source": "hymnary-first-line",
+    "first_line": "The sky shall unfold, preparing His entrance",
+    "tune": "WE SHALL BEHOLD HIM"
+  },
+  "238": {
+    "title": "O the King is coming, the King is coming",
+    "title_source": "hymnary-first-line",
+    "first_line": "O the King is coming, the King is coming!",
+    "tune": "KING IS COMING"
+  },
+  "239": {
+    "title": "Marvelous message we bring",
+    "title_source": "hymnary-first-line",
+    "first_line": "Marvelous message we bring",
+    "tune": "COMING AGAIN"
+  },
+  "240": {
+    "title": "When he shall come, resplendent in His glory",
+    "title_source": "hymnary-first-line",
+    "first_line": "When he shall come, resplendent in His glory",
+    "tune": "PEARCE"
+  },
+  "241": {
+    "title": "Lo, he comes with clouds descending",
+    "title_source": "hymnary-first-line",
+    "first_line": "Lo, he comes with clouds descending",
+    "tune": "REGENT SQUARE"
+  },
+  "242": {
+    "title": "While we are waiting come",
+    "title_source": "hymnary-first-line",
+    "first_line": "While we are waiting come",
+    "tune": "WAITING"
+  },
+  "243": {
+    "title": "O come, Messiah, come again",
+    "title_source": "hymnary-first-line",
+    "first_line": "O come, Messiah, come again",
+    "tune": "VENI EMMANUEL"
+  },
+  "244": {
+    "title": "You shall go out with joy and be led forth with peace",
+    "title_source": "hymnary-first-line",
+    "first_line": "You shall go out with joy and be led forth with peace",
+    "tune": "THE TREES OF THE FIELD"
+  },
+  "245": {
+    "title": "Jesus is coming to earth again",
+    "title_source": "hymnary-first-line",
+    "first_line": "Jesus is coming to earth again",
+    "tune": "SECOND COMING"
+  },
+  "246": {
+    "title": "Oh, Jesus my Savior, He is coming again",
+    "title_source": "hymnary-first-line",
+    "first_line": "Oh, Jesus my Savior, He is coming again",
+    "tune": "DIAPASON"
+  },
+  "247": {
+    "title": "Spirit of the Living God, fall fresh on me",
+    "title_source": "hymnary-first-line",
+    "first_line": "Spirit of the Living God, fall fresh on me",
+    "tune": "IVERSON"
+  },
+  "248": {
+    "title": "Holy Ghost, with light divine",
+    "title_source": "hymnary-first-line",
+    "first_line": "Holy Ghost, with light divine",
+    "tune": "MERCY"
+  },
+  "249": {
+    "title": "Spirit of God, descend upon my heart",
+    "title_source": "hymnary-first-line",
+    "first_line": "Spirit of God, descend upon my heart",
+    "tune": "MORECAMBE"
+  },
+  "250": {
+    "title": "Come as a wisdom to children",
+    "title_source": "hymnary-first-line",
+    "first_line": "Come as a wisdom to children",
+    "tune": "COME, HOLY SPIRIT"
+  },
+  "251": {
+    "title": "Holy Spirit, breathe on me",
+    "title_source": "hymnary-first-line",
+    "first_line": "Holy Spirit, breathe on me",
+    "tune": "TRUETT"
+  },
+  "252": {
+    "title": "There's a sweet, sweet Spirit in this place",
+    "title_source": "hymnary-first-line",
+    "first_line": "There's a sweet, sweet Spirit in this place",
+    "tune": "MANNA"
+  },
+  "253": {
+    "title": "Where the Spirit of the Lord is",
+    "title_source": "hymnary-first-line",
+    "first_line": "Where the Spirit of the Lord is",
+    "tune": "ADAMS"
+  },
+  "254": {
+    "title": "Heavenly Spirit, gentle Spirit",
+    "title_source": "hymnary-first-line",
+    "first_line": "Heavenly Spirit, gentle Spirit",
+    "tune": "HIMLADUVA"
+  },
+  "255": {
+    "title": "Greater is He that is in me",
+    "title_source": "hymnary-first-line",
+    "first_line": "Greater is He that is in me",
+    "tune": "GREATER IS HE"
+  },
+  "256": {
+    "title": "He is here, He is here",
+    "title_source": "hymnary-first-line",
+    "first_line": "He is here, He is here",
+    "tune": "HE IS HERE"
+  },
+  "257": {
+    "title": "O spread the tidings 'round wherever man is found",
+    "title_source": "hymnary-first-line",
+    "first_line": "O spread the tidings 'round wherever man is found",
+    "tune": "COMFORTER"
+  },
+  "258": {
+    "title": "We are gathered for Thy blessing",
+    "title_source": "hymnary-first-line",
+    "first_line": "We are gathered for Thy blessing",
+    "tune": "TABERNACLE"
+  },
+  "259": {
+    "title": "Breathe on me, breath of God",
+    "title_source": "hymnary-first-line",
+    "first_line": "Breathe on me, breath of God",
+    "tune": "TRENTHAM"
+  },
+  "260": {
+    "title": "Welcome, welcome, welcome welcome",
+    "title_source": "hymnary-first-line",
+    "first_line": "Welcome, welcome, welcome welcome!",
+    "tune": "WELCOME"
+  },
+  "261": {
+    "title": "Hover o'er me, Holy Spirit",
+    "title_source": "hymnary-first-line",
+    "first_line": "Hover o'er me, Holy Spirit",
+    "tune": "FILL ME NOW"
   },
   "262": {
     "title": "Holy, Holy, Holy",
@@ -262,21 +1704,87 @@
       "2026-07-12",
       "2026-09-20",
       "2026-09-20 (docx)"
-    ]
+    ],
+    "first_line": "Holy, holy, holy! Lord God Almighty!",
+    "tune": "NICAEA"
+  },
+  "263": {
+    "title": "Sing praise to the Father, praise to the Son",
+    "title_source": "hymnary-first-line",
+    "first_line": "Sing praise to the Father, praise to the Son",
+    "tune": "SING PRAISE"
+  },
+  "264": {
+    "title": "Praise ye the Father for His loving-kindness",
+    "title_source": "hymnary-first-line",
+    "first_line": "Praise ye the Father for His loving-kindness",
+    "tune": "FLEMMING"
+  },
+  "265": {
+    "title": "Father, I adore You",
+    "title_source": "hymnary-first-line",
+    "first_line": "Father, I adore You",
+    "tune": "MARANATHA"
+  },
+  "266": {
+    "title": "Holy, holy, holy holy",
+    "title_source": "hymnary-first-line",
+    "first_line": "Holy, holy, holy holy",
+    "tune": "HOLY, HOLY"
   },
   "267": {
     "title": "Come, Thou Almighty King",
     "seen": [
       "2026-02-15",
       "2026-05-10"
-    ]
+    ],
+    "first_line": "Come, Thou Almighty King",
+    "tune": "ITALIAN HYMN"
+  },
+  "268": {
+    "title": "God, our Father, we adore Thee",
+    "title_source": "hymnary-first-line",
+    "first_line": "God, our Father, we adore Thee!",
+    "tune": "BEECHER"
   },
   "269": {
     "title": "O Word of God Incarnate",
     "seen": [
       "2026-08-23",
       "2026-08-23 (docx)"
-    ]
+    ],
+    "first_line": "O Word of God incarnate",
+    "tune": "MUNICH"
+  },
+  "270": {
+    "title": "Sing them over again to me",
+    "title_source": "hymnary-first-line",
+    "first_line": "Sing them over again to me",
+    "tune": "WORDS OF LIFE"
+  },
+  "271": {
+    "title": "Standing on the promises of Christ my King",
+    "title_source": "hymnary-first-line",
+    "first_line": "Standing on the promises of Christ my King",
+    "tune": "PROMISES"
+  },
+  "272": {
+    "title": "Thy Word is a lamp unto my feet and a light unto my path",
+    "title_source": "hymnary-first-line",
+    "first_line": "Thy Word is a lamp unto my feet and a light unto my path",
+    "tune": "THY WORD"
+  },
+  "273": {
+    "title": "Holy Bible, book divine",
+    "title_source": "hymnary-first-line",
+    "first_line": "Holy Bible, book divine",
+    "tune": "ALETTA"
+  },
+  "274": {
+    "title": "Break Thou the bread of life",
+    "title_source": "hymnary-first-line",
+    "first_line": "Break Thou the bread of life",
+    "tune": "BREAD OF LIFE"
   },
   "275": {
     "title": "How Firm a Foundation",
@@ -290,14 +1798,18 @@
     "variants": [
       "How Firm A Foundation",
       "How Firm a Foundation"
-    ]
+    ],
+    "first_line": "How firm a foundation, ye saints of the Lord",
+    "tune": "FOUNDATION"
   },
   "276": {
     "title": "Christ Is Made the Sure Foundation",
     "seen": [
       "2026-07-19",
       "2026-07-19 (docx)"
-    ]
+    ],
+    "first_line": "Christ is made the sure foundation",
+    "tune": "REGENT SQUARE"
   },
   "277": {
     "title": "The Church’s One Foundation",
@@ -307,60 +1819,644 @@
       "2026-08-02 (docx)",
       "2026-10-18",
       "2026-10-18 (docx)"
-    ]
+    ],
+    "first_line": "The Church's one foundation",
+    "tune": "AURELIA"
+  },
+  "278": {
+    "title": "Glorious things of thee are spoken",
+    "title_source": "hymnary-first-line",
+    "first_line": "Glorious things of thee are spoken",
+    "tune": "AUSTRIAN HYMN"
+  },
+  "279": {
+    "title": "Faith of our fathers! living still",
+    "title_source": "hymnary-first-line",
+    "first_line": "Faith of our fathers! living still",
+    "tune": "ST. CATHERINE"
+  },
+  "280": {
+    "title": "I love Thy kingdom, Lord",
+    "title_source": "hymnary-first-line",
+    "first_line": "I love Thy kingdom, Lord",
+    "tune": "ST. THOMAS"
+  },
+  "281": {
+    "title": "We are one in the bond of love",
+    "title_source": "hymnary-first-line",
+    "first_line": "We are one in the bond of love",
+    "tune": "BOND OF LOVE"
+  },
+  "282": {
+    "title": "I'm so glad I'm a part of the family of God",
+    "title_source": "hymnary-first-line",
+    "first_line": "I'm so glad I'm a part of the family of God",
+    "tune": "FAMILY OF GOD"
+  },
+  "283": {
+    "title": "We are God's people, the chosen of the Lord",
+    "title_source": "hymnary-first-line",
+    "first_line": "We are God's people, the chosen of the Lord",
+    "tune": "SYMPHONY"
+  },
+  "284": {
+    "title": "We are one in the Spirit, we are one in the Lord",
+    "title_source": "hymnary-first-line",
+    "first_line": "We are one in the Spirit, we are one in the Lord",
+    "tune": "ST. BRENDAN'S"
+  },
+  "285": {
+    "title": "In Christ there is no East or West",
+    "title_source": "hymnary-first-line",
+    "first_line": "In Christ there is no East or West",
+    "tune": "ST. PETER"
+  },
+  "286": {
+    "title": "Blest be the tie that binds",
+    "title_source": "hymnary-first-line",
+    "first_line": "Blest be the tie that binds",
+    "tune": "DENNIS"
+  },
+  "287": {
+    "title": "Our God has made us one",
+    "title_source": "hymnary-first-line",
+    "first_line": "Our God has made us one",
+    "tune": "WEBER"
+  },
+  "288": {
+    "title": "Come and join the reapers",
+    "title_source": "hymnary-first-line",
+    "first_line": "Come and join the reapers",
+    "tune": "FAITHFUL MEN"
+  },
+  "289": {
+    "title": "There shall be showers of blessing",
+    "title_source": "hymnary-first-line",
+    "first_line": "\"There shall be showers of blessing\"",
+    "tune": "SHOWERS OF BLESSING"
+  },
+  "290": {
+    "title": "God of the living church empow'r",
+    "title_source": "hymnary-first-line",
+    "first_line": "God of the living church empow'r"
+  },
+  "291": {
+    "title": "O Breath of Life, come sweeping thru us",
+    "title_source": "hymnary-first-line",
+    "first_line": "O Breath of Life, come sweeping thru us",
+    "tune": "DET AR ETT FAST ORD"
+  },
+  "292": {
+    "title": "God of grace and God of glory",
+    "title_source": "hymnary-first-line",
+    "first_line": "God of grace and God of glory",
+    "tune": "CWM RHONDDA"
+  },
+  "293": {
+    "title": "Rise up, O Church of God",
+    "title_source": "hymnary-first-line",
+    "first_line": "Rise up, O Church of God!",
+    "tune": "ST. THOMAS"
+  },
+  "294": {
+    "title": "Set my soul afire, Lord, for Thy holy Word",
+    "title_source": "hymnary-first-line",
+    "first_line": "Set my soul afire, Lord, for Thy holy Word",
+    "tune": "SCALES"
+  },
+  "295": {
+    "title": "We praise thee, O God, for the Son of Thy love",
+    "title_source": "hymnary-first-line",
+    "first_line": "We praise thee, O God, for the Son of Thy love",
+    "tune": "REVIVE US AGAIN"
+  },
+  "296": {
+    "title": "We've a story to tell to the nations",
+    "title_source": "hymnary-first-line",
+    "first_line": "We've a story to tell to the nations",
+    "tune": "MESSAGE"
+  },
+  "297": {
+    "title": "I love to tell the story",
+    "title_source": "hymnary-first-line",
+    "first_line": "I love to tell the story",
+    "tune": "HANKEY"
+  },
+  "298": {
+    "title": "O Zion, haste, thy mission high fulfilling",
+    "title_source": "hymnary-first-line",
+    "first_line": "O Zion, haste, thy mission high fulfilling",
+    "tune": "TIDINGS"
+  },
+  "299": {
+    "title": "Rescue the perishing, care for the dying",
+    "title_source": "hymnary-first-line",
+    "first_line": "Rescue the perishing, care for the dying",
+    "tune": "RESCUE"
+  },
+  "300": {
+    "title": "I'll tell the world that I'm a Christian",
+    "title_source": "hymnary-first-line",
+    "first_line": "I'll tell the world that I'm a Christian",
+    "tune": "TUCKER"
+  },
+  "301": {
+    "title": "All power is given unto Me",
+    "title_source": "hymnary-first-line",
+    "first_line": "All power is given unto Me",
+    "tune": "GO YE"
+  },
+  "302": {
+    "title": "The love of God is broader than earth's vast expanse",
+    "title_source": "hymnary-first-line",
+    "first_line": "The love of God is broader than earth's vast expanse",
+    "tune": "SULLIVAN"
+  },
+  "303": {
+    "title": "People need the Lord",
+    "title_source": "hymnary-first-line",
+    "first_line": "People need the Lord",
+    "tune": "PEOPLE NEED THE lORD"
+  },
+  "304": {
+    "title": "Come, Christians, follow where our Savior trod",
+    "title_source": "hymnary-first-line",
+    "first_line": "Come, Christians, follow where our Savior trod",
+    "tune": "CRUCIFER"
+  },
+  "305": {
+    "title": "Lord, Thy church on earth is seeking",
+    "title_source": "hymnary-first-line",
+    "first_line": "Lord, Thy church on earth is seeking",
+    "tune": "KINGSTON"
+  },
+  "306": {
+    "title": "We have heard the joyful sound",
+    "title_source": "hymnary-first-line",
+    "first_line": "We have heard the joyful sound",
+    "tune": "JESUS SAVES"
+  },
+  "307": {
+    "title": "There's a call comes ringing o'er the restless wave",
+    "title_source": "hymnary-first-line",
+    "first_line": "There's a call comes ringing o'er the restless wave",
+    "tune": "MCCABE"
+  },
+  "308": {
+    "title": "Go ye therefore and teach all nations, go, go, go",
+    "title_source": "hymnary-first-line",
+    "first_line": "Go ye therefore and teach all nations, go, go, go",
+    "tune": "GO"
+  },
+  "309": {
+    "title": "It only takes a spark to get a fire going",
+    "title_source": "hymnary-first-line",
+    "first_line": "It only takes a spark to get a fire going",
+    "tune": "PASS IT ON"
+  },
+  "310": {
+    "title": "So send I you - to labor unrewarded",
+    "title_source": "hymnary-first-line",
+    "first_line": "So send I you - to labor unrewarded",
+    "tune": "TORONTO"
+  },
+  "311": {
+    "title": "So send I you - by grace made strong to triumph",
+    "title_source": "hymnary-first-line",
+    "first_line": "So send I you - by grace made strong to triumph",
+    "tune": "BY GRACE MADE STRONG"
+  },
+  "312": {
+    "title": "Almighty Father give us a vision",
+    "title_source": "hymnary-first-line",
+    "first_line": "Almighty Father give us a vision",
+    "tune": "GOD&#039;S PEOPLE"
+  },
+  "313": {
+    "title": "Lord lay some soul upon my heart",
+    "title_source": "hymnary-first-line",
+    "first_line": "Lord lay some soul upon my heart",
+    "tune": "IRA"
+  },
+  "314": {
+    "title": "Reach out and touch a soul that is hungry",
+    "title_source": "hymnary-first-line",
+    "first_line": "Reach out and touch a soul that is hungry",
+    "tune": "REACH OUT"
+  },
+  "315": {
+    "title": "Let your heart be broken",
+    "title_source": "hymnary-first-line",
+    "first_line": "Let your heart be broken",
+    "tune": "WYE VALLEY (abridged)"
+  },
+  "316": {
+    "title": "The vision of a dying world",
+    "title_source": "hymnary-first-line",
+    "first_line": "The vision of a dying world",
+    "tune": "ALL SAINTS, NEW"
+  },
+  "317": {
+    "title": "This child we dedicate to Thee",
+    "title_source": "hymnary-first-line",
+    "first_line": "This child we dedicate to Thee",
+    "tune": "FEDERAL STREET"
+  },
+  "318": {
+    "title": "Good Shepherd, take this little child",
+    "title_source": "hymnary-first-line",
+    "first_line": "Good Shepherd, take this little child",
+    "tune": "AMY"
+  },
+  "319": {
+    "title": "We bless the name of Christ the Lord",
+    "title_source": "hymnary-first-line",
+    "first_line": "We bless the name of Christ the Lord",
+    "tune": "RETREAT"
+  },
+  "320": {
+    "title": "Come, Holy Spirit, Dove divine",
+    "title_source": "hymnary-first-line",
+    "first_line": "Come, Holy Spirit, Dove divine",
+    "tune": "MARYTON"
+  },
+  "321": {
+    "title": "According to Thy gracious word",
+    "title_source": "hymnary-first-line",
+    "first_line": "According to Thy gracious word",
+    "tune": "MANOAH"
+  },
+  "322": {
+    "title": "In remembrance of Me, eat this bread",
+    "title_source": "hymnary-first-line",
+    "first_line": "In remembrance of Me, eat this bread",
+    "tune": "RED"
+  },
+  "323": {
+    "title": "Let us break bread together on our knees",
+    "title_source": "hymnary-first-line",
+    "first_line": "Let us break bread together on our knees",
+    "tune": "LET US BREAK BREAD"
+  },
+  "324": {
+    "title": "Come celebrate Jesus, come celebrate Jesus",
+    "title_source": "hymnary-first-line",
+    "first_line": "Come celebrate Jesus, come celebrate Jesus",
+    "tune": "CELEBRATE JESUS"
+  },
+  "325": {
+    "title": "Here, O my Lord, I see Thee face to face",
+    "title_source": "hymnary-first-line",
+    "first_line": "Here, O my Lord, I see Thee face to face",
+    "tune": "PENITENTIA"
+  },
+  "326": {
+    "title": "Softly and tenderly Jesus is calling",
+    "title_source": "hymnary-first-line",
+    "first_line": "Softly and tenderly Jesus is calling",
+    "tune": "THOMPSON"
+  },
+  "327": {
+    "title": "Jesus is tenderly calling you home",
+    "title_source": "hymnary-first-line",
+    "first_line": "Jesus is tenderly calling you home",
+    "tune": "CALLING TODAY"
+  },
+  "328": {
+    "title": "Have you any room for Jesus",
+    "title_source": "hymnary-first-line",
+    "first_line": "Have you any room for Jesus",
+    "tune": "ANY ROOM"
+  },
+  "329": {
+    "title": "The Savior is waiting to enter your heart",
+    "title_source": "hymnary-first-line",
+    "first_line": "The Savior is waiting to enter your heart",
+    "tune": "CARMICHAEL"
+  },
+  "330": {
+    "title": "Come, ev'ry soul by sin oppressed",
+    "title_source": "hymnary-first-line",
+    "first_line": "Come, ev'ry soul by sin oppressed",
+    "tune": "MINERVA"
+  },
+  "331": {
+    "title": "The cross upon which Jesus died",
+    "title_source": "hymnary-first-line",
+    "first_line": "The cross upon which Jesus died",
+    "tune": "ROOM AT THE CROSS"
+  },
+  "332": {
+    "title": "Without Him I could do nothing",
+    "title_source": "hymnary-first-line",
+    "first_line": "Without Him I could do nothing",
+    "tune": "WITHOUT HIM"
+  },
+  "333": {
+    "title": "Would you live for Jesus and be always pure and good",
+    "title_source": "hymnary-first-line",
+    "first_line": "Would you live for Jesus and be always pure and good?",
+    "tune": "NUSBAUM"
   },
   "334": {
     "title": "Come, Ye Sinners, Poor and Needy",
     "seen": [
       "2026-02-18"
-    ]
+    ],
+    "first_line": "Come, ye sinners, poor and needy",
+    "tune": "ARISE"
+  },
+  "335": {
+    "title": "Turn your eyes upon Jesus",
+    "title_source": "hymnary-first-line",
+    "first_line": "Turn your eyes upon Jesus",
+    "tune": "LEMMEL (Refrain only)"
+  },
+  "336": {
+    "title": "Out of my bondage, sorrow and night",
+    "title_source": "hymnary-first-line",
+    "first_line": "Out of my bondage, sorrow and night",
+    "tune": "JESUS, I COME"
+  },
+  "337": {
+    "title": "Pass me not, O gentle Savior",
+    "title_source": "hymnary-first-line",
+    "first_line": "Pass me not, O gentle Savior",
+    "tune": "PASS ME NOT"
+  },
+  "338": {
+    "title": "Years I spent in vanity and pride",
+    "title_source": "hymnary-first-line",
+    "first_line": "Years I spent in vanity and pride",
+    "tune": "CALVARY"
+  },
+  "339": {
+    "title": "I have a song I love to sing",
+    "title_source": "hymnary-first-line",
+    "first_line": "I have a song I love to sing",
+    "tune": "OTHELLO"
+  },
+  "340": {
+    "title": "I lay my sins on Jesus",
+    "title_source": "hymnary-first-line",
+    "first_line": "I lay my sins on Jesus",
+    "tune": "CRUCIFIX"
+  },
+  "341": {
+    "title": "I've wandered far away from God",
+    "title_source": "hymnary-first-line",
+    "first_line": "I've wandered far away from God",
+    "tune": "COMING HOME"
+  },
+  "342": {
+    "title": "Just as I am, without one plea",
+    "title_source": "hymnary-first-line",
+    "first_line": "Just as I am, without one plea",
+    "tune": "WOODWORTH"
+  },
+  "343": {
+    "title": "Be still and know that I am God",
+    "title_source": "hymnary-first-line",
+    "first_line": "Be still and know that I am God",
+    "tune": "BE STILL AND KNOW"
+  },
+  "344": {
+    "title": "He's got the whole world in His hands",
+    "title_source": "hymnary-first-line",
+    "first_line": "He's got the whole world in His hands",
+    "tune": "WHOLE WORLD"
   },
   "345": {
-    "title": "Leaning on the Everlasting Arms",
-    "seen": [
-      "2026-06-14",
-      "2026-10-04",
-      "2026-10-04 (docx)"
-    ]
+    "title": "Blessed Assurance",
+    "first_line": "Blessed assurance, Jesus is mine!",
+    "tune": "ASSURANCE",
+    "title_source": "hymnary-first-line",
+    "liturgy_cited_as": {
+      "title": "Leaning on the Everlasting Arms",
+      "seen": [
+        "2026-06-14",
+        "2026-10-04",
+        "2026-10-04 (docx)"
+      ],
+      "note": "digit transposition in the liturgy; the hymn is #354. Both bulletins printed #345. Flag if it recurs."
+    }
+  },
+  "346": {
+    "title": "I am trusting Thee, Lord Jesus",
+    "title_source": "hymnary-first-line",
+    "first_line": "I am trusting Thee, Lord Jesus",
+    "tune": "BULLINGER"
   },
   "347": {
     "title": "Be Still My Soul",
     "seen": [
       "2026-04-26"
-    ]
+    ],
+    "first_line": "Be still, my soul! the Lord is on thy side",
+    "tune": "FINLANDIA"
+  },
+  "348": {
+    "title": "O safe to the rock that is higher than I",
+    "title_source": "hymnary-first-line",
+    "first_line": "O safe to the rock that is higher than I",
+    "tune": "HIDING IN THEE"
+  },
+  "349": {
+    "title": "When we walk with the Lord",
+    "title_source": "hymnary-first-line",
+    "first_line": "When we walk with the Lord",
+    "tune": "TRUST AND OBEY"
   },
   "350": {
     "title": "Tis So Sweet to Trust in Jesus",
     "seen": [
       "2026-07-12"
-    ]
+    ],
+    "first_line": "’Tis so sweet to trust in Jesus",
+    "tune": "TRUST IN JESUS"
+  },
+  "351": {
+    "title": "Dying with Jesus, by death reckoned mine",
+    "title_source": "hymnary-first-line",
+    "first_line": "Dying with Jesus, by death reckoned mine",
+    "tune": "WHITTLE"
+  },
+  "352": {
+    "title": "My Father is rich in houses and lands",
+    "title_source": "hymnary-first-line",
+    "first_line": "My Father is rich in houses and lands",
+    "tune": "BINGHAMTON"
+  },
+  "353": {
+    "title": "The Lord's our Rock, in Him we hide",
+    "title_source": "hymnary-first-line",
+    "first_line": "The Lord's our Rock, in Him we hide",
+    "tune": "SHELTER"
+  },
+  "354": {
+    "title": "Leaning on the Everlasting Arms",
+    "first_line": "What a fellowship, what a joy divine",
+    "tune": "SHOWALTER",
+    "seen": [
+      "2026-06-14",
+      "2026-10-04",
+      "2026-10-04 (docx)"
+    ],
+    "seen_note": "cited as #345 in the liturgy on these dates"
+  },
+  "355": {
+    "title": "Simply trusting every day",
+    "title_source": "hymnary-first-line",
+    "first_line": "Simply trusting every day",
+    "tune": "TRUSTING JESUS"
+  },
+  "356": {
+    "title": "Under His wings I am safely abiding",
+    "title_source": "hymnary-first-line",
+    "first_line": "Under His wings I am safely abiding",
+    "tune": "HINGHAM"
+  },
+  "357": {
+    "title": "I am so glad that our Father in heav'n",
+    "title_source": "hymnary-first-line",
+    "first_line": "I am so glad that our Father in heav'n",
+    "tune": "GLADNESS"
+  },
+  "358": {
+    "title": "I am Thine, O Lord, I have heard Thy voice",
+    "title_source": "hymnary-first-line",
+    "first_line": "I am Thine, O Lord, I have heard Thy voice",
+    "tune": "I AM THINE"
+  },
+  "359": {
+    "title": "All my tomorrows, all my past",
+    "title_source": "hymnary-first-line",
+    "first_line": "All my tomorrows, all my past",
+    "tune": "LORD OF ALL"
+  },
+  "360": {
+    "title": "Jesus is Savior and Lord of my life",
+    "title_source": "hymnary-first-line",
+    "first_line": "Jesus is Savior and Lord of my life",
+    "tune": "LORDSHIP OF CHRIST"
+  },
+  "361": {
+    "title": "My God, I love Thee",
+    "title_source": "hymnary-first-line",
+    "first_line": "My God, I love Thee"
+  },
+  "362": {
+    "title": "I love Thee, I love Thee, I love Thee, my Lord",
+    "title_source": "hymnary-first-line",
+    "first_line": "I love Thee, I love Thee, I love Thee, my Lord",
+    "tune": "I LOVE THEE"
+  },
+  "363": {
+    "title": "More love to Thee, O Christ",
+    "title_source": "hymnary-first-line",
+    "first_line": "More love to Thee, O Christ",
+    "tune": "MORE LOVE TO THEE"
   },
   "364": {
     "title": "My Jesus, I Love Thee",
     "seen": [
       "2026-04-19"
-    ]
+    ],
+    "first_line": "My Jesus, I love Thee, I know Thou art mine",
+    "tune": "GORDON"
+  },
+  "365": {
+    "title": "Thou my everlasting portion",
+    "title_source": "hymnary-first-line",
+    "first_line": "Thou my everlasting portion",
+    "tune": "CLOSE TO THEE"
   },
   "366": {
     "title": "I Surrender All",
     "seen": [
       "2026-10-11",
       "2026-10-11 (docx)"
-    ]
+    ],
+    "first_line": "All to Jesus I surrender",
+    "tune": "SURRENDER"
+  },
+  "367": {
+    "title": "“Take up thy cross and follow Me,”",
+    "title_source": "hymnary-first-line",
+    "first_line": "“Take up thy cross and follow Me,”",
+    "tune": "FALLS CREEK"
   },
   "368": {
     "title": "All For Jesus",
     "seen": [
       "2026-03-08",
       "2026-06-21"
-    ]
+    ],
+    "first_line": "All for Jesus, all for Jesus!",
+    "tune": "CONSTANCY"
   },
   "369": {
     "title": "O Jesus, I Have Promised",
     "seen": [
       "2026-10-25",
       "2026-10-25 (docx)"
-    ]
+    ],
+    "first_line": "O Jesus, I have promised",
+    "tune": "ANGEL&#039;S STORY"
+  },
+  "370": {
+    "title": "My life, my love I give to Thee",
+    "title_source": "hymnary-first-line",
+    "first_line": "My life, my love I give to Thee",
+    "tune": "DUNBAR"
+  },
+  "371": {
+    "title": "Have Thine own way, Lord",
+    "title_source": "hymnary-first-line",
+    "first_line": "Have Thine own way, Lord!",
+    "tune": "ADELAIDE"
+  },
+  "372": {
+    "title": "Living for Jesus a life that is true",
+    "title_source": "hymnary-first-line",
+    "first_line": "Living for Jesus a life that is true",
+    "tune": "LIVING"
+  },
+  "373": {
+    "title": "I can hear my Savior calling",
+    "title_source": "hymnary-first-line",
+    "first_line": "I can hear my Savior calling",
+    "tune": "NORRIS"
+  },
+  "374": {
+    "title": "O Love that will not let me go",
+    "title_source": "hymnary-first-line",
+    "first_line": "O Love that will not let me go",
+    "tune": "ST. MARGARET"
+  },
+  "375": {
+    "title": "Jesus calls us; o'er the tumult",
+    "title_source": "hymnary-first-line",
+    "first_line": "Jesus calls us; o'er the tumult",
+    "tune": "GALILEE"
+  },
+  "376": {
+    "title": "I have decided to follow Jesus",
+    "title_source": "hymnary-first-line",
+    "first_line": "I have decided to follow Jesus",
+    "tune": "ASSAM"
+  },
+  "377": {
+    "title": "Jesus, I my cross have taken",
+    "title_source": "hymnary-first-line",
+    "first_line": "Jesus, I my cross have taken",
+    "tune": "ELLESDIE"
+  },
+  "378": {
+    "title": "Only one life to offer",
+    "title_source": "hymnary-first-line",
+    "first_line": "Only one life to offer",
+    "tune": "ONLY ONE LIFE"
   },
   "379": {
     "title": "Take My Life and Let It Be",
@@ -368,7 +2464,21 @@
       "2026-02-22",
       "2026-08-02",
       "2026-08-02 (docx)"
-    ]
+    ],
+    "first_line": "Take my life and let it be",
+    "tune": "HENDON"
+  },
+  "380": {
+    "title": "I am weak but Thou art strong",
+    "title_source": "hymnary-first-line",
+    "first_line": "I am weak but Thou art strong",
+    "tune": "CLOSER WALK"
+  },
+  "381": {
+    "title": "Open my eyes, that I may see",
+    "title_source": "hymnary-first-line",
+    "first_line": "Open my eyes, that I may see",
+    "tune": "SCOTT"
   },
   "382": {
     "title": "Be Thou My Vision",
@@ -376,45 +2486,1345 @@
       "2026-02-22",
       "2026-07-26",
       "2026-07-26 (docx)"
-    ]
+    ],
+    "first_line": "Be Thou my Vision, O Lord of my heart",
+    "tune": "SLANE"
+  },
+  "383": {
+    "title": "Open our eyes, Lord, we want to see Jesus",
+    "title_source": "hymnary-first-line",
+    "first_line": "Open our eyes, Lord, we want to see Jesus",
+    "tune": "OPEN OUR EYES"
+  },
+  "384": {
+    "title": "To be like Jesus, to be like Jesus",
+    "title_source": "hymnary-first-line",
+    "first_line": "To be like Jesus, to be like Jesus!",
+    "tune": "TO BE LIKE JESUS"
+  },
+  "385": {
+    "title": "Jesus, keep me near the cross",
+    "title_source": "hymnary-first-line",
+    "first_line": "Jesus, keep me near the cross",
+    "tune": "NEAR THE CROSS"
+  },
+  "386": {
+    "title": "For those God foreknew He also predestined",
+    "title_source": "hymnary-first-line",
+    "first_line": "For those God foreknew He also predestined"
+  },
+  "387": {
+    "title": "O to be like Thee! blessed Redeemer",
+    "title_source": "hymnary-first-line",
+    "first_line": "O to be like Thee! blessed Redeemer",
+    "tune": "RONDINELLA"
+  },
+  "388": {
+    "title": "Earthly pleasures vainly call me",
+    "title_source": "hymnary-first-line",
+    "first_line": "Earthly pleasures vainly call me",
+    "tune": "SPRING HILL"
+  },
+  "389": {
+    "title": "More about Jesus would I know",
+    "title_source": "hymnary-first-line",
+    "first_line": "More about Jesus would I know",
+    "tune": "SWENEY"
+  },
+  "390": {
+    "title": "May the mind of Christ my Savior",
+    "title_source": "hymnary-first-line",
+    "first_line": "May the mind of Christ my Savior",
+    "tune": "ST. LEONARDS"
+  },
+  "391": {
+    "title": "I want to be like Jesus Christ",
+    "title_source": "hymnary-first-line",
+    "first_line": "I want to be like Jesus Christ",
+    "tune": "ASPIRATION CANON"
+  },
+  "392": {
+    "title": "Nearer, still nearer, close to Thy heart",
+    "title_source": "hymnary-first-line",
+    "first_line": "Nearer, still nearer, close to Thy heart",
+    "tune": "MORRIS"
+  },
+  "393": {
+    "title": "Nearer, my God, to Thee",
+    "title_source": "hymnary-first-line",
+    "first_line": "Nearer, my God, to Thee",
+    "tune": "BETHANY"
+  },
+  "394": {
+    "title": "In my life, Lord, be glorified",
+    "title_source": "hymnary-first-line",
+    "first_line": "In my life, Lord, be glorified",
+    "tune": "BE GLORIFIED"
+  },
+  "395": {
+    "title": "Teach me Thy way, O Lord",
+    "title_source": "hymnary-first-line",
+    "first_line": "Teach me Thy way, O Lord",
+    "tune": "CAMACHA"
+  },
+  "396": {
+    "title": "When in the spring the flow'rs are blooming bright and fair",
+    "title_source": "hymnary-first-line",
+    "first_line": "When in the spring the flow'rs are blooming bright and fair",
+    "tune": "SPRINGTIME"
+  },
+  "397": {
+    "title": "Draw nigh to God, and He will draw nigh to you",
+    "title_source": "hymnary-first-line",
+    "first_line": "Draw nigh to God, and He will draw nigh to you",
+    "tune": "CROFT"
+  },
+  "398": {
+    "title": "Like the woman at the well I was seeking",
+    "title_source": "hymnary-first-line",
+    "first_line": "Like the woman at the well I was seeking",
+    "tune": "FILL MY CUP"
+  },
+  "399": {
+    "title": "I'm pressing on the upward way",
+    "title_source": "hymnary-first-line",
+    "first_line": "I'm pressing on the upward way",
+    "tune": "HIGHER GROUND"
+  },
+  "400": {
+    "title": "I have one deep, supreme desire",
+    "title_source": "hymnary-first-line",
+    "first_line": "I have one deep, supreme desire",
+    "tune": "IVES"
+  },
+  "401": {
+    "title": "As the hart longs for flowing streams",
+    "title_source": "hymnary-first-line",
+    "first_line": "As the hart longs for flowing streams"
+  },
+  "402": {
+    "title": "My hope is built on nothing less",
+    "title_source": "hymnary-first-line",
+    "first_line": "My hope is built on nothing less"
+  },
+  "403": {
+    "title": "Therefore having been justified by faith",
+    "title_source": "hymnary-first-line",
+    "first_line": "Therefore having been justified by faith"
+  },
+  "404": {
+    "title": "My hope is built on nothing less",
+    "title_source": "hymnary-first-line",
+    "first_line": "My hope is built on nothing less"
+  },
+  "405": {
+    "title": "My faith has found a resting place",
+    "title_source": "hymnary-first-line",
+    "first_line": "My faith has found a resting place"
+  },
+  "406": {
+    "title": "My hope is in the Lord",
+    "title_source": "hymnary-first-line",
+    "first_line": "My hope is in the Lord"
+  },
+  "407": {
+    "title": "Hear now the Name I'm singing",
+    "title_source": "hymnary-first-line",
+    "first_line": "Hear now the Name I'm singing"
+  },
+  "408": {
+    "title": "Have faith in God when your pathway is lonely",
+    "title_source": "hymnary-first-line",
+    "first_line": "Have faith in God when your pathway is lonely"
+  },
+  "409": {
+    "title": "I know not why God's wondrous grace",
+    "title_source": "hymnary-first-line",
+    "first_line": "I know not why God's wondrous grace"
+  },
+  "410": {
+    "title": "My faith looks up to Thee",
+    "title_source": "hymnary-first-line",
+    "first_line": "My faith looks up to Thee"
+  },
+  "411": {
+    "title": "The joy of the Lord is my strength",
+    "title_source": "hymnary-first-line",
+    "first_line": "The joy of the Lord is my strength"
+  },
+  "412": {
+    "title": "Sun of my soul, Thou Savior dear",
+    "title_source": "hymnary-first-line",
+    "first_line": "Sun of my soul, Thou Savior dear"
+  },
+  "413": {
+    "title": "Jesus, priceless treasure",
+    "title_source": "hymnary-first-line",
+    "first_line": "Jesus, priceless treasure"
+  },
+  "414": {
+    "title": "I heard the voice of Jesus say",
+    "title_source": "hymnary-first-line",
+    "first_line": "I heard the voice of Jesus say"
+  },
+  "415": {
+    "title": "He giveth more grace when the burden grows greater",
+    "title_source": "hymnary-first-line",
+    "first_line": "He giveth more grace when the burden grows greater"
+  },
+  "416": {
+    "title": "Come, ye disconsolate, where'er ye languish",
+    "title_source": "hymnary-first-line",
+    "first_line": "Come, ye disconsolate, where'er ye languish"
+  },
+  "417": {
+    "title": "No one understands like Jesus",
+    "title_source": "hymnary-first-line",
+    "first_line": "No one understands like Jesus"
+  },
+  "418": {
+    "title": "Is there a heart o'er bound by sorrow",
+    "title_source": "hymnary-first-line",
+    "first_line": "Is there a heart o'er bound by sorrow?"
+  },
+  "419": {
+    "title": "Abide with me! Fast falls the eventide",
+    "title_source": "hymnary-first-line",
+    "first_line": "Abide with me! Fast falls the eventide"
+  },
+  "420": {
+    "title": "Only believe, only believe",
+    "title_source": "hymnary-first-line",
+    "first_line": "Only believe, only believe"
+  },
+  "421": {
+    "title": "Be calm my soul, faint not with care",
+    "title_source": "hymnary-first-line",
+    "first_line": "Be calm my soul, faint not with care"
+  },
+  "422": {
+    "title": "There's not a friend like the lowly Jesus",
+    "title_source": "hymnary-first-line",
+    "first_line": "There's not a friend like the lowly Jesus"
+  },
+  "423": {
+    "title": "Sometimes I feel discouraged",
+    "title_source": "hymnary-first-line",
+    "first_line": "Sometimes I feel discouraged"
+  },
+  "424": {
+    "title": "Tell me the old, old story",
+    "title_source": "hymnary-first-line",
+    "first_line": "Tell me the old, old story"
+  },
+  "425": {
+    "title": "I come to the garden alone",
+    "title_source": "hymnary-first-line",
+    "first_line": "I come to the garden alone"
+  },
+  "426": {
+    "title": "Our Father, which art in heaven",
+    "title_source": "hymnary-first-line",
+    "first_line": "Our Father, which art in heaven"
+  },
+  "427": {
+    "title": "Dear Lord and Father of mankind",
+    "title_source": "hymnary-first-line",
+    "first_line": "Dear Lord and Father of mankind"
+  },
+  "428": {
+    "title": "I need Thee ev'ry hour",
+    "title_source": "hymnary-first-line",
+    "first_line": "I need Thee ev'ry hour"
+  },
+  "429": {
+    "title": "Lord, listen to your children praying",
+    "title_source": "hymnary-first-line",
+    "first_line": "Lord, listen to your children praying"
+  },
+  "430": {
+    "title": "I must tell Jesus all of my trials",
+    "title_source": "hymnary-first-line",
+    "first_line": "I must tell Jesus all of my trials"
+  },
+  "431": {
+    "title": "I have a Savior, He's pleading in glory",
+    "title_source": "hymnary-first-line",
+    "first_line": "I have a Savior, He's pleading in glory"
+  },
+  "432": {
+    "title": "From ev'ry stormy wind that blows",
+    "title_source": "hymnary-first-line",
+    "first_line": "From ev'ry stormy wind that blows"
+  },
+  "433": {
+    "title": "Sweet hour of prayer, sweet hour of prayer",
+    "title_source": "hymnary-first-line",
+    "first_line": "Sweet hour of prayer, sweet hour of prayer"
+  },
+  "434": {
+    "title": "Search me, O God, and know my heart today",
+    "title_source": "hymnary-first-line",
+    "first_line": "Search me, O God, and know my heart today"
+  },
+  "435": {
+    "title": "What a Friend we have in Jesus",
+    "title_source": "hymnary-first-line",
+    "first_line": "What a Friend we have in Jesus"
+  },
+  "436": {
+    "title": "Lord Jesus, I long to be perfectly whole",
+    "title_source": "hymnary-first-line",
+    "first_line": "Lord Jesus, I long to be perfectly whole"
+  },
+  "437": {
+    "title": "Pure and holy I would be",
+    "title_source": "hymnary-first-line",
+    "first_line": "Pure and holy I would be"
+  },
+  "438": {
+    "title": "Search me, O God, and know my heart today",
+    "title_source": "hymnary-first-line",
+    "first_line": "Search me, O God, and know my heart today"
+  },
+  "439": {
+    "title": "Search me, O God, and know my heart today",
+    "title_source": "hymnary-first-line",
+    "first_line": "Search me, O God, and know my heart today"
+  },
+  "440": {
+    "title": "O for a heart to praise my God",
+    "title_source": "hymnary-first-line",
+    "first_line": "O for a heart to praise my God"
+  },
+  "441": {
+    "title": "Take time to be holy",
+    "title_source": "hymnary-first-line",
+    "first_line": "Take time to be holy"
+  },
+  "442": {
+    "title": "Take time to be holy",
+    "title_source": "hymnary-first-line",
+    "first_line": "Take time to be holy"
+  },
+  "443": {
+    "title": "Take the world, but give me Jesus",
+    "title_source": "hymnary-first-line",
+    "first_line": "Take the world, but give me Jesus"
+  },
+  "444": {
+    "title": "It may not be on the mountain's height",
+    "title_source": "hymnary-first-line",
+    "first_line": "It may not be on the mountain's height"
+  },
+  "445": {
+    "title": "Savior, Thy dying love",
+    "title_source": "hymnary-first-line",
+    "first_line": "Savior, Thy dying love"
+  },
+  "446": {
+    "title": "I will serve Thee because I love Thee",
+    "title_source": "hymnary-first-line",
+    "first_line": "I will serve Thee because I love Thee"
+  },
+  "447": {
+    "title": "God forgave my sin in Jesus' name",
+    "title_source": "hymnary-first-line",
+    "first_line": "God forgave my sin in Jesus' name"
+  },
+  "448": {
+    "title": "A charge to keep I have",
+    "title_source": "hymnary-first-line",
+    "first_line": "A charge to keep I have"
+  },
+  "449": {
+    "title": "Must Jesus bear the cross alone",
+    "title_source": "hymnary-first-line",
+    "first_line": "Must Jesus bear the cross alone"
+  },
+  "450": {
+    "title": "Lord, speak to me, that I may speak",
+    "title_source": "hymnary-first-line",
+    "first_line": "Lord, speak to me, that I may speak"
+  },
+  "451": {
+    "title": "O Master, let me walk with Thee",
+    "title_source": "hymnary-first-line",
+    "first_line": "O Master, let me walk with Thee"
+  },
+  "452": {
+    "title": "Out in the highways and by-ways of life",
+    "title_source": "hymnary-first-line",
+    "first_line": "Out in the highways and by-ways of life"
+  },
+  "453": {
+    "title": "I gave My life for thee",
+    "title_source": "hymnary-first-line",
+    "first_line": "I gave My life for thee"
+  },
+  "454": {
+    "title": "Glorious is Thy name, Most Holy",
+    "title_source": "hymnary-first-line",
+    "first_line": "Glorious is Thy name, Most Holy"
+  },
+  "455": {
+    "title": "Come, all Christians, be committed",
+    "title_source": "hymnary-first-line",
+    "first_line": "Come, all Christians, be committed"
+  },
+  "456": {
+    "title": "Reach for the glorious prize",
+    "title_source": "hymnary-first-line",
+    "first_line": "Reach for the glorious prize"
+  },
+  "457": {
+    "title": "I will sing of the mercies of the Lord forever",
+    "title_source": "hymnary-first-line",
+    "first_line": "I will sing of the mercies of the Lord forever"
+  },
+  "458": {
+    "title": "Gentle Shepherd, come and lead us",
+    "title_source": "hymnary-first-line",
+    "first_line": "Gentle Shepherd, come and lead us"
+  },
+  "459": {
+    "title": "I am the good Shepherd",
+    "title_source": "hymnary-first-line",
+    "first_line": "\"I am the good Shepherd\""
+  },
+  "460": {
+    "title": "All the way my Savior leads me",
+    "title_source": "hymnary-first-line",
+    "first_line": "All the way my Savior leads me"
   },
   "461": {
     "title": "He Leadeth Me",
     "seen": [
       "2026-08-30",
       "2026-08-30 (docx)"
-    ]
+    ],
+    "first_line": "He leadeth me! O blessed thought!"
+  },
+  "462": {
+    "title": "Savior, like a shepherd lead us",
+    "title_source": "hymnary-first-line",
+    "first_line": "Savior, like a shepherd lead us"
+  },
+  "463": {
+    "title": "Precious Lord, take my hand",
+    "title_source": "hymnary-first-line",
+    "first_line": "Precious Lord, take my hand"
+  },
+  "464": {
+    "title": "Shepherd of love, You knew I had lost my way",
+    "title_source": "hymnary-first-line",
+    "first_line": "Shepherd of love, You knew I had lost my way"
+  },
+  "465": {
+    "title": "In His time, in His time",
+    "title_source": "hymnary-first-line",
+    "first_line": "In His time, in His time"
+  },
+  "466": {
+    "title": "Jesus, Lover of my soul",
+    "title_source": "hymnary-first-line",
+    "first_line": "Jesus, Lover of my soul"
+  },
+  "467": {
+    "title": "Anywhere with Jesus I can safely go",
+    "title_source": "hymnary-first-line",
+    "first_line": "Anywhere with Jesus I can safely go"
+  },
+  "468": {
+    "title": "The King of love my Shepherd is",
+    "title_source": "hymnary-first-line",
+    "first_line": "The King of love my Shepherd is"
+  },
+  "469": {
+    "title": "Cover me, Lord, with Your presence",
+    "title_source": "hymnary-first-line",
+    "first_line": "Cover me, Lord, with Your presence"
+  },
+  "470": {
+    "title": "Sweetly, Lord, have we heard Thee calling",
+    "title_source": "hymnary-first-line",
+    "first_line": "Sweetly, Lord, have we heard Thee calling"
+  },
+  "471": {
+    "title": "I must needs go home by the way of the cross",
+    "title_source": "hymnary-first-line",
+    "first_line": "I must needs go home by the way of the cross"
+  },
+  "472": {
+    "title": "The battle is the Lord's",
+    "title_source": "hymnary-first-line",
+    "first_line": "The battle is the Lord's!"
+  },
+  "473": {
+    "title": "I heard an old, old story",
+    "title_source": "hymnary-first-line",
+    "first_line": "I heard an old, old story"
+  },
+  "474": {
+    "title": "You're my brother, you're my sister",
+    "title_source": "hymnary-first-line",
+    "first_line": "You're my brother, you're my sister"
+  },
+  "475": {
+    "title": "Once to every man and nation",
+    "title_source": "hymnary-first-line",
+    "first_line": "Once to every man and nation"
+  },
+  "476": {
+    "title": "Be strong in the Lord and in His mighty power",
+    "title_source": "hymnary-first-line",
+    "first_line": "Be strong in the Lord and in His mighty power"
+  },
+  "477": {
+    "title": "Stand up, stand up for Jesus",
+    "title_source": "hymnary-first-line",
+    "first_line": "Stand up, stand up for Jesus"
+  },
+  "478": {
+    "title": "Soldiers of Christ, arise",
+    "title_source": "hymnary-first-line",
+    "first_line": "Soldiers of Christ, arise"
   },
   "479": {
     "title": "Onward, Christian Soldiers",
     "seen": [
       "2026-04-26"
-    ]
+    ],
+    "first_line": "Onward, Christian soldiers"
+  },
+  "480": {
+    "title": "I am a soldier of the cross",
+    "title_source": "hymnary-first-line",
+    "first_line": "I am a soldier of the cross!"
+  },
+  "481": {
+    "title": "Stand up, stand up for Jesus",
+    "title_source": "hymnary-first-line",
+    "first_line": "Stand up, stand up for Jesus"
+  },
+  "482": {
+    "title": "Am I a soldier of the cross",
+    "title_source": "hymnary-first-line",
+    "first_line": "Am I a soldier of the cross?"
   },
   "483": {
     "title": "Lead On, O King Eternal",
     "seen": [
       "2026-07-05"
-    ]
+    ],
+    "first_line": "Lead on, O King Eternal"
+  },
+  "484": {
+    "title": "Who is on the Lord's side",
+    "title_source": "hymnary-first-line",
+    "first_line": "Who is on the Lord's side?"
+  },
+  "485": {
+    "title": "In heavenly armor we'll enter the land",
+    "title_source": "hymnary-first-line",
+    "first_line": "In heavenly armor we'll enter the land"
+  },
+  "486": {
+    "title": "Encamped along the hills of light",
+    "title_source": "hymnary-first-line",
+    "first_line": "Encamped along the hills of light"
+  },
+  "487": {
+    "title": "Peace, perfect peace, in this dark world of sin",
+    "title_source": "hymnary-first-line",
+    "first_line": "Peace, perfect peace, in this dark world of sin?"
+  },
+  "488": {
+    "title": "There's within my heart a melody",
+    "title_source": "hymnary-first-line",
+    "first_line": "There's within my heart a melody"
+  },
+  "489": {
+    "title": "Rejoice in the Lord always, again I say, rejoice",
+    "title_source": "hymnary-first-line",
+    "first_line": "Rejoice in the Lord always, again I say, rejoice!"
+  },
+  "490": {
+    "title": "Loved with everlasting love",
+    "title_source": "hymnary-first-line",
+    "first_line": "Loved with everlasting love"
+  },
+  "491": {
+    "title": "These things I have spoken to you",
+    "title_source": "hymnary-first-line",
+    "first_line": "These things I have spoken to you"
+  },
+  "492": {
+    "title": "Thou wilt keep him in perfect peace",
+    "title_source": "hymnary-first-line",
+    "first_line": "Thou wilt keep him in perfect peace"
+  },
+  "493": {
+    "title": "When peace like a river attendeth my way",
+    "title_source": "hymnary-first-line",
+    "first_line": "When peace like a river attendeth my way"
+  },
+  "494": {
+    "title": "Like a river glorious",
+    "title_source": "hymnary-first-line",
+    "first_line": "Like a river glorious"
+  },
+  "495": {
+    "title": "O what a wonderful wonderful day",
+    "title_source": "hymnary-first-line",
+    "first_line": "O what a wonderful wonderful day"
+  },
+  "496": {
+    "title": "A wonderful Savior is Jesus my Lord",
+    "title_source": "hymnary-first-line",
+    "first_line": "A wonderful Savior is Jesus my Lord"
+  },
+  "497": {
+    "title": "There is a place of quiet rest",
+    "title_source": "hymnary-first-line",
+    "first_line": "There is a place of quiet rest"
+  },
+  "498": {
+    "title": "I've got peace like a river",
+    "title_source": "hymnary-first-line",
+    "first_line": "I've got peace like a river"
+  },
+  "499": {
+    "title": "There is sunshine in my soul today",
+    "title_source": "hymnary-first-line",
+    "first_line": "There is sunshine in my soul today"
+  },
+  "500": {
+    "title": "Far away in the depths of my spirit tonight",
+    "title_source": "hymnary-first-line",
+    "first_line": "Far away in the depths of my spirit tonight"
+  },
+  "501": {
+    "title": "Jesus, Thou Joy of loving hearts",
+    "title_source": "hymnary-first-line",
+    "first_line": "Jesus, Thou Joy of loving hearts"
+  },
+  "502": {
+    "title": "In heav'nly love abiding",
+    "title_source": "hymnary-first-line",
+    "first_line": "In heav'nly love abiding"
+  },
+  "503": {
+    "title": "Jesus, I am resting, resting",
+    "title_source": "hymnary-first-line",
+    "first_line": "Jesus, I am resting, resting"
+  },
+  "504": {
+    "title": "Shackled by a heavy burden",
+    "title_source": "hymnary-first-line",
+    "first_line": "Shackled by a heavy burden"
+  },
+  "505": {
+    "title": "I was sinking deep in sin",
+    "title_source": "hymnary-first-line",
+    "first_line": "I was sinking deep in sin"
   },
   "506": {
     "title": "I Will Sing of My Redeemer",
     "seen": [
       "2026-04-12"
-    ]
+    ],
+    "first_line": "I will sing of my Redeemer"
+  },
+  "507": {
+    "title": "Through it all, Through it all",
+    "title_source": "hymnary-first-line",
+    "first_line": "Through it all, Through it all"
+  },
+  "508": {
+    "title": "I will sing the wondrous story",
+    "title_source": "hymnary-first-line",
+    "first_line": "I will sing the wondrous story"
+  },
+  "509": {
+    "title": "I will proclaim the name of the Lord",
+    "title_source": "hymnary-first-line",
+    "first_line": "I will proclaim the name of the Lord"
+  },
+  "510": {
+    "title": "Jesus is all the world to me",
+    "title_source": "hymnary-first-line",
+    "first_line": "Jesus is all the world to me"
+  },
+  "511": {
+    "title": "Jesus my Lord will love me forever",
+    "title_source": "hymnary-first-line",
+    "first_line": "Jesus my Lord will love me forever"
+  },
+  "512": {
+    "title": "I stand amazed in the presence",
+    "title_source": "hymnary-first-line",
+    "first_line": "I stand amazed in the presence"
+  },
+  "513": {
+    "title": "O, how He loves you and me",
+    "title_source": "hymnary-first-line",
+    "first_line": "O, how He loves you and me"
+  },
+  "514": {
+    "title": "I have a song that Jesus gave me",
+    "title_source": "hymnary-first-line",
+    "first_line": "I have a song that Jesus gave me"
+  },
+  "515": {
+    "title": "What a wonderful change in my life has been wrought",
+    "title_source": "hymnary-first-line",
+    "first_line": "What a wonderful change in my life has been wrought"
+  },
+  "516": {
+    "title": "In the stars His handiwork I see",
+    "title_source": "hymnary-first-line",
+    "first_line": "In the stars His handiwork I see"
+  },
+  "517": {
+    "title": "I'd rather have Jesus than silver or gold",
+    "title_source": "hymnary-first-line",
+    "first_line": "I'd rather have Jesus than silver or gold"
+  },
+  "518": {
+    "title": "Since I started for the Kingdom",
+    "title_source": "hymnary-first-line",
+    "first_line": "Since I started for the Kingdom"
+  },
+  "519": {
+    "title": "Something beautiful, something good",
+    "title_source": "hymnary-first-line",
+    "first_line": "Something beautiful, something good"
+  },
+  "520": {
+    "title": "Redeemed, how I love to proclaim it",
+    "title_source": "hymnary-first-line",
+    "first_line": "Redeemed, how I love to proclaim it!"
+  },
+  "521": {
+    "title": "Redeemed, how I love to proclaim it",
+    "title_source": "hymnary-first-line",
+    "first_line": "Redeemed, how I love to proclaim it!"
+  },
+  "522": {
+    "title": "In loving kindness Jesus came",
+    "title_source": "hymnary-first-line",
+    "first_line": "In loving kindness Jesus came"
+  },
+  "523": {
+    "title": "Yesterday he died for me",
+    "title_source": "hymnary-first-line",
+    "first_line": "Yesterday he died for me"
+  },
+  "524": {
+    "title": "My Father is omnipotent",
+    "title_source": "hymnary-first-line",
+    "first_line": "My Father is omnipotent"
+  },
+  "525": {
+    "title": "When I saw the cleansing fountain",
+    "title_source": "hymnary-first-line",
+    "first_line": "When I saw the cleansing fountain"
+  },
+  "526": {
+    "title": "Who can cheer the heart like Jesus",
+    "title_source": "hymnary-first-line",
+    "first_line": "Who can cheer the heart like Jesus"
+  },
+  "527": {
+    "title": "Down at the cross where my Savior died",
+    "title_source": "hymnary-first-line",
+    "first_line": "Down at the cross where my Savior died"
+  },
+  "528": {
+    "title": "I would love to tell you what I think of Jesus",
+    "title_source": "hymnary-first-line",
+    "first_line": "I would love to tell you what I think of Jesus"
+  },
+  "529": {
+    "title": "There is a name I love to hear",
+    "title_source": "hymnary-first-line",
+    "first_line": "There is a name I love to hear"
+  },
+  "530": {
+    "title": "I've found a Friend, who is all to me",
+    "title_source": "hymnary-first-line",
+    "first_line": "I've found a Friend, who is all to me"
+  },
+  "531": {
+    "title": "All my life long I had panted",
+    "title_source": "hymnary-first-line",
+    "first_line": "All my life long I had panted"
+  },
+  "532": {
+    "title": "O happy day that fixed my choice",
+    "title_source": "hymnary-first-line",
+    "first_line": "O happy day that fixed my choice"
+  },
+  "533": {
+    "title": "O perfect love, all human thought transcending",
+    "title_source": "hymnary-first-line",
+    "first_line": "O perfect love, all human thought transcending"
+  },
+  "534": {
+    "title": "She will be called blessed By her sons and her daughters",
+    "title_source": "hymnary-first-line",
+    "first_line": "She will be called blessed By her sons and her daughters"
+  },
+  "535": {
+    "title": "O give us homes built firm upon the Savior",
+    "title_source": "hymnary-first-line",
+    "first_line": "O give us homes built firm upon the Savior"
+  },
+  "536": {
+    "title": "Happy the home when God is there",
+    "title_source": "hymnary-first-line",
+    "first_line": "Happy the home when God is there"
+  },
+  "537": {
+    "title": "As for me and my house, we will serve the Lord",
+    "title_source": "hymnary-first-line",
+    "first_line": "As for me and my house, we will serve the Lord"
+  },
+  "538": {
+    "title": "When I can read my title clear",
+    "title_source": "hymnary-first-line",
+    "first_line": "When I can read my title clear"
+  },
+  "539": {
+    "title": "When all my labors and trials are o'er",
+    "title_source": "hymnary-first-line",
+    "first_line": "When all my labors and trials are o'er"
+  },
+  "540": {
+    "title": "Then I saw a new heaven and a new earth",
+    "title_source": "hymnary-first-line",
+    "first_line": "Then I saw a new heaven and a new earth"
+  },
+  "541": {
+    "title": "Love divine, so great and wondrous",
+    "title_source": "hymnary-first-line",
+    "first_line": "Love divine, so great and wondrous"
+  },
+  "542": {
+    "title": "Sing the wondrous love of Jesus",
+    "title_source": "hymnary-first-line",
+    "first_line": "Sing the wondrous love of Jesus"
+  },
+  "543": {
+    "title": "When the trumpet of the Lord shall sound",
+    "title_source": "hymnary-first-line",
+    "first_line": "When the trumpet of the Lord shall sound"
+  },
+  "544": {
+    "title": "Trials dark on ev'ry hand",
+    "title_source": "hymnary-first-line",
+    "first_line": "Trials dark on ev'ry hand"
+  },
+  "545": {
+    "title": "We shall see His lovely face",
+    "title_source": "hymnary-first-line",
+    "first_line": "We shall see His lovely face"
   },
   "546": {
     "title": "For All the Saints",
     "seen": [
       "2026-10-18",
       "2026-10-18 (docx)"
-    ]
+    ],
+    "first_line": "For all the saints who from their labors rest"
+  },
+  "547": {
+    "title": "John saw the heav'n and earth made new",
+    "title_source": "hymnary-first-line",
+    "first_line": "John saw the heav'n and earth made new"
+  },
+  "548": {
+    "title": "Beyond the sunset, O blissful morning",
+    "title_source": "hymnary-first-line",
+    "first_line": "Beyond the sunset, O blissful morning"
+  },
+  "549": {
+    "title": "Face to face with Christ my Savior",
+    "title_source": "hymnary-first-line",
+    "first_line": "Face to face with Christ my Savior"
+  },
+  "550": {
+    "title": "And I shall see Him face to face",
+    "title_source": "hymnary-first-line",
+    "first_line": "And I shall see Him face to face"
+  },
+  "551": {
+    "title": "Soon and very soon, We are going to see the King",
+    "title_source": "hymnary-first-line",
+    "first_line": "Soon and very soon, We are going to see the King"
+  },
+  "552": {
+    "title": "On Jordan's stormy banks I stand",
+    "title_source": "hymnary-first-line",
+    "first_line": "On Jordan's stormy banks I stand"
+  },
+  "553": {
+    "title": "There's a land that is fairer than day",
+    "title_source": "hymnary-first-line",
+    "first_line": "There's a land that is fairer than day"
+  },
+  "554": {
+    "title": "Some glad morning when this life is o'er",
+    "title_source": "hymnary-first-line",
+    "first_line": "Some glad morning when this life is o'er"
+  },
+  "555": {
+    "title": "Come, we that love the Lord",
+    "title_source": "hymnary-first-line",
+    "first_line": "Come, we that love the Lord"
+  },
+  "556": {
+    "title": "Now thank we all our God",
+    "title_source": "hymnary-first-line",
+    "first_line": "Now thank we all our God"
+  },
+  "557": {
+    "title": "From the first bright light of morning",
+    "title_source": "hymnary-first-line",
+    "first_line": "From the first bright light of morning"
+  },
+  "558": {
+    "title": "God saw all that He had made, and it was good",
+    "title_source": "hymnary-first-line",
+    "first_line": "God saw all that He had made, and it was good"
+  },
+  "559": {
+    "title": "Come, ye thankful people, come",
+    "title_source": "hymnary-first-line",
+    "first_line": "Come, ye thankful people, come"
+  },
+  "560": {
+    "title": "For the beauty of the earth",
+    "title_source": "hymnary-first-line",
+    "first_line": "For the beauty of the earth"
+  },
+  "561": {
+    "title": "We gather together to ask the Lord's blessing",
+    "title_source": "hymnary-first-line",
+    "first_line": "We gather together to ask the Lord's blessing"
+  },
+  "562": {
+    "title": "Rejoice, ye pure in heart",
+    "title_source": "hymnary-first-line",
+    "first_line": "Rejoice, ye pure in heart"
+  },
+  "563": {
+    "title": "When upon life's billows you are tempest tossed",
+    "title_source": "hymnary-first-line",
+    "first_line": "When upon life's billows you are tempest tossed"
+  },
+  "564": {
+    "title": "We are so blessed by the gifts from Your hand",
+    "title_source": "hymnary-first-line",
+    "first_line": "We are so blessed by the gifts from Your hand"
+  },
+  "565": {
+    "title": "We thank You for Your love",
+    "title_source": "hymnary-first-line",
+    "first_line": "We thank You for Your love"
+  },
+  "566": {
+    "title": "For health and strength, and daily food",
+    "title_source": "hymnary-first-line",
+    "first_line": "For health and strength, and daily food"
+  },
+  "567": {
+    "title": "Another year is dawning",
+    "title_source": "hymnary-first-line",
+    "first_line": "Another year is dawning"
+  },
+  "568": {
+    "title": "God of the ages",
+    "title_source": "hymnary-first-line",
+    "first_line": "God of the ages"
+  },
+  "569": {
+    "title": "Mine eyes have seen the glory of the coming of the Lord",
+    "title_source": "hymnary-first-line",
+    "first_line": "Mine eyes have seen the glory of the coming of the Lord"
+  },
+  "570": {
+    "title": "Righteousness exalts a nation",
+    "title_source": "hymnary-first-line",
+    "first_line": "Righteousness exalts a nation"
+  },
+  "571": {
+    "title": "My country 'tis of thee",
+    "title_source": "hymnary-first-line",
+    "first_line": "My country 'tis of thee"
+  },
+  "572": {
+    "title": "O beautiful for spacious skies",
+    "title_source": "hymnary-first-line",
+    "first_line": "O beautiful for spacious skies"
+  },
+  "573": {
+    "title": "God of our fathers, whose almighty hand",
+    "title_source": "hymnary-first-line",
+    "first_line": "God of our fathers, whose almighty hand"
+  },
+  "574": {
+    "title": "If My people's hearts are humbled",
+    "title_source": "hymnary-first-line",
+    "first_line": "If My people's hearts are humbled"
+  },
+  "575": {
+    "title": "Eternal Father, strong to save",
+    "title_source": "hymnary-first-line",
+    "first_line": "Eternal Father, strong to save"
+  },
+  "576": {
+    "title": "O say, can you see by the dawn's early light",
+    "title_source": "hymnary-first-line",
+    "first_line": "O say, can you see by the dawn's early light"
+  },
+  "577": {
+    "title": "Blessed the nation whose God is the Lord",
+    "title_source": "hymnary-first-line",
+    "first_line": "Blessed the nation whose God is the Lord"
+  },
+  "578": {
+    "title": "Each little flow'r that opens up",
+    "title_source": "hymnary-first-line",
+    "first_line": "Each little flow'r that opens up"
+  },
+  "579": {
+    "title": "Jesus loves me! this I know",
+    "title_source": "hymnary-first-line",
+    "first_line": "Jesus loves me! this I know"
+  },
+  "580": {
+    "title": "Jesus loves the little children",
+    "title_source": "hymnary-first-line",
+    "first_line": "Jesus loves the little children"
+  },
+  "581": {
+    "title": "Commit thy way unto the Lord",
+    "title_source": "hymnary-first-line",
+    "first_line": "Commit thy way unto the Lord"
+  },
+  "582": {
+    "title": "Reach your hand as far as it goes",
+    "title_source": "hymnary-first-line",
+    "first_line": "Reach your hand as far as it goes"
+  },
+  "583": {
+    "title": "The wise may bring their learning",
+    "title_source": "hymnary-first-line",
+    "first_line": "The wise may bring their learning"
+  },
+  "584": {
+    "title": "It is good to sing Thy praises",
+    "title_source": "hymnary-first-line",
+    "first_line": "It is good to sing Thy praises"
+  },
+  "585": {
+    "title": "Brethren, we have met to worship",
+    "title_source": "hymnary-first-line",
+    "first_line": "Brethren, we have met to worship"
+  },
+  "586": {
+    "title": "Jesus, stand among us",
+    "title_source": "hymnary-first-line",
+    "first_line": "Jesus, stand among us"
+  },
+  "587": {
+    "title": "All praise to our redeeming Lord",
+    "title_source": "hymnary-first-line",
+    "first_line": "All praise to our redeeming Lord"
+  },
+  "588": {
+    "title": "We have come into His house and gathered in His name",
+    "title_source": "hymnary-first-line",
+    "first_line": "We have come into His house and gathered in His name"
+  },
+  "589": {
+    "title": "Come into his presence singing",
+    "title_source": "hymnary-first-line",
+    "first_line": "Come into his presence singing"
+  },
+  "590": {
+    "title": "This is the day, this is the day",
+    "title_source": "hymnary-first-line",
+    "first_line": "This is the day, this is the day"
+  },
+  "591": {
+    "title": "Come, let us reason together",
+    "title_source": "hymnary-first-line",
+    "first_line": "Come, let us reason together"
+  },
+  "592": {
+    "title": "In this quiet moment",
+    "title_source": "hymnary-first-line",
+    "first_line": "In this quiet moment"
+  },
+  "593": {
+    "title": "O worship the Lord in the beauty of holiness",
+    "title_source": "hymnary-first-line",
+    "first_line": "O worship the Lord in the beauty of holiness"
+  },
+  "594": {
+    "title": "The Lord is in His holy temple",
+    "title_source": "hymnary-first-line",
+    "first_line": "The Lord is in His holy temple"
+  },
+  "595": {
+    "title": "Now to the King of heav'n",
+    "title_source": "hymnary-first-line",
+    "first_line": "Now to the King of heav'n"
+  },
+  "596": {
+    "title": "Praise ye the name of the Lord of Hosts",
+    "title_source": "hymnary-first-line",
+    "first_line": "Praise ye the name of the Lord of Hosts"
+  },
+  "597": {
+    "title": "Christ, we do all adore Thee",
+    "title_source": "hymnary-first-line",
+    "first_line": "Christ, we do all adore Thee"
+  },
+  "598": {
+    "title": "Cast thy burden upon the Lord",
+    "title_source": "hymnary-first-line",
+    "first_line": "Cast thy burden upon the Lord"
+  },
+  "599": {
+    "title": "The earth is the Lord's",
+    "title_source": "hymnary-first-line",
+    "first_line": "The earth is the Lord's"
+  },
+  "600": {
+    "title": "If you will only let God guide you",
+    "title_source": "hymnary-first-line",
+    "first_line": "If you will only let God guide you"
+  },
+  "601": {
+    "title": "Lord, dismiss us with Thy blessing",
+    "title_source": "hymnary-first-line",
+    "first_line": "Lord, dismiss us with Thy blessing",
+    "tune": "SICILIAN MARINERS"
+  },
+  "602": {
+    "title": "God be with you till we meet again",
+    "title_source": "hymnary-first-line",
+    "first_line": "God be with you till we meet again",
+    "tune": "GOD BE WITH YOU"
+  },
+  "603": {
+    "title": "The Lord whom we love",
+    "title_source": "hymnary-first-line",
+    "first_line": "The Lord whom we love",
+    "tune": "BROOKS"
+  },
+  "604": {
+    "title": "Savior, again to Thy dear name we raise",
+    "title_source": "hymnary-first-line",
+    "first_line": "Savior, again to Thy dear name we raise",
+    "tune": "ELLERS"
+  },
+  "605": {
+    "title": "When this song of praise shall cease",
+    "title_source": "hymnary-first-line",
+    "first_line": "When this song of praise shall cease",
+    "tune": "MERCY"
+  },
+  "606": {
+    "title": "May the grace of Christ, our Savior",
+    "title_source": "hymnary-first-line",
+    "first_line": "May the grace of Christ, our Savior",
+    "tune": "CANE PEAK"
+  },
+  "607": {
+    "title": "The Lord bless you and keep you",
+    "title_source": "hymnary-first-line",
+    "first_line": "The Lord bless you and keep you",
+    "tune": "BENEDICTION"
+  },
+  "608": {
+    "title": "May the grace of Christ, our Savior",
+    "title_source": "hymnary-first-line",
+    "first_line": "May the grace of Christ, our Savior",
+    "tune": "SARDIS"
+  },
+  "609": {
+    "title": "Lord, let us now depart in peace",
+    "title_source": "hymnary-first-line",
+    "first_line": "Lord, let us now depart in peace",
+    "tune": "DISMISSAL"
+  },
+  "610": {
+    "title": "Go now, and live for the Savior",
+    "title_source": "hymnary-first-line",
+    "first_line": "Go now, and live for the Savior",
+    "tune": "GO NOW"
+  },
+  "611": {
+    "title": "Now unto the King eternal",
+    "title_source": "hymnary-first-line",
+    "first_line": "Now unto the King eternal",
+    "tune": "WINTON"
+  },
+  "612": {
+    "title": "May the grace of the Lord",
+    "title_source": "hymnary-first-line",
+    "first_line": "May the grace of the Lord",
+    "tune": "PAUL"
+  },
+  "613": {
+    "title": "The Lord bless you and keep you",
+    "title_source": "hymnary-first-line",
+    "first_line": "The Lord bless you and keep you"
+  },
+  "614": {
+    "title": "Hear our prayer, O Lord",
+    "title_source": "hymnary-first-line",
+    "first_line": "Hear our prayer, O Lord",
+    "tune": "[Hear our prayer, O Lord]"
+  },
+  "615": {
+    "title": "Spirit Divine, hear our prayer",
+    "title_source": "hymnary-first-line",
+    "first_line": "Spirit Divine, hear our prayer",
+    "tune": "[Spirit Divine, hear our prayer]"
+  },
+  "616": {
+    "title": "Hear our prayer, O heav'nly Father",
+    "title_source": "hymnary-first-line",
+    "first_line": "Hear our prayer, O heav'nly Father",
+    "tune": "[Hear our prayer, O heav&#039;nly Father]"
+  },
+  "617": {
+    "title": "Thou wilt keep him in perfect peace",
+    "title_source": "hymnary-first-line",
+    "first_line": "Thou wilt keep him in perfect peace",
+    "tune": "DUKE&#039;S TUNE"
+  },
+  "618": {
+    "title": "Let the words of my mouth",
+    "title_source": "hymnary-first-line",
+    "first_line": "Let the words of my mouth",
+    "tune": "[Let the words of my mouth]"
+  },
+  "619": {
+    "title": "Dear Father, our hearts are filled with thanksgiving",
+    "title_source": "hymnary-first-line",
+    "first_line": "Dear Father, our hearts are filled with thanksgiving",
+    "tune": "[Dear Father, our hearts are filled with thanksgiving]"
   },
   "620": {
     "title": "We Give Thee but Thine Own",
     "seen": [
       "2026-09-13",
       "2026-09-13 (docx)"
-    ]
+    ],
+    "first_line": "We give Thee but Thine own",
+    "tune": "SCHUMANN"
+  },
+  "621": {
+    "title": "We cannot give without receiving",
+    "title_source": "hymnary-first-line",
+    "first_line": "We cannot give without receiving",
+    "tune": "GOD&#039;S WAYS"
+  },
+  "622": {
+    "title": "Glory be to the Father",
+    "title_source": "hymnary-first-line",
+    "first_line": "Glory be to the Father",
+    "tune": "MEINEKE"
+  },
+  "623": {
+    "title": "Glory be to the Father",
+    "title_source": "hymnary-first-line",
+    "first_line": "Glory be to the Father",
+    "tune": "GREATOREX"
+  },
+  "624": {
+    "title": "Praise God from whom all blessings flow",
+    "title_source": "hymnary-first-line",
+    "first_line": "Praise God from whom all blessings flow",
+    "tune": "OLD HUNDREDTH"
+  },
+  "625": {
+    "title": "Praise God from whom all blessings flow",
+    "title_source": "hymnary-first-line",
+    "first_line": "Praise God from whom all blessings flow",
+    "tune": "OLD HUNDREDTH"
+  },
+  "626": {
+    "title": "Praise God from whom all blessings flow",
+    "title_source": "hymnary-first-line",
+    "first_line": "Praise God from whom all blessings flow",
+    "tune": "FAIRHILL"
+  },
+  "627": {
+    "title": "Praise God from whom all blessings flow",
+    "title_source": "hymnary-first-line",
+    "first_line": "Praise God from whom all blessings flow",
+    "tune": "PRAISE GOD"
+  },
+  "628a": {
+    "title": "Amen",
+    "title_source": "hymnary-first-line",
+    "first_line": "Amen",
+    "tune": "GENEVA"
+  },
+  "628b": {
+    "title": "Amen, Amen",
+    "title_source": "hymnary-first-line",
+    "first_line": "Amen, Amen",
+    "tune": "TWOFOLD"
+  },
+  "628c": {
+    "title": "Amen, Amen",
+    "title_source": "hymnary-first-line",
+    "first_line": "Amen, Amen",
+    "tune": "TWOFOLD"
+  },
+  "628d": {
+    "title": "Amen, Amen, Amen",
+    "title_source": "hymnary-first-line",
+    "first_line": "Amen, Amen, Amen",
+    "tune": "THREEFOLD"
+  },
+  "628e": {
+    "title": "Amen, Amen, Amen",
+    "title_source": "hymnary-first-line",
+    "first_line": "Amen, Amen, Amen",
+    "tune": "THREEFOLD"
+  },
+  "628f": {
+    "title": "Amen, Amen, Amen, Amen",
+    "title_source": "hymnary-first-line",
+    "first_line": "Amen, Amen, Amen, Amen",
+    "tune": "FOURFOLD"
+  },
+  "628g": {
+    "title": "Amen, Amen, Amen, Amen",
+    "title_source": "hymnary-first-line",
+    "first_line": "Amen, Amen, Amen, Amen",
+    "tune": "FOURFOLD"
+  },
+  "628h": {
+    "title": "Amen, Amen, Amen, Amen, Amen",
+    "title_source": "hymnary-first-line",
+    "first_line": "Amen, Amen, Amen, Amen, Amen",
+    "tune": "FIVEFOLD"
+  },
+  "628i": {
+    "title": "Amen, Amen, Amen, Amen, Amen, Amen, Amen",
+    "title_source": "hymnary-first-line",
+    "first_line": "Amen, Amen, Amen, Amen, Amen, Amen, Amen",
+    "tune": "SEVENFOLD AMEN"
   }
 }

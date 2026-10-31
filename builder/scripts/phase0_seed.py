@@ -84,12 +84,23 @@ for path in sorted(glob.glob(f"{repo}/bulletins/*/*[Ll][Ii]turgy*.docx")):
     for num, title in re.findall(r"#\s*(\d+)\s*[\"“](.+?)[\"”]", t):
         hymns.setdefault(int(num), {}).setdefault(title.strip(), []).append(sunday + " (docx)")
 
-hymn_out = {}
+# keep the hymnal-wide fields (first_line, tune, _meta, title_source) that were merged in from hymnary.org on 2026-10-31
+try:
+    existing = json.load(open(f"{out}/standing/hymns.json"))
+except FileNotFoundError:
+    existing = {}
+hymn_out = {k: v for k, v in existing.items() if k.startswith("_")}
+for k, v in existing.items():
+    if not k.startswith("_") and int(''.join(c for c in k if c.isdigit())) not in hymns:
+        hymn_out[k] = v
 for n, titles in sorted(hymns.items()):
     best = max(titles, key=lambda k: len(titles[k]))
     hymn_out[str(n)] = {"title": best, "seen": sorted({s for v in titles.values() for s in v})}
     if len(titles) > 1:
         hymn_out[str(n)]["variants"] = sorted(titles)
+    for extra in ("first_line", "tune"):
+        if extra in existing.get(str(n), {}):
+            hymn_out[str(n)][extra] = existing[str(n)][extra]
 json.dump(hymn_out, open(f"{out}/standing/hymns.json", "w"), indent=2, ensure_ascii=False)
 json.dump(dict(sorted(pew.items(), key=lambda kv: kv[1]["page"])),
           open(f"{out}/standing/pew-bible-pages.json", "w"), indent=2, ensure_ascii=False)

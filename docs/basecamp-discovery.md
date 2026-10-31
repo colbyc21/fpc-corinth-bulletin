@@ -256,7 +256,7 @@ Asked and answered 2026-10-29. "Default" means the §11.3 default in the plan, a
 | 5 | Budget | **Default.** Colby creates the `bulletin-builder` Console workspace with a $40 monthly limit and email alerts. Key goes in `~/.config/bulletin-builder/env` (mode 600), not `/etc`. Ask for the key only once the workspace exists. |
 | 6 | Calendar source | **App owns the events table.** The church has Google Workspace but probably no main calendar. Decision: run the calendar in the app for now, seeded from `builder/data/seed/events.csv`, and publish `calendar.ics`. Moving the source of truth to a Google Calendar later stays an option; the ICS feed makes that a one-way export if wanted. |
 | 7 | Rosters | **Seed only, enter weekly.** What exists is a schedule for the whole year that changes ad hoc when people are away. No import in Phase 1. The roster screen starts from the 22 seeded Sundays and each week is confirmed or edited by hand. A yearly-schedule import is a candidate for a later phase. |
-| 8 | Pew Bible and hymnal | **Pew Bible: ESV Thinline.** Hymnal: Colby will check; believed to be the red hymnal used in Presbyterian churches (likely *The Hymnal for Worship & Celebration* or the *Trinity Hymnal*; **unconfirmed**). Until confirmed, use the seeded page and hymn tables and flag anything missing. |
+| 8 | Pew Bible and hymnal | **Pew Bible: ESV Thinline.** **Hymnal: *The Hymnal for Worship & Celebration*** (brown, Word Music 1986, Fettke and Barker, ISBN 9783010026369), confirmed by Colby 2026-10-31. All 52 seeded numbers matched that hymnal's index; the full table was then filled from hymnary.org/hymnal/HWC1986. One transposition surfaced: the liturgy (and the printed bulletins of 2026-06-14 and 2026-10-04) cited #345 for *Leaning on the Everlasting Arms*, which is #354; #345 is *Blessed Assurance*. The table records both and the parse step should flag a number/title mismatch like this. |
 | 9 | Google Drive mirror | **No.** The git repo is the record; Colby's laptop clone still syncs to Drive. |
 | 10 | Printing | **Download button only.** |
 | 11 | Kids bulletin | **Phase 4.** |
@@ -264,7 +264,7 @@ Asked and answered 2026-10-29. "Default" means the §11.3 default in the plan, a
 
 Also confirmed: the family name is **LeGoff** (capital G); the 2026-11-01 bulletin's "Legoff" was wrong. Added to `docs/knowledge/name-spellings.md` and the seed script's spelling table.
 
-**Waiting on Colby (not blocking Phase 1):** add the deploy key to GitHub; create the Console workspace and hand over the key; confirm the hymnal edition.
+**Waiting on Colby (not blocking Phase 1):** add the deploy key to GitHub; create the Console workspace and hand over the key; confirm the hymnal edition. *(All three done by 2026-10-31.)*
 
 
 
@@ -296,4 +296,4 @@ systemctl --user restart bulletin-builder
 #    and add a Cloudflare Access application for that hostname (email OTP, exact-address allowlist).
 ```
 
-Still unconfirmed from §11.3: the hymnal edition (item 8).
+Item 8 (hymnal edition) was confirmed on 2026-10-31; nothing from §11.3 remains open.

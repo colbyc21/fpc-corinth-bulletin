@@ -204,7 +204,7 @@ If the church uses Planning Center or Breeze, check first whether either already
 - Welcome paragraphs, with the two Children's Church variants (regular schedule / school break) and a custom option
 - Vision & mission text, contact block
 - Pew Bible page table: book + chapter → page. The pew Bible is the **ESV Thinline** (§11.3). Seeded with 16 references in `builder/data/standing/pew-bible-pages.json`; fill in the rest from that edition's page map.
-- Hymnal table: number → title, so a hymn number alone fills the title and a mismatch is flagged. Seeded with 52 numbers in `builder/data/standing/hymns.json`. Hymnal edition still to be confirmed by Colby (believed to be the red hymnal used in Presbyterian churches).
+- Hymnal table: number → title, so a hymn number alone fills the title and a mismatch is flagged. The hymnal is **The Hymnal for Worship & Celebration** (brown, Word Music 1986, Fettke and Barker; confirmed by Colby 2026-10-31). `builder/data/standing/hymns.json` holds all 628 numbers plus the Amens (628a–628i): `first_line` and `tune` from hymnary.org, `title` and `seen` from the church's own liturgy files for the 52 numbers sung since February, otherwise the first line with `title_source` marking it. Keys starting with `_` are metadata. Hymnary notes its index is unproofed, so a mismatch is a flag, not an error.
 - Series tracker: current sermon series title and preacher default (Rev. Waring Porter)
 - Monthly items: Missionary Focus speaker for the month, kids bulletin month
 
@@ -360,7 +360,7 @@ Ask these in a single message. Each has a default; if Colby does not object, pro
 5. **Budget.** Default: Colby creates a Console workspace named `bulletin-builder` with a $40 monthly spend limit and alerts to his email, and puts its key in `~/.config/bulletin-builder/env` (was `/etc/bulletin-builder.env`; changed in Phase 0 so nothing needs sudo). Ask for the key only after the workspace exists.
 6. **Calendar source.** Ask whether the church already keeps a Google Calendar, Planning Center, Breeze, or similar. Default if none: the app owns the events table, seeded from §11.1, and publishes `calendar.ics`.
 7. **Rosters.** Ask for the current quarter's volunteer schedule in whatever form the office produces it (spreadsheet or Word). Default until it arrives: the roster screen starts from the seeded history and the volunteer fills each week by hand.
-8. **Pew Bible and hymnal.** Ask for the pew Bible edition (publisher and year) and the hymnal name and edition. Default: use the seeded page and hymn tables and flag anything missing.
+8. **Pew Bible and hymnal.** Ask for the pew Bible edition (publisher and year) and the hymnal name and edition. Default: use the seeded page and hymn tables and flag anything missing. *Answered: ESV Thinline; The Hymnal for Worship & Celebration (Word Music 1986), confirmed 2026-10-31.*
 9. **Google Drive mirror.** Ask whether the server should keep copying each week's folder into the shared drive (needs `rclone` and a service account). Default: no; the git repo is the record, and Colby's laptop clone still syncs to Drive when he pulls.
 10. **Printing.** Ask who prints the booklet and whether the PDF should be emailed somewhere on publish. Default: a download button only.
 11. **Kids bulletin.** Default: Phase 4, not the first release.
