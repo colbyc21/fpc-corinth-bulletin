@@ -122,9 +122,20 @@ def publish(date: str, *, store: Store | None = None, branch: str | None = None,
             _git(repo, "fetch", "-q", "origin", current)
             _git(repo, "reset", "-q", "--mixed", f"origin/{current}")
         else:
-            store.set_week_status(date, "published", published_at=config_now(), published_commit=sha)
+            store.set_week_status(date, "published", published_at=config_now(), published_commit=sha,
+                                  published_build=build_id_of(repo / "src/scroll" / f"{date}.html"))
     store.log("publish", user, json.dumps(result))
     return result
+
+
+def build_id_of(scroll_path: Path) -> str | None:
+    """The fpc-build marker in the scroll page that is being pushed."""
+    import re
+
+    if not scroll_path.exists():
+        return None
+    m = re.search(r'<meta name="fpc-build" content="([^"]+)"', scroll_path.read_text())
+    return m.group(1) if m else None
 
 
 def config_now() -> str:

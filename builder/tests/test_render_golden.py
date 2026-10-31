@@ -15,7 +15,8 @@ from builder import config
 from builder.pipeline import pdf as pdfmod, render, week as weekmod
 
 DATE = "2026-11-01"
-KNOWN_TEXT_DIFFS = {("Legoff", "LeGoff")}  # confirmed correction applied by the name rules
+KNOWN_TEXT_DIFFS = {("Legoff", "LeGoff"),  # confirmed correction applied by the name rules
+                    ("\x00", '<meta name="fpc-build"')}  # Phase 3 build marker: an added line only
 
 
 def _git_show(path: str) -> str:

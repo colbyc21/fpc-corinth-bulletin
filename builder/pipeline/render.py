@@ -13,6 +13,7 @@ Both templates receive the same context from :func:`context`.
 from __future__ import annotations
 
 import math
+import time
 from pathlib import Path
 
 from jinja2 import ChainableUndefined, Environment, FileSystemLoader, select_autoescape
@@ -171,6 +172,7 @@ def context(week: dict, store: Store | None = None) -> dict:
         "communion": week["special"].get("communion", False),
         "flowers": week.get("flowers"),
         "site_url": config.SITE_URL,
+        "build_id": time.strftime("%Y%m%dT%H%M%S"),
     }
 
 

@@ -87,6 +87,12 @@ create table if not exists weeks (
   built_at text, published_at text, published_commit text,
   updated_at text not null
 );
+create table if not exists chat (
+  id integer primary key autoincrement,
+  date text not null, ts text not null,
+  role text not null,          -- user | assistant
+  user_email text, text text not null, cost_usd real
+);
 create table if not exists ledger (
   id integer primary key autoincrement,
   ts text not null,
@@ -110,6 +116,9 @@ class Store:
         self.db.execute("pragma journal_mode=wal")
         self.db.execute("pragma foreign_keys=on")
         self.db.executescript(SCHEMA)
+        cols = {r["name"] for r in self.db.execute("pragma table_info(weeks)")}
+        if "published_build" not in cols:
+            self.db.execute("alter table weeks add column published_build text")
 
     def close(self) -> None:
         self.db.close()
@@ -267,6 +276,19 @@ class Store:
 
     def weeks(self) -> list[dict]:
         return [dict(r) for r in self.db.execute("select * from weeks order by date desc")]
+
+    # ── chat ─────────────────────────────────────────────────────────
+    def add_chat(self, date: str, role: str, text: str, user_email: str | None, cost: float | None = None) -> int:
+        cur = self.db.execute("insert into chat (date, ts, role, user_email, text, cost_usd) values (?, ?, ?, ?, ?, ?)",
+                              (date, now(), role, user_email, text, cost))
+        return int(cur.lastrowid)
+
+    def chat_history(self, date: str, limit: int = 60) -> list[dict]:
+        rows = self.db.execute("select * from chat where date=? order by id desc limit ?", (date, limit)).fetchall()
+        return [dict(r) for r in reversed(rows)]
+
+    def chat_count(self, date: str) -> int:
+        return int(self.db.execute("select count(*) as n from chat where date=? and role='user'", (date,)).fetchone()["n"])
 
     # ── ledger ───────────────────────────────────────────────────────
     def month_spend(self, year_month: str | None = None) -> float:

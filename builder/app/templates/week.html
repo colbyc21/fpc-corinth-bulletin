@@ -3,26 +3,183 @@
 {% block content %}
 <h1>{{ d | long_date }} <span class="pill {{ status.status }}">{{ status.status }}</span></h1>
 {% if week %}<p class="muted">{{ week.subtitle_override or week.liturgical_day }} · Sermon: “{{ week.sermon.title }}” · {{ week.sermon.preacher }}</p>{% endif %}
-{% if error %}<div class="flash bad">week.json does not validate: {{ error }}</div>{% endif %}
+{% if error %}<div class="flash bad">week.json does not validate: {{ error }}. Fix it in the JSON editor at the bottom.</div>{% endif %}
 
+<nav class="steps">
+  <a href="#inputs"><span>1</span> Inputs</a><a href="#details"><span>2</span> Details</a><a href="#build"><span>3</span> Build &amp; proof</a><a href="#publish"><span>4</span> Publish</a>
+</nav>
+
+<h2 id="inputs">1 · Inputs from the pastor and the office</h2>
 <div class="card">
   <form method="post" action="/weeks/{{ d }}/intake" enctype="multipart/form-data" class="row">
-    <div><label>Liturgy (.docx)</label><input type="file" name="liturgy" accept=".docx"></div>
-    <div><label>Sermon Notes (.docx)</label><input type="file" name="sermon" accept=".docx"></div>
-    <div><label>Content form (.rtf/.txt)</label><input type="file" name="content" accept=".rtf,.txt"></div>
-    <div><label>Pastor's announcements (.rtf/.txt)</label><input type="file" name="announcements" accept=".rtf,.txt"></div>
-    <div class="narrow"><button type="submit" {% if spend_status.blocked or not spend_status.model_calls %}disabled{% endif %}>Parse inputs</button></div>
+    <div><label>Liturgy (.docx) {% if inputs.liturgy %}<span class="ok">✓ on file</span>{% endif %}</label><input type="file" name="liturgy" accept=".docx"></div>
+    <div><label>Sermon Notes (.docx) {% if inputs.sermon %}<span class="ok">✓ on file</span>{% endif %}</label><input type="file" name="sermon" accept=".docx"></div>
+    <div><label>Content form (.rtf/.txt) {% if inputs.content %}<span class="ok">✓ on file</span>{% endif %}</label><input type="file" name="content" accept=".rtf,.txt"></div>
+    <div><label>Pastor's announcements (.rtf/.txt) {% if inputs.announcements %}<span class="ok">✓ on file</span>{% endif %}</label><input type="file" name="announcements" accept=".rtf,.txt"></div>
+    <div class="narrow"><button type="submit" {% if spend_status.blocked or not spend_status.model_calls %}disabled{% endif %}>Read the files</button></div>
   </form>
-  <p class="muted">Parsing reads the files with the model and rewrites this week’s content; the liturgy and the content form can be submitted separately.
+  <p class="muted">Reading the files fills in the liturgy, sermon, flowers, announcements, Those Who Serve and the calendar below, and lists every edit and gap it found. The liturgy and the content form can come on different days; what is not uploaded stays as it is. Sermon notes may be missing: the notes page becomes a fill-in page.
   {% if not spend_status.model_calls %}<strong>Model calls are switched off on this server.</strong>{% elif spend_status.blocked %}<strong>The monthly model spend cap is reached; contact Colby.</strong>{% elif spend_status.warn %}<strong>Model spend is at {{ (spend_status.fraction * 100) | round | int }}% of the monthly cap.</strong>{% endif %}</p>
 </div>
 
+{% if week %}
+<h2 id="details">2 · Details for this Sunday</h2>
+<form method="post" action="/weeks/{{ d }}/form">
 <div class="card">
   <div class="row">
-    <form method="post" action="/weeks/{{ d }}/build" class="narrow"><button type="submit" {% if error %}disabled{% endif %} title="Renders; if a panel overflows and model calls are on, the fit loop adjusts the layout">Build print + scroll</button></form>
+    <div><label>Cover subtitle (blank = “{{ week.liturgical_day }}”)</label><input type="text" name="subtitle_override" value="{{ week.subtitle_override or '' }}" placeholder="e.g. Reformation Sunday"></div>
+    <div class="narrow"><label>&nbsp;</label><label class="check"><input type="checkbox" name="communion" {% if week.special.communion %}checked{% endif %}> Communion</label></div>
+    <div class="narrow"><label>&nbsp;</label><label class="check"><input type="checkbox" name="canvass" {% if week.special.canvass %}checked{% endif %}> Every Member Canvass</label></div>
+    <div><label>Children's Church wording</label><select name="welcome_variant">{% for v, lbl in (('regular','Regular schedule'),('school_break','School break'),('custom','Custom')) %}<option value="{{ v }}" {% if week.welcome_variant == v %}selected{% endif %}>{{ lbl }}</option>{% endfor %}</select></div>
+    <div class="narrow"><label>Pew Bible page</label><input type="text" name="pew_bible_page" value="{{ week.pew_bible_page or '' }}" style="width:6em"></div>
+  </div>
+  {% if week.welcome_variant == 'custom' %}<div style="margin-top:0.6rem"><label>Custom Children &amp; Nursery paragraphs (blank line between paragraphs)</label><textarea name="welcome_custom" rows="3">{{ (week.welcome_custom or []) | join('\n\n') }}</textarea></div>{% endif %}
+</div>
+
+<div class="card">
+  <h3>Sermon</h3>
+  <div class="row">
+    <div style="flex:2 1 260px"><label>Title</label><input type="text" name="sermon_title" value="{{ week.sermon.title }}" required></div>
+    <div><label>Scripture</label><input type="text" name="sermon_scripture" value="{{ week.sermon.scripture }}" required></div>
+    <div><label>Preacher</label><input type="text" name="sermon_preacher" value="{{ week.sermon.preacher }}"></div>
+  </div>
+  <p class="muted">{% if week.sermon.missing %}No sermon notes yet: the notes page prints as a fill-in page. Upload the Sermon Notes above when they arrive.{% else %}{{ week.sermon.points | length }} point(s) and {{ week.sermon.intro | length }} intro paragraph(s) from the Sermon Notes. Change the wording through the chat box below.{% endif %}</p>
+</div>
+
+<div class="card">
+  <h3>Order of worship</h3>
+  <p class="muted">From the Liturgy document. To change an item (a hymn number, an anthem title, a reading), ask in the chat box below, e.g. “The anthem is ‘Be Thou My Vision’”.</p>
+  <ul class="compact">{% for it in liturgy_summary %}<li>{{ it.title }}{% if it.detail %} <span class="muted">— {{ it.detail }}</span>{% endif %}</li>{% endfor %}</ul>
+  {% if week.liturgy.notes %}<p class="muted">{{ week.liturgy.notes | length }} margin note(s): {{ week.liturgy.notes | map(attribute='label') | join(', ') }}.</p>{% endif %}
+</div>
+
+<div class="card">
+  <h3>Flower dedication</h3>
+  <div class="row">
+    <div style="flex:3 1 300px"><label>The flowers adorning the sanctuary today are given …</label><input type="text" name="flowers_given" value="{{ week.flowers.given if week.flowers else '' }}" placeholder="in honor of … / in loving memory of …  (blank = no dedication)"></div>
+    <div><label>Signed</label><input type="text" name="flowers_signed" value="{{ week.flowers.signed if week.flowers else '' }}"></div>
+  </div>
+  <details><summary class="muted">Longer dedication (message, verse, closing)</summary>
+  <div class="row">
+    <div style="flex:3 1 300px"><label>Message</label><textarea name="flowers_message" rows="2">{{ week.flowers.message if week.flowers else '' }}</textarea></div>
+  </div>
+  <div class="row">
+    <div style="flex:3 1 300px"><label>Quoted verse</label><input type="text" name="flowers_quote" value="{{ week.flowers.quote if week.flowers else '' }}"></div>
+    <div><label>Reference</label><input type="text" name="flowers_reference" value="{{ week.flowers.reference if week.flowers else '' }}"></div>
+    <div><label>Closing line</label><input type="text" name="flowers_closing" value="{{ week.flowers.closing if week.flowers else '' }}"></div>
+  </div>
+  </details>
+</div>
+
+<div class="card">
+  <h3>Announcements</h3>
+  {% for a in week.announcements + [{}] %}
+  <div class="ann">
+    <div class="row">
+      <div><label>Title{% if not a %} (new){% endif %}</label><input type="text" name="ann_title" value="{{ a.title or '' }}"></div>
+      <div style="flex:3 1 320px"><label>Text</label><textarea name="ann_body" rows="3">{{ a.body or '' }}</textarea></div>
+    </div>
+    <details><summary class="muted">Print-only / phone-only extras</summary>
+    <div class="row">
+      <div><label>Sentence for the printed booklet only</label><input type="text" name="ann_print_suffix" value="{{ a.print_suffix or '' }}"></div>
+      <div><label>Extra paragraph for the phone page only</label><input type="text" name="ann_detail" value="{{ a.detail or '' }}"></div>
+    </div></details>
+  </div>
+  {% endfor %}
+  <p class="muted">Clear a title and its text to drop an announcement. Inserts: {% for key, label in inserts.items() %}<label class="check"><input type="checkbox" name="insert_{{ key }}" {% if key in week.inserts %}checked{% endif %}> {{ label }}</label>{% endfor %}</p>
+</div>
+
+<div class="card">
+  <h3>Those Who Serve</h3>
+  <div class="row">
+    {% for role in ROSTER_ROLES %}
+    <div><label>{{ ROLE_LABELS[role] }}</label><input type="text" name="serve_{{ role }}" value="{{ week.serve[role] or '' }}" {% if not week.serve[role] %}class="blank"{% endif %}></div>
+    {% endfor %}
+  </div>
+  <p class="muted">Blank roles print nothing and are flagged. <button type="submit" class="quiet" formaction="/weeks/{{ d }}/refresh/serve" formmethod="post" title="Replace these with the roster table's row for this Sunday">Refresh from roster</button></p>
+</div>
+
+<div class="card">
+  <h3>Church calendar</h3>
+  <textarea name="calendar_lines" rows="6" class="code" style="min-height:auto">{{ calendar_text }}</textarea>
+  <p class="muted">One line per date: <code>2026-11-03: Messy Bible Study, 8 a.m. · Election Day</code>. Separate items with “ · ”. <button type="submit" class="quiet" formaction="/weeks/{{ d }}/refresh/calendar" formmethod="post" title="Replace these with the calendar table's events for the week">Refresh from calendar</button></p>
+</div>
+
+<div class="card"><button type="submit">Save details</button> <span class="muted">Saving does not rebuild; build in step 3.</span></div>
+</form>
+{% endif %}
+
+<h2 id="build">3 · Build and proof</h2>
+<div class="card">
+  <div class="row">
+    <form method="post" action="/weeks/{{ d }}/build" class="narrow"><button type="submit" {% if error %}disabled{% endif %} title="Renders print and phone pages; if a panel overflows and model calls are on, the fit loop adjusts the layout">Build print + scroll</button></form>
     {% if has_pdf %}<a class="btn quiet narrow" href="/weeks/{{ d }}/pdf">Download PDF</a>{% endif %}
     {% if week and week.inserts %}{% for ins in week.inserts %}<a class="btn quiet narrow" href="/weeks/{{ d }}/insert/{{ ins }}.pdf">Insert: {{ ins }}</a>{% endfor %}{% endif %}
     {% if has_scroll %}<a class="btn quiet narrow" href="/weeks/{{ d }}/scroll" target="_blank">Open scroll page</a>{% endif %}
+    <span class="muted" style="flex:2 1 240px">A build takes about a minute, longer if the fit loop runs. The page reloads when it is done.</span>
+  </div>
+</div>
+
+{% if report %}
+<div class="card">
+  <p class="muted">Last build {{ report.built_at }} · {{ report.seconds }} s{% if report.overflow %} · <strong class="bad">{{ report.overflow | length }} panel(s) overflow</strong>{% else %} · <span class="ok">every panel fits</span>{% endif %}</p>
+  <details><summary class="muted">Measurements</summary>
+  <table>
+    <thead><tr><th>Panel</th><th>Overflow (px)</th><th>Grid overflow</th><th>Past bottom</th></tr></thead>
+    <tbody>
+    {% for m in report.measurements %}
+      {% set bad = m.overflow_px > 0.5 or m.grid_overflow_px > 0.5 or m.content_past_bottom_px > 0.5 %}
+      <tr class="{{ 'bad' if bad else '' }}"><td>{{ m.label }}</td><td>{{ m.overflow_px }}</td><td>{{ m.grid_overflow_px }}</td><td>{{ m.content_past_bottom_px }}</td></tr>
+    {% endfor %}
+    </tbody>
+  </table></details>
+  {% if week and week.copyedit.changes %}
+  <h3>Edits the builder made to the submitted text</h3>
+  <ul>{% for c in week.copyedit.changes %}<li><code>{{ c.where }}</code>: {{ c.before }} → <strong>{{ c.after }}</strong> <span class="muted">({{ c.reason }})</span></li>{% endfor %}</ul>
+  {% endif %}
+  {% if report.name_changes %}
+  <h3>Name corrections applied at build</h3>
+  <ul>{% for c in report.name_changes %}<li><code>{{ c.where }}</code>: {{ c.before }} → <strong>{{ c.after }}</strong> <span class="muted">({{ c.reason }})</span></li>{% endfor %}</ul>
+  {% endif %}
+  {% if report.flags %}
+  <h3>Please check</h3>
+  <ul>{% for f in report.flags %}<li class="warn"><code>{{ f.where }}</code>: {{ f.message }}</li>{% endfor %}</ul>
+  {% endif %}
+</div>
+
+<div class="two">
+  <div>
+    <h3>Print panels</h3>
+    <div class="panels">
+      {% for n in panels %}
+      <figure><a href="/weeks/{{ d }}/panel/{{ n }}.png?t={{ report.built_at }}" target="_blank"><img src="/weeks/{{ d }}/panel/{{ n }}.png?t={{ report.built_at }}" alt="Page {{ n }}"></a><figcaption>Page {{ n }}</figcaption></figure>
+      {% endfor %}
+    </div>
+  </div>
+  <div>
+    <h3>Scroll page</h3>
+    {% if has_scroll %}<iframe class="scroll" src="/weeks/{{ d }}/scroll"></iframe>{% else %}<p class="muted">Build first.</p>{% endif %}
+  </div>
+</div>
+{% endif %}
+
+<h3 id="chat">Ask for a change</h3>
+<div class="card">
+  {% if chat %}
+  <div class="chatlog">
+    {% for m in chat %}<div class="msg {{ m.role }}"><span class="who">{{ 'You' if m.role == 'user' else 'Builder' }}</span> {{ m.text }}{% if m.cost_usd %} <span class="muted">(${{ '%.2f' % m.cost_usd }})</span>{% endif %}</div>{% endfor %}
+  </div>
+  {% endif %}
+  <form method="post" action="/weeks/{{ d }}/chat" class="row">
+    <div style="flex:4 1 300px"><input type="text" name="message" placeholder="e.g. Change the assisting elder to Dr. John Shipp" required {% if not report %}disabled{% endif %}></div>
+    <div class="narrow"><button type="submit" {% if not report or spend_status.blocked or not spend_status.model_calls or chat_left <= 0 %}disabled{% endif %}>Send</button></div>
+  </form>
+  <p class="muted">{% if not report %}Build first, then ask for changes here.{% else %}Each message makes the change, re-renders, and refreshes the proof. {{ chat_left }} message(s) left for this bulletin.{% endif %}</p>
+</div>
+
+<h2 id="publish">4 · Publish</h2>
+<div class="card">
+  <div class="row">
     <form method="post" action="/weeks/{{ d }}/ready" class="narrow"><button type="submit" class="quiet" {% if not has_pdf %}disabled{% endif %}>Mark ready</button></form>
     {% if user.role in ('publisher', 'admin') %}
     <form method="post" action="/weeks/{{ d }}/publish" class="row" style="flex:2 1 320px" onsubmit="return confirm('Commit and push {{ d }} to main? Netlify will deploy it.');">
@@ -33,57 +190,31 @@
     <div class="muted" style="flex:2 1 240px">Publishing needs the publisher role. Mark the week ready and a publisher will push it.</div>
     {% endif %}
   </div>
-  {% if status.published_commit %}<p class="muted">Last published commit <code>{{ status.published_commit }}</code> at {{ status.published_at }} · <a href="{{ netlify_url }}" target="_blank" rel="noopener">Netlify deploys ↗</a> · <a href="{{ site_url }}/scroll/{{ d }}/" target="_blank" rel="noopener">live page ↗</a></p>{% endif %}
+  {% if status.published_commit %}
+  <p class="muted" id="deploy" data-url="/weeks/{{ d }}/deploy.json">Published commit <code>{{ status.published_commit }}</code> at {{ status.published_at }} · <span id="deploy-state">checking the site…</span> · <a href="{{ site_url }}/scroll/{{ d }}/" target="_blank" rel="noopener">live page ↗</a> · <a href="{{ netlify_url }}" target="_blank" rel="noopener">Netlify ↗</a></p>
+  <script>
+    (function () {
+      var el = document.getElementById('deploy'), out = document.getElementById('deploy-state'), tries = 0;
+      function poll() {
+        fetch(el.dataset.url).then(function (r) { return r.json(); }).then(function (s) {
+          out.textContent = s.state === 'live' ? 'Live ✓' : (s.state === 'failed' ? 'Deploy failed: ' + s.detail : 'Deploying… (' + s.detail + ')');
+          out.className = s.state === 'live' ? 'ok' : (s.state === 'failed' ? 'bad' : 'warn');
+          if (s.state !== 'live' && s.state !== 'failed' && tries++ < 40) setTimeout(poll, 15000);
+        }).catch(function () { out.textContent = 'status unavailable'; });
+      }
+      poll();
+    })();
+  </script>
+  {% endif %}
 </div>
 
-{% if report %}
-<h2>Last build · {{ report.built_at }} · {{ report.seconds }} s</h2>
+<details style="margin-top:1.5rem"><summary class="muted">Advanced: week.json</summary>
 <div class="card">
-  <table>
-    <thead><tr><th>Panel</th><th>Overflow (px)</th><th>Grid overflow</th><th>Past bottom</th></tr></thead>
-    <tbody>
-    {% for m in report.measurements %}
-      {% set bad = m.overflow_px > 0.5 or m.grid_overflow_px > 0.5 or m.content_past_bottom_px > 0.5 %}
-      <tr class="{{ 'bad' if bad else '' }}"><td>{{ m.label }}</td><td>{{ m.overflow_px }}</td><td>{{ m.grid_overflow_px }}</td><td>{{ m.content_past_bottom_px }}</td></tr>
-    {% endfor %}
-    </tbody>
-  </table>
-  {% if report.name_changes %}
-  <h2>Name corrections applied</h2>
-  <ul>{% for c in report.name_changes %}<li><code>{{ c.where }}</code>: {{ c.before }} → <strong>{{ c.after }}</strong> <span class="muted">({{ c.reason }})</span></li>{% endfor %}</ul>
-  {% endif %}
-  {% if week and week.copyedit.changes %}
-  <h2>Copyedits from the inputs</h2>
-  <ul>{% for c in week.copyedit.changes %}<li><code>{{ c.where }}</code>: {{ c.before }} → <strong>{{ c.after }}</strong> <span class="muted">({{ c.reason }})</span></li>{% endfor %}</ul>
-  {% endif %}
-  {% if report.flags %}
-  <h2>Flags</h2>
-  <ul>{% for f in report.flags %}<li class="warn"><code>{{ f.where }}</code>: {{ f.message }}</li>{% endfor %}</ul>
-  {% endif %}
-</div>
-
-<div class="two">
-  <div>
-    <h2>Print panels</h2>
-    <div class="panels">
-      {% for n in panels %}
-      <figure><a href="/weeks/{{ d }}/panel/{{ n }}.png?t={{ report.built_at }}" target="_blank"><img src="/weeks/{{ d }}/panel/{{ n }}.png?t={{ report.built_at }}" alt="Page {{ n }}"></a><figcaption>Page {{ n }}</figcaption></figure>
-      {% endfor %}
-    </div>
-  </div>
-  <div>
-    <h2>Scroll page</h2>
-    {% if has_scroll %}<iframe class="scroll" src="/weeks/{{ d }}/scroll"></iframe>{% else %}<p class="muted">Build first.</p>{% endif %}
-  </div>
-</div>
-{% endif %}
-
-<h2>week.json</h2>
-<div class="card">
-  <p class="muted">The single source of truth for this Sunday. Phase 3 replaces this editor with the volunteer form; until then edit the JSON directly. It is validated on save.</p>
+  <p class="muted">The single source of truth for this Sunday. Everything above edits this file; edit it directly only if you know the schema. It is validated on save.</p>
   <form method="post" action="/weeks/{{ d }}/json">
     <textarea class="code" name="raw" spellcheck="false">{{ raw }}</textarea>
     <p style="margin-top:0.6rem"><button type="submit">Save week.json</button></p>
   </form>
 </div>
+</details>
 {% endblock %}

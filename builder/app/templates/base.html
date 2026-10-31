@@ -45,6 +45,17 @@
   details summary { cursor:pointer; color:var(--deep); }
   @media (max-width:700px) { .two { grid-template-columns:1fr; } }
   .two { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+  nav.steps { display:flex; gap:0.4rem; flex-wrap:wrap; margin:0 0 1rem; }
+  nav.steps a { text-decoration:none; color:var(--deep); border:1px solid var(--rule); background:var(--card); border-radius:999px; padding:0.25rem 0.8rem 0.25rem 0.3rem; font-size:0.85rem; }
+  nav.steps a span { display:inline-block; width:1.4rem; height:1.4rem; line-height:1.4rem; text-align:center; border-radius:50%; background:var(--accent); color:#fff; margin-right:0.4rem; font-size:0.75rem; }
+  h3 { font-weight:600; font-size:0.95rem; margin:0.2rem 0 0.6rem; }
+  label.check { display:inline-flex; align-items:center; gap:0.3rem; font-size:0.9rem; color:var(--ink); margin-right:0.8rem; }
+  input.blank { border-color:var(--warn); background:#fff8f0; }
+  ul.compact { columns:2; margin:0.3rem 0; padding-left:1.2rem; font-size:0.9rem; }
+  .ann { border-top:1px dashed var(--rule); padding-top:0.6rem; margin-top:0.6rem; } .ann:first-of-type { border-top:0; padding-top:0; margin-top:0; }
+  .chatlog { max-height:40vh; overflow:auto; margin-bottom:0.8rem; }
+  .msg { padding:0.4rem 0.6rem; border-radius:4px; margin-bottom:0.4rem; font-size:0.92rem; } .msg.user { background:#eef2ef; } .msg.assistant { background:#fff; border:1px solid var(--rule); }
+  .msg .who { font-weight:600; color:var(--deep); margin-right:0.4rem; font-size:0.8rem; text-transform:uppercase; letter-spacing:0.05em; }
 </style>
 </head>
 <body>

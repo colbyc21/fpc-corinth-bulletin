@@ -21,7 +21,7 @@ from fastapi.templating import Jinja2Templates
 
 from builder import config
 from builder.app import auth
-from builder.pipeline import build as buildmod, calendar_feed, dates, extract, fit as fitmod, intake as intakemod, model as modelmod, publish as publishmod
+from builder.pipeline import build as buildmod, calendar_feed, chat as chatmod, dates, deploy_status, extract, fit as fitmod, forms, intake as intakemod, model as modelmod, publish as publishmod
 from builder.pipeline import week as weekmod
 from builder.pipeline.store import ROLE_LABELS, ROSTER_ROLES, USER_ROLES, Store
 
@@ -182,10 +182,75 @@ def week_page(d: str, request: Request, user: dict = Depends(need("editor"))):
         week, error = None, str(e)
     report = buildmod.last_report(d)
     wdir = config.week_dir(d)
+    inputs = {slot: (wdir / pattern.format(d=d)).exists() or (wdir / pattern.format(d=d).replace(".rtf", ".txt")).exists()
+              for slot, (pattern, _) in UPLOAD_SLOTS.items()}
     return page(request, "week.html", user, d=d, raw=raw, week=week, error=error, report=report,
                 status=store().week_status(d), has_pdf=(wdir / f"bulletin-{d}-legal.pdf").exists(),
                 has_scroll=(config.SCROLL_DIR / f"{d}.html").exists(),
-                panels=sorted(int(k) for k in (report or {}).get("panels", {})))
+                panels=sorted(int(k) for k in (report or {}).get("panels", {})),
+                inputs=inputs, calendar_text=forms.calendar_lines_text(week["calendar"]) if week else "",
+                inserts=forms.INSERTS, chat=store().chat_history(d), chat_left=chatmod.MAX_MESSAGES_PER_WEEK - store().chat_count(d),
+                liturgy_summary=[{"id": it["id"], "title": it["title"], "detail": it.get("piece") or it.get("ref") or it.get("name") or ""}
+                                 for it in week["liturgy"]["items"] if it["type"] != "section"] if week else [])
+
+
+@app.post("/weeks/{d}/form")
+async def week_form(d: str, request: Request, user: dict = Depends(need("editor"))):
+    check_date(d)
+    form = await request.form()
+    data: dict = {}
+    for k, v in form.multi_items():
+        if hasattr(v, "filename"):
+            continue
+        data.setdefault(k, []).append(v)
+    try:
+        week = forms.form_to_week(weekmod.load_week(d), data)
+        weekmod.save_week(week)
+    except (ValueError, KeyError) as e:
+        return RedirectResponse(f"/weeks/{d}?m=Not+saved:+{_q(str(e))}#details", status_code=303)
+    s = store()
+    s.set_week_status(d, "draft")
+    s.log("week.form", user["email"], d)
+    return RedirectResponse(f"/weeks/{d}?m=Saved#details", status_code=303)
+
+
+@app.post("/weeks/{d}/refresh/{what}")
+def week_refresh(d: str, what: str, user: dict = Depends(need("editor"))):
+    """Re-pull the roster row or the calendar lines from the tables into the week."""
+    check_date(d)
+    s = store()
+    week = weekmod.load_week(d)
+    if what == "serve":
+        week["serve"] = {k: v for k, v in s.serve_for(d).items() if v}
+    elif what == "calendar":
+        week["calendar"] = calendar_feed.week_calendar(s, d)
+    else:
+        raise HTTPException(404)
+    weekmod.save_week(week)
+    s.log("week.refresh", user["email"], f"{d} {what}")
+    return RedirectResponse(f"/weeks/{d}?m={_q('Refreshed ' + what + ' from the table')}#details", status_code=303)
+
+
+@app.post("/weeks/{d}/chat")
+def week_chat(d: str, message: str = Form(...), user: dict = Depends(need("editor"))):
+    check_date(d)
+    message = message.strip()
+    if not message:
+        return RedirectResponse(f"/weeks/{d}#chat", status_code=303)
+    try:
+        res = chatmod.revise(d, message, store=store(), user=user["email"])
+    except modelmod.ModelError as e:
+        return RedirectResponse(f"/weeks/{d}?m={_q('Chat: ' + str(e))}#chat", status_code=303)
+    except Exception as e:
+        log.exception("chat failed")
+        return RedirectResponse(f"/weeks/{d}?m={_q('Chat failed: ' + str(e))}#chat", status_code=303)
+    return RedirectResponse(f"/weeks/{d}?m={_q('Done (' + f'${res['cost']:.2f}' + ')')}#chat", status_code=303)
+
+
+@app.get("/weeks/{d}/deploy.json")
+def week_deploy_status(d: str, user: dict = Depends(need("editor"))):
+    check_date(d)
+    return JSONResponse(deploy_status.status(d, store().week_status(d)))
 
 
 @app.post("/weeks/{d}/json")

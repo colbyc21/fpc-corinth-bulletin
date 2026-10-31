@@ -23,6 +23,18 @@ def ordinal_word(n: int) -> str:
     return ORDINALS[n] if 0 <= n < len(ORDINALS) else f"{n}th"
 
 
+_MONTHS = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"]
+
+
+def month_number(name: str) -> int:
+    """'Nov', 'nov.', 'November' → 11."""
+    key = name.strip().rstrip(".").lower()
+    for i, m in enumerate(_MONTHS, start=1):
+        if m.startswith(key) and len(key) >= 3:
+            return i
+    raise ValueError(f"unknown month {name!r}")
+
+
 def parse_date(s: str) -> date:
     return date.fromisoformat(s)
 

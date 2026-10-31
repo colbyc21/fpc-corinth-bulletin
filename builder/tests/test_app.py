@@ -89,3 +89,36 @@ def test_week_json_save_validates(client, store):
     r = client.post("/weeks/2026-11-01/json", data={"raw": '{"date": "2026-11-01"}'})
     assert "Not+saved" in r.headers["location"]
     client.cookies.clear()
+
+
+def test_week_page_form_refresh_and_chat_routes(client, store, monkeypatch, tmp_path):
+    # work on a copy of the week folder so the committed week.json is never touched
+    import shutil
+    from builder import config
+    bdir = tmp_path / "bulletins"
+    shutil.copytree(config.BULLETINS_DIR / "2026-11-01", bdir / "2026-11-01")
+    monkeypatch.setattr(config, "BULLETINS_DIR", bdir)
+    login_as(client, store, "ed3@example.com", "editor")
+    html = client.get("/weeks/2026-11-01").text
+    assert "1 · Inputs" in html and 'name="serve_assisting_elder"' in html and 'name="calendar_lines"' in html
+    data = {"sermon_title": "T2", "sermon_scripture": "Nehemiah 1:1–11", "sermon_preacher": "", "subtitle_override": "", "welcome_variant": "regular",
+            "pew_bible_page": "", "flowers_given": "", "ann_title": ["One"], "ann_body": ["Body one."], "serve_assisting_elder": "Dr. John Shipp",
+            "calendar_lines": "2026-11-03: Messy Bible Study, 8 a.m."}
+    r = client.post("/weeks/2026-11-01/form", data=data)
+    assert r.status_code == 303 and "Saved" in r.headers["location"]
+    from builder.pipeline import week as weekmod
+    w = weekmod.load_week("2026-11-01")
+    assert w["sermon"]["title"] == "T2" and w["announcements"] == [{"title": "One", "body": "Body one."}] and w["flowers"] is None
+    r = client.post("/weeks/2026-11-01/form", data={**data, "calendar_lines": "bad line"})
+    assert "Not+saved" in r.headers["location"]
+    r = client.post("/weeks/2026-11-01/refresh/serve")
+    assert r.status_code == 303 and "Refreshed" in r.headers["location"]
+    r = client.post("/weeks/2026-11-01/refresh/calendar")
+    assert r.status_code == 303
+    r = client.get("/weeks/2026-11-01/deploy.json")
+    assert r.status_code == 200 and r.json()["state"] in ("unpublished", "building", "live", "unknown")
+    from builder.app import main
+    monkeypatch.setattr(main.chatmod, "revise", lambda d, m, store, user=None: {"reply": "ok", "cost": 0.01, "turns": 1, "report": None, "edits": []})
+    r = client.post("/weeks/2026-11-01/chat", data={"message": "Change x"})
+    assert r.status_code == 303 and "Done" in r.headers["location"]
+    client.cookies.clear()
