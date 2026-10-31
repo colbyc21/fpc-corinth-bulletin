@@ -105,8 +105,10 @@ def with_defaults(doc: dict) -> dict:
     d.setdefault("media", [])
     for s in d["sections"]:
         base = SECTION_DEFAULTS.get(s["key"], {})
-        for k in ("label", "title", "intro", "footer_line"):
-            s.setdefault(k, base.get(k))
+        for k in ("label", "title", "footer_line"):
+            if s.get(k) is None:  # null = the standing text; "" = deliberately blank
+                s[k] = base.get(k)
+        s.setdefault("intro", None)
         s.setdefault("large_headings", base.get("large_headings", False))
         s.setdefault("split_items", base.get("split_items", False))
         s.setdefault("items", [])
@@ -152,7 +154,8 @@ def scaffold(sunday: str, week: dict | None = None, previous: dict | None = None
 def serve_lines_from_week(week: dict) -> list[dict]:
     from builder.pipeline.store import ROLE_LABELS
 
-    order = ["assisting_elder", "greeters", "acolytes", "ushers", "nursery", "childrens_church", "circle_of_prayer", "av_engineer"]
+    # Children's Church is bulletin-only: none of the sent emails list it
+    order = ["assisting_elder", "greeters", "acolytes", "ushers", "nursery", "circle_of_prayer", "av_engineer"]
     out = []
     for k in order:
         v = (week.get("serve") or {}).get(k)

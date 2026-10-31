@@ -84,6 +84,7 @@ def _nest(parsed: dict) -> dict:
         items = []
         for it in s.get("items", []):
             qt, lu, src = (it.get("quote_text") or "").strip(), (it.get("link_url") or "").strip(), (it.get("image_src") or "").strip()
+            qt = qt.strip("“”\"")  # the template sets the quotation marks
             img = None
             if src:
                 img = {"src": src, "alt": (it.get("image_alt") or "Photo").strip()}
@@ -124,14 +125,12 @@ def system_prompt(store: Store, example: str | None = EXAMPLE_DATE) -> str:
 
 
 def _previous_summary(prev: dict | None) -> str | None:
+    """Last week's items in the output shape (text included, so a carried-forward item keeps its wording)."""
     if not prev:
         return None
-    lines = []
-    for s in prev.get("sections", []):
-        for it in s.get("items", []):
-            head = it.get("title") or it.get("eyebrow") or (it.get("body") or [""])[0][:60]
-            lines.append(f"- [{s['key']}] {head}" + (f" ({it['when']})" if it.get("when") else ""))
-    return "\n".join(lines) or None
+    view = _model_view(prev)
+    sections = [s for s in view["sections"] if s["items"]]
+    return json.dumps(sections, ensure_ascii=False, indent=1) if sections else None
 
 
 def compose(sunday: str, office_text: str | None, *, store: Store, previous: dict | None = None, week: dict | None = None,
@@ -150,10 +149,11 @@ def compose(sunday: str, office_text: str | None, *, store: Store, previous: dic
         prev = _previous_summary(previous)
         if prev:
             user += ["", f"## Last week's email ({previous['friday']}), item by item", prev]
-        if week:
-            serve = {ROLE_LABELS.get(k, k): v for k, v in (week.get("serve") or {}).items() if v}
-            user += ["", "## The roster table for this Sunday", json.dumps(serve, ensure_ascii=False),
-                     "", "## The calendar table's lines", json.dumps(week.get("calendar") or [], ensure_ascii=False)]
+        roster = store.serve_for(sunday) if store else (week or {}).get("serve") or {}
+        serve = {ROLE_LABELS.get(k, k): v for k, v in roster.items() if v}
+        cal = calendar_feed.week_calendar(store, sunday, horizon_days=14) if store else (week or {}).get("calendar") or []
+        user += ["", "## The roster table for this Sunday", json.dumps(serve, ensure_ascii=False),
+                 "", "## The calendar table's lines", json.dumps(cal, ensure_ascii=False)]
     resp = model.complete(job, system=system_prompt(store, example), messages=[{"role": "user", "content": "\n".join(user)}],
                           schema=OUTPUT_SCHEMA, effort="medium", max_tokens=24000)
     out = model.json_of(resp)
@@ -168,10 +168,13 @@ def _norm(s: str) -> str:
     return re.sub(r"[^a-z0-9]+", " ", s.lower()).strip()
 
 
+_ROOM = re.compile(r"\broom\b|\binfants?\b|\bmovers\b|year olds|\b2\s*[-–]\s*3\b", re.I)
+
+
 def _event_key(s: str) -> str:
     """What an event is, without its time: 'Messy Bible Study at 8 am' == 'Messy Bible Study, 8 a.m.'"""
     s = re.split(r",| at | @ |\s+\d", s, 1)[0]
-    return _norm(s)
+    return re.sub(r"\b(the|a|an|for)\b", "", _norm(s)).replace("  ", " ").strip()
 
 
 def merge(sunday: str, parsed: dict, *, store: Store, week: dict | None, base: dict | None = None) -> dict:
@@ -245,9 +248,12 @@ def merge(sunday: str, parsed: dict, *, store: Store, week: dict | None, base: d
     for ln in parsed.get("serve_lines", []):
         role, nm = (ln.get("role") or None), (ln.get("names") or "").strip()
         if role is None:
-            (nursery_rooms if last_role == "nursery" else extras).append({"role": None, "names": nm})
+            (nursery_rooms if last_role == "nursery" or _ROOM.search(nm) else extras).append({"role": None, "names": nm})
             continue
         last_role = role.lower()
+        if last_role == "nursery" and _ROOM.search(nm):  # "Nursery — Infant (Room 4) — …" came through as one line
+            nursery_rooms.append({"role": None, "names": nm})
+            continue
         if last_role in by_role:
             table_names = by_role[last_role]["names"]
             if nm and _norm(nm) != _norm(table_names):

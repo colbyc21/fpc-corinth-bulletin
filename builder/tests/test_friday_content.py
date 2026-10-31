@@ -10,7 +10,7 @@ def _parsed(**over):
         "sections": [
             {"key": "women", "intro": "Jump in!", "items": [
                 {"eyebrow": None, "title": "First Thursday", "when": "Thursday, November 5 · Noon · Youth House", "when_highlight": True,
-                 "body": ["Jennifer Legoff will host."], "note": None, "quote_text": None, "quote_ref": None, "link_label": "Sign up", "link_url": "https://x.org",
+                 "body": ["Jennifer Legoff will host."], "note": None, "quote_text": "“Be kind.”", "quote_ref": "Eph. 4:32", "link_label": "Sign up", "link_url": "https://x.org",
                  "image_src": "https://files.constantcontact.com/a.jpg", "image_alt": "Flyer", "image_width": 520}]},
             {"key": "prepare", "intro": None, "items": [
                 {"eyebrow": None, "title": None, "when": None, "when_highlight": False, "body": [], "note": None, "quote_text": None, "quote_ref": None,
@@ -18,9 +18,11 @@ def _parsed(**over):
         ],
         "birthdays": [{"date": "2026-11-02", "names": ["B. Member"]}, {"date": "bad", "names": ["X"]}],
         "anniversaries": [],
-        "serve_lines": [{"role": "Assisting Elder", "names": "Dr. Don Shipp"}, {"role": "Nursery", "names": ""},
-                        {"role": None, "names": "Infant (Room 4) — Laura Kate"}, {"role": "Joy in Bloom Deliverer (November)", "names": "Gloria Williams"}],
-        "calendar_lines": [{"date": "2026-11-03", "items": ["Messy Bible Study at 8 am"]}, {"date": "2026-11-07", "items": ["Tabitha’s Toolbox Work Day"]}],
+        "serve_lines": [{"role": "Assisting Elder", "names": "Dr. Don Shipp"}, {"role": "Ushers", "names": "A, B, C, & D"},
+                        {"role": "", "names": "Infant (Room 4) — Laura Kate"}, {"role": "", "names": "Movers (Room 2) — Abby"},
+                        {"role": "Joy in Bloom Deliverer (November)", "names": "Gloria Williams"}],
+        "calendar_lines": [{"date": "2026-11-03", "items": ["Messy Bible Study at 8 am"]}, {"date": "2026-11-07", "items": ["Tabitha’s Toolbox Work Day"]},
+                           {"date": "2026-11-01", "items": ["The Session Meeting, 12:15 p.m."]}],
         "hymn_lines": ["A line"], "hymn_attribution": "Someone",
         "carried_forward": ["WM Book Club"], "dropped": ["Fall Festival"],
         "changes": [], "flags": [],
@@ -47,6 +49,10 @@ def test_merge_uses_the_tables_and_flags_the_notes(store):
     assert doc["serve"][0] == {"role": "Assisting Elder", "names": store.serve_for("2026-11-01")["assisting_elder"]}
     assert any("roster table says" in f["message"] for f in doc["copyedit"]["flags"])
     assert "Nursery" in roles and {"role": None, "names": "Infant (Room 4) — Laura Kate"} in doc["serve"]
+    assert roles.index("Nursery") + 1 == doc["serve"].index({"role": None, "names": "Infant (Room 4) — Laura Kate"})  # rooms sit under Nursery
+    assert doc["serve"][roles.index("Nursery")]["names"] == ""  # the rooms carry the names
+    assert it["quote"] == {"text": "Be kind.", "ref": "Eph. 4:32"}
+    assert str(doc["calendar"]).count("Session Meeting") == 1  # the notes' "The Session Meeting, 12:15 p.m." is the table's line
     assert roles[-1] == "Joy in Bloom Deliverer (November)"
     # the calendar table's lines are kept; the notes' extra event is added and flagged, the duplicate is not
     nov3 = next(c for c in doc["calendar"] if c["date"] == "2026-11-03")
@@ -76,7 +82,7 @@ def test_compose_sends_notes_previous_and_tables(store, monkeypatch):
     from builder.pipeline import week as weekmod
     out = fc.compose("2026-11-08", "THE FRIDAY EMAIL\nOpening Scripture\n...", store=store, previous=prev, week=weekmod.load_week("2026-11-01"))
     msg = seen["messages"][0]["content"]
-    assert "The office's notes" in msg and "Last week's email (2026-10-30)" in msg and "[women] First Thursday" in msg
+    assert "The office's notes" in msg and "Last week's email (2026-10-30)" in msg and '"title": "First Thursday"' in msg
     assert "roster table" in msg and "calendar table" in msg and seen["schema"] is fc.OUTPUT_SCHEMA
     assert "Worked example" in seen["system"] and "Confirmed name spellings" in seen["system"]
     assert out["_job"]["calls"] == 1
