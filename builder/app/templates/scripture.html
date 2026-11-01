@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Scripture{% endblock %}
+{% block content %}
+<h1>Scripture index</h1>
+<p class="muted">{{ idx.passages | length }} passages from {{ idx.books | length }} books, read at {{ idx.services }} services since {{ idx.since_label }}: every worship heading in the published bulletins that carries a reference (the sermon text, calls to worship and meditation, assurance of pardon, responses, Words of Institution). The public copy is <a href="{{ site_url }}/scripture/">{{ site_url }}/scripture/</a> (regenerated on every publish). A reference opens the passage on Bible Gateway ({{ idx.version }}).</p>
+
+<div class="card">
+  <table>
+    <thead><tr><th>Passage</th><th>Read as</th><th>Read</th><th>First</th><th>Last</th><th>Dates</th></tr></thead>
+    <tbody>
+    {% for p in idx.passages | sort(attribute='last', reverse=True) %}
+      <tr>
+        <td><a href="{{ p.url }}" target="_blank" rel="noopener"><strong>{{ p.ref }}</strong></a>{% if p.pew_page %}<div class="muted">Pew Bible, p. {{ p.pew_page }}</div>{% endif %}</td>
+        <td class="muted">{{ p.slots | join(" / ") }}</td>
+        <td>{{ p.times }}</td>
+        <td>{{ p.first }}</td>
+        <td>{{ p.last }}</td>
+        <td class="muted">{% for d in p.dates | reverse %}{{ d.date }} ({{ d.slot }}{% if d.note %}, {{ d.note }}{% endif %}{% if d.version %}, {{ d.version }}{% endif %}){% if not loop.last %}, {% endif %}{% endfor %}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% if idx.unparsed %}
+<p class="muted">Readings printed without a reference: {% for u in idx.unparsed %}{{ u.slot }} {{ u.text }} ({{ u.date }}){% if not loop.last %}; {% endif %}{% endfor %}.</p>
+{% endif %}
+{% endblock %}

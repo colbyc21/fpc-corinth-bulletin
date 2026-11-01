@@ -1,0 +1,5515 @@
+{
+  "generated": "2026-11-01T23:49:49+00:00",
+  "version": "ESV",
+  "services": 41,
+  "since": "2026-01-25",
+  "through": "2026-11-01",
+  "since_label": "January 25, 2026",
+  "through_label": "November 1, 2026",
+  "passages": [
+    {
+      "ref": "Genesis 3:19",
+      "book": "Genesis",
+      "testament": "OT",
+      "chapter": 3,
+      "verse": 19,
+      "times": 1,
+      "first": "2026-02-18",
+      "last": "2026-02-18",
+      "last_label": "February 18, 2026",
+      "pew_page": null,
+      "slots": [
+        "Distribution of Ashes"
+      ],
+      "dates": [
+        {
+          "date": "2026-02-18",
+          "label": "February 18, 2026",
+          "slot": "Distribution of Ashes",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Genesis%203%3A19&version=ESV"
+    },
+    {
+      "ref": "Exodus 12:21–27",
+      "book": "Exodus",
+      "testament": "OT",
+      "chapter": 12,
+      "verse": 21,
+      "times": 1,
+      "first": "2026-08-16",
+      "last": "2026-08-16",
+      "last_label": "August 16, 2026",
+      "pew_page": null,
+      "slots": [
+        "The Old Testament Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-08-16",
+          "label": "August 16, 2026",
+          "slot": "The Old Testament Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Exodus%2012%3A21-27&version=ESV"
+    },
+    {
+      "ref": "Exodus 16:11–18",
+      "book": "Exodus",
+      "testament": "OT",
+      "chapter": 16,
+      "verse": 11,
+      "times": 1,
+      "first": "2026-03-15",
+      "last": "2026-03-15",
+      "last_label": "March 15, 2026",
+      "pew_page": null,
+      "slots": [
+        "Scripture Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-03-15",
+          "label": "March 15, 2026",
+          "slot": "Scripture Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Exodus%2016%3A11-18&version=ESV"
+    },
+    {
+      "ref": "Leviticus 9:22–24",
+      "book": "Leviticus",
+      "testament": "OT",
+      "chapter": 9,
+      "verse": 22,
+      "times": 1,
+      "first": "2026-07-12",
+      "last": "2026-07-12",
+      "last_label": "July 12, 2026",
+      "pew_page": null,
+      "slots": [
+        "The Old Testament Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-07-12",
+          "label": "July 12, 2026",
+          "slot": "The Old Testament Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Leviticus%209%3A22-24&version=ESV"
+    },
+    {
+      "ref": "Leviticus 20:22–26",
+      "book": "Leviticus",
+      "testament": "OT",
+      "chapter": 20,
+      "verse": 22,
+      "times": 1,
+      "first": "2026-09-20",
+      "last": "2026-09-20",
+      "last_label": "September 20, 2026",
+      "pew_page": null,
+      "slots": [
+        "The Old Testament Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-09-20",
+          "label": "September 20, 2026",
+          "slot": "The Old Testament Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Leviticus%2020%3A22-26&version=ESV"
+    },
+    {
+      "ref": "Deuteronomy 6:1–9",
+      "book": "Deuteronomy",
+      "testament": "OT",
+      "chapter": 6,
+      "verse": 1,
+      "times": 1,
+      "first": "2026-08-23",
+      "last": "2026-08-23",
+      "last_label": "August 23, 2026",
+      "pew_page": null,
+      "slots": [
+        "The Old Testament Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-08-23",
+          "label": "August 23, 2026",
+          "slot": "The Old Testament Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Deuteronomy%206%3A1-9&version=ESV"
+    },
+    {
+      "ref": "1 Samuel 3:1–10",
+      "book": "1 Samuel",
+      "testament": "OT",
+      "chapter": 3,
+      "verse": 1,
+      "times": 1,
+      "first": "2026-03-01",
+      "last": "2026-03-01",
+      "last_label": "March 1, 2026",
+      "pew_page": null,
+      "slots": [
+        "Scripture Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-03-01",
+          "label": "March 1, 2026",
+          "slot": "Scripture Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=1%20Samuel%203%3A1-10&version=ESV"
+    },
+    {
+      "ref": "1 Samuel 12:24",
+      "book": "1 Samuel",
+      "testament": "OT",
+      "chapter": 12,
+      "verse": 24,
+      "times": 1,
+      "first": "2026-08-02",
+      "last": "2026-08-02",
+      "last_label": "August 2, 2026",
+      "pew_page": null,
+      "slots": [
+        "Call to Meditation"
+      ],
+      "dates": [
+        {
+          "date": "2026-08-02",
+          "label": "August 2, 2026",
+          "slot": "Call to Meditation",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=1%20Samuel%2012%3A24&version=ESV"
+    },
+    {
+      "ref": "1 Chronicles 29:10–13",
+      "book": "1 Chronicles",
+      "testament": "OT",
+      "chapter": 29,
+      "verse": 10,
+      "times": 2,
+      "first": "2026-05-03",
+      "last": "2026-09-13",
+      "last_label": "September 13, 2026",
+      "pew_page": null,
+      "slots": [
+        "Call to Worship",
+        "Old Testament Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-05-03",
+          "label": "May 3, 2026",
+          "slot": "Old Testament Reading",
+          "note": null,
+          "version": null
+        },
+        {
+          "date": "2026-09-13",
+          "label": "September 13, 2026",
+          "slot": "Call to Worship",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=1%20Chronicles%2029%3A10-13&version=ESV"
+    },
+    {
+      "ref": "1 Chronicles 29:10–14",
+      "book": "1 Chronicles",
+      "testament": "OT",
+      "chapter": 29,
+      "verse": 10,
+      "times": 1,
+      "first": "2026-10-25",
+      "last": "2026-10-25",
+      "last_label": "October 25, 2026",
+      "pew_page": null,
+      "slots": [
+        "Responsive Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-10-25",
+          "label": "October 25, 2026",
+          "slot": "Responsive Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=1%20Chronicles%2029%3A10-14&version=ESV"
+    },
+    {
+      "ref": "1 Chronicles 29:11",
+      "book": "1 Chronicles",
+      "testament": "OT",
+      "chapter": 29,
+      "verse": 11,
+      "times": 1,
+      "first": "2026-09-13",
+      "last": "2026-09-13",
+      "last_label": "September 13, 2026",
+      "pew_page": null,
+      "slots": [
+        "Call to Meditation"
+      ],
+      "dates": [
+        {
+          "date": "2026-09-13",
+          "label": "September 13, 2026",
+          "slot": "Call to Meditation",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=1%20Chronicles%2029%3A11&version=ESV"
+    },
+    {
+      "ref": "2 Chronicles 7:14",
+      "book": "2 Chronicles",
+      "testament": "OT",
+      "chapter": 7,
+      "verse": 14,
+      "times": 1,
+      "first": "2026-07-05",
+      "last": "2026-07-05",
+      "last_label": "July 5, 2026",
+      "pew_page": null,
+      "slots": [
+        "Call to Meditation"
+      ],
+      "dates": [
+        {
+          "date": "2026-07-05",
+          "label": "July 5, 2026",
+          "slot": "Call to Meditation",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=2%20Chronicles%207%3A14&version=ESV"
+    },
+    {
+      "ref": "Ezra 1:1–11",
+      "book": "Ezra",
+      "testament": "OT",
+      "chapter": 1,
+      "verse": 1,
+      "times": 1,
+      "first": "2026-06-28",
+      "last": "2026-06-28",
+      "last_label": "June 28, 2026",
+      "pew_page": null,
+      "slots": [
+        "Scripture Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-06-28",
+          "label": "June 28, 2026",
+          "slot": "Scripture Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Ezra%201%3A1-11&version=ESV"
+    },
+    {
+      "ref": "Ezra 2:1–70",
+      "book": "Ezra",
+      "testament": "OT",
+      "chapter": 2,
+      "verse": 1,
+      "times": 1,
+      "first": "2026-07-05",
+      "last": "2026-07-05",
+      "last_label": "July 5, 2026",
+      "pew_page": null,
+      "slots": [
+        "Scripture Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-07-05",
+          "label": "July 5, 2026",
+          "slot": "Scripture Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Ezra%202%3A1-70&version=ESV"
+    },
+    {
+      "ref": "Ezra 3:1–7",
+      "book": "Ezra",
+      "testament": "OT",
+      "chapter": 3,
+      "verse": 1,
+      "times": 1,
+      "first": "2026-07-12",
+      "last": "2026-07-12",
+      "last_label": "July 12, 2026",
+      "pew_page": null,
+      "slots": [
+        "Scripture Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-07-12",
+          "label": "July 12, 2026",
+          "slot": "Scripture Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Ezra%203%3A1-7&version=ESV"
+    },
+    {
+      "ref": "Ezra 3:8–13",
+      "book": "Ezra",
+      "testament": "OT",
+      "chapter": 3,
+      "verse": 8,
+      "times": 1,
+      "first": "2026-07-19",
+      "last": "2026-07-19",
+      "last_label": "July 19, 2026",
+      "pew_page": 390,
+      "slots": [
+        "Scripture Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-07-19",
+          "label": "July 19, 2026",
+          "slot": "Scripture Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Ezra%203%3A8-13&version=ESV"
+    },
+    {
+      "ref": "Ezra 4",
+      "book": "Ezra",
+      "testament": "OT",
+      "chapter": 4,
+      "verse": 0,
+      "times": 1,
+      "first": "2026-07-26",
+      "last": "2026-07-26",
+      "last_label": "July 26, 2026",
+      "pew_page": 391,
+      "slots": [
+        "Scripture Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-07-26",
+          "label": "July 26, 2026",
+          "slot": "Scripture Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Ezra%204&version=ESV"
+    },
+    {
+      "ref": "Ezra 5:1–17",
+      "book": "Ezra",
+      "testament": "OT",
+      "chapter": 5,
+      "verse": 1,
+      "times": 1,
+      "first": "2026-08-02",
+      "last": "2026-08-02",
+      "last_label": "August 2, 2026",
+      "pew_page": 392,
+      "slots": [
+        "Scripture Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-08-02",
+          "label": "August 2, 2026",
+          "slot": "Scripture Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Ezra%205%3A1-17&version=ESV"
+    },
+    {
+      "ref": "Ezra 6:1–12",
+      "book": "Ezra",
+      "testament": "OT",
+      "chapter": 6,
+      "verse": 1,
+      "times": 1,
+      "first": "2026-08-09",
+      "last": "2026-08-09",
+      "last_label": "August 9, 2026",
+      "pew_page": 392,
+      "slots": [
+        "Scripture Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-08-09",
+          "label": "August 9, 2026",
+          "slot": "Scripture Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Ezra%206%3A1-12&version=ESV"
+    },
+    {
+      "ref": "Ezra 6:13–22",
+      "book": "Ezra",
+      "testament": "OT",
+      "chapter": 6,
+      "verse": 13,
+      "times": 1,
+      "first": "2026-08-16",
+      "last": "2026-08-16",
+      "last_label": "August 16, 2026",
+      "pew_page": 393,
+      "slots": [
+        "Scripture Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-08-16",
+          "label": "August 16, 2026",
+          "slot": "Scripture Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Ezra%206%3A13-22&version=ESV"
+    },
+    {
+      "ref": "Ezra 7:1–10",
+      "book": "Ezra",
+      "testament": "OT",
+      "chapter": 7,
+      "verse": 1,
+      "times": 1,
+      "first": "2026-08-23",
+      "last": "2026-08-23",
+      "last_label": "August 23, 2026",
+      "pew_page": 393,
+      "slots": [
+        "Scripture Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-08-23",
+          "label": "August 23, 2026",
+          "slot": "Scripture Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Ezra%207%3A1-10&version=ESV"
+    },
+    {
+      "ref": "Ezra 7:11–28",
+      "book": "Ezra",
+      "testament": "OT",
+      "chapter": 7,
+      "verse": 11,
+      "times": 1,
+      "first": "2026-08-30",
+      "last": "2026-08-30",
+      "last_label": "August 30, 2026",
+      "pew_page": 393,
+      "slots": [
+        "Scripture Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-08-30",
+          "label": "August 30, 2026",
+          "slot": "Scripture Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Ezra%207%3A11-28&version=ESV"
+    },
+    {
+      "ref": "Ezra 8:1–23",
+      "book": "Ezra",
+      "testament": "OT",
+      "chapter": 8,
+      "verse": 1,
+      "times": 1,
+      "first": "2026-09-06",
+      "last": "2026-09-06",
+      "last_label": "September 6, 2026",
+      "pew_page": 394,
+      "slots": [
+        "Scripture Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-09-06",
+          "label": "September 6, 2026",
+          "slot": "Scripture Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Ezra%208%3A1-23&version=ESV"
+    },
+    {
+      "ref": "Ezra 8:24–36",
+      "book": "Ezra",
+      "testament": "OT",
+      "chapter": 8,
+      "verse": 24,
+      "times": 1,
+      "first": "2026-09-13",
+      "last": "2026-09-13",
+      "last_label": "September 13, 2026",
+      "pew_page": 395,
+      "slots": [
+        "Scripture Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-09-13",
+          "label": "September 13, 2026",
+          "slot": "Scripture Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Ezra%208%3A24-36&version=ESV"
+    },
+    {
+      "ref": "Ezra 9:1–4",
+      "book": "Ezra",
+      "testament": "OT",
+      "chapter": 9,
+      "verse": 1,
+      "times": 1,
+      "first": "2026-09-20",
+      "last": "2026-09-20",
+      "last_label": "September 20, 2026",
+      "pew_page": 395,
+      "slots": [
+        "Scripture Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-09-20",
+          "label": "September 20, 2026",
+          "slot": "Scripture Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Ezra%209%3A1-4&version=ESV"
+    },
+    {
+      "ref": "Ezra 9:5–15",
+      "book": "Ezra",
+      "testament": "OT",
+      "chapter": 9,
+      "verse": 5,
+      "times": 1,
+      "first": "2026-09-27",
+      "last": "2026-09-27",
+      "last_label": "September 27, 2026",
+      "pew_page": 395,
+      "slots": [
+        "Scripture Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-09-27",
+          "label": "September 27, 2026",
+          "slot": "Scripture Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Ezra%209%3A5-15&version=ESV"
+    },
+    {
+      "ref": "Ezra 10:1–17",
+      "book": "Ezra",
+      "testament": "OT",
+      "chapter": 10,
+      "verse": 1,
+      "times": 1,
+      "first": "2026-10-11",
+      "last": "2026-10-11",
+      "last_label": "October 11, 2026",
+      "pew_page": 396,
+      "slots": [
+        "Scripture Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-10-11",
+          "label": "October 11, 2026",
+          "slot": "Scripture Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Ezra%2010%3A1-17&version=ESV"
+    },
+    {
+      "ref": "Ezra 10:18–44",
+      "book": "Ezra",
+      "testament": "OT",
+      "chapter": 10,
+      "verse": 18,
+      "times": 1,
+      "first": "2026-10-18",
+      "last": "2026-10-18",
+      "last_label": "October 18, 2026",
+      "pew_page": 397,
+      "slots": [
+        "Scripture Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-10-18",
+          "label": "October 18, 2026",
+          "slot": "Scripture Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Ezra%2010%3A18-44&version=ESV"
+    },
+    {
+      "ref": "Nehemiah 1:1–11",
+      "book": "Nehemiah",
+      "testament": "OT",
+      "chapter": 1,
+      "verse": 1,
+      "times": 1,
+      "first": "2026-11-01",
+      "last": "2026-11-01",
+      "last_label": "November 1, 2026",
+      "pew_page": 398,
+      "slots": [
+        "Scripture Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-11-01",
+          "label": "November 1, 2026",
+          "slot": "Scripture Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Nehemiah%201%3A1-11&version=ESV"
+    },
+    {
+      "ref": "Psalm 19:7–11, 14; 95:6",
+      "book": "Psalm",
+      "testament": "OT",
+      "chapter": 19,
+      "verse": 7,
+      "times": 1,
+      "first": "2026-08-02",
+      "last": "2026-08-02",
+      "last_label": "August 2, 2026",
+      "pew_page": null,
+      "slots": [
+        "Call to Worship"
+      ],
+      "dates": [
+        {
+          "date": "2026-08-02",
+          "label": "August 2, 2026",
+          "slot": "Call to Worship",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Psalm%2019%3A7-11%2C14%3B%20Psalm%2095%3A6&version=ESV"
+    },
+    {
+      "ref": "Psalm 20",
+      "book": "Psalm",
+      "testament": "OT",
+      "chapter": 20,
+      "verse": 0,
+      "times": 1,
+      "first": "2026-09-06",
+      "last": "2026-09-06",
+      "last_label": "September 6, 2026",
+      "pew_page": null,
+      "slots": [
+        "Call to Worship"
+      ],
+      "dates": [
+        {
+          "date": "2026-09-06",
+          "label": "September 6, 2026",
+          "slot": "Call to Worship",
+          "note": "from",
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Psalm%2020&version=ESV"
+    },
+    {
+      "ref": "Psalm 23:1–3",
+      "book": "Psalm",
+      "testament": "OT",
+      "chapter": 23,
+      "verse": 1,
+      "times": 1,
+      "first": "2026-08-30",
+      "last": "2026-08-30",
+      "last_label": "August 30, 2026",
+      "pew_page": null,
+      "slots": [
+        "Assurance of Divine Pardon"
+      ],
+      "dates": [
+        {
+          "date": "2026-08-30",
+          "label": "August 30, 2026",
+          "slot": "Assurance of Divine Pardon",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Psalm%2023%3A1-3&version=ESV"
+    },
+    {
+      "ref": "Psalm 24",
+      "book": "Psalm",
+      "testament": "OT",
+      "chapter": 24,
+      "verse": 0,
+      "times": 1,
+      "first": "2026-09-13",
+      "last": "2026-09-13",
+      "last_label": "September 13, 2026",
+      "pew_page": null,
+      "slots": [
+        "The Psalter Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-09-13",
+          "label": "September 13, 2026",
+          "slot": "The Psalter Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Psalm%2024&version=ESV"
+    },
+    {
+      "ref": "Psalm 25:4–5",
+      "book": "Psalm",
+      "testament": "OT",
+      "chapter": 25,
+      "verse": 4,
+      "times": 2,
+      "first": "2026-10-11",
+      "last": "2026-10-18",
+      "last_label": "October 18, 2026",
+      "pew_page": null,
+      "slots": [
+        "Call to Meditation"
+      ],
+      "dates": [
+        {
+          "date": "2026-10-11",
+          "label": "October 11, 2026",
+          "slot": "Call to Meditation",
+          "note": null,
+          "version": null
+        },
+        {
+          "date": "2026-10-18",
+          "label": "October 18, 2026",
+          "slot": "Call to Meditation",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Psalm%2025%3A4-5&version=ESV"
+    },
+    {
+      "ref": "Psalm 25:6–15",
+      "book": "Psalm",
+      "testament": "OT",
+      "chapter": 25,
+      "verse": 6,
+      "times": 1,
+      "first": "2026-10-11",
+      "last": "2026-10-11",
+      "last_label": "October 11, 2026",
+      "pew_page": null,
+      "slots": [
+        "The Psalter Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-10-11",
+          "label": "October 11, 2026",
+          "slot": "The Psalter Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Psalm%2025%3A6-15&version=ESV"
+    },
+    {
+      "ref": "Psalm 27:1–4, 13–14",
+      "book": "Psalm",
+      "testament": "OT",
+      "chapter": 27,
+      "verse": 1,
+      "times": 1,
+      "first": "2026-07-26",
+      "last": "2026-07-26",
+      "last_label": "July 26, 2026",
+      "pew_page": null,
+      "slots": [
+        "Responsive Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-07-26",
+          "label": "July 26, 2026",
+          "slot": "Responsive Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Psalm%2027%3A1-4%2C13-14&version=ESV"
+    },
+    {
+      "ref": "Psalm 27:14",
+      "book": "Psalm",
+      "testament": "OT",
+      "chapter": 27,
+      "verse": 14,
+      "times": 1,
+      "first": "2026-07-26",
+      "last": "2026-07-26",
+      "last_label": "July 26, 2026",
+      "pew_page": null,
+      "slots": [
+        "Call to Meditation"
+      ],
+      "dates": [
+        {
+          "date": "2026-07-26",
+          "label": "July 26, 2026",
+          "slot": "Call to Meditation",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Psalm%2027%3A14&version=ESV"
+    },
+    {
+      "ref": "Psalm 30:1–5",
+      "book": "Psalm",
+      "testament": "OT",
+      "chapter": 30,
+      "verse": 1,
+      "times": 1,
+      "first": "2026-07-19",
+      "last": "2026-07-19",
+      "last_label": "July 19, 2026",
+      "pew_page": null,
+      "slots": [
+        "Call to Worship"
+      ],
+      "dates": [
+        {
+          "date": "2026-07-19",
+          "label": "July 19, 2026",
+          "slot": "Call to Worship",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Psalm%2030%3A1-5&version=ESV"
+    },
+    {
+      "ref": "Psalm 32:1–6, 10–11",
+      "book": "Psalm",
+      "testament": "OT",
+      "chapter": 32,
+      "verse": 1,
+      "times": 1,
+      "first": "2026-09-27",
+      "last": "2026-09-27",
+      "last_label": "September 27, 2026",
+      "pew_page": null,
+      "slots": [
+        "The Psalter Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-09-27",
+          "label": "September 27, 2026",
+          "slot": "The Psalter Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Psalm%2032%3A1-6%2C10-11&version=ESV"
+    },
+    {
+      "ref": "Psalm 32:5",
+      "book": "Psalm",
+      "testament": "OT",
+      "chapter": 32,
+      "verse": 5,
+      "times": 1,
+      "first": "2026-03-22",
+      "last": "2026-03-22",
+      "last_label": "March 22, 2026",
+      "pew_page": null,
+      "slots": [
+        "Assurance of Divine Pardon"
+      ],
+      "dates": [
+        {
+          "date": "2026-03-22",
+          "label": "March 22, 2026",
+          "slot": "Assurance of Divine Pardon",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Psalm%2032%3A5&version=ESV"
+    },
+    {
+      "ref": "Psalm 33:6–12, 18–22",
+      "book": "Psalm",
+      "testament": "OT",
+      "chapter": 33,
+      "verse": 6,
+      "times": 1,
+      "first": "2026-07-05",
+      "last": "2026-07-05",
+      "last_label": "July 5, 2026",
+      "pew_page": null,
+      "slots": [
+        "Responsive Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-07-05",
+          "label": "July 5, 2026",
+          "slot": "Responsive Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Psalm%2033%3A6-12%2C18-22&version=ESV"
+    },
+    {
+      "ref": "Psalm 34:1–3",
+      "book": "Psalm",
+      "testament": "OT",
+      "chapter": 34,
+      "verse": 1,
+      "times": 3,
+      "first": "2026-01-25",
+      "last": "2026-04-26",
+      "last_label": "April 26, 2026",
+      "pew_page": null,
+      "slots": [
+        "Call to Worship",
+        "Scriptural Call to Worship"
+      ],
+      "dates": [
+        {
+          "date": "2026-01-25",
+          "label": "January 25, 2026",
+          "slot": "Call to Worship",
+          "note": null,
+          "version": null
+        },
+        {
+          "date": "2026-02-22",
+          "label": "February 22, 2026",
+          "slot": "Call to Worship",
+          "note": null,
+          "version": null
+        },
+        {
+          "date": "2026-04-26",
+          "label": "April 26, 2026",
+          "slot": "Scriptural Call to Worship",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Psalm%2034%3A1-3&version=ESV"
+    },
+    {
+      "ref": "Psalm 34:8",
+      "book": "Psalm",
+      "testament": "OT",
+      "chapter": 34,
+      "verse": 8,
+      "times": 1,
+      "first": "2026-06-07",
+      "last": "2026-06-07",
+      "last_label": "June 7, 2026",
+      "pew_page": null,
+      "slots": [
+        "Call to Meditation"
+      ],
+      "dates": [
+        {
+          "date": "2026-06-07",
+          "label": "June 7, 2026",
+          "slot": "Call to Meditation",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Psalm%2034%3A8&version=ESV"
+    },
+    {
+      "ref": "Psalm 34:8–10, 15–22",
+      "book": "Psalm",
+      "testament": "OT",
+      "chapter": 34,
+      "verse": 8,
+      "times": 1,
+      "first": "2026-04-26",
+      "last": "2026-04-26",
+      "last_label": "April 26, 2026",
+      "pew_page": null,
+      "slots": [
+        "Old Testament Responsive Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-04-26",
+          "label": "April 26, 2026",
+          "slot": "Old Testament Responsive Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Psalm%2034%3A8-10%2C15-22&version=ESV"
+    },
+    {
+      "ref": "Psalm 34:22",
+      "book": "Psalm",
+      "testament": "OT",
+      "chapter": 34,
+      "verse": 22,
+      "times": 1,
+      "first": "2026-04-26",
+      "last": "2026-04-26",
+      "last_label": "April 26, 2026",
+      "pew_page": null,
+      "slots": [
+        "Assurance of Divine Pardon"
+      ],
+      "dates": [
+        {
+          "date": "2026-04-26",
+          "label": "April 26, 2026",
+          "slot": "Assurance of Divine Pardon",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Psalm%2034%3A22&version=ESV"
+    },
+    {
+      "ref": "Psalm 40",
+      "book": "Psalm",
+      "testament": "OT",
+      "chapter": 40,
+      "verse": 0,
+      "times": 1,
+      "first": "2026-02-22",
+      "last": "2026-02-22",
+      "last_label": "February 22, 2026",
+      "pew_page": null,
+      "slots": [
+        "Responsive Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-02-22",
+          "label": "February 22, 2026",
+          "slot": "Responsive Reading",
+          "note": "from",
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Psalm%2040&version=ESV"
+    },
+    {
+      "ref": "Psalm 42:5",
+      "book": "Psalm",
+      "testament": "OT",
+      "chapter": 42,
+      "verse": 5,
+      "times": 1,
+      "first": "2026-07-19",
+      "last": "2026-07-19",
+      "last_label": "July 19, 2026",
+      "pew_page": null,
+      "slots": [
+        "Call to Meditation"
+      ],
+      "dates": [
+        {
+          "date": "2026-07-19",
+          "label": "July 19, 2026",
+          "slot": "Call to Meditation",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Psalm%2042%3A5&version=ESV"
+    },
+    {
+      "ref": "Psalm 46",
+      "book": "Psalm",
+      "testament": "OT",
+      "chapter": 46,
+      "verse": 0,
+      "times": 1,
+      "first": "2026-07-26",
+      "last": "2026-07-26",
+      "last_label": "July 26, 2026",
+      "pew_page": null,
+      "slots": [
+        "Call to Worship"
+      ],
+      "dates": [
+        {
+          "date": "2026-07-26",
+          "label": "July 26, 2026",
+          "slot": "Call to Worship",
+          "note": "from",
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Psalm%2046&version=ESV"
+    },
+    {
+      "ref": "Psalm 46:10",
+      "book": "Psalm",
+      "testament": "OT",
+      "chapter": 46,
+      "verse": 10,
+      "times": 1,
+      "first": "2026-09-06",
+      "last": "2026-09-06",
+      "last_label": "September 6, 2026",
+      "pew_page": null,
+      "slots": [
+        "Call to Meditation"
+      ],
+      "dates": [
+        {
+          "date": "2026-09-06",
+          "label": "September 6, 2026",
+          "slot": "Call to Meditation",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Psalm%2046%3A10&version=ESV"
+    },
+    {
+      "ref": "Psalm 51",
+      "book": "Psalm",
+      "testament": "OT",
+      "chapter": 51,
+      "verse": 0,
+      "times": 1,
+      "first": "2026-03-22",
+      "last": "2026-03-22",
+      "last_label": "March 22, 2026",
+      "pew_page": null,
+      "slots": [
+        "Corporate Prayer of Confession"
+      ],
+      "dates": [
+        {
+          "date": "2026-03-22",
+          "label": "March 22, 2026",
+          "slot": "Corporate Prayer of Confession",
+          "note": "from",
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Psalm%2051&version=ESV"
+    },
+    {
+      "ref": "Psalm 51:1–2, 14; 42:5",
+      "book": "Psalm",
+      "testament": "OT",
+      "chapter": 51,
+      "verse": 1,
+      "times": 1,
+      "first": "2026-02-18",
+      "last": "2026-02-18",
+      "last_label": "February 18, 2026",
+      "pew_page": null,
+      "slots": [
+        "Call to Worship"
+      ],
+      "dates": [
+        {
+          "date": "2026-02-18",
+          "label": "February 18, 2026",
+          "slot": "Call to Worship",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Psalm%2051%3A1-2%2C14%3B%20Psalm%2042%3A5&version=ESV"
+    },
+    {
+      "ref": "Psalm 66:1–5",
+      "book": "Psalm",
+      "testament": "OT",
+      "chapter": 66,
+      "verse": 1,
+      "times": 1,
+      "first": "2026-07-05",
+      "last": "2026-07-05",
+      "last_label": "July 5, 2026",
+      "pew_page": null,
+      "slots": [
+        "Call to Worship"
+      ],
+      "dates": [
+        {
+          "date": "2026-07-05",
+          "label": "July 5, 2026",
+          "slot": "Call to Worship",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Psalm%2066%3A1-5&version=ESV"
+    },
+    {
+      "ref": "Psalm 89:1–5",
+      "book": "Psalm",
+      "testament": "OT",
+      "chapter": 89,
+      "verse": 1,
+      "times": 1,
+      "first": "2026-05-10",
+      "last": "2026-05-10",
+      "last_label": "May 10, 2026",
+      "pew_page": null,
+      "slots": [
+        "Scriptural Call to Worship"
+      ],
+      "dates": [
+        {
+          "date": "2026-05-10",
+          "label": "May 10, 2026",
+          "slot": "Scriptural Call to Worship",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Psalm%2089%3A1-5&version=ESV"
+    },
+    {
+      "ref": "Psalm 90:1",
+      "book": "Psalm",
+      "testament": "OT",
+      "chapter": 90,
+      "verse": 1,
+      "times": 1,
+      "first": "2026-06-28",
+      "last": "2026-06-28",
+      "last_label": "June 28, 2026",
+      "pew_page": null,
+      "slots": [
+        "Call to Meditation"
+      ],
+      "dates": [
+        {
+          "date": "2026-06-28",
+          "label": "June 28, 2026",
+          "slot": "Call to Meditation",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Psalm%2090%3A1&version=ESV"
+    },
+    {
+      "ref": "Psalm 91:1–2",
+      "book": "Psalm",
+      "testament": "OT",
+      "chapter": 91,
+      "verse": 1,
+      "times": 1,
+      "first": "2026-04-26",
+      "last": "2026-04-26",
+      "last_label": "April 26, 2026",
+      "pew_page": null,
+      "slots": [
+        "Call to Meditation"
+      ],
+      "dates": [
+        {
+          "date": "2026-04-26",
+          "label": "April 26, 2026",
+          "slot": "Call to Meditation",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Psalm%2091%3A1-2&version=ESV"
+    },
+    {
+      "ref": "Psalm 95:1–7",
+      "book": "Psalm",
+      "testament": "OT",
+      "chapter": 95,
+      "verse": 1,
+      "times": 2,
+      "first": "2026-07-12",
+      "last": "2026-08-30",
+      "last_label": "August 30, 2026",
+      "pew_page": null,
+      "slots": [
+        "Scriptural Call to Worship",
+        "The Old Testament Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-07-12",
+          "label": "July 12, 2026",
+          "slot": "Scriptural Call to Worship",
+          "note": null,
+          "version": null
+        },
+        {
+          "date": "2026-08-30",
+          "label": "August 30, 2026",
+          "slot": "The Old Testament Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Psalm%2095%3A1-7&version=ESV"
+    },
+    {
+      "ref": "Psalm 95:6–7",
+      "book": "Psalm",
+      "testament": "OT",
+      "chapter": 95,
+      "verse": 6,
+      "times": 1,
+      "first": "2026-09-20",
+      "last": "2026-09-20",
+      "last_label": "September 20, 2026",
+      "pew_page": null,
+      "slots": [
+        "Scriptural Call to Worship"
+      ],
+      "dates": [
+        {
+          "date": "2026-09-20",
+          "label": "September 20, 2026",
+          "slot": "Scriptural Call to Worship",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Psalm%2095%3A6-7&version=ESV"
+    },
+    {
+      "ref": "Psalm 96:11–13",
+      "book": "Psalm",
+      "testament": "OT",
+      "chapter": 96,
+      "verse": 11,
+      "times": 1,
+      "first": "2026-05-24",
+      "last": "2026-05-24",
+      "last_label": "May 24, 2026",
+      "pew_page": null,
+      "slots": [
+        "Scriptural Call to Worship"
+      ],
+      "dates": [
+        {
+          "date": "2026-05-24",
+          "label": "May 24, 2026",
+          "slot": "Scriptural Call to Worship",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Psalm%2096%3A11-13&version=ESV"
+    },
+    {
+      "ref": "Psalm 100",
+      "book": "Psalm",
+      "testament": "OT",
+      "chapter": 100,
+      "verse": 0,
+      "times": 3,
+      "first": "2026-06-14",
+      "last": "2026-10-04",
+      "last_label": "October 4, 2026",
+      "pew_page": null,
+      "slots": [
+        "Call to Worship",
+        "Scriptural Call to Worship"
+      ],
+      "dates": [
+        {
+          "date": "2026-06-14",
+          "label": "June 14, 2026",
+          "slot": "Call to Worship",
+          "note": null,
+          "version": null
+        },
+        {
+          "date": "2026-08-16",
+          "label": "August 16, 2026",
+          "slot": "Scriptural Call to Worship",
+          "note": null,
+          "version": null
+        },
+        {
+          "date": "2026-10-04",
+          "label": "October 4, 2026",
+          "slot": "Call to Worship",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Psalm%20100&version=ESV"
+    },
+    {
+      "ref": "Psalm 100:1–4",
+      "book": "Psalm",
+      "testament": "OT",
+      "chapter": 100,
+      "verse": 1,
+      "times": 1,
+      "first": "2026-05-17",
+      "last": "2026-05-17",
+      "last_label": "May 17, 2026",
+      "pew_page": null,
+      "slots": [
+        "Scriptural Call to Worship"
+      ],
+      "dates": [
+        {
+          "date": "2026-05-17",
+          "label": "May 17, 2026",
+          "slot": "Scriptural Call to Worship",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Psalm%20100%3A1-4&version=ESV"
+    },
+    {
+      "ref": "Psalm 103",
+      "book": "Psalm",
+      "testament": "OT",
+      "chapter": 103,
+      "verse": 0,
+      "times": 2,
+      "first": "2026-02-18",
+      "last": "2026-03-22",
+      "last_label": "March 22, 2026",
+      "pew_page": null,
+      "slots": [
+        "Call to Worship",
+        "Scripture Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-02-18",
+          "label": "February 18, 2026",
+          "slot": "Scripture Reading",
+          "note": null,
+          "version": null
+        },
+        {
+          "date": "2026-03-22",
+          "label": "March 22, 2026",
+          "slot": "Call to Worship",
+          "note": "from",
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Psalm%20103&version=ESV"
+    },
+    {
+      "ref": "Psalm 103:1–2, 20–22",
+      "book": "Psalm",
+      "testament": "OT",
+      "chapter": 103,
+      "verse": 1,
+      "times": 1,
+      "first": "2026-11-01",
+      "last": "2026-11-01",
+      "last_label": "November 1, 2026",
+      "pew_page": null,
+      "slots": [
+        "Call to Worship"
+      ],
+      "dates": [
+        {
+          "date": "2026-11-01",
+          "label": "November 1, 2026",
+          "slot": "Call to Worship",
+          "note": null,
+          "version": "NIV"
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Psalm%20103%3A1-2%2C20-22&version=ESV"
+    },
+    {
+      "ref": "Psalm 103:8, 12",
+      "book": "Psalm",
+      "testament": "OT",
+      "chapter": 103,
+      "verse": 8,
+      "times": 1,
+      "first": "2026-09-06",
+      "last": "2026-09-06",
+      "last_label": "September 6, 2026",
+      "pew_page": null,
+      "slots": [
+        "Assurance of Divine Pardon"
+      ],
+      "dates": [
+        {
+          "date": "2026-09-06",
+          "label": "September 6, 2026",
+          "slot": "Assurance of Divine Pardon",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Psalm%20103%3A8%2C12&version=ESV"
+    },
+    {
+      "ref": "Psalm 103:8–12",
+      "book": "Psalm",
+      "testament": "OT",
+      "chapter": 103,
+      "verse": 8,
+      "times": 1,
+      "first": "2026-10-11",
+      "last": "2026-10-11",
+      "last_label": "October 11, 2026",
+      "pew_page": null,
+      "slots": [
+        "Assurance of Divine Pardon"
+      ],
+      "dates": [
+        {
+          "date": "2026-10-11",
+          "label": "October 11, 2026",
+          "slot": "Assurance of Divine Pardon",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Psalm%20103%3A8-12&version=ESV"
+    },
+    {
+      "ref": "Psalm 103:11–12",
+      "book": "Psalm",
+      "testament": "OT",
+      "chapter": 103,
+      "verse": 11,
+      "times": 2,
+      "first": "2026-08-16",
+      "last": "2026-10-18",
+      "last_label": "October 18, 2026",
+      "pew_page": null,
+      "slots": [
+        "Assurance of Pardon"
+      ],
+      "dates": [
+        {
+          "date": "2026-08-16",
+          "label": "August 16, 2026",
+          "slot": "Assurance of Pardon",
+          "note": null,
+          "version": null
+        },
+        {
+          "date": "2026-10-18",
+          "label": "October 18, 2026",
+          "slot": "Assurance of Pardon",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Psalm%20103%3A11-12&version=ESV"
+    },
+    {
+      "ref": "Psalm 103:19–22",
+      "book": "Psalm",
+      "testament": "OT",
+      "chapter": 103,
+      "verse": 19,
+      "times": 1,
+      "first": "2026-08-09",
+      "last": "2026-08-09",
+      "last_label": "August 9, 2026",
+      "pew_page": null,
+      "slots": [
+        "Call to Worship"
+      ],
+      "dates": [
+        {
+          "date": "2026-08-09",
+          "label": "August 9, 2026",
+          "slot": "Call to Worship",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Psalm%20103%3A19-22&version=ESV"
+    },
+    {
+      "ref": "Psalm 104:24–28",
+      "book": "Psalm",
+      "testament": "OT",
+      "chapter": 104,
+      "verse": 24,
+      "times": 1,
+      "first": "2026-03-15",
+      "last": "2026-03-15",
+      "last_label": "March 15, 2026",
+      "pew_page": null,
+      "slots": [
+        "Scriptural Call to Worship"
+      ],
+      "dates": [
+        {
+          "date": "2026-03-15",
+          "label": "March 15, 2026",
+          "slot": "Scriptural Call to Worship",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Psalm%20104%3A24-28&version=ESV"
+    },
+    {
+      "ref": "Psalm 116:12–14, 17–19",
+      "book": "Psalm",
+      "testament": "OT",
+      "chapter": 116,
+      "verse": 12,
+      "times": 1,
+      "first": "2026-10-25",
+      "last": "2026-10-25",
+      "last_label": "October 25, 2026",
+      "pew_page": null,
+      "slots": [
+        "Call to Worship"
+      ],
+      "dates": [
+        {
+          "date": "2026-10-25",
+          "label": "October 25, 2026",
+          "slot": "Call to Worship",
+          "note": "taken from",
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Psalm%20116%3A12-14%2C17-19&version=ESV"
+    },
+    {
+      "ref": "Psalm 119:9–16",
+      "book": "Psalm",
+      "testament": "OT",
+      "chapter": 119,
+      "verse": 9,
+      "times": 1,
+      "first": "2026-08-23",
+      "last": "2026-08-23",
+      "last_label": "August 23, 2026",
+      "pew_page": null,
+      "slots": [
+        "Call to Worship"
+      ],
+      "dates": [
+        {
+          "date": "2026-08-23",
+          "label": "August 23, 2026",
+          "slot": "Call to Worship",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Psalm%20119%3A9-16&version=ESV"
+    },
+    {
+      "ref": "Psalm 119:10",
+      "book": "Psalm",
+      "testament": "OT",
+      "chapter": 119,
+      "verse": 10,
+      "times": 1,
+      "first": "2026-08-23",
+      "last": "2026-08-23",
+      "last_label": "August 23, 2026",
+      "pew_page": null,
+      "slots": [
+        "Call to Meditation"
+      ],
+      "dates": [
+        {
+          "date": "2026-08-23",
+          "label": "August 23, 2026",
+          "slot": "Call to Meditation",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Psalm%20119%3A10&version=ESV"
+    },
+    {
+      "ref": "Psalm 121",
+      "book": "Psalm",
+      "testament": "OT",
+      "chapter": 121,
+      "verse": 0,
+      "times": 1,
+      "first": "2026-05-31",
+      "last": "2026-05-31",
+      "last_label": "May 31, 2026",
+      "pew_page": null,
+      "slots": [
+        "Scriptural Call to Worship"
+      ],
+      "dates": [
+        {
+          "date": "2026-05-31",
+          "label": "May 31, 2026",
+          "slot": "Scriptural Call to Worship",
+          "note": "from",
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Psalm%20121&version=ESV"
+    },
+    {
+      "ref": "Psalm 121:1–8",
+      "book": "Psalm",
+      "testament": "OT",
+      "chapter": 121,
+      "verse": 1,
+      "times": 1,
+      "first": "2026-04-19",
+      "last": "2026-04-19",
+      "last_label": "April 19, 2026",
+      "pew_page": null,
+      "slots": [
+        "Scriptural Call to Worship"
+      ],
+      "dates": [
+        {
+          "date": "2026-04-19",
+          "label": "April 19, 2026",
+          "slot": "Scriptural Call to Worship",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Psalm%20121%3A1-8&version=ESV"
+    },
+    {
+      "ref": "Psalm 126:1–3",
+      "book": "Psalm",
+      "testament": "OT",
+      "chapter": 126,
+      "verse": 1,
+      "times": 1,
+      "first": "2026-06-28",
+      "last": "2026-06-28",
+      "last_label": "June 28, 2026",
+      "pew_page": null,
+      "slots": [
+        "Call to Worship"
+      ],
+      "dates": [
+        {
+          "date": "2026-06-28",
+          "label": "June 28, 2026",
+          "slot": "Call to Worship",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Psalm%20126%3A1-3&version=ESV"
+    },
+    {
+      "ref": "Psalm 130",
+      "book": "Psalm",
+      "testament": "OT",
+      "chapter": 130,
+      "verse": 0,
+      "times": 1,
+      "first": "2026-09-27",
+      "last": "2026-09-27",
+      "last_label": "September 27, 2026",
+      "pew_page": null,
+      "slots": [
+        "Call to Worship"
+      ],
+      "dates": [
+        {
+          "date": "2026-09-27",
+          "label": "September 27, 2026",
+          "slot": "Call to Worship",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Psalm%20130&version=ESV"
+    },
+    {
+      "ref": "Psalm 130:1–5",
+      "book": "Psalm",
+      "testament": "OT",
+      "chapter": 130,
+      "verse": 1,
+      "times": 1,
+      "first": "2026-04-12",
+      "last": "2026-04-12",
+      "last_label": "April 12, 2026",
+      "pew_page": null,
+      "slots": [
+        "Scriptural Call to Worship"
+      ],
+      "dates": [
+        {
+          "date": "2026-04-12",
+          "label": "April 12, 2026",
+          "slot": "Scriptural Call to Worship",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Psalm%20130%3A1-5&version=ESV"
+    },
+    {
+      "ref": "Psalm 130:3–4",
+      "book": "Psalm",
+      "testament": "OT",
+      "chapter": 130,
+      "verse": 3,
+      "times": 2,
+      "first": "2026-03-01",
+      "last": "2026-05-24",
+      "last_label": "May 24, 2026",
+      "pew_page": null,
+      "slots": [
+        "Assurance of Divine Pardon",
+        "Assurance of Pardon"
+      ],
+      "dates": [
+        {
+          "date": "2026-03-01",
+          "label": "March 1, 2026",
+          "slot": "Assurance of Divine Pardon",
+          "note": null,
+          "version": null
+        },
+        {
+          "date": "2026-05-24",
+          "label": "May 24, 2026",
+          "slot": "Assurance of Pardon",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Psalm%20130%3A3-4&version=ESV"
+    },
+    {
+      "ref": "Psalm 145",
+      "book": "Psalm",
+      "testament": "OT",
+      "chapter": 145,
+      "verse": 0,
+      "times": 4,
+      "first": "2026-03-15",
+      "last": "2026-08-30",
+      "last_label": "August 30, 2026",
+      "pew_page": null,
+      "slots": [
+        "Call to Worship",
+        "Responsive Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-03-15",
+          "label": "March 15, 2026",
+          "slot": "Responsive Reading",
+          "note": "taken from",
+          "version": null
+        },
+        {
+          "date": "2026-05-03",
+          "label": "May 3, 2026",
+          "slot": "Call to Worship",
+          "note": "from",
+          "version": null
+        },
+        {
+          "date": "2026-06-07",
+          "label": "June 7, 2026",
+          "slot": "Responsive Reading",
+          "note": "from",
+          "version": null
+        },
+        {
+          "date": "2026-08-30",
+          "label": "August 30, 2026",
+          "slot": "Call to Worship",
+          "note": "from",
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Psalm%20145&version=ESV"
+    },
+    {
+      "ref": "Psalm 145:10–13",
+      "book": "Psalm",
+      "testament": "OT",
+      "chapter": 145,
+      "verse": 10,
+      "times": 1,
+      "first": "2026-02-15",
+      "last": "2026-02-15",
+      "last_label": "February 15, 2026",
+      "pew_page": null,
+      "slots": [
+        "Scriptural Call to Worship"
+      ],
+      "dates": [
+        {
+          "date": "2026-02-15",
+          "label": "February 15, 2026",
+          "slot": "Scriptural Call to Worship",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Psalm%20145%3A10-13&version=ESV"
+    },
+    {
+      "ref": "Psalm 148:1–6, 13",
+      "book": "Psalm",
+      "testament": "OT",
+      "chapter": 148,
+      "verse": 1,
+      "times": 1,
+      "first": "2026-06-07",
+      "last": "2026-06-07",
+      "last_label": "June 7, 2026",
+      "pew_page": null,
+      "slots": [
+        "Call to Worship"
+      ],
+      "dates": [
+        {
+          "date": "2026-06-07",
+          "label": "June 7, 2026",
+          "slot": "Call to Worship",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Psalm%20148%3A1-6%2C13&version=ESV"
+    },
+    {
+      "ref": "Isaiah 6:1–3",
+      "book": "Isaiah",
+      "testament": "OT",
+      "chapter": 6,
+      "verse": 1,
+      "times": 1,
+      "first": "2026-09-20",
+      "last": "2026-09-20",
+      "last_label": "September 20, 2026",
+      "pew_page": null,
+      "slots": [
+        "Scriptural Call to Worship"
+      ],
+      "dates": [
+        {
+          "date": "2026-09-20",
+          "label": "September 20, 2026",
+          "slot": "Scriptural Call to Worship",
+          "note": "based on",
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Isaiah%206%3A1-3&version=ESV"
+    },
+    {
+      "ref": "Isaiah 6:1–7",
+      "book": "Isaiah",
+      "testament": "OT",
+      "chapter": 6,
+      "verse": 1,
+      "times": 1,
+      "first": "2026-05-24",
+      "last": "2026-05-24",
+      "last_label": "May 24, 2026",
+      "pew_page": null,
+      "slots": [
+        "Responsive Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-05-24",
+          "label": "May 24, 2026",
+          "slot": "Responsive Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Isaiah%206%3A1-7&version=ESV"
+    },
+    {
+      "ref": "Isaiah 6:6–7",
+      "book": "Isaiah",
+      "testament": "OT",
+      "chapter": 6,
+      "verse": 6,
+      "times": 1,
+      "first": "2026-09-20",
+      "last": "2026-09-20",
+      "last_label": "September 20, 2026",
+      "pew_page": null,
+      "slots": [
+        "Assurance of Divine Pardon"
+      ],
+      "dates": [
+        {
+          "date": "2026-09-20",
+          "label": "September 20, 2026",
+          "slot": "Assurance of Divine Pardon",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Isaiah%206%3A6-7&version=ESV"
+    },
+    {
+      "ref": "Isaiah 12:4–6",
+      "book": "Isaiah",
+      "testament": "OT",
+      "chapter": 12,
+      "verse": 4,
+      "times": 1,
+      "first": "2026-03-01",
+      "last": "2026-03-01",
+      "last_label": "March 1, 2026",
+      "pew_page": null,
+      "slots": [
+        "Scriptural Call to Worship"
+      ],
+      "dates": [
+        {
+          "date": "2026-03-01",
+          "label": "March 1, 2026",
+          "slot": "Scriptural Call to Worship",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Isaiah%2012%3A4-6&version=ESV"
+    },
+    {
+      "ref": "Isaiah 40:6b, 8",
+      "book": "Isaiah",
+      "testament": "OT",
+      "chapter": 40,
+      "verse": 6,
+      "times": 36,
+      "first": "2026-02-15",
+      "last": "2026-11-01",
+      "last_label": "November 1, 2026",
+      "pew_page": null,
+      "slots": [
+        "Scripture Response"
+      ],
+      "dates": [
+        {
+          "date": "2026-02-15",
+          "label": "February 15, 2026",
+          "slot": "Scripture Response",
+          "note": null,
+          "version": null
+        },
+        {
+          "date": "2026-02-22",
+          "label": "February 22, 2026",
+          "slot": "Scripture Response",
+          "note": null,
+          "version": null
+        },
+        {
+          "date": "2026-03-01",
+          "label": "March 1, 2026",
+          "slot": "Scripture Response",
+          "note": null,
+          "version": null
+        },
+        {
+          "date": "2026-03-08",
+          "label": "March 8, 2026",
+          "slot": "Scripture Response",
+          "note": null,
+          "version": null
+        },
+        {
+          "date": "2026-03-15",
+          "label": "March 15, 2026",
+          "slot": "Scripture Response",
+          "note": null,
+          "version": null
+        },
+        {
+          "date": "2026-03-22",
+          "label": "March 22, 2026",
+          "slot": "Scripture Response",
+          "note": null,
+          "version": null
+        },
+        {
+          "date": "2026-03-29",
+          "label": "March 29, 2026",
+          "slot": "Scripture Response",
+          "note": null,
+          "version": null
+        },
+        {
+          "date": "2026-04-05",
+          "label": "April 5, 2026",
+          "slot": "Scripture Response",
+          "note": null,
+          "version": null
+        },
+        {
+          "date": "2026-04-12",
+          "label": "April 12, 2026",
+          "slot": "Scripture Response",
+          "note": null,
+          "version": null
+        },
+        {
+          "date": "2026-04-19",
+          "label": "April 19, 2026",
+          "slot": "Scripture Response",
+          "note": null,
+          "version": null
+        },
+        {
+          "date": "2026-04-26",
+          "label": "April 26, 2026",
+          "slot": "Scripture Response",
+          "note": null,
+          "version": null
+        },
+        {
+          "date": "2026-05-03",
+          "label": "May 3, 2026",
+          "slot": "Scripture Response",
+          "note": null,
+          "version": null
+        },
+        {
+          "date": "2026-05-10",
+          "label": "May 10, 2026",
+          "slot": "Scripture Response",
+          "note": null,
+          "version": null
+        },
+        {
+          "date": "2026-05-17",
+          "label": "May 17, 2026",
+          "slot": "Scripture Response",
+          "note": null,
+          "version": null
+        },
+        {
+          "date": "2026-05-24",
+          "label": "May 24, 2026",
+          "slot": "Scripture Response",
+          "note": null,
+          "version": null
+        },
+        {
+          "date": "2026-05-31",
+          "label": "May 31, 2026",
+          "slot": "Scripture Response",
+          "note": null,
+          "version": null
+        },
+        {
+          "date": "2026-06-21",
+          "label": "June 21, 2026",
+          "slot": "Scripture Response",
+          "note": null,
+          "version": null
+        },
+        {
+          "date": "2026-06-28",
+          "label": "June 28, 2026",
+          "slot": "Scripture Response",
+          "note": null,
+          "version": null
+        },
+        {
+          "date": "2026-07-05",
+          "label": "July 5, 2026",
+          "slot": "Scripture Response",
+          "note": null,
+          "version": null
+        },
+        {
+          "date": "2026-07-12",
+          "label": "July 12, 2026",
+          "slot": "Scripture Response",
+          "note": null,
+          "version": null
+        },
+        {
+          "date": "2026-07-19",
+          "label": "July 19, 2026",
+          "slot": "Scripture Response",
+          "note": null,
+          "version": null
+        },
+        {
+          "date": "2026-07-26",
+          "label": "July 26, 2026",
+          "slot": "Scripture Response",
+          "note": null,
+          "version": null
+        },
+        {
+          "date": "2026-08-02",
+          "label": "August 2, 2026",
+          "slot": "Scripture Response",
+          "note": null,
+          "version": null
+        },
+        {
+          "date": "2026-08-09",
+          "label": "August 9, 2026",
+          "slot": "Scripture Response",
+          "note": null,
+          "version": null
+        },
+        {
+          "date": "2026-08-16",
+          "label": "August 16, 2026",
+          "slot": "Scripture Response",
+          "note": null,
+          "version": null
+        },
+        {
+          "date": "2026-08-23",
+          "label": "August 23, 2026",
+          "slot": "Scripture Response",
+          "note": null,
+          "version": null
+        },
+        {
+          "date": "2026-08-30",
+          "label": "August 30, 2026",
+          "slot": "Scripture Response",
+          "note": null,
+          "version": null
+        },
+        {
+          "date": "2026-09-06",
+          "label": "September 6, 2026",
+          "slot": "Scripture Response",
+          "note": null,
+          "version": null
+        },
+        {
+          "date": "2026-09-13",
+          "label": "September 13, 2026",
+          "slot": "Scripture Response",
+          "note": null,
+          "version": null
+        },
+        {
+          "date": "2026-09-20",
+          "label": "September 20, 2026",
+          "slot": "Scripture Response",
+          "note": null,
+          "version": null
+        },
+        {
+          "date": "2026-09-27",
+          "label": "September 27, 2026",
+          "slot": "Scripture Response",
+          "note": null,
+          "version": null
+        },
+        {
+          "date": "2026-10-04",
+          "label": "October 4, 2026",
+          "slot": "Scripture Response",
+          "note": null,
+          "version": null
+        },
+        {
+          "date": "2026-10-11",
+          "label": "October 11, 2026",
+          "slot": "Scripture Response",
+          "note": null,
+          "version": null
+        },
+        {
+          "date": "2026-10-18",
+          "label": "October 18, 2026",
+          "slot": "Scripture Response",
+          "note": null,
+          "version": null
+        },
+        {
+          "date": "2026-10-25",
+          "label": "October 25, 2026",
+          "slot": "Scripture Response",
+          "note": null,
+          "version": null
+        },
+        {
+          "date": "2026-11-01",
+          "label": "November 1, 2026",
+          "slot": "Scripture Response",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Isaiah%2040%3A6%2C8&version=ESV"
+    },
+    {
+      "ref": "Isaiah 40:28–31",
+      "book": "Isaiah",
+      "testament": "OT",
+      "chapter": 40,
+      "verse": 28,
+      "times": 1,
+      "first": "2026-05-31",
+      "last": "2026-05-31",
+      "last_label": "May 31, 2026",
+      "pew_page": null,
+      "slots": [
+        "Old Testament Scripture Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-05-31",
+          "label": "May 31, 2026",
+          "slot": "Old Testament Scripture Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Isaiah%2040%3A28-31&version=ESV"
+    },
+    {
+      "ref": "Isaiah 41:10",
+      "book": "Isaiah",
+      "testament": "OT",
+      "chapter": 41,
+      "verse": 10,
+      "times": 1,
+      "first": "2026-08-09",
+      "last": "2026-08-09",
+      "last_label": "August 9, 2026",
+      "pew_page": null,
+      "slots": [
+        "Call to Meditation"
+      ],
+      "dates": [
+        {
+          "date": "2026-08-09",
+          "label": "August 9, 2026",
+          "slot": "Call to Meditation",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Isaiah%2041%3A10&version=ESV"
+    },
+    {
+      "ref": "Isaiah 44:24–28",
+      "book": "Isaiah",
+      "testament": "OT",
+      "chapter": 44,
+      "verse": 24,
+      "times": 1,
+      "first": "2026-06-28",
+      "last": "2026-06-28",
+      "last_label": "June 28, 2026",
+      "pew_page": null,
+      "slots": [
+        "Old Testament Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-06-28",
+          "label": "June 28, 2026",
+          "slot": "Old Testament Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Isaiah%2044%3A24-28&version=ESV"
+    },
+    {
+      "ref": "Isaiah 53:4–6",
+      "book": "Isaiah",
+      "testament": "OT",
+      "chapter": 53,
+      "verse": 4,
+      "times": 1,
+      "first": "2026-02-18",
+      "last": "2026-02-18",
+      "last_label": "February 18, 2026",
+      "pew_page": null,
+      "slots": [
+        "Words of Assurance"
+      ],
+      "dates": [
+        {
+          "date": "2026-02-18",
+          "label": "February 18, 2026",
+          "slot": "Words of Assurance",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Isaiah%2053%3A4-6&version=ESV"
+    },
+    {
+      "ref": "Isaiah 55:6–9",
+      "book": "Isaiah",
+      "testament": "OT",
+      "chapter": 55,
+      "verse": 6,
+      "times": 1,
+      "first": "2026-10-11",
+      "last": "2026-10-11",
+      "last_label": "October 11, 2026",
+      "pew_page": null,
+      "slots": [
+        "Call to Worship"
+      ],
+      "dates": [
+        {
+          "date": "2026-10-11",
+          "label": "October 11, 2026",
+          "slot": "Call to Worship",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Isaiah%2055%3A6-9&version=ESV"
+    },
+    {
+      "ref": "Isaiah 55:10–11",
+      "book": "Isaiah",
+      "testament": "OT",
+      "chapter": 55,
+      "verse": 10,
+      "times": 1,
+      "first": "2026-08-02",
+      "last": "2026-08-02",
+      "last_label": "August 2, 2026",
+      "pew_page": null,
+      "slots": [
+        "Assurance of Divine Pardon"
+      ],
+      "dates": [
+        {
+          "date": "2026-08-02",
+          "label": "August 2, 2026",
+          "slot": "Assurance of Divine Pardon",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Isaiah%2055%3A10-11&version=ESV"
+    },
+    {
+      "ref": "Jeremiah 1:4–8",
+      "book": "Jeremiah",
+      "testament": "OT",
+      "chapter": 1,
+      "verse": 4,
+      "times": 1,
+      "first": "2026-05-17",
+      "last": "2026-05-17",
+      "last_label": "May 17, 2026",
+      "pew_page": null,
+      "slots": [
+        "Old Testament Scripture Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-05-17",
+          "label": "May 17, 2026",
+          "slot": "Old Testament Scripture Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Jeremiah%201%3A4-8&version=ESV"
+    },
+    {
+      "ref": "Jeremiah 31:2, 3",
+      "book": "Jeremiah",
+      "testament": "OT",
+      "chapter": 31,
+      "verse": 2,
+      "times": 1,
+      "first": "2026-01-25",
+      "last": "2026-01-25",
+      "last_label": "January 25, 2026",
+      "pew_page": null,
+      "slots": [
+        "Call to Meditation"
+      ],
+      "dates": [
+        {
+          "date": "2026-01-25",
+          "label": "January 25, 2026",
+          "slot": "Call to Meditation",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Jeremiah%2031%3A2%2C3&version=ESV"
+    },
+    {
+      "ref": "Lamentations 3:22–23",
+      "book": "Lamentations",
+      "testament": "OT",
+      "chapter": 3,
+      "verse": 22,
+      "times": 2,
+      "first": "2026-05-10",
+      "last": "2026-11-01",
+      "last_label": "November 1, 2026",
+      "pew_page": null,
+      "slots": [
+        "Call to Meditation"
+      ],
+      "dates": [
+        {
+          "date": "2026-05-10",
+          "label": "May 10, 2026",
+          "slot": "Call to Meditation",
+          "note": null,
+          "version": null
+        },
+        {
+          "date": "2026-11-01",
+          "label": "November 1, 2026",
+          "slot": "Call to Meditation",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Lamentations%203%3A22-23&version=ESV"
+    },
+    {
+      "ref": "Lamentations 3:22–24",
+      "book": "Lamentations",
+      "testament": "OT",
+      "chapter": 3,
+      "verse": 22,
+      "times": 1,
+      "first": "2026-06-28",
+      "last": "2026-06-28",
+      "last_label": "June 28, 2026",
+      "pew_page": null,
+      "slots": [
+        "Assurance of Divine Pardon"
+      ],
+      "dates": [
+        {
+          "date": "2026-06-28",
+          "label": "June 28, 2026",
+          "slot": "Assurance of Divine Pardon",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Lamentations%203%3A22-24&version=ESV"
+    },
+    {
+      "ref": "Lamentations 3:31–33",
+      "book": "Lamentations",
+      "testament": "OT",
+      "chapter": 3,
+      "verse": 31,
+      "times": 1,
+      "first": "2026-02-18",
+      "last": "2026-02-18",
+      "last_label": "February 18, 2026",
+      "pew_page": null,
+      "slots": [
+        "Scripture Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-02-18",
+          "label": "February 18, 2026",
+          "slot": "Scripture Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Lamentations%203%3A31-33&version=ESV"
+    },
+    {
+      "ref": "Daniel 9",
+      "book": "Daniel",
+      "testament": "OT",
+      "chapter": 9,
+      "verse": 0,
+      "times": 1,
+      "first": "2026-11-01",
+      "last": "2026-11-01",
+      "last_label": "November 1, 2026",
+      "pew_page": null,
+      "slots": [
+        "Scriptural Call to Confession"
+      ],
+      "dates": [
+        {
+          "date": "2026-11-01",
+          "label": "November 1, 2026",
+          "slot": "Scriptural Call to Confession",
+          "note": "taken from",
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Daniel%209&version=ESV"
+    },
+    {
+      "ref": "Micah 7:18–19",
+      "book": "Micah",
+      "testament": "OT",
+      "chapter": 7,
+      "verse": 18,
+      "times": 1,
+      "first": "2026-04-12",
+      "last": "2026-04-12",
+      "last_label": "April 12, 2026",
+      "pew_page": null,
+      "slots": [
+        "Assurance of Divine Pardon"
+      ],
+      "dates": [
+        {
+          "date": "2026-04-12",
+          "label": "April 12, 2026",
+          "slot": "Assurance of Divine Pardon",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Micah%207%3A18-19&version=ESV"
+    },
+    {
+      "ref": "Micah 7:19",
+      "book": "Micah",
+      "testament": "OT",
+      "chapter": 7,
+      "verse": 19,
+      "times": 1,
+      "first": "2026-09-27",
+      "last": "2026-09-27",
+      "last_label": "September 27, 2026",
+      "pew_page": null,
+      "slots": [
+        "Call to Meditation"
+      ],
+      "dates": [
+        {
+          "date": "2026-09-27",
+          "label": "September 27, 2026",
+          "slot": "Call to Meditation",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Micah%207%3A19&version=ESV"
+    },
+    {
+      "ref": "Haggai 1:3–11",
+      "book": "Haggai",
+      "testament": "OT",
+      "chapter": 1,
+      "verse": 3,
+      "times": 1,
+      "first": "2026-08-02",
+      "last": "2026-08-02",
+      "last_label": "August 2, 2026",
+      "pew_page": null,
+      "slots": [
+        "The Old Testament Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-08-02",
+          "label": "August 2, 2026",
+          "slot": "The Old Testament Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Haggai%201%3A3-11&version=ESV"
+    },
+    {
+      "ref": "Haggai 2:3–9",
+      "book": "Haggai",
+      "testament": "OT",
+      "chapter": 2,
+      "verse": 3,
+      "times": 1,
+      "first": "2026-07-19",
+      "last": "2026-07-19",
+      "last_label": "July 19, 2026",
+      "pew_page": null,
+      "slots": [
+        "The Old Testament Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-07-19",
+          "label": "July 19, 2026",
+          "slot": "The Old Testament Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Haggai%202%3A3-9&version=ESV"
+    },
+    {
+      "ref": "Zechariah 9:9b–10",
+      "book": "Zechariah",
+      "testament": "OT",
+      "chapter": 9,
+      "verse": 9,
+      "times": 1,
+      "first": "2026-03-29",
+      "last": "2026-03-29",
+      "last_label": "March 29, 2026",
+      "pew_page": null,
+      "slots": [
+        "Call to Meditation"
+      ],
+      "dates": [
+        {
+          "date": "2026-03-29",
+          "label": "March 29, 2026",
+          "slot": "Call to Meditation",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Zechariah%209%3A9-10&version=ESV"
+    },
+    {
+      "ref": "Matthew 6:9–13",
+      "book": "Matthew",
+      "testament": "NT",
+      "chapter": 6,
+      "verse": 9,
+      "times": 1,
+      "first": "2026-02-15",
+      "last": "2026-02-15",
+      "last_label": "February 15, 2026",
+      "pew_page": null,
+      "slots": [
+        "Scripture Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-02-15",
+          "label": "February 15, 2026",
+          "slot": "Scripture Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Matthew%206%3A9-13&version=ESV"
+    },
+    {
+      "ref": "Matthew 6:10b",
+      "book": "Matthew",
+      "testament": "NT",
+      "chapter": 6,
+      "verse": 10,
+      "times": 1,
+      "first": "2026-03-01",
+      "last": "2026-03-01",
+      "last_label": "March 1, 2026",
+      "pew_page": null,
+      "slots": [
+        "Scripture Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-03-01",
+          "label": "March 1, 2026",
+          "slot": "Scripture Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Matthew%206%3A10&version=ESV"
+    },
+    {
+      "ref": "Matthew 6:11",
+      "book": "Matthew",
+      "testament": "NT",
+      "chapter": 6,
+      "verse": 11,
+      "times": 1,
+      "first": "2026-03-15",
+      "last": "2026-03-15",
+      "last_label": "March 15, 2026",
+      "pew_page": null,
+      "slots": [
+        "Scripture Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-03-15",
+          "label": "March 15, 2026",
+          "slot": "Scripture Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Matthew%206%3A11&version=ESV"
+    },
+    {
+      "ref": "Matthew 6:12a",
+      "book": "Matthew",
+      "testament": "NT",
+      "chapter": 6,
+      "verse": 12,
+      "times": 1,
+      "first": "2026-03-22",
+      "last": "2026-03-22",
+      "last_label": "March 22, 2026",
+      "pew_page": null,
+      "slots": [
+        "Scripture Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-03-22",
+          "label": "March 22, 2026",
+          "slot": "Scripture Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Matthew%206%3A12&version=ESV"
+    },
+    {
+      "ref": "Matthew 6:12b",
+      "book": "Matthew",
+      "testament": "NT",
+      "chapter": 6,
+      "verse": 12,
+      "times": 1,
+      "first": "2026-04-12",
+      "last": "2026-04-12",
+      "last_label": "April 12, 2026",
+      "pew_page": null,
+      "slots": [
+        "Scripture Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-04-12",
+          "label": "April 12, 2026",
+          "slot": "Scripture Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Matthew%206%3A12&version=ESV"
+    },
+    {
+      "ref": "Matthew 6:13",
+      "book": "Matthew",
+      "testament": "NT",
+      "chapter": 6,
+      "verse": 13,
+      "times": 1,
+      "first": "2026-04-26",
+      "last": "2026-04-26",
+      "last_label": "April 26, 2026",
+      "pew_page": null,
+      "slots": [
+        "Scripture Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-04-26",
+          "label": "April 26, 2026",
+          "slot": "Scripture Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Matthew%206%3A13&version=ESV"
+    },
+    {
+      "ref": "Matthew 6:13a",
+      "book": "Matthew",
+      "testament": "NT",
+      "chapter": 6,
+      "verse": 13,
+      "times": 1,
+      "first": "2026-04-19",
+      "last": "2026-04-19",
+      "last_label": "April 19, 2026",
+      "pew_page": null,
+      "slots": [
+        "Scripture Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-04-19",
+          "label": "April 19, 2026",
+          "slot": "Scripture Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Matthew%206%3A13&version=ESV"
+    },
+    {
+      "ref": "Matthew 6:25–34",
+      "book": "Matthew",
+      "testament": "NT",
+      "chapter": 6,
+      "verse": 25,
+      "times": 1,
+      "first": "2026-09-06",
+      "last": "2026-09-06",
+      "last_label": "September 6, 2026",
+      "pew_page": null,
+      "slots": [
+        "The New Testament Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-09-06",
+          "label": "September 6, 2026",
+          "slot": "The New Testament Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Matthew%206%3A25-34&version=ESV"
+    },
+    {
+      "ref": "Matthew 10:32",
+      "book": "Matthew",
+      "testament": "NT",
+      "chapter": 10,
+      "verse": 32,
+      "times": 2,
+      "first": "2026-03-08",
+      "last": "2026-06-21",
+      "last_label": "June 21, 2026",
+      "pew_page": null,
+      "slots": [
+        "Call to Meditation"
+      ],
+      "dates": [
+        {
+          "date": "2026-03-08",
+          "label": "March 8, 2026",
+          "slot": "Call to Meditation",
+          "note": null,
+          "version": null
+        },
+        {
+          "date": "2026-06-21",
+          "label": "June 21, 2026",
+          "slot": "Call to Meditation",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Matthew%2010%3A32&version=ESV"
+    },
+    {
+      "ref": "Matthew 11:28–29",
+      "book": "Matthew",
+      "testament": "NT",
+      "chapter": 11,
+      "verse": 28,
+      "times": 1,
+      "first": "2026-09-20",
+      "last": "2026-09-20",
+      "last_label": "September 20, 2026",
+      "pew_page": null,
+      "slots": [
+        "Preparation for Worship"
+      ],
+      "dates": [
+        {
+          "date": "2026-09-20",
+          "label": "September 20, 2026",
+          "slot": "Preparation for Worship",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Matthew%2011%3A28-29&version=ESV"
+    },
+    {
+      "ref": "Matthew 14:22–33",
+      "book": "Matthew",
+      "testament": "NT",
+      "chapter": 14,
+      "verse": 22,
+      "times": 2,
+      "first": "2026-06-14",
+      "last": "2026-10-04",
+      "last_label": "October 4, 2026",
+      "pew_page": null,
+      "slots": [
+        "Responsive Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-06-14",
+          "label": "June 14, 2026",
+          "slot": "Responsive Reading",
+          "note": null,
+          "version": null
+        },
+        {
+          "date": "2026-10-04",
+          "label": "October 4, 2026",
+          "slot": "Responsive Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Matthew%2014%3A22-33&version=ESV"
+    },
+    {
+      "ref": "Matthew 18:21–35",
+      "book": "Matthew",
+      "testament": "NT",
+      "chapter": 18,
+      "verse": 21,
+      "times": 1,
+      "first": "2026-04-12",
+      "last": "2026-04-12",
+      "last_label": "April 12, 2026",
+      "pew_page": null,
+      "slots": [
+        "Scripture Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-04-12",
+          "label": "April 12, 2026",
+          "slot": "Scripture Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Matthew%2018%3A21-35&version=ESV"
+    },
+    {
+      "ref": "Matthew 21:1–11",
+      "book": "Matthew",
+      "testament": "NT",
+      "chapter": 21,
+      "verse": 1,
+      "times": 1,
+      "first": "2026-03-29",
+      "last": "2026-03-29",
+      "last_label": "March 29, 2026",
+      "pew_page": null,
+      "slots": [
+        "Scripture Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-03-29",
+          "label": "March 29, 2026",
+          "slot": "Scripture Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Matthew%2021%3A1-11&version=ESV"
+    },
+    {
+      "ref": "Matthew 25:31–34",
+      "book": "Matthew",
+      "testament": "NT",
+      "chapter": 25,
+      "verse": 31,
+      "times": 1,
+      "first": "2026-02-15",
+      "last": "2026-02-15",
+      "last_label": "February 15, 2026",
+      "pew_page": null,
+      "slots": [
+        "Scripture Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-02-15",
+          "label": "February 15, 2026",
+          "slot": "Scripture Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Matthew%2025%3A31-34&version=ESV"
+    },
+    {
+      "ref": "Matthew 26:17–19",
+      "book": "Matthew",
+      "testament": "NT",
+      "chapter": 26,
+      "verse": 17,
+      "times": 1,
+      "first": "2026-04-02",
+      "last": "2026-04-02",
+      "last_label": "April 2, 2026",
+      "pew_page": null,
+      "slots": [
+        "Scripture Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-04-02",
+          "label": "April 2, 2026",
+          "slot": "Scripture Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Matthew%2026%3A17-19&version=ESV"
+    },
+    {
+      "ref": "Matthew 26:20–25, 31a, 33–34",
+      "book": "Matthew",
+      "testament": "NT",
+      "chapter": 26,
+      "verse": 20,
+      "times": 1,
+      "first": "2026-04-02",
+      "last": "2026-04-02",
+      "last_label": "April 2, 2026",
+      "pew_page": null,
+      "slots": [
+        "The Betrayal Foretold"
+      ],
+      "dates": [
+        {
+          "date": "2026-04-02",
+          "label": "April 2, 2026",
+          "slot": "The Betrayal Foretold",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Matthew%2026%3A20-25%2C31%2C33-34&version=ESV"
+    },
+    {
+      "ref": "Matthew 26:45–50, 55–56",
+      "book": "Matthew",
+      "testament": "NT",
+      "chapter": 26,
+      "verse": 45,
+      "times": 1,
+      "first": "2026-04-02",
+      "last": "2026-04-02",
+      "last_label": "April 2, 2026",
+      "pew_page": null,
+      "slots": [
+        "The Arrest"
+      ],
+      "dates": [
+        {
+          "date": "2026-04-02",
+          "label": "April 2, 2026",
+          "slot": "The Arrest",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Matthew%2026%3A45-50%2C55-56&version=ESV"
+    },
+    {
+      "ref": "Mark 14:32–36",
+      "book": "Mark",
+      "testament": "NT",
+      "chapter": 14,
+      "verse": 32,
+      "times": 1,
+      "first": "2026-04-02",
+      "last": "2026-04-02",
+      "last_label": "April 2, 2026",
+      "pew_page": null,
+      "slots": [
+        "Gethsemane"
+      ],
+      "dates": [
+        {
+          "date": "2026-04-02",
+          "label": "April 2, 2026",
+          "slot": "Gethsemane",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Mark%2014%3A32-36&version=ESV"
+    },
+    {
+      "ref": "Luke 6:27–36",
+      "book": "Luke",
+      "testament": "NT",
+      "chapter": 6,
+      "verse": 27,
+      "times": 2,
+      "first": "2026-01-25",
+      "last": "2026-02-22",
+      "last_label": "February 22, 2026",
+      "pew_page": null,
+      "slots": [
+        "Scripture Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-01-25",
+          "label": "January 25, 2026",
+          "slot": "Scripture Reading",
+          "note": null,
+          "version": null
+        },
+        {
+          "date": "2026-02-22",
+          "label": "February 22, 2026",
+          "slot": "Scripture Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Luke%206%3A27-36&version=ESV"
+    },
+    {
+      "ref": "Luke 13:1–9",
+      "book": "Luke",
+      "testament": "NT",
+      "chapter": 13,
+      "verse": 1,
+      "times": 1,
+      "first": "2026-03-08",
+      "last": "2026-03-08",
+      "last_label": "March 8, 2026",
+      "pew_page": null,
+      "slots": [
+        "Scripture Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-03-08",
+          "label": "March 8, 2026",
+          "slot": "Scripture Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Luke%2013%3A1-9&version=ESV"
+    },
+    {
+      "ref": "Luke 22:14–20",
+      "book": "Luke",
+      "testament": "NT",
+      "chapter": 22,
+      "verse": 14,
+      "times": 1,
+      "first": "2026-04-02",
+      "last": "2026-04-02",
+      "last_label": "April 2, 2026",
+      "pew_page": null,
+      "slots": [
+        "Words of Institution"
+      ],
+      "dates": [
+        {
+          "date": "2026-04-02",
+          "label": "April 2, 2026",
+          "slot": "Words of Institution",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Luke%2022%3A14-20&version=ESV"
+    },
+    {
+      "ref": "Luke 22:54–62",
+      "book": "Luke",
+      "testament": "NT",
+      "chapter": 22,
+      "verse": 54,
+      "times": 1,
+      "first": "2026-04-02",
+      "last": "2026-04-02",
+      "last_label": "April 2, 2026",
+      "pew_page": null,
+      "slots": [
+        "Peter’s Denial"
+      ],
+      "dates": [
+        {
+          "date": "2026-04-02",
+          "label": "April 2, 2026",
+          "slot": "Peter’s Denial",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Luke%2022%3A54-62&version=ESV"
+    },
+    {
+      "ref": "Luke 22:66–23:24",
+      "book": "Luke",
+      "testament": "NT",
+      "chapter": 22,
+      "verse": 66,
+      "times": 1,
+      "first": "2026-04-02",
+      "last": "2026-04-02",
+      "last_label": "April 2, 2026",
+      "pew_page": null,
+      "slots": [
+        "The Trial before Pilate"
+      ],
+      "dates": [
+        {
+          "date": "2026-04-02",
+          "label": "April 2, 2026",
+          "slot": "The Trial before Pilate",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Luke%2022%3A66-23%3A24&version=ESV"
+    },
+    {
+      "ref": "Luke 23:26–27",
+      "book": "Luke",
+      "testament": "NT",
+      "chapter": 23,
+      "verse": 26,
+      "times": 1,
+      "first": "2026-04-02",
+      "last": "2026-04-02",
+      "last_label": "April 2, 2026",
+      "pew_page": null,
+      "slots": [
+        "The Road to Calvary"
+      ],
+      "dates": [
+        {
+          "date": "2026-04-02",
+          "label": "April 2, 2026",
+          "slot": "The Road to Calvary",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Luke%2023%3A26-27&version=ESV"
+    },
+    {
+      "ref": "Luke 23:33–34, 39–46",
+      "book": "Luke",
+      "testament": "NT",
+      "chapter": 23,
+      "verse": 33,
+      "times": 1,
+      "first": "2026-04-02",
+      "last": "2026-04-02",
+      "last_label": "April 2, 2026",
+      "pew_page": null,
+      "slots": [
+        "The Crucifixion"
+      ],
+      "dates": [
+        {
+          "date": "2026-04-02",
+          "label": "April 2, 2026",
+          "slot": "The Crucifixion",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Luke%2023%3A33-34%2C39-46&version=ESV"
+    },
+    {
+      "ref": "Luke 23:47–49",
+      "book": "Luke",
+      "testament": "NT",
+      "chapter": 23,
+      "verse": 47,
+      "times": 1,
+      "first": "2026-04-02",
+      "last": "2026-04-02",
+      "last_label": "April 2, 2026",
+      "pew_page": null,
+      "slots": [
+        "The Centurion’s Witness"
+      ],
+      "dates": [
+        {
+          "date": "2026-04-02",
+          "label": "April 2, 2026",
+          "slot": "The Centurion’s Witness",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Luke%2023%3A47-49&version=ESV"
+    },
+    {
+      "ref": "Luke 24:34",
+      "book": "Luke",
+      "testament": "NT",
+      "chapter": 24,
+      "verse": 34,
+      "times": 1,
+      "first": "2026-04-05",
+      "last": "2026-04-05",
+      "last_label": "April 5, 2026",
+      "pew_page": null,
+      "slots": [
+        "Call to Worship"
+      ],
+      "dates": [
+        {
+          "date": "2026-04-05",
+          "label": "April 5, 2026",
+          "slot": "Call to Worship",
+          "note": "from",
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Luke%2024%3A34&version=ESV"
+    },
+    {
+      "ref": "John 3:16",
+      "book": "John",
+      "testament": "NT",
+      "chapter": 3,
+      "verse": 16,
+      "times": 3,
+      "first": "2026-03-15",
+      "last": "2026-06-07",
+      "last_label": "June 7, 2026",
+      "pew_page": null,
+      "slots": [
+        "Assurance of Pardon"
+      ],
+      "dates": [
+        {
+          "date": "2026-03-15",
+          "label": "March 15, 2026",
+          "slot": "Assurance of Pardon",
+          "note": null,
+          "version": null
+        },
+        {
+          "date": "2026-04-19",
+          "label": "April 19, 2026",
+          "slot": "Assurance of Pardon",
+          "note": null,
+          "version": null
+        },
+        {
+          "date": "2026-06-07",
+          "label": "June 7, 2026",
+          "slot": "Assurance of Pardon",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=John%203%3A16&version=ESV"
+    },
+    {
+      "ref": "John 3:16–17",
+      "book": "John",
+      "testament": "NT",
+      "chapter": 3,
+      "verse": 16,
+      "times": 1,
+      "first": "2026-03-29",
+      "last": "2026-03-29",
+      "last_label": "March 29, 2026",
+      "pew_page": null,
+      "slots": [
+        "Assurance of Divine Pardon"
+      ],
+      "dates": [
+        {
+          "date": "2026-03-29",
+          "label": "March 29, 2026",
+          "slot": "Assurance of Divine Pardon",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=John%203%3A16-17&version=ESV"
+    },
+    {
+      "ref": "John 10:28",
+      "book": "John",
+      "testament": "NT",
+      "chapter": 10,
+      "verse": 28,
+      "times": 1,
+      "first": "2026-05-17",
+      "last": "2026-05-17",
+      "last_label": "May 17, 2026",
+      "pew_page": null,
+      "slots": [
+        "Call to Meditation"
+      ],
+      "dates": [
+        {
+          "date": "2026-05-17",
+          "label": "May 17, 2026",
+          "slot": "Call to Meditation",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=John%2010%3A28&version=ESV"
+    },
+    {
+      "ref": "John 11:25–26",
+      "book": "John",
+      "testament": "NT",
+      "chapter": 11,
+      "verse": 25,
+      "times": 1,
+      "first": "2026-04-05",
+      "last": "2026-04-05",
+      "last_label": "April 5, 2026",
+      "pew_page": null,
+      "slots": [
+        "Call to Meditation"
+      ],
+      "dates": [
+        {
+          "date": "2026-04-05",
+          "label": "April 5, 2026",
+          "slot": "Call to Meditation",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=John%2011%3A25-26&version=ESV"
+    },
+    {
+      "ref": "John 12:12–15",
+      "book": "John",
+      "testament": "NT",
+      "chapter": 12,
+      "verse": 12,
+      "times": 1,
+      "first": "2026-03-29",
+      "last": "2026-03-29",
+      "last_label": "March 29, 2026",
+      "pew_page": null,
+      "slots": [
+        "Scripture Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-03-29",
+          "label": "March 29, 2026",
+          "slot": "Scripture Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=John%2012%3A12-15&version=ESV"
+    },
+    {
+      "ref": "John 12:13",
+      "book": "John",
+      "testament": "NT",
+      "chapter": 12,
+      "verse": 13,
+      "times": 1,
+      "first": "2026-03-29",
+      "last": "2026-03-29",
+      "last_label": "March 29, 2026",
+      "pew_page": null,
+      "slots": [
+        "Call to Worship"
+      ],
+      "dates": [
+        {
+          "date": "2026-03-29",
+          "label": "March 29, 2026",
+          "slot": "Call to Worship",
+          "note": "based on",
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=John%2012%3A13&version=ESV"
+    },
+    {
+      "ref": "John 14:1",
+      "book": "John",
+      "testament": "NT",
+      "chapter": 14,
+      "verse": 1,
+      "times": 2,
+      "first": "2026-06-14",
+      "last": "2026-10-04",
+      "last_label": "October 4, 2026",
+      "pew_page": null,
+      "slots": [
+        "Call to Meditation"
+      ],
+      "dates": [
+        {
+          "date": "2026-06-14",
+          "label": "June 14, 2026",
+          "slot": "Call to Meditation",
+          "note": null,
+          "version": null
+        },
+        {
+          "date": "2026-10-04",
+          "label": "October 4, 2026",
+          "slot": "Call to Meditation",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=John%2014%3A1&version=ESV"
+    },
+    {
+      "ref": "John 15:1, 7–11",
+      "book": "John",
+      "testament": "NT",
+      "chapter": 15,
+      "verse": 1,
+      "times": 1,
+      "first": "2026-04-19",
+      "last": "2026-04-19",
+      "last_label": "April 19, 2026",
+      "pew_page": null,
+      "slots": [
+        "Responsive Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-04-19",
+          "label": "April 19, 2026",
+          "slot": "Responsive Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=John%2015%3A1%2C7-11&version=ESV"
+    },
+    {
+      "ref": "John 17:17–19",
+      "book": "John",
+      "testament": "NT",
+      "chapter": 17,
+      "verse": 17,
+      "times": 1,
+      "first": "2026-08-23",
+      "last": "2026-08-23",
+      "last_label": "August 23, 2026",
+      "pew_page": null,
+      "slots": [
+        "Assurance of Divine Pardon"
+      ],
+      "dates": [
+        {
+          "date": "2026-08-23",
+          "label": "August 23, 2026",
+          "slot": "Assurance of Divine Pardon",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=John%2017%3A17-19&version=ESV"
+    },
+    {
+      "ref": "John 18:36",
+      "book": "John",
+      "testament": "NT",
+      "chapter": 18,
+      "verse": 36,
+      "times": 1,
+      "first": "2026-02-15",
+      "last": "2026-02-15",
+      "last_label": "February 15, 2026",
+      "pew_page": null,
+      "slots": [
+        "Scripture Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-02-15",
+          "label": "February 15, 2026",
+          "slot": "Scripture Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=John%2018%3A36&version=ESV"
+    },
+    {
+      "ref": "Acts 9:1–19",
+      "book": "Acts",
+      "testament": "NT",
+      "chapter": 9,
+      "verse": 1,
+      "times": 1,
+      "first": "2026-10-04",
+      "last": "2026-10-04",
+      "last_label": "October 4, 2026",
+      "pew_page": 945,
+      "slots": [
+        "Scripture Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-10-04",
+          "label": "October 4, 2026",
+          "slot": "Scripture Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Acts%209%3A1-19&version=ESV"
+    },
+    {
+      "ref": "Romans 4:25",
+      "book": "Romans",
+      "testament": "NT",
+      "chapter": 4,
+      "verse": 25,
+      "times": 1,
+      "first": "2026-04-05",
+      "last": "2026-04-05",
+      "last_label": "April 5, 2026",
+      "pew_page": null,
+      "slots": [
+        "Assurance of Divine Pardon"
+      ],
+      "dates": [
+        {
+          "date": "2026-04-05",
+          "label": "April 5, 2026",
+          "slot": "Assurance of Divine Pardon",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Romans%204%3A25&version=ESV"
+    },
+    {
+      "ref": "Romans 5:6–11",
+      "book": "Romans",
+      "testament": "NT",
+      "chapter": 5,
+      "verse": 6,
+      "times": 1,
+      "first": "2026-10-18",
+      "last": "2026-10-18",
+      "last_label": "October 18, 2026",
+      "pew_page": null,
+      "slots": [
+        "The New Testament Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-10-18",
+          "label": "October 18, 2026",
+          "slot": "The New Testament Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Romans%205%3A6-11&version=ESV"
+    },
+    {
+      "ref": "Romans 6:23",
+      "book": "Romans",
+      "testament": "NT",
+      "chapter": 6,
+      "verse": 23,
+      "times": 2,
+      "first": "2026-03-08",
+      "last": "2026-06-21",
+      "last_label": "June 21, 2026",
+      "pew_page": null,
+      "slots": [
+        "Assurance of Divine Pardon"
+      ],
+      "dates": [
+        {
+          "date": "2026-03-08",
+          "label": "March 8, 2026",
+          "slot": "Assurance of Divine Pardon",
+          "note": null,
+          "version": null
+        },
+        {
+          "date": "2026-06-21",
+          "label": "June 21, 2026",
+          "slot": "Assurance of Divine Pardon",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Romans%206%3A23&version=ESV"
+    },
+    {
+      "ref": "Romans 8:1",
+      "book": "Romans",
+      "testament": "NT",
+      "chapter": 8,
+      "verse": 1,
+      "times": 2,
+      "first": "2026-02-22",
+      "last": "2026-07-19",
+      "last_label": "July 19, 2026",
+      "pew_page": null,
+      "slots": [
+        "Assurance of Divine Pardon"
+      ],
+      "dates": [
+        {
+          "date": "2026-02-22",
+          "label": "February 22, 2026",
+          "slot": "Assurance of Divine Pardon",
+          "note": null,
+          "version": null
+        },
+        {
+          "date": "2026-07-19",
+          "label": "July 19, 2026",
+          "slot": "Assurance of Divine Pardon",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Romans%208%3A1&version=ESV"
+    },
+    {
+      "ref": "Romans 8:28–39",
+      "book": "Romans",
+      "testament": "NT",
+      "chapter": 8,
+      "verse": 28,
+      "times": 1,
+      "first": "2026-08-09",
+      "last": "2026-08-09",
+      "last_label": "August 9, 2026",
+      "pew_page": null,
+      "slots": [
+        "Responsive Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-08-09",
+          "label": "August 9, 2026",
+          "slot": "Responsive Reading",
+          "note": "from",
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Romans%208%3A28-39&version=ESV"
+    },
+    {
+      "ref": "Romans 8:31–32",
+      "book": "Romans",
+      "testament": "NT",
+      "chapter": 8,
+      "verse": 31,
+      "times": 1,
+      "first": "2026-08-09",
+      "last": "2026-08-09",
+      "last_label": "August 9, 2026",
+      "pew_page": null,
+      "slots": [
+        "Assurance of Divine Pardon"
+      ],
+      "dates": [
+        {
+          "date": "2026-08-09",
+          "label": "August 9, 2026",
+          "slot": "Assurance of Divine Pardon",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Romans%208%3A31-32&version=ESV"
+    },
+    {
+      "ref": "Romans 8:38–39",
+      "book": "Romans",
+      "testament": "NT",
+      "chapter": 8,
+      "verse": 38,
+      "times": 1,
+      "first": "2026-05-17",
+      "last": "2026-05-17",
+      "last_label": "May 17, 2026",
+      "pew_page": null,
+      "slots": [
+        "Assurance of Divine Pardon"
+      ],
+      "dates": [
+        {
+          "date": "2026-05-17",
+          "label": "May 17, 2026",
+          "slot": "Assurance of Divine Pardon",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Romans%208%3A38-39&version=ESV"
+    },
+    {
+      "ref": "Romans 11:33–36",
+      "book": "Romans",
+      "testament": "NT",
+      "chapter": 11,
+      "verse": 33,
+      "times": 1,
+      "first": "2026-05-03",
+      "last": "2026-05-03",
+      "last_label": "May 3, 2026",
+      "pew_page": null,
+      "slots": [
+        "Scripture Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-05-03",
+          "label": "May 3, 2026",
+          "slot": "Scripture Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Romans%2011%3A33-36&version=ESV"
+    },
+    {
+      "ref": "1 Corinthians 5:6–8",
+      "book": "1 Corinthians",
+      "testament": "NT",
+      "chapter": 5,
+      "verse": 6,
+      "times": 1,
+      "first": "2026-08-16",
+      "last": "2026-08-16",
+      "last_label": "August 16, 2026",
+      "pew_page": null,
+      "slots": [
+        "The New Testament Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-08-16",
+          "label": "August 16, 2026",
+          "slot": "The New Testament Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=1%20Corinthians%205%3A6-8&version=ESV"
+    },
+    {
+      "ref": "1 Corinthians 10:12–13",
+      "book": "1 Corinthians",
+      "testament": "NT",
+      "chapter": 10,
+      "verse": 12,
+      "times": 1,
+      "first": "2026-04-19",
+      "last": "2026-04-19",
+      "last_label": "April 19, 2026",
+      "pew_page": null,
+      "slots": [
+        "Scripture Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-04-19",
+          "label": "April 19, 2026",
+          "slot": "Scripture Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=1%20Corinthians%2010%3A12-13&version=ESV"
+    },
+    {
+      "ref": "1 Corinthians 11:23–26",
+      "book": "1 Corinthians",
+      "testament": "NT",
+      "chapter": 11,
+      "verse": 23,
+      "times": 1,
+      "first": "2026-02-18",
+      "last": "2026-02-18",
+      "last_label": "February 18, 2026",
+      "pew_page": null,
+      "slots": [
+        "The Words of Institution"
+      ],
+      "dates": [
+        {
+          "date": "2026-02-18",
+          "label": "February 18, 2026",
+          "slot": "The Words of Institution",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=1%20Corinthians%2011%3A23-26&version=ESV"
+    },
+    {
+      "ref": "1 Corinthians 11:23–29",
+      "book": "1 Corinthians",
+      "testament": "NT",
+      "chapter": 11,
+      "verse": 23,
+      "times": 8,
+      "first": "2026-02-15",
+      "last": "2026-10-18",
+      "last_label": "October 18, 2026",
+      "pew_page": null,
+      "slots": [
+        "The Words of Institution"
+      ],
+      "dates": [
+        {
+          "date": "2026-02-15",
+          "label": "February 15, 2026",
+          "slot": "The Words of Institution",
+          "note": null,
+          "version": null
+        },
+        {
+          "date": "2026-03-15",
+          "label": "March 15, 2026",
+          "slot": "The Words of Institution",
+          "note": null,
+          "version": null
+        },
+        {
+          "date": "2026-04-19",
+          "label": "April 19, 2026",
+          "slot": "The Words of Institution",
+          "note": null,
+          "version": null
+        },
+        {
+          "date": "2026-05-24",
+          "label": "May 24, 2026",
+          "slot": "The Words of Institution",
+          "note": null,
+          "version": null
+        },
+        {
+          "date": "2026-07-12",
+          "label": "July 12, 2026",
+          "slot": "The Words of Institution",
+          "note": null,
+          "version": null
+        },
+        {
+          "date": "2026-08-16",
+          "label": "August 16, 2026",
+          "slot": "The Words of Institution",
+          "note": null,
+          "version": null
+        },
+        {
+          "date": "2026-09-20",
+          "label": "September 20, 2026",
+          "slot": "The Words of Institution",
+          "note": null,
+          "version": null
+        },
+        {
+          "date": "2026-10-18",
+          "label": "October 18, 2026",
+          "slot": "The Words of Institution",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=1%20Corinthians%2011%3A23-29&version=ESV"
+    },
+    {
+      "ref": "1 Corinthians 15:1–22",
+      "book": "1 Corinthians",
+      "testament": "NT",
+      "chapter": 15,
+      "verse": 1,
+      "times": 1,
+      "first": "2026-04-05",
+      "last": "2026-04-05",
+      "last_label": "April 5, 2026",
+      "pew_page": null,
+      "slots": [
+        "Scripture Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-04-05",
+          "label": "April 5, 2026",
+          "slot": "Scripture Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=1%20Corinthians%2015%3A1-22&version=ESV"
+    },
+    {
+      "ref": "2 Corinthians 1:20",
+      "book": "2 Corinthians",
+      "testament": "NT",
+      "chapter": 1,
+      "verse": 20,
+      "times": 1,
+      "first": "2026-05-10",
+      "last": "2026-05-10",
+      "last_label": "May 10, 2026",
+      "pew_page": null,
+      "slots": [
+        "Scripture Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-05-10",
+          "label": "May 10, 2026",
+          "slot": "Scripture Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=2%20Corinthians%201%3A20&version=ESV"
+    },
+    {
+      "ref": "2 Corinthians 8:7",
+      "book": "2 Corinthians",
+      "testament": "NT",
+      "chapter": 8,
+      "verse": 7,
+      "times": 1,
+      "first": "2026-10-25",
+      "last": "2026-10-25",
+      "last_label": "October 25, 2026",
+      "pew_page": 967,
+      "slots": [
+        "Call to Meditation",
+        "Scripture Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-10-25",
+          "label": "October 25, 2026",
+          "slot": "Call to Meditation / Scripture Reading",
+          "note": null,
+          "version": "NIV"
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=2%20Corinthians%208%3A7&version=ESV"
+    },
+    {
+      "ref": "2 Corinthians 8:9",
+      "book": "2 Corinthians",
+      "testament": "NT",
+      "chapter": 8,
+      "verse": 9,
+      "times": 1,
+      "first": "2026-09-13",
+      "last": "2026-09-13",
+      "last_label": "September 13, 2026",
+      "pew_page": null,
+      "slots": [
+        "Assurance of Divine Pardon"
+      ],
+      "dates": [
+        {
+          "date": "2026-09-13",
+          "label": "September 13, 2026",
+          "slot": "Assurance of Divine Pardon",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=2%20Corinthians%208%3A9&version=ESV"
+    },
+    {
+      "ref": "2 Corinthians 9:8",
+      "book": "2 Corinthians",
+      "testament": "NT",
+      "chapter": 9,
+      "verse": 8,
+      "times": 1,
+      "first": "2026-08-30",
+      "last": "2026-08-30",
+      "last_label": "August 30, 2026",
+      "pew_page": null,
+      "slots": [
+        "Call to Meditation"
+      ],
+      "dates": [
+        {
+          "date": "2026-08-30",
+          "label": "August 30, 2026",
+          "slot": "Call to Meditation",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=2%20Corinthians%209%3A8&version=ESV"
+    },
+    {
+      "ref": "Ephesians 1:1, 7",
+      "book": "Ephesians",
+      "testament": "NT",
+      "chapter": 1,
+      "verse": 1,
+      "times": 1,
+      "first": "2026-03-22",
+      "last": "2026-03-22",
+      "last_label": "March 22, 2026",
+      "pew_page": null,
+      "slots": [
+        "Call to Meditation"
+      ],
+      "dates": [
+        {
+          "date": "2026-03-22",
+          "label": "March 22, 2026",
+          "slot": "Call to Meditation",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Ephesians%201%3A1%2C7&version=ESV"
+    },
+    {
+      "ref": "Ephesians 1:3–10",
+      "book": "Ephesians",
+      "testament": "NT",
+      "chapter": 1,
+      "verse": 3,
+      "times": 1,
+      "first": "2026-04-12",
+      "last": "2026-04-12",
+      "last_label": "April 12, 2026",
+      "pew_page": null,
+      "slots": [
+        "New Testament Responsive Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-04-12",
+          "label": "April 12, 2026",
+          "slot": "New Testament Responsive Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Ephesians%201%3A3-10&version=ESV"
+    },
+    {
+      "ref": "Ephesians 1:3–12",
+      "book": "Ephesians",
+      "testament": "NT",
+      "chapter": 1,
+      "verse": 3,
+      "times": 1,
+      "first": "2026-03-01",
+      "last": "2026-03-01",
+      "last_label": "March 1, 2026",
+      "pew_page": null,
+      "slots": [
+        "Responsive Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-03-01",
+          "label": "March 1, 2026",
+          "slot": "Responsive Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Ephesians%201%3A3-12&version=ESV"
+    },
+    {
+      "ref": "Ephesians 1:3–7",
+      "book": "Ephesians",
+      "testament": "NT",
+      "chapter": 1,
+      "verse": 3,
+      "times": 1,
+      "first": "2026-03-22",
+      "last": "2026-03-22",
+      "last_label": "March 22, 2026",
+      "pew_page": null,
+      "slots": [
+        "New Testament Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-03-22",
+          "label": "March 22, 2026",
+          "slot": "New Testament Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Ephesians%201%3A3-7&version=ESV"
+    },
+    {
+      "ref": "Ephesians 1:7–8",
+      "book": "Ephesians",
+      "testament": "NT",
+      "chapter": 1,
+      "verse": 7,
+      "times": 1,
+      "first": "2026-10-25",
+      "last": "2026-10-25",
+      "last_label": "October 25, 2026",
+      "pew_page": null,
+      "slots": [
+        "Assurance of Divine Pardon"
+      ],
+      "dates": [
+        {
+          "date": "2026-10-25",
+          "label": "October 25, 2026",
+          "slot": "Assurance of Divine Pardon",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Ephesians%201%3A7-8&version=ESV"
+    },
+    {
+      "ref": "Ephesians 4:31–32",
+      "book": "Ephesians",
+      "testament": "NT",
+      "chapter": 4,
+      "verse": 31,
+      "times": 1,
+      "first": "2026-04-12",
+      "last": "2026-04-12",
+      "last_label": "April 12, 2026",
+      "pew_page": null,
+      "slots": [
+        "Benediction"
+      ],
+      "dates": [
+        {
+          "date": "2026-04-12",
+          "label": "April 12, 2026",
+          "slot": "Benediction",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Ephesians%204%3A31-32&version=ESV"
+    },
+    {
+      "ref": "Ephesians 6:10–18",
+      "book": "Ephesians",
+      "testament": "NT",
+      "chapter": 6,
+      "verse": 10,
+      "times": 1,
+      "first": "2026-04-26",
+      "last": "2026-04-26",
+      "last_label": "April 26, 2026",
+      "pew_page": null,
+      "slots": [
+        "Scripture Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-04-26",
+          "label": "April 26, 2026",
+          "slot": "Scripture Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Ephesians%206%3A10-18&version=ESV"
+    },
+    {
+      "ref": "Philippians 1:6",
+      "book": "Philippians",
+      "testament": "NT",
+      "chapter": 1,
+      "verse": 6,
+      "times": 2,
+      "first": "2026-05-31",
+      "last": "2026-08-16",
+      "last_label": "August 16, 2026",
+      "pew_page": null,
+      "slots": [
+        "Call to Meditation"
+      ],
+      "dates": [
+        {
+          "date": "2026-05-31",
+          "label": "May 31, 2026",
+          "slot": "Call to Meditation",
+          "note": null,
+          "version": null
+        },
+        {
+          "date": "2026-08-16",
+          "label": "August 16, 2026",
+          "slot": "Call to Meditation",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Philippians%201%3A6&version=ESV"
+    },
+    {
+      "ref": "Philippians 2:1–11",
+      "book": "Philippians",
+      "testament": "NT",
+      "chapter": 2,
+      "verse": 1,
+      "times": 2,
+      "first": "2026-03-08",
+      "last": "2026-06-21",
+      "last_label": "June 21, 2026",
+      "pew_page": null,
+      "slots": [
+        "Responsive Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-03-08",
+          "label": "March 8, 2026",
+          "slot": "Responsive Reading",
+          "note": null,
+          "version": null
+        },
+        {
+          "date": "2026-06-21",
+          "label": "June 21, 2026",
+          "slot": "Responsive Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Philippians%202%3A1-11&version=ESV"
+    },
+    {
+      "ref": "Philippians 2:6–8",
+      "book": "Philippians",
+      "testament": "NT",
+      "chapter": 2,
+      "verse": 6,
+      "times": 1,
+      "first": "2026-04-02",
+      "last": "2026-04-02",
+      "last_label": "April 2, 2026",
+      "pew_page": null,
+      "slots": [
+        "Closing Scripture"
+      ],
+      "dates": [
+        {
+          "date": "2026-04-02",
+          "label": "April 2, 2026",
+          "slot": "Closing Scripture",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Philippians%202%3A6-8&version=ESV"
+    },
+    {
+      "ref": "Philippians 2:13",
+      "book": "Philippians",
+      "testament": "NT",
+      "chapter": 2,
+      "verse": 13,
+      "times": 1,
+      "first": "2026-03-01",
+      "last": "2026-03-01",
+      "last_label": "March 1, 2026",
+      "pew_page": null,
+      "slots": [
+        "Call to Meditation"
+      ],
+      "dates": [
+        {
+          "date": "2026-03-01",
+          "label": "March 1, 2026",
+          "slot": "Call to Meditation",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Philippians%202%3A13&version=ESV"
+    },
+    {
+      "ref": "Colossians 3:1",
+      "book": "Colossians",
+      "testament": "NT",
+      "chapter": 3,
+      "verse": 1,
+      "times": 1,
+      "first": "2026-02-22",
+      "last": "2026-02-22",
+      "last_label": "February 22, 2026",
+      "pew_page": null,
+      "slots": [
+        "Call to Meditation"
+      ],
+      "dates": [
+        {
+          "date": "2026-02-22",
+          "label": "February 22, 2026",
+          "slot": "Call to Meditation",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Colossians%203%3A1&version=ESV"
+    },
+    {
+      "ref": "1 Thessalonians 5:23–24",
+      "book": "1 Thessalonians",
+      "testament": "NT",
+      "chapter": 5,
+      "verse": 23,
+      "times": 1,
+      "first": "2026-02-18",
+      "last": "2026-02-18",
+      "last_label": "February 18, 2026",
+      "pew_page": null,
+      "slots": [
+        "Benediction & Dismissal"
+      ],
+      "dates": [
+        {
+          "date": "2026-02-18",
+          "label": "February 18, 2026",
+          "slot": "Benediction & Dismissal",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=1%20Thessalonians%205%3A23-24&version=ESV"
+    },
+    {
+      "ref": "2 Thessalonians 3:3",
+      "book": "2 Thessalonians",
+      "testament": "NT",
+      "chapter": 3,
+      "verse": 3,
+      "times": 2,
+      "first": "2026-04-19",
+      "last": "2026-07-26",
+      "last_label": "July 26, 2026",
+      "pew_page": null,
+      "slots": [
+        "Assurance of Divine Pardon",
+        "Call to Meditation"
+      ],
+      "dates": [
+        {
+          "date": "2026-04-19",
+          "label": "April 19, 2026",
+          "slot": "Call to Meditation",
+          "note": null,
+          "version": null
+        },
+        {
+          "date": "2026-07-26",
+          "label": "July 26, 2026",
+          "slot": "Assurance of Divine Pardon",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=2%20Thessalonians%203%3A3&version=ESV"
+    },
+    {
+      "ref": "1 Timothy 1:15",
+      "book": "1 Timothy",
+      "testament": "NT",
+      "chapter": 1,
+      "verse": 15,
+      "times": 1,
+      "first": "2026-07-05",
+      "last": "2026-07-05",
+      "last_label": "July 5, 2026",
+      "pew_page": null,
+      "slots": [
+        "Assurance of Divine Pardon"
+      ],
+      "dates": [
+        {
+          "date": "2026-07-05",
+          "label": "July 5, 2026",
+          "slot": "Assurance of Divine Pardon",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=1%20Timothy%201%3A15&version=ESV"
+    },
+    {
+      "ref": "Hebrews 4:14–16",
+      "book": "Hebrews",
+      "testament": "NT",
+      "chapter": 4,
+      "verse": 14,
+      "times": 1,
+      "first": "2026-07-12",
+      "last": "2026-07-12",
+      "last_label": "July 12, 2026",
+      "pew_page": null,
+      "slots": [
+        "Assurance of Pardon"
+      ],
+      "dates": [
+        {
+          "date": "2026-07-12",
+          "label": "July 12, 2026",
+          "slot": "Assurance of Pardon",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Hebrews%204%3A14-16&version=ESV"
+    },
+    {
+      "ref": "Hebrews 10:19–25",
+      "book": "Hebrews",
+      "testament": "NT",
+      "chapter": 10,
+      "verse": 19,
+      "times": 1,
+      "first": "2026-07-12",
+      "last": "2026-07-12",
+      "last_label": "July 12, 2026",
+      "pew_page": null,
+      "slots": [
+        "The New Testament Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-07-12",
+          "label": "July 12, 2026",
+          "slot": "The New Testament Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Hebrews%2010%3A19-25&version=ESV"
+    },
+    {
+      "ref": "Hebrews 12:2",
+      "book": "Hebrews",
+      "testament": "NT",
+      "chapter": 12,
+      "verse": 2,
+      "times": 1,
+      "first": "2026-04-02",
+      "last": "2026-04-02",
+      "last_label": "April 2, 2026",
+      "pew_page": null,
+      "slots": [
+        "Closing Scripture"
+      ],
+      "dates": [
+        {
+          "date": "2026-04-02",
+          "label": "April 2, 2026",
+          "slot": "Closing Scripture",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Hebrews%2012%3A2&version=ESV"
+    },
+    {
+      "ref": "Hebrews 13:20–21",
+      "book": "Hebrews",
+      "testament": "NT",
+      "chapter": 13,
+      "verse": 20,
+      "times": 1,
+      "first": "2026-04-05",
+      "last": "2026-04-05",
+      "last_label": "April 5, 2026",
+      "pew_page": null,
+      "slots": [
+        "Benediction"
+      ],
+      "dates": [
+        {
+          "date": "2026-04-05",
+          "label": "April 5, 2026",
+          "slot": "Benediction",
+          "note": "based on",
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Hebrews%2013%3A20-21&version=ESV"
+    },
+    {
+      "ref": "James 1:17",
+      "book": "James",
+      "testament": "NT",
+      "chapter": 1,
+      "verse": 17,
+      "times": 1,
+      "first": "2026-03-15",
+      "last": "2026-03-15",
+      "last_label": "March 15, 2026",
+      "pew_page": null,
+      "slots": [
+        "Call to Meditation"
+      ],
+      "dates": [
+        {
+          "date": "2026-03-15",
+          "label": "March 15, 2026",
+          "slot": "Call to Meditation",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=James%201%3A17&version=ESV"
+    },
+    {
+      "ref": "1 Peter 1:3–4",
+      "book": "1 Peter",
+      "testament": "NT",
+      "chapter": 1,
+      "verse": 3,
+      "times": 4,
+      "first": "2026-04-05",
+      "last": "2026-10-04",
+      "last_label": "October 4, 2026",
+      "pew_page": null,
+      "slots": [
+        "Assurance of Divine Pardon",
+        "Call to Worship"
+      ],
+      "dates": [
+        {
+          "date": "2026-04-05",
+          "label": "April 5, 2026",
+          "slot": "Call to Worship",
+          "note": null,
+          "version": null
+        },
+        {
+          "date": "2026-05-31",
+          "label": "May 31, 2026",
+          "slot": "Assurance of Divine Pardon",
+          "note": null,
+          "version": null
+        },
+        {
+          "date": "2026-06-14",
+          "label": "June 14, 2026",
+          "slot": "Assurance of Divine Pardon",
+          "note": null,
+          "version": null
+        },
+        {
+          "date": "2026-10-04",
+          "label": "October 4, 2026",
+          "slot": "Assurance of Divine Pardon",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=1%20Peter%201%3A3-4&version=ESV"
+    },
+    {
+      "ref": "1 Peter 2:24",
+      "book": "1 Peter",
+      "testament": "NT",
+      "chapter": 2,
+      "verse": 24,
+      "times": 1,
+      "first": "2026-07-19",
+      "last": "2026-07-19",
+      "last_label": "July 19, 2026",
+      "pew_page": null,
+      "slots": [
+        "Assurance of Divine Pardon"
+      ],
+      "dates": [
+        {
+          "date": "2026-07-19",
+          "label": "July 19, 2026",
+          "slot": "Assurance of Divine Pardon",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=1%20Peter%202%3A24&version=ESV"
+    },
+    {
+      "ref": "1 John 1:5–10",
+      "book": "1 John",
+      "testament": "NT",
+      "chapter": 1,
+      "verse": 5,
+      "times": 1,
+      "first": "2026-03-22",
+      "last": "2026-03-22",
+      "last_label": "March 22, 2026",
+      "pew_page": null,
+      "slots": [
+        "Scripture Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-03-22",
+          "label": "March 22, 2026",
+          "slot": "Scripture Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=1%20John%201%3A5-10&version=ESV"
+    },
+    {
+      "ref": "1 John 1:8–9",
+      "book": "1 John",
+      "testament": "NT",
+      "chapter": 1,
+      "verse": 8,
+      "times": 4,
+      "first": "2026-02-15",
+      "last": "2026-09-20",
+      "last_label": "September 20, 2026",
+      "pew_page": null,
+      "slots": [
+        "Assurance of Divine Pardon",
+        "Call to Meditation",
+        "The Call to Confession"
+      ],
+      "dates": [
+        {
+          "date": "2026-02-15",
+          "label": "February 15, 2026",
+          "slot": "Assurance of Divine Pardon",
+          "note": null,
+          "version": null
+        },
+        {
+          "date": "2026-04-12",
+          "label": "April 12, 2026",
+          "slot": "Call to Meditation",
+          "note": null,
+          "version": null
+        },
+        {
+          "date": "2026-05-10",
+          "label": "May 10, 2026",
+          "slot": "Assurance of Divine Pardon",
+          "note": null,
+          "version": null
+        },
+        {
+          "date": "2026-09-20",
+          "label": "September 20, 2026",
+          "slot": "The Call to Confession",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=1%20John%201%3A8-9&version=ESV"
+    },
+    {
+      "ref": "1 John 1:9",
+      "book": "1 John",
+      "testament": "NT",
+      "chapter": 1,
+      "verse": 9,
+      "times": 2,
+      "first": "2026-09-27",
+      "last": "2026-11-01",
+      "last_label": "November 1, 2026",
+      "pew_page": null,
+      "slots": [
+        "Assurance of Divine Pardon"
+      ],
+      "dates": [
+        {
+          "date": "2026-09-27",
+          "label": "September 27, 2026",
+          "slot": "Assurance of Divine Pardon",
+          "note": null,
+          "version": null
+        },
+        {
+          "date": "2026-11-01",
+          "label": "November 1, 2026",
+          "slot": "Assurance of Divine Pardon",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=1%20John%201%3A9&version=ESV"
+    },
+    {
+      "ref": "Jude 1–4",
+      "book": "Jude",
+      "testament": "NT",
+      "chapter": 1,
+      "verse": 1,
+      "times": 1,
+      "first": "2026-05-17",
+      "last": "2026-05-17",
+      "last_label": "May 17, 2026",
+      "pew_page": null,
+      "slots": [
+        "Scripture Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-05-17",
+          "label": "May 17, 2026",
+          "slot": "Scripture Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Jude%201%3A1-4&version=ESV"
+    },
+    {
+      "ref": "Jude 5–16",
+      "book": "Jude",
+      "testament": "NT",
+      "chapter": 1,
+      "verse": 5,
+      "times": 1,
+      "first": "2026-05-24",
+      "last": "2026-05-24",
+      "last_label": "May 24, 2026",
+      "pew_page": null,
+      "slots": [
+        "Scripture Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-05-24",
+          "label": "May 24, 2026",
+          "slot": "Scripture Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Jude%201%3A5-16&version=ESV"
+    },
+    {
+      "ref": "Jude 17–25",
+      "book": "Jude",
+      "testament": "NT",
+      "chapter": 1,
+      "verse": 17,
+      "times": 1,
+      "first": "2026-05-31",
+      "last": "2026-05-31",
+      "last_label": "May 31, 2026",
+      "pew_page": null,
+      "slots": [
+        "Scripture Reading"
+      ],
+      "dates": [
+        {
+          "date": "2026-05-31",
+          "label": "May 31, 2026",
+          "slot": "Scripture Reading",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Jude%201%3A17-25&version=ESV"
+    },
+    {
+      "ref": "Revelation 1:5–6",
+      "book": "Revelation",
+      "testament": "NT",
+      "chapter": 1,
+      "verse": 5,
+      "times": 1,
+      "first": "2026-05-03",
+      "last": "2026-05-03",
+      "last_label": "May 3, 2026",
+      "pew_page": null,
+      "slots": [
+        "Assurance of Divine Pardon",
+        "Call to Meditation"
+      ],
+      "dates": [
+        {
+          "date": "2026-05-03",
+          "label": "May 3, 2026",
+          "slot": "Call to Meditation / Assurance of Divine Pardon",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Revelation%201%3A5-6&version=ESV"
+    },
+    {
+      "ref": "Revelation 5:12",
+      "book": "Revelation",
+      "testament": "NT",
+      "chapter": 5,
+      "verse": 12,
+      "times": 2,
+      "first": "2026-03-08",
+      "last": "2026-06-21",
+      "last_label": "June 21, 2026",
+      "pew_page": null,
+      "slots": [
+        "Call to Worship"
+      ],
+      "dates": [
+        {
+          "date": "2026-03-08",
+          "label": "March 8, 2026",
+          "slot": "Call to Worship",
+          "note": "based on",
+          "version": null
+        },
+        {
+          "date": "2026-06-21",
+          "label": "June 21, 2026",
+          "slot": "Call to Worship",
+          "note": "based on",
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Revelation%205%3A12&version=ESV"
+    },
+    {
+      "ref": "Revelation 5:13",
+      "book": "Revelation",
+      "testament": "NT",
+      "chapter": 5,
+      "verse": 13,
+      "times": 1,
+      "first": "2026-05-24",
+      "last": "2026-05-24",
+      "last_label": "May 24, 2026",
+      "pew_page": null,
+      "slots": [
+        "Call to Meditation"
+      ],
+      "dates": [
+        {
+          "date": "2026-05-24",
+          "label": "May 24, 2026",
+          "slot": "Call to Meditation",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Revelation%205%3A13&version=ESV"
+    },
+    {
+      "ref": "Revelation 11:15",
+      "book": "Revelation",
+      "testament": "NT",
+      "chapter": 11,
+      "verse": 15,
+      "times": 1,
+      "first": "2026-02-15",
+      "last": "2026-02-15",
+      "last_label": "February 15, 2026",
+      "pew_page": null,
+      "slots": [
+        "Call to Meditation"
+      ],
+      "dates": [
+        {
+          "date": "2026-02-15",
+          "label": "February 15, 2026",
+          "slot": "Call to Meditation",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Revelation%2011%3A15&version=ESV"
+    },
+    {
+      "ref": "Revelation 21:1–5",
+      "book": "Revelation",
+      "testament": "NT",
+      "chapter": 21,
+      "verse": 1,
+      "times": 1,
+      "first": "2026-10-18",
+      "last": "2026-10-18",
+      "last_label": "October 18, 2026",
+      "pew_page": null,
+      "slots": [
+        "Scriptural Call to Worship"
+      ],
+      "dates": [
+        {
+          "date": "2026-10-18",
+          "label": "October 18, 2026",
+          "slot": "Scriptural Call to Worship",
+          "note": null,
+          "version": null
+        }
+      ],
+      "url": "https://www.biblegateway.com/passage/?search=Revelation%2021%3A1-5&version=ESV"
+    }
+  ],
+  "books": [
+    {
+      "book": "Genesis",
+      "testament": "OT",
+      "passages": 1,
+      "times": 1
+    },
+    {
+      "book": "Exodus",
+      "testament": "OT",
+      "passages": 2,
+      "times": 2
+    },
+    {
+      "book": "Leviticus",
+      "testament": "OT",
+      "passages": 2,
+      "times": 2
+    },
+    {
+      "book": "Deuteronomy",
+      "testament": "OT",
+      "passages": 1,
+      "times": 1
+    },
+    {
+      "book": "1 Samuel",
+      "testament": "OT",
+      "passages": 2,
+      "times": 2
+    },
+    {
+      "book": "1 Chronicles",
+      "testament": "OT",
+      "passages": 3,
+      "times": 4
+    },
+    {
+      "book": "2 Chronicles",
+      "testament": "OT",
+      "passages": 1,
+      "times": 1
+    },
+    {
+      "book": "Ezra",
+      "testament": "OT",
+      "passages": 16,
+      "times": 16
+    },
+    {
+      "book": "Nehemiah",
+      "testament": "OT",
+      "passages": 1,
+      "times": 1
+    },
+    {
+      "book": "Psalm",
+      "testament": "OT",
+      "passages": 50,
+      "times": 62
+    },
+    {
+      "book": "Isaiah",
+      "testament": "OT",
+      "passages": 11,
+      "times": 46
+    },
+    {
+      "book": "Jeremiah",
+      "testament": "OT",
+      "passages": 2,
+      "times": 2
+    },
+    {
+      "book": "Lamentations",
+      "testament": "OT",
+      "passages": 3,
+      "times": 4
+    },
+    {
+      "book": "Daniel",
+      "testament": "OT",
+      "passages": 1,
+      "times": 1
+    },
+    {
+      "book": "Micah",
+      "testament": "OT",
+      "passages": 2,
+      "times": 2
+    },
+    {
+      "book": "Haggai",
+      "testament": "OT",
+      "passages": 2,
+      "times": 2
+    },
+    {
+      "book": "Zechariah",
+      "testament": "OT",
+      "passages": 1,
+      "times": 1
+    },
+    {
+      "book": "Matthew",
+      "testament": "NT",
+      "passages": 17,
+      "times": 19
+    },
+    {
+      "book": "Mark",
+      "testament": "NT",
+      "passages": 1,
+      "times": 1
+    },
+    {
+      "book": "Luke",
+      "testament": "NT",
+      "passages": 9,
+      "times": 10
+    },
+    {
+      "book": "John",
+      "testament": "NT",
+      "passages": 10,
+      "times": 13
+    },
+    {
+      "book": "Acts",
+      "testament": "NT",
+      "passages": 1,
+      "times": 1
+    },
+    {
+      "book": "Romans",
+      "testament": "NT",
+      "passages": 8,
+      "times": 10
+    },
+    {
+      "book": "1 Corinthians",
+      "testament": "NT",
+      "passages": 5,
+      "times": 12
+    },
+    {
+      "book": "2 Corinthians",
+      "testament": "NT",
+      "passages": 4,
+      "times": 4
+    },
+    {
+      "book": "Ephesians",
+      "testament": "NT",
+      "passages": 7,
+      "times": 7
+    },
+    {
+      "book": "Philippians",
+      "testament": "NT",
+      "passages": 4,
+      "times": 6
+    },
+    {
+      "book": "Colossians",
+      "testament": "NT",
+      "passages": 1,
+      "times": 1
+    },
+    {
+      "book": "1 Thessalonians",
+      "testament": "NT",
+      "passages": 1,
+      "times": 1
+    },
+    {
+      "book": "2 Thessalonians",
+      "testament": "NT",
+      "passages": 1,
+      "times": 2
+    },
+    {
+      "book": "1 Timothy",
+      "testament": "NT",
+      "passages": 1,
+      "times": 1
+    },
+    {
+      "book": "Hebrews",
+      "testament": "NT",
+      "passages": 4,
+      "times": 4
+    },
+    {
+      "book": "James",
+      "testament": "NT",
+      "passages": 1,
+      "times": 1
+    },
+    {
+      "book": "1 Peter",
+      "testament": "NT",
+      "passages": 2,
+      "times": 5
+    },
+    {
+      "book": "1 John",
+      "testament": "NT",
+      "passages": 3,
+      "times": 7
+    },
+    {
+      "book": "Jude",
+      "testament": "NT",
+      "passages": 3,
+      "times": 3
+    },
+    {
+      "book": "Revelation",
+      "testament": "NT",
+      "passages": 5,
+      "times": 6
+    }
+  ],
+  "unparsed": [
+    {
+      "date": "2026-06-07",
+      "slot": "Scripture Reading",
+      "text": "(see outline)"
+    },
+    {
+      "date": "2026-06-14",
+      "slot": "Scripture Reading",
+      "text": "(see outline)"
+    },
+    {
+      "date": "2026-06-21",
+      "slot": "Scripture Reading",
+      "text": "(see outline)"
+    }
+  ]
+}

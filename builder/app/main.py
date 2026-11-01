@@ -21,7 +21,7 @@ from fastapi.templating import Jinja2Templates
 
 from builder import config
 from builder.app import auth
-from builder.pipeline import build as buildmod, calendar_feed, chat as chatmod, content as contentmod, dates, deploy_status, extract, fit as fitmod, forms, hymn_index, intake as intakemod, model as modelmod, publish as publishmod
+from builder.pipeline import build as buildmod, calendar_feed, chat as chatmod, content as contentmod, dates, deploy_status, extract, fit as fitmod, forms, hymn_index, intake as intakemod, scripture_index, model as modelmod, publish as publishmod
 from builder.pipeline import week as weekmod
 from builder.pipeline.store import ROLE_LABELS, ROSTER_ROLES, USER_ROLES, Store
 
@@ -508,6 +508,11 @@ def event_delete(eid: int, user: dict = Depends(need("publisher"))):
 @app.get("/hymns", response_class=HTMLResponse)
 def hymns(request: Request, user: dict = Depends(need("editor"))):
     return page(request, "hymns.html", user, idx=hymn_index.build())
+
+
+@app.get("/scripture", response_class=HTMLResponse)
+def scripture(request: Request, user: dict = Depends(need("editor"))):
+    return page(request, "scripture.html", user, idx=scripture_index.build())
 
 
 @app.get("/calendar.ics")

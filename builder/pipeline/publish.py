@@ -13,7 +13,7 @@ import subprocess
 from pathlib import Path
 
 from builder import config
-from builder.pipeline import calendar_feed, dates, hymn_index
+from builder.pipeline import calendar_feed, dates, hymn_index, scripture_index
 from builder.pipeline import week as weekmod
 from builder.pipeline.store import Store
 
@@ -103,6 +103,7 @@ def publish(date: str, *, store: Store | None = None, branch: str | None = None,
     update_scroll_index(week, repo)
     calendar_feed.write_site_files(store, repo)
     hymn_index.write_site_data(repo)  # reads the scroll pages, including this week's
+    scripture_index.write_site_data(repo)
     build_line = eleventy_check(repo)
 
     current = _git(repo, "rev-parse", "--abbrev-ref", "HEAD")

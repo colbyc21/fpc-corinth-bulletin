@@ -63,7 +63,7 @@
   <a class="brand" href="/">FPC Bulletin Builder</a>
   {% if user %}
   <nav>
-    <a href="/">Weeks</a><a href="/hymns">Hymns</a>
+    <a href="/">Weeks</a><a href="/hymns">Hymns</a><a href="/scripture">Scripture</a>
     {% if user.role in ('publisher', 'admin') %}<a href="/events">Calendar</a>{% endif %}
     {% if user.role == 'admin' %}<a href="/rosters">Rosters</a><a href="/standing">Standing text</a><a href="/users">Users</a><a href="/audit">Audit</a><a href="/spend">Spend</a>{% endif %}
   </nav>

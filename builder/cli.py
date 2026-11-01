@@ -12,6 +12,7 @@
     python -m builder extract file.docx       print the docx as text
     python -m builder calendar [--sunday D]   print the back-cover lines and write src/calendar.ics
     python -m builder hymns [--write]         hymn index from the published bulletins; --write refreshes src/_data/hymnIndex.json
+    python -m builder scripture [--write]     scripture index likewise; --write refreshes src/_data/scriptureIndex.json
     python -m builder add-user email role     create an app user (editor|publisher|admin)
     python -m builder cc auth|status|lists    Constant Contact: one-time device-flow authorization, token status, contact lists
     python -m builder email new|intake|build|push 2026-11-08 [notes.rtf] [--test a@b.c]
@@ -191,6 +192,20 @@ def cmd_hymns(args) -> int:
     return 0
 
 
+def cmd_scripture(args) -> int:
+    from builder.pipeline import scripture_index
+
+    idx = scripture_index.build()
+    print(f"{len(idx['passages'])} passages from {len(idx['books'])} books at {idx['services']} services, {idx['since']} to {idx['through']}")
+    for r in idx["passages"]:
+        print(f"  {r['ref']:<34} {r['times']:>2}x  last {r['last']}  {' / '.join(r['slots'])}")
+    for u in idx["unparsed"]:
+        print(f"  (no reference) {u['slot']}: {u['text']}  {u['date']}")
+    if args.write:
+        print("wrote", scripture_index.write_site_data())
+    return 0
+
+
 def cmd_cc(args) -> int:
     from builder.pipeline import constant_contact as cc
 
@@ -299,6 +314,7 @@ def main(argv: list[str] | None = None) -> int:
     s = sub.add_parser("extract"); s.add_argument("file"); s.set_defaults(fn=cmd_extract)
     s = sub.add_parser("calendar"); s.add_argument("--sunday"); s.add_argument("--write", action="store_true"); s.set_defaults(fn=cmd_calendar)
     s = sub.add_parser("hymns"); s.add_argument("--write", action="store_true"); s.set_defaults(fn=cmd_hymns)
+    s = sub.add_parser("scripture"); s.add_argument("--write", action="store_true"); s.set_defaults(fn=cmd_scripture)
     s = sub.add_parser("cc"); s.add_argument("what", choices=["auth", "status", "lists"]); s.set_defaults(fn=cmd_cc)
     s = sub.add_parser("email"); s.add_argument("what", choices=["new", "intake", "build", "push"]); s.add_argument("date"); s.add_argument("file", nargs="?")
     s.add_argument("--test", action="append", help="test-send address (repeatable)"); s.add_argument("--force", action="store_true"); s.set_defaults(fn=cmd_email)
