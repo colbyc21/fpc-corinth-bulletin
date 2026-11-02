@@ -17,7 +17,8 @@ def test_template_renders_the_hook_with_the_sunday_date(store):
     html = render.render_scroll(weekmod.load_week("2026-11-01"), store)
     assert HOOK.search(html).group(1) == "2026-11-01"
     assert "sermons.fpccorinth.org/api/episodes.json?date=" in html
-    assert "sermon-listen-apps" in html  # Apple Podcasts / Spotify links come from the API's per-episode links
+    assert "sermon-listen-apps" in html  # Apple Podcasts / Spotify / YouTube links come from the API's per-episode links
+    assert "Watch the service live" in html and "youtube_live" in html  # the coming Sunday points at the live stream
 
 
 def test_every_published_page_with_a_sermon_has_the_hook():
@@ -28,7 +29,7 @@ def test_every_published_page_with_a_sermon_has_the_hook():
         m = HOOK.search(text)
         assert m and m.group(1) == page.stem, page.name
         assert text.count("sermons.fpccorinth.org/api/episodes.json") == 1, page.name
-        assert "sermon-listen-apps" in text, page.name
+        assert "sermon-listen-apps" in text and "youtube_live" in text, page.name
 
 
 def test_archive_page_marks_each_week():
