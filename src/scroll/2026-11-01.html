@@ -492,6 +492,25 @@
     margin-bottom: 0.4rem;
   }
 
+  .sermon-listen {
+    text-align: center;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .sermon-listen a {
+    display: inline-block;
+    color: var(--accent-deep);
+    text-decoration: none;
+    border: 1px solid var(--rule-light);
+    border-radius: 999px;
+    padding: 0.4rem 1rem;
+  }
+  .sermon-listen a:hover { color: var(--warm-white); background: var(--accent); border-color: var(--accent); }
+  .sermon-listen[hidden] { display: none; }
+
   .sermon-epigraph {
     text-align: center;
     font-style: italic;
@@ -941,6 +960,7 @@
     <div class="reveal">
       <p class="section-heading">Sermon Notes</p>      <p class="sermon-title">&ldquo;Spiritual Renewal: When God Begins to Work&rdquo;</p>
       <p class="sermon-text-ref">Rev. Waring Porter &nbsp;&middot;&nbsp; Nehemiah 1:1–11</p>
+      <p class="sermon-listen" data-sermon-date="2026-11-01" hidden><a href="https://sermons.fpccorinth.org/" target="_blank" rel="noopener">&#9654;&nbsp; Listen to this sermon</a></p>
       <p class="sermon-intro" style="margin-bottom:0.6rem; padding-bottom:0; border-bottom:none;">Welcome back to the story of God’s restoration. In the book of Ezra we saw a temple rebuilt and a community rooted again in the Word of God. We are going to keep going in the story and get into the Book of Nehemiah — in the Jewish Bible, Ezra and Nehemiah are one book. As we open the Book of Nehemiah, we discover that a beautiful house of worship is not enough if the city around it lies in ruins and the people inside are living in fear. Nehemiah takes us from the quiet halls of a Persian palace in Babylon to the rubble of a broken Jerusalem, shifting our focus from architectural reconstruction to a deep, messy, and urgent spiritual renewal.</p>      <p class="sermon-intro" style="margin-bottom:0.6rem; padding-bottom:0; border-bottom:none;">The temple had been rebuilt, but Jerusalem’s walls still lay in ruins. God’s people had returned to the land, but they remained vulnerable and exposed. There had been real restoration, but there was still work to be done.</p>      <p class="sermon-intro">As we look at the first chapter of Nehemiah we see how God begins His work of restoration: by awakening His people to the brokenness around them and drawing them to Himself in prayer. Nehemiah 1 shows us where and how that work begins.</p>
       <p class="sermon-point">I. God Awakens His People <span class="pt-ref">(vv. 1–4)</span></p>      <div class="notes-lines">        <div class="notes-line"></div>        <div class="notes-line"></div>        <div class="notes-line"></div>      </div>
       <p class="sermon-point">II. God Draws His People to Himself <span class="pt-ref">(vv. 5–10)</span></p>      <p class="scripture-quote">Daniel 9:18 — “For we do not present our pleas before you because of our righteousness, but because of your great mercy.”</p>      <div class="notes-lines">        <div class="notes-line"></div>        <div class="notes-line"></div>        <div class="notes-line"></div>      </div>
@@ -1002,6 +1022,24 @@
     });
   }, { threshold: 0.08 });
   reveals.forEach(el => observer.observe(el));
+</script>
+
+<script>
+(function () {
+  var el = document.querySelector('.sermon-listen[data-sermon-date]');
+  if (!el || !window.fetch) return;
+  fetch('https://sermons.fpccorinth.org/api/episodes.json?date=' + el.getAttribute('data-sermon-date'))
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (j) {
+      var ep = j && j.episodes && j.episodes[0];
+      if (!ep) return;
+      var a = el.querySelector('a');
+      a.href = ep.url;
+      if (ep.duration_seconds) a.title = ep.title + ' (' + Math.round(ep.duration_seconds / 60) + ' min)';
+      el.hidden = false;
+    })
+    .catch(function () {});
+})();
 </script>
 
 <script>

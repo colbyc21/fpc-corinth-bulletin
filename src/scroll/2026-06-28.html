@@ -485,6 +485,25 @@
     margin-bottom: 0.4rem;
   }
 
+  .sermon-listen {
+    text-align: center;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .sermon-listen a {
+    display: inline-block;
+    color: var(--accent-deep);
+    text-decoration: none;
+    border: 1px solid var(--rule-light);
+    border-radius: 999px;
+    padding: 0.4rem 1rem;
+  }
+  .sermon-listen a:hover { color: var(--warm-white); background: var(--accent); border-color: var(--accent); }
+  .sermon-listen[hidden] { display: none; }
+
   .sermon-epigraph {
     text-align: center;
     font-style: italic;
@@ -1042,6 +1061,7 @@
       <p class="section-heading">Sermon Outline</p>
       <p class="sermon-title">&ldquo;Restored by Grace: The God Who Stirs Hearts&rdquo;</p>
       <p class="sermon-text-ref">Rev. Waring Porter &nbsp;&middot;&nbsp; Ezra 1:1&ndash;11</p>
+      <p class="sermon-listen" data-sermon-date="2026-06-28" hidden><a href="https://sermons.fpccorinth.org/" target="_blank" rel="noopener">&#9654;&nbsp; Listen to this sermon</a></p>
       <p class="sermon-epigraph">&ldquo;Lord, you have been our dwelling place in all generations.&rdquo; &mdash; Psalm 90:1</p>
 
       <p class="sermon-intro">Ezra tells the story of the restoration of God&rsquo;s people &mdash; a people returning home, a temple rebuilt, worship renewed, and hearts called back to covenant faithfulness. Beneath it all runs a deeper theme: God&rsquo;s gracious work of restoring what sin had broken. Restoration does not begin with human strength; it begins with divine grace. As we journey through Ezra together, we will discover again that God&rsquo;s people are restored by grace &mdash; grace that pursues, preserves, rebuilds, and renews.</p>
@@ -1147,6 +1167,24 @@
     });
   }, { threshold: 0.08 });
   reveals.forEach(el => observer.observe(el));
+</script>
+
+<script>
+(function () {
+  var el = document.querySelector('.sermon-listen[data-sermon-date]');
+  if (!el || !window.fetch) return;
+  fetch('https://sermons.fpccorinth.org/api/episodes.json?date=' + el.getAttribute('data-sermon-date'))
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (j) {
+      var ep = j && j.episodes && j.episodes[0];
+      if (!ep) return;
+      var a = el.querySelector('a');
+      a.href = ep.url;
+      if (ep.duration_seconds) a.title = ep.title + ' (' + Math.round(ep.duration_seconds / 60) + ' min)';
+      el.hidden = false;
+    })
+    .catch(function () {});
+})();
 </script>
 
 <script>

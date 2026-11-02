@@ -151,6 +151,7 @@ def context(week: dict, store: Store | None = None) -> dict:
 
     return {
         "week": week,
+        "date": week["date"],
         "date_long": dates.long_date(week["date"]),
         "subtitle": weekmod.subtitle(week),
         "welcome": standing_welcome,

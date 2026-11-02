@@ -492,6 +492,25 @@
     margin-bottom: 0.4rem;
   }
 
+  .sermon-listen {
+    text-align: center;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .sermon-listen a {
+    display: inline-block;
+    color: var(--accent-deep);
+    text-decoration: none;
+    border: 1px solid var(--rule-light);
+    border-radius: 999px;
+    padding: 0.4rem 1rem;
+  }
+  .sermon-listen a:hover { color: var(--warm-white); background: var(--accent); border-color: var(--accent); }
+  .sermon-listen[hidden] { display: none; }
+
   .sermon-epigraph {
     text-align: center;
     font-style: italic;
@@ -1076,6 +1095,7 @@
       <p class="section-heading">Sermon Outline</p>
       <p class="sermon-title">&ldquo;Excel in Giving&rdquo;</p>
       <p class="sermon-text-ref">Rev. Waring Porter &nbsp;&middot;&nbsp; 2 Corinthians 8:7</p>
+      <p class="sermon-listen" data-sermon-date="2026-10-25" hidden><a href="https://sermons.fpccorinth.org/" target="_blank" rel="noopener">&#9654;&nbsp; Listen to this sermon</a></p>
 
       <p class="sermon-intro" style="margin-bottom:0.6rem; padding-bottom:0; border-bottom:none;">As we look around First Presbyterian Church, we have much for which to give thanks. We see the Lord at work. We see people growing in their faith, serving others, caring for one another, and being equipped for the work of ministry. We see disciples making disciples. These are signs of His grace among us. But as we give thanks for what God is doing, we also need to ask ourselves a deeper question: Are we growing as disciples of Jesus in every area of our lives?</p>
       <p class="sermon-intro" style="margin-bottom:0.6rem; padding-bottom:0; border-bottom:none;">Paul is writing to a church that has demonstrated spiritual growth in many areas. He lists five of them. Even though they are excelling in these areas, he wants them to grow in one more area: the grace of giving. We are not talking about simply giving more money&hellip; not simply meeting a budget&hellip; and not simply keeping the church&rsquo;s ministries funded. We are talking about the grace of generosity as an expression of Christian discipleship &mdash; who we are because we are following Jesus, being changed by Jesus, and living/loving like Jesus.</p>
@@ -1198,6 +1218,24 @@
     });
   }, { threshold: 0.08 });
   reveals.forEach(el => observer.observe(el));
+</script>
+
+<script>
+(function () {
+  var el = document.querySelector('.sermon-listen[data-sermon-date]');
+  if (!el || !window.fetch) return;
+  fetch('https://sermons.fpccorinth.org/api/episodes.json?date=' + el.getAttribute('data-sermon-date'))
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (j) {
+      var ep = j && j.episodes && j.episodes[0];
+      if (!ep) return;
+      var a = el.querySelector('a');
+      a.href = ep.url;
+      if (ep.duration_seconds) a.title = ep.title + ' (' + Math.round(ep.duration_seconds / 60) + ' min)';
+      el.hidden = false;
+    })
+    .catch(function () {});
+})();
 </script>
 
 <script>

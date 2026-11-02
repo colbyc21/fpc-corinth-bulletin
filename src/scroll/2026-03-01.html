@@ -484,6 +484,25 @@
     margin-bottom: 0.4rem;
   }
 
+  .sermon-listen {
+    text-align: center;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .sermon-listen a {
+    display: inline-block;
+    color: var(--accent-deep);
+    text-decoration: none;
+    border: 1px solid var(--rule-light);
+    border-radius: 999px;
+    padding: 0.4rem 1rem;
+  }
+  .sermon-listen a:hover { color: var(--warm-white); background: var(--accent); border-color: var(--accent); }
+  .sermon-listen[hidden] { display: none; }
+
   .sermon-intro {
     font-size: 0.88rem;
     line-height: 1.6;
@@ -978,6 +997,7 @@
       <p class="section-heading">Sermon Outline</p>
       <p class="sermon-title">&ldquo;Praying as Christ Taught Us: Your Will Be Done&rdquo;</p>
       <p class="sermon-text-ref">1 Samuel 3:1&ndash;10; Matthew 6:10b &bull; Rev. Waring Porter</p>
+      <p class="sermon-listen" data-sermon-date="2026-03-01" hidden><a href="https://sermons.fpccorinth.org/" target="_blank" rel="noopener">&#9654;&nbsp; Listen to this sermon</a></p>
 
       <p class="sermon-intro">As we continue our journey through the Lord&rsquo;s Prayer, we come to the petition, &ldquo;Your will be done, on earth as it is in heaven.&rdquo; In this prayer we learn that our hearts are to be aligned with God&rsquo;s purposes, not our own. Like young Samuel, we are taught to listen attentively and to answer, &ldquo;Speak, for your servant hears.&rdquo; To pray &ldquo;your will be done&rdquo; is to confess that our Father&rsquo;s will is always good, always wise, and always best; and it is to ask that he would so shape our desires that we delight to walk in obedience to him.</p>
 
@@ -1077,6 +1097,24 @@
     });
   }, { threshold: 0.08 });
   reveals.forEach(el => observer.observe(el));
+</script>
+
+<script>
+(function () {
+  var el = document.querySelector('.sermon-listen[data-sermon-date]');
+  if (!el || !window.fetch) return;
+  fetch('https://sermons.fpccorinth.org/api/episodes.json?date=' + el.getAttribute('data-sermon-date'))
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (j) {
+      var ep = j && j.episodes && j.episodes[0];
+      if (!ep) return;
+      var a = el.querySelector('a');
+      a.href = ep.url;
+      if (ep.duration_seconds) a.title = ep.title + ' (' + Math.round(ep.duration_seconds / 60) + ' min)';
+      el.hidden = false;
+    })
+    .catch(function () {});
+})();
 </script>
 
 <script>

@@ -492,6 +492,25 @@
     margin-bottom: 0.4rem;
   }
 
+  .sermon-listen {
+    text-align: center;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .sermon-listen a {
+    display: inline-block;
+    color: var(--accent-deep);
+    text-decoration: none;
+    border: 1px solid var(--rule-light);
+    border-radius: 999px;
+    padding: 0.4rem 1rem;
+  }
+  .sermon-listen a:hover { color: var(--warm-white); background: var(--accent); border-color: var(--accent); }
+  .sermon-listen[hidden] { display: none; }
+
   .sermon-epigraph {
     text-align: center;
     font-style: italic;
@@ -1084,6 +1103,7 @@
       <p class="section-heading">Sermon Outline</p>
       <p class="sermon-title">&ldquo;Restored by Grace: Shaped by the Word&rdquo;</p>
       <p class="sermon-text-ref">Rev. Waring Porter &nbsp;&middot;&nbsp; Ezra 7:1&ndash;10</p>
+      <p class="sermon-listen" data-sermon-date="2026-08-23" hidden><a href="https://sermons.fpccorinth.org/" target="_blank" rel="noopener">&#9654;&nbsp; Listen to this sermon</a></p>
 
       <p class="sermon-intro">Ezra 7 introduces us to a man who understood something crucial: God&rsquo;s Word isn&rsquo;t given merely to be studied. It is given to shape us. Have you ever noticed how easy it is to become an expert these days? If your sink starts leaking, you can watch a YouTube video and become convinced you can rebuild the entire plumbing system in your house. However, there is a difference between knowing something and being shaped by it. We live in a culture where information can fill our head without ever changing our life. That is really where Ezra 7 takes us. Ezra isn&rsquo;t simply a man who knows God&rsquo;s Word. Ezra is a man who has been shaped by God&rsquo;s Word. That distinction matters, not only for Ezra, but for every one of us.</p>
 
@@ -1194,6 +1214,24 @@
     });
   }, { threshold: 0.08 });
   reveals.forEach(el => observer.observe(el));
+</script>
+
+<script>
+(function () {
+  var el = document.querySelector('.sermon-listen[data-sermon-date]');
+  if (!el || !window.fetch) return;
+  fetch('https://sermons.fpccorinth.org/api/episodes.json?date=' + el.getAttribute('data-sermon-date'))
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (j) {
+      var ep = j && j.episodes && j.episodes[0];
+      if (!ep) return;
+      var a = el.querySelector('a');
+      a.href = ep.url;
+      if (ep.duration_seconds) a.title = ep.title + ' (' + Math.round(ep.duration_seconds / 60) + ' min)';
+      el.hidden = false;
+    })
+    .catch(function () {});
+})();
 </script>
 
 <script>

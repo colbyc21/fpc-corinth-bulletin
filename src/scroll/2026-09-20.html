@@ -492,6 +492,25 @@
     margin-bottom: 0.4rem;
   }
 
+  .sermon-listen {
+    text-align: center;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .sermon-listen a {
+    display: inline-block;
+    color: var(--accent-deep);
+    text-decoration: none;
+    border: 1px solid var(--rule-light);
+    border-radius: 999px;
+    padding: 0.4rem 1rem;
+  }
+  .sermon-listen a:hover { color: var(--warm-white); background: var(--accent); border-color: var(--accent); }
+  .sermon-listen[hidden] { display: none; }
+
   .sermon-epigraph {
     text-align: center;
     font-style: italic;
@@ -1085,6 +1104,7 @@
       <p class="section-heading">Sermon Outline</p>
       <p class="sermon-title">&ldquo;Restored by Grace: Living as God&rsquo;s Holy People&rdquo;</p>
       <p class="sermon-text-ref">Rev. Waring Porter &nbsp;&middot;&nbsp; Ezra 9:1&ndash;4</p>
+      <p class="sermon-listen" data-sermon-date="2026-09-20" hidden><a href="https://sermons.fpccorinth.org/" target="_blank" rel="noopener">&#9654;&nbsp; Listen to this sermon</a></p>
 
       <p class="sermon-intro">When we think about sin in our life, we should understand that one of the most dangerous things about sin is not simply that we commit it; it is that we can gradually become comfortable with it. This is because a danger does not become less dangerous simply because we have become accustomed to it. That is the uncomfortable message we encounter in Ezra 9. When Ezra arrives in Jerusalem, he discovers something deeply troubling: God&rsquo;s people have begun compromising with the very nations and practices from which God had called them to remain distinct. God&rsquo;s people were becoming comfortable with sin. We are saved and restored by grace, and grace means God has rescued us in order that we might belong to Him and live for Him. Being restored by grace does not make the pursuit of holiness optional. In fact, grace restores God&rsquo;s people so that they might once again live as God&rsquo;s holy people. Let&rsquo;s consider what it means to live as God&rsquo;s holy people.</p>
 
@@ -1203,6 +1223,24 @@
     });
   }, { threshold: 0.08 });
   reveals.forEach(el => observer.observe(el));
+</script>
+
+<script>
+(function () {
+  var el = document.querySelector('.sermon-listen[data-sermon-date]');
+  if (!el || !window.fetch) return;
+  fetch('https://sermons.fpccorinth.org/api/episodes.json?date=' + el.getAttribute('data-sermon-date'))
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (j) {
+      var ep = j && j.episodes && j.episodes[0];
+      if (!ep) return;
+      var a = el.querySelector('a');
+      a.href = ep.url;
+      if (ep.duration_seconds) a.title = ep.title + ' (' + Math.round(ep.duration_seconds / 60) + ' min)';
+      el.hidden = false;
+    })
+    .catch(function () {});
+})();
 </script>
 
 <script>

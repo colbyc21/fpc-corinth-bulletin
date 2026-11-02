@@ -484,6 +484,25 @@
     margin-bottom: 0.4rem;
   }
 
+  .sermon-listen {
+    text-align: center;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .sermon-listen a {
+    display: inline-block;
+    color: var(--accent-deep);
+    text-decoration: none;
+    border: 1px solid var(--rule-light);
+    border-radius: 999px;
+    padding: 0.4rem 1rem;
+  }
+  .sermon-listen a:hover { color: var(--warm-white); background: var(--accent); border-color: var(--accent); }
+  .sermon-listen[hidden] { display: none; }
+
   .sermon-intro {
     font-size: 0.88rem;
     line-height: 1.6;
@@ -1002,6 +1021,7 @@
       <p class="section-heading">Sermon Outline</p>
       <p class="sermon-title">&ldquo;Praying as Christ Taught Us: Lead Us Not into Temptation&rdquo;</p>
       <p class="sermon-text-ref">1 Corinthians 10:12&ndash;13; Matthew 6:13a &bull; Rev. Waring Porter</p>
+      <p class="sermon-listen" data-sermon-date="2026-04-19" hidden><a href="https://sermons.fpccorinth.org/" target="_blank" rel="noopener">&#9654;&nbsp; Listen to this sermon</a></p>
 
       <p class="sermon-intro">In this series, we have seen how the Lord&rsquo;s Prayer shapes every aspect of the Christian life: our worship, our dependence, and our repentance. Now we turn to the final petitions, where Jesus teaches us to seek God&rsquo;s ongoing protection and preservation. In this next petition, &ldquo;Lead us not into temptation,&rdquo; we are reminded that the Christian life is not lived in our own strength, but in daily reliance on the faithfulness of our God. This petition humbles us by exposing our weakness, while at the same time comforting us with the assurance that our heavenly Father is our Keeper, who guards us, strengthens us, and preserves us in the midst of every trial.</p>
 
@@ -1101,6 +1121,24 @@
     });
   }, { threshold: 0.08 });
   reveals.forEach(el => observer.observe(el));
+</script>
+
+<script>
+(function () {
+  var el = document.querySelector('.sermon-listen[data-sermon-date]');
+  if (!el || !window.fetch) return;
+  fetch('https://sermons.fpccorinth.org/api/episodes.json?date=' + el.getAttribute('data-sermon-date'))
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (j) {
+      var ep = j && j.episodes && j.episodes[0];
+      if (!ep) return;
+      var a = el.querySelector('a');
+      a.href = ep.url;
+      if (ep.duration_seconds) a.title = ep.title + ' (' + Math.round(ep.duration_seconds / 60) + ' min)';
+      el.hidden = false;
+    })
+    .catch(function () {});
+})();
 </script>
 
 <script>

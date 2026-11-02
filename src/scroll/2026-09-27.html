@@ -492,6 +492,25 @@
     margin-bottom: 0.4rem;
   }
 
+  .sermon-listen {
+    text-align: center;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .sermon-listen a {
+    display: inline-block;
+    color: var(--accent-deep);
+    text-decoration: none;
+    border: 1px solid var(--rule-light);
+    border-radius: 999px;
+    padding: 0.4rem 1rem;
+  }
+  .sermon-listen a:hover { color: var(--warm-white); background: var(--accent); border-color: var(--accent); }
+  .sermon-listen[hidden] { display: none; }
+
   .sermon-epigraph {
     text-align: center;
     font-style: italic;
@@ -1074,6 +1093,7 @@
       <p class="section-heading">Sermon Outline</p>
       <p class="sermon-title">&ldquo;Restored by Grace: Clinging to God&rsquo;s Mercy&rdquo;</p>
       <p class="sermon-text-ref">Rev. Waring Porter &nbsp;&middot;&nbsp; Ezra 9:5&ndash;15</p>
+      <p class="sermon-listen" data-sermon-date="2026-09-27" hidden><a href="https://sermons.fpccorinth.org/" target="_blank" rel="noopener">&#9654;&nbsp; Listen to this sermon</a></p>
 
       <p class="sermon-intro">The biblical word for repentance means to turn &mdash; to change one&rsquo;s mind and direction because we have come to recognize that we are going the wrong way. Biblical repentance is more than simply feeling bad about what we&rsquo;ve done. It involves honestly acknowledging our sin before God, turning away from it, and turning back toward God in faith and obedience. That is important because there is a difference between regret and repentance.</p>
       <p class="sermon-intro">True repentance doesn&rsquo;t cause us to run away from God because our sin is so terrible. True repentance causes us to run toward God because His mercy is greater than our sin. Ezra knows that God&rsquo;s grace is not permission to keep going in the same direction. God&rsquo;s mercy changes us. It turns us around and enables us to follow Him faithfully.</p>
@@ -1198,6 +1218,24 @@
     });
   }, { threshold: 0.08 });
   reveals.forEach(el => observer.observe(el));
+</script>
+
+<script>
+(function () {
+  var el = document.querySelector('.sermon-listen[data-sermon-date]');
+  if (!el || !window.fetch) return;
+  fetch('https://sermons.fpccorinth.org/api/episodes.json?date=' + el.getAttribute('data-sermon-date'))
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (j) {
+      var ep = j && j.episodes && j.episodes[0];
+      if (!ep) return;
+      var a = el.querySelector('a');
+      a.href = ep.url;
+      if (ep.duration_seconds) a.title = ep.title + ' (' + Math.round(ep.duration_seconds / 60) + ' min)';
+      el.hidden = false;
+    })
+    .catch(function () {});
+})();
 </script>
 
 <script>

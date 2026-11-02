@@ -492,6 +492,25 @@
     margin-bottom: 0.4rem;
   }
 
+  .sermon-listen {
+    text-align: center;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .sermon-listen a {
+    display: inline-block;
+    color: var(--accent-deep);
+    text-decoration: none;
+    border: 1px solid var(--rule-light);
+    border-radius: 999px;
+    padding: 0.4rem 1rem;
+  }
+  .sermon-listen a:hover { color: var(--warm-white); background: var(--accent); border-color: var(--accent); }
+  .sermon-listen[hidden] { display: none; }
+
   .sermon-epigraph {
     text-align: center;
     font-style: italic;
@@ -1082,6 +1101,7 @@
       <p class="section-heading">Sermon Outline</p>
       <p class="sermon-title">&ldquo;Restored by Grace: Faithful Stewards&rdquo;</p>
       <p class="sermon-text-ref">Rev. Waring Porter &nbsp;&middot;&nbsp; Ezra 8:24&ndash;36</p>
+      <p class="sermon-listen" data-sermon-date="2026-09-13" hidden><a href="https://sermons.fpccorinth.org/" target="_blank" rel="noopener">&#9654;&nbsp; Listen to this sermon</a></p>
 
       <p class="sermon-intro">One of the funniest things about human beings is how quickly we can turn something we&rsquo;ve merely been given access to into something we think we actually own. We have a remarkable tendency to confuse having something with owning something. Psalm 24 reminds us, &ldquo;The earth is the LORD&rsquo;s and the fullness thereof.&rdquo; Everything belongs to Him. Ezra has entrusted these priests with something incredibly valuable: silver, gold, and vessels dedicated to the worship of God. But Ezra wants them to understand something very clearly: This isn&rsquo;t your stuff. You have been entrusted with them. Your job is to guard them, keep them, and faithfully deliver them to the place God has appointed. This brings us to the focus of this passage: Because God has entrusted His holy things to His redeemed people, He calls us to be faithful stewards with accountability, integrity, and faithfulness for His glory.</p>
 
@@ -1197,6 +1217,24 @@
     });
   }, { threshold: 0.08 });
   reveals.forEach(el => observer.observe(el));
+</script>
+
+<script>
+(function () {
+  var el = document.querySelector('.sermon-listen[data-sermon-date]');
+  if (!el || !window.fetch) return;
+  fetch('https://sermons.fpccorinth.org/api/episodes.json?date=' + el.getAttribute('data-sermon-date'))
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (j) {
+      var ep = j && j.episodes && j.episodes[0];
+      if (!ep) return;
+      var a = el.querySelector('a');
+      a.href = ep.url;
+      if (ep.duration_seconds) a.title = ep.title + ' (' + Math.round(ep.duration_seconds / 60) + ' min)';
+      el.hidden = false;
+    })
+    .catch(function () {});
+})();
 </script>
 
 <script>

@@ -484,6 +484,25 @@
     margin-bottom: 0.4rem;
   }
 
+  .sermon-listen {
+    text-align: center;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .sermon-listen a {
+    display: inline-block;
+    color: var(--accent-deep);
+    text-decoration: none;
+    border: 1px solid var(--rule-light);
+    border-radius: 999px;
+    padding: 0.4rem 1rem;
+  }
+  .sermon-listen a:hover { color: var(--warm-white); background: var(--accent); border-color: var(--accent); }
+  .sermon-listen[hidden] { display: none; }
+
   .sermon-intro {
     font-size: 0.88rem;
     line-height: 1.6;
@@ -978,6 +997,7 @@
       <p class="section-heading">Sermon Outline</p>
       <p class="sermon-title">&ldquo;The King We Need&rdquo;</p>
       <p class="sermon-text-ref">Matthew 21:1&ndash;11 &bull; Rev. Waring Porter</p>
+      <p class="sermon-listen" data-sermon-date="2026-03-29" hidden><a href="https://sermons.fpccorinth.org/" target="_blank" rel="noopener">&#9654;&nbsp; Listen to this sermon</a></p>
 
       <p class="sermon-intro">On Palm Sunday we remember the day our Lord Jesus entered Jerusalem, not with the pomp of an earthly conqueror, but riding humbly upon a donkey in fulfillment of ancient prophecy. The crowds cried &ldquo;Hosanna!&rdquo; as they spread their cloaks and palm branches before him, yet within days their shouts would turn to cries of &ldquo;Crucify him!&rdquo; This week holds before us the great tension of Christ&rsquo;s kingship: a King who comes not to be served but to serve, not to take up the sword but to bear the cross. He is the King we need, though not always the King we expect.</p>
 
@@ -1092,6 +1112,24 @@
     });
   }, { threshold: 0.08 });
   reveals.forEach(el => observer.observe(el));
+</script>
+
+<script>
+(function () {
+  var el = document.querySelector('.sermon-listen[data-sermon-date]');
+  if (!el || !window.fetch) return;
+  fetch('https://sermons.fpccorinth.org/api/episodes.json?date=' + el.getAttribute('data-sermon-date'))
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (j) {
+      var ep = j && j.episodes && j.episodes[0];
+      if (!ep) return;
+      var a = el.querySelector('a');
+      a.href = ep.url;
+      if (ep.duration_seconds) a.title = ep.title + ' (' + Math.round(ep.duration_seconds / 60) + ' min)';
+      el.hidden = false;
+    })
+    .catch(function () {});
+})();
 </script>
 
 <script>

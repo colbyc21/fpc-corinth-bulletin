@@ -492,6 +492,25 @@
     margin-bottom: 0.4rem;
   }
 
+  .sermon-listen {
+    text-align: center;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .sermon-listen a {
+    display: inline-block;
+    color: var(--accent-deep);
+    text-decoration: none;
+    border: 1px solid var(--rule-light);
+    border-radius: 999px;
+    padding: 0.4rem 1rem;
+  }
+  .sermon-listen a:hover { color: var(--warm-white); background: var(--accent); border-color: var(--accent); }
+  .sermon-listen[hidden] { display: none; }
+
   .sermon-epigraph {
     text-align: center;
     font-style: italic;
@@ -1087,6 +1106,7 @@
       <p class="section-heading">Sermon Outline</p>
       <p class="sermon-title">&ldquo;Restored by Grace: Unfinished Business&rdquo;</p>
       <p class="sermon-text-ref">Rev. Waring Porter &nbsp;&middot;&nbsp; Ezra 10:18&ndash;44</p>
+      <p class="sermon-listen" data-sermon-date="2026-10-18" hidden><a href="https://sermons.fpccorinth.org/" target="_blank" rel="noopener">&#9654;&nbsp; Listen to this sermon</a></p>
 
       <p class="sermon-intro">At the beginning of chapter 10, Ezra is confronted with a terrible spiritual crisis. The people, including some of their leaders, have entered into marriages that violate God&rsquo;s covenant commands and threaten to draw the community away from the Lord. This is not a minor administrative problem, but a matter of covenant faithfulness and the spiritual future of God&rsquo;s people. We saw that genuine repentance produces a willingness to obey God, even when obedience is difficult and costly.</p>
       <p class="sermon-intro">Now, in the passage today, Ezra records the names of those who were involved in this covenant violation. The list is sobering. It reminds us that sin had reached deeply into the life of the restored community, including among those who should have known better. Then, rather abruptly, the book ends. There is no grand announcement that the people have finally become completely faithful. There is no declaration that Israel&rsquo;s spiritual struggles are over. There is no picture of a perfect community living in unbroken obedience to God. Why would God give us a book that ends this way?</p>
@@ -1205,6 +1225,24 @@
     });
   }, { threshold: 0.08 });
   reveals.forEach(el => observer.observe(el));
+</script>
+
+<script>
+(function () {
+  var el = document.querySelector('.sermon-listen[data-sermon-date]');
+  if (!el || !window.fetch) return;
+  fetch('https://sermons.fpccorinth.org/api/episodes.json?date=' + el.getAttribute('data-sermon-date'))
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (j) {
+      var ep = j && j.episodes && j.episodes[0];
+      if (!ep) return;
+      var a = el.querySelector('a');
+      a.href = ep.url;
+      if (ep.duration_seconds) a.title = ep.title + ' (' + Math.round(ep.duration_seconds / 60) + ' min)';
+      el.hidden = false;
+    })
+    .catch(function () {});
+})();
 </script>
 
 <script>

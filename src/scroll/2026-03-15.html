@@ -484,6 +484,25 @@
     margin-bottom: 0.4rem;
   }
 
+  .sermon-listen {
+    text-align: center;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .sermon-listen a {
+    display: inline-block;
+    color: var(--accent-deep);
+    text-decoration: none;
+    border: 1px solid var(--rule-light);
+    border-radius: 999px;
+    padding: 0.4rem 1rem;
+  }
+  .sermon-listen a:hover { color: var(--warm-white); background: var(--accent); border-color: var(--accent); }
+  .sermon-listen[hidden] { display: none; }
+
   .sermon-intro {
     font-size: 0.88rem;
     line-height: 1.6;
@@ -995,6 +1014,7 @@
       <p class="section-heading">Sermon Outline</p>
       <p class="sermon-title">&ldquo;Praying as Christ Taught Us: Our Daily Bread&rdquo;</p>
       <p class="sermon-text-ref">Exodus 16:11&ndash;18; Matthew 6:11 &bull; Rev. Waring Porter</p>
+      <p class="sermon-listen" data-sermon-date="2026-03-15" hidden><a href="https://sermons.fpccorinth.org/" target="_blank" rel="noopener">&#9654;&nbsp; Listen to this sermon</a></p>
 
       <p class="sermon-intro">In this series, we have been learning to pray as Christ taught us, beginning with worship, moving to submission, and now turning to dependence. In the petition &ldquo;Give us this day our daily bread,&rdquo; Jesus teaches us that every provision &mdash; from the simplest meal to the sustaining grace of God &mdash; comes from our heavenly Father&rsquo;s hand. Like Israel in the wilderness, we are called to receive daily manna with gratitude, trusting that the God who opens his hand to satisfy the desire of every living thing will also provide for our bodies and our souls.</p>
 
@@ -1101,6 +1121,24 @@
     });
   }, { threshold: 0.08 });
   reveals.forEach(el => observer.observe(el));
+</script>
+
+<script>
+(function () {
+  var el = document.querySelector('.sermon-listen[data-sermon-date]');
+  if (!el || !window.fetch) return;
+  fetch('https://sermons.fpccorinth.org/api/episodes.json?date=' + el.getAttribute('data-sermon-date'))
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (j) {
+      var ep = j && j.episodes && j.episodes[0];
+      if (!ep) return;
+      var a = el.querySelector('a');
+      a.href = ep.url;
+      if (ep.duration_seconds) a.title = ep.title + ' (' + Math.round(ep.duration_seconds / 60) + ' min)';
+      el.hidden = false;
+    })
+    .catch(function () {});
+})();
 </script>
 
 <script>

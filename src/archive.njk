@@ -211,6 +211,20 @@ permalink: /archive/
     color: var(--ink-light);
     line-height: 1.45;
   }
+  .archive-listen {
+    display: inline-block;
+    margin: 0.5rem 0 0 1.3rem;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 0.66rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent-deep);
+    text-decoration: none;
+    border: 1px solid var(--rule-light);
+    border-radius: 999px;
+    padding: 0.3rem 0.8rem;
+  }
+  .archive-listen:hover { color: var(--warm-white); background: var(--accent); border-color: var(--accent); }
   .archive-arrow {
     position: absolute;
     right: 1.3rem;
@@ -331,7 +345,7 @@ permalink: /archive/
   {% if allBulletins.length > 0 %}
     <ul class="archive-list">
       {% for item in allBulletins | sort(true, false, "date") %}
-        <li>
+        <li data-date="{{ item.date }}">
           <a class="archive-item" href="{{ item.url }}">
             {% if item.liturgical_day %}<p class="archive-day">{{ item.liturgical_day }}</p>{% endif %}
             <p class="archive-date">{{ item.date | formatDate }}</p>
@@ -349,6 +363,33 @@ permalink: /archive/
     A congregation of the Evangelical Presbyterian Church &middot; <a href="/about/">About</a>
   </p>
 </div>
+
+<script>
+(function () {
+  var items = document.querySelectorAll('.archive-list li[data-date]');
+  if (!items.length || !window.fetch) return;
+  fetch('https://sermons.fpccorinth.org/api/episodes.json')
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (j) {
+      if (!j || !j.episodes) return;
+      var byDate = {};
+      j.episodes.forEach(function (ep) { if (!byDate[ep.date]) byDate[ep.date] = ep; });
+      items.forEach(function (li) {
+        var ep = byDate[li.getAttribute('data-date')];
+        if (!ep) return;
+        var a = document.createElement('a');
+        a.className = 'archive-listen';
+        a.href = ep.url;
+        a.target = '_blank';
+        a.rel = 'noopener';
+        a.title = ep.title + (ep.duration_seconds ? ' (' + Math.round(ep.duration_seconds / 60) + ' min)' : '');
+        a.innerHTML = '&#9654;&nbsp; Listen to the sermon';
+        li.appendChild(a);
+      });
+    })
+    .catch(function () {});
+})();
+</script>
 
 <script>
 (function () {

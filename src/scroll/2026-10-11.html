@@ -492,6 +492,25 @@
     margin-bottom: 0.4rem;
   }
 
+  .sermon-listen {
+    text-align: center;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .sermon-listen a {
+    display: inline-block;
+    color: var(--accent-deep);
+    text-decoration: none;
+    border: 1px solid var(--rule-light);
+    border-radius: 999px;
+    padding: 0.4rem 1rem;
+  }
+  .sermon-listen a:hover { color: var(--warm-white); background: var(--accent); border-color: var(--accent); }
+  .sermon-listen[hidden] { display: none; }
+
   .sermon-epigraph {
     text-align: center;
     font-style: italic;
@@ -1079,6 +1098,7 @@
       <p class="section-heading">Sermon Outline</p>
       <p class="sermon-title">&ldquo;Restored by Grace: Evidence of Repentance&rdquo;</p>
       <p class="sermon-text-ref">Rev. Waring Porter &nbsp;&middot;&nbsp; Ezra 10:1&ndash;17</p>
+      <p class="sermon-listen" data-sermon-date="2026-10-11" hidden><a href="https://sermons.fpccorinth.org/" target="_blank" rel="noopener">&#9654;&nbsp; Listen to this sermon</a></p>
 
       <p class="sermon-intro">Something we learned recently on our hike to LeConte Lodge is that sometimes the hardest part of a hike isn&rsquo;t getting to the top &mdash; it is getting back down. Going down the mountain requires another kind of effort, and different muscles. You have to pay attention to every step, and deal with the consequences of the climb.</p>
       <p class="sermon-intro">In Ezra 9&ndash;10, we are reading about the repentance of God&rsquo;s people. Repentance can be like walking down a mountain &mdash; it can be hard. There can be a moment when God opens our eyes to our sin and brokenness, and we see it clearly. We say, &ldquo;Lord, I have sinned.&rdquo; But then comes the question: What are you going to do about it? Ezra 10 gives us the evidence of repentance. Ezra 10 shows us that genuine repentance produces obedience&hellip; there is evidence of repentance. Let&rsquo;s observe how this is worked out in this passage.</p>
@@ -1196,6 +1216,24 @@
     });
   }, { threshold: 0.08 });
   reveals.forEach(el => observer.observe(el));
+</script>
+
+<script>
+(function () {
+  var el = document.querySelector('.sermon-listen[data-sermon-date]');
+  if (!el || !window.fetch) return;
+  fetch('https://sermons.fpccorinth.org/api/episodes.json?date=' + el.getAttribute('data-sermon-date'))
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (j) {
+      var ep = j && j.episodes && j.episodes[0];
+      if (!ep) return;
+      var a = el.querySelector('a');
+      a.href = ep.url;
+      if (ep.duration_seconds) a.title = ep.title + ' (' + Math.round(ep.duration_seconds / 60) + ' min)';
+      el.hidden = false;
+    })
+    .catch(function () {});
+})();
 </script>
 
 <script>

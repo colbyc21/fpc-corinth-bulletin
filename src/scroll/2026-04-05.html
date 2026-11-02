@@ -484,6 +484,25 @@
     margin-bottom: 0.4rem;
   }
 
+  .sermon-listen {
+    text-align: center;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .sermon-listen a {
+    display: inline-block;
+    color: var(--accent-deep);
+    text-decoration: none;
+    border: 1px solid var(--rule-light);
+    border-radius: 999px;
+    padding: 0.4rem 1rem;
+  }
+  .sermon-listen a:hover { color: var(--warm-white); background: var(--accent); border-color: var(--accent); }
+  .sermon-listen[hidden] { display: none; }
+
   .sermon-intro {
     font-size: 0.88rem;
     line-height: 1.6;
@@ -987,6 +1006,7 @@
       <p class="section-heading">Sermon Outline</p>
       <p class="sermon-title">&ldquo;The Resurrection Truth&rdquo;</p>
       <p class="sermon-text-ref">1 Corinthians 15:1&ndash;22 &bull; Rev. Waring Porter</p>
+      <p class="sermon-listen" data-sermon-date="2026-04-05" hidden><a href="https://sermons.fpccorinth.org/" target="_blank" rel="noopener">&#9654;&nbsp; Listen to this sermon</a></p>
 
       <p class="sermon-intro">Most of the world knows that Christianity is centered around the resurrection of Jesus Christ. It is foundational to our weekly worship, and is specifically celebrated and remembered on Easter Sunday. God came to earth in human form, became a man, lived a perfect life, died on the cross so all of our sins could be forgiven, and He said, &ldquo;I&rsquo;m going to let these people kill Me and prove I am who I say I am, the Christ &mdash; God&rsquo;s anointed one, by raising Myself back to life three days later.&rdquo; Following His crucifixion, three days later He comes back to life. He&rsquo;s walking around Jerusalem. Hundreds of people see Him. The most significant event in history has happened. If we are going to understand the gospel rightly, if it truly is of first importance, then we must understand what the resurrection means and why it matters. In these verses, Paul helps us see three foundational resurrection truths:</p>
 
@@ -1085,6 +1105,24 @@
     });
   }, { threshold: 0.08 });
   reveals.forEach(el => observer.observe(el));
+</script>
+
+<script>
+(function () {
+  var el = document.querySelector('.sermon-listen[data-sermon-date]');
+  if (!el || !window.fetch) return;
+  fetch('https://sermons.fpccorinth.org/api/episodes.json?date=' + el.getAttribute('data-sermon-date'))
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (j) {
+      var ep = j && j.episodes && j.episodes[0];
+      if (!ep) return;
+      var a = el.querySelector('a');
+      a.href = ep.url;
+      if (ep.duration_seconds) a.title = ep.title + ' (' + Math.round(ep.duration_seconds / 60) + ' min)';
+      el.hidden = false;
+    })
+    .catch(function () {});
+})();
 </script>
 
 <script>

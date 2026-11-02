@@ -492,6 +492,25 @@
     margin-bottom: 0.4rem;
   }
 
+  .sermon-listen {
+    text-align: center;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .sermon-listen a {
+    display: inline-block;
+    color: var(--accent-deep);
+    text-decoration: none;
+    border: 1px solid var(--rule-light);
+    border-radius: 999px;
+    padding: 0.4rem 1rem;
+  }
+  .sermon-listen a:hover { color: var(--warm-white); background: var(--accent); border-color: var(--accent); }
+  .sermon-listen[hidden] { display: none; }
+
   .sermon-epigraph {
     text-align: center;
     font-style: italic;
@@ -1070,6 +1089,7 @@
       <p class="section-heading">Sermon Notes</p>
       <p class="sermon-title">&ldquo;The Power of Conversion&rdquo;</p>
       <p class="sermon-text-ref">Mr. Brett Butler &nbsp;&middot;&nbsp; Acts 9:1&ndash;19</p>
+      <p class="sermon-listen" data-sermon-date="2026-10-04" hidden><a href="https://sermons.fpccorinth.org/" target="_blank" rel="noopener">&#9654;&nbsp; Listen to this sermon</a></p>
 
       <!-- CHECK: docx reads "no lie is too lost for redemption"; set as "no life" -->
       <p class="sermon-intro">The story of Paul&rsquo;s conversion is one of the greatest biblical narratives of divine grace and mercy. Saul of Tarsus was a man zealous for religion, but blind to the truth. He fiercely hated the followers of Christ, persecuted them passionately, and even consented to their deaths. Yet the Lord, who searches all hearts, saw him as a vessel that could be used for His glory. On the road to Damascus, Saul encountered the risen Christ in a dramatic, life-changing moment. The light that shone from Heaven not only blinded his eyes but illuminated his soul. The once sworn enemy of the Church became an Apostle of Christ, proving that no life is too lost for redemption.</p>
@@ -1187,6 +1207,24 @@
     });
   }, { threshold: 0.08 });
   reveals.forEach(el => observer.observe(el));
+</script>
+
+<script>
+(function () {
+  var el = document.querySelector('.sermon-listen[data-sermon-date]');
+  if (!el || !window.fetch) return;
+  fetch('https://sermons.fpccorinth.org/api/episodes.json?date=' + el.getAttribute('data-sermon-date'))
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (j) {
+      var ep = j && j.episodes && j.episodes[0];
+      if (!ep) return;
+      var a = el.querySelector('a');
+      a.href = ep.url;
+      if (ep.duration_seconds) a.title = ep.title + ' (' + Math.round(ep.duration_seconds / 60) + ' min)';
+      el.hidden = false;
+    })
+    .catch(function () {});
+})();
 </script>
 
 <script>
