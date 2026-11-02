@@ -510,6 +510,9 @@
   }
   .sermon-listen a:hover { color: var(--warm-white); background: var(--accent); border-color: var(--accent); }
   .sermon-listen[hidden] { display: none; }
+  .sermon-listen-apps { display: block; margin-top: 0.55rem; font-size: 0.64rem; letter-spacing: 0.1em; color: var(--ink-faint); }
+  .sermon-listen-apps a { display: inline; border: 0; padding: 0; border-radius: 0; color: var(--accent-deep); border-bottom: 1px solid var(--rule-light); }
+  .sermon-listen-apps a:hover { background: none; color: var(--ink); border-color: var(--ink); }
 
   .sermon-epigraph {
     text-align: center;
@@ -1239,6 +1242,19 @@
       var a = el.querySelector('a');
       a.href = ep.url;
       if (ep.duration_seconds) a.title = ep.title + ' (' + Math.round(ep.duration_seconds / 60) + ' min)';
+      var apps = [['apple', 'Apple Podcasts'], ['spotify', 'Spotify']].filter(function (p) { return ep.links && ep.links[p[0]]; });
+      if (apps.length) {
+        var row = document.createElement('span');
+        row.className = 'sermon-listen-apps';
+        row.appendChild(document.createTextNode('or in '));
+        apps.forEach(function (p, i) {
+          if (i) row.appendChild(document.createTextNode(' · '));
+          var b = document.createElement('a');
+          b.href = ep.links[p[0]]; b.target = '_blank'; b.rel = 'noopener'; b.textContent = p[1];
+          row.appendChild(b);
+        });
+        el.appendChild(row);
+      }
       el.hidden = false;
     })
     .catch(function () {});

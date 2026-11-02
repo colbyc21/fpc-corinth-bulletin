@@ -224,6 +224,7 @@ permalink: /archive/
     border-radius: 999px;
     padding: 0.3rem 0.8rem;
   }
+  .archive-listen-app { margin-left: 0.4rem; border-color: transparent; color: var(--ink-faint); }
   .archive-listen:hover { color: var(--warm-white); background: var(--accent); border-color: var(--accent); }
   .archive-arrow {
     position: absolute;
@@ -385,6 +386,13 @@ permalink: /archive/
         a.title = ep.title + (ep.duration_seconds ? ' (' + Math.round(ep.duration_seconds / 60) + ' min)' : '');
         a.innerHTML = '&#9654;&nbsp; Listen to the sermon';
         li.appendChild(a);
+        [['apple', 'Apple Podcasts'], ['spotify', 'Spotify']].forEach(function (p) {
+          if (!ep.links || !ep.links[p[0]]) return;
+          var b = document.createElement('a');
+          b.className = 'archive-listen archive-listen-app';
+          b.href = ep.links[p[0]]; b.target = '_blank'; b.rel = 'noopener'; b.textContent = p[1];
+          li.appendChild(b);
+        });
       });
     })
     .catch(function () {});
