@@ -1,16 +1,96 @@
 {
-  "generated": "2026-11-06T22:05:06+00:00",
+  "generated": "2026-11-06T22:15:21+00:00",
   "subscribe_url": "https://bulletin.fpccorinth.org/calendar.ics",
   "events": [
+    {
+      "date": "2026-11-01",
+      "label": "November 1",
+      "month": "November 2026",
+      "weekday": "Sunday",
+      "title": "Session Meeting",
+      "time": "5pm",
+      "location": "",
+      "recurring": true
+    },
+    {
+      "date": "2026-11-03",
+      "label": "November 3",
+      "month": "November 2026",
+      "weekday": "Tuesday",
+      "title": "Messy Bible Study",
+      "time": "8 a.m.",
+      "location": "Youth House",
+      "recurring": true
+    },
+    {
+      "date": "2026-11-03",
+      "label": "November 3",
+      "month": "November 2026",
+      "weekday": "Tuesday",
+      "title": "Election Day (Fellowship Hall in use)",
+      "time": "",
+      "location": "",
+      "recurring": false
+    },
+    {
+      "date": "2026-11-03",
+      "label": "November 3",
+      "month": "November 2026",
+      "weekday": "Tuesday",
+      "title": "No Day School",
+      "time": "",
+      "location": "",
+      "recurring": false
+    },
+    {
+      "date": "2026-11-04",
+      "label": "November 4",
+      "month": "November 2026",
+      "weekday": "Wednesday",
+      "title": "Messy Bible Study",
+      "time": "6 p.m.",
+      "location": "",
+      "recurring": true
+    },
+    {
+      "date": "2026-11-04",
+      "label": "November 4",
+      "month": "November 2026",
+      "weekday": "Wednesday",
+      "title": "Kids Quest",
+      "time": "",
+      "location": "",
+      "recurring": true
+    },
+    {
+      "date": "2026-11-04",
+      "label": "November 4",
+      "month": "November 2026",
+      "weekday": "Wednesday",
+      "title": "Youth House",
+      "time": "",
+      "location": "",
+      "recurring": true
+    },
+    {
+      "date": "2026-11-05",
+      "label": "November 5",
+      "month": "November 2026",
+      "weekday": "Thursday",
+      "title": "First Thursday at the Youth House",
+      "time": "noon",
+      "location": "",
+      "recurring": false
+    },
     {
       "date": "2026-11-08",
       "label": "November 8",
       "month": "November 2026",
       "weekday": "Sunday",
       "title": "Deacons’ Meeting",
-      "time": "",
+      "time": "8am",
       "location": "",
-      "recurring": false
+      "recurring": true
     },
     {
       "date": "2026-11-11",
@@ -203,6 +283,16 @@
       "recurring": true
     },
     {
+      "date": "2026-12-06",
+      "label": "December 6",
+      "month": "December 2026",
+      "weekday": "Sunday",
+      "title": "Session Meeting",
+      "time": "5pm",
+      "location": "",
+      "recurring": true
+    },
+    {
       "date": "2026-12-08",
       "label": "December 8",
       "month": "December 2026",
@@ -239,6 +329,16 @@
       "weekday": "Wednesday",
       "title": "Youth House",
       "time": "",
+      "location": "",
+      "recurring": true
+    },
+    {
+      "date": "2026-12-13",
+      "label": "December 13",
+      "month": "December 2026",
+      "weekday": "Sunday",
+      "title": "Deacons’ Meeting",
+      "time": "8am",
       "location": "",
       "recurring": true
     },
@@ -363,6 +463,16 @@
       "recurring": true
     },
     {
+      "date": "2027-01-03",
+      "label": "January 3",
+      "month": "January 2027",
+      "weekday": "Sunday",
+      "title": "Session Meeting",
+      "time": "5pm",
+      "location": "",
+      "recurring": true
+    },
+    {
       "date": "2027-01-05",
       "label": "January 5",
       "month": "January 2027",
@@ -370,6 +480,166 @@
       "title": "Messy Bible Study",
       "time": "8 a.m.",
       "location": "Youth House",
+      "recurring": true
+    },
+    {
+      "date": "2027-01-06",
+      "label": "January 6",
+      "month": "January 2027",
+      "weekday": "Wednesday",
+      "title": "Messy Bible Study",
+      "time": "6 p.m.",
+      "location": "",
+      "recurring": true
+    },
+    {
+      "date": "2027-01-06",
+      "label": "January 6",
+      "month": "January 2027",
+      "weekday": "Wednesday",
+      "title": "Kids Quest",
+      "time": "",
+      "location": "",
+      "recurring": true
+    },
+    {
+      "date": "2027-01-06",
+      "label": "January 6",
+      "month": "January 2027",
+      "weekday": "Wednesday",
+      "title": "Youth House",
+      "time": "",
+      "location": "",
+      "recurring": true
+    },
+    {
+      "date": "2027-01-10",
+      "label": "January 10",
+      "month": "January 2027",
+      "weekday": "Sunday",
+      "title": "Deacons’ Meeting",
+      "time": "8am",
+      "location": "",
+      "recurring": true
+    },
+    {
+      "date": "2027-01-12",
+      "label": "January 12",
+      "month": "January 2027",
+      "weekday": "Tuesday",
+      "title": "Messy Bible Study",
+      "time": "8 a.m.",
+      "location": "Youth House",
+      "recurring": true
+    },
+    {
+      "date": "2027-01-13",
+      "label": "January 13",
+      "month": "January 2027",
+      "weekday": "Wednesday",
+      "title": "Messy Bible Study",
+      "time": "6 p.m.",
+      "location": "",
+      "recurring": true
+    },
+    {
+      "date": "2027-01-13",
+      "label": "January 13",
+      "month": "January 2027",
+      "weekday": "Wednesday",
+      "title": "Kids Quest",
+      "time": "",
+      "location": "",
+      "recurring": true
+    },
+    {
+      "date": "2027-01-13",
+      "label": "January 13",
+      "month": "January 2027",
+      "weekday": "Wednesday",
+      "title": "Youth House",
+      "time": "",
+      "location": "",
+      "recurring": true
+    },
+    {
+      "date": "2027-01-19",
+      "label": "January 19",
+      "month": "January 2027",
+      "weekday": "Tuesday",
+      "title": "Messy Bible Study",
+      "time": "8 a.m.",
+      "location": "Youth House",
+      "recurring": true
+    },
+    {
+      "date": "2027-01-20",
+      "label": "January 20",
+      "month": "January 2027",
+      "weekday": "Wednesday",
+      "title": "Messy Bible Study",
+      "time": "6 p.m.",
+      "location": "",
+      "recurring": true
+    },
+    {
+      "date": "2027-01-20",
+      "label": "January 20",
+      "month": "January 2027",
+      "weekday": "Wednesday",
+      "title": "Kids Quest",
+      "time": "",
+      "location": "",
+      "recurring": true
+    },
+    {
+      "date": "2027-01-20",
+      "label": "January 20",
+      "month": "January 2027",
+      "weekday": "Wednesday",
+      "title": "Youth House",
+      "time": "",
+      "location": "",
+      "recurring": true
+    },
+    {
+      "date": "2027-01-26",
+      "label": "January 26",
+      "month": "January 2027",
+      "weekday": "Tuesday",
+      "title": "Messy Bible Study",
+      "time": "8 a.m.",
+      "location": "Youth House",
+      "recurring": true
+    },
+    {
+      "date": "2027-01-27",
+      "label": "January 27",
+      "month": "January 2027",
+      "weekday": "Wednesday",
+      "title": "Messy Bible Study",
+      "time": "6 p.m.",
+      "location": "",
+      "recurring": true
+    },
+    {
+      "date": "2027-01-27",
+      "label": "January 27",
+      "month": "January 2027",
+      "weekday": "Wednesday",
+      "title": "Kids Quest",
+      "time": "",
+      "location": "",
+      "recurring": true
+    },
+    {
+      "date": "2027-01-27",
+      "label": "January 27",
+      "month": "January 2027",
+      "weekday": "Wednesday",
+      "title": "Youth House",
+      "time": "",
+      "location": "",
       "recurring": true
     }
   ],
@@ -389,9 +659,9 @@
             "entries": [
               {
                 "title": "Session Meeting",
-                "time": "",
+                "time": "5pm",
                 "location": "",
-                "recurring": false
+                "recurring": true
               }
             ]
           },
@@ -492,9 +762,9 @@
             "entries": [
               {
                 "title": "Deacons’ Meeting",
-                "time": "",
+                "time": "8am",
                 "location": "",
-                "recurring": false
+                "recurring": true
               }
             ]
           },
@@ -818,7 +1088,7 @@
           }
         ]
       ],
-      "pdf": "/calendar/print/fpc-calendar-2026-11-4d16d81f.pdf"
+      "pdf": "/calendar/print/fpc-calendar-2026-11-9b641d68.pdf"
     },
     {
       "month": "2026-12",
@@ -909,7 +1179,14 @@
             "day": 6,
             "weekday": "Sun",
             "in_month": true,
-            "entries": []
+            "entries": [
+              {
+                "title": "Session Meeting",
+                "time": "5pm",
+                "location": "",
+                "recurring": true
+              }
+            ]
           },
           {
             "date": "2026-12-07",
@@ -986,7 +1263,14 @@
             "day": 13,
             "weekday": "Sun",
             "in_month": true,
-            "entries": []
+            "entries": [
+              {
+                "title": "Deacons’ Meeting",
+                "time": "8am",
+                "location": "",
+                "recurring": true
+              }
+            ]
           },
           {
             "date": "2026-12-14",
@@ -1212,7 +1496,7 @@
           }
         ]
       ],
-      "pdf": "/calendar/print/fpc-calendar-2026-12-a7efe68f.pdf"
+      "pdf": "/calendar/print/fpc-calendar-2026-12-3aa8102e.pdf"
     },
     {
       "month": "2027-01",
@@ -1303,7 +1587,14 @@
             "day": 3,
             "weekday": "Sun",
             "in_month": true,
-            "entries": []
+            "entries": [
+              {
+                "title": "Session Meeting",
+                "time": "5pm",
+                "location": "",
+                "recurring": true
+              }
+            ]
           },
           {
             "date": "2027-01-04",
@@ -1380,7 +1671,14 @@
             "day": 10,
             "weekday": "Sun",
             "in_month": true,
-            "entries": []
+            "entries": [
+              {
+                "title": "Deacons’ Meeting",
+                "time": "8am",
+                "location": "",
+                "recurring": true
+              }
+            ]
           },
           {
             "date": "2027-01-11",
@@ -1683,7 +1981,7 @@
           }
         ]
       ],
-      "pdf": "/calendar/print/fpc-calendar-2027-01-d31889e6.pdf"
+      "pdf": "/calendar/print/fpc-calendar-2027-01-aea2af11.pdf"
     }
   ]
 }
