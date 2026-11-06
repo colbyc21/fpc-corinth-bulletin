@@ -281,11 +281,67 @@ def test_times_sort_by_the_clock():
     assert sorted(reversed(order), key=calendar_feed._time_key) == order
 
 
-def test_site_data_carries_the_month_view(cal_store, tmp_path):
+def test_site_data_carries_the_month_view_and_a_one_page_landscape_pdf_of_each_month(cal_store, tmp_path):
+    from builder.pipeline import pdf
     (tmp_path / "src/_data").mkdir(parents=True)
-    calendar_feed.write_site_files(cal_store, tmp_path)
+    written = calendar_feed.write_site_files(cal_store, tmp_path)
     data = json.loads((tmp_path / "src/_data/calendarEvents.json").read_text())
     assert len(data["months"]) == calendar_feed.PUBLIC_MONTHS and data["events"] and data["months"][0]["weeks"]
+    pdfs = sorted((tmp_path / calendar_feed.PRINT_DIR).glob("*.pdf"))
+    assert len(pdfs) == calendar_feed.PUBLIC_MONTHS and set(pdfs) <= set(written)
+    for m, path in zip(data["months"], pdfs):
+        assert m["pdf"] == f"/calendar/print/{path.name}" and path.name.startswith(f"fpc-calendar-{m['month']}-")
+        assert pdf.pdf_info(path) == {"pages": 1, "mediabox": [[0.0, 0.0, 792.0, 612.0]], "fonts": pdf.pdf_info(path)["fonts"]}  # letter, landscape
+    # nothing changed: the same files, untouched; one event added: that month's file is replaced, the others stay
+    stamps = {p.name: p.stat().st_mtime_ns for p in pdfs}
+    calendar_feed.write_site_files(cal_store, tmp_path)
+    assert {p.name: p.stat().st_mtime_ns for p in (tmp_path / calendar_feed.PRINT_DIR).glob("*.pdf")} == stamps
+    first = data["months"][0]["month"]
+    cal_store.upsert_event({"title": "Hanging of the Greens", "start_date": f"{first}-15"})
+    calendar_feed.write_site_files(cal_store, tmp_path)
+    after = sorted(p.name for p in (tmp_path / calendar_feed.PRINT_DIR).glob("*.pdf"))
+    assert len(after) == calendar_feed.PUBLIC_MONTHS and after[0] != pdfs[0].name and after[1:] == [p.name for p in pdfs[1:]]
+
+
+def _busy_month(tmp_path, per_day):
+    """January 2027 (six rows of weeks) with ``per_day`` events on every day."""
+    from datetime import date
+    from builder.pipeline.store import Store
+    s = Store(tmp_path / f"busy{per_day}.sqlite")
+    for i in range(per_day):
+        s.upsert_event({"title": f"Advent Workshop, Group {i + 1}", "start_date": "2026-11-01", "end_date": "2027-02-28", "time_text": "6:30 p.m."})
+    months = calendar_feed.public_months(s, count=1, today=date(2027, 1, 10))
+    s.close()
+    return months
+
+
+def test_a_crowded_month_is_scaled_down_to_stay_on_one_page(tmp_path):
+    import re
+    import pymupdf
+    from builder.pipeline import pdf
+    months = _busy_month(tmp_path, 4)   # more than six rows hold at full size
+    (path,) = calendar_feed.write_month_pdfs(months, tmp_path)
+    info = pdf.pdf_info(path)
+    assert info["pages"] == 1 and info["mediabox"] == [[0.0, 0.0, 792.0, 612.0]]
+    with pymupdf.open(path) as doc:
+        page = doc[0]
+        assert len(re.findall(r"Group\s+4\b", page.get_text())) == 42 and "as it stood on" in page.get_text()  # every day's last line, and the footer
+        sizes = {round(sp["size"], 1) for b in page.get_text("dict")["blocks"] for ln in b.get("lines", []) for sp in ln["spans"] if "Group" in sp["text"]}
+        assert sizes and max(sizes) < 8   # the 8 pt entries were shrunk to make room
+
+
+def test_a_month_that_cannot_fit_readably_has_no_pdf_and_prints_from_the_browser(tmp_path):
+    months = _busy_month(tmp_path, 30)
+    assert calendar_feed.write_month_pdfs(months, tmp_path) == []
+    assert "pdf" not in months[0] and not list((tmp_path / calendar_feed.PRINT_DIR).glob("*.pdf"))
+
+
+def test_publish_takes_the_printable_months_once_there_are_some(tmp_path):
+    from builder.pipeline import publish
+    assert calendar_feed.PRINT_DIR not in publish.paths_for("2026-11-08", tmp_path)
+    (tmp_path / calendar_feed.PRINT_DIR).mkdir(parents=True)
+    (tmp_path / calendar_feed.PRINT_DIR / "fpc-calendar-2026-11-00000000.pdf").write_bytes(b"%PDF")
+    assert calendar_feed.PRINT_DIR in publish.paths_for("2026-11-08", tmp_path)
 
 
 def test_events_gain_the_exceptions_table_on_an_older_database(tmp_path):

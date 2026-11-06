@@ -36,6 +36,11 @@ _MEASURE_JS = """
 """
 
 
+_SHEET_OVERFLOWS_JS = """
+() => { const s = document.querySelector('.sheet'); return s.scrollHeight > s.clientHeight + 1 || s.scrollWidth > s.clientWidth + 1; }
+"""
+
+
 class Renderer:
     """One browser for many renders. Use as a context manager."""
 
@@ -69,6 +74,26 @@ class Renderer:
         finally:
             page.close()
         return pdf_path
+
+    def fitted_pdf(self, html_path: Path, pdf_path: Path, step: float = 0.04, floor: float = 0.6) -> float:
+        """A one-page PDF of a page built around a ``.sheet`` the size of the paper
+        (templates/calendar-month.html.j2). While anything overflows the sheet, the
+        page's ``--z`` is stepped down: the sheet lays out larger and is scaled back
+        to the paper, so everything shrinks together. Returns the scale used, and
+        raises ValueError rather than print type too small to read or cut anything off."""
+        page = self._open(html_path)
+        try:
+            page.emulate_media(media="print")
+            z = 1.0
+            while page.evaluate(_SHEET_OVERFLOWS_JS):
+                z = round(z - step, 2)
+                if z < floor:
+                    raise ValueError(f"does not fit the page even at {floor:.0%} size")
+                page.evaluate("z => document.documentElement.style.setProperty('--z', z)", z)
+            page.pdf(path=str(pdf_path), prefer_css_page_size=True, print_background=True)
+            return z
+        finally:
+            page.close()
 
     def measure(self, html_path: Path) -> list[dict]:
         page = self._open(html_path)

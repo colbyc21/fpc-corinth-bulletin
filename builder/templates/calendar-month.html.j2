@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>{{ m.label }} · Church Calendar · First Presbyterian Church of Corinth</title>
+{# One month of the public calendar as a single landscape letter page: the PDF behind
+   "Print this month" on /calendar/. The grid's rows stretch to fill the sheet; when a
+   busy month needs more room than the sheet has, pdf.Renderer.fitted_pdf steps --z
+   down, which lays the same content out on a larger sheet and scales it back to the page. #}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  @page { size: 11in 8.5in; margin: 0; }
+  :root { --z: 1; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 11in; height: 8.5in; overflow: hidden; }
+  body { font-family: 'Work Sans', 'Helvetica Neue', Arial, sans-serif; color: #171200; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .sheet { zoom: var(--z); width: calc(11in / var(--z)); height: calc(8.5in / var(--z)); padding: calc(0.4in / var(--z)) calc(0.45in / var(--z));
+           display: flex; flex-direction: column; overflow: hidden; }
+  .eyebrow { font-size: 7.5pt; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: #56736a; }
+  h1 { font-size: 22pt; font-weight: 300; line-height: 1.15; margin: 0.02in 0 0.1in; }
+  .grid { flex: 1 1 auto; min-height: 0; display: grid; grid-template-columns: repeat(7, minmax(0, 1fr));
+          grid-template-rows: auto repeat({{ m.weeks | length }}, minmax(min-content, 1fr)); border-top: 1px solid #8f8f84; border-left: 1px solid #8f8f84; }
+  .dow, .day { border-right: 1px solid #8f8f84; border-bottom: 1px solid #8f8f84; }
+  .dow { font-size: 7pt; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #3f3d32; padding: 0.03in 0.06in; }
+  .day { padding: 0.04in 0.06in 0.05in; }
+  .num { font-size: 10pt; font-weight: 500; }
+  .day.out .num, .day.out .ev { color: #9a998c; }
+  .day.out .ev { border-left-color: #cfcfc6; }
+  .ev { font-size: 8pt; line-height: 1.22; margin-top: 0.035in; padding-left: 0.05in; border-left: 2px solid #6d8c83; overflow-wrap: anywhere; }
+  .ev.once { border-left-color: #847539; }
+  .ev .tm { color: #55544a; } .ev .nw { white-space: nowrap; }
+  .day.out .ev .tm { color: inherit; }
+  .foot { display: flex; justify-content: space-between; gap: 0.3in; font-size: 7pt; color: #55544a; margin-top: 0.07in; }
+  .foot i { display: inline-block; width: 0; height: 0.6em; border-left: 2px solid #6d8c83; margin: 0 0.05in 0 0; }
+  .foot i.once { border-left-color: #847539; margin-left: 0.15in; }
+</style>
+</head>
+<body>
+<div class="sheet">
+  <p class="eyebrow">First Presbyterian Church of Corinth · Church Calendar</p>
+  <h1>{{ m.label }}</h1>
+  <div class="grid">
+    {% for name in ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'] %}<div class="dow">{{ name }}</div>{% endfor %}
+    {% for week in m.weeks %}{% for day in week %}
+    <div class="day{% if not day.in_month %} out{% endif %}">
+      <div class="num">{{ day.day }}</div>
+      {% for en in day.entries %}
+      <div class="ev{% if not en.recurring %} once{% endif %}">{{ en.title }}{% if en.time or en.location %} <span class="tm"><span class="nw">{{ en.time }}</span>{% if en.time and en.location %} · {% endif %}{{ en.location }}</span>{% endif %}</div>
+      {% endfor %}
+    </div>
+    {% endfor %}{% endfor %}
+  </div>
+  <div class="foot">
+    <span><i></i>Every week or every month <i class="once"></i>One-time events</span>
+    <span>bulletin.fpccorinth.org/calendar, as it stood on {{ as_of }}. Dates and times can change; the page and the subscribed calendar are kept current.</span>
+  </div>
+</div>
+</body>
+</html>

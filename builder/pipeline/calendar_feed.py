@@ -14,8 +14,11 @@ as EXDATE and a move as an override VEVENT with RECURRENCE-ID.
 from __future__ import annotations
 
 import calendar as _cal
+import hashlib
 import json
+import logging
 import re
+import tempfile
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
@@ -372,6 +375,54 @@ def public_months(store: Store, count: int = PUBLIC_MONTHS, today: date | None =
     return out
 
 
+PRINT_DIR = "src/calendar-print"   # Eleventy copies it to /calendar/print/
+
+
+def write_month_pdfs(months: list[dict], repo: Path, as_of: date | None = None) -> list[Path]:
+    """One landscape, one-page PDF per month of the public month view, which is
+    what "Print this month" on /calendar/ opens: a browser's own print cannot be
+    made to choose landscape or to fit a page, a PDF is both already. Each
+    month gains ``pdf``, its address on the site. The file name carries a hash
+    of what is on the page, so an unchanged month is left alone (no churn in
+    git, and a changed month gets a new address no cache can hold an old copy
+    of); files for months no longer shown are removed. A month too crowded
+    to fit a page at a readable size gets no file and no ``pdf``, and the
+    page prints that one from the browser."""
+    from builder.pipeline import pdf as pdfmod, render
+
+    out = repo / PRINT_DIR
+    template = (config.TEMPLATES_DIR / "calendar-month.html.j2").read_text()
+    names = {}
+    for m in months:
+        digest = hashlib.sha1((template + json.dumps(m, sort_keys=True, ensure_ascii=False)).encode()).hexdigest()[:8]
+        names[m["month"]] = f"fpc-calendar-{m['month']}-{digest}.pdf"
+    missing = [m for m in months if not (out / names[m["month"]]).exists()]
+    if missing:
+        out.mkdir(parents=True, exist_ok=True)
+        tpl = render._env().get_template("calendar-month.html.j2")
+        with tempfile.TemporaryDirectory() as tmp, pdfmod.Renderer() as renderer:
+            for m in missing:
+                html = Path(tmp) / f"{m['month']}.html"
+                html.write_text(tpl.render(m=m, as_of=dates.long_date(as_of or date.today())))
+                draft = Path(tmp) / f"{m['month']}.pdf"
+                try:
+                    renderer.fitted_pdf(html, draft)
+                    if pdfmod.pdf_info(draft)["pages"] != 1:
+                        raise ValueError("came out as more than one page")
+                except ValueError as e:
+                    logging.getLogger("builder.calendar").warning("no printable PDF for %s: %s", m["label"], e)
+                    del names[m["month"]]
+                    continue
+                draft.replace(out / names[m["month"]])
+    for old in out.glob("fpc-calendar-*.pdf"):
+        if old.name not in names.values():
+            old.unlink()
+    for m in months:
+        if m["month"] in names:
+            m["pdf"] = f"/calendar/print/{names[m['month']]}"
+    return [out / n for n in names.values()]
+
+
 def _vevent(ev: dict, stamp: datetime, start: date, end: date, time_text: str | None, location: str | None) -> Event:
     e = Event()
     e.add("uid", ev["uid"])
@@ -429,19 +480,25 @@ def build_ics(store: Store) -> bytes:
 
 
 def write_site_files(store: Store, repo: Path | None = None) -> list[Path]:
-    """Write src/calendar.ics and src/_data/calendarEvents.json for Eleventy."""
+    """Write src/calendar.ics, src/_data/calendarEvents.json and the printable month PDFs for Eleventy."""
     repo = repo or config.REPO
     ics_path = repo / "src/calendar.ics"
     data_path = repo / "src/_data/calendarEvents.json"
     ics_path.write_bytes(build_ics(store))
+    months = public_months(store)
+    try:
+        pdfs = write_month_pdfs(months, repo)
+    except Exception as e:  # the calendar still publishes; a month without ``pdf`` prints from the browser instead
+        logging.getLogger("builder.calendar").warning("calendar PDFs not written: %s", e)
+        pdfs = []
     payload = {
         "generated": datetime.now(timezone.utc).replace(microsecond=0).isoformat(),
         "subscribe_url": f"{config.SITE_URL}/calendar.ics",
         "events": upcoming(store, 60),
-        "months": public_months(store),
+        "months": months,
     }
     data_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n")
-    return [ics_path, data_path]
+    return [ics_path, data_path, *pdfs]
 
 
 def validate_ics(data: bytes) -> int:

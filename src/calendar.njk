@@ -68,7 +68,7 @@ permalink: /calendar/
   /* ── MONTH VIEW (the same grid as the builder's calendar screen) ── */
   .paper { margin: 0.7rem 0 0 !important; }
   .linklike { font: inherit; color: var(--accent-deep); background: none; border: 0; padding: 0; text-decoration: underline; cursor: pointer; }
-  .quiet { font-family: 'Work Sans', sans-serif; font-weight: 500; font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-light); background: var(--warm-white); border: 1px solid var(--rule); border-radius: 2px; padding: 0.4rem 0.8rem; cursor: pointer; white-space: nowrap; }
+  .quiet { display: inline-block; text-decoration: none; line-height: 1.6; font-family: 'Work Sans', sans-serif; font-weight: 500; font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-light); background: var(--warm-white); border: 1px solid var(--rule); border-radius: 2px; padding: 0.4rem 0.8rem; cursor: pointer; white-space: nowrap; }
   .quiet:hover { color: var(--warm-white); background: var(--ink); border-color: var(--ink); }
   .viewtabs { display: none; justify-content: center; margin: 0 0 1.4rem; }
   .viewtabs button { border-radius: 0; margin-left: -1px; }
@@ -77,7 +77,7 @@ permalink: /calendar/
   .calmonth { margin-bottom: 2.4rem; }
   .calhead { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.7rem; flex-wrap: wrap; }
   .calhead h2 { margin: 0 auto 0 0; font-family: 'Work Sans', sans-serif; font-weight: 400; font-size: 1.3rem; color: var(--ink); }
-  .calhead button { display: none; }
+  .calhead button { display: none; } .calhead a.quiet { font-size: 0.68rem; }
   .calgrid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); border-top: 1px solid var(--rule-light); border-left: 1px solid var(--rule-light); font-family: 'Work Sans', sans-serif; }
   .calgrid .dow { font-size: 0.62rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-faint); padding: 0.3rem 0.4rem; border-right: 1px solid var(--rule-light); border-bottom: 1px solid var(--rule-light); }
   .calgrid .day { min-height: 5.6rem; padding: 0.25rem 0.3rem 0.4rem; background: #fff; border-right: 1px solid var(--rule-light); border-bottom: 1px solid var(--rule-light); }
@@ -109,17 +109,16 @@ permalink: /calendar/
     .calhead h2 { flex: 1 1 100%; }
   }
   /* ── PRINT: a month to a landscape page ───── */
-  @page month { size: letter landscape; margin: 0.4in 0.45in; }
   @media print {
     html { font-size: 11pt; }
     body { background: #fff; min-height: 0; }
-    .site-header, .subscribe, .viewtabs, .calhead button, .updated { display: none !important; }
+    .site-header, .subscribe, .viewtabs, .calhead button, .calhead a, .updated { display: none !important; }
     .page { max-width: none; margin: 0; padding: 0; box-shadow: none; min-height: 0; background: #fff; }
     .js.view-month .intro { display: none; }
     .print-only { display: block; }
     .printhead { font-family: 'Work Sans', sans-serif; font-size: 7.5pt; letter-spacing: 0.2em; text-transform: uppercase; color: #444; margin-bottom: 0.05in; }
     .printfoot { font-family: 'Work Sans', sans-serif; font-size: 7pt; color: #444; margin-top: 0.05in; }
-    .calmonth { page: month; break-after: page; margin: 0; }
+    .calmonth { break-after: page; margin: 0; }
     .calmonth:last-child, .js .calmonth.show { break-after: auto; }
     .calhead { margin-bottom: 0.08in; } .calhead h2 { font-size: 20pt; font-weight: 300; }
     .calgrid, .calgrid .dow, .calgrid .day { border-color: #999; }
@@ -145,6 +144,7 @@ permalink: /calendar/
   .site-nav .menu-list a.current { color: var(--accent-deep); font-weight: 600; }
   @media (max-width: 420px) { .site-nav summary { font-size: 0.64rem; padding: 0.3rem 0.7rem; } }
 </style>
+<style id="landscape" media="print">@page { size: letter landscape; margin: 0.4in 0.45in; }</style>
 </head>
 <body>
 
@@ -193,7 +193,7 @@ permalink: /calendar/
         <li>Paste <code>https://bulletin.fpccorinth.org/calendar.ics</code> and choose Add calendar. It will then appear in the Google Calendar app on your phone.</li>
       </ol>
     </details>
-    {% if calendarEvents.months %}<p class="paper">Rather have it on paper? <button type="button" class="linklike" data-print>Print the month</button> and put it on the refrigerator.</p>{% endif %}
+    {% if calendarEvents.months %}<p class="paper">Rather have it on paper? {% if calendarEvents.months[0].pdf %}<a class="linklike" id="paperlink" href="{{ calendarEvents.months[0].pdf }}" target="_blank" rel="noopener">Print the month</a>{% else %}<button type="button" class="linklike" data-print>Print the month</button>{% endif %} and put it on the refrigerator. It opens as a one-page sheet, ready to print.</p>{% endif %}
   </section>
 
   {% if calendarEvents.months %}
@@ -209,7 +209,8 @@ permalink: /calendar/
         <h2>{{ m.label }}</h2>
         {% if not loop.first %}<button type="button" class="quiet" data-go="{{ calendarEvents.months[loop.index0 - 1].month }}">‹ {{ m.prev_label }}</button>{% endif %}
         {% if not loop.last %}<button type="button" class="quiet" data-go="{{ calendarEvents.months[loop.index0 + 1].month }}">{{ m.next_label }} ›</button>{% endif %}
-        <button type="button" class="quiet" data-print>Print this month</button>
+        {% if m.pdf %}<a class="quiet" href="{{ m.pdf }}" target="_blank" rel="noopener" data-pdf>Print this month</a>
+        {% else %}<button type="button" class="quiet" data-print>Print this month</button>{% endif %}
       </div>
       <div class="calgrid">
         {% for name in ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'] %}<div class="dow">{{ name }}</div>{% endfor %}
@@ -263,7 +264,8 @@ permalink: /calendar/
 })();
 </script>
 <script>
-// Month view: one month at a time, today marked, a Month / List switch and a print button.
+// Month view: one month at a time, today marked, and a Month / List switch. "Print this month" is a
+// link to that month's one-page landscape PDF (made by the builder); it only prints from here when there is none.
 // Without script the page still works: every month shows, one under the other, then the list.
 (function () {
   var months = [].slice.call(document.querySelectorAll('.calmonth'));
@@ -271,12 +273,18 @@ permalink: /calendar/
   var root = document.documentElement, now = new Date();
   function pad(n) { return ('0' + n).slice(-2); }
   var thisMonth = now.getFullYear() + '-' + pad(now.getMonth() + 1), today = thisMonth + '-' + pad(now.getDate());
+  var paper = document.getElementById('paperlink'), landscape = document.getElementById('landscape');
   function show(month) {
-    months.forEach(function (m) { m.classList.toggle('show', m.getAttribute('data-month') === month); });
+    months.forEach(function (m) {
+      var on = m.getAttribute('data-month') === month, pdf = m.querySelector('[data-pdf]');
+      m.classList.toggle('show', on);
+      if (on && paper && pdf) paper.href = pdf.href; // "Print the month" follows the month on screen
+    });
   }
   function view(v) {
     root.classList.remove('view-month', 'view-list');
     root.classList.add('view-' + v);
+    if (landscape) landscape.disabled = v !== 'month'; // a printed list stays upright
     document.querySelectorAll('[data-view]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-view') === v)); });
   }
   root.classList.add('js');

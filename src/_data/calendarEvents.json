@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-06T21:48:49+00:00",
+  "generated": "2026-11-06T22:05:06+00:00",
   "subscribe_url": "https://bulletin.fpccorinth.org/calendar.ics",
   "events": [
     {
@@ -817,7 +817,8 @@
             "entries": []
           }
         ]
-      ]
+      ],
+      "pdf": "/calendar/print/fpc-calendar-2026-11-4d16d81f.pdf"
     },
     {
       "month": "2026-12",
@@ -1210,7 +1211,8 @@
             "entries": []
           }
         ]
-      ]
+      ],
+      "pdf": "/calendar/print/fpc-calendar-2026-12-a7efe68f.pdf"
     },
     {
       "month": "2027-01",
@@ -1680,7 +1682,8 @@
             "entries": []
           }
         ]
-      ]
+      ],
+      "pdf": "/calendar/print/fpc-calendar-2027-01-d31889e6.pdf"
     }
   ]
 }

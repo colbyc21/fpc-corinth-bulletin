@@ -13,7 +13,7 @@ Self-service production of the Sunday bulletin on basecamp. The plan is in
 | `pipeline/pdf.py` | Playwright PDF, per-panel overflow measurement, PNG proofs, PDF comparison |
 | `pipeline/build.py` | one build: names → render → PDF → measure → proofs → `var/proofs/<date>/build.json` |
 | `pipeline/publish.py` | scroll index, calendar files, Eleventy check, commit, push (deploy key) |
-| `pipeline/calendar_feed.py` | events table → back-cover lines, `src/calendar.ics`, `/calendar/` page data (the upcoming list and a three-month grid the page shows a month at a time and prints a month to a landscape page), the app's month view; one date of a repeating event can be skipped or moved (`event_exceptions`: EXDATE / RECURRENCE-ID in the feed) |
+| `pipeline/calendar_feed.py` | events table → back-cover lines, `src/calendar.ics`, `/calendar/` page data (the upcoming list, a three-month grid the page shows a month at a time, and `src/calendar-print/`: a one-page landscape PDF of each month, scaled to fit, which is what “Print this month” opens; `templates/calendar-month.html.j2`), the app's month view; one date of a repeating event can be skipped or moved (`event_exceptions`: EXDATE / RECURRENCE-ID in the feed) |
 | `pipeline/hymn_index.py` | published scroll pages → hymn index (`/hymns/` page data, app Hymns screen): times sung, last sung, hymnary.org link |
 | `pipeline/store.py` | SQLite: rosters (the Those Who Serve roles, plus who has the flowers, which is not printed), events, standing text, users, magic links, audit, week status, spend ledger |
 | `pipeline/names.py` | confirmed name spellings, applied to every build |

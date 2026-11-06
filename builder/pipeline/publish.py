@@ -61,7 +61,7 @@ def eleventy_check(repo: Path) -> str:
 
 
 def paths_for(date: str, repo: Path) -> list[str]:
-    return [
+    paths = [
         f"bulletins/{date}",
         f"src/scroll/{date}.html",
         "src/_data/scrollBulletins.json",
@@ -70,6 +70,9 @@ def paths_for(date: str, repo: Path) -> list[str]:
         "src/_data/hymnIndex.json",
         "qrcode.png",
     ]
+    if any((repo / calendar_feed.PRINT_DIR).glob("*.pdf")):  # the printable months; absent until the first is rendered
+        paths.append(calendar_feed.PRINT_DIR)
+    return paths
 
 
 def commit_message(date: str, repo: Path, correction: str | None = None) -> str:
