@@ -72,6 +72,12 @@ JOB_CAPS = {  # kind: (max calls, max USD)
     "chat": (4, 1.00),
 }
 BUILDS_PER_WEEK = 3
+
+# The public calendar follows the events table by itself: the app pushes it this long
+# after the last edit on the Calendar screen, and a nightly timer does the same
+# (deploy/bulletin-calendar.timer). "off" leaves it to the weekly publish and the timer.
+CALENDAR_AUTOPUBLISH = os.environ.get("BUILDER_CALENDAR_AUTOPUBLISH", "on").lower() not in {"off", "0", "false", "no"}
+CALENDAR_PUSH_DELAY = float(os.environ.get("BUILDER_CALENDAR_PUSH_DELAY", "300"))
 PROMPTS_DIR = BUILDER_DIR / "prompts"
 KNOWLEDGE_DIR = REPO / "docs/knowledge"
 

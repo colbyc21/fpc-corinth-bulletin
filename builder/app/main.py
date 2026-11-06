@@ -20,7 +20,7 @@ from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, Redirect
 from fastapi.templating import Jinja2Templates
 
 from builder import config
-from builder.app import auth
+from builder.app import auth, calendar_sync
 from builder.pipeline import build as buildmod, calendar_feed, chat as chatmod, content as contentmod, dates, deploy_status, extract, fit as fitmod, forms, hymn_index, intake as intakemod, scripture_index, model as modelmod, publish as publishmod
 from builder.pipeline import stats as statsmod
 from builder.pipeline import week as weekmod
@@ -470,7 +470,7 @@ def events(request: Request, user: dict = Depends(need("publisher")), all: int =
     for e in evs:
         e["coming_exceptions"] = calendar_feed.coming_exceptions(e, today)
     return page(request, "events.html", user, events=evs, show_all=bool(all), today=today.isoformat(),
-                cal=calendar_feed.month_grid(s, month, today), picked=_picked_date(s, pick),
+                cal=calendar_feed.month_grid(s, month, today), picked=_picked_date(s, pick), sync=calendar_sync.status(s),
                 preview=calendar_feed.week_calendar(s, dates.next_sunday().isoformat()), next_sunday=dates.next_sunday().isoformat())
 
 
@@ -505,6 +505,7 @@ async def event_create(request: Request, user: dict = Depends(need("publisher"))
     except ValueError as e:
         return RedirectResponse(f"/events?m={_q(str(e))}", status_code=303)
     store().log("event.add", user["email"], json.dumps(data))
+    calendar_sync.request(store(), user["email"])
     return RedirectResponse(f"/events?m=Added#e-{eid}", status_code=303)
 
 
@@ -516,6 +517,7 @@ async def event_update(eid: int, request: Request, user: dict = Depends(need("pu
     except ValueError as e:
         return RedirectResponse(f"/events?m={_q(str(e))}", status_code=303)
     store().log("event.edit", user["email"], json.dumps({"id": eid, **data}))
+    calendar_sync.request(store(), user["email"])
     return RedirectResponse(f"/events?m=Saved#e-{eid}", status_code=303)
 
 
@@ -523,6 +525,7 @@ async def event_update(eid: int, request: Request, user: dict = Depends(need("pu
 def event_delete(eid: int, user: dict = Depends(need("publisher"))):
     store().delete_event(eid)
     store().log("event.delete", user["email"], str(eid))
+    calendar_sync.request(store(), user["email"])
     return RedirectResponse("/events?m=Removed", status_code=303)
 
 
@@ -549,7 +552,20 @@ async def event_date(eid: int, d: str, action: str, request: Request, user: dict
     except ValueError as e:
         return RedirectResponse(f"/events?month={month}&pick={eid}:{d}&m={_q('Not saved: ' + str(e))}#pick", status_code=303)
     s.log(f"event.{action}", user["email"], json.dumps({"id": eid, "date": d, **{k: v for k, v in form.items() if k != "month" and v}}))
+    calendar_sync.request(s, user["email"])
     return RedirectResponse(f"/events?month={month}&m={_q(done)}#calendar", status_code=303)
+
+
+@app.post("/calendar/send")
+def calendar_send(user: dict = Depends(need("publisher"))):
+    """Push the public calendar now instead of waiting for the few minutes after an edit, or for tonight."""
+    try:
+        res = calendar_sync.send(store(), user["email"])
+    except Exception as e:
+        log.exception("calendar send failed")
+        return RedirectResponse(f"/events?m={_q('The public calendar was not sent: ' + str(e))}", status_code=303)
+    msg = f"The public calendar is on its way ({res['commit']}); it is live in about a minute" if res["changed"] else "The public calendar already matches this table"
+    return RedirectResponse(f"/events?m={_q(msg)}", status_code=303)
 
 
 @app.get("/hymns", response_class=HTMLResponse)

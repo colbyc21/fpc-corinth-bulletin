@@ -336,6 +336,12 @@ class Store:
     def log(self, action: str, user_email: str | None = None, detail: str | None = None) -> None:
         self.db.execute("insert into audit (ts, user_email, action, detail) values (?, ?, ?, ?)", (now(), user_email, action, detail))
 
+    def last_audit(self, *actions: str) -> dict | None:
+        """The most recent audit row with one of these actions."""
+        marks = ", ".join("?" for _ in actions)
+        row = self.db.execute(f"select * from audit where action in ({marks}) order by id desc limit 1", actions).fetchone()
+        return dict(row) if row else None
+
     def audit(self, limit: int = 200) -> list[dict]:
         return [dict(r) for r in self.db.execute("select * from audit order by id desc limit ?", (limit,))]
 

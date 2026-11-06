@@ -1,0 +1,21 @@
+# Nightly refresh of the public calendar (page data, feed, printable months): regenerates them from
+# the events table and pushes only if something changed. The app does the same a few minutes
+# after an edit on the Calendar screen; this run covers the turn of a month and anything missed.
+# Install:  cp builder/deploy/bulletin-calendar.{service,timer} ~/.config/systemd/user/
+#           systemctl --user daemon-reload && systemctl --user enable --now bulletin-calendar.timer
+# Run now:  systemctl --user start bulletin-calendar.service
+# Logs:     journalctl --user -u bulletin-calendar -n 50
+[Unit]
+Description=FPC Corinth bulletin builder: refresh the public calendar
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=%h/bulletin-builder/repo
+EnvironmentFile=%h/.config/bulletin-builder/env
+Environment=BUILDER_REPO=%h/bulletin-builder/repo
+Environment=BUILDER_VAR=%h/bulletin-builder/var
+Environment=PYTHONUNBUFFERED=1
+ExecStart=%h/bulletin-builder/venv/bin/python -m builder calendar --publish
+SyslogIdentifier=bulletin-calendar

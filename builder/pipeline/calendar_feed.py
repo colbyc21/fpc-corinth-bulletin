@@ -21,6 +21,7 @@ import re
 import tempfile
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 from icalendar import Calendar, Event, vRecur
 
@@ -423,10 +424,12 @@ def write_month_pdfs(months: list[dict], repo: Path, as_of: date | None = None) 
     return [out / n for n in names.values()]
 
 
-def _vevent(ev: dict, stamp: datetime, start: date, end: date, time_text: str | None, location: str | None) -> Event:
+def _vevent(ev: dict, stamp: str, start: date, end: date, time_text: str | None, location: str | None) -> Event:
+    """``stamp`` is when this was last revised in the table: DTSTAMP is that, not the moment the
+    file was written, so the feed is byte-for-byte the same until an event changes."""
     e = Event()
     e.add("uid", ev["uid"])
-    e.add("dtstamp", stamp)
+    e.add("dtstamp", datetime.fromisoformat(stamp).astimezone(timezone.utc))
     e.add("summary", line_text(ev, time_text))
     e.add("dtstart", start)
     e.add("dtend", end + timedelta(days=1))  # all-day events: DTEND is exclusive
@@ -447,11 +450,10 @@ def build_ics(store: Store) -> bytes:
     cal.add("x-wr-calname", "FPC Corinth Church Calendar")
     cal.add("x-wr-timezone", "America/Chicago")
     cal.add("refresh-interval;value=duration", "P1D")
-    stamp = datetime.now(timezone.utc)
     for ev in store.events():
         start = date.fromisoformat(ev["start_date"])
         end = date.fromisoformat(ev["end_date"]) if ev.get("end_date") else start
-        e = _vevent(ev, stamp, start, end, ev.get("time_text"), ev.get("location"))
+        e = _vevent(ev, ev["updated_at"], start, end, ev.get("time_text"), ev.get("location"))
         rule = _rule(ev.get("recurrence"))
         if rule:
             r: dict = {"freq": rule[0].lower()}
@@ -472,32 +474,57 @@ def build_ics(store: Store) -> bytes:
             if x["kind"] != "move":
                 continue
             new = date.fromisoformat(x["new_date"])
-            o = _vevent(ev, stamp, new, new, x.get("time_text") or ev.get("time_text"), x.get("location") or ev.get("location"))
+            o = _vevent(ev, x["updated_at"], new, new, x.get("time_text") or ev.get("time_text"), x.get("location") or ev.get("location"))
             o.add("recurrence-id", d)
             o.add("last-modified", datetime.fromisoformat(x["updated_at"]))
             cal.add_component(o)
     return cal.to_ical()
 
 
-def write_site_files(store: Store, repo: Path | None = None) -> list[Path]:
-    """Write src/calendar.ics, src/_data/calendarEvents.json and the printable month PDFs for Eleventy."""
+LOCAL_TZ = ZoneInfo("America/Chicago")
+
+
+def local_today() -> date:
+    """Today in Corinth. The server keeps UTC, where the date turns over at six in the evening."""
+    return datetime.now(LOCAL_TZ).date()
+
+
+def write_site_files(store: Store, repo: Path | None = None, today: date | None = None) -> list[Path]:
+    """Write src/calendar.ics, src/_data/calendarEvents.json and the printable month PDFs for Eleventy.
+
+    Everything here is a function of the events table and the current month,
+    and a file is only rewritten when its content differs, so running this
+    again changes nothing until an event changes or a new month begins (that
+    is what lets ``publish.publish_calendar`` run after every edit and every
+    night without a commit each time). The list starts at the first of the
+    month, like the grid; the page itself hides the days that have passed."""
     repo = repo or config.REPO
+    today = today or local_today()
     ics_path = repo / "src/calendar.ics"
     data_path = repo / "src/_data/calendarEvents.json"
-    ics_path.write_bytes(build_ics(store))
-    months = public_months(store)
+    ics = build_ics(store)
+    if not ics_path.exists() or ics_path.read_bytes() != ics:
+        ics_path.write_bytes(ics)
+    months = public_months(store, today=today)
     try:
-        pdfs = write_month_pdfs(months, repo)
+        pdfs = write_month_pdfs(months, repo, as_of=today)
     except Exception as e:  # the calendar still publishes; a month without ``pdf`` prints from the browser instead
         logging.getLogger("builder.calendar").warning("calendar PDFs not written: %s", e)
         pdfs = []
+    first = today.replace(day=1)
+    last = next(date.fromisoformat(d["date"]) for d in reversed(months[-1]["weeks"][-1]) if d["in_month"])  # the last day of the last month shown
     payload = {
         "generated": datetime.now(timezone.utc).replace(microsecond=0).isoformat(),
         "subscribe_url": f"{config.SITE_URL}/calendar.ics",
-        "events": upcoming(store, 60),
+        "events": upcoming(store, (last - first).days, today=first),
         "months": months,
     }
-    data_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n")
+    try:
+        current = json.loads(data_path.read_text())
+    except (OSError, ValueError):
+        current = None
+    if current is None or {**current, "generated": None} != {**payload, "generated": None}:
+        data_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n")
     return [ics_path, data_path, *pdfs]
 
 

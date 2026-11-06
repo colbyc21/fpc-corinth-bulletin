@@ -175,6 +175,15 @@ def cmd_calendar(args) -> int:
     if args.write:
         for p in calendar_feed.write_site_files(s):
             print("wrote", p)
+    if args.publish:  # what deploy/bulletin-calendar.timer runs every night
+        from builder.pipeline import publish
+        try:
+            res = publish.publish_calendar(store=s, user="timer")
+        except Exception as e:
+            s.log("calendar.publish.failed", "timer", str(e)[:500])
+            print(f"public calendar not updated: {e}", file=sys.stderr)
+            return 1
+        print(f"public calendar pushed ({res['commit']})" if res["changed"] else "public calendar already up to date")
     return 0
 
 
@@ -312,7 +321,7 @@ def main(argv: list[str] | None = None) -> int:
     s = sub.add_parser("compare"); s.add_argument("a"); s.add_argument("b"); s.add_argument("--dpi", type=int, default=60)
     s.add_argument("--diff", action="store_true"); s.set_defaults(fn=cmd_compare)
     s = sub.add_parser("extract"); s.add_argument("file"); s.set_defaults(fn=cmd_extract)
-    s = sub.add_parser("calendar"); s.add_argument("--sunday"); s.add_argument("--write", action="store_true"); s.set_defaults(fn=cmd_calendar)
+    s = sub.add_parser("calendar"); s.add_argument("--sunday"); s.add_argument("--write", action="store_true"); s.add_argument("--publish", action="store_true"); s.set_defaults(fn=cmd_calendar)
     s = sub.add_parser("hymns"); s.add_argument("--write", action="store_true"); s.set_defaults(fn=cmd_hymns)
     s = sub.add_parser("scripture"); s.add_argument("--write", action="store_true"); s.set_defaults(fn=cmd_scripture)
     s = sub.add_parser("cc"); s.add_argument("what", choices=["auth", "status", "lists"]); s.set_defaults(fn=cmd_cc)

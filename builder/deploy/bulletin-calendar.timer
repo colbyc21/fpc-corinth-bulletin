@@ -1,0 +1,10 @@
+# Runs bulletin-calendar.service just after midnight in Corinth, so a new month is on the page when the day starts.
+[Unit]
+Description=FPC Corinth bulletin builder: nightly refresh of the public calendar
+
+[Timer]
+OnCalendar=*-*-* 00:10:00 America/Chicago
+Persistent=true
+
+[Install]
+WantedBy=timers.target

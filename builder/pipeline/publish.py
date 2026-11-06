@@ -3,13 +3,19 @@
 Runs against the repo clone in ``config.REPO`` (on basecamp that is the
 deploy clone at ~/bulletin-builder/repo, whose ``core.sshCommand`` already
 points at the deploy key). The app never deletes from the repo; a rebuild
-overwrites that week's generated files only.
+overwrites that week's generated files only (and the printable calendar
+months, which are replaced as the calendar changes).
+
+``publish_calendar`` is the small sibling: the calendar files alone, pushed
+when they change, after an edit on the Calendar screen and every night.
 """
 from __future__ import annotations
 
+import fcntl
 import json
 import os
 import subprocess
+from contextlib import contextmanager
 from pathlib import Path
 
 from builder import config
@@ -18,10 +24,24 @@ from builder.pipeline import week as weekmod
 from builder.pipeline.store import Store
 
 TRAILER = "Co-Authored-By: Claude <noreply@anthropic.com>"
+CALENDAR_SUBJECT = "Update the church calendar page, feed and printable months"
 
 
 class PublishError(RuntimeError):
     pass
+
+
+@contextmanager
+def publishing():
+    """One publish at a time. The weekly publish, the push that follows a calendar edit and the
+    nightly timer all commit in the same clone, from the app and from a separate process."""
+    config.ensure_dirs()
+    with open(config.VAR / "publish.lock", "w") as fh:
+        fcntl.flock(fh, fcntl.LOCK_EX)
+        try:
+            yield
+        finally:
+            fcntl.flock(fh, fcntl.LOCK_UN)
 
 
 def _git(repo: Path, *args: str, check: bool = True) -> str:
@@ -96,6 +116,12 @@ def publish(date: str, *, store: Store | None = None, branch: str | None = None,
     the remote's main so a test publish leaves no stray local commit (the
     working tree, including the built files, is kept).
     """
+    with publishing():
+        return _publish(date, store=store, branch=branch, push=push, correction=correction, user=user, repo=repo)
+
+
+def _publish(date: str, *, store: Store | None, branch: str | None, push: bool, correction: str | None, user: str | None,
+             repo: Path | None) -> dict:
     repo = repo or config.REPO
     store = store or Store()
     week = weekmod.load_week(date)
@@ -132,6 +158,54 @@ def publish(date: str, *, store: Store | None = None, branch: str | None = None,
                                   published_build=build_id_of(repo / "src/scroll" / f"{date}.html"))
     store.log("publish", user, json.dumps(result))
     return result
+
+
+def calendar_paths(repo: Path) -> list[str]:
+    paths = ["src/calendar.ics", "src/_data/calendarEvents.json"]
+    if any((repo / calendar_feed.PRINT_DIR).glob("*.pdf")):
+        paths.append(calendar_feed.PRINT_DIR)
+    return paths
+
+
+def publish_calendar(*, store: Store | None = None, repo: Path | None = None, push: bool = True, user: str | None = None) -> dict:
+    """Bring the public calendar (the /calendar/ page data, the feed people
+    subscribe to, the printable months) up to date with the events table and
+    the current month, and push it if that changed anything.
+
+    This is what keeps the public calendar current between bulletins: the app
+    calls it a few minutes after an edit on the Calendar screen, and
+    ``deploy/bulletin-calendar.timer`` calls it every night. It commits the
+    calendar files and nothing else, whatever state a week in progress is in.
+    It refuses, rather than push someone else's work, when the clone is not on
+    main or holds commits that were never pushed; a push that fails takes its
+    commit back, so the next run starts clean."""
+    repo = repo or config.REPO
+    store = store or Store()
+    with publishing():
+        current = _git(repo, "rev-parse", "--abbrev-ref", "HEAD")
+        if current != "main":
+            raise PublishError(f"the clone is on {current}, not main")
+        if push:
+            sync_main(repo)
+            if _git(repo, "rev-list", "--count", "origin/main..HEAD") != "0":
+                raise PublishError("the clone holds commits that were never pushed; push or drop them first")
+        calendar_feed.write_site_files(store, repo)
+        paths = calendar_paths(repo)
+        _git(repo, "add", "-A", "--", *paths)
+        if not _git(repo, "status", "--porcelain", "--", *paths):
+            return {"changed": False}
+        build_line = eleventy_check(repo)
+        _git(repo, "commit", "-q", "-m", CALENDAR_SUBJECT, "--", *paths)
+        result = {"changed": True, "commit": _git(repo, "rev-parse", "--short", "HEAD"), "pushed": False, "eleventy": build_line}
+        if push:
+            try:
+                _git(repo, "push", "-q", "origin", "HEAD:refs/heads/main")
+            except PublishError:
+                _git(repo, "reset", "-q", "--soft", "HEAD~1")  # keep the files, drop the commit: the next run makes it again
+                raise
+            result["pushed"] = True
+        store.log("calendar.publish", user, json.dumps(result))
+        return result
 
 
 def build_id_of(scroll_path: Path) -> str | None:

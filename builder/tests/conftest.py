@@ -5,6 +5,7 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(REPO))
 os.environ.setdefault("BUILDER_REPO", str(REPO))
+os.environ["BUILDER_CALENDAR_AUTOPUBLISH"] = "off"  # an edit in a test must never push the real calendar
 
 import pytest  # noqa: E402
 

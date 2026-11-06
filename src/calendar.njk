@@ -51,6 +51,7 @@ permalink: /calendar/
   .event .when small { display: block; font-weight: 400; font-size: 0.72rem; color: var(--ink-faint); }
   .event .what { color: var(--ink-light); }
   .event .meta { font-size: 0.8rem; color: var(--ink-faint); font-style: italic; }
+  [hidden] { display: none !important; }
   .empty { font-style: italic; color: var(--ink-faint); text-align: center; padding: 2rem 0; }
   .updated { font-size: 0.75rem; color: var(--ink-faint); text-align: center; margin-top: 2rem; }
   @media (max-width: 480px) {
@@ -232,15 +233,16 @@ permalink: /calendar/
   <section id="list-view" class="narrow">
   {% set evs = calendarEvents.events %}
   {% if evs.length == 0 %}
-    <p class="empty">No events are scheduled in the next sixty days.</p>
+    <p class="empty">Nothing is on the calendar yet.</p>
   {% endif %}
+  <p class="empty" id="allpast" hidden>Nothing further is on the calendar yet.</p>
   {% set lastMonth = "" %}
   {% for e in evs %}
     {% if e.month != lastMonth %}
       <p class="month">{{ e.month }}</p>
       {% set lastMonth = e.month %}
     {% endif %}
-    <div class="event">
+    <div class="event" data-date="{{ e.date }}">
       <div class="when">{{ e.label }}<small>{{ e.weekday }}</small></div>
       <div class="what">{{ e.title }}{% if e.time or e.location %}<div class="meta">{{ e.time }}{% if e.time and e.location %} · {% endif %}{{ e.location }}</div>{% endif %}</div>
     </div>
@@ -261,6 +263,28 @@ permalink: /calendar/
     var h = a.getAttribute('href');
     if (h !== '/' && p.indexOf(h) === 0) a.classList.add('current');
   });
+})();
+</script>
+<script>
+// The list is built from the first of the month, so the page stays right between updates:
+// days that have passed are hidden here, and a month heading with nothing left under it goes too.
+(function () {
+  var now = new Date();
+  function pad(n) { return ('0' + n).slice(-2); }
+  var today = now.getFullYear() + '-' + pad(now.getMonth() + 1) + '-' + pad(now.getDate());
+  var list = document.getElementById('list-view');
+  if (!list) return;
+  var head = null, left = 0, any = false;
+  function close() { if (head && !left) head.hidden = true; }
+  [].slice.call(list.children).forEach(function (el) {
+    if (el.classList.contains('month')) { close(); head = el; left = 0; }
+    else if (el.classList.contains('event')) {
+      if (el.getAttribute('data-date') < today) el.hidden = true; else { left++; any = true; }
+    }
+  });
+  close();
+  var none = document.getElementById('allpast');
+  if (none && !any && list.querySelector('.event')) none.hidden = false;
 })();
 </script>
 <script>

@@ -14,6 +14,7 @@ Self-service production of the Sunday bulletin on basecamp. The plan is in
 | `pipeline/build.py` | one build: names → render → PDF → measure → proofs → `var/proofs/<date>/build.json` |
 | `pipeline/publish.py` | scroll index, calendar files, Eleventy check, commit, push (deploy key) |
 | `pipeline/calendar_feed.py` | events table → back-cover lines, `src/calendar.ics`, `/calendar/` page data (the upcoming list, a three-month grid the page shows a month at a time, and `src/calendar-print/`: a one-page landscape PDF of each month, scaled to fit, which is what “Print this month” opens; `templates/calendar-month.html.j2`), the app's month view; one date of a repeating event can be skipped or moved (`event_exceptions`: EXDATE / RECURRENCE-ID in the feed) |
+| `app/calendar_sync.py` + `publish.publish_calendar` | the public calendar keeps itself current: a calendar-only commit and push a few minutes after an edit on the Calendar screen, and nightly from `deploy/bulletin-calendar.timer` (see below) |
 | `pipeline/hymn_index.py` | published scroll pages → hymn index (`/hymns/` page data, app Hymns screen): times sung, last sung, hymnary.org link |
 | `pipeline/store.py` | SQLite: rosters (the Those Who Serve roles, plus who has the flowers, which is not printed), events, standing text, users, magic links, audit, week status, spend ledger |
 | `pipeline/names.py` | confirmed name spellings, applied to every build |
@@ -36,7 +37,7 @@ Self-service production of the Sunday bulletin on basecamp. The plan is in
 | `app/` | FastAPI app: magic-link login; the week page (Inputs → Details → Build & proof → Publish, with chat); the Friday email page (Notes → Content with per-item photos → Preview & chat → Send); rosters, events, standing text, users, audit, spend |
 | `data/seed/`, `data/standing/` | Phase 0 seeds; the store loads them once |
 | `tests/` | pytest; `test_render_golden.py` is the Phase 1 acceptance test |
-| `deploy/bulletin-builder.service` | user-level systemd unit |
+| `deploy/bulletin-builder.service`, `deploy/bulletin-calendar.{service,timer}` | user-level systemd units: the app, and the nightly calendar refresh |
 
 ## Running on basecamp
 
@@ -69,6 +70,39 @@ against `BUILDER_MONTHLY_CAP_USD` (default 40). Per-job caps are in
 clear error while rendering and publishing keep working. The Phase 2
 acceptance run is `python -m builder.scripts.phase2_acceptance` against a
 scratch clone (`BUILDER_REPO`), never the working repo.
+
+## Keeping the public calendar current
+
+The calendar page, the `.ics` feed and the printable months no longer wait
+for a bulletin. `publish.publish_calendar` regenerates them from the events
+table and commits and pushes those files alone, and only when something in
+them changed. It runs:
+
+* **after an edit**: saving, removing, skipping or moving an event on the
+  Calendar screen starts a countdown (`BUILDER_CALENDAR_PUSH_DELAY`, 300
+  seconds); each further edit restarts it, so a run of edits is one deploy.
+  `BUILDER_CALENDAR_AUTOPUBLISH=off` in the env file turns this off.
+* **every night** at 12:10 a.m. in Corinth, from the systemd timer
+  (`python -m builder calendar --publish`): the turn of a month, and anything
+  an app restart or a failed push left behind.
+* **on demand**: “Send to the site now” on the Calendar screen.
+
+The files are stable so that this costs nothing when nothing changed: the
+feed's DTSTAMP is each event's own last edit, the data file is only rewritten
+when its content differs, and the list starts on the first of the month (the
+page hides the days that have passed, so it is right on any day without a
+rebuild). The publish refuses to run when the clone is off main or holds
+unpushed commits, and takes its commit back if the push fails; the Calendar
+screen shows the last send and the last failure, both from the audit log
+(`calendar.publish`, `calendar.publish.failed`). A file lock in `BUILDER_VAR`
+keeps it and the weekly publish from committing at once.
+
+```
+cp builder/deploy/bulletin-calendar.{service,timer} ~/.config/systemd/user/
+systemctl --user daemon-reload && systemctl --user enable --now bulletin-calendar.timer
+systemctl --user start bulletin-calendar.service     # run it now
+journalctl --user -u bulletin-calendar -n 50
+```
 
 ## Site stats
 

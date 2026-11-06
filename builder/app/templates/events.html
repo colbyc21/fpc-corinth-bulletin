@@ -2,12 +2,24 @@
 {% block title %}Calendar{% endblock %}
 {% block content %}
 <h1>Church calendar</h1>
-<p class="muted">This table feeds the back-cover calendar box and the public feed at <a href="{{ site_url }}/calendar.ics">{{ site_url }}/calendar.ics</a> (regenerated on every publish). Repeating items run until their “until” date; a monthly item is, say, the first Sunday or the last Thursday of each month. <strong>Featured</strong> events are listed in every bulletin until they pass, the way the Thanksgiving Meal was. To <strong>skip or move one date</strong> of a repeating event (no Bible study Thanksgiving week, Session a week late), click that date in the calendar below; the repeat itself stays as it is.</p>
+<p class="muted">This table feeds the back-cover calendar box and the public feed at <a href="{{ site_url }}/calendar.ics">{{ site_url }}/calendar.ics</a>. Repeating items run until their “until” date; a monthly item is, say, the first Sunday or the last Thursday of each month. <strong>Featured</strong> events are listed in every bulletin until they pass, the way the Thanksgiving Meal was. To <strong>skip or move one date</strong> of a repeating event (no Bible study Thanksgiving week, Session a week late), click that date in the calendar below; the repeat itself stays as it is.</p>
 
 <div class="card">
   <h2 style="margin-top:0">Next bulletin’s calendar box ({{ next_sunday | long_date }})</h2>
   {% for line in preview %}<div><strong>{{ line.date | month_day }}</strong> &nbsp;{{ line["items"] | join(" · ") }}</div>{% else %}<div class="muted">Nothing in the window.</div>{% endfor %}
 </div>
+
+{% if sync is defined %}
+<div class="card" id="public">
+  <form method="post" action="/calendar/send" style="float:right; margin:0 0 0.4rem 1rem">{% if user.role in ('publisher', 'admin') %}<button type="submit" class="quiet">Send to the site now</button>{% endif %}</form>
+  <strong>The public calendar keeps up by itself.</strong>
+  The <a href="{{ site_url }}/calendar/" target="_blank" rel="noopener">calendar page</a>, the feed on people’s phones and the printable months are sent
+  {% if sync.auto %}about {{ sync.delay_minutes }} minutes after the last change made here, and again every night{% else %}every night and with each bulletin (sending after each change is switched off){% endif %}.
+  {% if sync.due %}<span class="warn">Changes are waiting and go out at about {{ sync.due.split(' at ')[1] }}</span>{% endif %}
+  {% if sync.sent %}<span class="muted">Last sent {{ sync.sent }}</span>{% endif %}
+  {% if sync.failed %}<div class="bad" style="margin-top:0.4rem">The last try, {{ sync.failed.when }}, did not go through: {{ sync.failed.why }}</div>{% endif %}
+</div>
+{% endif %}
 
 {% if cal is defined %}
 {% set qall = '&all=1' if show_all else '' %}
