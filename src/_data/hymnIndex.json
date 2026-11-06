@@ -1,12 +1,12 @@
 {
-  "generated": "2026-10-31T20:33:29+00:00",
+  "generated": "2026-11-06T14:45:58+00:00",
   "hymnal": "The Hymnal for Worship & Celebration",
   "hymnary_hymnal_url": "https://hymnary.org/hymnal/HWC1986",
-  "services": 40,
+  "services": 41,
   "since": "2026-01-25",
-  "through": "2026-11-01",
+  "through": "2026-11-08",
   "since_label": "January 25, 2026",
-  "through_label": "November 1, 2026",
+  "through_label": "November 8, 2026",
   "hymns": [
     {
       "number": "1",
@@ -957,10 +957,10 @@
       "as_printed": [],
       "tune": "FOUNDATION",
       "in_hymnal": true,
-      "times": 3,
+      "times": 4,
       "first": "2026-05-17",
-      "last": "2026-08-23",
-      "last_label": "August 23, 2026",
+      "last": "2026-11-08",
+      "last_label": "November 8, 2026",
       "dates": [
         {
           "date": "2026-05-17",
@@ -981,6 +981,13 @@
           "label": "August 23, 2026",
           "slot": "Hymn",
           "verses": "vv. 1–2",
+          "parts": 1
+        },
+        {
+          "date": "2026-11-08",
+          "label": "November 8, 2026",
+          "slot": "The Hymn",
+          "verses": null,
           "parts": 1
         }
       ],
@@ -1041,6 +1048,29 @@
         }
       ],
       "url": "https://hymnary.org/hymn/HWC1986/277"
+    },
+    {
+      "number": "292",
+      "title": "God of grace and God of glory",
+      "as_printed": [
+        "God of Grace and God of Glory (vv. 1, 4)"
+      ],
+      "tune": "CWM RHONDDA",
+      "in_hymnal": true,
+      "times": 1,
+      "first": "2026-11-08",
+      "last": "2026-11-08",
+      "last_label": "November 8, 2026",
+      "dates": [
+        {
+          "date": "2026-11-08",
+          "label": "November 8, 2026",
+          "slot": "Hymn",
+          "verses": null,
+          "parts": 1
+        }
+      ],
+      "url": "https://hymnary.org/hymn/HWC1986/292"
     },
     {
       "number": "334",
@@ -1308,19 +1338,28 @@
     {
       "number": "461",
       "title": "He Leadeth Me",
-      "as_printed": [],
+      "as_printed": [
+        "He Leadeth Me (v. 2)"
+      ],
       "tune": null,
       "in_hymnal": true,
-      "times": 1,
+      "times": 2,
       "first": "2026-08-30",
-      "last": "2026-08-30",
-      "last_label": "August 30, 2026",
+      "last": "2026-11-08",
+      "last_label": "November 8, 2026",
       "dates": [
         {
           "date": "2026-08-30",
           "label": "August 30, 2026",
           "slot": "Congregational Response",
           "verses": "v. 1",
+          "parts": 1
+        },
+        {
+          "date": "2026-11-08",
+          "label": "November 8, 2026",
+          "slot": "Hymn of Response",
+          "verses": null,
           "parts": 1
         }
       ],

@@ -1,0 +1,616 @@
+{
+  "date": "2026-11-08",
+  "liturgical_day": "Twenty-fourth Sunday after Pentecost",
+  "subtitle_override": null,
+  "special": {
+    "communion": false,
+    "canvass": false
+  },
+  "pew_bible_page": 398,
+  "welcome_variant": "regular",
+  "flowers": {
+    "given": "in honor of Ms. Jenny Biggers, Ms. Betty Knight, and Dave and Becky Shanklin for loving our kids and always praying for them.",
+    "message": null,
+    "quote": null,
+    "reference": null,
+    "closing": null,
+    "signed": "Holland & Caitlin Yeates"
+  },
+  "announcements": [
+    {
+      "title": "37th Community Thanksgiving Meal",
+      "body": "Join us on Thanksgiving morning, Thursday, November 26, as we prepare and deliver 750 Thanksgiving meals to those who need them throughout Alcorn County. This is a HUGE project and can only be accomplished with the help of many. It is a great opportunity for the members of FPC to be disciples by “living and loving like Jesus.” You can help with meal prep or by delivering meals.",
+      "print_suffix": "Please fill out the insert to volunteer your time and place it in the offering plate, or drop it by the church office.",
+      "detail": "To volunteer your time for meal prep or delivering meals, please fill out the insert in the printed bulletin and place it in the offering plate, or drop it by the church office."
+    },
+    {
+      "title": "Altar Flowers",
+      "body": "We have two openings for altar flowers in December: Sunday, December 6, and Sunday, December 13. If you’d like to provide altar flowers for those dates, please contact Teresa in the church office."
+    }
+  ],
+  "serve": {
+    "assisting_elder": "Dr. Marz Mazurkiewicz",
+    "greeters": "Hunter & Anna McCalla",
+    "ushers": "Scott Sawyer, Holland Yeates, Ben Long, & Josh McCahill",
+    "acolytes": "Madelyn Butler & Kathryn Moore",
+    "nursery": "Deborah Kiddy, Jennifer Sexton, Sarah Bynum, Deb Parker, & Kyle & Meghan Holcombe",
+    "circle_of_prayer": "Malechi Doren & Alberto Albarracin",
+    "childrens_church": "Virginia Boyd James",
+    "av_engineer": "Russell Smith"
+  },
+  "staff": null,
+  "calendar": [
+    {
+      "date": "2026-11-08",
+      "items": [
+        "Deacons’ Meeting"
+      ]
+    },
+    {
+      "date": "2026-11-11",
+      "items": [
+        "Kids Quest",
+        "Youth House",
+        "Messy Bible Study, 6 p.m.",
+        "Kids Quest Family Gathering, 5pm"
+      ]
+    },
+    {
+      "date": "2026-11-12",
+      "items": [
+        "Women's Ministry Book Club"
+      ]
+    },
+    {
+      "date": "2026-11-18",
+      "items": [
+        "Messy Bible Study Dinner, 6pm"
+      ]
+    },
+    {
+      "date": "2026-11-26",
+      "items": [
+        "37th Community Thanksgiving Meal"
+      ]
+    }
+  ],
+  "liturgy": {
+    "items": [
+      {
+        "id": "gathering",
+        "type": "section",
+        "title": "Gathering",
+        "star": false,
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "piano-prelude",
+        "type": "plain",
+        "title": "The Piano Prelude",
+        "star": false,
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "greetings",
+        "type": "plain",
+        "title": "Greetings & Announcements",
+        "star": false,
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "meditation",
+        "type": "scripture",
+        "title": "Call to Meditation",
+        "ref": "Psalm 118:23",
+        "text": "“The Lord has done this, and it is marvelous in our eyes.”",
+        "star": false,
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "prelude",
+        "type": "music",
+        "title": "The Prelude",
+        "credit": "The Jo Anderson Handbell Choir",
+        "star": false,
+        "sub": false,
+        "lines": [],
+        "silent_confession": false,
+        "piece": "Rejoice, the Lord is King"
+      },
+      {
+        "id": "call-to-worship",
+        "type": "responsive",
+        "title": "Call to Worship",
+        "star": true,
+        "ref": "Psalm 121:1–5; 103:19",
+        "lines": [
+          {
+            "who": "Leader",
+            "text": "I lift up my eyes to the hills. From where does my help come?"
+          },
+          {
+            "who": "All",
+            "text": "My help comes from the Lord, who made heaven and earth."
+          },
+          {
+            "who": "Leader",
+            "text": "He will not let your foot be moved; he who keeps you will not slumber."
+          },
+          {
+            "who": "All",
+            "text": "Behold, he who keeps Israel will neither slumber nor sleep."
+          },
+          {
+            "who": "Leader",
+            "text": "The Lord is your keeper;"
+          },
+          {
+            "who": "All",
+            "text": "The Lord has established his throne in the heavens, and his kingdom rules over all."
+          },
+          {
+            "who": "Leader",
+            "text": "Let us worship the God of heaven and earth."
+          }
+        ],
+        "sub": false,
+        "silent_confession": false
+      },
+      {
+        "id": "hymn1",
+        "type": "hymn",
+        "title": "The Hymn",
+        "star": true,
+        "number": 275,
+        "piece": "How Firm a Foundation",
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "invocation",
+        "type": "corporate",
+        "title": "Prayer of Invocation & The Lord’s Prayer",
+        "star": true,
+        "text": "Our Father, who art in heaven, hallowed be thy Name. Thy Kingdom come, thy will be done on earth, as it is in heaven. Give us this day our daily bread, and forgive us our debts, as we forgive our debtors. Lead us not into temptation, but deliver us from evil. For thine is the kingdom, the power, and the glory, forever. Amen.",
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "responsive-reading",
+        "type": "responsive",
+        "title": "Responsive Reading",
+        "star": true,
+        "ref": "Proverbs 16:1–9",
+        "lines": [
+          {
+            "who": "Leader",
+            "text": "The plans of the heart belong to man, but the answer of the tongue is from the Lord. All the ways of a man are pure in his own eyes, but the Lord weighs the spirit. Commit your work to the Lord, and your plans will be established."
+          },
+          {
+            "who": "All",
+            "text": "The Lord has made everything for its purpose, even the wicked for the day of trouble."
+          },
+          {
+            "who": "Leader",
+            "text": "Everyone who is arrogant in heart is an abomination to the Lord; be assured, he will not go unpunished. By steadfast love and faithfulness iniquity is atoned for, and by the fear of the Lord one turns away from evil."
+          },
+          {
+            "who": "All",
+            "text": "When a man’s ways please the Lord, he makes even his enemies to be at peace with him."
+          },
+          {
+            "who": "Leader",
+            "text": "Better is a little with righteousness than great revenues with injustice."
+          },
+          {
+            "who": "All",
+            "text": "The heart of man plans his way, but the Lord establishes his steps."
+          },
+          {
+            "who": "Leader",
+            "text": "This is the word of the Lord."
+          },
+          {
+            "who": "All",
+            "text": "Thanks be to God."
+          }
+        ],
+        "sub": false,
+        "silent_confession": false
+      },
+      {
+        "id": "hymn2",
+        "type": "hymn",
+        "title": "Hymn of Response",
+        "star": true,
+        "text": "Lord, I would clasp thy hand in mine, nor ever murmur nor repine; Content, whatever lot I see, since ’tis my God that leadeth me. He leadeth me, he leadeth me; by his own hand he leadeth me: His faithful follower I would be, for by his hand he leadeth me.",
+        "number": 461,
+        "piece": "He Leadeth Me (v. 2)",
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "confession",
+        "type": "corporate",
+        "title": "Corporate Prayer of Confession",
+        "star": true,
+        "text": "Gracious and sovereign Father, we confess that too often we trust in our own wisdom, rely upon our own plans, and seek to direct our own steps. We are slow to surrender our will to Yours and often fearful when Your providence leads us along unfamiliar paths. Forgive us for our pride, our anxious hearts, and our reluctance to follow where You call. Teach us to rest in Your wisdom, trust in Your goodness, and walk courageously in obedience to Your Word. Thank You that through Jesus Christ our sins are forgiven and our lives are secure in Your gracious hands. Lead us by Your Spirit, that we might faithfully follow Christ and glorify You in all that we do.",
+        "silent_confession": true,
+        "sub": false,
+        "lines": []
+      },
+      {
+        "id": "assurance",
+        "type": "scripture",
+        "title": "Assurance of Divine Pardon",
+        "star": true,
+        "ref": "Romans 8:28, 31–32",
+        "text": "“And we know that for those who love God all things work together for good, for those who are called according to his purpose. What then shall we say to these things? If God is for us, who can be against us? He who did not spare his own Son but gave him up for us all, how will he not also with him graciously give us all things?”",
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "word",
+        "type": "section",
+        "title": "Word",
+        "star": false,
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "tithes",
+        "type": "plain",
+        "title": "The Giving of Tithes and Offerings",
+        "star": false,
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "offertory",
+        "type": "music",
+        "title": "Offertory",
+        "credit": "The Jo Anderson Handbell Choir",
+        "star": false,
+        "sub": false,
+        "lines": [],
+        "silent_confession": false,
+        "piece": "As the Deer"
+      },
+      {
+        "id": "doxology",
+        "type": "corporate",
+        "title": "The Doxology and Prayer of Dedication",
+        "star": true,
+        "text": "Praise God, from whom all blessings flow; Praise Him, all creatures here below; Praise Him above, ye heavenly host; Praise Father, Son, and Holy Ghost. Amen.",
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "children",
+        "type": "plain",
+        "title": "Children Dismissed to Children’s Church",
+        "star": true,
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "anthem",
+        "type": "music",
+        "title": "Choral Anthem",
+        "piece": "O Worship the King",
+        "credit": "Robert Grant; J. Michael Haydn; arr. Ted Cornell",
+        "star": false,
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "reading",
+        "type": "reading",
+        "title": "Scripture Reading",
+        "ref": "Nehemiah 2",
+        "star": false,
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "response",
+        "type": "responsive",
+        "title": "Scripture Response",
+        "ref": "Isaiah 40:6b, 8",
+        "lines": [
+          {
+            "who": "Leader",
+            "text": "All flesh is grass, and all its beauty is like the flower of the field;"
+          },
+          {
+            "who": "All",
+            "text": "The grass withers, the flower fades, but the Word of our God will stand forever. Amen."
+          }
+        ],
+        "star": false,
+        "sub": false,
+        "silent_confession": false
+      },
+      {
+        "id": "sermon",
+        "type": "sermon",
+        "title": "Sermon",
+        "star": false,
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "commitment",
+        "type": "plain",
+        "title": "Prayer of Commitment",
+        "star": false,
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "sending",
+        "type": "section",
+        "title": "Sending",
+        "star": false,
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "hymn3",
+        "type": "hymn",
+        "title": "Hymn",
+        "star": true,
+        "number": 292,
+        "piece": "God of Grace and God of Glory (vv. 1, 4)",
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "benediction",
+        "type": "plain",
+        "title": "Benediction",
+        "star": true,
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "choral-benediction",
+        "type": "music",
+        "title": "Choral Benediction",
+        "star": true,
+        "piece": "Sevenfold Amen",
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "postlude",
+        "type": "plain",
+        "title": "Postlude",
+        "star": true,
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      }
+    ],
+    "notes": [
+      {
+        "for": "call-to-worship",
+        "label": "Call to Worship",
+        "text": "We are summoned to worship by God’s word, calling His people into His presence to honor Him in spirit and truth, opening a sacred conversation that unfolds throughout the service. We sing in response to God’s call to worship, which is a reminder that worship is at God’s initiative, not ours."
+      },
+      {
+        "for": "invocation",
+        "label": "Invocation",
+        "text": "The word “invocation” suggests that the congregation calls upon God, yet this must not be misunderstood to mean that we bring God into our presence or that His nearness depends on our request. The Lord is already present with His people before our worship begins. To “invoke” is to call upon or earnestly seek. So, we lift our voices to God, asking Him to draw near and enable us to worship Him rightly for His character and mighty works."
+      },
+      {
+        "for": "confession",
+        "label": "Corporate Confession",
+        "text": "Our corporate confession of sin is a three-fold acknowledgement that the world is not the way it was meant to be; I am not the way I was meant to be; and we as a church are not the way we were meant to be. As we acknowledge our failures together, we testify to the world that the gospel is rooted in the faithful mercy of God alone. This is the most honest moment of our week, as we humbly agree with Scripture’s claim that all have sinned and fall short of the glory of God."
+      },
+      {
+        "for": "doxology",
+        "label": "The Doxology: A Call to Praise",
+        "text": "The word Doxology means “a word of glory” or “an expression of praise.” Written by Thomas Ken in 1674, these familiar words have been sung by generations of Christians as an expression of joyful thanksgiving to God. Worship is ultimately about giving God the glory He alone deserves. As we sing, we acknowledge Him as the source of every good gift and respond to His grace with grateful hearts. We join our voices in praise to the Triune God — Father, Son, and Holy Spirit, giving Him the glory due His name."
+      },
+      {
+        "for": "children",
+        "label": "Children’s Church",
+        "text": "Children ages 4 up to 4th grade are invited to come forward and exit out the side door for Children’s Church. Following the worship service, they may be picked up in the Fellowship Hall."
+      },
+      {
+        "for": "hymn3",
+        "label": "God of Grace & God of Glory",
+        "text": "As we sing this closing hymn, we are reminded that God sovereignly directs our steps (Proverbs 16) and faithfully prepares His people for the work to which He calls them (Nehemiah 2). Like Nehemiah, may we trust God’s providence, seek His wisdom, and find courage to follow His leading, relying not on our own strength but on His grace."
+      }
+    ],
+    "intro": null
+  },
+  "sermon": {
+    "title": "Spiritual Renewal: Courageous Obedience",
+    "scripture": "Nehemiah 2",
+    "preacher": "Rev. Waring Porter",
+    "intro": [
+      "We saw in chapter 1 how Nehemiah engaged in prayer after hearing the discouraging news about what was happening in Jerusalem. He prayed that God would give him strength and the opportunity to speak to the king about returning to Jerusalem. Sometimes we talk about prayer as though it were an alternative to action. Other times, we make our plans, organize our activities, and work hard, and we forget about our dependence upon God and leave prayer out of it.",
+      "Nehemiah shows us a better way. We pray because we depend upon God, and we act because God has called us to be faithful. Prayer does not make us passive, but makes us dependent upon God as we take the next faithful step.",
+      "What we see in this account is this next faithful step of Nehemiah’s. It can help us to understand that we can have the courage to follow God’s calling, because of how He works in His sovereign and providential ways. God’s providence encourages responsible planning and courageous obedience. It makes us dependent upon God as we take the next faithful step."
+    ],
+    "points": [
+      {
+        "heading": "I. Trusting God’s Providence in Ordinary Circumstances",
+        "ref": "vv. 1–8",
+        "quote": "Proverbs 16:9 — “The heart of man plans his way, but the Lord establishes his steps.”"
+      },
+      {
+        "heading": "II. Faithful Preparation While Confronting Realities",
+        "ref": "vv. 9–16",
+        "quote": "Proverbs 16:3 — “Commit your work to the LORD, and your plans will be established.”"
+      },
+      {
+        "heading": "III. Mobilizes Others",
+        "ref": "vv. 17–20"
+      }
+    ],
+    "missing": false,
+    "notes_lines_per_point": 3,
+    "blank_lines": 18
+  },
+  "inserts": [
+    "thanksgiving-meal"
+  ],
+  "layout": {
+    "pages": {
+      "p3": [
+        "gathering",
+        "piano-prelude",
+        "greetings",
+        "meditation",
+        "prelude",
+        "call-to-worship",
+        "hymn1"
+      ],
+      "p4": [
+        "invocation",
+        "responsive-reading"
+      ],
+      "p5": [
+        "hymn2",
+        "confession",
+        "assurance",
+        "word",
+        "tithes",
+        "offertory",
+        "doxology"
+      ],
+      "p6": [
+        "children",
+        "anthem",
+        "reading",
+        "response",
+        "sermon",
+        "commitment",
+        "sending",
+        "hymn3",
+        "benediction",
+        "choral-benediction",
+        "postlude"
+      ]
+    },
+    "page_style": {},
+    "announcement_columns": null,
+    "notes": [
+      {
+        "notes": [
+          "confession"
+        ],
+        "at": "confession",
+        "span": 2,
+        "align": "start"
+      },
+      {
+        "notes": [
+          "doxology"
+        ],
+        "at": "tithes",
+        "span": 3,
+        "align": "end"
+      },
+      {
+        "notes": [
+          "children"
+        ],
+        "at": "children",
+        "span": 2,
+        "align": "start"
+      }
+    ],
+    "overrides": []
+  },
+  "copyedit": {
+    "changes": [
+      {
+        "where": "flowers.message",
+        "before": "None",
+        "after": "null",
+        "reason": "Placeholder text; no message part in this dedication."
+      },
+      {
+        "where": "flowers.quote",
+        "before": "None",
+        "after": "null",
+        "reason": "Placeholder text; no quote in this dedication."
+      },
+      {
+        "where": "flowers.reference",
+        "before": "None",
+        "after": "null",
+        "reason": "Placeholder text; no reference in this dedication."
+      },
+      {
+        "where": "flowers.closing",
+        "before": "None",
+        "after": "null",
+        "reason": "Placeholder text; no closing in this dedication."
+      }
+    ],
+    "flags": [
+      {
+        "where": "prelude",
+        "message": "No Choral Introit this week; “The Jo Anderson Handbell Choir” on The Prelude line was kept as the Prelude’s credit (no piece title given)."
+      },
+      {
+        "where": "offertory",
+        "message": "New item “Offertory” (handbell choir, no piece title) added as a music item after Tithes & Offerings."
+      },
+      {
+        "where": "responsive-reading",
+        "message": "Responsive Reading (Proverbs 16:1–9) replaces the Scriptural Call to Confession this week; given id “responsive-reading”."
+      },
+      {
+        "where": "hymn2, hymn3",
+        "message": "Verse selections “(v. 2)” and “(vv. 1, 4)” were kept in the hymn piece titles; the printed verse of “He Leadeth Me” is in the item’s text."
+      },
+      {
+        "where": "sermon.intro",
+        "message": "Corrected the typo “Jersuselum” to “Jerusalem” in the first intro paragraph."
+      },
+      {
+        "where": "liturgy.hymn2",
+        "message": "#461 is “He Leadeth Me” in the hymnal; the liturgy says “He Leadeth Me (v. 2)”."
+      },
+      {
+        "where": "pew_bible_page",
+        "message": "No Pew Bible page known for Nehemiah 2; page omitted."
+      },
+      {
+        "where": "calendar[3]",
+        "message": "November 26 (Thanksgiving Meal) falls outside the week after Sunday, November 8; confirm it should be listed."
+      }
+    ]
+  },
+  "welcome_custom": null
+}
