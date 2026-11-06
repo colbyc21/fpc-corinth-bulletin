@@ -1,4 +1,4 @@
-"""SQLite store: rosters, events, standing text, users, audit log, week status.
+"""SQLite store: rosters, events, standing text, users, audit log, week status, site stats.
 
 One small database under ``BUILDER_VAR``. The standing JSON files in
 ``builder/data/standing`` and the CSVs in ``builder/data/seed`` are the
@@ -26,6 +26,11 @@ ROLE_LABELS = {
     "acolytes": "Acolytes", "nursery": "Nursery", "circle_of_prayer": "Circle of Prayer",
     "childrens_church": "Children’s Church", "av_engineer": "AV Engineer",
 }
+# Kept on the roster but not printed under Those Who Serve: the flowers show in
+# the bulletin through the dedication, so the name here is for whoever builds it.
+ROSTER_EXTRAS = ["flowers"]
+ROSTER_COLUMNS = ROSTER_ROLES + ROSTER_EXTRAS
+ROSTER_LABELS = {**ROLE_LABELS, "flowers": "Flowers"}
 USER_ROLES = ("editor", "publisher", "admin")
 
 SCHEMA = """
@@ -33,6 +38,7 @@ create table if not exists rosters (
   sunday text primary key,
   assisting_elder text, greeters text, ushers text, acolytes text,
   nursery text, circle_of_prayer text, childrens_church text, av_engineer text,
+  flowers text,
   updated_at text not null
 );
 create table if not exists events (
@@ -53,6 +59,19 @@ create table if not exists events (
   deleted_at text
 );
 create index if not exists events_start on events(start_date);
+create table if not exists event_exceptions (
+  id integer primary key autoincrement,
+  event_id integer not null references events(id),
+  occurrence_date text not null,   -- the date the repeat rule lands on
+  kind text not null check(kind in ('skip','move')),
+  new_date text,                   -- move: the date it happens instead (the same day when only the time or place changes)
+  time_text text,                  -- move: its time that day, if different
+  location text,                   -- move: its place that day, if different
+  note text,                       -- why; shown in the app, never printed
+  created_at text not null,
+  updated_at text not null,
+  unique(event_id, occurrence_date)
+);
 create table if not exists standing (
   key text primary key,
   json text not null,
@@ -100,6 +119,21 @@ create table if not exists ledger (
   input_tokens integer, cache_write_tokens integer, cache_read_tokens integer, output_tokens integer,
   cost_usd real not null
 );
+create table if not exists hits (
+  id integer primary key autoincrement,
+  ts text not null,            -- UTC
+  day text not null,           -- the date in Corinth when the page was opened
+  hour integer not null,       -- the hour there, 0-23
+  path text not null,          -- normalised: /scroll/2026-11-08, /calendar, ...
+  visitor text not null,       -- hash of address + browser under that day's salt; cannot be linked across days
+  referrer text,               -- host of an outside page that linked here
+  device text                  -- phone | tablet | desktop
+);
+create index if not exists hits_day on hits(day);
+create table if not exists stats_salt (
+  day text primary key,        -- only the current day's row is kept
+  salt text not null
+);
 """
 
 
@@ -119,6 +153,10 @@ class Store:
         cols = {r["name"] for r in self.db.execute("pragma table_info(weeks)")}
         if "published_build" not in cols:
             self.db.execute("alter table weeks add column published_build text")
+        have = {r["name"] for r in self.db.execute("pragma table_info(rosters)")}
+        for col in ROSTER_EXTRAS:
+            if col not in have:
+                self.db.execute(f"alter table rosters add column {col} text")
 
     def close(self) -> None:
         self.db.close()
@@ -133,10 +171,10 @@ class Store:
         return [dict(r) for r in rows]
 
     def upsert_roster(self, sunday: str, values: dict) -> None:
-        cols = ", ".join(ROSTER_ROLES)
-        marks = ", ".join("?" for _ in ROSTER_ROLES)
-        sets = ", ".join(f"{c}=excluded.{c}" for c in ROSTER_ROLES)
-        vals = [(values.get(c) or "").strip() or None for c in ROSTER_ROLES]
+        cols = ", ".join(ROSTER_COLUMNS)
+        marks = ", ".join("?" for _ in ROSTER_COLUMNS)
+        sets = ", ".join(f"{c}=excluded.{c}" for c in ROSTER_COLUMNS)
+        vals = [(values.get(c) or "").strip() or None for c in ROSTER_COLUMNS]
         self.db.execute(
             f"insert into rosters (sunday, {cols}, updated_at) values (?, {marks}, ?) "
             f"on conflict(sunday) do update set {sets}, updated_at=excluded.updated_at",
@@ -147,14 +185,53 @@ class Store:
         row = self.roster(sunday) or {}
         return {r: row.get(r) for r in ROSTER_ROLES}
 
+    def flowers_for(self, sunday: str) -> str | None:
+        """Who has the flowers that Sunday, from the roster (not a printed role)."""
+        return (self.roster(sunday) or {}).get("flowers")
+
     # ── events ───────────────────────────────────────────────────────
     def events(self, include_deleted: bool = False) -> list[dict]:
+        """Every event, each with ``exceptions``: the single dates of a repeating event that were skipped or moved."""
         sql = "select * from events" + ("" if include_deleted else " where deleted_at is null") + " order by start_date, id"
-        return [dict(r) for r in self.db.execute(sql).fetchall()]
+        rows = [dict(r) for r in self.db.execute(sql).fetchall()]
+        by_event: dict[int, list[dict]] = {}
+        for x in self.db.execute("select * from event_exceptions order by occurrence_date"):
+            by_event.setdefault(x["event_id"], []).append(dict(x))
+        for r in rows:
+            r["exceptions"] = by_event.get(r["id"], [])
+        return rows
 
     def event(self, event_id: int) -> dict | None:
         row = self.db.execute("select * from events where id=?", (event_id,)).fetchone()
-        return dict(row) if row else None
+        if not row:
+            return None
+        ev = dict(row)
+        ev["exceptions"] = [dict(x) for x in self.db.execute(
+            "select * from event_exceptions where event_id=? order by occurrence_date", (event_id,))]
+        return ev
+
+    def set_exception(self, event_id: int, occurrence_date: str, kind: str, new_date: str | None = None,
+                      time_text: str | None = None, location: str | None = None, note: str | None = None) -> None:
+        """Skip or move one date of a repeating event; a second call for the same date replaces the first."""
+        if kind not in ("skip", "move"):
+            raise ValueError("an exception is a skip or a move")
+        if kind == "move" and not new_date:
+            raise ValueError("a moved date needs the date it moves to")
+        clean = [(v or "").strip() or None for v in (time_text, location, note)]
+        ts = now()
+        self.db.execute(
+            "insert into event_exceptions (event_id, occurrence_date, kind, new_date, time_text, location, note, created_at, updated_at) "
+            "values (?, ?, ?, ?, ?, ?, ?, ?, ?) on conflict(event_id, occurrence_date) do update set kind=excluded.kind, "
+            "new_date=excluded.new_date, time_text=excluded.time_text, location=excluded.location, note=excluded.note, updated_at=excluded.updated_at",
+            (event_id, occurrence_date, kind, new_date if kind == "move" else None, *(clean if kind == "move" else [None, None, clean[2]]), ts, ts),
+        )
+        self.db.execute("update events set updated_at=? where id=?", (ts, event_id))  # subscribers see LAST-MODIFIED move
+
+    def clear_exception(self, event_id: int, occurrence_date: str) -> bool:
+        cur = self.db.execute("delete from event_exceptions where event_id=? and occurrence_date=?", (event_id, occurrence_date))
+        if cur.rowcount:
+            self.db.execute("update events set updated_at=? where id=?", (now(), event_id))
+        return bool(cur.rowcount)
 
     def upsert_event(self, data: dict, event_id: int | None = None) -> int:
         fields = ("title", "start_date", "end_date", "time_text", "location", "notes",
@@ -325,6 +402,53 @@ class Store:
     def builds_this_week(self, date: str) -> int:
         """Full builds that ran the fit loop for this Sunday (ledger kind 'fit' jobs)."""
         return int(self.db.execute("select count(distinct job) as n from ledger where kind='fit' and job like ?", (f"fit:{date}:%",)).fetchone()["n"])
+
+    # ── site stats (page views of the public site; see pipeline/stats.py) ──
+    def visitor_salt(self, day: str) -> str:
+        """The random salt for one day's visitor hashes. Older salts are deleted, so old hashes cannot be redone."""
+        self.db.execute("insert or ignore into stats_salt (day, salt) values (?, ?)", (day, secrets.token_hex(16)))
+        self.db.execute("delete from stats_salt where day<>?", (day,))
+        return self.db.execute("select salt from stats_salt where day=?", (day,)).fetchone()["salt"]
+
+    def add_hit(self, ts: str, day: str, hour: int, path: str, visitor: str, referrer: str | None, device: str | None) -> None:
+        self.db.execute("insert into hits (ts, day, hour, path, visitor, referrer, device) values (?, ?, ?, ?, ?, ?, ?)",
+                        (ts, day, hour, path, visitor, referrer, device))
+
+    def hit_counts(self, day: str, visitor: str) -> tuple[int, int]:
+        """(every hit that day, that visitor's hits that day): what the flood limits look at."""
+        row = self.db.execute("select count(*) as n, coalesce(sum(visitor=?),0) as mine from hits where day=?", (visitor, day)).fetchone()
+        return int(row["n"]), int(row["mine"])
+
+    def hits_total(self, since: str, until: str) -> dict:
+        row = self.db.execute("select count(*) as views, count(distinct visitor) as visitors from hits where day between ? and ?",
+                              (since, until)).fetchone()
+        return dict(row)
+
+    def hits_daily(self, since: str, until: str) -> dict[str, dict]:
+        return {r["day"]: dict(r) for r in self.db.execute(
+            "select day, count(*) as views, count(distinct visitor) as visitors from hits where day between ? and ? group by day",
+            (since, until))}
+
+    def hits_grouped(self, column: str, since: str, until: str, limit: int = 12) -> list[dict]:
+        if column not in ("path", "referrer", "device"):
+            raise ValueError("bad column")
+        return [dict(r) for r in self.db.execute(
+            f"select {column} as label, count(*) as views, count(distinct visitor) as visitors from hits"
+            f" where day between ? and ? and {column} is not null group by {column} order by views desc, label limit ?",
+            (since, until, limit))]
+
+    def hits_by_bulletin(self, limit: int = 12, service_hours: tuple[int, int] = (10, 11)) -> list[dict]:
+        """Per Sunday bulletin page: all-time views, and how much of that was on its own Sunday and during the service."""
+        return [dict(r) for r in self.db.execute(
+            "select substr(path, 9) as date, count(*) as views, count(distinct visitor) as visitors,"
+            " coalesce(sum(day = substr(path, 9)), 0) as sunday_views,"
+            " count(distinct case when day = substr(path, 9) then visitor end) as sunday_visitors,"
+            " count(distinct case when day = substr(path, 9) and hour between ? and ? then visitor end) as service_visitors"
+            " from hits where path glob '/scroll/[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]'"
+            " group by path order by path desc limit ?", (*service_hours, limit))]
+
+    def first_hit_day(self) -> str | None:
+        return self.db.execute("select min(day) as d from hits").fetchone()["d"]
 
     # ── seeding ──────────────────────────────────────────────────────
     def seed_if_empty(self, seed_dir: Path | None = None) -> dict:

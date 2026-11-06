@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+{% block title %}Stats{% endblock %}
+{% macro n(v) %}{{ '{:,}'.format(v or 0) }}{% endmacro %}
+{% macro barlist(rows, first) %}
+  <table class="barlist">
+    <thead><tr><th>{{ first }}</th><th></th><th class="num">Views</th><th class="num">Visitors</th></tr></thead>
+    <tbody>
+    {% for r in rows %}<tr><td>{{ r.label }}</td><td class="track"><span style="width:{{ r.pct }}%"></span></td><td class="num">{{ n(r.views) }}</td><td class="num">{{ n(r.visitors) }}</td></tr>{% endfor %}
+    </tbody>
+  </table>
+{% endmacro %}
+{% block content %}
+<style>
+  .tiles { display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:1rem; margin-bottom:1rem; }
+  .tile { background:var(--card); border:1px solid var(--rule); border-radius:4px; padding:0.9rem 1.1rem; }
+  .tile .label { font-size:0.85rem; color:var(--ink-light); }
+  .tile .value { font-size:2rem; font-weight:600; line-height:1.2; margin:0.15rem 0; }
+  .tile .note { font-size:0.8rem; color:var(--faint); }
+  .chart { display:grid; grid-template-columns:auto 1fr; column-gap:0.5rem; }
+  .chart .yaxis { display:flex; flex-direction:column-reverse; justify-content:space-between; height:200px; font-size:0.72rem; color:var(--faint); text-align:right; font-variant-numeric:tabular-nums; }
+  .chart .yaxis span { line-height:1; transform:translateY(50%); } .chart .yaxis span:last-child { transform:translateY(-50%) translateY(0.5em); } .chart .yaxis span:first-child { transform:none; }
+  .chart .plot { position:relative; height:200px; display:flex; align-items:stretch; border-bottom:1px solid var(--rule);
+                 background:linear-gradient(var(--rule), var(--rule)) 0 0 / 100% 1px no-repeat, linear-gradient(var(--rule), var(--rule)) 0 25% / 100% 1px no-repeat,
+                            linear-gradient(var(--rule), var(--rule)) 0 50% / 100% 1px no-repeat, linear-gradient(var(--rule), var(--rule)) 0 75% / 100% 1px no-repeat; }
+  .chart .col { flex:1 1 0; min-width:0; display:flex; align-items:flex-end; justify-content:center; padding:0 1px; }
+  .chart .col i { display:block; width:100%; max-width:24px; background:var(--deep); border-radius:4px 4px 0 0; min-height:2px; }
+  .chart .col:hover { background:rgba(86,115,106,0.10); } .chart .col:hover i { background:var(--accent); }
+  .chart .xaxis { grid-column:2; display:flex; font-size:0.72rem; color:var(--faint); margin-top:0.3rem; }
+  .chart .xaxis span { flex:1 1 0; min-width:0; white-space:nowrap; text-align:center; overflow:visible; display:flex; justify-content:center; }
+  #tip { position:fixed; pointer-events:none; background:var(--ink); color:#fff; padding:0.35rem 0.6rem; border-radius:3px; font-size:0.8rem; line-height:1.35; z-index:10; white-space:nowrap; }
+  #tip strong { font-weight:600; } #tip span { opacity:0.75; }
+  td.num, th.num { text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap; }
+  .barlist td.track { width:40%; vertical-align:middle; } .barlist td.track span { display:block; height:8px; min-width:2px; background:var(--deep); border-radius:0 4px 4px 0; }
+  .barlist td:first-child { white-space:nowrap; } .barlist td.track { min-width:60px; }
+  .scrollx { overflow-x:auto; }
+  @media (max-width:700px) { .chart .xaxis span.alt { visibility:hidden; } .two { grid-template-columns:1fr; } }
+</style>
+
+<h1>Site stats</h1>
+<p class="muted">Who opens <a href="{{ site_url }}/">{{ site_url.replace('https://', '') }}</a>{% if st.since %}, counted since {{ st.since | long_date }}{% endif %}.
+A <em>view</em> is one page opened; a <em>visitor</em> is one phone or computer, counted once a day. No cookies are set and nothing that identifies a person is kept.
+Search-engine robots and anyone signed in to this app are left out.</p>
+
+{% if st.empty %}
+<div class="card"><strong>Nothing counted yet.</strong> The counter is part of the public site, so numbers start to arrive once the site has been deployed with it and someone opens a page.</div>
+{% else %}
+<div class="tiles">
+  <div class="tile"><div class="label">Views, last 7 days</div><div class="value">{{ n(st.week.views) }}</div>
+    <div class="note">{% if st.week_delta.views %}{{ st.week_delta.views.text }} on the 7 days before{% else %}&nbsp;{% endif %}</div></div>
+  <div class="tile"><div class="label">Visitors, last 7 days</div><div class="value">{{ n(st.week.visitors) }}</div>
+    <div class="note">{% if st.week_delta.visitors %}{{ st.week_delta.visitors.text }} on the 7 days before{% else %}&nbsp;{% endif %}</div></div>
+  <div class="tile"><div class="label">Following along in worship</div><div class="value">{{ n(st.sunday.service_visitors if st.sunday else 0) }}</div>
+    <div class="note">visitors to the bulletin, {{ st.last_sunday | month_day }}, {{ service_hours[0] }} a.m. to noon</div></div>
+  <div class="tile"><div class="label">Last Sunday’s bulletin</div><div class="value">{{ n(st.sunday.views if st.sunday else 0) }}</div>
+    <div class="note">views of the {{ st.last_sunday | month_day }} bulletin so far</div></div>
+</div>
+
+<h2>Views per day, last 8 weeks</h2>
+<div class="card">
+  <div class="chart" role="img" aria-label="Column chart of page views per day for the last 8 weeks; the same numbers are in the table below it.">
+    <div class="yaxis">{% for t in st.ticks %}<span>{{ n(t) }}</span>{% endfor %}</div>
+    <div class="plot">
+      {% for d in st.days %}<div class="col" data-day="{{ d.label }}" data-views="{{ d.views }}" data-visitors="{{ d.visitors }}">{% if d.views %}<i style="height:{{ '%.2f' % (d.views * 100 / st.axis_max) }}%"></i>{% endif %}</div>{% endfor %}
+    </div>
+    <div class="xaxis">{% set sundays = namespace(n=0) %}{% for d in st.days %}{% if d.tick %}{% set sundays.n = sundays.n + 1 %}{% endif %}<span{% if d.tick and sundays.n % 2 == 0 %} class="alt"{% endif %}>{{ d.tick }}</span>{% endfor %}</div>
+  </div>
+  <p class="muted" style="margin:0.6rem 0 0">The dates along the bottom are Sundays.</p>
+  <details style="margin-top:0.4rem"><summary>The same as a table</summary>
+    <table style="max-width:420px">
+      <thead><tr><th>Day</th><th class="num">Views</th><th class="num">Visitors</th></tr></thead>
+      <tbody>{% for d in st.days | reverse %}<tr><td>{{ d.label }}</td><td class="num">{{ n(d.views) }}</td><td class="num">{{ n(d.visitors) }}</td></tr>{% endfor %}</tbody>
+    </table>
+  </details>
+</div>
+<div id="tip" hidden></div>
+
+<h2>By bulletin</h2>
+<div class="card scrollx">
+  {% if st.bulletins %}
+  <table>
+    <thead><tr><th>Sunday</th><th class="num">Views</th><th class="num">Visitors</th><th class="num">Visitors that Sunday</th><th class="num">During worship</th></tr></thead>
+    <tbody>
+    {% for b in st.bulletins %}<tr><td><a href="{{ site_url }}/scroll/{{ b.date }}/" target="_blank" rel="noopener">{{ b.date | long_date }}</a></td>
+      <td class="num">{{ n(b.views) }}</td><td class="num">{{ n(b.visitors) }}</td><td class="num">{{ n(b.sunday_visitors) }}</td><td class="num">{{ n(b.service_visitors) }}</td></tr>{% endfor %}
+    </tbody>
+  </table>
+  <p class="muted" style="margin:0.6rem 0 0">Views and visitors are for as long as the page has been counted. “During worship” is visitors on the bulletin’s own Sunday between {{ service_hours[0] }} a.m. and noon.</p>
+  {% else %}<span class="muted">No bulletin page has been opened yet.</span>{% endif %}
+</div>
+
+<div class="two">
+  <div>
+    <h2>Pages, last 30 days</h2>
+    <div class="card scrollx">{{ barlist(st.pages, "Page") }}</div>
+  </div>
+  <div>
+    <h2>Devices, last 30 days</h2>
+    <div class="card scrollx">{{ barlist(st.devices, "Device") }}</div>
+    <h2>Linked from, last 30 days</h2>
+    <div class="card scrollx">
+      {% if st.referrers %}{{ barlist(st.referrers, "Site") }}{% else %}<span class="muted">No visits from a link on another website.</span>{% endif %}
+      <p class="muted" style="margin:0.6rem 0 0">Only visits that arrive from another website show here. The QR code, a home-screen icon, a typed address and most links in email carry no such trail.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var tip = document.getElementById('tip');
+  function line(strong, rest) {
+    var div = document.createElement('div'), b = document.createElement('strong'), s = document.createElement('span');
+    b.textContent = strong; s.textContent = rest; div.appendChild(b); div.appendChild(s); return div;
+  }
+  document.querySelectorAll('.chart .col').forEach(function (col) {
+    col.addEventListener('pointermove', function (e) {
+      tip.textContent = '';
+      var day = document.createElement('div'); day.textContent = col.dataset.day; tip.appendChild(day);
+      tip.appendChild(line(Number(col.dataset.views).toLocaleString(), ' views'));
+      tip.appendChild(line(Number(col.dataset.visitors).toLocaleString(), ' visitors'));
+      tip.hidden = false;
+      var w = tip.offsetWidth, x = e.clientX + 14;
+      if (x + w > window.innerWidth - 8) x = e.clientX - w - 14;
+      tip.style.left = x + 'px'; tip.style.top = (e.clientY - 12) + 'px';
+    });
+    col.addEventListener('pointerleave', function () { tip.hidden = true; });
+  });
+})();
+</script>
+{% endif %}
+{% endblock %}

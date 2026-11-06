@@ -22,8 +22,9 @@ from fastapi.templating import Jinja2Templates
 from builder import config
 from builder.app import auth
 from builder.pipeline import build as buildmod, calendar_feed, chat as chatmod, content as contentmod, dates, deploy_status, extract, fit as fitmod, forms, hymn_index, intake as intakemod, scripture_index, model as modelmod, publish as publishmod
+from builder.pipeline import stats as statsmod
 from builder.pipeline import week as weekmod
-from builder.pipeline.store import ROLE_LABELS, ROSTER_ROLES, USER_ROLES, Store
+from builder.pipeline.store import ROLE_LABELS, ROSTER_COLUMNS, ROSTER_LABELS, ROSTER_ROLES, USER_ROLES, Store
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(name)s %(levelname)s %(message)s")
 log = logging.getLogger("builder.app")
@@ -34,7 +35,8 @@ templates.env.filters["long_date"] = dates.long_date
 templates.env.filters["month_day"] = dates.month_day
 templates.env.filters["recurrence_parts"] = calendar_feed.recurrence_parts
 templates.env.filters["describe_recurrence"] = calendar_feed.describe_recurrence
-templates.env.globals.update(ROLE_LABELS=ROLE_LABELS, ROSTER_ROLES=ROSTER_ROLES, USER_ROLES=USER_ROLES,
+templates.env.globals.update(ROLE_LABELS=ROLE_LABELS, ROSTER_ROLES=ROSTER_ROLES, ROSTER_COLUMNS=ROSTER_COLUMNS,
+                             ROSTER_LABELS=ROSTER_LABELS, USER_ROLES=USER_ROLES,
                              netlify_url=config.NETLIFY_DEPLOYS_URL, site_url=config.SITE_URL)
 
 DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
@@ -187,7 +189,7 @@ def week_page(d: str, request: Request, user: dict = Depends(need("editor"))):
     inputs = {slot: (wdir / pattern.format(d=d)).exists() or (wdir / pattern.format(d=d).replace(".rtf", ".txt")).exists()
               for slot, (pattern, _) in UPLOAD_SLOTS.items()}
     return page(request, "week.html", user, d=d, raw=raw, week=week, error=error, report=report,
-                status=store().week_status(d), has_pdf=(wdir / f"bulletin-{d}-legal.pdf").exists(),
+                status=store().week_status(d), roster_flowers=store().flowers_for(d), has_pdf=(wdir / f"bulletin-{d}-legal.pdf").exists(),
                 has_scroll=(config.SCROLL_DIR / f"{d}.html").exists(),
                 panels=sorted(int(k) for k in (report or {}).get("panels", {})),
                 inputs=inputs, calendar_text=forms.calendar_lines_text(week["calendar"]) if week else "",
@@ -451,21 +453,40 @@ def rosters(request: Request, user: dict = Depends(need("admin"))):
 async def roster_save(sunday: str, request: Request, user: dict = Depends(need("admin"))):
     check_date(sunday)
     form = await request.form()
-    store().upsert_roster(sunday, {r: form.get(r, "") for r in ROSTER_ROLES})
+    store().upsert_roster(sunday, {r: form.get(r, "") for r in ROSTER_COLUMNS})
     store().log("roster.save", user["email"], sunday)
     return RedirectResponse(f"/rosters?m=Saved+{sunday}#r-{sunday}", status_code=303)
 
 
 # ── events ───────────────────────────────────────────────────────────
 @app.get("/events", response_class=HTMLResponse)
-def events(request: Request, user: dict = Depends(need("publisher")), all: int = 0):
+def events(request: Request, user: dict = Depends(need("publisher")), all: int = 0, month: str = "", pick: str = ""):
     s = store()
-    today = date.today().isoformat()
+    today = date.today()
     evs = s.events()
     if not all:
-        evs = [e for e in evs if e.get("recurrence") or (e.get("end_date") or e["start_date"]) >= today]
-    return page(request, "events.html", user, events=evs, show_all=bool(all), today=today,
+        evs = [e for e in evs if e.get("recurrence") or (e.get("end_date") or e["start_date"]) >= today.isoformat()]
+    evs.sort(key=lambda e: (e["start_date"], e["id"]), reverse=True)  # the latest date first
+    for e in evs:
+        e["coming_exceptions"] = calendar_feed.coming_exceptions(e, today)
+    return page(request, "events.html", user, events=evs, show_all=bool(all), today=today.isoformat(),
+                cal=calendar_feed.month_grid(s, month, today), picked=_picked_date(s, pick),
                 preview=calendar_feed.week_calendar(s, dates.next_sunday().isoformat()), next_sunday=dates.next_sunday().isoformat())
+
+
+def _picked_date(s: Store, pick: str) -> dict | None:
+    """``<event id>:<date>`` from a click on the on-screen calendar: one date of a repeating event, to skip, move or put back."""
+    eid, _, d = pick.partition(":")
+    if not eid.isdigit() or not DATE_RE.match(d):
+        return None
+    ev = s.event(int(eid))
+    try:
+        on = date.fromisoformat(d)
+    except ValueError:
+        return None
+    if not ev or ev.get("deleted_at") or not ev.get("recurrence") or not calendar_feed.rule_dates(ev, on, on):
+        return None
+    return {"event": ev, "date": d, "weekday": on.strftime("%A"), "exception": calendar_feed.exceptions(ev).get(on)}
 
 
 async def _event_form(request: Request) -> dict:
@@ -505,6 +526,32 @@ def event_delete(eid: int, user: dict = Depends(need("publisher"))):
     return RedirectResponse("/events?m=Removed", status_code=303)
 
 
+@app.post("/events/{eid}/dates/{d}/{action}")
+async def event_date(eid: int, d: str, action: str, request: Request, user: dict = Depends(need("publisher"))):
+    """Skip, move or restore one date of a repeating event, from the on-screen calendar."""
+    if action not in ("skip", "move", "restore"):
+        raise HTTPException(404)
+    check_date(d)
+    form = await request.form()
+    month = form.get("month") if re.match(r"^\d{4}-\d{2}$", form.get("month") or "") else d[:7]
+    s = store()
+    try:
+        if action == "skip":
+            ev = calendar_feed.skip_date(s, eid, d, form.get("note"))
+            done = f"Skipped {ev['title']} on {dates.month_day(d)}"
+        elif action == "move":
+            to = (form.get("new_date") or "").strip()
+            ev = calendar_feed.move_date(s, eid, d, to, form.get("time_text"), form.get("location"), form.get("note"))
+            done = f"Moved {ev['title']} of {dates.month_day(d)}" + (f" to {dates.month_day(to)}" if to != d else "")
+        else:
+            calendar_feed.restore_date(s, eid, d)
+            done = f"Put {dates.month_day(d)} back"
+    except ValueError as e:
+        return RedirectResponse(f"/events?month={month}&pick={eid}:{d}&m={_q('Not saved: ' + str(e))}#pick", status_code=303)
+    s.log(f"event.{action}", user["email"], json.dumps({"id": eid, "date": d, **{k: v for k, v in form.items() if k != "month" and v}}))
+    return RedirectResponse(f"/events?month={month}&m={_q(done)}#calendar", status_code=303)
+
+
 @app.get("/hymns", response_class=HTMLResponse)
 def hymns(request: Request, user: dict = Depends(need("editor"))):
     return page(request, "hymns.html", user, idx=hymn_index.build())
@@ -513,6 +560,31 @@ def hymns(request: Request, user: dict = Depends(need("editor"))):
 @app.get("/scripture", response_class=HTMLResponse)
 def scripture(request: Request, user: dict = Depends(need("editor"))):
     return page(request, "scripture.html", user, idx=scripture_index.build())
+
+
+# ── site stats ───────────────────────────────────────────────────────
+@app.get("/stats", response_class=HTMLResponse)
+def stats_page(request: Request, user: dict = Depends(need("editor"))):
+    return page(request, "stats.html", user, st=statsmod.summary(store()), service_hours=statsmod.SERVICE_HOURS)
+
+
+@app.post("/hit")
+async def hit(request: Request):
+    """The public site's page-view beacon (src/_includes/stats-beacon.js). Public like /media: it answers 204
+    whatever it is sent and counts only a view of the site itself, by someone not signed in to this app."""
+    resp = Response(status_code=204, headers={"Access-Control-Allow-Origin": config.SITE_URL, "Cache-Control": "no-store"})
+    try:
+        if request.headers.get("origin") != config.SITE_URL or not 0 < int(request.headers.get("content-length") or 0) <= 2048:
+            return resp
+        data = json.loads(await request.body())
+        if not isinstance(data, dict) or current_user(request):  # the builders' own proofreading is not readership
+            return resp
+        ip = (request.headers.get("cf-connecting-ip") or (request.headers.get("x-forwarded-for") or "").split(",")[0].strip()
+              or (request.client.host if request.client else ""))
+        statsmod.record(store(), path=data.get("p"), referrer=data.get("r"), ua=request.headers.get("user-agent", ""), ip=ip)
+    except Exception as e:  # a beacon must never surface an error to a reader's browser
+        log.warning("hit not counted: %s", e)
+    return resp
 
 
 @app.get("/calendar.ics")

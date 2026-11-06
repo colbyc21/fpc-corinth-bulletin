@@ -60,6 +60,7 @@
 
 <div class="card">
   <h3>Flower dedication</h3>
+  {% if roster_flowers %}<p class="muted">On the roster for flowers this Sunday: <strong>{{ roster_flowers }}</strong></p>{% endif %}
   <div class="row">
     <div style="flex:3 1 300px"><label>The flowers adorning the sanctuary today are given …</label><input type="text" name="flowers_given" value="{{ week.flowers.given if week.flowers else '' }}" placeholder="in honor of … / in loving memory of …  (blank = no dedication)"></div>
     <div><label>Signed</label><input type="text" name="flowers_signed" value="{{ week.flowers.signed if week.flowers else '' }}"></div>

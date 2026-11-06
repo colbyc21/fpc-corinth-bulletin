@@ -85,3 +85,221 @@ def test_roster_seed_has_nov1(store):
     serve = store.serve_for("2026-11-01")
     assert serve["assisting_elder"] == "Dr. John Shipp"
     assert serve["circle_of_prayer"] == "Jason & Jennifer LeGoff"
+
+
+def test_roster_gains_the_flowers_column_on_an_older_database(tmp_path):
+    import sqlite3
+    from builder.pipeline.store import Store
+    path = tmp_path / "old.sqlite"
+    db = sqlite3.connect(path)
+    db.execute("create table rosters (sunday text primary key, assisting_elder text, greeters text, ushers text, acolytes text,"
+               " nursery text, circle_of_prayer text, childrens_church text, av_engineer text, updated_at text not null)")
+    db.execute("insert into rosters (sunday, greeters, updated_at) values ('2026-11-08', 'Hunter & Anna McCalla', 'x')")
+    db.commit(); db.close()
+    s = Store(path)
+    assert s.serve_for("2026-11-08")["greeters"] == "Hunter & Anna McCalla" and s.flowers_for("2026-11-08") is None
+    s.upsert_roster("2026-11-08", {**s.serve_for("2026-11-08"), "flowers": "Jan Pike"})
+    assert s.flowers_for("2026-11-08") == "Jan Pike" and s.serve_for("2026-11-08")["greeters"] == "Hunter & Anna McCalla"
+    assert "flowers" not in s.serve_for("2026-11-08")
+    s.close(); Store(path).close()  # opening again does not try to add the column twice
+
+
+# ── one date of a repeating event skipped or moved ──────────────────
+@pytest.fixture()
+def cal_store(tmp_path):
+    from builder.pipeline.store import Store
+    s = Store(tmp_path / "cal.sqlite")
+    s.upsert_event({"title": "Messy Bible Study", "start_date": "2026-10-20", "time_text": "8 a.m.",
+                    "location": "Youth House", "recurrence": "WEEKLY;BYDAY=TU"})
+    s.upsert_event({"title": "Session Meeting", "start_date": "2026-11-01", "recurrence": "MONTHLY;BYDAY=1SU"})
+    s.upsert_event({"title": "37th Community Thanksgiving Meal", "start_date": "2026-11-26"})
+    yield s
+    s.close()
+
+
+def _id(store, title):
+    return next(e["id"] for e in store.events() if e["title"] == title)
+
+
+def test_a_skipped_date_drops_out_everywhere(cal_store):
+    from datetime import date
+    study = _id(cal_store, "Messy Bible Study")
+    calendar_feed.skip_date(cal_store, study, "2026-11-24", "Thanksgiving week")
+    ev = cal_store.event(study)
+    got = calendar_feed.occurrences(ev, date(2026, 11, 15), date(2026, 12, 5))
+    assert [d.isoformat() for d in got] == ["2026-11-17", "2026-12-01"]
+    assert [l["date"] for l in calendar_feed.week_calendar(cal_store, "2026-11-22")] == ["2026-11-26"]
+    assert "2026-11-24" not in [r["date"] for r in calendar_feed.upcoming(cal_store, 60, today=date(2026, 11, 6))]
+    data = calendar_feed.build_ics(cal_store)
+    assert b"EXDATE;VALUE=DATE:20261124" in data and b"RRULE:FREQ=WEEKLY;BYDAY=TU" in data
+    assert calendar_feed.validate_ics(data) == 3
+    # putting it back restores the rule's date
+    assert calendar_feed.restore_date(cal_store, study, "2026-11-24") is True
+    assert calendar_feed.week_calendar(cal_store, "2026-11-22")[0] == {"date": "2026-11-24", "items": ["Messy Bible Study, 8 a.m."]}
+    assert b"EXDATE" not in calendar_feed.build_ics(cal_store)
+
+
+def test_a_moved_date_lands_on_its_new_day_with_its_new_time(cal_store):
+    from datetime import date
+    session = _id(cal_store, "Session Meeting")
+    calendar_feed.move_date(cal_store, session, "2026-12-06", "2026-12-13", "12:15 p.m.", "Parlor")
+    ev = cal_store.event(session)
+    got = calendar_feed.instances(ev, date(2026, 11, 1), date(2027, 1, 31))
+    assert [(i["date"].isoformat(), i["status"], i["time_text"], i["location"]) for i in got] == [
+        ("2026-11-01", "", None, None), ("2026-12-13", "moved", "12:15 p.m.", "Parlor"), ("2027-01-03", "", None, None)]
+    # the bulletin for Dec 6 no longer lists it; the one for Dec 13 does, with the time
+    assert all("Session Meeting" not in " ".join(l["items"]) for l in calendar_feed.week_calendar(cal_store, "2026-12-06", horizon_days=6))
+    assert {"date": "2026-12-13", "items": ["Session Meeting, 12:15 p.m."]} in calendar_feed.week_calendar(cal_store, "2026-12-13")
+    row = next(r for r in calendar_feed.upcoming(cal_store, 60, today=date(2026, 11, 6)) if r["date"] == "2026-12-13")
+    assert (row["title"], row["time"], row["location"], row["weekday"]) == ("Session Meeting", "12:15 p.m.", "Parlor", "Sunday")
+    # a window that holds only the new day still finds it; one that holds only the old day finds nothing
+    assert calendar_feed.occurrences(ev, date(2026, 12, 10), date(2026, 12, 20)) == [date(2026, 12, 13)]
+    assert calendar_feed.occurrences(ev, date(2026, 12, 1), date(2026, 12, 8)) == []
+    # the feed: one repeating event, plus an override that names the date it replaces
+    data = calendar_feed.build_ics(cal_store)
+    assert calendar_feed.validate_ics(data) == 4
+    assert b"RECURRENCE-ID;VALUE=DATE:20261206" in data and b"DTSTART;VALUE=DATE:20261213" in data
+    assert b"SUMMARY:Session Meeting\\, 12:15 p.m." in data and b"EXDATE" not in data
+    from icalendar import Calendar
+    uids = [str(c["uid"]) for c in Calendar.from_ical(data).walk() if c.name == "VEVENT" and "Session" in str(c["summary"])]
+    assert len(uids) == 2 and len(set(uids)) == 1
+
+
+def test_a_date_can_keep_its_day_and_change_only_its_time(cal_store):
+    from datetime import date
+    study = _id(cal_store, "Messy Bible Study")
+    calendar_feed.move_date(cal_store, study, "2026-11-10", "2026-11-10", time_text="9 a.m.")
+    assert calendar_feed.week_calendar(cal_store, "2026-11-08")[0] == {"date": "2026-11-10", "items": ["Messy Bible Study, 9 a.m."]}
+    gaps = calendar_feed.instances(cal_store.event(study), date(2026, 11, 10), date(2026, 11, 10), with_gaps=True)
+    assert [i["status"] for i in gaps] == ["moved"]  # no struck-through twin on the same day
+    # a second change to the same date replaces the first
+    calendar_feed.skip_date(cal_store, study, "2026-11-10")
+    assert [x["kind"] for x in cal_store.event(study)["exceptions"]] == ["skip"]
+    assert cal_store.event(study)["exceptions"][0]["time_text"] is None
+
+
+def test_skip_and_move_refuse_what_makes_no_sense(cal_store):
+    study, meal = _id(cal_store, "Messy Bible Study"), _id(cal_store, "37th Community Thanksgiving Meal")
+    with pytest.raises(ValueError, match="does not fall on November 25"):
+        calendar_feed.skip_date(cal_store, study, "2026-11-25")       # a Wednesday
+    with pytest.raises(ValueError, match="does not fall"):
+        calendar_feed.skip_date(cal_store, study, "2026-10-13")       # before it started
+    with pytest.raises(ValueError, match="only a repeating event"):
+        calendar_feed.skip_date(cal_store, meal, "2026-11-26")
+    with pytest.raises(ValueError, match="needs the day it moves to"):
+        calendar_feed.move_date(cal_store, study, "2026-11-24", "")
+    with pytest.raises(ValueError, match="nothing to move"):
+        calendar_feed.move_date(cal_store, study, "2026-11-24", "2026-11-24")
+    with pytest.raises(ValueError, match="no such event"):
+        calendar_feed.skip_date(cal_store, 9999, "2026-11-24")
+    with pytest.raises(ValueError, match="not a date"):
+        calendar_feed.skip_date(cal_store, study, "next Tuesday")
+    assert cal_store.event(study)["exceptions"] == []
+    assert calendar_feed.restore_date(cal_store, study, "2026-11-24") is False
+
+
+def test_an_exception_stops_applying_when_the_rule_moves_off_its_date(cal_store):
+    from datetime import date
+    study = _id(cal_store, "Messy Bible Study")
+    calendar_feed.skip_date(cal_store, study, "2026-11-24")
+    calendar_feed.move_date(cal_store, study, "2026-12-01", "2026-12-03")
+    ev = cal_store.event(study)
+    cal_store.upsert_event({**ev, "recurrence": "WEEKLY;BYDAY=WE"}, study)
+    ev = cal_store.event(study)
+    got = calendar_feed.occurrences(ev, date(2026, 11, 22), date(2026, 12, 5))
+    assert [d.isoformat() for d in got] == ["2026-11-25", "2026-12-02"]   # every Wednesday, and no stray Thursday
+    data = calendar_feed.build_ics(cal_store)
+    assert b"EXDATE" not in data and b"RECURRENCE-ID" not in data
+    assert calendar_feed.coming_exceptions(ev, date(2026, 11, 6)) == []
+
+
+def test_coming_exceptions_lists_what_is_still_ahead(cal_store):
+    from datetime import date
+    study = _id(cal_store, "Messy Bible Study")
+    calendar_feed.skip_date(cal_store, study, "2026-10-27")
+    calendar_feed.move_date(cal_store, study, "2026-11-03", "2026-11-07")
+    calendar_feed.skip_date(cal_store, study, "2026-11-24")
+    ahead = calendar_feed.coming_exceptions(cal_store.event(study), date(2026, 11, 6))
+    assert [x["occurrence_date"] for x in ahead] == ["2026-11-03", "2026-11-24"]   # Nov 3 still counts: its new day is tomorrow
+
+
+def test_month_grid_is_whole_weeks_from_sunday_with_the_gaps_marked(cal_store):
+    from datetime import date
+    study = _id(cal_store, "Messy Bible Study")
+    calendar_feed.skip_date(cal_store, study, "2026-11-24", "Thanksgiving week")
+    calendar_feed.move_date(cal_store, study, "2026-11-10", "2026-11-11")
+    cal_store.upsert_event({"title": "Edge", "start_date": "2026-11-27", "end_date": "2026-11-29"})
+    g = calendar_feed.month_grid(cal_store, "2026-11", today=date(2026, 11, 6))
+    assert (g["label"], g["prev"], g["next"], g["this_month"]) == ("November 2026", "2026-10", "2026-12", "2026-11")
+    assert all(len(w) == 7 for w in g["weeks"])
+    assert g["weeks"][0][0]["date"] == "2026-11-01" and g["weeks"][-1][-1]["date"] == "2026-12-05"
+    days = {d["date"]: d for w in g["weeks"] for d in w}
+    assert days["2026-11-06"]["today"] and not days["2026-12-01"]["in_month"]
+
+    def on(d):
+        return [(e["title"], e["status"], e["other_label"]) for e in days[d]["entries"]]
+    assert on("2026-11-01") == [("Session Meeting", "", "")]
+    assert on("2026-11-10") == [("Messy Bible Study", "moved_away", "Nov 11")]
+    assert on("2026-11-11") == [("Messy Bible Study", "moved", "Nov 10")]
+    assert on("2026-11-24") == [("Messy Bible Study", "skipped", "")] and days["2026-11-24"]["entries"][0]["note"] == "Thanksgiving week"
+    assert on("2026-11-26") == [("37th Community Thanksgiving Meal", "", "")]
+    assert [on(d) for d in ("2026-11-27", "2026-11-28", "2026-11-29")] == [[("Edge", "", "")]] * 3   # every day of a multi-day event
+    assert on("2026-12-01") == [("Messy Bible Study", "", "")]   # the trailing days of the last week are filled in too
+    # every repeating entry carries the date the rule gave it, which is what a click acts on
+    assert days["2026-11-11"]["entries"][0]["original"] == "2026-11-10"
+    # a month that is not one falls back to the current month
+    assert calendar_feed.month_grid(cal_store, "garbage", today=date(2026, 11, 6))["month"] == "2026-11"
+    assert calendar_feed.month_grid(cal_store, "2026-13", today=date(2026, 11, 6))["month"] == "2026-11"
+    assert calendar_feed.month_grid(cal_store, "2026-12", today=date(2026, 11, 6))["next"] == "2027-01"
+
+
+def test_public_months_show_what_happens_and_nothing_from_the_office(cal_store):
+    from datetime import date
+    study = _id(cal_store, "Messy Bible Study")
+    calendar_feed.skip_date(cal_store, study, "2026-11-24", "Thanksgiving week")
+    calendar_feed.move_date(cal_store, study, "2026-11-10", "2026-11-11", "6:30 p.m.", "Parlor", "the Youth House is being painted")
+    cal_store.upsert_event({"title": "Choir Supper", "start_date": "2026-11-11", "time_text": "5pm"})
+    cal_store.upsert_event({"title": "Coat Drive", "start_date": "2026-11-11"})
+    cal_store.upsert_event({"title": "Lunch Bunch", "start_date": "2026-11-11", "time_text": "noon"})
+    months = calendar_feed.public_months(cal_store, today=date(2026, 11, 20))
+    assert [(m["month"], m["label"]) for m in months] == [("2026-11", "November 2026"), ("2026-12", "December 2026"), ("2027-01", "January 2027")]
+    assert (months[0]["prev_label"], months[0]["next_label"]) == ("October", "December")
+    nov = {d["date"]: d for w in months[0]["weeks"] for d in w}
+    assert nov["2026-11-01"]["weekday"] == "Sun" and len(months[0]["weeks"][0]) == 7   # the whole month, from its first Sunday row
+    assert nov["2026-11-10"]["entries"] == [] and nov["2026-11-24"]["entries"] == []    # the moved-away and the skipped date are just empty
+    # the moved study is on its new day at its new time and place, and the day runs by the clock with the untimed item last
+    assert [(e["title"], e["time"]) for e in nov["2026-11-11"]["entries"]] == [
+        ("Lunch Bunch", "noon"), ("Choir Supper", "5pm"), ("Messy Bible Study", "6:30 p.m."), ("Coat Drive", "")]
+    assert nov["2026-11-11"]["entries"][2] == {"title": "Messy Bible Study", "time": "6:30 p.m.", "location": "Parlor", "recurring": True}
+    assert nov["2026-11-26"]["entries"] == [{"title": "37th Community Thanksgiving Meal", "time": "", "location": "", "recurring": False}]
+    text = json.dumps(months)
+    assert "painted" not in text and "Thanksgiving week" not in text and "event_id" not in text and "today" not in text
+
+
+def test_times_sort_by_the_clock():
+    order = ["8 a.m.", "9:30 AM", "10:45 a.m.", "noon", "12:15 p.m.", "1pm", "5pm", "6 p.m.", "6:30 p.m.", "after worship", ""]
+    assert sorted(reversed(order), key=calendar_feed._time_key) == order
+
+
+def test_site_data_carries_the_month_view(cal_store, tmp_path):
+    (tmp_path / "src/_data").mkdir(parents=True)
+    calendar_feed.write_site_files(cal_store, tmp_path)
+    data = json.loads((tmp_path / "src/_data/calendarEvents.json").read_text())
+    assert len(data["months"]) == calendar_feed.PUBLIC_MONTHS and data["events"] and data["months"][0]["weeks"]
+
+
+def test_events_gain_the_exceptions_table_on_an_older_database(tmp_path):
+    import sqlite3
+    from builder.pipeline.store import Store
+    path = tmp_path / "old.sqlite"
+    s = Store(path)
+    eid = s.upsert_event({"title": "Kids Quest", "start_date": "2026-10-21", "recurrence": "WEEKLY;BYDAY=WE"})
+    s.close()
+    db = sqlite3.connect(path)
+    db.execute("drop table event_exceptions")
+    db.commit(); db.close()
+    s = Store(path)
+    assert s.event(eid)["exceptions"] == [] and s.events()[0]["exceptions"] == []
+    calendar_feed.skip_date(s, eid, "2026-11-25")
+    assert [x["occurrence_date"] for x in s.events()[0]["exceptions"]] == ["2026-11-25"]
+    s.close()

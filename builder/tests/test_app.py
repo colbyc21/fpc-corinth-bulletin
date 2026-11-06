@@ -89,6 +89,12 @@ def test_admin_screens_render_and_edit(client, store):
     r = client.post("/rosters/2026-11-08", data={"assisting_elder": "Dr. Steve Blair", "ushers": "A, B, & C"})
     assert r.status_code == 303
     assert store.serve_for("2026-11-08")["assisting_elder"] == "Dr. Steve Blair"
+    # flowers is kept on the roster and shown beside the dedication, but is not a Those Who Serve role
+    row = {**store.serve_for("2026-11-01"), "flowers": "Don & Martha Guare"}
+    assert client.post("/rosters/2026-11-01", data={k: v or "" for k, v in row.items()}).status_code == 303
+    assert store.flowers_for("2026-11-01") == "Don & Martha Guare" and "flowers" not in store.serve_for("2026-11-01")
+    assert 'value="Don &amp; Martha Guare"' in client.get("/rosters").text
+    assert "On the roster for flowers this Sunday: <strong>Don &amp; Martha Guare</strong>" in client.get("/weeks/2026-11-01").text
     r = client.post("/events", data={"title": "Test Event", "start_date": "2026-12-01", "time_text": "6 p.m.", "byday": "", "featured": "on"})
     assert r.status_code == 303 and "Added" in r.headers["location"]
     ev = [e for e in store.events() if e["title"] == "Test Event"][0]
@@ -163,4 +169,71 @@ def test_week_page_form_refresh_and_chat_routes(client, store, monkeypatch, tmp_
     monkeypatch.setattr(main.chatmod, "revise", lambda d, m, store, user=None: {"reply": "ok", "cost": 0.01, "turns": 1, "report": None, "edits": []})
     r = client.post("/weeks/2026-11-01/chat", data={"message": "Change x"})
     assert r.status_code == 303 and "Done" in r.headers["location"]
+    client.cookies.clear()
+
+
+def test_calendar_screen_shows_the_month_and_skips_and_moves_single_dates(client, store):
+    from builder.pipeline import calendar_feed
+    login_as(client, store, "cal@example.com", "publisher")
+    eid = store.upsert_event({"title": "Choir Rehearsal", "start_date": "2026-01-07", "time_text": "7 p.m.", "recurrence": "WEEKLY;BYDAY=WE"})
+    late = store.upsert_event({"title": "Zebra Cookout", "start_date": "2031-06-01"})
+    early = store.upsert_event({"title": "Aardvark Picnic", "start_date": "2031-05-01"})
+    try:
+        html = client.get("/events?month=2031-05").text
+        # the on-screen calendar: the month asked for, its neighbours, and each date of the repeat as a link
+        assert "<h2>May 2031</h2>" in html and "month=2031-04" in html and "month=2031-06" in html
+        assert f'pick={eid}:2031-05-07#pick' in html and f'href="#e-{early}"' in html
+        # the list below runs from the latest date down
+        assert html.index(f'id="e-{late}"') < html.index(f'id="e-{early}"') < html.index(f'id="e-{eid}"')
+        # picking a date opens its panel
+        html = client.get(f"/events?month=2031-05&pick={eid}:2031-05-07").text
+        assert "Choir Rehearsal · Wednesday, May 7" in html and f'action="/events/{eid}/dates/2031-05-07/skip"' in html
+        assert 'id="pick"' not in client.get(f"/events?month=2031-05&pick={eid}:2031-05-08").text   # a Thursday
+        assert 'id="pick"' not in client.get(f"/events?month=2031-05&pick={early}:2031-05-01").text  # not a repeat
+        assert client.get("/events?month=nonsense&pick=nonsense").status_code == 200
+
+        r = client.post(f"/events/{eid}/dates/2031-05-07/skip", data={"note": "Choir away", "month": "2031-05"})
+        assert r.status_code == 303 and r.headers["location"].startswith("/events?month=2031-05&m=Skipped+Choir+Rehearsal+on+May+7")
+        html = client.get(f"/events?month=2031-05&pick={eid}:2031-05-07").text
+        assert "Skipped: it will not appear on this date." in html and "Choir away" in html and "Put it back on May 7" in html
+        assert "Skipped May 7 (Choir away)" in html   # and on the event's own card
+        assert "Choir Rehearsal" not in str(calendar_feed.week_calendar(store, "2031-05-04", horizon_days=6))
+
+        r = client.post(f"/events/{eid}/dates/2031-05-14/move", data={"new_date": "2031-05-15", "time_text": "6 p.m.", "month": "2031-05"})
+        assert r.status_code == 303 and "Moved+Choir+Rehearsal+of+May+14+to+May+15" in r.headers["location"]
+        html = client.get("/events?month=2031-05").text
+        assert "moved to May 15" in html and "moved from May 14" in html and "May 14 moved to May 15, 6 p.m." in html
+        week = {l["date"]: l["items"] for l in calendar_feed.week_calendar(store, "2031-05-11", horizon_days=6)}
+        assert "Choir Rehearsal, 6 p.m." in week["2031-05-15"] and "Choir Rehearsal" not in str(week["2031-05-14"])
+        assert b"RECURRENCE-ID;VALUE=DATE:20310514" in client.get("/calendar.ics").content
+
+        # what cannot be done says so and saves nothing
+        r = client.post(f"/events/{eid}/dates/2031-05-21/move", data={"new_date": "2031-05-21"})
+        assert r.status_code == 303 and "Not+saved" in r.headers["location"] and f"pick={eid}%3A2031-05-21" not in r.headers["location"]
+        assert f"pick={eid}:2031-05-21" in r.headers["location"]
+        r = client.post(f"/events/{eid}/dates/2031-05-22/skip")
+        assert "Not+saved" in r.headers["location"] and "does+not+fall+on+May+22" in r.headers["location"]
+        assert client.post(f"/events/{early}/dates/2031-05-01/skip").headers["location"].count("Not+saved") == 1
+        assert client.post(f"/events/{eid}/dates/2031-05-21/explode").status_code == 404
+        assert client.post(f"/events/{eid}/dates/soon/skip").status_code == 400
+        assert len(store.event(eid)["exceptions"]) == 2
+
+        for d in ("2031-05-07", "2031-05-14"):
+            assert client.post(f"/events/{eid}/dates/{d}/restore").status_code == 303
+        assert store.event(eid)["exceptions"] == []
+        assert [a["action"] for a in store.audit(5)][:2] == ["event.restore", "event.restore"]
+    finally:
+        for i in (eid, late, early):
+            store.delete_event(i)
+    client.cookies.clear()
+
+
+def test_editor_cannot_skip_or_move(client, store):
+    login_as(client, store, "ed2@example.com", "editor")
+    eid = store.upsert_event({"title": "Handbells", "start_date": "2026-01-05", "recurrence": "WEEKLY;BYDAY=MO"})
+    try:
+        assert client.post(f"/events/{eid}/dates/2031-05-05/skip").status_code == 403
+        assert store.event(eid)["exceptions"] == []
+    finally:
+        store.delete_event(eid)
     client.cookies.clear()

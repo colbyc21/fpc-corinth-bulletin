@@ -13,9 +13,9 @@ Self-service production of the Sunday bulletin on basecamp. The plan is in
 | `pipeline/pdf.py` | Playwright PDF, per-panel overflow measurement, PNG proofs, PDF comparison |
 | `pipeline/build.py` | one build: names → render → PDF → measure → proofs → `var/proofs/<date>/build.json` |
 | `pipeline/publish.py` | scroll index, calendar files, Eleventy check, commit, push (deploy key) |
-| `pipeline/calendar_feed.py` | events table → back-cover lines, `src/calendar.ics`, `/calendar/` page data |
+| `pipeline/calendar_feed.py` | events table → back-cover lines, `src/calendar.ics`, `/calendar/` page data (the upcoming list and a three-month grid the page shows a month at a time and prints a month to a landscape page), the app's month view; one date of a repeating event can be skipped or moved (`event_exceptions`: EXDATE / RECURRENCE-ID in the feed) |
 | `pipeline/hymn_index.py` | published scroll pages → hymn index (`/hymns/` page data, app Hymns screen): times sung, last sung, hymnary.org link |
-| `pipeline/store.py` | SQLite: rosters, events, standing text, users, magic links, audit, week status, spend ledger |
+| `pipeline/store.py` | SQLite: rosters (the Those Who Serve roles, plus who has the flowers, which is not printed), events, standing text, users, magic links, audit, week status, spend ledger |
 | `pipeline/names.py` | confirmed name spellings, applied to every build |
 | `pipeline/extract.py` | docx / rtf → text, read by the parse step |
 | `pipeline/model.py` | the only Claude API client: caps, kill switch, ledger pricing, streaming, structured output |
@@ -30,6 +30,7 @@ Self-service production of the Sunday bulletin on basecamp. The plan is in
 | `pipeline/friday_forms.py` / `friday_chat.py` / `friday_push.py` | the email page's form ↔ friday.json; chat corrections (`prompts/friday_chat.md`); Constant Contact draft, test send, schedule |
 | `pipeline/media.py` | photos for the email: resized, stored under `var/media`, served publicly at `/media/<name>` |
 | `pipeline/constant_contact.py` | Constant Contact v3 client: device-flow OAuth, lists, campaigns, tests, schedule (`python -m builder cc auth`) |
+| `pipeline/stats.py` | page views of the public site: the `/hit` beacon's rules (robots, floods, one visitor = one device once a day, nothing personal kept) and the numbers on the app's Stats screen |
 | `pipeline/deploy_status.py` | is the published week live? Netlify API if `NETLIFY_TOKEN`/`NETLIFY_SITE_ID` are set, else the scroll page's `fpc-build` marker |
 | `prompts/*.md` | the four prompts; edit these, not the code, to change model behaviour |
 | `app/` | FastAPI app: magic-link login; the week page (Inputs → Details → Build & proof → Publish, with chat); the Friday email page (Notes → Content with per-item photos → Preview & chat → Send); rosters, events, standing text, users, audit, spend |
@@ -68,6 +69,23 @@ against `BUILDER_MONTHLY_CAP_USD` (default 40). Per-job caps are in
 clear error while rendering and publishing keep working. The Phase 2
 acceptance run is `python -m builder.scripts.phase2_acceptance` against a
 scratch clone (`BUILDER_REPO`), never the working repo.
+
+## Site stats
+
+`.eleventy.js` appends `src/_includes/stats-beacon.js`, inline, to every built
+page except the forwarding front page and the 404. On
+`bulletin.fpccorinth.org` only, it posts the page's path and referrer to
+`POST /hit` on this app (public, like `/media`). `pipeline/stats.py` drops
+robots, anything not sent from the site, and anyone signed in to the app, and
+writes one row to `hits`: the day and hour in Corinth, the path, phone /
+tablet / computer, the referring site, and a visitor hash. The hash is of
+address + browser under a random salt that is deleted when the day ends, so
+no address is stored and a visitor cannot be followed from one day to the
+next; no cookie is set. The Stats screen (`/stats`, any signed-in user) shows
+views and visitors per day, per bulletin (with how many followed along on the
+Sunday between 10 a.m. and noon), per page, per device and per referring
+site. The two host names are written into the beacon file; change them there
+and in `config.SITE_URL` together.
 
 ## week.json in one paragraph
 

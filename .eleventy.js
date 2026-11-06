@@ -1,4 +1,37 @@
+const fs = require("fs");
+const path = require("path");
+
+// Pages that do not get the page-view counter: the front page only forwards to the
+// latest bulletin (which counts itself), and a 404 is not a page anyone meant to open.
+const STATS_SKIP = new Set(["index.html", "404.html"]);
+
+function htmlFiles(dir) {
+  return fs.readdirSync(dir, { withFileTypes: true }).flatMap(entry => {
+    const full = path.join(dir, entry.name);
+    if (entry.isDirectory()) return htmlFiles(full);
+    return entry.name.endsWith(".html") ? [full] : [];
+  });
+}
+
 module.exports = function(eleventyConfig) {
+  // Page-view counter: once the site is written, put src/_includes/stats-beacon.js at the
+  // end of every page. Done here, on the output, because the scroll bulletins are copied
+  // through as finished HTML and so never pass through a layout. It is inline (not a file
+  // under /js/) because the service worker serves scripts cache-first and would pin an old copy.
+  eleventyConfig.on("eleventy.after", ({ dir }) => {
+    const out = dir.output;
+    if (!fs.existsSync(out)) return;
+    const beacon = fs.readFileSync(path.join(__dirname, "src/_includes/stats-beacon.js"), "utf8");
+    const tag = `<script data-fpc-stats>\n${beacon}</script>\n`;
+    for (const file of htmlFiles(out)) {
+      if (STATS_SKIP.has(path.relative(out, file)) || file.includes(`${path.sep}admin${path.sep}`)) continue;
+      const html = fs.readFileSync(file, "utf8");
+      const at = html.lastIndexOf("</body>");
+      if (at === -1 || html.includes("data-fpc-stats")) continue;
+      fs.writeFileSync(file, html.slice(0, at) + tag + html.slice(at));
+    }
+  });
+
   // Pass through static files
   eleventyConfig.addPassthroughCopy("src/css/style.css");
   eleventyConfig.addPassthroughCopy("src/images");
