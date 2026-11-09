@@ -77,7 +77,7 @@ def test_monthly_event_in_ics(store):
 def test_upcoming_is_sorted(store):
     from datetime import date
     rows = calendar_feed.upcoming(store, 60, today=date(2026, 11, 1))
-    assert rows == sorted(rows, key=lambda r: (r["date"], r["time"] == "", r["time"]))
+    assert rows == sorted(rows, key=lambda r: (r["date"], calendar_feed._time_key(r["time"])))
     assert any(r["title"] == "37th Community Thanksgiving Meal" for r in rows)
 
 

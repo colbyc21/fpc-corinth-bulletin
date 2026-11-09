@@ -282,7 +282,7 @@ def upcoming(store: Store, days: int = 60, today: date | None = None) -> list[di
                 "location": inst["location"] or "",
                 "recurring": bool(ev.get("recurrence")),
             })
-    rows.sort(key=lambda r: (r["date"], r["time"] == "", r["time"]))
+    rows.sort(key=lambda r: (r["date"], _time_key(r["time"])))
     return rows
 
 
@@ -326,7 +326,7 @@ def month_grid(store: Store, month: str | None = None, today: date | None = None
                 "past": inst["date"] < today, "original": inst["original"].isoformat(),
                 "other_label": dates.short_month_day(other) if other else "", "note": x.get("note") or ""})
     for items in by_date.values():
-        items.sort(key=lambda i: i["status"] in ("skipped", "moved_away"))  # what happens first, the gaps after
+        items.sort(key=lambda i: (i["status"] in ("skipped", "moved_away"), _time_key(i["time"])))  # what happens first, by the clock; the gaps after
     prev, nxt = first - timedelta(days=1), (first + timedelta(days=32)).replace(day=1)
     return {
         "month": first.strftime("%Y-%m"), "label": first.strftime("%B %Y"),
