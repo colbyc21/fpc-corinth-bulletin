@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Worship Bulletin — November 15, 2026</title>
+<meta name="fpc-build" content="20261112T182447">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f4f5f1;
+    --warm-white: #fdfdfb;
+    --parchment: #eceeea;
+    --ink: #171200;
+    --ink-light: #3f3d32;
+    --ink-faint: #666558;
+    --rule: #b0af9b;
+    --rule-light: #d9d9cf;
+    --accent: #6d8c83;
+    --accent-soft: #8aa39b;
+    --accent-deep: #56736a;
+    --gold: #847539;
+    --gold-soft: #ada37c;
+    --section-bg: #eef2ef;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    scroll-behavior: smooth;
+    font-size: 17px;
+  }
+
+  body {
+    font-family: 'EB Garamond', 'Georgia', serif;
+    color: var(--ink);
+    background: var(--parchment);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Subtle paper texture overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 999;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  }
+
+  .scroll-container {
+    max-width: 640px;
+    margin: 0 auto;
+    background: var(--warm-white);
+    min-height: 100vh;
+    box-shadow: 0 0 80px rgba(23, 18, 0, 0.08);
+  }
+
+  /* ── SITE HEADER ─────────────────────────── */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--warm-white);
+    border-bottom: 1px solid var(--rule-light);
+    backdrop-filter: saturate(180%) blur(8px);
+  }
+  .site-header-inner {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0.7rem 1.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .site-header .brand {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 500;
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .site-header .brand:hover {
+    color: var(--accent-deep);
+  }
+  .site-header .archive-link {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 500;
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    text-decoration: none;
+    padding: 0.35rem 0.85rem;
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    white-space: nowrap;
+  }
+  .site-header .archive-link:hover {
+    color: var(--warm-white);
+    background: var(--ink);
+    border-color: var(--ink);
+  }
+  @media (max-width: 420px) {
+    .site-header .brand { font-size: 0.68rem; letter-spacing: 0.1em; }
+    .site-header .archive-link { font-size: 0.64rem; padding: 0.3rem 0.7rem; }
+    .site-header-inner { padding: 0.6rem 1rem; }
+  }
+
+  /* ── COVER ──────────────────────────────── */
+  .cover-section {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 3rem 2rem;
+    position: relative;
+    background:
+      radial-gradient(ellipse at 30% 20%, rgba(132, 117, 57, 0.05) 0%, transparent 60%),
+      radial-gradient(ellipse at 70% 80%, rgba(109, 140, 131, 0.07) 0%, transparent 50%),
+      var(--warm-white);
+  }
+
+  .cover-rule {
+    width: 100%;
+    height: 2px;
+    background: var(--ink);
+    position: absolute;
+    left: 0;
+  }
+  .cover-rule--top { top: 1.5rem; }
+  .cover-rule--bottom { bottom: 1.5rem; }
+
+  .cover-logo {
+    width: min(78vw, 360px);
+    height: auto;
+    margin-bottom: 0.8rem;
+    opacity: 0;
+    animation: fadeUp 1s ease-out 0.5s forwards;
+  }
+
+  .cover-ornament {
+    width: 160px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--ink), transparent);
+    margin: 0.3rem auto 0.8rem;
+    opacity: 0;
+    animation: fadeUp 1s ease-out 0.6s forwards;
+  }
+
+  .cover-date {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 300;
+    font-size: clamp(1.2rem, 4vw, 1.6rem);
+    color: var(--ink);
+    opacity: 0;
+    animation: fadeUp 1s ease-out 0.8s forwards;
+  }
+
+  .cover-occasion {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 400;
+    font-size: 0.78rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent-deep);
+    margin-top: 0.6rem;
+    opacity: 0;
+    animation: fadeUp 1s ease-out 0.95s forwards;
+  }
+
+  .cover-mission {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--ink-light);
+    margin-top: 1rem;
+    opacity: 0;
+    animation: fadeUp 1s ease-out 1.05s forwards;
+  }
+
+  .cover-footer {
+    position: absolute;
+    bottom: 2.2rem;
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 0.82rem;
+    color: var(--ink-faint);
+    letter-spacing: 0.02em;
+    opacity: 0;
+    animation: fadeUp 1s ease-out 1s forwards;
+  }
+
+  .cover-scroll-hint {
+    position: absolute;
+    bottom: 4.5rem;
+    opacity: 0;
+    animation: fadeUp 1s ease-out 1.2s forwards, gentle-bob 2.5s ease-in-out 2.2s infinite;
+  }
+  .cover-scroll-hint svg {
+    width: 20px;
+    height: 20px;
+    stroke: var(--rule);
+    fill: none;
+    stroke-width: 1.5;
+  }
+
+  /* ── SECTION LAYOUT ─────────────────────── */
+  .bulletin-section {
+    padding: 2rem 1.8rem;
+    border-top: 1px solid var(--rule-light);
+  }
+
+  .section-heading {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 500;
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent-deep);
+    text-align: center;
+    margin-bottom: 1.4rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  /* ── WELCOME ────────────────────────────── */
+  .welcome-section {
+    background:
+      linear-gradient(180deg, var(--section-bg) 0%, var(--warm-white) 100%);
+  }
+
+  .welcome-title {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 300;
+    font-size: 1.8rem;
+    text-align: center;
+    margin-bottom: 1.2rem;
+    color: var(--ink);
+  }
+
+  .welcome-block {
+    margin-bottom: 1.2rem;
+  }
+
+  .welcome-block h3 {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 500;
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent-deep);
+    margin-bottom: 0.4rem;
+  }
+
+  .welcome-block p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--ink-light);
+    text-align: justify;
+    hyphens: auto;
+  }
+
+  .connect-info {
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: var(--ink-light);
+  }
+  .connect-info strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  /* ── LITURGY ────────────────────────────── */
+  .liturgy-header {
+    text-align: center;
+    margin-bottom: 1rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid var(--rule-light);
+  }
+
+  .liturgy-main-title {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 600;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin-bottom: 0.25rem;
+  }
+
+  .liturgy-date-line {
+    font-family: 'EB Garamond', serif;
+    font-size: 1rem;
+    color: var(--ink-faint);
+  }
+
+  .liturgy-standing-note {
+    font-style: italic;
+    font-size: 0.82rem;
+    color: var(--ink-faint);
+    margin-top: 0.3rem;
+  }
+
+  /* Liturgy section divider */
+  .liturgy-divider {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 600;
+    font-size: 0.68rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--accent-deep);
+    margin: 1.6rem 0 0.8rem;
+    position: relative;
+    padding: 0.5rem 0;
+  }
+  .liturgy-divider::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 20%;
+    right: 20%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--rule), transparent);
+  }
+
+  /* Worship items */
+  .worship-item {
+    margin-bottom: 1rem;
+  }
+
+  .worship-heading {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--ink);
+    margin-bottom: 0.2rem;
+  }
+
+  .worship-attr {
+    font-weight: 400;
+    font-style: italic;
+    font-size: 0.88rem;
+    color: var(--ink-faint);
+    margin-left: 0.3rem;
+  }
+
+  .worship-body {
+    font-size: 0.95rem;
+    padding-left: 0.06in;
+    margin-top: 0.15rem;
+    text-align: justify;
+    hyphens: auto;
+    color: var(--ink-light);
+  }
+
+  .worship-body.corporate {
+    font-style: italic;
+    color: var(--ink);
+  }
+
+  /* Responsive reading */
+  .responsive {
+    padding-left: 0.06in;
+    margin-top: 0.2rem;
+  }
+
+  .leader-line, .all-line {
+    font-size: 0.95rem;
+    margin-bottom: 0.15rem;
+    text-align: justify;
+    hyphens: auto;
+  }
+
+  .leader-line {
+    color: var(--ink-light);
+  }
+
+  .all-line {
+    font-style: italic;
+    color: var(--ink);
+  }
+
+  .leader-label {
+    font-weight: 400;
+    color: var(--ink-faint);
+    font-size: 0.85rem;
+  }
+
+  .all-label {
+    font-weight: 700;
+    color: var(--ink);
+    font-size: 0.85rem;
+  }
+
+  .silent-confession {
+    font-weight: 700;
+    font-style: italic;
+    font-size: 0.85rem;
+    padding-left: 0.06in;
+    margin-top: 0.3rem;
+    color: var(--ink-faint);
+  }
+
+  .creed-note {
+    font-size: 0.78rem;
+    font-style: italic;
+    color: var(--ink-faint);
+    padding-left: 0.06in;
+    margin-top: 0.15rem;
+  }
+
+  /* Margin notes (inline on scroll version) */
+  .margin-note {
+    font-size: 0.78rem;
+    line-height: 1.45;
+    color: var(--ink-faint);
+    font-style: italic;
+    border-left: 2px solid var(--rule-light);
+    padding-left: 0.8rem;
+    margin: 0.4rem 0 0.6rem 0.06in;
+  }
+
+  .margin-note .note-label {
+    font-weight: 600;
+    font-style: normal;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--rule);
+    display: block;
+    margin-bottom: 0.1rem;
+  }
+
+  /* Anthem lyrics */
+  .anthem-lyrics {
+    display: flex;
+    gap: 1.2rem;
+    padding-left: 0.06in;
+    margin-top: 0.4rem;
+  }
+  .anthem-lyrics .verse {
+    flex: 1;
+    font-style: italic;
+    font-size: 0.85rem;
+    line-height: 1.45;
+    color: var(--ink-light);
+  }
+  @media (max-width: 500px) {
+    .anthem-lyrics { flex-direction: column; gap: 0.6rem; }
+  }
+  .anthem-credit {
+    font-size: 0.72rem;
+    color: var(--ink-faint);
+    font-style: normal;
+    padding-left: 0.06in;
+    margin-top: 0.4rem;
+  }
+
+  /* ── SERMON NOTES ───────────────────────── */
+  .sermon-section {
+    background:
+      linear-gradient(180deg, var(--warm-white) 0%, var(--section-bg) 30%, var(--section-bg) 70%, var(--warm-white) 100%);
+  }
+
+  .sermon-title {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 400;
+    font-size: 1.5rem;
+    text-align: center;
+    font-style: normal;
+    color: var(--ink);
+    margin-bottom: 0.2rem;
+  }
+
+  .sermon-text-ref {
+    text-align: center;
+    font-size: 0.92rem;
+    color: var(--ink-faint);
+    margin-bottom: 0.4rem;
+  }
+
+  .sermon-listen {
+    text-align: center;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .sermon-listen a {
+    display: inline-block;
+    color: var(--accent-deep);
+    text-decoration: none;
+    border: 1px solid var(--rule-light);
+    border-radius: 999px;
+    padding: 0.4rem 1rem;
+  }
+  .sermon-listen a:hover { color: var(--warm-white); background: var(--accent); border-color: var(--accent); }
+  .sermon-listen[hidden] { display: none; }
+  .sermon-listen-apps { display: block; margin-top: 0.55rem; font-size: 0.64rem; letter-spacing: 0.1em; color: var(--ink-faint); }
+  .sermon-listen-apps a { display: inline; white-space: nowrap; border: 0; padding: 0; border-radius: 0; color: var(--accent-deep); border-bottom: 1px solid var(--rule-light); }
+  .sermon-listen-apps a:hover { background: none; color: var(--ink); border-color: var(--ink); }
+  .app-icon { width: 1.25em; height: 1.25em; vertical-align: -0.3em; margin-right: 0.3em; fill: currentColor; }
+  .app-icon-applepodcasts { color: #b150e2; }
+  .app-icon-spotify { color: #1db954; }
+  .app-icon-youtube { color: #ff0000; }
+  .sermon-listen > a .app-icon { width: 1.3em; height: 1.3em; margin-right: 0.45em; }
+
+  .sermon-epigraph {
+    text-align: center;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--ink-light);
+    margin: 0.6rem 0 1.2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--rule-light);
+  }
+
+  .sermon-intro {
+    font-size: 0.92rem;
+    line-height: 1.65;
+    text-align: justify;
+    hyphens: auto;
+    color: var(--ink-light);
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--rule-light);
+  }
+
+  .sermon-point {
+    font-family: 'EB Garamond', serif;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--ink);
+    margin-top: 1.2rem;
+    margin-bottom: 0.3rem;
+  }
+  .sermon-point .pt-ref {
+    font-weight: 400;
+    font-style: italic;
+    font-size: 0.9rem;
+    color: var(--ink-faint);
+  }
+
+  .notes-prompt {
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin-top: 1rem;
+    margin-bottom: 0.25rem;
+    color: var(--ink);
+  }
+
+  .sub-list {
+    list-style: none;
+    padding-left: 0.06in;
+    margin: 0.3rem 0 0.4rem;
+  }
+  .sub-list li {
+    font-size: 0.92rem;
+    line-height: 1.55;
+    color: var(--ink-light);
+    padding-left: 1rem;
+    position: relative;
+  }
+  .sub-list li::before {
+    content: '·';
+    position: absolute;
+    left: 0.3rem;
+    color: var(--accent-deep);
+    font-weight: 700;
+  }
+
+  .scripture-quote {
+    font-size: 0.85rem;
+    font-style: italic;
+    color: var(--ink-faint);
+    padding-left: 0.8rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .notes-lines {
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+    padding: 0.4rem 0;
+  }
+
+  .notes-line {
+    border-bottom: 1px solid var(--rule-light);
+    width: 100%;
+  }
+
+  .sermon-resources {
+    font-size: 0.75rem;
+    color: var(--ink-faint);
+    margin-top: 1.5rem;
+    padding-top: 0.8rem;
+    border-top: 1px solid var(--rule-light);
+    line-height: 1.5;
+  }
+
+  /* ── ANNOUNCEMENTS ──────────────────────── */
+  .flower-dedication {
+    text-align: center;
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-top: 1px solid var(--rule-light);
+    border-bottom: 1px solid var(--rule-light);
+  }
+
+  .flower-dedication .attribution {
+    font-size: 0.85rem;
+    font-style: italic;
+    color: var(--ink-faint);
+    margin-top: 0.3rem;
+  }
+
+  .announce-block {
+    margin-bottom: 1rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid var(--rule-light);
+  }
+  .announce-block:last-child { border-bottom: none; }
+  .announce-block h3 {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 500;
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent-deep);
+    margin-bottom: 0.4rem;
+  }
+  .announce-block p {
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: var(--ink-light);
+    text-align: justify;
+    hyphens: auto;
+  }
+  .announce-block p.announce-detail {
+    text-align: left;
+    margin-top: 0.4rem;
+  }
+
+  /* QR code for announcement */
+  .announce-qr {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.9rem;
+  }
+  .announce-qr img {
+    width: 160px;
+    height: 160px;
+    max-width: 55%;
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    background: #fff;
+    padding: 0.5rem;
+  }
+  .announce-qr .qr-caption {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 500;
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  /* ── SERVANTS & STAFF ───────────────────── */
+  .serve-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.3rem 1.2rem;
+    margin-bottom: 1rem;
+  }
+
+  .serve-line {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: var(--ink-light);
+  }
+  .serve-line .role {
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .staff-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.2rem 1.2rem;
+  }
+
+  .staff-line {
+    font-size: 0.82rem;
+    line-height: 1.45;
+    color: var(--ink-light);
+  }
+  .staff-line .name {
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  /* ── CALENDAR ───────────────────────────── */
+  .calendar-section {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--rule-light);
+  }
+
+  .cal-line {
+    font-size: 0.88rem;
+    line-height: 1.5;
+    color: var(--ink-light);
+    margin-bottom: 0.2rem;
+  }
+  .cal-line .cal-date {
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  /* ── FOOTER ─────────────────────────────── */
+  .bulletin-footer {
+    text-align: center;
+    padding: 1.5rem 2rem 2rem;
+    border-top: 2px solid var(--ink);
+    background: var(--warm-white);
+  }
+
+  .footer-address {
+    font-family: 'EB Garamond', serif;
+    font-size: 0.85rem;
+    color: var(--ink-faint);
+    letter-spacing: 0.04em;
+  }
+
+  .footer-give {
+    margin-top: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .give-button {
+    display: inline-block;
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 500;
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--warm-white);
+    background: var(--accent);
+    padding: 0.7rem 1.6rem;
+    border-radius: 2px;
+    transition: background 0.2s ease;
+  }
+  .give-button:hover {
+    background: var(--accent-soft);
+  }
+
+  /* ── ANIMATIONS ─────────────────────────── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes gentle-bob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(5px); }
+  }
+
+  /* Scroll-triggered fade-in */
+  .reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── RESPONSIVE ─────────────────────────── */
+  @media (max-width: 500px) {
+    html { font-size: 16px; }
+    .bulletin-section { padding: 1.5rem 1.3rem; }
+    .serve-grid, .staff-grid { grid-template-columns: 1fr; }
+    .section-heading::before, .section-heading::after { width: 24px; }
+  }
+
+  @media (min-width: 641px) {
+    .scroll-container {
+      margin-top: 1.5rem;
+      margin-bottom: 1.5rem;
+      border-radius: 2px;
+    }
+  }
+
+  /* ── PRINT ──────────────────────────────── */
+  @media print {
+    body { background: #fff; }
+    .scroll-container { box-shadow: none; max-width: none; }
+    .cover-scroll-hint { display: none; }
+    .site-header { display: none; }
+    .reveal { opacity: 1; transform: none; }
+  }
+  /* ── SITE MENU ───────────────────────────── */
+  .site-nav details { position: relative; }
+  .site-nav summary { list-style: none; cursor: pointer; display: inline-flex; align-items: center; gap: 0.45rem; font-family: 'Work Sans', sans-serif; font-weight: 500; font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-faint); padding: 0.35rem 0.85rem; border: 1px solid var(--rule); border-radius: 2px; white-space: nowrap; user-select: none; -webkit-user-select: none; -webkit-tap-highlight-color: transparent; transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease; }
+  .site-nav summary::-webkit-details-marker { display: none; }
+  .site-nav summary svg { width: 15px; height: 15px; }
+  .site-nav summary:hover, .site-nav details[open] summary { color: var(--warm-white); background: var(--ink); border-color: var(--ink); }
+  .site-nav .menu-list { position: absolute; right: 0; top: calc(100% + 0.55rem); min-width: 14rem; background: var(--warm-white); border: 1px solid var(--rule-light); border-radius: 3px; box-shadow: 0 14px 36px rgba(23, 18, 0, 0.14); padding: 0.4rem 0; z-index: 200; }
+  .site-nav .menu-list a { display: block; padding: 0.6rem 1.15rem; font-family: 'Work Sans', sans-serif; font-size: 0.8rem; letter-spacing: 0.05em; color: var(--ink); text-decoration: none; }
+  .site-nav .menu-list a:hover { background: var(--section-bg); color: var(--accent-deep); }
+  .site-nav .menu-list a.current { color: var(--accent-deep); font-weight: 600; }
+  @media (max-width: 420px) { .site-nav summary { font-size: 0.64rem; padding: 0.3rem 0.7rem; } }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="https://fpccorinth.org" target="_blank" rel="noopener">First Presbyterian Church</a>
+    <nav class="site-nav" aria-label="Site">
+      <details>
+        <summary><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg>Menu</summary>
+        <div class="menu-list">
+          <a href="/">This Week’s Bulletin</a>
+          <a href="/archive/">Past Bulletins</a>
+          <a href="/calendar/">Church Calendar</a>
+          <a href="/hymns/">Hymn Index</a>
+          <a href="/scripture/">Scripture Index</a>
+          <a href="/about/">About &amp; Service Times</a>
+        </div>
+      </details>
+    </nav>
+  </div>
+</header>
+
+<div class="scroll-container">
+
+  <!-- ═══════════ COVER ═══════════ -->
+  <section class="cover-section">
+    <div class="cover-rule cover-rule--top"></div>
+
+    <h1 style="margin:0; line-height:0;"><img class="cover-logo" src="/images/fpc-logo-2026.png" alt="First Presbyterian Church"></h1>
+    <div class="cover-ornament"></div>
+    <p class="cover-date">November 15, 2026</p>
+    <p class="cover-occasion">Twenty-fifth Sunday after Pentecost</p>
+    <p class="cover-mission">“To be disciples, to make disciples”</p>
+
+    <div class="cover-scroll-hint">
+      <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+
+    <div class="cover-rule cover-rule--bottom"></div>
+    <p class="cover-footer">A congregation of the Evangelical Presbyterian Church</p>
+  </section>
+
+  <!-- ═══════════ WELCOME ═══════════ -->
+  <section class="bulletin-section welcome-section">
+    <div class="reveal">
+      <p class="section-heading">Welcome</p>
+
+      <div class="welcome-block">
+        <h3>We Are Glad You Are Here!</h3>        <p>We are honored that you decided to join us this morning. Whether it is your first time in church, your first time in a long while, or part of your regular rhythm, we hope you will be encouraged by the fellowship with each other, and with our Lord, as we worship him together.</p>        <p style="margin-top:0.5rem;">If this is your first time with us, please take a moment and fill out a Next Steps Card found on the back of the pew, or scan the QR code and submit it on your phone. We would love to meet you and help you get connected.</p>      </div>
+
+      <div class="welcome-block">
+        <h3>Children &amp; Nursery</h3>        <p>Children (age 4+) and their families worship together in the sanctuary, where children will be dismissed to Children’s Church during the service. Children’s bulletins and crayons are available at both entrances to the Sanctuary. Children are always welcome in worship!</p>        <p style="margin-top:0.5rem;">Nursery rooms for infants through age 3 are in the Education Wing, with the entrance behind the playground on the west side of campus. If you have a newborn and/or are nursing your baby, please feel free to use our baby room just off the narthex — a quiet space with comfortable seating where the worship service is broadcast as well.</p>      </div>
+
+      <div class="welcome-block">
+        <h3>Our Vision &amp; Mission</h3>        <p>Our vision is to see lives transformed by the power of the gospel, rooted in God’s Word and the Reformed tradition, in order to create a culture of discipleship at FPC where disciples WORSHIP holistically, GROW relationally in Christ, and SERVE boldly in the world for the glory of God. Our mission is to accomplish this by “Being Disciples and Making Disciples.”</p>      </div>
+
+      <div class="welcome-block">
+        <h3>Connect With Us</h3>
+        <p class="connect-info">
+          <strong>Website:</strong> fpccorinth.org<br>
+          <strong>Phone:</strong> 662-286-6638<br>
+          <strong>Address:</strong> 919 East Shiloh Rd, Corinth, MS 38834
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ LITURGY: GATHERING ═══════════ -->
+  <section class="bulletin-section">
+    <div class="reveal">      <div class="liturgy-header">
+        <p class="liturgy-main-title">Liturgy for the Worship of God</p>
+        <p class="liturgy-date-line">November 15, 2026</p>
+        <p class="liturgy-standing-note">* Indicates congregation standing if able</p>
+      </div>
+      <div class="liturgy-divider">Gathering</div>      <p class="liturgy-standing-note" style="margin:0 0 1rem; font-size:0.9rem; color:var(--ink-light); line-height:1.5;">Our worship is a covenant conversation between God and His people. Throughout the service, God graciously speaks to us through His Word, and we joyfully respond with praise, confession, prayer, faith, thanksgiving, and obedience.</p>
+      <div class="worship-item">        <p class="worship-heading">The Piano Prelude</p>      </div>
+      <div class="worship-item">        <p class="worship-heading">Greetings &amp; Announcements</p>      </div>
+      <div class="worship-item">        <p class="worship-heading">Call to Meditation: <span style="font-weight:normal;">Ephesians 4:15–16</span></p>        <p class="worship-body">“We are to grow up in every way into him who is the head, into Christ, from whom the whole body, joined and held together by every joint with which it is equipped, when each part is working properly, makes the body grow so that it builds itself up in love.”</p>      </div>
+      <div class="worship-item">        <p class="worship-heading">The Prelude</p>      </div>
+      <div class="worship-item">        <p class="worship-heading">Choral Introit <span class="worship-attr">&ldquo;We Come to Praise&rdquo;</span></p>      </div>
+      <div class="worship-item">        <p class="worship-heading">*Call to Worship: <span style="font-weight:normal;">Psalm 100</span></p>        <div class="responsive">          <p class="leader-line"><span class="leader-label">Leader:</span> Make a joyful noise to the Lord, all the earth! Serve the Lord with gladness! Come into his presence with singing! Know that the Lord, he is God!</p>          <p class="all-line"><span class="all-label">All:</span> It is he who made us, and we are his; we are his people, and the sheep of his pasture.</p>          <p class="leader-line"><span class="leader-label">Leader:</span> Enter his gates with thanksgiving, and his courts with praise! Give thanks to him; bless his name!</p>          <p class="all-line"><span class="all-label">All:</span> For the Lord is good; his steadfast love endures forever, and his faithfulness to all generations.</p>        </div><div class="margin-note">
+          <span class="note-label">Call to Worship</span>
+          We are summoned to worship by God’s word, calling His people into His presence to honor Him in spirit and truth, opening a sacred conversation that unfolds throughout the service. We sing in response to God’s call to worship, which is a reminder that worship is at God’s initiative, not ours.
+        </div>      </div>
+      <div class="worship-item">        <p class="worship-heading">*The Hymn: &nbsp;#277 <span class="worship-attr">&ldquo;The Church’s One Foundation (vv. 1–3)&rdquo;</span></p><div class="margin-note">
+          <span class="note-label">The Church’s One Foundation</span>
+          In this hymn, written by Samuel Stone in 1866, we sing of Christ’s redeemed Church, who awaits the day when He will gather His people from every age and nation into eternal glory. Though the Church now struggles and suffers, Christ will preserve her until the final redemption, when she will dwell with Him forever in the new heavens and new earth.
+        </div>      </div>
+      <div class="worship-item">        <p class="worship-heading">*Prayer of Invocation &amp; The Lord’s Prayer</p>        <p class="worship-body corporate">Our Father, who art in heaven, hallowed be thy Name. Thy Kingdom come, thy will be done on earth, as it is in heaven. Give us this day our daily bread, and forgive us our debts, as we forgive our debtors. Lead us not into temptation, but deliver us from evil. For thine is the kingdom, the power, and the glory, forever. Amen.</p>      </div>
+      <div class="worship-item">        <p class="worship-heading">*The New Testament Reading: <span style="font-weight:normal;">1 Corinthians 12:12–14, 18–27</span></p>        <div class="responsive">          <p class="leader-line"><span class="leader-label">Leader:</span> For just as the body is one and has many members, and all the members of the body, though many, are one body, so it is with Christ.</p>          <p class="all-line"><span class="all-label">All:</span> For in one Spirit we were all baptized into one body—Jews or Greeks, slaves or free—and all were made to drink of one Spirit.</p>          <p class="leader-line"><span class="leader-label">Leader:</span> For the body does not consist of one member but of many. But as it is, God arranged the members in the body, each one of them, as he chose. If all were a single member, where would the body be? As it is, there are many parts, yet one body. The eye cannot say to the hand, “I have no need of you,” nor again the head to the feet, “I have no need of you.”</p>          <p class="all-line"><span class="all-label">All:</span> On the contrary, the parts of the body that seem to be weaker are indispensable,</p>          <p class="leader-line"><span class="leader-label">Leader:</span> And on those parts of the body that we think less honorable we bestow the greater honor, and our unpresentable parts are treated with greater modesty, which our more presentable parts do not require. But God has so composed the body, giving greater honor to the part that lacked it, that there may be no division in the body, but that the members may have the same care for one another.</p>          <p class="all-line"><span class="all-label">All:</span> If one member suffers, all suffer together; if one member is honored, all rejoice together.</p>          <p class="leader-line"><span class="leader-label">Leader:</span> Now you are the body of Christ and individually members of it.</p>        </div>      </div>
+      <div class="worship-item">        <p class="worship-heading">*Congregational Response: &nbsp;#277 <span class="worship-attr">&ldquo;The Church’s One Foundation (v. 4)&rdquo;</span></p>      </div>    </div>
+  </section>
+  <!-- ═══════════ LITURGY: WORD ═══════════ -->
+  <section class="bulletin-section">
+    <div class="reveal">
+      <div class="liturgy-divider">Word</div>
+      <div class="worship-item">        <p class="worship-heading">The Giving of Tithes and Offerings</p>      </div>
+      <div class="worship-item">        <p class="worship-heading">The Offertory <span class="worship-attr">&ldquo;In the Name of the Father&rdquo;</span></p>      </div>
+      <div class="worship-item">        <p class="worship-heading">*The Doxology and Prayer of Dedication</p>        <p class="worship-body corporate">Praise God, from whom all blessings flow; Praise Him, all creatures here below; Praise Him above, ye heavenly host; Praise Father, Son, and Holy Ghost. Amen.</p>      </div>
+      <div class="worship-item">        <p class="worship-heading">*Children Dismissed to Children’s Church</p><div class="margin-note">
+          <span class="note-label">Children’s Church</span>
+          Children ages 4 up to 4th grade are invited to come forward and exit out the side door for Children’s Church. Following the worship service, they may be picked up in the Fellowship Hall.
+        </div>      </div>
+      <div class="worship-item">        <p class="worship-heading">Scripture Reading <span class="worship-attr">Nehemiah 3 &middot; Pew Bible, p. 399</span></p>      </div>
+      <div class="worship-item">        <p class="worship-heading">Scripture Response: <span style="font-weight:normal;">Isaiah 40:6b, 8</span></p>        <div class="responsive">          <p class="leader-line"><span class="leader-label">Leader:</span> All flesh is grass, and all its beauty is like the flower of the field;</p>          <p class="all-line"><span class="all-label">All:</span> The grass withers, the flower fades, but the Word of our God will stand forever. Amen.</p>        </div>      </div>
+      <div class="worship-item">        <p class="worship-heading">Sermon: <span class="worship-attr">&ldquo;Spiritual Renewal: A Shared Calling&rdquo; &middot; Rev. Waring Porter</span></p>      </div>
+      <div class="worship-item">        <p class="worship-heading">Prayer of Commitment</p>      </div>
+      <div class="worship-item">        <p class="worship-heading">Choral Anthem <span class="worship-attr">&ldquo;In the Name of the Father&rdquo; &middot; Nan &amp; Dennis Allen</span></p>      </div>    </div>
+  </section>
+  <!-- ═══════════ LITURGY: TABLE ═══════════ -->
+  <section class="bulletin-section">
+    <div class="reveal">
+      <div class="liturgy-divider">Table</div>
+      <div class="worship-item">        <p class="worship-heading">The Sacrament of The Lord’s Supper</p><div class="margin-note">
+          <span class="note-label">The Lord’s Supper</span>
+          The Lord’s Supper is a means of grace in which Christ spiritually nourishes believers, strengthening their faith as they partake of the bread and cup in union with Him. We reflect on how thankful we are for the work of Christ on our behalf, and we pray that his grace would work more powerfully in our lives to change us more into his likeness. The sacrament is a tangible, concrete gift where we can physically remember the goodness of the gospel story.
+        </div>      </div>
+      <div class="worship-item">        <p class="worship-heading">Invitation to the Table</p>      </div>
+      <div class="worship-item">        <p class="worship-heading">Corporate Prayer of Confession</p>        <p class="worship-body corporate">Great God, our Father: As we remember Christ’s suffering on the cross, our hearts are filled with shame that we often forsake the gospel and make little to no progress in our growth as disciples from day to day. We lament that war and lust flourish and grow more rampant every day. Forgive us for our cruel indifference to the cross. Teach us the good news of the gospel through the forgiveness achieved at the cross. Allow us, sinful and broken as we may be, to live in light of the cross, and look forward to the day when the whole world shall be born again.</p>        <p class="silent-confession">Silent Confession</p><div class="margin-note">
+          <span class="note-label">Prayer of Confession</span>
+          Our worship moves from adoration to grace, to confession, then assurance, and finally to the Table. This prayer intentionally acknowledges our tendency toward self-reliance while anticipating the grace that Christ offers in the Sacrament.
+        </div>      </div>
+      <div class="worship-item">        <p class="worship-heading">Assurance of Divine Pardon: <span style="font-weight:normal;">1 John 4:14–16</span></p>        <p class="worship-body">“And we have seen and testify that the Father has sent his Son to be the Savior of the world. Whoever confesses that Jesus is the Son of God, God abides in him, and he in God. So we have come to know and to believe the love that God has for us. God is love, and whoever abides in love abides in God, and God abides in him.”</p>      </div>
+      <div class="worship-item">        <p class="worship-heading">The Words of Institution: <span style="font-weight:normal;">1 Corinthians 11:23–29</span></p>      </div>
+      <div class="worship-item">        <p class="worship-heading">Partaking of the Elements</p>      </div>
+      <div class="worship-item">        <p class="worship-heading">Prayer of Thanksgiving</p>      </div>    </div>
+  </section>
+  <!-- ═══════════ LITURGY: SENDING ═══════════ -->
+  <section class="bulletin-section">
+    <div class="reveal">
+      <div class="liturgy-divider">Sending</div>
+      <div class="worship-item">        <p class="worship-heading">*Hymn of Commitment: &nbsp;#280 <span class="worship-attr">&ldquo;I Love Thy Kingdom, Lord&rdquo;</span></p>      </div>
+      <div class="worship-item">        <p class="worship-heading">*Benediction</p><div class="margin-note">
+          <span class="note-label">Benediction</span>
+          God’s people are blessed by the Lord and sent forth into the world, bearing with them the hope and peace of the Gospel. As we continue our worship, we do so as people sent to our community for reconciliation, bearing witness to the good news of the gospel.
+        </div>      </div>
+      <div class="worship-item">        <p class="worship-heading">*Choral Benediction <span class="worship-attr">&ldquo;Sevenfold Amen&rdquo;</span></p>      </div>
+      <div class="worship-item">        <p class="worship-heading">*Postlude</p>      </div>    </div>
+  </section>
+  <!-- ═══════════ SERMON NOTES ═══════════ -->
+  <section class="bulletin-section sermon-section">
+    <div class="reveal">
+      <p class="section-heading">Sermon Notes</p>      <p class="sermon-title">&ldquo;Spiritual Renewal: A Shared Calling&rdquo;</p>
+      <p class="sermon-text-ref">Rev. Waring Porter &nbsp;&middot;&nbsp; Nehemiah 3</p>
+      <p class="sermon-listen" data-sermon-date="2026-11-15" hidden><a href="https://sermons.fpccorinth.org/" target="_blank" rel="noopener">&#9654;&nbsp; Listen to this sermon</a></p>
+      <p class="sermon-intro" style="margin-bottom:0.6rem; padding-bottom:0; border-bottom:none;">In chapter 2, Nehemiah challenges the people to rise up and build. The people respond with enthusiasm saying, “Let us rise up and build.” Now, in chapter 3, we see what that response actually looks like.</p>      <p class="sermon-intro" style="margin-bottom:0.6rem; padding-bottom:0; border-bottom:none;">We see the priests, the goldsmiths, the perfume makers, the merchants, the rulers, and even the daughters of one of the leaders all participating in the work. As you read through the chapter, one phrase keeps appearing: “Next to him…” One person works on one section of the wall, and somebody else comes alongside and works on the next section. It’s a beautiful picture of God’s people working together.</p>      <p class="sermon-intro">God’s work is not the responsibility of a few particularly gifted or committed individuals. It is a shared calling of His entire people. It was true of the rebuilding of Jerusalem, and it is still true for the church today. There are three things this passage teaches us about our shared calling as the people of God.</p>
+      <p class="sermon-point">I. Requires Everyone <span class="pt-ref">(vv. 1–12)</span></p>      <div class="notes-lines">        <div class="notes-line"></div>        <div class="notes-line"></div>        <div class="notes-line"></div>      </div>
+      <p class="sermon-point">II. Requires Faithfulness <span class="pt-ref">(vv. 13–27)</span></p>      <p class="scripture-quote">Ephesians 4:15–16 — “we are to grow up in every way into him who is the head, into Christ, from whom the whole body, joined and held together by every joint with which it is equipped, when each part is working properly, makes the body grow so that it builds itself up in love.”</p>      <div class="notes-lines">        <div class="notes-line"></div>        <div class="notes-line"></div>        <div class="notes-line"></div>      </div>
+      <p class="sermon-point">III. Requires a Common Commitment <span class="pt-ref">(vv. 28–32)</span></p>      <div class="notes-lines">        <div class="notes-line"></div>        <div class="notes-line"></div>        <div class="notes-line"></div>      </div>    </div>
+  </section>
+
+  <!-- ═══════════ ANNOUNCEMENTS ═══════════ -->
+  <section class="bulletin-section">
+    <div class="reveal">
+      <p class="section-heading">Announcements</p>
+      <div class="announce-block">
+        <h3>Hanging of the Greens</h3>
+        <p>On Sunday, November 22, we will meet at 5 p.m. for a devotional and caroling in the sanctuary, followed by a time of decking the halls of FPC! Sunday School teachers of children’s classes will take the students from the sanctuary to briefly go by their rooms before getting their dinner and taking it to the playground for an outdoor Christmas movie! Adults can decorate, eat, and pick up their children from the playground when they’re done. The nursery will not be available this night, but there will be plenty of hands willing and able to hold your littlest loves, and high chairs are available in the Fellowship Hall! So please come and bring them with you. Sign up in the Sunday bulletin or by emailing lkcarmichiel@fpccorinth.org to help bring food to Hanging of the Greens. We will need multiple crockpots of soup or chili, pizza (for kids), or a dessert. We will provide an array of toppings for chili/soups, and drinks.</p>      </div>
+      <div class="announce-block">
+        <h3>37th Community Thanksgiving Meal</h3>
+        <p>Join us on Thanksgiving morning, Thursday, November 26, as we prepare and deliver 750 Thanksgiving meals to those who need them throughout Alcorn County. This is a HUGE project and can only be accomplished with the help of many. This is a great opportunity for the members of FPC to be disciples by “living and loving like Jesus.” You can help with meal prep or by delivering meals.</p>        <p class="announce-detail">To volunteer your time with meal prep or delivering meals, please fill out the insert in the printed bulletin at church Sunday and place it in the offering plate, or drop it by the church office.</p>      </div>
+      <div class="flower-dedication">
+        <p><strong>Flower Dedication</strong> &mdash; The flowers adorning the sanctuary today are given in honor of the leaders and volunteers of our Children’s Ministry and Youth Ministry.</p>        <p class="attribution" style="margin-top:0.5rem;">Thank you for your faithful service and the love you pour into every child and teen. We are thankful for all you do.</p>        <p class="attribution" style="margin-top:0.5rem;">Ryan &amp; Ellen Wesson</p>      </div>    </div>
+  </section>
+
+  <!-- ═══════════ THOSE WHO SERVE / STAFF ═══════════ -->
+  <section class="bulletin-section">
+    <div class="reveal">
+      <p class="section-heading">Those Who Serve Today</p>
+
+      <div class="serve-grid">        <p class="serve-line"><span class="role">Assisting Elder</span> &mdash; Zeb Taylor</p>        <p class="serve-line"><span class="role">Ushers</span> &mdash; Scott Sawyer, Holland Yeates, Ben Long, &amp; Josh McCahill</p>        <p class="serve-line"><span class="role">Greeters</span> &mdash; Danny &amp; Wendy Phillips</p>        <p class="serve-line"><span class="role">Nursery</span> &mdash; Deborah Kiddy, Bobby &amp; Nicole Roach, Devin Butler, Leslie Fisher, &amp; Lauren Butler</p>        <p class="serve-line"><span class="role">Acolytes</span> &mdash; Julianne Whittington &amp; Blair Bryant</p>        <p class="serve-line"><span class="role">Children’s Church</span> &mdash; Ken &amp; Edi Williams</p>        <p class="serve-line"><span class="role">Circle of Prayer</span> &mdash; Jack Griffith &amp; Jenny Biggers</p>        <p class="serve-line"><span class="role">AV Engineer</span> &mdash; Russell Smith</p>      </div>
+
+      <p class="section-heading" style="margin-top:1.2rem;">Church Staff</p>
+
+      <div class="staff-grid">        <p class="staff-line"><span class="name">Rev. Waring Porter</span> &mdash; Pastor</p>        <p class="staff-line"><span class="name">Phyllis Sellers</span> &mdash; Day School Director</p>        <p class="staff-line"><span class="name">Gregg Parker</span> &mdash; Dir. of Discipleship</p>        <p class="staff-line"><span class="name">Jan Pike</span> &mdash; Choir Director</p>        <p class="staff-line"><span class="name">Bobby Capps</span> &mdash; Dir. of Outreach &amp; Care</p>        <p class="staff-line"><span class="name">Malechi Doren</span> &mdash; Accompanist</p>        <p class="staff-line"><span class="name">Jennifer Shipp</span> &mdash; Dir. of Student Ministries</p>        <p class="staff-line"><span class="name">Teresa Tsagarakis</span> &mdash; Administrative Assistant</p>        <p class="staff-line"><span class="name">Laura Kate Carmichiel</span> &mdash; Dir. of Women’s Min. &amp; Comm.</p>        <p class="staff-line"><span class="name">Sammy Allred</span> &mdash; Bookkeeper</p>      </div>
+
+      <div class="calendar-section">
+        <p class="section-heading" style="margin-top:0;">The Church Calendar</p>        <p class="cal-line"><span class="cal-date">November 17</span> &nbsp;Messy Bible Study, 8 a.m.</p>        <p class="cal-line"><span class="cal-date">November 18</span> &nbsp;Kids Quest · Youth House · Youth House Friendsgiving, 6 p.m. · Messy Bible Study Dinner, 6 p.m.</p>        <p class="cal-line"><span class="cal-date">November 19</span> &nbsp;Joy Riders — Cullman, AL, 8:30 a.m.</p>        <p class="cal-line"><span class="cal-date">November 22</span> &nbsp;Hanging of the Greens, 5 p.m.</p>        <p class="cal-line"><span class="cal-date">November 26</span> &nbsp;37th Community Thanksgiving Meal</p>      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ FOOTER ═══════════ -->
+  <footer class="bulletin-footer">
+    <p class="footer-address">919 East Shiloh Rd  ·  Corinth, MS 38834  ·  fpccorinth.org  ·  662-286-6638</p>
+    <div class="footer-give">
+      <a class="give-button" href="https://onrealm.org/fpccorinth/-/form/give/now" target="_blank" rel="noopener">Give Online</a>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  // Scroll-triggered reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+
+<script>
+(function () {
+  var el = document.querySelector('.sermon-listen[data-sermon-date]');
+  var ICONS = { apple: '<svg class="app-icon app-icon-applepodcasts" viewBox="0 0 24 24" aria-hidden="true"><path d="M5.34 0A5.328 5.328 0 000 5.34v13.32A5.328 5.328 0 005.34 24h13.32A5.328 5.328 0 0024 18.66V5.34A5.328 5.328 0 0018.66 0zm6.525 2.568c2.336 0 4.448.902 6.056 2.587 1.224 1.272 1.912 2.619 2.264 4.392.12.59.12 2.2.007 2.864a8.506 8.506 0 01-3.24 5.296c-.608.46-2.096 1.261-2.336 1.261-.088 0-.096-.091-.056-.46.072-.592.144-.715.48-.856.536-.224 1.448-.874 2.008-1.435a7.644 7.644 0 002.008-3.536c.208-.824.184-2.656-.048-3.504-.728-2.696-2.928-4.792-5.624-5.352-.784-.16-2.208-.16-3 0-2.728.56-4.984 2.76-5.672 5.528-.184.752-.184 2.584 0 3.336.456 1.832 1.64 3.512 3.192 4.512.304.2.672.408.824.472.336.144.408.264.472.856.04.36.03.464-.056.464-.056 0-.464-.176-.896-.384l-.04-.03c-2.472-1.216-4.056-3.274-4.632-6.012-.144-.706-.168-2.392-.03-3.04.36-1.74 1.048-3.1 2.192-4.304 1.648-1.737 3.768-2.656 6.128-2.656zm.134 2.81c.409.004.803.04 1.106.106 2.784.62 4.76 3.408 4.376 6.174-.152 1.114-.536 2.03-1.216 2.88-.336.43-1.152 1.15-1.296 1.15-.023 0-.048-.272-.048-.603v-.605l.416-.496c1.568-1.878 1.456-4.502-.256-6.224-.664-.67-1.432-1.064-2.424-1.246-.64-.118-.776-.118-1.448-.008-1.02.167-1.81.562-2.512 1.256-1.72 1.704-1.832 4.342-.264 6.222l.413.496v.608c0 .336-.027.608-.06.608-.03 0-.264-.16-.512-.36l-.034-.011c-.832-.664-1.568-1.842-1.872-2.997-.184-.698-.184-2.024.008-2.72.504-1.878 1.888-3.335 3.808-4.019.41-.145 1.133-.22 1.814-.211zm-.13 2.99c.31 0 .62.06.844.178.488.253.888.745 1.04 1.259.464 1.578-1.208 2.96-2.72 2.254h-.015c-.712-.331-1.096-.956-1.104-1.77 0-.733.408-1.371 1.112-1.745.224-.117.534-.176.844-.176zm-.011 4.728c.988-.004 1.706.349 1.97.97.198.464.124 1.932-.218 4.302-.232 1.656-.36 2.074-.68 2.356-.44.39-1.064.498-1.656.288h-.003c-.716-.257-.87-.605-1.164-2.644-.341-2.37-.416-3.838-.218-4.302.262-.616.974-.966 1.97-.97z"/></svg>', spotify: '<svg class="app-icon app-icon-spotify" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>', youtube: '<svg class="app-icon app-icon-youtube" viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>' };
+  if (!el || !window.fetch) return;
+  fetch('https://sermons.fpccorinth.org/api/episodes.json?date=' + el.getAttribute('data-sermon-date'))
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (j) {
+      var ep = j && j.episodes && j.episodes[0];
+      var a = el.querySelector('a');
+      if (!ep) {
+        // No recording yet: for this coming Sunday, point at the live stream instead.
+        var today = new Date(); var iso = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
+        var live = j && j.show && j.show.youtube_live;
+        if (!live || el.getAttribute('data-sermon-date') < iso) return;
+        a.href = live;
+        a.innerHTML = ICONS.youtube + 'Watch the service live';
+        el.hidden = false;
+        return;
+      }
+      a.href = ep.url;
+      if (ep.duration_seconds) a.title = ep.title + ' (' + Math.round(ep.duration_seconds / 60) + ' min)';
+      var apps = [['apple', 'Apple Podcasts'], ['spotify', 'Spotify'], ['youtube', 'YouTube']].filter(function (p) { return ep.links && ep.links[p[0]]; });
+      if (apps.length) {
+        var row = document.createElement('span');
+        row.className = 'sermon-listen-apps';
+        row.appendChild(document.createTextNode('or in '));
+        apps.forEach(function (p, i) {
+          if (i) row.appendChild(document.createTextNode(' · '));
+          var b = document.createElement('a');
+          b.href = ep.links[p[0]]; b.target = '_blank'; b.rel = 'noopener'; b.innerHTML = ICONS[p[0]] + p[1];
+          row.appendChild(b);
+        });
+        el.appendChild(row);
+      }
+      el.hidden = false;
+    })
+    .catch(function () {});
+})();
+</script>
+
+<script>
+(function () {
+  var d = document.querySelector('.site-nav details');
+  if (!d) return;
+  document.addEventListener('click', function (e) { if (d.open && !d.contains(e.target)) d.open = false; });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') d.open = false; });
+  var p = location.pathname;
+  d.querySelectorAll('.menu-list a').forEach(function (a) {
+    var h = a.getAttribute('href');
+    if (h !== '/' && p.indexOf(h) === 0) a.classList.add('current');
+  });
+})();
+</script>
+</body>
+</html>

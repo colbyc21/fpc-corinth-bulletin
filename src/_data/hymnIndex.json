@@ -1,12 +1,12 @@
 {
-  "generated": "2026-11-06T15:04:29+00:00",
+  "generated": "2026-11-12T18:31:03+00:00",
   "hymnal": "The Hymnal for Worship & Celebration",
   "hymnary_hymnal_url": "https://hymnary.org/hymnal/HWC1986",
-  "services": 41,
+  "services": 42,
   "since": "2026-01-25",
-  "through": "2026-11-08",
+  "through": "2026-11-15",
   "since_label": "January 25, 2026",
-  "through_label": "November 8, 2026",
+  "through_label": "November 15, 2026",
   "hymns": [
     {
       "number": "1",
@@ -1017,13 +1017,15 @@
     {
       "number": "277",
       "title": "The Church’s One Foundation",
-      "as_printed": [],
+      "as_printed": [
+        "The Church’s One Foundation (vv. 1–3)"
+      ],
       "tune": "AURELIA",
       "in_hymnal": true,
-      "times": 3,
+      "times": 4,
       "first": "2026-05-31",
-      "last": "2026-10-18",
-      "last_label": "October 18, 2026",
+      "last": "2026-11-15",
+      "last_label": "November 15, 2026",
       "dates": [
         {
           "date": "2026-05-31",
@@ -1045,9 +1047,39 @@
           "slot": "The Hymn",
           "verses": null,
           "parts": 1
+        },
+        {
+          "date": "2026-11-15",
+          "label": "November 15, 2026",
+          "slot": "The Hymn / Congregational Response",
+          "verses": null,
+          "parts": 2
         }
       ],
       "url": "https://hymnary.org/hymn/HWC1986/277"
+    },
+    {
+      "number": "280",
+      "title": "I love Thy kingdom, Lord",
+      "as_printed": [
+        "I Love Thy Kingdom, Lord"
+      ],
+      "tune": "ST. THOMAS",
+      "in_hymnal": true,
+      "times": 1,
+      "first": "2026-11-15",
+      "last": "2026-11-15",
+      "last_label": "November 15, 2026",
+      "dates": [
+        {
+          "date": "2026-11-15",
+          "label": "November 15, 2026",
+          "slot": "Hymn of Commitment",
+          "verses": null,
+          "parts": 1
+        }
+      ],
+      "url": "https://hymnary.org/hymn/HWC1986/280"
     },
     {
       "number": "292",

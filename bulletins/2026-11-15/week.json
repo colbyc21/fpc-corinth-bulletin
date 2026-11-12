@@ -1,0 +1,653 @@
+{
+  "date": "2026-11-15",
+  "liturgical_day": "Twenty-fifth Sunday after Pentecost",
+  "subtitle_override": null,
+  "special": {
+    "communion": true,
+    "canvass": false
+  },
+  "pew_bible_page": 399,
+  "welcome_variant": "regular",
+  "flowers": {
+    "given": "in honor of the leaders and volunteers of our Children’s Ministry and Youth Ministry.",
+    "message": "Thank you for your faithful service and the love you pour into every child and teen. We are thankful for all you do.",
+    "quote": null,
+    "reference": null,
+    "closing": null,
+    "signed": "Ryan & Ellen Wesson"
+  },
+  "announcements": [
+    {
+      "title": "Hanging of the Greens",
+      "body": "On Sunday, November 22, we will meet at 5 p.m. for a devotional and caroling in the sanctuary, followed by a time of decking the halls of FPC! Sunday School teachers of children’s classes will take the students from the sanctuary to briefly go by their rooms before getting their dinner and taking it to the playground for an outdoor Christmas movie! Adults can decorate, eat, and pick up their children from the playground when they’re done. The nursery will not be available this night, but there will be plenty of hands willing and able to hold your littlest loves, and high chairs are available in the Fellowship Hall! So please come and bring them with you. Sign up in the Sunday bulletin or by emailing lkcarmichiel@fpccorinth.org to help bring food to Hanging of the Greens. We will need multiple crockpots of soup or chili, pizza (for kids), or a dessert. We will provide an array of toppings for chili/soups, and drinks."
+    },
+    {
+      "title": "37th Community Thanksgiving Meal",
+      "body": "Join us on Thanksgiving morning, Thursday, November 26, as we prepare and deliver 750 Thanksgiving meals to those who need them throughout Alcorn County. This is a HUGE project and can only be accomplished with the help of many. This is a great opportunity for the members of FPC to be disciples by “living and loving like Jesus.” You can help with meal prep or by delivering meals.",
+      "print_suffix": "Please fill out the insert at church Sunday to volunteer your time and place it in the offering plate, or drop it by the church office.",
+      "detail": "To volunteer your time with meal prep or delivering meals, please fill out the insert in the printed bulletin at church Sunday and place it in the offering plate, or drop it by the church office."
+    }
+  ],
+  "serve": {
+    "assisting_elder": "Zeb Taylor",
+    "greeters": "Danny & Wendy Phillips",
+    "ushers": "Scott Sawyer, Holland Yeates, Ben Long, & Josh McCahill",
+    "acolytes": "Julianne Whittington & Blair Bryant",
+    "nursery": "Deborah Kiddy, Bobby & Nicole Roach, Devin Butler, Leslie Fisher, & Lauren Butler",
+    "circle_of_prayer": "Jack Griffith & Jenny Biggers",
+    "childrens_church": "Ken & Edi Williams",
+    "av_engineer": "Russell Smith"
+  },
+  "staff": null,
+  "calendar": [
+    {
+      "date": "2026-11-17",
+      "items": [
+        "Messy Bible Study, 8 a.m."
+      ]
+    },
+    {
+      "date": "2026-11-18",
+      "items": [
+        "Kids Quest",
+        "Youth House",
+        "Youth House Friendsgiving, 6 p.m.",
+        "Messy Bible Study Dinner, 6 p.m."
+      ]
+    },
+    {
+      "date": "2026-11-19",
+      "items": [
+        "Joy Riders — Cullman, AL, 8:30 a.m."
+      ]
+    },
+    {
+      "date": "2026-11-22",
+      "items": [
+        "Hanging of the Greens, 5 p.m."
+      ]
+    },
+    {
+      "date": "2026-11-26",
+      "items": [
+        "37th Community Thanksgiving Meal"
+      ]
+    }
+  ],
+  "liturgy": {
+    "items": [
+      {
+        "id": "gathering",
+        "type": "section",
+        "title": "Gathering",
+        "star": false,
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "piano-prelude",
+        "type": "plain",
+        "title": "The Piano Prelude",
+        "star": false,
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "greetings",
+        "type": "plain",
+        "title": "Greetings & Announcements",
+        "star": false,
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "meditation",
+        "type": "scripture",
+        "title": "Call to Meditation",
+        "ref": "Ephesians 4:15–16",
+        "text": "“We are to grow up in every way into him who is the head, into Christ, from whom the whole body, joined and held together by every joint with which it is equipped, when each part is working properly, makes the body grow so that it builds itself up in love.”",
+        "star": false,
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "prelude",
+        "type": "plain",
+        "title": "The Prelude",
+        "star": false,
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "introit",
+        "type": "music",
+        "title": "Choral Introit",
+        "piece": "We Come to Praise",
+        "star": false,
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "call-to-worship",
+        "type": "responsive",
+        "title": "Call to Worship",
+        "star": true,
+        "ref": "Psalm 100",
+        "lines": [
+          {
+            "who": "Leader",
+            "text": "Make a joyful noise to the Lord, all the earth! Serve the Lord with gladness! Come into his presence with singing! Know that the Lord, he is God!"
+          },
+          {
+            "who": "All",
+            "text": "It is he who made us, and we are his; we are his people, and the sheep of his pasture."
+          },
+          {
+            "who": "Leader",
+            "text": "Enter his gates with thanksgiving, and his courts with praise! Give thanks to him; bless his name!"
+          },
+          {
+            "who": "All",
+            "text": "For the Lord is good; his steadfast love endures forever, and his faithfulness to all generations."
+          }
+        ],
+        "sub": false,
+        "silent_confession": false
+      },
+      {
+        "id": "hymn1",
+        "type": "hymn",
+        "title": "The Hymn",
+        "star": true,
+        "number": 277,
+        "piece": "The Church’s One Foundation (vv. 1–3)",
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "invocation",
+        "type": "corporate",
+        "title": "Prayer of Invocation & The Lord’s Prayer",
+        "star": true,
+        "text": "Our Father, who art in heaven, hallowed be thy Name. Thy Kingdom come, thy will be done on earth, as it is in heaven. Give us this day our daily bread, and forgive us our debts, as we forgive our debtors. Lead us not into temptation, but deliver us from evil. For thine is the kingdom, the power, and the glory, forever. Amen.",
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "nt-reading",
+        "type": "responsive",
+        "title": "The New Testament Reading",
+        "star": true,
+        "ref": "1 Corinthians 12:12–14, 18–27",
+        "lines": [
+          {
+            "who": "Leader",
+            "text": "For just as the body is one and has many members, and all the members of the body, though many, are one body, so it is with Christ."
+          },
+          {
+            "who": "All",
+            "text": "For in one Spirit we were all baptized into one body—Jews or Greeks, slaves or free—and all were made to drink of one Spirit."
+          },
+          {
+            "who": "Leader",
+            "text": "For the body does not consist of one member but of many. But as it is, God arranged the members in the body, each one of them, as he chose. If all were a single member, where would the body be? As it is, there are many parts, yet one body. The eye cannot say to the hand, “I have no need of you,” nor again the head to the feet, “I have no need of you.”"
+          },
+          {
+            "who": "All",
+            "text": "On the contrary, the parts of the body that seem to be weaker are indispensable,"
+          },
+          {
+            "who": "Leader",
+            "text": "And on those parts of the body that we think less honorable we bestow the greater honor, and our unpresentable parts are treated with greater modesty, which our more presentable parts do not require. But God has so composed the body, giving greater honor to the part that lacked it, that there may be no division in the body, but that the members may have the same care for one another."
+          },
+          {
+            "who": "All",
+            "text": "If one member suffers, all suffer together; if one member is honored, all rejoice together."
+          },
+          {
+            "who": "Leader",
+            "text": "Now you are the body of Christ and individually members of it."
+          }
+        ],
+        "sub": false,
+        "silent_confession": false
+      },
+      {
+        "id": "hymn2",
+        "type": "hymn",
+        "title": "Congregational Response",
+        "star": true,
+        "number": 277,
+        "piece": "The Church’s One Foundation (v. 4)",
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "word",
+        "type": "section",
+        "title": "Word",
+        "star": false,
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "tithes",
+        "type": "plain",
+        "title": "The Giving of Tithes and Offerings",
+        "star": false,
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "offertory",
+        "type": "music",
+        "title": "The Offertory",
+        "star": false,
+        "sub": false,
+        "lines": [],
+        "silent_confession": false,
+        "piece": "In the Name of the Father"
+      },
+      {
+        "id": "doxology",
+        "type": "corporate",
+        "title": "The Doxology and Prayer of Dedication",
+        "star": true,
+        "text": "Praise God, from whom all blessings flow; Praise Him, all creatures here below; Praise Him above, ye heavenly host; Praise Father, Son, and Holy Ghost. Amen.",
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "children",
+        "type": "plain",
+        "title": "Children Dismissed to Children’s Church",
+        "star": true,
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "reading",
+        "type": "reading",
+        "title": "Scripture Reading",
+        "ref": "Nehemiah 3",
+        "star": false,
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "response",
+        "type": "responsive",
+        "title": "Scripture Response",
+        "ref": "Isaiah 40:6b, 8",
+        "lines": [
+          {
+            "who": "Leader",
+            "text": "All flesh is grass, and all its beauty is like the flower of the field;"
+          },
+          {
+            "who": "All",
+            "text": "The grass withers, the flower fades, but the Word of our God will stand forever. Amen."
+          }
+        ],
+        "star": false,
+        "sub": false,
+        "silent_confession": false
+      },
+      {
+        "id": "sermon",
+        "type": "sermon",
+        "title": "Sermon",
+        "star": false,
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "commitment",
+        "type": "plain",
+        "title": "Prayer of Commitment",
+        "star": false,
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "anthem",
+        "type": "music",
+        "title": "Choral Anthem",
+        "piece": "In the Name of the Father",
+        "credit": "Nan & Dennis Allen",
+        "star": false,
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "table",
+        "type": "section",
+        "title": "Table",
+        "scroll_only": true,
+        "star": false,
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "sacrament",
+        "type": "plain",
+        "title": "The Sacrament of The Lord’s Supper",
+        "star": false,
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "invitation",
+        "type": "plain",
+        "title": "Invitation to the Table",
+        "sub": true,
+        "star": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "confession",
+        "type": "corporate",
+        "title": "Corporate Prayer of Confession",
+        "sub": true,
+        "text": "Great God, our Father: As we remember Christ’s suffering on the cross, our hearts are filled with shame that we often forsake the gospel and make little to no progress in our growth as disciples from day to day. We lament that war and lust flourish and grow more rampant every day. Forgive us for our cruel indifference to the cross. Teach us the good news of the gospel through the forgiveness achieved at the cross. Allow us, sinful and broken as we may be, to live in light of the cross, and look forward to the day when the whole world shall be born again.",
+        "silent_confession": true,
+        "star": false,
+        "lines": []
+      },
+      {
+        "id": "assurance",
+        "type": "scripture",
+        "title": "Assurance of Divine Pardon",
+        "sub": true,
+        "ref": "1 John 4:14–16",
+        "text": "“And we have seen and testify that the Father has sent his Son to be the Savior of the world. Whoever confesses that Jesus is the Son of God, God abides in him, and he in God. So we have come to know and to believe the love that God has for us. God is love, and whoever abides in love abides in God, and God abides in him.”",
+        "star": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "institution",
+        "type": "scripture",
+        "title": "The Words of Institution",
+        "sub": true,
+        "ref": "1 Corinthians 11:23–29",
+        "star": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "partaking",
+        "type": "plain",
+        "title": "Partaking of the Elements",
+        "sub": true,
+        "star": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "thanksgiving",
+        "type": "plain",
+        "title": "Prayer of Thanksgiving",
+        "sub": true,
+        "star": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "sending",
+        "type": "section",
+        "title": "Sending",
+        "star": false,
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "hymn3",
+        "type": "hymn",
+        "title": "Hymn of Commitment",
+        "star": true,
+        "number": 280,
+        "piece": "I Love Thy Kingdom, Lord",
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "benediction",
+        "type": "plain",
+        "title": "Benediction",
+        "star": true,
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "choral-benediction",
+        "type": "music",
+        "title": "Choral Benediction",
+        "star": true,
+        "piece": "Sevenfold Amen",
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "postlude",
+        "type": "plain",
+        "title": "Postlude",
+        "star": true,
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      }
+    ],
+    "notes": [
+      {
+        "for": "call-to-worship",
+        "label": "Call to Worship",
+        "text": "We are summoned to worship by God’s word, calling His people into His presence to honor Him in spirit and truth, opening a sacred conversation that unfolds throughout the service. We sing in response to God’s call to worship, which is a reminder that worship is at God’s initiative, not ours."
+      },
+      {
+        "for": "hymn1",
+        "label": "The Church’s One Foundation",
+        "text": "In this hymn, written by Samuel Stone in 1866, we sing of Christ’s redeemed Church, who awaits the day when He will gather His people from every age and nation into eternal glory. Though the Church now struggles and suffers, Christ will preserve her until the final redemption, when she will dwell with Him forever in the new heavens and new earth."
+      },
+      {
+        "for": "confession",
+        "label": "Prayer of Confession",
+        "text": "Our worship moves from adoration to grace, to confession, then assurance, and finally to the Table. This prayer intentionally acknowledges our tendency toward self-reliance while anticipating the grace that Christ offers in the Sacrament."
+      },
+      {
+        "for": "children",
+        "label": "Children’s Church",
+        "text": "Children ages 4 up to 4th grade are invited to come forward and exit out the side door for Children’s Church. Following the worship service, they may be picked up in the Fellowship Hall."
+      },
+      {
+        "for": "sacrament",
+        "label": "The Lord’s Supper",
+        "text": "The Lord’s Supper is a means of grace in which Christ spiritually nourishes believers, strengthening their faith as they partake of the bread and cup in union with Him. We reflect on how thankful we are for the work of Christ on our behalf, and we pray that his grace would work more powerfully in our lives to change us more into his likeness. The sacrament is a tangible, concrete gift where we can physically remember the goodness of the gospel story."
+      },
+      {
+        "for": "benediction",
+        "label": "Benediction",
+        "text": "God’s people are blessed by the Lord and sent forth into the world, bearing with them the hope and peace of the Gospel. As we continue our worship, we do so as people sent to our community for reconciliation, bearing witness to the good news of the gospel."
+      }
+    ],
+    "intro": null
+  },
+  "sermon": {
+    "title": "Spiritual Renewal: A Shared Calling",
+    "scripture": "Nehemiah 3",
+    "preacher": "Rev. Waring Porter",
+    "intro": [
+      "In chapter 2, Nehemiah challenges the people to rise up and build. The people respond with enthusiasm saying, “Let us rise up and build.” Now, in chapter 3, we see what that response actually looks like.",
+      "We see the priests, the goldsmiths, the perfume makers, the merchants, the rulers, and even the daughters of one of the leaders all participating in the work. As you read through the chapter, one phrase keeps appearing: “Next to him…” One person works on one section of the wall, and somebody else comes alongside and works on the next section. It’s a beautiful picture of God’s people working together.",
+      "God’s work is not the responsibility of a few particularly gifted or committed individuals. It is a shared calling of His entire people. It was true of the rebuilding of Jerusalem, and it is still true for the church today. There are three things this passage teaches us about our shared calling as the people of God."
+    ],
+    "points": [
+      {
+        "heading": "I. Requires Everyone",
+        "ref": "vv. 1–12"
+      },
+      {
+        "heading": "II. Requires Faithfulness",
+        "ref": "vv. 13–27",
+        "quote": "Ephesians 4:15–16 — “we are to grow up in every way into him who is the head, into Christ, from whom the whole body, joined and held together by every joint with which it is equipped, when each part is working properly, makes the body grow so that it builds itself up in love.”"
+      },
+      {
+        "heading": "III. Requires a Common Commitment",
+        "ref": "vv. 28–32"
+      }
+    ],
+    "missing": false,
+    "notes_lines_per_point": 3,
+    "blank_lines": 18
+  },
+  "inserts": [],
+  "layout": {
+    "pages": {
+      "p3": [
+        "gathering",
+        "piano-prelude",
+        "greetings",
+        "meditation",
+        "prelude",
+        "introit",
+        "call-to-worship",
+        "hymn1"
+      ],
+      "p4": [
+        "invocation",
+        "nt-reading",
+        "hymn2"
+      ],
+      "p5": [
+        "word",
+        "tithes",
+        "offertory",
+        "doxology",
+        "children",
+        "reading",
+        "response"
+      ],
+      "p6": [
+        "sermon",
+        "commitment",
+        "anthem",
+        "table",
+        "sacrament",
+        "invitation",
+        "confession",
+        "assurance",
+        "institution",
+        "partaking",
+        "thanksgiving",
+        "sending",
+        "hymn3",
+        "benediction",
+        "choral-benediction",
+        "postlude"
+      ]
+    },
+    "page_style": {
+      "p4": {
+        "spread": false,
+        "row_gap": "48px"
+      }
+    },
+    "announcement_columns": null,
+    "notes": [
+      {
+        "notes": [
+          "sacrament",
+          "confession"
+        ],
+        "at": "sacrament",
+        "span": 7,
+        "align": "start"
+      },
+      {
+        "notes": [
+          "benediction"
+        ],
+        "at": "benediction",
+        "span": 3,
+        "align": "start"
+      }
+    ],
+    "overrides": [
+      {
+        "page": "p8",
+        "selector": "p, div, li",
+        "css": "line-height:1.25",
+        "reason": "Tighten back cover line spacing slightly so it fits"
+      }
+    ]
+  },
+  "copyedit": {
+    "changes": [
+      {
+        "where": "flowers.quote",
+        "before": "None",
+        "after": "null",
+        "reason": "Placeholder text; no quoted verse in this dedication."
+      },
+      {
+        "where": "flowers.reference",
+        "before": "None",
+        "after": "null",
+        "reason": "Placeholder text; no reference in this dedication."
+      },
+      {
+        "where": "flowers.closing",
+        "before": "None",
+        "after": "null",
+        "reason": "Placeholder text; no closing line in this dedication."
+      }
+    ],
+    "flags": [
+      {
+        "where": "hymn1 / hymn2",
+        "message": "Both use #277 “The Church’s One Foundation”; verse ranges kept in piece (vv. 1–3; doc’s “(vv. 4)” printed as “(v. 4)”). Doc had no quotation marks around the title."
+      },
+      {
+        "where": "offertory",
+        "message": "“The Offertory” listed after Tithes with no piece named; kept as a plain item. Choral Anthem sits after the Prayer of Commitment, before the Lord’s Supper, as in the document."
+      },
+      {
+        "where": "pew_bible_page",
+        "message": "No Pew Bible page known for Nehemiah 3; page omitted."
+      },
+      {
+        "where": "announcements[0].body",
+        "message": "“Sign up in the Sunday bulletin” refers to a printed sign-up. Is there an insert for this, and how should phone-page readers sign up? Email is the only option given to them."
+      },
+      {
+        "where": "calendar[4]",
+        "message": "Thursday, November 26 falls outside the week after Sunday, November 15. Confirm it should be listed."
+      }
+    ]
+  },
+  "welcome_custom": null
+}
