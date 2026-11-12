@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-12T14:48:49+00:00",
+  "generated": "2026-11-12T15:12:07+00:00",
   "subscribe_url": "https://bulletin.fpccorinth.org/calendar.ics",
   "events": [
     {
@@ -41,16 +41,6 @@
       "time": "",
       "location": "",
       "recurring": false
-    },
-    {
-      "date": "2026-11-04",
-      "label": "November 4",
-      "month": "November 2026",
-      "weekday": "Wednesday",
-      "title": "Messy Bible Study",
-      "time": "6 p.m.",
-      "location": "",
-      "recurring": true
     },
     {
       "date": "2026-11-04",
@@ -101,16 +91,6 @@
       "time": "5pm",
       "location": "Pavilion",
       "recurring": false
-    },
-    {
-      "date": "2026-11-11",
-      "label": "November 11",
-      "month": "November 2026",
-      "weekday": "Wednesday",
-      "title": "Messy Bible Study",
-      "time": "6 p.m.",
-      "location": "",
-      "recurring": true
     },
     {
       "date": "2026-11-11",
@@ -635,12 +615,6 @@
             "in_month": true,
             "entries": [
               {
-                "title": "Messy Bible Study",
-                "time": "6 p.m.",
-                "location": "",
-                "recurring": true
-              },
-              {
                 "title": "Kids Quest",
                 "time": "",
                 "location": "",
@@ -723,12 +697,6 @@
                 "time": "5pm",
                 "location": "Pavilion",
                 "recurring": false
-              },
-              {
-                "title": "Messy Bible Study",
-                "time": "6 p.m.",
-                "location": "",
-                "recurring": true
               },
               {
                 "title": "Kids Quest",
@@ -1020,7 +988,7 @@
           }
         ]
       ],
-      "pdf": "/calendar/print/fpc-calendar-2026-11-bc884836.pdf"
+      "pdf": "/calendar/print/fpc-calendar-2026-11-804b0383.pdf"
     },
     {
       "month": "2026-12",
