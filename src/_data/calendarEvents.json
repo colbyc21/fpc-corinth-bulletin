@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-12T14:18:38+00:00",
+  "generated": "2026-11-12T14:48:49+00:00",
   "subscribe_url": "https://bulletin.fpccorinth.org/calendar.ics",
   "events": [
     {
@@ -191,6 +191,16 @@
       "time": "",
       "location": "",
       "recurring": true
+    },
+    {
+      "date": "2026-11-19",
+      "label": "November 19",
+      "month": "November 2026",
+      "weekday": "Thursday",
+      "title": "Joy Riders - Cullman, AL",
+      "time": "8:30 am",
+      "location": "",
+      "recurring": false
     },
     {
       "date": "2026-11-22",
@@ -829,7 +839,14 @@
             "day": 19,
             "weekday": "Thu",
             "in_month": true,
-            "entries": []
+            "entries": [
+              {
+                "title": "Joy Riders - Cullman, AL",
+                "time": "8:30 am",
+                "location": "",
+                "recurring": false
+              }
+            ]
           },
           {
             "date": "2026-11-20",
@@ -1003,7 +1020,7 @@
           }
         ]
       ],
-      "pdf": "/calendar/print/fpc-calendar-2026-11-e6e05f0f.pdf"
+      "pdf": "/calendar/print/fpc-calendar-2026-11-bc884836.pdf"
     },
     {
       "month": "2026-12",
