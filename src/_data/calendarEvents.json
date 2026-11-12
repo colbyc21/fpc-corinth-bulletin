@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-09T20:45:57+00:00",
+  "generated": "2026-11-12T14:18:38+00:00",
   "subscribe_url": "https://bulletin.fpccorinth.org/calendar.ics",
   "events": [
     {
@@ -191,6 +191,16 @@
       "time": "",
       "location": "",
       "recurring": true
+    },
+    {
+      "date": "2026-11-22",
+      "label": "November 22",
+      "month": "November 2026",
+      "weekday": "Sunday",
+      "title": "Hanging of the Greens",
+      "time": "5pm",
+      "location": "",
+      "recurring": false
     },
     {
       "date": "2026-11-24",
@@ -842,7 +852,14 @@
             "day": 22,
             "weekday": "Sun",
             "in_month": true,
-            "entries": []
+            "entries": [
+              {
+                "title": "Hanging of the Greens",
+                "time": "5pm",
+                "location": "",
+                "recurring": false
+              }
+            ]
           },
           {
             "date": "2026-11-23",
@@ -986,7 +1003,7 @@
           }
         ]
       ],
-      "pdf": "/calendar/print/fpc-calendar-2026-11-9dd737f8.pdf"
+      "pdf": "/calendar/print/fpc-calendar-2026-11-e6e05f0f.pdf"
     },
     {
       "month": "2026-12",
