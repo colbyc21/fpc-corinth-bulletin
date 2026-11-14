@@ -1,6 +1,6 @@
 """Model call 4: the chat box on the proof page.
 
-One message = one job (``JOB_CAPS['chat']``: 4 calls, $1). The model has
+One message = one job (``JOB_CAPS['chat']``: 12 calls, $2). The model has
 the fit loop's tools plus ``edit_week`` (one value by JSON pointer) and must
 render after editing. The exchange is kept in the ``chat`` table so the
 volunteer sees the thread and the next message gets the recent context.

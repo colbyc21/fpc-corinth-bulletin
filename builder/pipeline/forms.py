@@ -16,7 +16,7 @@ from builder.pipeline.store import ROLE_LABELS
 
 SERVE_KEYS = list(ROLE_LABELS)
 FLOWER_KEYS = ("given", "message", "quote", "reference", "closing", "signed")
-INSERTS = {"thanksgiving-meal": "Thanksgiving Meal volunteer insert"}
+_INSERT_FIELD = re.compile(r"^insert_([a-z0-9-]+)$")
 _ISO = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 _MD = re.compile(r"^(?P<m>[A-Za-z]{3,9})\.?\s+(?P<d>\d{1,2})$")
 
@@ -120,5 +120,5 @@ def form_to_week(week: dict, form: dict) -> dict:
 
     w["serve"] = {k: v for k in SERVE_KEYS if (v := _s(form, f"serve_{k}"))}
     w["calendar"] = parse_calendar_lines(_s(form, "calendar_lines"), w["date"])
-    w["inserts"] = [k for k in INSERTS if _s(form, f"insert_{k}") == "on"]
+    w["inserts"] = [m.group(1) for k in form if (m := _INSERT_FIELD.match(k)) and _s(form, k) == "on"]
     return w

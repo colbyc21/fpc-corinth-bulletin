@@ -92,7 +92,13 @@
     </div></details>
   </div>
   {% endfor %}
-  <p class="muted">Clear a title and its text to drop an announcement. Inserts: {% for key, label in inserts.items() %}<label class="check"><input type="checkbox" name="insert_{{ key }}" {% if key in week.inserts %}checked{% endif %}> {{ label }}</label>{% endfor %}</p>
+  <p class="muted">Clear a title and its text to drop an announcement.</p>
+</div>
+
+<div class="card">
+  <h3>Sign-up inserts</h3>
+  <p>{% for key, label in inserts.items() %}<label class="check"><input type="checkbox" name="insert_{{ key }}" {% if key in week.inserts %}checked{% endif %}> {{ label }}</label>{% endfor %}</p>
+  <p class="muted">Tick the half-sheets that go in this Sunday’s bulletin; each one’s PDF is then under step 3. <a href="/inserts/new?week={{ d }}">Make a new insert for this Sunday →</a>{% if week.announcements %} Or start one from an announcement: {% for a in week.announcements %}<a href="/inserts/new?week={{ d }}&amp;ann={{ loop.index0 }}">{{ a.title }}</a>{% if not loop.last %} · {% endif %}{% endfor %}{% endif %}</p>
 </div>
 
 <div class="card">
@@ -120,7 +126,7 @@
   <div class="row">
     <form method="post" action="/weeks/{{ d }}/build" class="narrow"><button type="submit" {% if error %}disabled{% endif %} title="Renders print and phone pages; if a panel overflows and model calls are on, the fit loop adjusts the layout">Build print + scroll</button></form>
     {% if has_pdf %}<a class="btn quiet narrow" href="/weeks/{{ d }}/pdf">Download PDF</a>{% endif %}
-    {% if week and week.inserts %}{% for ins in week.inserts %}<a class="btn quiet narrow" href="/weeks/{{ d }}/insert/{{ ins }}.pdf">Insert: {{ ins }}</a>{% endfor %}{% endif %}
+    {% if week and week.inserts %}{% for ins in week.inserts %}<a class="btn quiet narrow" href="{% if custom_inserts is defined and ins in custom_inserts %}/inserts/{{ ins }}/insert.pdf{% else %}/weeks/{{ d }}/insert/{{ ins }}.pdf{% endif %}">Insert: {{ inserts[ins] or ins }}</a>{% endfor %}{% endif %}
     {% if has_scroll %}<a class="btn quiet narrow" href="/weeks/{{ d }}/scroll" target="_blank">Open scroll page</a>{% endif %}
     <span class="muted" style="flex:2 1 240px">A build takes about a minute, longer if the fit loop runs. The page reloads when it is done.</span>
   </div>

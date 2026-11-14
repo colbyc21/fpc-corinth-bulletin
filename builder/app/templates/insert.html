@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% block title %}{{ doc.title or 'New insert' }}{% endblock %}
+{% block content %}
+<h1><a class="muted" style="font-size:0.85rem;font-weight:400;text-decoration:none" href="/inserts">← Inserts</a><br>{{ doc.title or 'New sign-up insert' }}</h1>
+<style>
+  .irow { display:grid; grid-template-columns: 10.5em minmax(0, 1fr) 6.3em auto; gap:0.4rem; margin-bottom:0.4rem; align-items:center; }
+  .irow button { padding:0.3rem 0.45rem; } .irow select { padding-left:0.3rem; padding-right:0.1rem; }
+  .irow .tools { white-space:nowrap; }
+  img.proof { width:100%; border:1px solid var(--rule); background:#fff; display:block; }
+  .editor { display:grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap:1rem; align-items:start; }
+  @media (max-width:900px) { .editor { grid-template-columns:1fr; } .irow { grid-template-columns:1fr 1fr; } }
+</style>
+
+<div class="editor">
+<form method="post" action="{% if slug %}/inserts/{{ slug }}{% else %}/inserts{% endif %}" class="card">
+  {% if week %}<input type="hidden" name="week" value="{{ week }}"><p class="muted">Saving adds this insert to the bulletin for {{ week | long_date }}.</p>{% endif %}
+  <div class="row">
+    <div style="flex:3 1 260px"><label>Title</label><input type="text" name="title" value="{{ doc.title }}" required placeholder="e.g. Church Fellowship Night"></div>
+    <div><label>Small line above the title</label><input type="text" name="eyebrow" value="{{ doc.eyebrow }}" placeholder="Sign-Up"></div>
+  </div>
+  <div class="row" style="margin-top:0.6rem">
+    <div><label>When (optional)</label><input type="text" name="when" value="{{ doc.when }}" placeholder="Sunday, August 16 · 5:30 p.m."></div>
+    <div><label>Where (optional)</label><input type="text" name="where" value="{{ doc.where }}" placeholder="Fellowship Hall"></div>
+  </div>
+  <div style="margin-top:0.6rem"><label>What it is about (a blank line starts a new paragraph)</label><textarea name="blurb" rows="5">{{ doc.blurb }}</textarea></div>
+
+  <h3 style="margin-top:1rem">What people fill in</h3>
+  <div id="rows">
+    {% for r in doc.rows + [{'type': 'line', 'text': '', 'indent': false}] %}
+    <div class="irow">
+      <select name="row_type" aria-label="Kind of row">{% for k, lbl in row_types.items() %}<option value="{{ k }}" {% if r.type == k %}selected{% endif %}>{{ lbl }}</option>{% endfor %}</select>
+      <input type="text" name="row_text" value="{{ r.text }}" aria-label="Text" placeholder="{% if loop.last %}Another row: type its text here{% endif %}">
+      <select name="row_indent" aria-label="Indent"><option value="0">Flush</option><option value="1" {% if r.indent %}selected{% endif %}>Indented</option></select>
+      <span class="tools"><button type="button" class="quiet" data-move="-1" title="Move up">↑</button> <button type="button" class="quiet" data-move="1" title="Move down">↓</button> <button type="button" class="quiet" data-remove title="Remove this row">✕</button></span>
+    </div>
+    {% endfor %}
+  </div>
+  <p><button type="button" class="quiet" id="add-row">Add a row</button></p>
+  <p class="muted">Each row is one thing on the form, top to bottom. A short write-in is a blank for a number; for checkboxes in a row, put a comma between the choices (“Main dish, Side, Dessert”); a small note sits just under the row above it. Words in parentheses, like “(required)” or “(9:30 a.m.)”, print lighter. “Indented” tucks a row under the one above it, for a follow-up question beneath a checkbox. A row with no text is left out.</p>
+
+  <div style="margin-top:0.6rem"><label>Line at the bottom: how to return it</label><input type="text" name="return_note" value="{{ doc.return_note }}"></div>
+  <p style="margin-top:0.6rem">
+    <label class="check"><input type="checkbox" name="logo" {% if doc.logo %}checked{% endif %}> Church logo at the top</label>
+    <label class="check"><input type="checkbox" name="footer" {% if doc.footer %}checked{% endif %}> Church address at the bottom</label>
+  </p>
+  <p><button type="submit">{% if slug %}Save and redo the proof{% else %}Save and make the proof{% endif %}</button></p>
+</form>
+
+<div>
+  <div class="card">
+    {% if proof %}
+    <a href="/inserts/{{ slug }}/insert.pdf" target="_blank"><img class="proof" src="/inserts/{{ slug }}/proof.png?v={{ stamp }}" alt="Proof of the insert: the same half-sheet twice on a letter page"></a>
+    <p style="margin-top:0.6rem"><a class="btn" href="/inserts/{{ slug }}/insert.pdf">Download the PDF</a></p>
+    <p class="muted">Print on letter paper, landscape, at 100% (not “fit to page”), and cut along the dashed line: each page makes two inserts.</p>
+    {% elif slug %}
+    <p class="muted">No proof: this insert does not fit its half-sheet yet. Take out a row or shorten the text, then save.</p>
+    {% else %}
+    <p class="muted">The proof shows here once the insert is saved. Type the title and what the form is about, list what people fill in, and save; you can keep changing it afterwards.</p>
+    {% endif %}
+  </div>
+
+  {% if slug %}
+  <div class="card">
+    <h3>Put it in a Sunday’s bulletin</h3>
+    {% if weeks %}
+    <form method="post" action="/inserts/{{ slug }}/attach" class="row">
+      <div><select name="date" aria-label="Sunday">{% for d in weeks %}<option value="{{ d }}">{{ d | long_date }}</option>{% endfor %}</select></div>
+      <div class="narrow"><button type="submit" class="quiet">Add to that Sunday</button></div>
+    </form>
+    {% endif %}
+    <p class="muted">The Sunday’s page then lists it, and building that week keeps a copy of the PDF with the bulletin’s files. It can be unticked there.</p>
+  </div>
+  <div class="card row">
+    <form method="post" action="/inserts/{{ slug }}/copy" class="narrow"><button type="submit" class="quiet" title="Start another insert from this one, for next time">Make a copy</button></form>
+    <form method="post" action="/inserts/{{ slug }}/delete" class="narrow" onsubmit="return confirm('Remove this insert? Sundays that carry it will no longer print it.')"><button type="submit" class="danger">Remove</button></form>
+  </div>
+  {% endif %}
+</div>
+</div>
+
+<script>
+(function () {
+  var rows = document.getElementById('rows');
+  function fresh() {
+    var row = rows.lastElementChild.cloneNode(true);
+    row.querySelector('[name=row_text]').value = '';
+    row.querySelector('[name=row_text]').placeholder = '';
+    row.querySelector('[name=row_type]').value = 'line';
+    row.querySelector('[name=row_indent]').value = '0';
+    return row;
+  }
+  document.getElementById('add-row').addEventListener('click', function () {
+    var row = fresh();
+    rows.appendChild(row);
+    row.querySelector('[name=row_text]').focus();
+  });
+  rows.addEventListener('click', function (e) {
+    var b = e.target.closest('button');
+    if (!b) return;
+    var row = b.closest('.irow');
+    if (b.hasAttribute('data-remove')) {
+      if (rows.children.length > 1) row.remove(); else row.querySelector('[name=row_text]').value = '';
+    } else if (b.dataset.move === '-1' && row.previousElementSibling) {
+      rows.insertBefore(row, row.previousElementSibling);
+    } else if (b.dataset.move === '1' && row.nextElementSibling) {
+      rows.insertBefore(row.nextElementSibling, row);
+    }
+  });
+})();
+</script>
+{% endblock %}

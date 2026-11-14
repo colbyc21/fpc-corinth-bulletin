@@ -24,8 +24,9 @@ Self-service production of the Sunday bulletin on basecamp. The plan is in
 | `pipeline/content.py` | model call 2: content form + pastor's announcements → flowers, announcements, serve, calendar, with `changes`/`flags` |
 | `pipeline/intake.py` | runs the two calls on the uploaded files and writes week.json |
 | `pipeline/fit.py` | model call 3: the fit loop (tools `read_week`, `set_layout`, `render_and_measure`) and `build_and_fit` |
-| `pipeline/chat.py` | model call 4: the chat box (edit_week by JSON pointer + the fit tools), 4 calls / $1 per message |
+| `pipeline/chat.py` | model call 4: the chat box (edit_week by JSON pointer + the fit tools), 12 calls / $2 per message |
 | `pipeline/forms.py` | the volunteer form ↔ week.json |
+| `pipeline/inserts.py` + `templates/insert.html.j2` | sign-up inserts made on the Inserts screen (`/inserts`, any signed-in user): a form (title, when, where, blurb, rows of write-in lines and checkboxes) → a document in the `inserts` table → a landscape letter sheet with the half-sheet twice, PDF and proof under `var/inserts/<slug>/`, shrunk as far as 70% to fit and refused beyond that. A week lists the slugs it carries in `week.inserts`; the build writes each one's HTML and PDF beside the bulletin. `templates/inserts/thanksgiving-meal.html` is the one hand-built insert from before the screen |
 | `pipeline/friday.py` + `templates/email.html.j2` | the Friday email: `bulletins/<sunday>/friday.json` → 600 px table-layout HTML |
 | `pipeline/friday_content.py` | model call: the office's notes → sections, merged with the calendar and roster tables (`prompts/friday.md`) |
 | `pipeline/friday_forms.py` / `friday_chat.py` / `friday_push.py` | the email page's form ↔ friday.json; chat corrections (`prompts/friday_chat.md`); Constant Contact draft, test send, schedule |
@@ -34,7 +35,7 @@ Self-service production of the Sunday bulletin on basecamp. The plan is in
 | `pipeline/stats.py` | page views of the public site: the `/hit` beacon's rules (robots, floods, one visitor = one device once a day, nothing personal kept) and the numbers on the app's Stats screen |
 | `pipeline/deploy_status.py` | is the published week live? Netlify API if `NETLIFY_TOKEN`/`NETLIFY_SITE_ID` are set, else the scroll page's `fpc-build` marker |
 | `prompts/*.md` | the four prompts; edit these, not the code, to change model behaviour |
-| `app/` | FastAPI app: magic-link login; the week page (Inputs → Details → Build & proof → Publish, with chat); the Friday email page (Notes → Content with per-item photos → Preview & chat → Send); rosters, events, standing text, users, audit, spend |
+| `app/` | FastAPI app: magic-link login; the week page (Inputs → Details → Build & proof → Publish, with chat); the Friday email page (Notes → Content with per-item photos → Preview & chat → Send); sign-up inserts; rosters, events, standing text, users, audit, spend |
 | `data/seed/`, `data/standing/` | Phase 0 seeds; the store loads them once |
 | `tests/` | pytest; `test_render_golden.py` is the Phase 1 acceptance test |
 | `deploy/bulletin-builder.service`, `deploy/bulletin-calendar.{service,timer}` | user-level systemd units: the app, and the nightly calendar refresh |

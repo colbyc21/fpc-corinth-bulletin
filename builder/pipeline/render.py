@@ -185,7 +185,13 @@ def render_scroll(week: dict, store: Store | None = None) -> str:
     return _env().get_template("scroll.html.j2").render(**context(week, store))
 
 
-def render_insert(name: str, week: dict) -> str | None:
+def render_insert(name: str, week: dict, store: Store | None = None) -> str | None:
+    """An insert a week carries: one made on the Inserts screen, else the hand-built file of that name."""
+    from builder.pipeline import inserts
+
+    doc = (store or Store()).insert_doc(name)
+    if doc:
+        return inserts.render(doc)
     path = config.TEMPLATES_DIR / "inserts" / f"{name}.html"
     if not path.exists():
         return None
@@ -211,7 +217,7 @@ def write_outputs(week: dict, store: Store | None = None, out_dir: Path | None =
     scroll_path.write_text(render_scroll(week, store))
     out["scroll_html"] = scroll_path
     for name in week.get("inserts", []):
-        html = render_insert(name, week)
+        html = render_insert(name, week, store)
         if html:
             p = wdir / f"{name}-insert.html"
             p.write_text(html)

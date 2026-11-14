@@ -37,7 +37,7 @@ _MEASURE_JS = """
 
 
 _SHEET_OVERFLOWS_JS = """
-() => { const s = document.querySelector('.sheet'); return s.scrollHeight > s.clientHeight + 1 || s.scrollWidth > s.clientWidth + 1; }
+(sel) => { const s = document.querySelector(sel); return s.scrollHeight > s.clientHeight + 1 || s.scrollWidth > s.clientWidth + 1; }
 """
 
 
@@ -75,9 +75,10 @@ class Renderer:
             page.close()
         return pdf_path
 
-    def fitted_pdf(self, html_path: Path, pdf_path: Path, step: float = 0.04, floor: float = 0.6) -> float:
+    def fitted_pdf(self, html_path: Path, pdf_path: Path, step: float = 0.04, floor: float = 0.6, selector: str = ".sheet") -> float:
         """A one-page PDF of a page built around a ``.sheet`` the size of the paper
-        (templates/calendar-month.html.j2). While anything overflows the sheet, the
+        (templates/calendar-month.html.j2), or around another box named by ``selector``
+        (the half-sheet of templates/insert.html.j2). While anything overflows it, the
         page's ``--z`` is stepped down: the sheet lays out larger and is scaled back
         to the paper, so everything shrinks together. Returns the scale used, and
         raises ValueError rather than print type too small to read or cut anything off."""
@@ -85,7 +86,7 @@ class Renderer:
         try:
             page.emulate_media(media="print")
             z = 1.0
-            while page.evaluate(_SHEET_OVERFLOWS_JS):
+            while page.evaluate(_SHEET_OVERFLOWS_JS, selector):
                 z = round(z - step, 2)
                 if z < floor:
                     raise ValueError(f"does not fit the page even at {floor:.0%} size")

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>{{ doc.title }} · Bulletin insert</title>
+{# A sign-up insert made on the app's Inserts screen (pipeline/inserts.py): one
+   landscape letter sheet holding the same 5.5 x 8.5 in half-sheet twice, cut down the
+   middle. The look follows the hand-built Thanksgiving Meal insert of 2026-10-25.
+   When the rows need more room than the half-sheet has, inserts.build steps --z down
+   (pdf.Renderer.fitted_pdf), which shrinks everything in the panel together. #}
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root { --z: 1; }
+  @page { size: 11in 8.5in; margin: 0; }
+  body { font-family: "Times New Roman", "Georgia", serif; font-size: 11pt; line-height: 1.35; color: #000; background: #fff; }
+
+  .sheet { width: 11in; height: 8.5in; display: flex; overflow: hidden; position: relative; }
+  .cut-line { position: absolute; left: 5.5in; top: 0; height: 8.5in; border-left: 0.5pt dashed #999; }
+  .cut-mark { position: absolute; left: 5.5in; transform: translateX(-50%); font-family: Arial, Helvetica, sans-serif; font-size: 7pt; color: #999; background: #fff; padding: 0 3px; }
+  .cut-mark.top { top: 0.08in; } .cut-mark.bottom { bottom: 0.08in; }
+
+  .panel { width: 5.5in; height: 8.5in; overflow: hidden; }
+  .fit { zoom: var(--z); width: calc(5.5in / var(--z)); height: calc(8.5in / var(--z)); padding: calc(0.5in / var(--z)) calc(0.5in / var(--z)) calc(0.45in / var(--z));
+         display: flex; flex-direction: column; overflow: hidden; }
+
+  hr { border: none; border-top: 1.5pt solid #000; }
+  hr.thin { border-top-width: 0.75pt; }
+  .logo { height: 1.05in; display: block; margin: 0.14in auto 0.12in; }
+  .eyebrow { text-align: center; font-size: 9pt; letter-spacing: 0.18em; text-transform: uppercase; margin: 0.12in 0 0.04in; }
+  .logo + .eyebrow { margin-top: 0; }
+  h1 { text-align: center; font-size: 17pt; font-weight: bold; line-height: 1.15; margin-bottom: 0.05in; text-wrap: balance; }
+  hr + h1 { margin-top: 0.12in; }
+  .when { text-align: center; font-style: italic; font-size: 11.5pt; text-wrap: balance; }
+  .where { text-align: center; font-size: 10.5pt; margin-top: 0.02in; text-wrap: balance; }
+  .head-end { margin-top: 0.12in; }
+  .blurb { font-size: 10.5pt; line-height: 1.4; text-align: justify; margin-top: 0.14in; }
+  .blurb + .blurb { margin-top: 0.07in; }
+
+  .rows { margin-top: 0.24in; }
+  .row { margin-bottom: 0.28in; font-size: 11.5pt; }
+  .row.indent { margin-left: 0.45in; font-size: 10.5pt; }
+  .row .paren { font-weight: normal; }
+  .row.line, .row.short { display: flex; align-items: baseline; gap: 0.08in; }
+  .row.line .label, .row.short .label { font-weight: bold; white-space: nowrap; }
+  .row.indent .label { font-weight: normal; }
+  .rule { flex: 1; border-bottom: 0.75pt solid #000; height: 0.26in; min-width: 0.6in; }
+  .row.short .rule { flex: 0 0 0.9in; }
+  .row.line.long { display: block; }
+  .row.line.long .label { white-space: normal; display: block; }
+  .row.line.long .rule { display: block; }
+  .row.heading { font-weight: bold; margin-bottom: 0.14in; }
+  .row.note { font-size: 8.5pt; font-style: italic; color: #333; margin-top: -0.2in; }
+  .row.check, .row.checks { margin-bottom: 0.2in; padding-left: 0.1in; }
+  .row.check { display: flex; align-items: baseline; gap: 0.1in; }
+  .row.checks { display: flex; flex-wrap: wrap; gap: 0.12in 0.3in; }
+  .row.checks .opt { display: inline-flex; align-items: baseline; gap: 0.08in; white-space: nowrap; }
+  .row.check .paren, .row.checks .paren { font-size: 10pt; }
+  .box { flex: 0 0 auto; width: 0.17in; height: 0.17in; border: 0.9pt solid #000; position: relative; top: 0.025in; }
+
+  .foot { margin-top: auto; text-align: center; font-size: 9pt; line-height: 1.35; }
+  .foot .return { font-style: italic; margin-bottom: 0.08in; text-wrap: balance; }
+  .foot .church { font-size: 8pt; color: #333; padding-top: 0.05in; }
+
+  @media screen {
+    body { background: #888; }
+    .sheet { background: #fff; margin: 0.25in auto; box-shadow: 0 2px 12px rgba(0,0,0,0.3); }
+  }
+</style>
+</head>
+<body>
+{% macro panel() %}
+  <div class="panel"><div class="fit">
+    <hr>
+    {% if doc.logo %}<img class="logo" src="logo-cover.png" alt="First Presbyterian Church">{% endif %}
+    {% if doc.eyebrow %}<p class="eyebrow">{{ doc.eyebrow }}</p>{% endif %}
+    <h1>{{ doc.title }}</h1>
+    {% if doc.when %}<p class="when">{{ doc.when }}</p>{% endif %}
+    {% if doc.where %}<p class="where">{{ doc.where }}</p>{% endif %}
+    <hr class="thin head-end">
+    {% for para in blurb %}<p class="blurb">{{ para }}</p>{% endfor %}
+
+    <div class="rows">
+    {% for r in doc.rows %}
+      {% set cls = r.type ~ (' indent' if r.indent else '') %}
+      {% if r.type in ('line', 'short') %}
+      <div class="row {{ cls }}{% if r.type == 'line' and r.text | length > 34 %} long{% endif %}"><span class="label">{{ r.text | paren }}</span><span class="rule"></span></div>
+      {% elif r.type == 'check' %}
+      <div class="row {{ cls }}"><span class="box"></span><span>{{ r.text | paren }}</span></div>
+      {% elif r.type == 'checks' %}
+      <div class="row {{ cls }}">{% for o in r.text | options %}<span class="opt"><span class="box"></span><span>{{ o | paren }}</span></span>{% endfor %}</div>
+      {% else %}
+      <p class="row {{ cls }}">{{ r.text | paren }}</p>
+      {% endif %}
+    {% endfor %}
+    </div>
+
+    <div class="foot">
+      {% if doc.return_note %}<p class="return">{{ doc.return_note }}</p>{% endif %}
+      <hr>
+      {% if doc.footer %}<p class="church">First Presbyterian Church &nbsp;&middot;&nbsp; 919 East Shiloh Rd, Corinth, MS 38834 &nbsp;&middot;&nbsp; 662-286-6638</p>{% endif %}
+    </div>
+  </div></div>
+{% endmacro %}
+<div class="sheet">
+  <div class="cut-line"></div>
+  <span class="cut-mark top">&#9986; cut</span>
+  <span class="cut-mark bottom">&#9986; cut</span>
+{{ panel() }}
+{{ panel() }}
+</div>
+</body>
+</html>

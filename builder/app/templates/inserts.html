@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Inserts{% endblock %}
+{% block content %}
+<h1>Sign-up inserts</h1>
+<p class="muted">A half-sheet sign-up form that goes inside the bulletin: two to a letter page, cut down the middle. Make one here, print its PDF, and tick it on a Sunday’s page so it is kept with that week’s bulletin.</p>
+
+<div class="card"><a class="btn" href="/inserts/new">Make a new insert</a></div>
+
+<table>
+  <thead><tr><th>Insert</th><th>When</th><th>In the bulletin for</th><th>Last changed</th><th></th></tr></thead>
+  <tbody>
+  {% for i in inserts %}
+    <tr>
+      <td><a href="/inserts/{{ i.slug }}">{{ i.title }}</a></td>
+      <td>{{ i.when }}</td>
+      <td>{% for d in carried.get(i.slug, []) %}<a href="/weeks/{{ d }}">{{ d | month_day }}</a>{% if not loop.last %}, {% endif %}{% else %}<span class="muted">no Sunday yet</span>{% endfor %}</td>
+      <td class="muted">{{ i.updated_at[:10] }}</td>
+      <td><a class="muted" href="/inserts/{{ i.slug }}/insert.pdf">PDF</a></td>
+    </tr>
+  {% else %}
+    <tr><td colspan="5" class="muted">None yet.</td></tr>
+  {% endfor %}
+  {% for key, label in built_in.items() %}
+    <tr>
+      <td>{{ label }}</td>
+      <td class="muted" colspan="2">{% for d in carried.get(key, []) %}<a href="/weeks/{{ d }}">{{ d | month_day }}</a>{% if not loop.last %}, {% endif %}{% endfor %}</td>
+      <td class="muted" colspan="2">Built by hand before this screen existed; tick it on a Sunday’s page.</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

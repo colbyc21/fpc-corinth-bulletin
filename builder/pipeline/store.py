@@ -77,6 +77,12 @@ create table if not exists standing (
   json text not null,
   updated_at text not null
 );
+create table if not exists inserts (
+  slug text primary key,       -- the name a week lists in week.inserts
+  json text not null,          -- the document pipeline/inserts.py renders
+  created_at text not null,
+  updated_at text not null
+);
 create table if not exists users (
   id integer primary key autoincrement,
   email text not null unique,
@@ -279,6 +285,29 @@ class Store:
         keys = {p.stem for p in config.STANDING_DIR.glob("*.json")}
         keys |= {r["key"] for r in self.db.execute("select key from standing")}
         return sorted(keys)
+
+    # ── sign-up inserts ──────────────────────────────────────────────
+    def inserts(self) -> list[dict]:
+        rows = self.db.execute("select * from inserts order by updated_at desc, slug")
+        return [{"slug": r["slug"], "updated_at": r["updated_at"], **json.loads(r["json"])} for r in rows]
+
+    def insert_doc(self, slug: str) -> dict | None:
+        row = self.db.execute("select json from inserts where slug=?", (slug,)).fetchone()
+        return json.loads(row["json"]) if row else None
+
+    def insert_stamp(self, slug: str) -> str:
+        row = self.db.execute("select updated_at from inserts where slug=?", (slug,)).fetchone()
+        return row["updated_at"] if row else ""
+
+    def save_insert(self, slug: str, doc: dict) -> None:
+        self.db.execute(
+            "insert into inserts (slug, json, created_at, updated_at) values (?, ?, ?, ?) "
+            "on conflict(slug) do update set json=excluded.json, updated_at=excluded.updated_at",
+            (slug, json.dumps(doc, ensure_ascii=False), now(), now()),
+        )
+
+    def delete_insert(self, slug: str) -> None:
+        self.db.execute("delete from inserts where slug=?", (slug,))
 
     # ── users and magic links ────────────────────────────────────────
     def users(self) -> list[dict]:

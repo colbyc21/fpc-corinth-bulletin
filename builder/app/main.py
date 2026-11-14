@@ -18,10 +18,11 @@ from pathlib import Path
 from fastapi import Depends, FastAPI, File, Form, HTTPException, Request, UploadFile
 from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, RedirectResponse, Response
 from fastapi.templating import Jinja2Templates
+from starlette.concurrency import run_in_threadpool
 
 from builder import config
 from builder.app import auth, calendar_sync
-from builder.pipeline import build as buildmod, calendar_feed, chat as chatmod, content as contentmod, dates, deploy_status, extract, fit as fitmod, forms, hymn_index, intake as intakemod, scripture_index, model as modelmod, publish as publishmod
+from builder.pipeline import build as buildmod, calendar_feed, chat as chatmod, content as contentmod, dates, deploy_status, extract, fit as fitmod, forms, hymn_index, inserts as insertmod, intake as intakemod, scripture_index, model as modelmod, publish as publishmod
 from builder.pipeline import stats as statsmod
 from builder.pipeline import week as weekmod
 from builder.pipeline.store import ROLE_LABELS, ROSTER_COLUMNS, ROSTER_LABELS, ROSTER_ROLES, USER_ROLES, Store
@@ -193,7 +194,7 @@ def week_page(d: str, request: Request, user: dict = Depends(need("editor"))):
                 has_scroll=(config.SCROLL_DIR / f"{d}.html").exists(),
                 panels=sorted(int(k) for k in (report or {}).get("panels", {})),
                 inputs=inputs, calendar_text=forms.calendar_lines_text(week["calendar"]) if week else "",
-                inserts=forms.INSERTS, chat=store().chat_history(d), chat_left=chatmod.MAX_MESSAGES_PER_WEEK - store().chat_count(d),
+                inserts=insertmod.available(store()), custom_inserts={i["slug"] for i in store().inserts()}, chat=store().chat_history(d), chat_left=chatmod.MAX_MESSAGES_PER_WEEK - store().chat_count(d),
                 liturgy_summary=[{"id": it["id"], "title": it["title"], "detail": it.get("piece") or it.get("ref") or it.get("name") or ""}
                                  for it in week["liturgy"]["items"] if it["type"] != "section"] if week else [])
 
@@ -635,6 +636,158 @@ def standing_save(key: str, raw: str = Form(...), user: dict = Depends(need("adm
     store().set_standing(key, value)
     store().log("standing.save", user["email"], key)
     return RedirectResponse(f"/standing/{key}?m=Saved", status_code=303)
+
+
+# ── sign-up inserts ──────────────────────────────────────────────────
+def _insert_or_404(slug: str) -> dict:
+    doc = store().insert_doc(slug) if insertmod.SLUG_RE.match(slug) else None
+    if doc is None:
+        raise HTTPException(404, "No such insert.")
+    return doc
+
+
+def _insert_page(request: Request, user: dict, slug: str | None, doc: dict, week: str = ""):
+    proof = slug is not None and (insertmod.out_dir(slug) / "proof-1.png").exists()
+    return page(request, "insert.html", user, slug=slug, doc=doc, week=week, proof=proof, row_types=insertmod.ROW_TYPES,
+                weeks=[w["date"] for w in list_weeks()[:6]], stamp=store().insert_stamp(slug) if slug else "")
+
+
+def _build_insert(slug: str, doc: dict) -> str:
+    """Make the PDF and proof; the sentence to show beside "Saved"."""
+    try:
+        res = insertmod.build(slug, doc)
+    except ValueError:
+        return ", but it does not fit the half-sheet. Too many rows or too much text: shorten it and save again"
+    except Exception as e:
+        log.exception("insert build failed")
+        return f", but making the PDF failed: {e}"
+    return "" if res["scale"] == 1 else f"; the type is at {res['scale']:.0%} size so that everything fits"
+
+
+def _attach_insert(slug: str, d: str) -> None:
+    week = weekmod.load_week(d)
+    if slug not in week["inserts"]:
+        week["inserts"].append(slug)
+        weekmod.save_week(week)
+
+
+async def _posted(request: Request) -> dict:
+    data: dict = {}
+    for k, v in (await request.form()).multi_items():
+        if not hasattr(v, "filename"):
+            data.setdefault(k, []).append(v)
+    return data
+
+
+@app.get("/inserts", response_class=HTMLResponse)
+def inserts_list(request: Request, user: dict = Depends(need("editor"))):
+    carried: dict[str, list[str]] = {}
+    for p in sorted(config.BULLETINS_DIR.glob("*/week.json"), reverse=True)[:12]:
+        try:
+            for name in json.loads(p.read_text()).get("inserts", []):
+                carried.setdefault(name, []).append(p.parent.name)
+        except Exception:
+            continue
+    return page(request, "inserts.html", user, inserts=store().inserts(), carried=carried, built_in=insertmod.BUILT_IN)
+
+
+@app.get("/inserts/new", response_class=HTMLResponse)
+def insert_new(request: Request, week: str = "", ann: int = -1, user: dict = Depends(need("editor"))):
+    doc = insertmod.blank()
+    if week and DATE_RE.match(week) and weekmod.week_path(week).exists():
+        anns = json.loads(weekmod.week_path(week).read_text()).get("announcements", [])
+        if 0 <= ann < len(anns):
+            doc = insertmod.from_announcement(anns[ann])
+    else:
+        week = ""
+    return _insert_page(request, user, None, doc, week)
+
+
+@app.post("/inserts")
+async def insert_create(request: Request, user: dict = Depends(need("editor"))):
+    data = await _posted(request)
+    try:
+        doc = insertmod.form_to_doc(data)
+    except ValueError as e:
+        return RedirectResponse(f"/inserts/new?m={_q('Not saved: ' + str(e))}", status_code=303)
+    s = store()
+    slug = insertmod.new_slug(doc["title"], s)
+    s.save_insert(slug, doc)
+    s.log("insert.create", user["email"], slug)
+    msg = "Saved" + await run_in_threadpool(_build_insert, slug, doc)  # Playwright's sync API cannot run on the event loop
+    week = (data.get("week") or [""])[0]
+    if DATE_RE.match(week) and weekmod.week_path(week).exists():
+        try:
+            _attach_insert(slug, week)
+            msg += f". Added to {dates.long_date(week)}"
+        except Exception as e:
+            msg += f". Not added to {week}: {e}"
+    return RedirectResponse(f"/inserts/{slug}?m={_q(msg)}", status_code=303)
+
+
+@app.get("/inserts/{slug}", response_class=HTMLResponse)
+def insert_edit(slug: str, request: Request, user: dict = Depends(need("editor"))):
+    return _insert_page(request, user, slug, _insert_or_404(slug))
+
+
+@app.post("/inserts/{slug}")
+async def insert_save(slug: str, request: Request, user: dict = Depends(need("editor"))):
+    _insert_or_404(slug)
+    try:
+        doc = insertmod.form_to_doc(await _posted(request))
+    except ValueError as e:
+        return RedirectResponse(f"/inserts/{slug}?m={_q('Not saved: ' + str(e))}", status_code=303)
+    store().save_insert(slug, doc)
+    store().log("insert.save", user["email"], slug)
+    note = await run_in_threadpool(_build_insert, slug, doc)
+    return RedirectResponse(f"/inserts/{slug}?m={_q('Saved' + note)}", status_code=303)
+
+
+@app.post("/inserts/{slug}/copy")
+def insert_copy(slug: str, user: dict = Depends(need("editor"))):
+    doc = _insert_or_404(slug)
+    s = store()
+    new = insertmod.new_slug(doc["title"], s)
+    s.save_insert(new, doc)
+    s.log("insert.copy", user["email"], f"{slug} -> {new}")
+    msg = "This is the copy. Change it and save" + _build_insert(new, doc)
+    return RedirectResponse(f"/inserts/{new}?m={_q(msg)}", status_code=303)
+
+
+@app.post("/inserts/{slug}/delete")
+def insert_delete(slug: str, user: dict = Depends(need("editor"))):
+    doc = _insert_or_404(slug)
+    store().delete_insert(slug)
+    store().log("insert.delete", user["email"], json.dumps({"slug": slug, "doc": doc}, ensure_ascii=False))  # the audit log keeps what was removed
+    return RedirectResponse(f"/inserts?m={_q('Removed “' + doc['title'] + '”')}", status_code=303)
+
+
+@app.post("/inserts/{slug}/attach")
+def insert_attach(slug: str, date_: str = Form(..., alias="date"), user: dict = Depends(need("editor"))):
+    _insert_or_404(slug)
+    d = check_date(date_)
+    try:
+        _attach_insert(slug, d)
+    except Exception as e:
+        return RedirectResponse(f"/inserts/{slug}?m={_q(f'Not saved: could not add it to {d}: {e}')}", status_code=303)
+    store().log("insert.attach", user["email"], f"{slug} -> {d}")
+    return RedirectResponse(f"/weeks/{d}?m={_q('Insert added to this Sunday. Its PDF is under step 3')}#build", status_code=303)
+
+
+@app.get("/inserts/{slug}/{name}")
+def insert_file(slug: str, name: str, user: dict = Depends(need("editor"))):
+    doc = _insert_or_404(slug)
+    if name not in ("insert.pdf", "proof.png"):
+        raise HTTPException(404)
+    d = insertmod.out_dir(slug)
+    if not (d / "insert.pdf").exists():  # a new server, or a cleared var directory
+        try:
+            insertmod.build(slug, doc)
+        except ValueError as e:
+            raise HTTPException(404, f"This insert {e}. Shorten it on the Inserts screen.")
+    if name == "proof.png":
+        return FileResponse(d / "proof-1.png", media_type="image/png", headers={"Cache-Control": "no-store"})
+    return FileResponse(d / "insert.pdf", media_type="application/pdf", filename=f"{slug}-insert.pdf", headers={"Cache-Control": "no-store"})
 
 
 # ── users and audit ──────────────────────────────────────────────────

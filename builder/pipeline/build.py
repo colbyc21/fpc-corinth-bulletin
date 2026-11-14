@@ -11,7 +11,7 @@ import time
 from pathlib import Path
 
 from builder import config
-from builder.pipeline import names, pdf as pdfmod, render
+from builder.pipeline import inserts as insertmod, names, pdf as pdfmod, render
 from builder.pipeline import week as weekmod
 from builder.pipeline.store import Store
 
@@ -45,7 +45,12 @@ def build(date: str, *, store: Store | None = None, renderer: pdfmod.Renderer | 
         for key, html in list(outputs.items()):
             if key.startswith("insert:"):
                 ipdf = html.with_suffix(".pdf")
-                r.pdf(html, ipdf)
+                try:  # made on the Inserts screen: shrunk to fit its half-sheet if it must be
+                    if not store.insert_doc(key.split(":", 1)[1]):
+                        raise ValueError("hand-built")
+                    insertmod.to_pdf(r, html, ipdf)
+                except ValueError:  # the Inserts screen has already said it does not fit; the bulletin still builds
+                    r.pdf(html, ipdf)
                 outputs[key + ":pdf"] = ipdf
     finally:
         if own:

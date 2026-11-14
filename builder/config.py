@@ -68,8 +68,8 @@ WARN_FRACTION = 0.8
 JOB_CAPS = {  # kind: (max calls, max USD)
     "parse": (2, 1.50),
     "content": (2, 1.00),
-    "fit": (8, 3.00),
-    "chat": (4, 1.00),
+    "fit": (12, 3.00),
+    "chat": (12, 2.00),
 }
 BUILDS_PER_WEEK = 3
 
