@@ -119,8 +119,17 @@ def test_inserts_screen(client, store, monkeypatch):
 
     r = client.post("/inserts/church-fellowship-night/attach", data={"date": "2026-11-01"})
     assert r.status_code == 303 and r.headers["location"].startswith("/weeks/2026-11-01?")
-    r = client.post("/inserts/church-fellowship-night/copy")
+    # an earlier insert, or the hand-built one, fills the new-insert form; nothing is saved until Save
+    r = client.get("/inserts/new?source=church-fellowship-night&week=2026-11-01")
+    assert 'name="title" value="Fellowship Supper"' in r.text and 'value="Number attending:"' in r.text and 'action="/inserts"' in r.text
+    assert 'name="week" value="2026-11-01"' in r.text and "This is a copy of" in r.text and len(store.inserts()) == 1
+    r = client.get("/inserts/new?source=thanksgiving-meal")
+    assert 'value="37th Community Thanksgiving Meal"' in r.text and 'value="How many from your family?"' in r.text
+    assert 'name="title" value=""' in client.get("/inserts/new?source=../nope").text
+    assert "/inserts/new?source=church-fellowship-night" in client.get("/inserts").text and "/inserts/new?source=thanksgiving-meal" in client.get("/inserts").text
+    r = client.post("/inserts", data={**data, "title": "Fellowship Supper"})
     assert r.headers["location"].startswith("/inserts/fellowship-supper?")
+    assert store.insert_doc("church-fellowship-night")["title"] == "Fellowship Supper"  # the original is untouched
     for slug in ("church-fellowship-night", "fellowship-supper"):
         assert client.post(f"/inserts/{slug}/delete").status_code == 303
     assert store.inserts() == [] and client.get("/inserts/fellowship-supper").status_code == 404

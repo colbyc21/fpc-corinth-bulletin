@@ -108,6 +108,39 @@ def from_announcement(ann: dict) -> dict:
     return doc
 
 
+# The hand-built inserts as documents, so that one can be the start of a new insert.
+BUILT_IN_DOCS = {
+    "thanksgiving-meal": {
+        "title": "37th Community Thanksgiving Meal", "eyebrow": "Volunteer Sign-Up",
+        "when": "Thanksgiving Morning · Thursday, November 26, 2026", "where": "",
+        "blurb": "Join us on Thanksgiving morning as we prepare and deliver 750 Thanksgiving meals to those who need them throughout "
+                 "Alcorn County. This is a HUGE project and can only be accomplished with the help of many. It is a great opportunity "
+                 "for the members of FPC to be disciples by “living and loving like Jesus.”",
+        "rows": [{"type": "line", "text": "Name(s):", "indent": False},
+                 {"type": "line", "text": "Email (required):", "indent": False},
+                 {"type": "note", "text": "*You will receive an email on Nov. 24 with instructions.", "indent": False},
+                 {"type": "heading", "text": "I/We would like to serve by:", "indent": False},
+                 {"type": "check", "text": "Meal Preparation (9:30 a.m.)", "indent": False},
+                 {"type": "short", "text": "How many from your family?", "indent": True},
+                 {"type": "check", "text": "Deliver Meals (9:45 a.m.)", "indent": False}],
+        "return_note": DEFAULT_RETURN, "logo": True, "footer": True,
+    },
+}
+
+
+def source_doc(slug: str, store: Store) -> dict | None:
+    """The document a new insert can start from: one made on the screen, or a hand-built one."""
+    if not SLUG_RE.match(slug or ""):
+        return None
+    doc = store.insert_doc(slug) or BUILT_IN_DOCS.get(slug)
+    return clean(doc) if doc else None
+
+
+def sources(store: Store) -> dict[str, str]:
+    """slug → title of everything a new insert can be copied from, newest first."""
+    return {**{i["slug"]: i["title"] for i in store.inserts()}, **{k: BUILT_IN[k] for k in BUILT_IN_DOCS}}
+
+
 def available(store: Store) -> dict[str, str]:
     """slug → label of every insert a week can carry."""
     return {**{i["slug"]: i["title"] for i in store.inserts()}, **BUILT_IN}

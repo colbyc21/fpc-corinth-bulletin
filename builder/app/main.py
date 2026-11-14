@@ -646,10 +646,10 @@ def _insert_or_404(slug: str) -> dict:
     return doc
 
 
-def _insert_page(request: Request, user: dict, slug: str | None, doc: dict, week: str = ""):
+def _insert_page(request: Request, user: dict, slug: str | None, doc: dict, week: str = "", source: str = ""):
     proof = slug is not None and (insertmod.out_dir(slug) / "proof-1.png").exists()
     return page(request, "insert.html", user, slug=slug, doc=doc, week=week, proof=proof, row_types=insertmod.ROW_TYPES,
-                weeks=[w["date"] for w in list_weeks()[:6]], stamp=store().insert_stamp(slug) if slug else "")
+                weeks=[w["date"] for w in list_weeks()[:6]], source=source, sources=insertmod.sources(store()), stamp=store().insert_stamp(slug) if slug else "")
 
 
 def _build_insert(slug: str, doc: dict) -> str:
@@ -688,19 +688,22 @@ def inserts_list(request: Request, user: dict = Depends(need("editor"))):
                 carried.setdefault(name, []).append(p.parent.name)
         except Exception:
             continue
-    return page(request, "inserts.html", user, inserts=store().inserts(), carried=carried, built_in=insertmod.BUILT_IN)
+    return page(request, "inserts.html", user, inserts=store().inserts(), carried=carried, built_in=insertmod.BUILT_IN, copyable=insertmod.BUILT_IN_DOCS)
 
 
 @app.get("/inserts/new", response_class=HTMLResponse)
-def insert_new(request: Request, week: str = "", ann: int = -1, user: dict = Depends(need("editor"))):
-    doc = insertmod.blank()
-    if week and DATE_RE.match(week) and weekmod.week_path(week).exists():
-        anns = json.loads(weekmod.week_path(week).read_text()).get("announcements", [])
-        if 0 <= ann < len(anns):
-            doc = insertmod.from_announcement(anns[ann])
-    else:
+def insert_new(request: Request, week: str = "", ann: int = -1, source: str = "", user: dict = Depends(need("editor"))):
+    """The blank form, or one filled from an earlier insert (``source``) or from one of a week's announcements."""
+    if not (week and DATE_RE.match(week) and weekmod.week_path(week).exists()):
         week = ""
-    return _insert_page(request, user, None, doc, week)
+    doc = insertmod.source_doc(source, store())
+    if doc is None:
+        source, doc = "", insertmod.blank()
+        if week:
+            anns = json.loads(weekmod.week_path(week).read_text()).get("announcements", [])
+            if 0 <= ann < len(anns):
+                doc = insertmod.from_announcement(anns[ann])
+    return _insert_page(request, user, None, doc, week, source)
 
 
 @app.post("/inserts")
@@ -741,17 +744,6 @@ async def insert_save(slug: str, request: Request, user: dict = Depends(need("ed
     store().log("insert.save", user["email"], slug)
     note = await run_in_threadpool(_build_insert, slug, doc)
     return RedirectResponse(f"/inserts/{slug}?m={_q('Saved' + note)}", status_code=303)
-
-
-@app.post("/inserts/{slug}/copy")
-def insert_copy(slug: str, user: dict = Depends(need("editor"))):
-    doc = _insert_or_404(slug)
-    s = store()
-    new = insertmod.new_slug(doc["title"], s)
-    s.save_insert(new, doc)
-    s.log("insert.copy", user["email"], f"{slug} -> {new}")
-    msg = "This is the copy. Change it and save" + _build_insert(new, doc)
-    return RedirectResponse(f"/inserts/{new}?m={_q(msg)}", status_code=303)
 
 
 @app.post("/inserts/{slug}/delete")

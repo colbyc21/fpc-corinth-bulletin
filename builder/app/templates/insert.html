@@ -11,6 +11,16 @@
   @media (max-width:900px) { .editor { grid-template-columns:1fr; } .irow { grid-template-columns:1fr 1fr; } }
 </style>
 
+{% if not slug and sources %}
+<form method="get" action="/inserts/new" class="card row">
+  {% if week %}<input type="hidden" name="week" value="{{ week }}">{% endif %}
+  <div><label for="source">Start from an earlier insert</label>
+    <select id="source" name="source"><option value="">A blank form</option>{% for k, t in sources.items() %}<option value="{{ k }}" {% if k == source %}selected{% endif %}>{{ t }}</option>{% endfor %}</select></div>
+  <div class="narrow"><button type="submit" class="quiet">Fill the form from it</button></div>
+  <div class="muted" style="flex:2 1 260px">{% if source %}This is a copy of “{{ sources[source] }}”. Change the title, dates and anything else, then save: it becomes a new insert and the earlier one stays as it was.{% else %}Copies its wording and rows into the form below as a new insert; the earlier one is not changed.{% endif %}</div>
+</form>
+{% endif %}
+
 <div class="editor">
 <form method="post" action="{% if slug %}/inserts/{{ slug }}{% else %}/inserts{% endif %}" class="card">
   {% if week %}<input type="hidden" name="week" value="{{ week }}"><p class="muted">Saving adds this insert to the bulletin for {{ week | long_date }}.</p>{% endif %}
@@ -71,7 +81,7 @@
     <p class="muted">The Sunday’s page then lists it, and building that week keeps a copy of the PDF with the bulletin’s files. It can be unticked there.</p>
   </div>
   <div class="card row">
-    <form method="post" action="/inserts/{{ slug }}/copy" class="narrow"><button type="submit" class="quiet" title="Start another insert from this one, for next time">Make a copy</button></form>
+    <a class="btn quiet narrow" href="/inserts/new?source={{ slug }}" title="Start another insert from this one, for next time">Copy as a new insert</a>
     <form method="post" action="/inserts/{{ slug }}/delete" class="narrow" onsubmit="return confirm('Remove this insert? Sundays that carry it will no longer print it.')"><button type="submit" class="danger">Remove</button></form>
   </div>
   {% endif %}
