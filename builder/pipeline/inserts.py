@@ -7,7 +7,9 @@ stored in the ``inserts`` table by slug::
 
     {"title": "...", "eyebrow": "Sign-Up", "when": "...", "where": "...", "blurb": "...",
      "rows": [{"type": "line", "text": "Name(s):", "indent": false}, ...],
-     "return_note": "...", "logo": true, "footer": true}
+     "return_note": "...", "logo": true, "footer": true,
+     "title_print": "First line|Second line",          # only when the title has a forced break
+     "title_size": "normal", "text_size": "normal", "spacing": "normal", "blurb_align": "justify"}
 
 A week lists the slugs it carries in ``week.inserts``; the weekly build renders
 each beside the bulletin (``render.render_insert``). The one hand-built insert
@@ -36,6 +38,17 @@ ROW_TYPES = {
     "heading": "Bold text",
     "note": "Small note",
 }
+# The look settings: what each choice is called on the form, and what it means on the sheet.
+LOOK = {
+    "title_size": ("Title size", {"small": "Small", "normal": "Normal", "large": "Large"}),
+    "text_size": ("Type size", {"small": "Small", "normal": "Normal", "large": "Large"}),
+    "spacing": ("Space between rows", {"tight": "Tight", "normal": "Normal", "roomy": "Roomy"}),
+    "blurb_align": ("Blurb", {"justify": "Justified", "left": "Left", "center": "Centered"}),
+}
+LOOK_DEFAULTS = {"title_size": "normal", "text_size": "normal", "spacing": "normal", "blurb_align": "justify"}
+_TITLE_PT = {"small": "14.5pt", "normal": "17pt", "large": "20pt"}
+_TEXT_SCALE = {"small": "0.92", "normal": "1", "large": "1.1"}
+_GAP_SCALE = {"tight": "0.72", "normal": "1", "roomy": "1.3"}
 DEFAULT_RETURN = "Please place this form in the offering plate or bring it to the church office."
 SLUG_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 RESERVED = {"new", *BUILT_IN}
@@ -47,7 +60,7 @@ def blank() -> dict:
     return {"title": "", "eyebrow": "Sign-Up", "when": "", "where": "", "blurb": "",
             "rows": [{"type": "line", "text": "Name(s):", "indent": False},
                      {"type": "line", "text": "Phone or email:", "indent": False}],
-            "return_note": DEFAULT_RETURN, "logo": True, "footer": True}
+            "return_note": DEFAULT_RETURN, "logo": True, "footer": True, **LOOK_DEFAULTS}
 
 
 def slugify(title: str) -> str:
@@ -70,11 +83,19 @@ def clean(doc: dict) -> dict:
     def s(key: str) -> str:
         return " ".join(str(doc.get(key) or "").split())
 
-    out = {"title": s("title"), "eyebrow": s("eyebrow"), "when": s("when"), "where": s("where"),
+    lines = [ln for ln in (" ".join(x.split()) for x in str(doc.get("title_print") or doc.get("title") or "").split("|")) if ln]
+    out = {"title": " ".join(lines), "eyebrow": s("eyebrow"), "when": s("when"), "where": s("where"),
            "blurb": "\n\n".join(" ".join(p.split()) for p in re.split(r"\n\s*\n", str(doc.get("blurb") or "")) if p.strip()),
            "rows": [], "return_note": s("return_note"), "logo": bool(doc.get("logo")), "footer": bool(doc.get("footer"))}
     if not out["title"]:
         raise ValueError("the insert needs a title")
+    if len(lines) > 1:  # "First line | Second line" on the form: the title breaks there on the sheet
+        out["title_print"] = "|".join(lines[:3])
+    for key, (label, choices) in LOOK.items():
+        value = doc.get(key) or LOOK_DEFAULTS[key]
+        if value not in choices:
+            raise ValueError(f"{label.lower()} cannot be {value!r}")
+        out[key] = value
     for r in doc.get("rows") or []:
         text = " ".join(str(r.get("text") or "").split())
         if not text:
@@ -97,7 +118,7 @@ def form_to_doc(form: dict) -> dict:
     rows = [{"type": t, "text": x, "indent": i < len(indents) and indents[i] == "1"} for i, (t, x) in enumerate(zip(types, texts))]
     return clean({"title": one("title"), "eyebrow": one("eyebrow"), "when": one("when"), "where": one("where"),
                   "blurb": one("blurb"), "rows": rows, "return_note": one("return_note"),
-                  "logo": one("logo") == "on", "footer": one("footer") == "on"})
+                  "logo": one("logo") == "on", "footer": one("footer") == "on", **{k: one(k) for k in LOOK}})
 
 
 def from_announcement(ann: dict) -> dict:
@@ -161,7 +182,10 @@ def render(doc: dict) -> str:
                       trim_blocks=True, lstrip_blocks=True)
     env.filters["paren"] = _paren
     env.filters["options"] = _options
-    return env.get_template("insert.html.j2").render(doc=doc, blurb=[p for p in doc.get("blurb", "").split("\n\n") if p])
+    look = (f"--title: {_TITLE_PT[doc.get('title_size') or 'normal']}; --t: {_TEXT_SCALE[doc.get('text_size') or 'normal']}; "
+            f"--g: {_GAP_SCALE[doc.get('spacing') or 'normal']}")
+    return env.get_template("insert.html.j2").render(doc=doc, look=look, title_lines=(doc.get("title_print") or doc["title"]).split("|"),
+                                                     blurb=[p for p in doc.get("blurb", "").split("\n\n") if p])
 
 
 def out_dir(slug: str) -> Path:
@@ -184,10 +208,21 @@ def to_pdf(renderer: pdfmod.Renderer, html: Path, pdf: Path) -> float:
     return renderer.fitted_pdf(html, pdf, selector=".fit", floor=0.7)
 
 
+def fit_state(slug: str) -> str:
+    """How the saved insert sits on its half-sheet, in words, from the last build."""
+    d = out_dir(slug)
+    if (d / "scale.txt").exists():
+        scale = float((d / "scale.txt").read_text())
+        return "It fits the half-sheet at full size." if scale == 1 else f"It is over-full: everything is being shrunk to {scale:.0%} size to fit."
+    if (d / "insert.html").exists() and not (d / "insert.pdf").exists():
+        return "It does not fit the half-sheet even shrunk to 70%, so it has no proof."
+    return ""
+
+
 def build(slug: str, doc: dict, renderer: pdfmod.Renderer | None = None) -> dict:
     """HTML, PDF and a proof PNG under ``<var>/inserts/<slug>/``. Returns {"scale": ..., "pdf": ..., "png": ...}."""
     d = out_dir(slug)
-    for old in (d / "insert.pdf", d / "proof-1.png"):  # never leave an earlier version's proof standing
+    for old in (d / "insert.pdf", d / "proof-1.png", d / "scale.txt"):  # never leave an earlier version's proof standing
         old.unlink(missing_ok=True)
     html = write_html(doc, d / "insert.html")
     own = renderer is None
@@ -198,4 +233,5 @@ def build(slug: str, doc: dict, renderer: pdfmod.Renderer | None = None) -> dict
         if own:
             r.__exit__(None, None, None)
     png = pdfmod.page_pngs(d / "insert.pdf", d, dpi=110, prefix="proof")[0]
+    (d / "scale.txt").write_text(str(scale))
     return {"scale": scale, "pdf": d / "insert.pdf", "png": png}

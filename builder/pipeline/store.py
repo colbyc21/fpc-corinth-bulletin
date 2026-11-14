@@ -308,6 +308,7 @@ class Store:
 
     def delete_insert(self, slug: str) -> None:
         self.db.execute("delete from inserts where slug=?", (slug,))
+        self.db.execute("delete from chat where date=?", (f"insert:{slug}",))  # a later insert of the same name starts its own conversation
 
     # ── users and magic links ────────────────────────────────────────
     def users(self) -> list[dict]:

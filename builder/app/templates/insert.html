@@ -21,11 +21,21 @@
 </form>
 {% endif %}
 
+{% if not slug %}
+<form method="post" action="/inserts/draft" class="card">
+  {% if week %}<input type="hidden" name="week" value="{{ week }}">{% endif %}
+  <label for="draft-source">Or have AI draft it: paste the announcement or the pastor’s email</label>
+  <textarea id="draft-source" name="source" rows="4" placeholder="Paste the text here. The draft takes its title, date, wording and what to ask for from it; you then check it and change anything, by hand or by asking."></textarea>
+  <p style="margin:0.6rem 0 0"><button type="submit" class="quiet" {% if spend_status.blocked or not spend_status.model_calls %}disabled{% endif %}>Draft the insert</button>
+  <span class="muted">Takes about ten seconds and costs a few cents. {% if not spend_status.model_calls %}Model calls are switched off on this server.{% elif spend_status.blocked %}The monthly model spend cap is reached.{% endif %}</span></p>
+</form>
+{% endif %}
+
 <div class="editor">
 <form method="post" action="{% if slug %}/inserts/{{ slug }}{% else %}/inserts{% endif %}" class="card">
   {% if week %}<input type="hidden" name="week" value="{{ week }}"><p class="muted">Saving adds this insert to the bulletin for {{ week | long_date }}.</p>{% endif %}
   <div class="row">
-    <div style="flex:3 1 260px"><label>Title</label><input type="text" name="title" value="{{ doc.title }}" required placeholder="e.g. Church Fellowship Night"></div>
+    <div style="flex:3 1 260px"><label>Title</label><input type="text" name="title" value="{{ (doc.title_print or doc.title) | replace('|', ' | ') }}" required placeholder="e.g. Church Fellowship Night"></div>
     <div><label>Small line above the title</label><input type="text" name="eyebrow" value="{{ doc.eyebrow }}" placeholder="Sign-Up"></div>
   </div>
   <div class="row" style="margin-top:0.6rem">
@@ -53,6 +63,13 @@
     <label class="check"><input type="checkbox" name="logo" {% if doc.logo %}checked{% endif %}> Church logo at the top</label>
     <label class="check"><input type="checkbox" name="footer" {% if doc.footer %}checked{% endif %}> Church address at the bottom</label>
   </p>
+  <h3 style="margin-top:1rem">The look</h3>
+  <div class="row">
+    {% for key, (label, choices) in look.items() %}
+    <div><label>{{ label }}</label><select name="{{ key }}">{% for v, lbl in choices.items() %}<option value="{{ v }}" {% if (doc[key] or look_defaults[key]) == v %}selected{% endif %}>{{ lbl }}</option>{% endfor %}</select></div>
+    {% endfor %}
+  </div>
+  <p class="muted">To break the title onto two lines at a place you choose, type <code>|</code> there: “37th Community | Thanksgiving Meal”.</p>
   <p><button type="submit">{% if slug %}Save and redo the proof{% else %}Save and make the proof{% endif %}</button></p>
 </form>
 
@@ -70,6 +87,19 @@
   </div>
 
   {% if slug %}
+  <div class="card" id="chat">
+    <h3>Ask for a change</h3>
+    {% if chat %}
+    <div class="chatlog">
+      {% for m in chat %}<div class="msg {{ m.role }}"><span class="who">{{ 'You' if m.role == 'user' else 'Builder' }}</span> {{ m.text }}{% if m.cost_usd %} <span class="muted">(${{ '%.2f' % m.cost_usd }})</span>{% endif %}</div>{% endfor %}
+    </div>
+    {% endif %}
+    <form method="post" action="/inserts/{{ slug }}/chat">
+      <textarea name="message" rows="2" required placeholder="e.g. Add a checkbox for bringing a dessert · The title is too big · Give people more room to write · Tighten the wording"></textarea>
+      <p style="margin:0.5rem 0 0"><button type="submit" {% if spend_status.blocked or not spend_status.model_calls or chat_left <= 0 %}disabled{% endif %}>Send</button></p>
+    </form>
+    <p class="muted">{% if not spend_status.model_calls %}Model calls are switched off on this server.{% elif spend_status.blocked %}The monthly model spend cap is reached.{% else %}Each message changes the insert, saves it and redoes the proof, for a few cents. Save your own changes to the form first: a message works from the saved insert. {{ chat_left }} message(s) left for this insert.{% endif %}</p>
+  </div>
   <div class="card">
     <h3>Put it in a Sunday’s bulletin</h3>
     {% if weeks %}

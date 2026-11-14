@@ -6,6 +6,8 @@
 {# A sign-up insert made on the app's Inserts screen (pipeline/inserts.py): one
    landscape letter sheet holding the same 5.5 x 8.5 in half-sheet twice, cut down the
    middle. The look follows the hand-built Thanksgiving Meal insert of 2026-10-25.
+   The look settings (title size, type size, spacing, blurb alignment) arrive as the CSS
+   variables --title, --t and --g on each half-sheet.
    When the rows need more room than the half-sheet has, inserts.build steps --z down
    (pdf.Renderer.fitted_pdf), which shrinks everything in the panel together. #}
 <style>
@@ -28,17 +30,18 @@
   .logo { height: 1.05in; display: block; margin: 0.14in auto 0.12in; }
   .eyebrow { text-align: center; font-size: 9pt; letter-spacing: 0.18em; text-transform: uppercase; margin: 0.12in 0 0.04in; }
   .logo + .eyebrow { margin-top: 0; }
-  h1 { text-align: center; font-size: 17pt; font-weight: bold; line-height: 1.15; margin-bottom: 0.05in; text-wrap: balance; }
+  h1 { text-align: center; font-size: var(--title, 17pt); font-weight: bold; line-height: 1.15; margin-bottom: 0.05in; text-wrap: balance; }
   hr + h1 { margin-top: 0.12in; }
-  .when { text-align: center; font-style: italic; font-size: 11.5pt; text-wrap: balance; }
-  .where { text-align: center; font-size: 10.5pt; margin-top: 0.02in; text-wrap: balance; }
+  .when { text-align: center; font-style: italic; font-size: calc(11.5pt * var(--t, 1)); text-wrap: balance; }
+  .where { text-align: center; font-size: calc(10.5pt * var(--t, 1)); margin-top: 0.02in; text-wrap: balance; }
   .head-end { margin-top: 0.12in; }
-  .blurb { font-size: 10.5pt; line-height: 1.4; text-align: justify; margin-top: 0.14in; }
+  .blurb { font-size: calc(10.5pt * var(--t, 1)); line-height: 1.4; text-align: justify; margin-top: 0.14in; }
+  .blurb.left { text-align: left; } .blurb.center { text-align: center; text-wrap: balance; }
   .blurb + .blurb { margin-top: 0.07in; }
 
-  .rows { margin-top: 0.24in; }
-  .row { margin-bottom: 0.28in; font-size: 11.5pt; }
-  .row.indent { margin-left: 0.45in; font-size: 10.5pt; }
+  .rows { margin-top: calc(0.24in * var(--g, 1)); }
+  .row { margin-bottom: calc(0.28in * var(--g, 1)); font-size: calc(11.5pt * var(--t, 1)); }
+  .row.indent { margin-left: 0.45in; font-size: calc(10.5pt * var(--t, 1)); }
   .row .paren { font-weight: normal; }
   .row.line, .row.short { display: flex; align-items: baseline; gap: 0.08in; }
   .row.line .label, .row.short .label { font-weight: bold; white-space: nowrap; }
@@ -48,13 +51,13 @@
   .row.line.long { display: block; }
   .row.line.long .label { white-space: normal; display: block; }
   .row.line.long .rule { display: block; }
-  .row.heading { font-weight: bold; margin-bottom: 0.14in; }
-  .row.note { font-size: 8.5pt; font-style: italic; color: #333; margin-top: -0.2in; }
-  .row.check, .row.checks { margin-bottom: 0.2in; padding-left: 0.1in; }
+  .row.heading { font-weight: bold; margin-bottom: calc(0.14in * var(--g, 1)); }
+  .row.note { font-size: calc(8.5pt * var(--t, 1)); font-style: italic; color: #333; margin-top: calc(-0.2in * var(--g, 1)); }
+  .row.check, .row.checks { margin-bottom: calc(0.2in * var(--g, 1)); padding-left: 0.1in; }
   .row.check { display: flex; align-items: baseline; gap: 0.1in; }
   .row.checks { display: flex; flex-wrap: wrap; gap: 0.12in 0.3in; }
   .row.checks .opt { display: inline-flex; align-items: baseline; gap: 0.08in; white-space: nowrap; }
-  .row.check .paren, .row.checks .paren { font-size: 10pt; }
+  .row.check .paren, .row.checks .paren { font-size: calc(10pt * var(--t, 1)); }
   .box { flex: 0 0 auto; width: 0.17in; height: 0.17in; border: 0.9pt solid #000; position: relative; top: 0.025in; }
 
   .foot { margin-top: auto; text-align: center; font-size: 9pt; line-height: 1.35; }
@@ -69,15 +72,15 @@
 </head>
 <body>
 {% macro panel() %}
-  <div class="panel"><div class="fit">
+  <div class="panel"><div class="fit" style="{{ look }}">
     <hr>
     {% if doc.logo %}<img class="logo" src="logo-cover.png" alt="First Presbyterian Church">{% endif %}
     {% if doc.eyebrow %}<p class="eyebrow">{{ doc.eyebrow }}</p>{% endif %}
-    <h1>{{ doc.title }}</h1>
+    <h1>{% for line in title_lines %}{{ line }}{% if not loop.last %}<br>{% endif %}{% endfor %}</h1>
     {% if doc.when %}<p class="when">{{ doc.when }}</p>{% endif %}
     {% if doc.where %}<p class="where">{{ doc.where }}</p>{% endif %}
     <hr class="thin head-end">
-    {% for para in blurb %}<p class="blurb">{{ para }}</p>{% endfor %}
+    {% for para in blurb %}<p class="blurb {{ doc.blurb_align or '' }}">{{ para }}</p>{% endfor %}
 
     <div class="rows">
     {% for r in doc.rows %}

@@ -22,7 +22,7 @@ from starlette.concurrency import run_in_threadpool
 
 from builder import config
 from builder.app import auth, calendar_sync
-from builder.pipeline import build as buildmod, calendar_feed, chat as chatmod, content as contentmod, dates, deploy_status, extract, fit as fitmod, forms, hymn_index, inserts as insertmod, intake as intakemod, scripture_index, model as modelmod, publish as publishmod
+from builder.pipeline import build as buildmod, calendar_feed, chat as chatmod, content as contentmod, dates, deploy_status, extract, fit as fitmod, forms, hymn_index, insert_chat, inserts as insertmod, intake as intakemod, scripture_index, model as modelmod, publish as publishmod
 from builder.pipeline import stats as statsmod
 from builder.pipeline import week as weekmod
 from builder.pipeline.store import ROLE_LABELS, ROSTER_COLUMNS, ROSTER_LABELS, ROSTER_ROLES, USER_ROLES, Store
@@ -649,7 +649,9 @@ def _insert_or_404(slug: str) -> dict:
 def _insert_page(request: Request, user: dict, slug: str | None, doc: dict, week: str = "", source: str = ""):
     proof = slug is not None and (insertmod.out_dir(slug) / "proof-1.png").exists()
     return page(request, "insert.html", user, slug=slug, doc=doc, week=week, proof=proof, row_types=insertmod.ROW_TYPES,
-                weeks=[w["date"] for w in list_weeks()[:6]], source=source, sources=insertmod.sources(store()), stamp=store().insert_stamp(slug) if slug else "")
+                weeks=[w["date"] for w in list_weeks()[:6]], source=source, sources=insertmod.sources(store()), look=insertmod.LOOK, look_defaults=insertmod.LOOK_DEFAULTS,
+                chat=store().chat_history(insert_chat.chat_key(slug)) if slug else [],
+                chat_left=insert_chat.MAX_MESSAGES - store().chat_count(insert_chat.chat_key(slug)) if slug else 0, stamp=store().insert_stamp(slug) if slug else "")
 
 
 def _build_insert(slug: str, doc: dict) -> str:
@@ -728,6 +730,27 @@ async def insert_create(request: Request, user: dict = Depends(need("editor"))):
     return RedirectResponse(f"/inserts/{slug}?m={_q(msg)}", status_code=303)
 
 
+@app.post("/inserts/draft")
+def insert_draft(source: str = Form(""), week: str = Form(""), user: dict = Depends(need("editor"))):
+    """AI help: a new insert drafted from a pasted announcement or email."""
+    back = "/inserts/new" + (f"?week={week}&" if DATE_RE.match(week) else "?")
+    try:
+        res = insert_chat.draft(source, store=store(), user=user["email"])
+    except (modelmod.ModelError, ValueError) as e:
+        return RedirectResponse(f"{back}m={_q('Not drafted: ' + str(e))}", status_code=303)
+    except Exception as e:
+        log.exception("insert draft failed")
+        return RedirectResponse(f"{back}m={_q('Draft failed: ' + str(e))}", status_code=303)
+    msg = f"Drafted (${res['cost']:.2f}). Check every date and detail against what you pasted"
+    if DATE_RE.match(week) and weekmod.week_path(week).exists():
+        try:
+            _attach_insert(res["slug"], week)
+            msg += f". Added to {dates.long_date(week)}"
+        except Exception as e:
+            msg += f". Not added to {week}: {e}"
+    return RedirectResponse(f"/inserts/{res['slug']}?m={_q(msg)}#chat", status_code=303)
+
+
 @app.get("/inserts/{slug}", response_class=HTMLResponse)
 def insert_edit(slug: str, request: Request, user: dict = Depends(need("editor"))):
     return _insert_page(request, user, slug, _insert_or_404(slug))
@@ -744,6 +767,23 @@ async def insert_save(slug: str, request: Request, user: dict = Depends(need("ed
     store().log("insert.save", user["email"], slug)
     note = await run_in_threadpool(_build_insert, slug, doc)
     return RedirectResponse(f"/inserts/{slug}?m={_q('Saved' + note)}", status_code=303)
+
+
+@app.post("/inserts/{slug}/chat")
+def insert_chat_post(slug: str, message: str = Form(""), user: dict = Depends(need("editor"))):
+    _insert_or_404(slug)
+    message = message.strip()
+    if not message:
+        return RedirectResponse(f"/inserts/{slug}#chat", status_code=303)
+    try:
+        res = insert_chat.revise(slug, message, store=store(), user=user["email"])
+    except modelmod.ModelError as e:
+        return RedirectResponse(f"/inserts/{slug}?m={_q('Chat: ' + str(e))}#chat", status_code=303)
+    except Exception as e:
+        log.exception("insert chat failed")
+        return RedirectResponse(f"/inserts/{slug}?m={_q('Chat failed: ' + str(e))}#chat", status_code=303)
+    note = "Changed" if res["changed"] else "Nothing changed"
+    return RedirectResponse(f"/inserts/{slug}?m={_q(f'{note} (${res['cost']:.2f})')}#chat", status_code=303)
 
 
 @app.post("/inserts/{slug}/delete")

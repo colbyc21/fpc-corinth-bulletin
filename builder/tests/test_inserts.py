@@ -5,7 +5,7 @@ import os
 import pytest
 from fastapi.testclient import TestClient
 
-from builder.pipeline import forms, inserts, pdf as pdfmod, render
+from builder.pipeline import forms, insert_chat, inserts, model, pdf as pdfmod, render
 from builder.pipeline import week as weekmod
 
 FORM = {
@@ -25,7 +25,7 @@ def test_form_to_doc_and_html():
     assert len(doc["rows"]) == 6 and doc["rows"][5] == {"type": "short", "text": "How many children?", "indent": True}  # the empty row is dropped
     html = inserts.render(doc)
     assert html.count("<h1>Church Fellowship Night</h1>") == 2  # the same half-sheet twice
-    assert html.count('class="blurb"') == 4 and "Bring a &lt;dish&gt; &amp; a friend." in html
+    assert html.count('<p class="blurb justify">') == 4 and "Bring a &lt;dish&gt; &amp; a friend." in html
     assert '<span class="label">Name(s):</span>' in html  # "(s)" is part of the word, not a parenthetical
     assert 'Nursery needed <span class="paren">(ages 0–3)</span>' in html
     assert html.count('class="opt"') == 6 and 'class="row short indent"' in html
@@ -53,16 +53,17 @@ def test_build_fits_or_refuses(tmp_var):
     doc = inserts.form_to_doc(FORM)
     with pdfmod.Renderer() as r:
         res = inserts.build("fits", doc, r)
-        assert res["scale"] == 1.0 and res["png"].exists()
+        assert res["scale"] == 1.0 and res["png"].exists() and "full size" in inserts.fit_state("fits")
         info = pdfmod.pdf_info(res["pdf"])
         assert info["pages"] == 1 and [round(x) for x in info["mediabox"][0]] == [0, 0, 792, 612]  # letter, landscape
         crowded = {**doc, "rows": doc["rows"] + [{"type": "line", "text": f"Question {i}:", "indent": False} for i in range(5)]}
         res = inserts.build("fits", crowded, r)
-        assert 0.7 <= res["scale"] < 1.0  # shrunk together rather than cut off
+        assert 0.7 <= res["scale"] < 1.0 and "over-full" in inserts.fit_state("fits")  # shrunk together rather than cut off
         hopeless = {**doc, "blurb": "Words and more words. " * 150, "rows": crowded["rows"] * 2}
         with pytest.raises(ValueError, match="does not fit"):
             inserts.build("fits", hopeless, r)
         assert not res["pdf"].exists() and not res["png"].exists()  # no stale proof of the earlier version
+        assert "does not fit" in inserts.fit_state("fits")
 
 
 def test_week_carries_a_made_insert(store, tmp_path):
@@ -134,3 +135,100 @@ def test_inserts_screen(client, store, monkeypatch):
         assert client.post(f"/inserts/{slug}/delete").status_code == 303
     assert store.inserts() == [] and client.get("/inserts/fellowship-supper").status_code == 404
     assert any(a["action"] == "insert.delete" and "Fellowship Supper" in a["detail"] for a in store.audit(limit=20))
+
+
+def test_look_settings_and_title_break():
+    doc = inserts.form_to_doc({**FORM, "title": ["37th Community |  Thanksgiving Meal"], "title_size": ["large"], "text_size": ["small"],
+                               "spacing": ["roomy"], "blurb_align": ["left"]})
+    assert doc["title"] == "37th Community Thanksgiving Meal" and doc["title_print"] == "37th Community|Thanksgiving Meal"
+    html = inserts.render(doc)
+    assert "<h1>37th Community<br>Thanksgiving Meal</h1>" in html and '<p class="blurb left">' in html
+    assert 'style="--title: 20pt; --t: 0.92; --g: 1.3"' in html
+    plain = inserts.form_to_doc(FORM)
+    assert "title_print" not in plain and plain["spacing"] == "normal" and 'style="--title: 17pt; --t: 1; --g: 1"' in inserts.render(plain)
+    assert 'style="--title: 17pt; --t: 1; --g: 1"' in inserts.render({k: v for k, v in plain.items() if k not in inserts.LOOK})  # saved before the look settings
+    with pytest.raises(ValueError, match="title size"):
+        inserts.form_to_doc({**FORM, "title_size": ["huge"]})
+    assert insert_chat.for_model(doc)["title"] == "37th Community|Thanksgiving Meal" and "title_print" not in insert_chat.for_model(doc)
+
+
+class _Resp:
+    def __init__(self, out):
+        self.content = [type("B", (), {"type": "text", "text": __import__("json").dumps(out)})()]
+
+
+def test_ai_revise_and_draft(store, tmp_var, monkeypatch):
+    built = []
+    monkeypatch.setattr(inserts, "build", lambda slug, doc, renderer=None: built.append(slug) or {"scale": 0.92})
+    monkeypatch.setattr(inserts, "fit_state", lambda slug: "It fits the half-sheet at full size.")
+    start = inserts.form_to_doc(FORM)
+    store.save_insert("ai-night", start)
+    seen = {}
+
+    def fake(job, **kw):
+        job.record("claude-opus-5-5", {"output_tokens": 500})
+        seen.update(kw, text=kw["messages"][0]["content"])
+        return _Resp(seen["answer"])
+
+    monkeypatch.setattr(insert_chat.model, "complete", fake)
+    new = insert_chat.for_model(start)
+    new["rows"].append({"type": "check", "text": "I can bring a dessert", "indent": False})
+    new["spacing"] = "tight"
+    seen["answer"] = {"reply": "Added a dessert checkbox and tightened the spacing.", "changed": True, "doc": new}
+    res = insert_chat.revise("ai-night", "add a dessert checkbox, and tighten it up", store=store, user="ed@example.com")
+    saved = store.insert_doc("ai-night")
+    assert res["changed"] and res["cost"] > 0 and saved["rows"][-1]["text"] == "I can bring a dessert" and saved["spacing"] == "tight"
+    assert "92% size" in res["reply"] and built == ["ai-night"]
+    assert seen["schema"] is insert_chat.SCHEMA and "Request: add a dessert checkbox" in seen["text"] and '"Number attending:"' in seen["text"] and "fits the half-sheet at full size" in seen["text"]
+    hist = store.chat_history(insert_chat.chat_key("ai-night"))
+    assert [h["role"] for h in hist] == ["user", "assistant"] and hist[-1]["cost_usd"] > 0
+
+    # a request the form cannot meet changes nothing, and the earlier turns go along as context
+    seen["answer"] = {"reply": "The form cannot carry a photo.", "changed": False, "doc": new}
+    res = insert_chat.revise("ai-night", "add a photo of the church", store=store)
+    assert not res["changed"] and store.insert_doc("ai-night") == saved and built == ["ai-night"]
+    assert "Earlier in this conversation" in seen["text"] and "tightened the spacing" in seen["text"]
+
+    # a document that does not pass the form's own rules is refused, not saved
+    seen["answer"] = {"reply": "x", "changed": True, "doc": {**new, "title": " "}}
+    with pytest.raises(model.ModelError, match="Nothing was saved"):
+        insert_chat.revise("ai-night", "remove the title", store=store)
+    assert store.insert_doc("ai-night") == saved
+
+    monkeypatch.setattr(insert_chat, "MAX_MESSAGES", 3)
+    with pytest.raises(model.SpendCap):
+        insert_chat.revise("ai-night", "again", store=store)
+
+    seen["answer"] = {"reply": "Drafted from the announcement.", "changed": True,
+                      "doc": {**insert_chat.for_model(inserts.blank()), "title": "Chili|Cook-Off", "when": "Sunday, January 10 · noon"}}
+    res = insert_chat.draft("Join us for the chili cook-off on January 10 at noon. Sign up to bring a pot!", store=store, user="ed@example.com")
+    assert res["slug"] == "chili-cook-off" and store.insert_doc("chili-cook-off")["title_print"] == "Chili|Cook-Off"
+    assert "The text:" in seen["text"] and "chili cook-off on January 10" in seen["text"]
+    with pytest.raises(ValueError, match="paste"):
+        insert_chat.draft("too short", store=store)
+    for slug in ("ai-night", "chili-cook-off"):
+        store.delete_insert(slug)
+    assert store.chat_history(insert_chat.chat_key("ai-night")) == []
+
+
+def test_ai_routes(client, store, monkeypatch):
+    from builder.app import main
+    store.save_insert("route-night", inserts.form_to_doc(FORM))
+    page = client.get("/inserts/route-night").text
+    assert 'action="/inserts/route-night/chat"' in page and 'name="title_size"' in page
+    assert 'action="/inserts/draft"' in client.get("/inserts/new").text
+    monkeypatch.setattr(main.insert_chat, "revise", lambda slug, message, **kw: {"reply": "ok", "cost": 0.03, "changed": True})
+    r = client.post("/inserts/route-night/chat", data={"message": "bigger title"})
+    assert r.status_code == 303 and "Changed" in r.headers["location"] and r.headers["location"].endswith("#chat")
+
+    def off(*a, **k):
+        raise model.ModelOff("Model calls are switched off")
+    monkeypatch.setattr(main.insert_chat, "revise", off)
+    monkeypatch.setattr(main.insert_chat, "draft", off)
+    assert "switched+off" in client.post("/inserts/route-night/chat", data={"message": "x"}).headers["location"]
+    r = client.post("/inserts/draft", data={"source": "A long enough announcement to draft from.", "week": "2026-11-01"})
+    assert r.headers["location"].startswith("/inserts/new?week=2026-11-01&m=Not+drafted")
+    monkeypatch.setattr(main.insert_chat, "draft", lambda source, **kw: {"slug": "route-night", "reply": "ok", "cost": 0.04})
+    r = client.post("/inserts/draft", data={"source": "A long enough announcement to draft from."})
+    assert r.headers["location"].startswith("/inserts/route-night?m=Drafted")
+    store.delete_insert("route-night")

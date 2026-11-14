@@ -70,6 +70,7 @@ JOB_CAPS = {  # kind: (max calls, max USD)
     "content": (2, 1.00),
     "fit": (12, 3.00),
     "chat": (12, 2.00),
+    "insert": (1, 0.50),   # one call per message on the Inserts screen
 }
 BUILDS_PER_WEEK = 3
 
