@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-12T15:12:07+00:00",
+  "generated": "2026-11-19T16:09:49+00:00",
   "subscribe_url": "https://bulletin.fpccorinth.org/calendar.ics",
   "events": [
     {
@@ -191,36 +191,6 @@
       "time": "5pm",
       "location": "",
       "recurring": false
-    },
-    {
-      "date": "2026-11-24",
-      "label": "November 24",
-      "month": "November 2026",
-      "weekday": "Tuesday",
-      "title": "Messy Bible Study",
-      "time": "8 a.m.",
-      "location": "Youth House",
-      "recurring": true
-    },
-    {
-      "date": "2026-11-25",
-      "label": "November 25",
-      "month": "November 2026",
-      "weekday": "Wednesday",
-      "title": "Kids Quest",
-      "time": "",
-      "location": "",
-      "recurring": true
-    },
-    {
-      "date": "2026-11-25",
-      "label": "November 25",
-      "month": "November 2026",
-      "weekday": "Wednesday",
-      "title": "Youth House",
-      "time": "",
-      "location": "",
-      "recurring": true
     },
     {
       "date": "2026-11-26",
@@ -858,34 +828,14 @@
             "day": 24,
             "weekday": "Tue",
             "in_month": true,
-            "entries": [
-              {
-                "title": "Messy Bible Study",
-                "time": "8 a.m.",
-                "location": "Youth House",
-                "recurring": true
-              }
-            ]
+            "entries": []
           },
           {
             "date": "2026-11-25",
             "day": 25,
             "weekday": "Wed",
             "in_month": true,
-            "entries": [
-              {
-                "title": "Kids Quest",
-                "time": "",
-                "location": "",
-                "recurring": true
-              },
-              {
-                "title": "Youth House",
-                "time": "",
-                "location": "",
-                "recurring": true
-              }
-            ]
+            "entries": []
           },
           {
             "date": "2026-11-26",
@@ -988,7 +938,7 @@
           }
         ]
       ],
-      "pdf": "/calendar/print/fpc-calendar-2026-11-804b0383.pdf"
+      "pdf": "/calendar/print/fpc-calendar-2026-11-dc56ac05.pdf"
     },
     {
       "month": "2026-12",
