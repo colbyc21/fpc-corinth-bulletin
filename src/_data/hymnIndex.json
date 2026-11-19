@@ -1,12 +1,12 @@
 {
-  "generated": "2026-11-12T18:31:03+00:00",
+  "generated": "2026-11-19T16:46:50+00:00",
   "hymnal": "The Hymnal for Worship & Celebration",
   "hymnary_hymnal_url": "https://hymnary.org/hymnal/HWC1986",
-  "services": 42,
+  "services": 43,
   "since": "2026-01-25",
-  "through": "2026-11-15",
+  "through": "2026-11-22",
   "since_label": "January 25, 2026",
-  "through_label": "November 15, 2026",
+  "through_label": "November 22, 2026",
   "hymns": [
     {
       "number": "1",
@@ -1480,6 +1480,75 @@
         }
       ],
       "url": "https://hymnary.org/hymn/HWC1986/546"
+    },
+    {
+      "number": "557",
+      "title": "From the first bright light of morning",
+      "as_printed": [
+        "In Thanksgiving Let Us Praise Him"
+      ],
+      "tune": null,
+      "in_hymnal": true,
+      "times": 1,
+      "first": "2026-11-22",
+      "last": "2026-11-22",
+      "last_label": "November 22, 2026",
+      "dates": [
+        {
+          "date": "2026-11-22",
+          "label": "November 22, 2026",
+          "slot": "Congregational Response",
+          "verses": null,
+          "parts": 1
+        }
+      ],
+      "url": "https://hymnary.org/hymn/HWC1986/557"
+    },
+    {
+      "number": "559",
+      "title": "Come, ye thankful people, come",
+      "as_printed": [
+        "Come, Ye Thankful People, Come"
+      ],
+      "tune": null,
+      "in_hymnal": true,
+      "times": 1,
+      "first": "2026-11-22",
+      "last": "2026-11-22",
+      "last_label": "November 22, 2026",
+      "dates": [
+        {
+          "date": "2026-11-22",
+          "label": "November 22, 2026",
+          "slot": "The Hymn",
+          "verses": null,
+          "parts": 1
+        }
+      ],
+      "url": "https://hymnary.org/hymn/HWC1986/559"
+    },
+    {
+      "number": "562",
+      "title": "Rejoice, ye pure in heart",
+      "as_printed": [
+        "Rejoice, Ye Pure in Heart"
+      ],
+      "tune": null,
+      "in_hymnal": true,
+      "times": 1,
+      "first": "2026-11-22",
+      "last": "2026-11-22",
+      "last_label": "November 22, 2026",
+      "dates": [
+        {
+          "date": "2026-11-22",
+          "label": "November 22, 2026",
+          "slot": "Hymn",
+          "verses": null,
+          "parts": 1
+        }
+      ],
+      "url": "https://hymnary.org/hymn/HWC1986/562"
     },
     {
       "number": "620",

@@ -1,0 +1,615 @@
+{
+  "date": "2026-11-22",
+  "liturgical_day": "Twenty-sixth Sunday after Pentecost",
+  "subtitle_override": null,
+  "special": {
+    "communion": false,
+    "canvass": false
+  },
+  "pew_bible_page": 400,
+  "welcome_variant": "regular",
+  "flowers": {
+    "given": "in honor of Emma & Will Verdung in celebration of their marriage on November 21, 2026.",
+    "message": null,
+    "quote": null,
+    "reference": null,
+    "closing": null,
+    "signed": "Ken & Edi Williams"
+  },
+  "announcements": [
+    {
+      "title": "The Red Rose",
+      "body": "The Red Rose welcomes Mary Ellon McCalla, born November 13, 2026, to Hunter and Anna McCalla."
+    },
+    {
+      "title": "Hanging of the Greens",
+      "body": "Come join us at 5 p.m. in the sanctuary for fun and fellowship as we decorate the church for Christmas. Bring your children, as we have lots of fun planned for them as well."
+    }
+  ],
+  "serve": {
+    "assisting_elder": "Dr. Mark Mazurkiewicz",
+    "greeters": "Bobby & Christy Burns",
+    "ushers": "Scott Sawyer, Holland Yeates, Ben Long, & Josh McCahill",
+    "acolytes": "Madelyn Butler & Kathryn Moore",
+    "nursery": "BJ Mazurkiewicz, Laura Kate Carmichiel, Katy Stanley, Penny Long, Suzanne Davis, Terre Smith, Abbie Butler, & Courtney Taylor",
+    "circle_of_prayer": "Dave Shanklin & Becky Stewart",
+    "childrens_church": "Jason & Jennifer LeGoff",
+    "av_engineer": "Russell Smith"
+  },
+  "staff": null,
+  "calendar": [
+    {
+      "date": "2026-11-22",
+      "items": [
+        "Hanging of the Greens, 5 p.m."
+      ]
+    },
+    {
+      "date": "2026-11-26",
+      "items": [
+        "37th Community Thanksgiving Meal"
+      ]
+    }
+  ],
+  "liturgy": {
+    "items": [
+      {
+        "id": "gathering",
+        "type": "section",
+        "title": "Gathering",
+        "star": false,
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "piano-prelude",
+        "type": "plain",
+        "title": "The Piano Prelude",
+        "star": false,
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "greetings",
+        "type": "plain",
+        "title": "Greetings & Announcements",
+        "star": false,
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "meditation",
+        "type": "scripture",
+        "title": "Call to Meditation",
+        "ref": "Psalm 27:14",
+        "text": "“Wait for the Lord; be strong, and let your heart take courage; wait for the Lord!”",
+        "star": false,
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "prelude",
+        "type": "plain",
+        "title": "The Prelude",
+        "star": false,
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "introit",
+        "type": "music",
+        "title": "Choral Introit",
+        "piece": "We Come to Praise",
+        "star": false,
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "call-to-worship",
+        "type": "responsive",
+        "title": "Call to Worship",
+        "star": true,
+        "ref": "Psalm 95:1–3, 6–7",
+        "lines": [
+          {
+            "who": "Leader",
+            "text": "Oh come, let us sing to the Lord; let us make a joyful noise to the rock of our salvation! Let us come into his presence with thanksgiving; let us make a joyful noise to him with songs of praise! For the Lord is a great God, and a great King above all gods."
+          },
+          {
+            "who": "All",
+            "text": "Oh come, let us worship and bow down; let us kneel before the Lord, our Maker! For he is our God, and we are the people of his pasture, and the sheep of his hand."
+          }
+        ],
+        "sub": false,
+        "silent_confession": false
+      },
+      {
+        "id": "hymn1",
+        "type": "hymn",
+        "title": "The Hymn",
+        "star": true,
+        "number": 559,
+        "piece": "Come, Ye Thankful People, Come",
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "invocation",
+        "type": "corporate",
+        "title": "Prayer of Invocation & The Lord’s Prayer",
+        "star": true,
+        "text": "Our Father, who art in heaven, hallowed be thy Name. Thy Kingdom come, thy will be done on earth, as it is in heaven. Give us this day our daily bread, and forgive us our debts, as we forgive our debtors. Lead us not into temptation, but deliver us from evil. For thine is the kingdom, the power, and the glory, forever. Amen.",
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "responsive-reading",
+        "type": "responsive",
+        "title": "Responsive Reading",
+        "star": true,
+        "ref": "from Psalm 107",
+        "lines": [
+          {
+            "who": "Leader",
+            "text": "Oh give thanks to the Lord, for he is good, for his steadfast love endures forever! Let the redeemed of the Lord say so, whom he has redeemed from trouble and gathered in from the lands, from the east and from the west, from the north and from the south. Some wandered in desert wastes, finding no way to a city to dwell in; hungry and thirsty, their soul fainted within them."
+          },
+          {
+            "who": "All",
+            "text": "Then they cried to the Lord in their trouble, and he delivered them from their distress."
+          },
+          {
+            "who": "Leader",
+            "text": "He led them by a straight way till they reached a city to dwell in."
+          },
+          {
+            "who": "All",
+            "text": "Let them thank the Lord for his steadfast love, for his wondrous works to the children of man!"
+          },
+          {
+            "who": "Leader",
+            "text": "For he satisfies the longing soul, and the hungry soul he fills with good things. Some sat in darkness and in the shadow of death."
+          },
+          {
+            "who": "All",
+            "text": "Then they cried to the Lord in their trouble, and he delivered them from their distress."
+          },
+          {
+            "who": "Leader",
+            "text": "He brought them out of darkness and the shadow of death, and burst their bonds apart."
+          },
+          {
+            "who": "All",
+            "text": "Let them thank the Lord for his steadfast love, for his wondrous works to the children of man! And let them offer sacrifices of thanksgiving, and tell of his deeds in songs of joy!"
+          }
+        ],
+        "sub": false,
+        "silent_confession": false
+      },
+      {
+        "id": "congregational-response",
+        "type": "hymn",
+        "title": "Congregational Response",
+        "star": true,
+        "number": 557,
+        "piece": "In Thanksgiving Let Us Praise Him",
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "confession",
+        "type": "corporate",
+        "title": "Corporate Prayer of Confession",
+        "text": "God, our heavenly Father, You are our Creator, Redeemer, and Sustainer. Every good and perfect gift comes from You. Yet we confess that we have doubted Your generous heart which delights to give what is good to Your children. We have murmured and complained against You. We have failed to give thanks to You in all circumstances. Empower us to cast off these and all other sins of our heart knowing that they are an affront and insult to You. Fill us anew with Your Spirit and deepen our gratitude so that we might serve and obey You with undivided and joyful hearts.",
+        "silent_confession": true,
+        "star": false,
+        "sub": false,
+        "lines": []
+      },
+      {
+        "id": "assurance",
+        "type": "scripture",
+        "title": "Assurance of Divine Pardon",
+        "ref": "II Corinthians 8:9",
+        "text": "“For you know the grace of our Lord Jesus Christ, that though he was rich, yet for your sake he became poor, so that you by his poverty might become rich.”",
+        "star": false,
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "gloria-patri",
+        "type": "corporate",
+        "title": "Gloria Patri",
+        "star": true,
+        "text": "Glory be to the Father, and to the Son: and to the Holy Ghost; As it was in the beginning, is now, and ever shall be: world without end. Amen.",
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "creed",
+        "type": "corporate",
+        "title": "Profession of Faith",
+        "star": true,
+        "ref": "The Apostles’ Creed",
+        "text": "I believe in God, the Father almighty, Maker of heaven and earth, and in Jesus Christ, his only Son, our Lord, who was conceived by the Holy Ghost, born of the Virgin Mary, suffered under Pontius Pilate, was crucified, dead and buried; he descended into hell; the third day he rose again from the dead; he ascended into heaven, and sitteth on the right hand of God the Father Almighty; from thence he shall come to judge the quick and the dead. I believe in the Holy Ghost, the holy catholic* Church, the communion of saints, the forgiveness of sins, the resurrection of the body, and the life everlasting. Amen.",
+        "creed_note": "*that is, the true Christian church of all times and all places",
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "word",
+        "type": "section",
+        "title": "Word",
+        "star": false,
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "dgroup",
+        "type": "speaker",
+        "title": "dGroup Story of Grace",
+        "name": "Leslie Fisher, Rebecca Sawyer",
+        "star": false,
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "tithes",
+        "type": "plain",
+        "title": "The Giving of Tithes and Offerings",
+        "star": false,
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "anthem",
+        "type": "music",
+        "title": "Choral Anthem",
+        "piece": "Give Thanks",
+        "credit": "Henry Smith; arr. Gary Hallquist",
+        "star": false,
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "doxology",
+        "type": "corporate",
+        "title": "The Doxology and Prayer of Dedication",
+        "star": true,
+        "text": "Praise God, from whom all blessings flow; Praise Him, all creatures here below; Praise Him above, ye heavenly host; Praise Father, Son, and Holy Ghost. Amen.",
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "children",
+        "type": "plain",
+        "title": "Children Dismissed to Children’s Church",
+        "star": true,
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "reading",
+        "type": "reading",
+        "title": "Scripture Reading",
+        "ref": "Nehemiah 4",
+        "star": false,
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "response",
+        "type": "responsive",
+        "title": "Scripture Response",
+        "ref": "Isaiah 40:6b, 8",
+        "lines": [
+          {
+            "who": "Leader",
+            "text": "All flesh is grass, and all its beauty is like the flower of the field;"
+          },
+          {
+            "who": "All",
+            "text": "The grass withers, the flower fades, but the Word of our God will stand forever. Amen."
+          }
+        ],
+        "star": false,
+        "sub": false,
+        "silent_confession": false
+      },
+      {
+        "id": "sermon",
+        "type": "sermon",
+        "title": "Sermon",
+        "star": false,
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "commitment",
+        "type": "plain",
+        "title": "Prayer of Commitment",
+        "star": false,
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "sending",
+        "type": "section",
+        "title": "Sending",
+        "star": false,
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "hymn3",
+        "type": "hymn",
+        "title": "Hymn",
+        "star": true,
+        "number": 562,
+        "piece": "Rejoice, Ye Pure in Heart",
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "benediction",
+        "type": "plain",
+        "title": "Benediction",
+        "star": true,
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "choral-benediction",
+        "type": "music",
+        "title": "Choral Benediction",
+        "star": true,
+        "piece": "Sevenfold Amen",
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "postlude",
+        "type": "plain",
+        "title": "Postlude",
+        "star": true,
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      }
+    ],
+    "notes": [
+      {
+        "for": "call-to-worship",
+        "label": "Call to Worship",
+        "text": "We are summoned to worship by God’s word, calling His people into His presence to honor Him in spirit and truth, opening a sacred conversation that unfolds throughout the service. We sing in response to God’s call to worship, which is a reminder that worship is at God’s initiative, not ours."
+      },
+      {
+        "for": "hymn1",
+        "label": "Come, Ye Thankful People, Come",
+        "text": "Written in 1844 by English clergyman and hymnwriter Henry Alford, this hymn blends the physical gratitude of an autumn harvest with the spiritual anticipation of Christ’s return. While the first verse celebrates the gathering of earthly crops, the final verses are looking forward to the great final harvest when God will gather His people into His eternal home."
+      },
+      {
+        "for": "confession",
+        "label": "Corporate Confession",
+        "text": "God graciously reveals His holiness, and His people respond with humble confession, trusting His promise of forgiveness in Christ."
+      },
+      {
+        "for": "dgroup",
+        "label": "dGroup",
+        "text": "A group of 3-5, same gender individuals, led by a trained disciple-maker, that meets regularly to encourage one another as Christ-followers to continue taking steps in becoming a disciple of Christ who makes other disciples."
+      },
+      {
+        "for": "children",
+        "label": "Children’s Church",
+        "text": "Children ages 4 up to 4th grade are invited to come forward and exit out the side door for Children’s Church. Following the worship service, they may be picked up in the Fellowship Hall."
+      }
+    ],
+    "intro": null
+  },
+  "sermon": {
+    "title": "Spiritual Renewal: Resting in the Lord",
+    "scripture": "Nehemiah 4",
+    "preacher": "Rev. Waring Porter",
+    "intro": [
+      "In Nehemiah 4, we discover the moment God’s people begin making progress in their mission, opposition begins to intensify. As we have established, the rebuilding of Jerusalem was more than a construction project, it was part of God’s larger work of the spiritual renewal of His people after the exile. Sometimes we mistakenly assume that if we are doing what God wants us to do, everything ought to go smoothly and we will experience great success. But Scripture teaches us something different. Faithfulness does not exempt us from difficulty. Obedience does not guarantee an absence of opposition. Spiritual renewal does not mean the absence of spiritual conflict. However, we can interpret danger in light of the power and promises of God. That is the good news of Nehemiah 4. God’s people can persevere and rest in the Lord because their confidence is not ultimately in themselves, but in the Lord who fights for them. We see three things in this chapter that enable us to rest in the Lord."
+    ],
+    "points": [
+      {
+        "heading": "I. PERSEVERE",
+        "ref": "vv. 1–6"
+      },
+      {
+        "heading": "II. REMEMBER",
+        "ref": "vv. 7–14",
+        "quote": "Psalm 27:14 — “Wait for the LORD; be strong, and let your heart take courage; wait for the LORD!”"
+      },
+      {
+        "heading": "III. TRUST",
+        "ref": "vv. 15–23",
+        "sub": [
+          "Exodus 14:14 — “The LORD will fight for you.”",
+          "2 Chronicles 20:15 — “Do not be afraid and do not be dismayed…for the battle is not yours but God’s.”"
+        ]
+      }
+    ],
+    "missing": false,
+    "notes_lines_per_point": 3,
+    "blank_lines": 18
+  },
+  "inserts": [],
+  "layout": {
+    "pages": {
+      "p3": [
+        "gathering",
+        "piano-prelude",
+        "greetings",
+        "meditation",
+        "prelude",
+        "introit",
+        "call-to-worship",
+        "hymn1"
+      ],
+      "p4": [
+        "invocation",
+        "responsive-reading",
+        "congregational-response"
+      ],
+      "p5": [
+        "confession",
+        "assurance",
+        "gloria-patri",
+        "creed",
+        "word",
+        "dgroup",
+        "tithes",
+        "anthem",
+        "doxology"
+      ],
+      "p6": [
+        "children",
+        "reading",
+        "response",
+        "sermon",
+        "commitment",
+        "sending",
+        "hymn3",
+        "benediction",
+        "choral-benediction",
+        "postlude"
+      ]
+    },
+    "page_style": {
+      "p4": {
+        "spread": false
+      }
+    },
+    "announcement_columns": null,
+    "notes": [
+      {
+        "notes": [
+          "dgroup"
+        ],
+        "at": "dgroup",
+        "span": 3,
+        "align": "start"
+      }
+    ],
+    "overrides": [
+      {
+        "page": "p8",
+        "selector": ".announcements",
+        "css": "text-align: center;",
+        "reason": "Volunteer asked to center the announcements on the back cover."
+      },
+      {
+        "page": "p4",
+        "selector": "#responsive-reading, [data-id=\"responsive-reading\"]",
+        "css": "margin-top: 2.4em; margin-top: 2lh;",
+        "reason": "Volunteer asked for a double space (2 blank lines) before the Responsive Reading."
+      },
+      {
+        "page": "p4",
+        "selector": "#congregational-response, [data-id=\"congregational-response\"]",
+        "css": "margin-top: 3.6em; margin-top: 3lh;",
+        "reason": "Volunteer asked for a triple space (3 blank lines) before the Congregational Response."
+      }
+    ]
+  },
+  "copyedit": {
+    "changes": [
+      {
+        "where": "flowers.message",
+        "before": "None",
+        "after": "null",
+        "reason": "Placeholder text \"None\" means no message; set to null."
+      },
+      {
+        "where": "flowers.quote",
+        "before": "None",
+        "after": "null",
+        "reason": "Placeholder text \"None\" means no quote; set to null."
+      },
+      {
+        "where": "flowers.reference",
+        "before": "None",
+        "after": "null",
+        "reason": "Placeholder text \"None\" means no reference; set to null."
+      },
+      {
+        "where": "flowers.closing",
+        "before": "None",
+        "after": "null",
+        "reason": "Placeholder text \"None\" means no closing; set to null."
+      },
+      {
+        "where": "calendar[0].items[0]",
+        "before": "5pm",
+        "after": "5 p.m.",
+        "reason": "House time style."
+      }
+    ],
+    "flags": [
+      {
+        "where": "creed",
+        "message": "Document says “The Apostle Creed”; printed as “The Apostles’ Creed”. Also added the missing space in “catholic* Church, the”."
+      },
+      {
+        "where": "responsive-reading",
+        "message": "First “children of Man!” lowercased to “man” to match the repeated line (and ESV); “ALl” corrected to “All”."
+      },
+      {
+        "where": "dgroup",
+        "message": "dGroup Story of Grace treated as a speaker item opening the Word section (before Tithes); no role given for Leslie Fisher and Rebecca Sawyer."
+      },
+      {
+        "where": "sermon.points[2]",
+        "message": "Point III has two quoted verses; both placed in sub rather than quote."
+      },
+      {
+        "where": "liturgy.congregational-response",
+        "message": "#557 is “From the first bright light of morning” in the hymnal; the liturgy says “In Thanksgiving Let Us Praise Him”."
+      },
+      {
+        "where": "pew_bible_page",
+        "message": "No Pew Bible page known for Nehemiah 4; page omitted."
+      },
+      {
+        "where": "announcements[1].body",
+        "message": "No date is given for the Hanging of the Greens. The calendar lists it for today, Sunday, November 22, at 5 p.m. Confirm, and consider adding “this evening” or the date."
+      },
+      {
+        "where": "announcements[0].body",
+        "message": "Please confirm the spelling of the baby’s name “Mary Ellon” (rather than “Ellen”)."
+      },
+      {
+        "where": "flowers.given",
+        "message": "Please confirm the spelling of the couple’s surname “Verdung.”"
+      }
+    ]
+  },
+  "welcome_custom": null
+}
