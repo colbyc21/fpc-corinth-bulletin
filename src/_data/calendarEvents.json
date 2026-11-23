@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-19T16:09:49+00:00",
+  "generated": "2026-11-23T20:24:03+00:00",
   "subscribe_url": "https://bulletin.fpccorinth.org/calendar.ics",
   "events": [
     {
@@ -10,16 +10,6 @@
       "title": "Session Meeting",
       "time": "5pm",
       "location": "",
-      "recurring": true
-    },
-    {
-      "date": "2026-11-03",
-      "label": "November 3",
-      "month": "November 2026",
-      "weekday": "Tuesday",
-      "title": "Messy Bible Study",
-      "time": "8 a.m.",
-      "location": "Youth House",
       "recurring": true
     },
     {
@@ -123,16 +113,6 @@
       "recurring": false
     },
     {
-      "date": "2026-11-17",
-      "label": "November 17",
-      "month": "November 2026",
-      "weekday": "Tuesday",
-      "title": "Messy Bible Study",
-      "time": "8 a.m.",
-      "location": "Youth House",
-      "recurring": true
-    },
-    {
       "date": "2026-11-18",
       "label": "November 18",
       "month": "November 2026",
@@ -203,16 +183,6 @@
       "recurring": false
     },
     {
-      "date": "2026-12-01",
-      "label": "December 1",
-      "month": "December 2026",
-      "weekday": "Tuesday",
-      "title": "Messy Bible Study",
-      "time": "8 a.m.",
-      "location": "Youth House",
-      "recurring": true
-    },
-    {
       "date": "2026-12-02",
       "label": "December 2",
       "month": "December 2026",
@@ -240,16 +210,6 @@
       "title": "Session Meeting",
       "time": "5pm",
       "location": "",
-      "recurring": true
-    },
-    {
-      "date": "2026-12-08",
-      "label": "December 8",
-      "month": "December 2026",
-      "weekday": "Tuesday",
-      "title": "Messy Bible Study",
-      "time": "8 a.m.",
-      "location": "Youth House",
       "recurring": true
     },
     {
@@ -283,16 +243,6 @@
       "recurring": true
     },
     {
-      "date": "2026-12-15",
-      "label": "December 15",
-      "month": "December 2026",
-      "weekday": "Tuesday",
-      "title": "Messy Bible Study",
-      "time": "8 a.m.",
-      "location": "Youth House",
-      "recurring": true
-    },
-    {
       "date": "2026-12-16",
       "label": "December 16",
       "month": "December 2026",
@@ -305,66 +255,6 @@
     {
       "date": "2026-12-16",
       "label": "December 16",
-      "month": "December 2026",
-      "weekday": "Wednesday",
-      "title": "Youth House",
-      "time": "",
-      "location": "",
-      "recurring": true
-    },
-    {
-      "date": "2026-12-22",
-      "label": "December 22",
-      "month": "December 2026",
-      "weekday": "Tuesday",
-      "title": "Messy Bible Study",
-      "time": "8 a.m.",
-      "location": "Youth House",
-      "recurring": true
-    },
-    {
-      "date": "2026-12-23",
-      "label": "December 23",
-      "month": "December 2026",
-      "weekday": "Wednesday",
-      "title": "Kids Quest",
-      "time": "",
-      "location": "",
-      "recurring": true
-    },
-    {
-      "date": "2026-12-23",
-      "label": "December 23",
-      "month": "December 2026",
-      "weekday": "Wednesday",
-      "title": "Youth House",
-      "time": "",
-      "location": "",
-      "recurring": true
-    },
-    {
-      "date": "2026-12-29",
-      "label": "December 29",
-      "month": "December 2026",
-      "weekday": "Tuesday",
-      "title": "Messy Bible Study",
-      "time": "8 a.m.",
-      "location": "Youth House",
-      "recurring": true
-    },
-    {
-      "date": "2026-12-30",
-      "label": "December 30",
-      "month": "December 2026",
-      "weekday": "Wednesday",
-      "title": "Kids Quest",
-      "time": "",
-      "location": "",
-      "recurring": true
-    },
-    {
-      "date": "2026-12-30",
-      "label": "December 30",
       "month": "December 2026",
       "weekday": "Wednesday",
       "title": "Youth House",
@@ -380,16 +270,6 @@
       "title": "Session Meeting",
       "time": "5pm",
       "location": "",
-      "recurring": true
-    },
-    {
-      "date": "2027-01-05",
-      "label": "January 5",
-      "month": "January 2027",
-      "weekday": "Tuesday",
-      "title": "Messy Bible Study",
-      "time": "8 a.m.",
-      "location": "Youth House",
       "recurring": true
     },
     {
@@ -433,16 +313,6 @@
       "recurring": false
     },
     {
-      "date": "2027-01-12",
-      "label": "January 12",
-      "month": "January 2027",
-      "weekday": "Tuesday",
-      "title": "Messy Bible Study",
-      "time": "8 a.m.",
-      "location": "Youth House",
-      "recurring": true
-    },
-    {
       "date": "2027-01-13",
       "label": "January 13",
       "month": "January 2027",
@@ -460,16 +330,6 @@
       "title": "Youth House",
       "time": "",
       "location": "",
-      "recurring": true
-    },
-    {
-      "date": "2027-01-19",
-      "label": "January 19",
-      "month": "January 2027",
-      "weekday": "Tuesday",
-      "title": "Messy Bible Study",
-      "time": "8 a.m.",
-      "location": "Youth House",
       "recurring": true
     },
     {
@@ -493,14 +353,14 @@
       "recurring": true
     },
     {
-      "date": "2027-01-26",
-      "label": "January 26",
+      "date": "2027-01-24",
+      "label": "January 24",
       "month": "January 2027",
-      "weekday": "Tuesday",
-      "title": "Messy Bible Study",
-      "time": "8 a.m.",
-      "location": "Youth House",
-      "recurring": true
+      "weekday": "Sunday",
+      "title": "Church Fellowship Night",
+      "time": "",
+      "location": "",
+      "recurring": false
     },
     {
       "date": "2027-01-27",
@@ -558,12 +418,6 @@
             "weekday": "Tue",
             "in_month": true,
             "entries": [
-              {
-                "title": "Messy Bible Study",
-                "time": "8 a.m.",
-                "location": "Youth House",
-                "recurring": true
-              },
               {
                 "title": "Election Day (Fellowship Hall in use)",
                 "time": "",
@@ -731,14 +585,7 @@
             "day": 17,
             "weekday": "Tue",
             "in_month": true,
-            "entries": [
-              {
-                "title": "Messy Bible Study",
-                "time": "8 a.m.",
-                "location": "Youth House",
-                "recurring": true
-              }
-            ]
+            "entries": []
           },
           {
             "date": "2026-11-18",
@@ -886,14 +733,7 @@
             "day": 1,
             "weekday": "Tue",
             "in_month": false,
-            "entries": [
-              {
-                "title": "Messy Bible Study",
-                "time": "8 a.m.",
-                "location": "Youth House",
-                "recurring": true
-              }
-            ]
+            "entries": []
           },
           {
             "date": "2026-12-02",
@@ -938,7 +778,7 @@
           }
         ]
       ],
-      "pdf": "/calendar/print/fpc-calendar-2026-11-dc56ac05.pdf"
+      "pdf": "/calendar/print/fpc-calendar-2026-11-ee2fbfcc.pdf"
     },
     {
       "month": "2026-12",
@@ -966,14 +806,7 @@
             "day": 1,
             "weekday": "Tue",
             "in_month": true,
-            "entries": [
-              {
-                "title": "Messy Bible Study",
-                "time": "8 a.m.",
-                "location": "Youth House",
-                "recurring": true
-              }
-            ]
+            "entries": []
           },
           {
             "date": "2026-12-02",
@@ -1044,14 +877,7 @@
             "day": 8,
             "weekday": "Tue",
             "in_month": true,
-            "entries": [
-              {
-                "title": "Messy Bible Study",
-                "time": "8 a.m.",
-                "location": "Youth House",
-                "recurring": true
-              }
-            ]
+            "entries": []
           },
           {
             "date": "2026-12-09",
@@ -1122,14 +948,7 @@
             "day": 15,
             "weekday": "Tue",
             "in_month": true,
-            "entries": [
-              {
-                "title": "Messy Bible Study",
-                "time": "8 a.m.",
-                "location": "Youth House",
-                "recurring": true
-              }
-            ]
+            "entries": []
           },
           {
             "date": "2026-12-16",
@@ -1193,34 +1012,14 @@
             "day": 22,
             "weekday": "Tue",
             "in_month": true,
-            "entries": [
-              {
-                "title": "Messy Bible Study",
-                "time": "8 a.m.",
-                "location": "Youth House",
-                "recurring": true
-              }
-            ]
+            "entries": []
           },
           {
             "date": "2026-12-23",
             "day": 23,
             "weekday": "Wed",
             "in_month": true,
-            "entries": [
-              {
-                "title": "Kids Quest",
-                "time": "",
-                "location": "",
-                "recurring": true
-              },
-              {
-                "title": "Youth House",
-                "time": "",
-                "location": "",
-                "recurring": true
-              }
-            ]
+            "entries": []
           },
           {
             "date": "2026-12-24",
@@ -1264,34 +1063,14 @@
             "day": 29,
             "weekday": "Tue",
             "in_month": true,
-            "entries": [
-              {
-                "title": "Messy Bible Study",
-                "time": "8 a.m.",
-                "location": "Youth House",
-                "recurring": true
-              }
-            ]
+            "entries": []
           },
           {
             "date": "2026-12-30",
             "day": 30,
             "weekday": "Wed",
             "in_month": true,
-            "entries": [
-              {
-                "title": "Kids Quest",
-                "time": "",
-                "location": "",
-                "recurring": true
-              },
-              {
-                "title": "Youth House",
-                "time": "",
-                "location": "",
-                "recurring": true
-              }
-            ]
+            "entries": []
           },
           {
             "date": "2026-12-31",
@@ -1316,7 +1095,7 @@
           }
         ]
       ],
-      "pdf": "/calendar/print/fpc-calendar-2026-12-6b647132.pdf"
+      "pdf": "/calendar/print/fpc-calendar-2026-12-a022b03c.pdf"
     },
     {
       "month": "2027-01",
@@ -1344,34 +1123,14 @@
             "day": 29,
             "weekday": "Tue",
             "in_month": false,
-            "entries": [
-              {
-                "title": "Messy Bible Study",
-                "time": "8 a.m.",
-                "location": "Youth House",
-                "recurring": true
-              }
-            ]
+            "entries": []
           },
           {
             "date": "2026-12-30",
             "day": 30,
             "weekday": "Wed",
             "in_month": false,
-            "entries": [
-              {
-                "title": "Kids Quest",
-                "time": "",
-                "location": "",
-                "recurring": true
-              },
-              {
-                "title": "Youth House",
-                "time": "",
-                "location": "",
-                "recurring": true
-              }
-            ]
+            "entries": []
           },
           {
             "date": "2026-12-31",
@@ -1422,14 +1181,7 @@
             "day": 5,
             "weekday": "Tue",
             "in_month": true,
-            "entries": [
-              {
-                "title": "Messy Bible Study",
-                "time": "8 a.m.",
-                "location": "Youth House",
-                "recurring": true
-              }
-            ]
+            "entries": []
           },
           {
             "date": "2027-01-06",
@@ -1506,14 +1258,7 @@
             "day": 12,
             "weekday": "Tue",
             "in_month": true,
-            "entries": [
-              {
-                "title": "Messy Bible Study",
-                "time": "8 a.m.",
-                "location": "Youth House",
-                "recurring": true
-              }
-            ]
+            "entries": []
           },
           {
             "date": "2027-01-13",
@@ -1577,14 +1322,7 @@
             "day": 19,
             "weekday": "Tue",
             "in_month": true,
-            "entries": [
-              {
-                "title": "Messy Bible Study",
-                "time": "8 a.m.",
-                "location": "Youth House",
-                "recurring": true
-              }
-            ]
+            "entries": []
           },
           {
             "date": "2027-01-20",
@@ -1634,7 +1372,14 @@
             "day": 24,
             "weekday": "Sun",
             "in_month": true,
-            "entries": []
+            "entries": [
+              {
+                "title": "Church Fellowship Night",
+                "time": "",
+                "location": "",
+                "recurring": false
+              }
+            ]
           },
           {
             "date": "2027-01-25",
@@ -1648,14 +1393,7 @@
             "day": 26,
             "weekday": "Tue",
             "in_month": true,
-            "entries": [
-              {
-                "title": "Messy Bible Study",
-                "time": "8 a.m.",
-                "location": "Youth House",
-                "recurring": true
-              }
-            ]
+            "entries": []
           },
           {
             "date": "2027-01-27",
@@ -1719,14 +1457,7 @@
             "day": 2,
             "weekday": "Tue",
             "in_month": false,
-            "entries": [
-              {
-                "title": "Messy Bible Study",
-                "time": "8 a.m.",
-                "location": "Youth House",
-                "recurring": true
-              }
-            ]
+            "entries": []
           },
           {
             "date": "2027-02-03",
@@ -1767,11 +1498,18 @@
             "day": 6,
             "weekday": "Sat",
             "in_month": false,
-            "entries": []
+            "entries": [
+              {
+                "title": "Women's Ministry Retreat",
+                "time": "",
+                "location": "",
+                "recurring": false
+              }
+            ]
           }
         ]
       ],
-      "pdf": "/calendar/print/fpc-calendar-2027-01-dc8eb097.pdf"
+      "pdf": "/calendar/print/fpc-calendar-2027-01-63f3a52c.pdf"
     }
   ]
 }
