@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-23T20:40:13+00:00",
+  "generated": "2026-11-23T21:02:34+00:00",
   "subscribe_url": "https://bulletin.fpccorinth.org/calendar.ics",
   "events": [
     {
@@ -201,6 +201,26 @@
       "time": "",
       "location": "",
       "recurring": true
+    },
+    {
+      "date": "2026-12-03",
+      "label": "December 3",
+      "month": "December 2026",
+      "weekday": "Thursday",
+      "title": "First Thursday",
+      "time": "12:00 pm",
+      "location": "",
+      "recurring": false
+    },
+    {
+      "date": "2026-12-06",
+      "label": "December 6",
+      "month": "December 2026",
+      "weekday": "Sunday",
+      "title": "Family Gingerbread House Decorating",
+      "time": "4:00 pm",
+      "location": "",
+      "recurring": false
     },
     {
       "date": "2026-12-06",
@@ -770,7 +790,14 @@
             "day": 3,
             "weekday": "Thu",
             "in_month": false,
-            "entries": []
+            "entries": [
+              {
+                "title": "First Thursday",
+                "time": "12:00 pm",
+                "location": "",
+                "recurring": false
+              }
+            ]
           },
           {
             "date": "2026-12-04",
@@ -788,7 +815,7 @@
           }
         ]
       ],
-      "pdf": "/calendar/print/fpc-calendar-2026-11-ee2fbfcc.pdf"
+      "pdf": "/calendar/print/fpc-calendar-2026-11-c0aa9abb.pdf"
     },
     {
       "month": "2026-12",
@@ -843,7 +870,14 @@
             "day": 3,
             "weekday": "Thu",
             "in_month": true,
-            "entries": []
+            "entries": [
+              {
+                "title": "First Thursday",
+                "time": "12:00 pm",
+                "location": "",
+                "recurring": false
+              }
+            ]
           },
           {
             "date": "2026-12-04",
@@ -867,6 +901,12 @@
             "weekday": "Sun",
             "in_month": true,
             "entries": [
+              {
+                "title": "Family Gingerbread House Decorating",
+                "time": "4:00 pm",
+                "location": "",
+                "recurring": false
+              },
               {
                 "title": "Session Meeting",
                 "time": "5pm",
@@ -1105,7 +1145,7 @@
           }
         ]
       ],
-      "pdf": "/calendar/print/fpc-calendar-2026-12-a022b03c.pdf"
+      "pdf": "/calendar/print/fpc-calendar-2026-12-3883a9e4.pdf"
     },
     {
       "month": "2027-01",
