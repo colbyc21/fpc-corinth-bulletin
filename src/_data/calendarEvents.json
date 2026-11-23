@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-23T21:02:34+00:00",
+  "generated": "2026-11-23T21:14:58+00:00",
   "subscribe_url": "https://bulletin.fpccorinth.org/calendar.ics",
   "events": [
     {
@@ -253,6 +253,16 @@
       "recurring": true
     },
     {
+      "date": "2026-12-10",
+      "label": "December 10",
+      "month": "December 2026",
+      "weekday": "Thursday",
+      "title": "WM Book Club- \"Tap Code\"",
+      "time": "5 pm",
+      "location": "",
+      "recurring": false
+    },
+    {
       "date": "2026-12-13",
       "label": "December 13",
       "month": "December 2026",
@@ -281,6 +291,36 @@
       "time": "",
       "location": "",
       "recurring": true
+    },
+    {
+      "date": "2026-12-18",
+      "label": "December 18",
+      "month": "December 2026",
+      "weekday": "Friday",
+      "title": "College Student Lunch",
+      "time": "12 pm",
+      "location": "Pizza Grocery",
+      "recurring": false
+    },
+    {
+      "date": "2026-12-20",
+      "label": "December 20",
+      "month": "December 2026",
+      "weekday": "Sunday",
+      "title": "Youth House Bake Sale benefitting LH Toy Store",
+      "time": "9 am",
+      "location": "",
+      "recurring": false
+    },
+    {
+      "date": "2026-12-20",
+      "label": "December 20",
+      "month": "December 2026",
+      "weekday": "Sunday",
+      "title": "YH Senior Dinner",
+      "time": "6 pm",
+      "location": "",
+      "recurring": false
     },
     {
       "date": "2027-01-03",
@@ -954,7 +994,14 @@
             "day": 10,
             "weekday": "Thu",
             "in_month": true,
-            "entries": []
+            "entries": [
+              {
+                "title": "WM Book Club- \"Tap Code\"",
+                "time": "5 pm",
+                "location": "",
+                "recurring": false
+              }
+            ]
           },
           {
             "date": "2026-12-11",
@@ -1032,7 +1079,14 @@
             "day": 18,
             "weekday": "Fri",
             "in_month": true,
-            "entries": []
+            "entries": [
+              {
+                "title": "College Student Lunch",
+                "time": "12 pm",
+                "location": "Pizza Grocery",
+                "recurring": false
+              }
+            ]
           },
           {
             "date": "2026-12-19",
@@ -1048,7 +1102,20 @@
             "day": 20,
             "weekday": "Sun",
             "in_month": true,
-            "entries": []
+            "entries": [
+              {
+                "title": "Youth House Bake Sale benefitting LH Toy Store",
+                "time": "9 am",
+                "location": "",
+                "recurring": false
+              },
+              {
+                "title": "YH Senior Dinner",
+                "time": "6 pm",
+                "location": "",
+                "recurring": false
+              }
+            ]
           },
           {
             "date": "2026-12-21",
@@ -1145,7 +1212,7 @@
           }
         ]
       ],
-      "pdf": "/calendar/print/fpc-calendar-2026-12-3883a9e4.pdf"
+      "pdf": "/calendar/print/fpc-calendar-2026-12-dd9f9a79.pdf"
     },
     {
       "month": "2027-01",
