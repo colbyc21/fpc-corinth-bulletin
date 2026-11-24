@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-23T21:14:58+00:00",
+  "generated": "2026-11-24T16:24:04+00:00",
   "subscribe_url": "https://bulletin.fpccorinth.org/calendar.ics",
   "events": [
     {
@@ -320,6 +320,16 @@
       "title": "YH Senior Dinner",
       "time": "6 pm",
       "location": "",
+      "recurring": false
+    },
+    {
+      "date": "2026-12-24",
+      "label": "December 24",
+      "month": "December 2026",
+      "weekday": "Thursday",
+      "title": "Candle Light Service",
+      "time": "6 p.m.",
+      "location": "Sanctuary",
       "recurring": false
     },
     {
@@ -1143,7 +1153,14 @@
             "day": 24,
             "weekday": "Thu",
             "in_month": true,
-            "entries": []
+            "entries": [
+              {
+                "title": "Candle Light Service",
+                "time": "6 p.m.",
+                "location": "Sanctuary",
+                "recurring": false
+              }
+            ]
           },
           {
             "date": "2026-12-25",
@@ -1212,7 +1229,7 @@
           }
         ]
       ],
-      "pdf": "/calendar/print/fpc-calendar-2026-12-dd9f9a79.pdf"
+      "pdf": "/calendar/print/fpc-calendar-2026-12-9f2808e7.pdf"
     },
     {
       "month": "2027-01",
