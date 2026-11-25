@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-24T16:24:04+00:00",
+  "generated": "2026-11-25T13:32:50+00:00",
   "subscribe_url": "https://bulletin.fpccorinth.org/calendar.ics",
   "events": [
     {
@@ -207,7 +207,7 @@
       "label": "December 3",
       "month": "December 2026",
       "weekday": "Thursday",
-      "title": "First Thursday",
+      "title": "First Thursday Cookie Swap",
       "time": "12:00 pm",
       "location": "",
       "recurring": false
@@ -842,7 +842,7 @@
             "in_month": false,
             "entries": [
               {
-                "title": "First Thursday",
+                "title": "First Thursday Cookie Swap",
                 "time": "12:00 pm",
                 "location": "",
                 "recurring": false
@@ -865,7 +865,7 @@
           }
         ]
       ],
-      "pdf": "/calendar/print/fpc-calendar-2026-11-c0aa9abb.pdf"
+      "pdf": "/calendar/print/fpc-calendar-2026-11-fdc17606.pdf"
     },
     {
       "month": "2026-12",
@@ -922,7 +922,7 @@
             "in_month": true,
             "entries": [
               {
-                "title": "First Thursday",
+                "title": "First Thursday Cookie Swap",
                 "time": "12:00 pm",
                 "location": "",
                 "recurring": false
@@ -1229,7 +1229,7 @@
           }
         ]
       ],
-      "pdf": "/calendar/print/fpc-calendar-2026-12-9f2808e7.pdf"
+      "pdf": "/calendar/print/fpc-calendar-2026-12-1b83a1e5.pdf"
     },
     {
       "month": "2027-01",
