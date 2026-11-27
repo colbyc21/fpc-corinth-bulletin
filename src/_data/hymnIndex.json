@@ -1,12 +1,12 @@
 {
-  "generated": "2026-11-19T16:46:50+00:00",
+  "generated": "2026-11-27T13:42:49+00:00",
   "hymnal": "The Hymnal for Worship & Celebration",
   "hymnary_hymnal_url": "https://hymnary.org/hymnal/HWC1986",
-  "services": 43,
+  "services": 44,
   "since": "2026-01-25",
-  "through": "2026-11-22",
+  "through": "2026-11-29",
   "since_label": "January 25, 2026",
-  "through_label": "November 22, 2026",
+  "through_label": "November 29, 2026",
   "hymns": [
     {
       "number": "1",
@@ -559,6 +559,75 @@
         }
       ],
       "url": "https://hymnary.org/hymn/HWC1986/108"
+    },
+    {
+      "number": "123",
+      "title": "O come, O come, Emmanuel",
+      "as_printed": [
+        "O Come, O Come, Emmanuel (vv. 1, 4)"
+      ],
+      "tune": "VENI EMMANUEL",
+      "in_hymnal": true,
+      "times": 1,
+      "first": "2026-11-29",
+      "last": "2026-11-29",
+      "last_label": "November 29, 2026",
+      "dates": [
+        {
+          "date": "2026-11-29",
+          "label": "November 29, 2026",
+          "slot": "Congregational Response",
+          "verses": null,
+          "parts": 1
+        }
+      ],
+      "url": "https://hymnary.org/hymn/HWC1986/123"
+    },
+    {
+      "number": "124",
+      "title": "Come, Thou long-expected Jesus",
+      "as_printed": [
+        "Come Thou Long Expected Jesus"
+      ],
+      "tune": "HYFRYDOL",
+      "in_hymnal": true,
+      "times": 1,
+      "first": "2026-11-29",
+      "last": "2026-11-29",
+      "last_label": "November 29, 2026",
+      "dates": [
+        {
+          "date": "2026-11-29",
+          "label": "November 29, 2026",
+          "slot": "The Hymn",
+          "verses": null,
+          "parts": 1
+        }
+      ],
+      "url": "https://hymnary.org/hymn/HWC1986/124"
+    },
+    {
+      "number": "145",
+      "title": "O come, all ye faithful, joyful and triumphant",
+      "as_printed": [
+        "O Come, All Ye Faithful"
+      ],
+      "tune": "ADESTE FIDELES",
+      "in_hymnal": true,
+      "times": 1,
+      "first": "2026-11-29",
+      "last": "2026-11-29",
+      "last_label": "November 29, 2026",
+      "dates": [
+        {
+          "date": "2026-11-29",
+          "label": "November 29, 2026",
+          "slot": "Hymn",
+          "verses": null,
+          "parts": 1
+        }
+      ],
+      "url": "https://hymnary.org/hymn/HWC1986/145"
     },
     {
       "number": "173",

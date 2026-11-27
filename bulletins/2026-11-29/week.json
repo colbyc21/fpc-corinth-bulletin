@@ -1,0 +1,681 @@
+{
+  "date": "2026-11-29",
+  "liturgical_day": "First Sunday of Advent",
+  "subtitle_override": null,
+  "special": {
+    "communion": false,
+    "canvass": false
+  },
+  "pew_bible_page": 791,
+  "welcome_variant": "school_break",
+  "flowers": {
+    "given": "in memory of Ronnie Smith.",
+    "message": null,
+    "quote": null,
+    "reference": null,
+    "closing": null,
+    "signed": "Michael & Kim Pratt"
+  },
+  "announcements": [
+    {
+      "title": "The Red Rose",
+      "body": "The Red Rose welcomes Emma Jane Taylor, born November 20, 2026, to Zeb and Courtney Taylor."
+    },
+    {
+      "title": "Discovery Devotions",
+      "body": "The Discovery Devotion books for the first quarter of 2027 are available on the resource table in the front and side foyers."
+    },
+    {
+      "title": "Congregational Meeting",
+      "body": "The Session has called for a congregational meeting to take place on Sunday, December 6, immediately following the worship service, for the purpose of electing church officers. Those being recommended for the Office of Ruling Elder are Cameron Crockett, Steve Drewry, Randy Long, and Orma Smith. Those being recommended for the Office of Deacon are Nate Alexander, Billy Scott Blackwelder, Andy Butler, Adam Kirk, Wesley Mathis, and Hack Smith."
+    }
+  ],
+  "serve": {
+    "assisting_elder": "Clayton Stanley",
+    "ushers": "Scott Sawyer, Holland Yeates, Ben Long, & Josh McCahill",
+    "acolytes": "Brandon Giaccaglini & Reid Butler",
+    "nursery": "Mary Elizabeth Pounders, Robert & Sallie Kate Williams, Ashley Majors, & Scott & Rebecca Sawyer",
+    "av_engineer": "Russell Smith"
+  },
+  "staff": null,
+  "calendar": [
+    {
+      "date": "2026-12-02",
+      "items": [
+        "Kids Quest",
+        "Youth House"
+      ]
+    },
+    {
+      "date": "2026-12-03",
+      "items": [
+        "First Thursday Cookie Swap, noon"
+      ]
+    },
+    {
+      "date": "2026-12-06",
+      "items": [
+        "Session Meeting, 5 p.m.",
+        "Family Gingerbread House Decorating, Fellowship Hall, 4–6 p.m."
+      ]
+    }
+  ],
+  "liturgy": {
+    "items": [
+      {
+        "id": "gathering",
+        "type": "section",
+        "title": "Gathering",
+        "star": false,
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "piano-prelude",
+        "type": "plain",
+        "title": "The Piano Prelude",
+        "star": false,
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "greetings",
+        "type": "plain",
+        "title": "Greetings & Announcements",
+        "star": false,
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "advent-candle",
+        "type": "speaker",
+        "title": "The Lighting of the Advent Candle",
+        "ref": "Isaiah 42:1–7",
+        "name": "Maribel Albarran, Maya, Isaac, Angel",
+        "star": false,
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "introit",
+        "type": "music",
+        "title": "Choral Introit",
+        "piece": "We Come to Praise",
+        "star": false,
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "call-to-worship",
+        "type": "responsive",
+        "title": "Call to Worship",
+        "star": true,
+        "ref": "based on Philippians 4:4–5",
+        "lines": [
+          {
+            "who": "Leader",
+            "text": "Rejoice in the Lord always."
+          },
+          {
+            "who": "All",
+            "text": "I will say it again: Rejoice!"
+          },
+          {
+            "who": "Leader",
+            "text": "Let your gentleness be evident to all"
+          },
+          {
+            "who": "All",
+            "text": "The Lord is near"
+          },
+          {
+            "who": "Leader",
+            "text": "We rejoice in the hope of Christ’s coming."
+          },
+          {
+            "who": "All",
+            "text": "Let us worship God!"
+          }
+        ],
+        "sub": false,
+        "silent_confession": false
+      },
+      {
+        "id": "hymn1",
+        "type": "hymn",
+        "title": "The Hymn",
+        "star": true,
+        "number": 124,
+        "piece": "Come Thou Long Expected Jesus",
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "invocation",
+        "type": "corporate",
+        "title": "Prayer of Invocation & The Lord’s Prayer",
+        "star": true,
+        "text": "Our Father, who art in heaven, hallowed be thy Name. Thy Kingdom come, thy will be done on earth, as it is in heaven. Give us this day our daily bread, and forgive us our debts, as we forgive our debtors. Lead us not into temptation, but deliver us from evil. For thine is the kingdom, the power, and the glory, forever. Amen.",
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "responsive-reading",
+        "type": "responsive",
+        "title": "Responsive Reading",
+        "star": true,
+        "ref": "taken from Isaiah 65",
+        "lines": [
+          {
+            "who": "Leader",
+            "text": "For behold, I create new heavens and a new earth,"
+          },
+          {
+            "who": "All",
+            "text": "and the former things shall not be remembered or come into mind."
+          },
+          {
+            "who": "Leader",
+            "text": "But be glad and rejoice forever in that which I create;"
+          },
+          {
+            "who": "All",
+            "text": "for behold, I create Jerusalem to be a joy, and her people to be a gladness."
+          },
+          {
+            "who": "Leader",
+            "text": "I will rejoice in Jerusalem and be glad in my people;"
+          },
+          {
+            "who": "All",
+            "text": "no more shall be heard in it the sound of weeping and the cry of distress."
+          },
+          {
+            "who": "Leader",
+            "text": "No more shall there be in it an infant who lives but a few days,"
+          },
+          {
+            "who": "All",
+            "text": "or an old man who does not fill out his days,"
+          },
+          {
+            "who": "Leader",
+            "text": "The wolf and the lamb shall graze together; the lion shall eat straw like the ox, and dust shall be the serpent’s food."
+          },
+          {
+            "who": "All",
+            "text": "They shall not hurt or destroy in all my holy mountain,” says the Lord."
+          }
+        ],
+        "sub": false,
+        "silent_confession": false
+      },
+      {
+        "id": "hymn2",
+        "type": "hymn",
+        "title": "Congregational Response",
+        "star": true,
+        "number": 123,
+        "piece": "O Come, O Come, Emmanuel (vv. 1, 4)",
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "confession",
+        "type": "corporate",
+        "title": "Corporate Prayer of Confession",
+        "text": "Merciful God, always with us, always coming: We confess that we do not know how to prepare for your Advent. We have forgotten how to hope in miracles; we have ignored the promise of your kingdom; we get distracted by all the busyness of this season. Forgive us, God. Grant us the simple wonder of the shepherds, the intelligent courage of the Magi, and the patient faith of Mary and Joseph, that we may journey with them to Bethlehem and find the good news of a child born for us. Now, in the quiet of our hearts, we ask you to make us ready for his coming.",
+        "silent_confession": true,
+        "credit": "excerpted from The Worship Sourcebook",
+        "star": false,
+        "sub": false,
+        "lines": []
+      },
+      {
+        "id": "assurance",
+        "type": "scripture",
+        "title": "Assurance of Divine Pardon",
+        "ref": "Isaiah 40:1–2",
+        "text": "“Comfort, comfort my people, says your God. Your sins are pardoned. Your penalty is paid.”",
+        "star": false,
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "gloria-patri",
+        "type": "corporate",
+        "title": "Gloria Patri",
+        "star": true,
+        "text": "Glory be to the Father, and to the Son: and to the Holy Ghost; As it was in the beginning, is now, and ever shall be: world without end. Amen.",
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "new-members",
+        "type": "plain",
+        "title": "Introduction of New Members",
+        "star": false,
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "baptism",
+        "type": "speaker",
+        "title": "The Sacrament of Baptism",
+        "name": "Phildarius Burt, Jake Edmondson, Nabrandon Patterson",
+        "star": false,
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "word",
+        "type": "section",
+        "title": "Word",
+        "star": false,
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "tithes",
+        "type": "plain",
+        "title": "The Giving of Tithes and Offerings",
+        "star": false,
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "anthem",
+        "type": "music",
+        "title": "Choral Anthem",
+        "piece": "Will We Know Him?",
+        "credit": "Don Besig & Nancy Price",
+        "star": false,
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "doxology",
+        "type": "corporate",
+        "title": "The Doxology and Prayer of Dedication",
+        "star": true,
+        "text": "Praise God, from whom all blessings flow; Praise Him, all creatures here below; Praise Him above, ye heavenly host; Praise Father, Son, and Holy Ghost. Amen.",
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "children-word",
+        "type": "speaker",
+        "title": "A Word for the Children",
+        "name": "LeeAnne Price",
+        "star": false,
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "reading",
+        "type": "reading",
+        "title": "Scripture Reading",
+        "ref": "Haggai 1:1–15",
+        "star": false,
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "response",
+        "type": "responsive",
+        "title": "Scripture Response",
+        "ref": "Isaiah 40:6b, 8",
+        "lines": [
+          {
+            "who": "Leader",
+            "text": "All flesh is grass, and all its beauty is like the flower of the field;"
+          },
+          {
+            "who": "All",
+            "text": "The grass withers, the flower fades, but the Word of our God will stand forever. Amen."
+          }
+        ],
+        "star": false,
+        "sub": false,
+        "silent_confession": false
+      },
+      {
+        "id": "sermon",
+        "type": "sermon",
+        "title": "Sermon",
+        "star": false,
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "commitment",
+        "type": "plain",
+        "title": "Prayer of Commitment",
+        "star": false,
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "sending",
+        "type": "section",
+        "title": "Sending",
+        "star": false,
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "hymn3",
+        "type": "hymn",
+        "title": "Hymn",
+        "star": true,
+        "number": 145,
+        "piece": "O Come, All Ye Faithful",
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "benediction",
+        "type": "plain",
+        "title": "Benediction",
+        "star": true,
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "choral-benediction",
+        "type": "music",
+        "title": "Choral Benediction",
+        "star": true,
+        "piece": "Sevenfold Amen",
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      },
+      {
+        "id": "postlude",
+        "type": "plain",
+        "title": "Postlude",
+        "star": true,
+        "sub": false,
+        "lines": [],
+        "silent_confession": false
+      }
+    ],
+    "notes": [
+      {
+        "for": "advent-candle",
+        "label": "The Advent Wreath",
+        "text": "As we light the Advent candles, we remember God’s covenant faithfulness. Just as Israel watched in darkness for the promised Messiah, the Church today watches in hope for Christ’s return. The growing light reminds us that Jesus Christ, the Light of the World, has come to dispel the darkness of sin and will come again to make all things new."
+      },
+      {
+        "for": "invocation",
+        "label": "The Lord’s Prayer",
+        "text": "In the Reformed faith, we recognize that the whole Word of God is of use to direct us in prayer, yet Christ gave us this specific prayer as a special rule and pattern. From its opening address to its closing doxology, the Lord’s Prayer teaches us to approach God with reverence and confidence, prioritizing his kingdom and glory while trusting him for our daily bread, pardon, and protection."
+      },
+      {
+        "for": "hymn2",
+        "label": "O Come, O Come, Emmanuel",
+        "text": "Rooted in the ancient O Antiphons, this hymn frames Advent through God’s covenantal faithfulness and sovereign providence. Drawing on Israel’s exile and Old Testament Messianic titles, it confesses that salvation rests entirely on God’s initiative to rescue His people from bondage. We sing it not in uncertain longing, but in assured hope: the covenant-keeping God who sovereignly fulfilled His promises in Christ’s first coming will just as certainly consummate His kingdom at His return."
+      },
+      {
+        "for": "new-members",
+        "label": "Welcome FPC New Members",
+        "text": "Phildarius Burt, Rebecca Carpenter, Malechi Doren, Jake Edmondson, John Ward Grace, Anne Marie Grace, Nabrandon Patterson, Chris & Amanda Puckett, Shelby Puckett, Hannah Puckett, Lenay Williams"
+      },
+      {
+        "for": "children-word",
+        "label": "A Word for the Children",
+        "text": "Children are invited to come forward as we prepare our hearts to hear God’s Word."
+      },
+      {
+        "for": "benediction",
+        "label": "Benediction",
+        "text": "God’s people are blessed by the Lord and sent forth into the world, bearing with them the hope and peace of the Gospel."
+      }
+    ],
+    "intro": null
+  },
+  "sermon": {
+    "title": "Greater Glory: I Am With You",
+    "scripture": "Haggai 1:1–15",
+    "preacher": "Rev. Waring Porter",
+    "intro": [
+      "We are kicking off the Advent season today with a series that’s going to take us through the OT prophecy of a guy named Haggai. Our sermon series for Advent is called “Greater Glory” and will invite us to pause and consider this period of time when we are waiting for Jesus to return and establish his glory in the new Jerusalem.",
+      "This series will take us through the book of Haggai and highlight four promises that God makes to God’s covenant people, promises that are ultimately found and fulfilled in the arrival of Jesus. Jesus, the “Treasure of All Nations” (Haggai 2:7), comes to show the world a greater vision for our lives, and God’s Spirit guides our hearts and hands to wait with purpose and work with hope.",
+      "Advent is about more than remembering that Jesus came into the world. It’s about remembering that our deepest hope is found in the God who comes to dwell with His people. The people in Haggai’s day needed more than a building project. They needed the presence of God. So do we!"
+    ],
+    "points": [
+      {
+        "heading": "I. A Distracted People",
+        "ref": "vv. 1–6"
+      },
+      {
+        "heading": "II. A Changed People",
+        "ref": "vv. 7–11"
+      },
+      {
+        "heading": "III. A Hopeful People",
+        "ref": "vv. 12–15"
+      }
+    ],
+    "missing": false,
+    "notes_lines_per_point": 3,
+    "blank_lines": 18
+  },
+  "inserts": [],
+  "layout": {
+    "pages": {
+      "p3": [
+        "gathering",
+        "piano-prelude",
+        "greetings",
+        "advent-candle",
+        "introit",
+        "call-to-worship",
+        "hymn1"
+      ],
+      "p4": [
+        "invocation",
+        "responsive-reading",
+        "hymn2"
+      ],
+      "p5": [
+        "confession",
+        "assurance",
+        "gloria-patri",
+        "new-members",
+        "baptism",
+        "word",
+        "tithes",
+        "anthem",
+        "doxology",
+        "children-word"
+      ],
+      "p6": [
+        "reading",
+        "response",
+        "sermon",
+        "commitment",
+        "sending",
+        "hymn3",
+        "benediction",
+        "choral-benediction",
+        "postlude"
+      ]
+    },
+    "page_style": {
+      "p4": {
+        "spread": false
+      }
+    },
+    "announcement_columns": null,
+    "notes": [
+      {
+        "notes": [
+          "advent-candle"
+        ],
+        "at": "advent-candle",
+        "span": 1,
+        "align": "start"
+      },
+      {
+        "notes": [
+          "invocation"
+        ],
+        "at": "invocation",
+        "span": 2,
+        "align": "start"
+      },
+      {
+        "notes": [
+          "hymn2"
+        ],
+        "at": "hymn2",
+        "span": 1,
+        "align": "start"
+      },
+      {
+        "notes": [
+          "new-members"
+        ],
+        "at": "new-members",
+        "span": 2,
+        "align": "start"
+      },
+      {
+        "notes": [
+          "children-word"
+        ],
+        "at": "children-word",
+        "span": 1,
+        "align": "start"
+      },
+      {
+        "notes": [
+          "benediction"
+        ],
+        "at": "benediction",
+        "span": 1,
+        "align": "start"
+      }
+    ],
+    "overrides": [
+      {
+        "page": "p4",
+        "selector": "[data-id=\"hymn2\"]",
+        "css": "margin-top: 0.3in;",
+        "reason": "Volunteer asked for extra space between Responsive Reading and Congregational Response on page 4."
+      }
+    ]
+  },
+  "copyedit": {
+    "changes": [
+      {
+        "where": "flowers.message",
+        "before": "None",
+        "after": "null",
+        "reason": "Placeholder text \"None\" means there is no message; set to null."
+      },
+      {
+        "where": "flowers.quote",
+        "before": "None",
+        "after": "null",
+        "reason": "Placeholder text \"None\" means there is no quote; set to null."
+      },
+      {
+        "where": "flowers.reference",
+        "before": "None",
+        "after": "null",
+        "reason": "Placeholder text \"None\" means there is no reference; set to null."
+      },
+      {
+        "where": "flowers.closing",
+        "before": "None",
+        "after": "null",
+        "reason": "Placeholder text \"None\" means there is no closing; set to null."
+      }
+    ],
+    "flags": [
+      {
+        "where": "advent-candle",
+        "message": "New item “The Lighting of the Advent Candle” classified as a speaker item (readers as name, Isaiah 42:1–7 as ref); check rendering."
+      },
+      {
+        "where": "hymn2",
+        "message": "“Congregational Response” hymn #123 sings only vv. 1, 4; verse note appended to the piece title. Check how it should print."
+      },
+      {
+        "where": "word",
+        "message": "Word section placed before Tithes per rule, so Introduction of New Members and The Sacrament of Baptism fall in the Gathering section. Confirm placement."
+      },
+      {
+        "where": "notes.new-members",
+        "message": "New Members list had “Malachi Doren”; corrected to “Malechi Doren” per confirmed spelling."
+      },
+      {
+        "where": "responsive-reading",
+        "message": "Last line has a closing quotation mark (“…holy mountain,” says the Lord.”) with no opening mark in the reading. Kept as written."
+      },
+      {
+        "where": "confession",
+        "message": "Source attribution “(excerpted from The Worship Sourcebook)” moved out of the prayer text into credit."
+      },
+      {
+        "where": "pew_bible_page",
+        "message": "No Pew Bible page known for Haggai 1:1–15; page omitted."
+      },
+      {
+        "where": "serve.greeters",
+        "message": "Greeters role is blank."
+      },
+      {
+        "where": "serve.circle_of_prayer",
+        "message": "Circle of Prayer role is blank."
+      },
+      {
+        "where": "serve.childrens_church",
+        "message": "Children’s Church role is blank; confirm whether it is off this week or a name is missing."
+      },
+      {
+        "where": "flowers.given",
+        "message": "Dedication reads “in memory of” rather than the usual “in loving memory of”; confirm the wording the Pratts want."
+      },
+      {
+        "where": "announcements[0].body",
+        "message": "Birth date of November 20 has already passed, which is expected for a birth announcement; confirm the date and the spelling of the names."
+      },
+      {
+        "where": "serve.greeters",
+        "message": "Greeters is blank on the content form."
+      },
+      {
+        "where": "serve.circle_of_prayer",
+        "message": "Circle of Prayer is blank on the content form."
+      }
+    ]
+  },
+  "welcome_custom": null
+}
